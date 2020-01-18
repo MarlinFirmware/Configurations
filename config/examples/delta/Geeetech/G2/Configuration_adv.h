@@ -479,7 +479,7 @@
   //#define X_DUAL_ENDSTOPS
   #if ENABLED(X_DUAL_ENDSTOPS)
     #define X2_USE_ENDSTOP _XMAX_
-    #define X2_ENDSTOP_ADJUSTMENT  0
+    #define X_DUAL_ENDSTOPS_ADJUSTMENT  0
   #endif
 #endif
 
@@ -1571,10 +1571,9 @@
 //
 //#define ARC_SUPPORT               // Disable this feature to save ~3226 bytes
 #if ENABLED(ARC_SUPPORT)
-  #define MM_PER_ARC_SEGMENT    1 // (mm) Length (or minimum length) of each arc segment
-  #define MIN_ARC_SEGMENTS     24 // Minimum number of segments in a complete circle
-  //#define ARC_SEGMENTS_PER_SEC 50 // Use feedrate to choose segment length (with MM_PER_ARC_SEGMENT as the minimum)
-  #define N_ARC_CORRECTION     25 // Number of interpolated segments between corrections
+  #define MM_PER_ARC_SEGMENT  1   // Length of each arc segment
+  #define MIN_ARC_SEGMENTS   24   // Minimum number of segments in a complete circle
+  #define N_ARC_CORRECTION   25   // Number of interpolated segments between corrections
   //#define ARC_P_CIRCLES         // Enable the 'P' parameter to specify complete circles
   //#define CNC_WORKSPACE_PLANES  // Allow G2/G3 to operate in XY, ZX, or YZ planes
 #endif

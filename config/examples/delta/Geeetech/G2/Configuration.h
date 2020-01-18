@@ -637,12 +637,22 @@
   #define DELTA_DIAGONAL_ROD 196.0        // (mm)
 
   // Distance between bed and nozzle Z home position
-  #define DELTA_HEIGHT 200                // (mm) Get this value from G33 auto calibrate
+  #define DELTA_HEIGHT 200             // (mm) Get this value from G33 auto calibrate
 
   #define DELTA_ENDSTOP_ADJ { 0.0, 0.0, 0.0 } // Get these values from G33 auto calibrate
 
+  // Horizontal offset from middle of printer to smooth rod center.
+  //#define DELTA_SMOOTH_ROD_OFFSET 160 // mm
+
+  // Horizontal offset of the universal joints on the end effector.
+  //#define DELTA_EFFECTOR_OFFSET 34 // mm  //34 G2 frame
+
+  // Horizontal offset of the universal joints on the carriages.
+  //#define DELTA_CARRIAGE_OFFSET 25 // mm  //25 G2 frame
+
   // Horizontal distance bridged by diagonal push rods when effector is centered.
-  #define DELTA_RADIUS 92.0               // (mm) Get this value from G33 auto calibrate
+  //#define DELTA_RADIUS (DELTA_SMOOTH_ROD_OFFSET-DELTA_EFFECTOR_OFFSET-DELTA_CARRIAGE_OFFSET+2) //+2 G2 frame
+  #define DELTA_RADIUS 90.0            // (mm) Get this value from G33 auto calibrate
 
   // Trim adjustments for individual towers
   // tower angle corrections for X and Y tower / rotate XYZ so Z tower angle = 0
@@ -700,7 +710,7 @@
 // Mechanical endstop with COM to ground and NC to Signal uses "false" here (most common setup).
 #define X_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define Y_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
-#define Z_MIN_ENDSTOP_INVERTING true // Set to true to invert the logic of the endstop. //G2 false
+#define Z_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop. //G2 false
 #define X_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define Y_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define Z_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
@@ -1026,7 +1036,7 @@
  *
  * Specify a Probe position as { X, Y, Z }
  */
-#define NOZZLE_TO_PROBE_OFFSET { -19, -11, -2 } //G2 { 19, -11, -2 }
+#define NOZZLE_TO_PROBE_OFFSET { 19, -11, -2 } //G2 { 19, -11, -2 }
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
