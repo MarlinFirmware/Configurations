@@ -492,7 +492,11 @@
   //#define X_DUAL_ENDSTOPS
   #if ENABLED(X_DUAL_ENDSTOPS)
     #define X2_USE_ENDSTOP _XMAX_
+<<<<<<< HEAD
     #define X2_ENDSTOP_ADJUSTMENT  0
+=======
+    #define X_DUAL_ENDSTOPS_ADJUSTMENT  0
+>>>>>>> Pr
   #endif
 #endif
 
@@ -502,6 +506,7 @@
   //#define Y_DUAL_ENDSTOPS
   #if ENABLED(Y_DUAL_ENDSTOPS)
     #define Y2_USE_ENDSTOP _YMAX_
+<<<<<<< HEAD
     #define Y2_ENDSTOP_ADJUSTMENT  0
   #endif
 #endif
@@ -524,6 +529,29 @@
       #define Z4_USE_ENDSTOP        _YMAX_
       #define Z4_ENDSTOP_ADJUSTMENT 0
     #endif
+=======
+    #define Y_DUAL_ENDSTOPS_ADJUSTMENT  0
+  #endif
+#endif
+
+//#define Z_DUAL_STEPPER_DRIVERS
+#if ENABLED(Z_DUAL_STEPPER_DRIVERS)
+  //#define Z_DUAL_ENDSTOPS
+  #if ENABLED(Z_DUAL_ENDSTOPS)
+    #define Z2_USE_ENDSTOP _XMAX_
+    #define Z_DUAL_ENDSTOPS_ADJUSTMENT  0
+  #endif
+#endif
+
+//#define Z_TRIPLE_STEPPER_DRIVERS
+#if ENABLED(Z_TRIPLE_STEPPER_DRIVERS)
+  //#define Z_TRIPLE_ENDSTOPS
+  #if ENABLED(Z_TRIPLE_ENDSTOPS)
+    #define Z2_USE_ENDSTOP _XMAX_
+    #define Z3_USE_ENDSTOP _YMAX_
+    #define Z_TRIPLE_ENDSTOPS_ADJUSTMENT2  0
+    #define Z_TRIPLE_ENDSTOPS_ADJUSTMENT3  0
+>>>>>>> Pr
   #endif
 #endif
 
@@ -1543,6 +1571,7 @@
 
 #endif
 
+<<<<<<< HEAD
 /**
  * Thermal Probe Compensation
  * Probe measurements are adjusted to compensate for temperature distortion.
@@ -1575,6 +1604,8 @@
   #endif
 #endif
 
+=======
+>>>>>>> Pr
 // @section extras
 
 //
@@ -1912,12 +1943,15 @@
     #define Z3_MICROSTEPS       16
   #endif
 
+<<<<<<< HEAD
   #if AXIS_DRIVER_TYPE_Z4(TMC26X)
     #define Z4_MAX_CURRENT    1000
     #define Z4_SENSE_RESISTOR   91
     #define Z4_MICROSTEPS       16
   #endif
 
+=======
+>>>>>>> Pr
   #if AXIS_DRIVER_TYPE_E0(TMC26X)
     #define E0_MAX_CURRENT    1000
     #define E0_SENSE_RESISTOR   91
@@ -2035,6 +2069,7 @@
     #define Z3_CHAIN_POS     -1
   #endif
 
+<<<<<<< HEAD
   #if AXIS_IS_TMC(Z4)
     #define Z4_CURRENT      800
     #define Z4_CURRENT_HOME Z4_CURRENT
@@ -2043,6 +2078,8 @@
     #define Z4_CHAIN_POS     -1
   #endif
 
+=======
+>>>>>>> Pr
   #if AXIS_IS_TMC(E0)
     #define E0_CURRENT      800
     #define E0_MICROSTEPS    16
@@ -2132,7 +2169,10 @@
   #define Y2_SLAVE_ADDRESS 0
   #define Z2_SLAVE_ADDRESS 0
   #define Z3_SLAVE_ADDRESS 0
+<<<<<<< HEAD
   #define Z4_SLAVE_ADDRESS 0
+=======
+>>>>>>> Pr
   #define E0_SLAVE_ADDRESS 0
   #define E1_SLAVE_ADDRESS 0
   #define E2_SLAVE_ADDRESS 0
@@ -2208,7 +2248,10 @@
   #define Z_HYBRID_THRESHOLD       3
   #define Z2_HYBRID_THRESHOLD      3
   #define Z3_HYBRID_THRESHOLD      3
+<<<<<<< HEAD
   #define Z4_HYBRID_THRESHOLD      3
+=======
+>>>>>>> Pr
   #define E0_HYBRID_THRESHOLD     30
   #define E1_HYBRID_THRESHOLD     30
   #define E2_HYBRID_THRESHOLD     30
@@ -2374,6 +2417,7 @@
     #define Z3_SLEW_RATE         1
   #endif
 
+<<<<<<< HEAD
   #if AXIS_IS_L64XX(Z4)
     #define Z4_MICROSTEPS      128
     #define Z4_OVERCURRENT    2000
@@ -2383,6 +2427,8 @@
     #define Z4_SLEW_RATE         1
   #endif
 
+=======
+>>>>>>> Pr
   #if AXIS_IS_L64XX(E0)
     #define E0_MICROSTEPS      128
     #define E0_OVERCURRENT    2000
@@ -2446,7 +2492,11 @@
    *         I not present or I0 or I1 - X, Y, Z or E0
    *         I2 - X2, Y2, Z2 or E1
    *         I3 - Z3 or E3
+<<<<<<< HEAD
    *         I4 - Z4 or E4
+=======
+   *         I4 - E4
+>>>>>>> Pr
    *         I5 - E5
    * M916 - Increase drive level until get thermal warning
    * M917 - Find minimum current thresholds
