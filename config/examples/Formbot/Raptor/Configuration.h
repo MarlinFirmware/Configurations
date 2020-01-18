@@ -844,17 +844,19 @@
  * When changing speed and direction, if the difference is less than the
  * value set here, it may happen instantaneously.
  */
+
+#if ENABLED(Y_SPREADCYCLE) || DISABLED(Y_2208)
+  #define DEFAULT_YJERK 10.0
+#else
+  #define DEFAULT_YJERK  5.0
+#endif
+
 //#define CLASSIC_JERK
 #if ENABLED(CLASSIC_JERK)
   #if ENABLED(X_SPREADCYCLE) || DISABLED(X_2208)
     #define DEFAULT_XJERK 20.0
   #else
     #define DEFAULT_XJERK 10.0
-  #endif
-  #if ENABLED(Y_SPREADCYCLE) || DISABLED(Y_2208)
-    #define DEFAULT_YJERK 10.0
-  #else
-    #define DEFAULT_YJERK  5.0
   #endif
   #define DEFAULT_ZJERK  0.4
 
@@ -874,7 +876,7 @@
  *   http://blog.kyneticcnc.com/2018/10/computing-junction-deviation-for-marlin.html
  */
 #if DISABLED(CLASSIC_JERK)
-  #define JUNCTION_DEVIATION_MM (.4 * DEFAULT_YJERK * DEFAULT_YJERK / DEFAULT_ACCELERATION)  // (mm) Distance from real junction edge
+  #define JUNCTION_DEVIATION_MM (.4 * sq(DEFAULT_YJERK) / DEFAULT_ACCELERATION)  // (mm) Distance from real junction edge
 #endif
 
 /**
