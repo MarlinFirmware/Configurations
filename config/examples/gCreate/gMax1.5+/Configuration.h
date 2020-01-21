@@ -148,7 +148,7 @@
 // @section extruder
 
 // This defines the number of extruders
-// :[1, 2, 3, 4, 5, 6]
+// :[1, 2, 3, 4, 5, 6, 7, 8]
 #define EXTRUDERS 1
 
 // Generally expected filament diameter (1.75, 2.85, 3.0, ...). Used for Volumetric, Filament Width Sensor, etc.
@@ -416,6 +416,8 @@
 #define TEMP_SENSOR_3 0
 #define TEMP_SENSOR_4 0
 #define TEMP_SENSOR_5 0
+#define TEMP_SENSOR_6 0
+#define TEMP_SENSOR_7 0
 #define TEMP_SENSOR_BED 75   // gMax-1.5+ users please note:   This is a Roxy modification to the printer.   I want
                              // to print on glass.   And I'm using a 400mm x 400mm silicon heat pad powered through
                              // a Fortek SSR to do it.   If you are using an unaltered gCreate machine, this needs
@@ -447,6 +449,8 @@
 #define HEATER_3_MINTEMP   5
 #define HEATER_4_MINTEMP   5
 #define HEATER_5_MINTEMP   5
+#define HEATER_6_MINTEMP   5
+#define HEATER_7_MINTEMP   5
 #define BED_MINTEMP        5
 
 // Above this temperature the heater will be switched off.
@@ -458,6 +462,8 @@
 #define HEATER_3_MAXTEMP 245
 #define HEATER_4_MAXTEMP 245
 #define HEATER_5_MAXTEMP 245
+#define HEATER_6_MAXTEMP 245
+#define HEATER_7_MAXTEMP 245
 #define BED_MAXTEMP      115
 
 //===========================================================================
@@ -689,6 +695,8 @@
 //#define E3_DRIVER_TYPE A4988
 //#define E4_DRIVER_TYPE A4988
 //#define E5_DRIVER_TYPE A4988
+//#define E6_DRIVER_TYPE A4988
+//#define E7_DRIVER_TYPE A4988
 
 // Enable this feature if all enabled endstop pins are interrupt-capable.
 // This will remove the need to poll the interrupt pins, saving many CPU cycles.
@@ -1055,6 +1063,8 @@
 #define INVERT_E3_DIR false
 #define INVERT_E4_DIR false
 #define INVERT_E5_DIR false
+#define INVERT_E6_DIR false
+#define INVERT_E7_DIR false
 
 // @section homing
 
