@@ -1996,6 +1996,9 @@
 // different pins/wiring (see pins_ANET_10.h).
 //
 #define ANET_FULL_GRAPHICS_LCD
+#define ST7920_DELAY_1 DELAY_NS(150)
+#define ST7920_DELAY_2 DELAY_NS(150)
+#define ST7920_DELAY_3 DELAY_NS(150)
 
 //
 // AZSMZ 12864 LCD with SD
