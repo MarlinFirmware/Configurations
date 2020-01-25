@@ -103,7 +103,7 @@
  *
  * :[-1, 0, 1, 2, 3, 4, 5, 6, 7]
  */
-#define SERIAL_PORT 1 // libmaple 0 for USB ,1 for serial
+#define SERIAL_PORT 1 // libmaple 0 for USB, 1 for serial
 
 /**
  * Select a secondary serial port on the board to use for communication with the host.
