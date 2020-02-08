@@ -1894,6 +1894,14 @@
 //
 //#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
 
+// Enable this option if you have issues with screen image corruption
+//#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER_ADJUST_TIMINGS
+#if ENABLED(REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER_ADJUST_TIMINGS)
+    #define ST7920_DELAY_1 DELAY_NS(0)
+    #define ST7920_DELAY_2 DELAY_NS(0)
+    #define ST7920_DELAY_3 DELAY_NS(127)
+#endif
+
 //
 // ReprapWorld Graphical LCD
 // https://reprapworld.com/?products_details&products_id/1218
