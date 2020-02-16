@@ -855,22 +855,23 @@
  */
 //#define CLASSIC_JERK
 #if ENABLED(CLASSIC_JERK)
-  #if ENABLED(X_SPREADCYCLE) || DISABLED(X_2208)
-    #define DEFAULT_XJERK 20.0
-  #else
-    #define DEFAULT_XJERK 10.0
-  #endif
-  #if ENABLED(Y_SPREADCYCLE) || DISABLED(Y_2208)
-    #define DEFAULT_YJERK 10.0
-  #else
-    #define DEFAULT_YJERK  5.0
-  #endif
   #define DEFAULT_ZJERK  0.4
 
   //#define LIMITED_JERK_EDITING        // Limit edit via M205 or LCD to DEFAULT_aJERK * 2
   #if ENABLED(LIMITED_JERK_EDITING)
     #define MAX_JERK_EDIT_VALUES { 20, 20, 0.6, 10 } // ...or, set your own edit limits
   #endif
+#endif
+
+#if ENABLED(X_SPREADCYCLE) || DISABLED(X_2208)
+  #define DEFAULT_XJERK 20.0
+#else
+  #define DEFAULT_XJERK 10.0
+#endif
+#if ENABLED(Y_SPREADCYCLE) || DISABLED(Y_2208)
+  #define DEFAULT_YJERK 10.0
+#else
+  #define DEFAULT_YJERK  5.0
 #endif
 
 #define DEFAULT_EJERK    5.0  // May be used by Linear Advance
