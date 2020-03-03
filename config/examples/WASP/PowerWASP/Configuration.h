@@ -113,24 +113,18 @@
  * :[-1, 0, 1, 2, 3, 4, 5, 6, 7]
  */
 #define SERIAL_PORT_2 3
-/** Internal onboard port for WASP
 
+/**
+ * Internal onboard port for WASP
+ *
  *  (Top view)
-
  *  .------------.---------------------.
-
  *  |            |  Arduino Serial3    |
-
  *  |  Stepper   |  [O] 5V             | Front
-
  *  |  drivers   |  [O] GND            | panel
-
  *  |   & fan    |  [O] TX             | side
-
  *  |            |  [O] RX             |
-
  *  `------------´---------------------´
-
  */
 
 /**
