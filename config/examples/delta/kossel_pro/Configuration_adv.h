@@ -20,6 +20,11 @@
  *
  */
 
+// Example configuration file for OpenBeam Kossel Pro
+// tested on 2015-05-19 by @Wackerbarth
+// using Arduino 1.6.5 (Mac)
+
+
 /**
  * Configuration_adv.h
  *
