@@ -101,7 +101,8 @@
     #define SCARA_OFFSET_THETA2 131 // degrees
 
   #endif
-
+  #define THETA_ANGLE_AT_HOME -30 //THETA DEGREE AT LIMIT SWITCH
+  #define PSI_ANGLE_AT_HOME 135 //PSI DEGREE AT LIMIT SWITCH
 #endif
 
 //===========================================================================
