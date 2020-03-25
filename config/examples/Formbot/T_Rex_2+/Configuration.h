@@ -21,9 +21,6 @@
  */
 #pragma once
 
-//#define ROXYs_TRex         // Turn this on to get customizations only available on Roxy's T-Rex 2+
-                             // Marlin controlled heat bed, Max7219 debug LED's, less bright LED light level
-                             // More aggressive PID numbers for hotends (due to double fans)
 /**
  * Configuration.h
  *
@@ -110,9 +107,6 @@
 
 /**
  * Select a secondary serial port on the board to use for communication with the host.
- * This allows the connection of wireless adapters (for instance) to non-default port pins.
- * Serial port -1 is the USB emulated serial port, if available.
- *
  * :[-1, 0, 1, 2, 3, 4, 5, 6, 7]
  */
 //#define SERIAL_PORT_2 -1
@@ -137,7 +131,7 @@
 #endif
 
 // Name displayed in the LCD "Ready" message and Info menu
-  #define CUSTOM_MACHINE_NAME "T-Rex 2+"
+#define CUSTOM_MACHINE_NAME "T-Rex 2+ v15"
 
 // Printer's unique ID, used by some programs to differentiate between machines.
 // Choose your own or use a service like http://www.uuidgenerator.net/version4
@@ -156,7 +150,7 @@
 //#define SINGLENOZZLE
 
 /**
- * Průša MK2 Single Nozzle Multi-Material Multiplexer, and variants.
+ * PrÅ¯Å¡a MK2 Single Nozzle Multi-Material Multiplexer, and variants.
  *
  * This device allows one stepper driver on a control board to drive
  * two to eight stepper motors, one at a time, in a manner suitable
@@ -312,15 +306,16 @@
 // Offset of the extruders (uncomment if using more than one and relying on firmware to position when changing).
 // The offset has to be X=0, Y=0 for the extruder 0 hotend (default extruder).
 // For the other hotends it is their distance from the extruder 0 hotend.
-//#define HOTEND_OFFSET_X { 0.0, 20.00 } // (mm) relative X-offset for each nozzle
-//#define HOTEND_OFFSET_Y { 0.0, 5.00 }  // (mm) relative Y-offset for each nozzle
-//#define HOTEND_OFFSET_Z { 0.0, 0.00 }  // (mm) relative Z-offset for each nozzle
 
-#ifdef ROXYs_TRex
-  #define HOTEND_OFFSET_X { 0.0, 0.00 }  // (mm) for each extruder, offset of the hotend on the X axis
-  #define HOTEND_OFFSET_Y { 0.0, 1.25 }  // (mm) for each extruder, offset of the hotend on the Y axis
-  #define HOTEND_OFFSET_Z { 0.0, 0.00 }  // (mm) relative Z-offset for each nozzle
-#endif
+//#define HOTEND_OFFSET_X { 0.0, 436.0 }  // (mm) relative X-offset for each nozzle
+//#define HOTEND_OFFSET_X { 0.0, 434.8 }  // (mm) relative X-offset for each nozzle
+#define HOTEND_OFFSET_X { 0.0, 434.6 }    // (mm) relative X-offset for each nozzle
+
+//#define HOTEND_OFFSET_Y { 0.0, 0.50 }   // (mm) relative Y-offset for each nozzle
+//#define HOTEND_OFFSET_Y { 0.0, -0.60 }  // (mm) relative Y-offset for each nozzle
+#define HOTEND_OFFSET_Y { 0.0, -0.50 }    // (mm) relative Y-offset for each nozzle
+
+#define HOTEND_OFFSET_Z { 0.0, 0.45 }     // (mm) relative Z-offset for each nozzle
 
 // @section machine
 
@@ -345,8 +340,8 @@
     #define AUTO_POWER_E_FANS
     #define AUTO_POWER_CONTROLLERFAN
     #define AUTO_POWER_CHAMBER_FAN
-    //#define AUTO_POWER_E_TEMP        50 // (°C) Turn on PSU over this temperature
-    //#define AUTO_POWER_CHAMBER_TEMP  30 // (°C) Turn on PSU over this temperature
+    //#define AUTO_POWER_E_TEMP        50 // (Â°C) Turn on PSU over this temperature
+    //#define AUTO_POWER_CHAMBER_TEMP  30 // (Â°C) Turn on PSU over this temperature
     #define POWER_TIMEOUT 30
   #endif
 #endif
@@ -385,7 +380,7 @@
  *    10 : 100k RS thermistor 198-961 (4.7k pullup)
  *    11 : 100k beta 3950 1% thermistor (4.7k pullup)
  *    12 : 100k 0603 SMD Vishay NTCS0603E3104FXT (4.7k pullup) (calibrated for Makibox hot bed)
- *    13 : 100k Hisens 3950  1% up to 300°C for hotend "Simple ONE " & "Hotend "All In ONE"
+ *    13 : 100k Hisens 3950  1% up to 300Â°C for hotend "Simple ONE " & "Hotend "All In ONE"
  *    15 : 100k thermistor calibration for JGAurora A5 hotend
  *    18 : ATC Semitec 204GT-2 (4.7k pullup) Dagoma.Fr - MKS_Base_DKU001327
  *    20 : Pt100 with circuit in the Ultimainboard V2.x with 5v excitation (AVR)
@@ -413,8 +408,8 @@
  *  1000 : Custom - Specify parameters in Configuration_adv.h
  *
  *         Use these for Testing or Development purposes. NEVER for production machine.
- *   998 : Dummy Table that ALWAYS reads 25°C or the temperature defined below.
- *   999 : Dummy Table that ALWAYS reads 100°C or the temperature defined below.
+ *   998 : Dummy Table that ALWAYS reads 25Â°C or the temperature defined below.
+ *   999 : Dummy Table that ALWAYS reads 100Â°C or the temperature defined below.
  */
 #define TEMP_SENSOR_0 1
 #define TEMP_SENSOR_1 1
@@ -424,11 +419,7 @@
 #define TEMP_SENSOR_5 0
 #define TEMP_SENSOR_6 0
 #define TEMP_SENSOR_7 0
-#ifdef ROXYs_TRex
-  #define TEMP_SENSOR_BED 11
-#else
-  #define TEMP_SENSOR_BED 0
-#endif
+#define TEMP_SENSOR_BED 11
 #define TEMP_SENSOR_PROBE 0
 #define TEMP_SENSOR_CHAMBER 0
 
@@ -441,13 +432,13 @@
 //#define TEMP_SENSOR_1_AS_REDUNDANT
 #define MAX_REDUNDANT_TEMP_SENSOR_DIFF 10
 
-#define TEMP_RESIDENCY_TIME     10  // (seconds) Time to wait for hotend to "settle" in M109
-#define TEMP_WINDOW              1  // (°C) Temperature proximity for the "temperature reached" timer
-#define TEMP_HYSTERESIS          3  // (°C) Temperature proximity considered "close enough" to the target
+#define TEMP_RESIDENCY_TIME      3  // (seconds) Time to wait for hotend to "settle" in M109
+#define TEMP_WINDOW              1  // (Â°C) Temperature proximity for the "temperature reached" timer
+#define TEMP_HYSTERESIS          3  // (Â°C) Temperature proximity considered "close enough" to the target
 
-#define TEMP_BED_RESIDENCY_TIME 10  // (seconds) Time to wait for bed to "settle" in M190
-#define TEMP_BED_WINDOW          1  // (°C) Temperature proximity for the "temperature reached" timer
-#define TEMP_BED_HYSTERESIS      3  // (°C) Temperature proximity considered "close enough" to the target
+#define TEMP_BED_RESIDENCY_TIME  3  // (seconds) Time to wait for bed to "settle" in M190
+#define TEMP_BED_WINDOW          1  // (Â°C) Temperature proximity for the "temperature reached" timer
+#define TEMP_BED_HYSTERESIS      3  // (Â°C) Temperature proximity considered "close enough" to the target
 
 // Below this temperature the heater will be switched off
 // because it probably indicates a broken thermistor wire.
@@ -464,15 +455,15 @@
 // Above this temperature the heater will be switched off.
 // This can protect components from overheating, but NOT from shorts and failures.
 // (Use MINTEMP for thermistor short/failure protection.)
-#define HEATER_0_MAXTEMP 410
-#define HEATER_1_MAXTEMP 275
+#define HEATER_0_MAXTEMP 245
+#define HEATER_1_MAXTEMP 245
 #define HEATER_2_MAXTEMP 275
 #define HEATER_3_MAXTEMP 275
 #define HEATER_4_MAXTEMP 275
 #define HEATER_5_MAXTEMP 275
 #define HEATER_6_MAXTEMP 275
 #define HEATER_7_MAXTEMP 275
-#define BED_MAXTEMP      150
+#define BED_MAXTEMP      135
 
 //===========================================================================
 //============================= PID Settings ================================
@@ -480,44 +471,104 @@
 // PID Tuning Guide here: http://reprap.org/wiki/PID_Tuning
 
 // Comment the following line to disable PID and enable bang-bang.
+
 #define PIDTEMP
-#define BANG_MAX 255     // Limits current to nozzle while in bang-bang mode; 255=full current
+#define BANG_MAX 180     // Limits current to nozzle while in bang-bang mode; 255=full current
+
 #define PID_MAX BANG_MAX // Limits current to nozzle while PID is active (see PID_FUNCTIONAL_RANGE below); 255=full current
 #define PID_K1 0.95      // Smoothing factor within any PID loop
 #if ENABLED(PIDTEMP)
   #define PID_EDIT_MENU           // Add PID editing to the "Advanced Settings" menu. (~700 bytes of PROGMEM)
   #define PID_AUTOTUNE_MENU       // Add PID auto-tuning to the "Advanced Settings" menu. (~250 bytes of PROGMEM)
-  //#define PID_DEBUG             // Sends debug data to the serial port.
+  #define PID_DEBUG               // Sends debug data to the serial port.  Use M303 D to toggle activation.
   //#define PID_OPENLOOP 1        // Puts PID in open loop. M104/M140 sets the output power from 0 to PID_MAX
   //#define SLOW_PWM_HEATERS      // PWM with very low frequency (roughly 0.125Hz=8s) and minimum state time of approximately 1s useful for heaters driven by a relay
-  //#define PID_PARAMS_PER_HOTEND // Uses separate PID parameters for each extruder (useful for mismatched extruders)
+  #define PID_PARAMS_PER_HOTEND   // Uses separate PID parameters for each extruder (useful for mismatched extruders)
                                   // Set/get with gcode: M301 E[extruder number, 0-2]
-  #define PID_FUNCTIONAL_RANGE 10 // If the temperature difference between the target temperature and the actual temperature
+  #define PID_FUNCTIONAL_RANGE 8  // If the temperature difference between the target temperature and the actual temperature
                                   // is more than PID_FUNCTIONAL_RANGE then the PID will be shut off and the heater will be set to min/max.
 
-  // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
+/*  
+ *  For Roxy Formbot T-Rex2 Frankenstien dmachine:
+ *
+ 
+>>> M303 S210 E0 C5 U1
+SENDING:M303 S210 E0 C5 U1
+PID Autotune start
+ bias: 96 d: 96 min: 205.86 max: 216.93
+ bias: 97 d: 97 min: 204.72 max: 214.45
+ bias: 95 d: 95 min: 205.82 max: 214.22 Ku: 28.80 Tu: 27.53
+ Classic PID
+ Kp: 17.28 Ki: 1.26 Kd: 59.46
+ bias: 94 d: 94 min: 205.98 max: 214.02 Ku: 29.75 Tu: 27.85
+ Classic PID
+ Kp: 17.85 Ki: 1.28 Kd: 62.14
+SENDING:T1
+ bias: 94 d: 94 min: 205.55 max: 213.98 Ku: 28.37 Tu: 28.18
+ Classic PID
+ Kp: 17.02 Ki: 1.21 Kd: 59.96
+PID Autotune finished! Put the last Kp, Ki and Kd constants from below into Configuration.h
+#define DEFAULT_Kp 17.02
+#define DEFAULT_Ki 1.21
+#define DEFAULT_Kd 59.96
 
-  #ifdef ROXYs_TRex
-    // Roxy's T-Rex 2+
-    #define DEFAULT_Kp 15.17
-    #define DEFAULT_Ki 0.88
-    #define DEFAULT_Kd 65.24
-  #else
-    // T-Rex 2+
-    #define DEFAULT_Kp 22.2
-    #define DEFAULT_Ki 1.08
-    #define DEFAULT_Kd 114
-  #endif
+SENDING:T1
+echo:Active Extruder: 1
+Setting hotend temperature to 211.000000 degrees Celsius.
 
-  // MakerGear
-  //#define DEFAULT_Kp 7.0
-  //#define DEFAULT_Ki 0.1
-  //#define DEFAULT_Kd 12
+>>> M303 S210 E1 C5 U1
+SENDING:M303 S210 E1 C5 U1
+PID Autotune start
+ bias: 117 d: 117 min: 205.59 max: 216.51
+ bias: 123 d: 123 min: 202.88 max: 216.15
+ bias: 123 d: 123 min: 203.13 max: 217.14 Ku: 22.36 Tu: 41.29
+ Classic PID
+ Kp: 13.41 Ki: 0.65 Kd: 69.23
+ bias: 123 d: 123 min: 203.06 max: 216.72 Ku: 22.92 Tu: 40.96
+ Classic PID
+ Kp: 13.75 Ki: 0.67 Kd: 70.42
 
-  // Mendel Parts V9 on 12V
-  //#define DEFAULT_Kp 63.0
-  //#define DEFAULT_Ki 2.25
-  //#define DEFAULT_Kd 440
+
+ ------------------------------------
+ cho: PID_DEBUG 0: Input 22.73 Output 0.00 pTerm 0.00 iTerm 0.00 dTerm 0.00
+echo: PID_DEBUG 0: Input 22.62 Output 0.00 pTerm 0.00 iTerm 0.00 dTerm 0.00
+echo: PID_DEBUG 0: Input 22.50 Output 0.00 pTerm 0.00 iTerm 0.00 dTerm 0.00
+echo: PID_DEBUG 0: Input 22.66 Output 0.00 pTerm 0.00 iTerm 0.00 dTerm 0.00
+>>> M303 E0 C5 U1 S210
+SENDING:M303 E0 C5 U1 S210
+echo: PID_DEBUG 0: Input 22.66 Output 0.00 pTerm 0.00 iTerm 0.00 dTerm 0.00
+PID Autotune start
+ bias: 93 d: 56 min: 205.63 max: 212.42
+ bias: 98 d: 51 min: 205.78 max: 212.73
+ bias: 97 d: 52 min: 207.34 max: 212.62 Ku: 25.11 Tu: 29.33
+ Classic PID
+ Kp: 15.07 Ki: 1.03 Kd: 55.23
+ bias: 94 d: 55 min: 208.01 max: 212.38 Ku: 32.01 Tu: 27.20
+ Classic PID
+ Kp: 19.21 Ki: 1.41 Kd: 65.30
+ bias: 93 d: 56 min: 207.97 max: 212.38
+ Ku: 32.31 Tu: 26.54
+ Classic PID
+ Kp: 19.38 Ki: 1.46 Kd: 64.31
+PID Autotune finished! Put the last Kp, Ki and Kd constants from below into Configuration.h
+#define DEFAULT_Kp 19.38
+#define DEFAULT_Ki 1.46
+#define DEFAULT_Kd 64.31
+echo: PID_DEBUG 0: Input 209.92 Output 0.00 pTerm 0.00 iTerm 0.00 dTerm 0.00
+echo: PID_DEBUG 0: Input 209.73 Output 0.00 pTerm 0.00 iTerm 0.00 dTerm 0.00
+echo: PID_DEBUG 0: Input 209.69 Output 0.00 pTerm 0.00 iTerm 0.00 dTerm 0.00
+
+*/
+
+//#define DEFAULT_Kp 15.17
+//#define DEFAULT_Ki 0.88
+//#define DEFAULT_Kd 65.24
+//
+//
+//
+#define DEFAULT_Kp 19.38
+#define DEFAULT_Ki 1.46
+#define DEFAULT_Kd 64.31
 
 #endif // PIDTEMP
 
@@ -548,24 +599,18 @@
  * When set to any value below 255, enables a form of PWM to the bed that acts like a divider
  * so don't use it unless you are OK with PWM on your bed. (See the comment on enabling PIDTEMPBED)
  */
-#define MAX_BED_POWER 255 // limits duty cycle to bed; 255=full current
+#define MAX_BED_POWER 200 // limits duty cycle to bed; 255=full current
 
 #if ENABLED(PIDTEMPBED)
   //#define MIN_BED_POWER 0
   //#define PID_BED_DEBUG // Sends debug data to the serial port.
 
-  #ifdef ROXYs_TRex
-    // T-Rex 2+
+  //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
+  //from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
+
     #define DEFAULT_bedKp 289.73
     #define DEFAULT_bedKi 51.26
     #define DEFAULT_bedKd 409.43
-  #else
-    //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
-    //from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
-    #define DEFAULT_bedKp 10.00
-    #define DEFAULT_bedKi .023
-    #define DEFAULT_bedKd 305.4
-  #endif
 
   //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   //from pidautotune
@@ -614,7 +659,7 @@
 
 #define THERMAL_PROTECTION_HOTENDS // Enable thermal protection for all extruders
 #define THERMAL_PROTECTION_BED     // Enable thermal protection for the heated bed
-#define THERMAL_PROTECTION_CHAMBER // Enable thermal protection for the heated chamber
+//#define THERMAL_PROTECTION_CHAMBER // Enable thermal protection for the heated chamber
 
 //===========================================================================
 //============================= Mechanical Settings =========================
@@ -758,7 +803,7 @@
  * Override with M92
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 800, 93 }
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 160, 1600, (93*2) }
 
 /**
  * Default Max Feed Rate (mm/s)
@@ -769,7 +814,7 @@
 
 //#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
-  #define MAX_FEEDRATE_EDIT_VALUES    { 600, 600, 10, 50 } // ...or, set your own edit limits
+  #define MAX_FEEDRATE_EDIT_VALUES    { 600, 300, 20, 50 } // ...or, set your own edit limits
 #endif
 
 /**
@@ -778,11 +823,11 @@
  * Override with M201
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_ACCELERATION      { 1500, 500, 400, 4000 }
+#define DEFAULT_MAX_ACCELERATION      { 1500, 500, 400, 3500 }
 
 //#define LIMITED_MAX_ACCEL_EDITING     // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
 #if ENABLED(LIMITED_MAX_ACCEL_EDITING)
-  #define MAX_ACCEL_EDIT_VALUES       { 6000, 6000, 200, 20000 } // ...or, set your own edit limits
+  #define MAX_ACCEL_EDIT_VALUES       { 6000, 6000, 600, 20000 } // ...or, set your own edit limits
 #endif
 
 /**
@@ -807,8 +852,8 @@
  */
 //#define CLASSIC_JERK
 #if ENABLED(CLASSIC_JERK)
-  #define DEFAULT_XJERK 12.0  // More conservative numbers.
-  #define DEFAULT_YJERK  8.0
+  #define DEFAULT_XJERK 10.0
+  #define DEFAULT_YJERK  5.0
   #define DEFAULT_ZJERK  0.4
 
   //#define TRAVEL_EXTRA_XYJERK 0.0     // Additional jerk allowance for all travel moves
@@ -829,13 +874,13 @@
  *   http://blog.kyneticcnc.com/2018/10/computing-junction-deviation-for-marlin.html
  */
 #if DISABLED(CLASSIC_JERK)
-  #define JUNCTION_DEVIATION_MM 0.017 // (mm) Distance from real junction edge
+  #define JUNCTION_DEVIATION_MM 0.013 // (mm) Distance from real junction edge
 #endif
 
 /**
  * S-Curve Acceleration
  *
- * This option eliminates vibration during printing by fitting a Bézier
+ * This option eliminates vibration during printing by fitting a BÃ©zier
  * curve to move acceleration, producing much smoother direction changes.
  *
  * See https://github.com/synthetos/TinyG/wiki/Jerk-Controlled-Motion-Explained
@@ -913,6 +958,9 @@
  * The BLTouch probe uses a Hall effect sensor and emulates a servo.
  */
 #define BLTOUCH
+#if ENABLED(BLTOUCH)
+  //#define BLTOUCH_DELAY 375   // (ms) Enable and increase if needed
+#endif
 
 /**
  * Touch-MI Probe by hotends.fr
@@ -984,7 +1032,7 @@
  *
  * Specify a Probe position as { X, Y, Z }
  */
-#define NOZZLE_TO_PROBE_OFFSET { -3, 31, -1.25 }
+#define NOZZLE_TO_PROBE_OFFSET { 24, 30, -2.00 }
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
@@ -1008,7 +1056,7 @@
  * A total of 2 does fast/slow probes with a weighted average.
  * A total of 3 or more adds more slow probes, taking the average.
  */
-//#define MULTIPLE_PROBING 2
+#define MULTIPLE_PROBING 2
 //#define EXTRA_PROBING    1
 
 /**
@@ -1028,9 +1076,8 @@
 #define Z_CLEARANCE_DEPLOY_PROBE    7 // Z Clearance for Deploy/Stow
 #define Z_CLEARANCE_BETWEEN_PROBES  7 // Z Clearance between probe points
 #define Z_CLEARANCE_MULTI_PROBE     5 // Z Clearance between multiple probes
-#define Z_AFTER_PROBING            10 // Z position after probing is done
-
-#define Z_PROBE_LOW_POINT          -2 // Farthest distance below the trigger-point to go before stopping
+#define Z_AFTER_PROBING             7 // Z position after probing is done
+#define Z_PROBE_LOW_POINT          -3 // Farthest distance below the trigger-point to go before stopping
 
 // For M851 give a range for adjusting the Z probe offset
 #define Z_PROBE_OFFSET_RANGE_MIN -20
@@ -1079,20 +1126,20 @@
 // @section extruder
 
 #define DISABLE_E false             // For all extruders
-//#define DISABLE_INACTIVE_EXTRUDER // Keep only the active extruder enabled
+#define DISABLE_INACTIVE_EXTRUDER false // Keep only the active extruder enabled.
 
 // @section machine
 
 // Invert the stepper direction. Change (or reverse the motor connector) if an axis goes the wrong way.
 #define INVERT_X_DIR false
-#define INVERT_Y_DIR false
-#define INVERT_Z_DIR true
+  #define INVERT_Y_DIR false
+  #define INVERT_Z_DIR true
 
 // @section extruder
 
 // For direct drive extruder v9 set to true, for geared extruder set to false.
-#define INVERT_E0_DIR false
-#define INVERT_E1_DIR true
+#define INVERT_E0_DIR true
+#define INVERT_E1_DIR false
 #define INVERT_E2_DIR false
 #define INVERT_E3_DIR false
 #define INVERT_E4_DIR false
@@ -1106,10 +1153,10 @@
 
 //#define UNKNOWN_Z_NO_RAISE      // Don't raise Z (lower the bed) if Z is "unknown." For beds that fall when Z is powered off.
 
-#define Z_HOMING_HEIGHT    8      // (mm) Minimal Z height before homing (G28) for Z clearance above the bed, clamps, ...
+#define Z_HOMING_HEIGHT  8        // (mm) Minimal Z height before homing (G28) for Z clearance above the bed, clamps, ...
                                   // Be sure to have this much clearance over your Z_MAX_POS to prevent grinding.
 
-//#define Z_AFTER_HOMING  10      // (mm) Height to move to after homing Z
+//#define Z_AFTER_HOMING  8       // (mm) Height to move to after homing Z
 
 // Direction of endstops when homing; 1=MAX, -1=MIN
 // :[-1,1]
@@ -1124,10 +1171,10 @@
 #define Y_BED_SIZE 400
 
 // Travel limits (mm) after homing, corresponding to endstop positions.
-#define X_MIN_POS -42
+#define X_MIN_POS -47
 #define Y_MIN_POS 0
 #define Z_MIN_POS 0
-#define X_MAX_POS 450
+#define X_MAX_POS 460
 #define Y_MAX_POS Y_BED_SIZE
 #define Z_MAX_POS 700
 
@@ -1145,7 +1192,7 @@
 #if ENABLED(MIN_SOFTWARE_ENDSTOPS)
   #define MIN_SOFTWARE_ENDSTOP_X
   #define MIN_SOFTWARE_ENDSTOP_Y
-  #define MIN_SOFTWARE_ENDSTOP_Z
+//#define MIN_SOFTWARE_ENDSTOP_Z
 #endif
 
 // Max software endstops constrain movement within maximum coordinate bounds
@@ -1268,8 +1315,8 @@
   #if ENABLED(G26_MESH_VALIDATION)
     #define MESH_TEST_NOZZLE_SIZE    0.4  // (mm) Diameter of primary nozzle.
     #define MESH_TEST_LAYER_HEIGHT   0.2  // (mm) Default layer height for the G26 Mesh Validation Tool.
-    #define MESH_TEST_HOTEND_TEMP  208    // (°C) Default nozzle temperature for the G26 Mesh Validation Tool.
-    #define MESH_TEST_BED_TEMP      60    // (°C) Default bed temperature for the G26 Mesh Validation Tool.
+    #define MESH_TEST_HOTEND_TEMP  205    // (Â°C) Default nozzle temperature for the G26 Mesh Validation Tool.
+    #define MESH_TEST_BED_TEMP      60    // (Â°C) Default bed temperature for the G26 Mesh Validation Tool.
     #define G26_XY_FEEDRATE         20    // (mm/s) Feedrate for XY Moves for the G26 Mesh Validation Tool.
     #define G26_RETRACT_MULTIPLIER   1.0  // G26 Q (retraction) used by default between mesh test elements.
   #endif
@@ -1309,21 +1356,16 @@
   //========================= Unified Bed Leveling ============================
   //===========================================================================
 
-  #define MESH_EDIT_GFX_OVERLAY      // Display a graphics overlay while editing the mesh
+  #define MESH_EDIT_GFX_OVERLAY   // Display a graphics overlay while editing the mesh
 
-  #ifdef ROXYs_TRex
-    #define MESH_INSET 35            // Set Mesh bounds as an inset region of the bed
-  #else
-    #define MESH_INSET 0
-  #endif
-
-  #define GRID_MAX_POINTS_X 11       // Don't use more than 15 points per axis, implementation limited.
+  #define MESH_INSET        35      // Set Mesh bounds as an inset region of the bed
+  #define GRID_MAX_POINTS_X  8      // Don't use more than 15 points per axis, implementation limited.
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
   #define UBL_MESH_EDIT_MOVES_Z     // Sophisticated users prefer no movement of nozzle
   #define UBL_SAVE_ACTIVE_ON_M500   // Save the currently active mesh in the current slot on M500
 
-  #define UBL_Z_RAISE_WHEN_OFF_MESH 0.0   // When the nozzle is off the mesh, this value is used
+  #define UBL_Z_RAISE_WHEN_OFF_MESH 0.0 // When the nozzle is off the mesh, this value is used
                                           // as the Z-Height correction value.
 
 #elif ENABLED(MESH_BED_LEVELING)
@@ -1332,7 +1374,7 @@
   //=================================== Mesh ==================================
   //===========================================================================
 
-  #define MESH_INSET 10          // Set Mesh bounds as an inset region of the bed
+  #define MESH_INSET 3           // Set Mesh bounds as an inset region of the bed
   #define GRID_MAX_POINTS_X 3    // Don't use more than 7 points per axis, implementation limited.
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
@@ -1366,7 +1408,7 @@
 #endif
 
 // Add a menu item to move between bed corners for manual bed adjustment
-//#define LEVEL_BED_CORNERS
+#define LEVEL_BED_CORNERS
 
 #if ENABLED(LEVEL_BED_CORNERS)
   #define LEVEL_CORNERS_INSET_LFRB { 30, 30, 30, 30 } // (mm) Left, Front, Right, Back insets
@@ -1391,7 +1433,7 @@
 // For DELTA this is the top-center of the Cartesian print volume.
 //#define MANUAL_X_HOME_POS 0
 //#define MANUAL_Y_HOME_POS 0
-//#define MANUAL_Z_HOME_POS 0
+#define MANUAL_Z_HOME_POS 0
 
 // Use "Z Safe Homing" to avoid homing with a Z probe outside the bed area.
 //
@@ -1488,7 +1530,7 @@
  *   M501 - Read settings from EEPROM. (i.e., Throw away unsaved changes)
  *   M502 - Revert settings to "factory" defaults. (Follow with M500 to init the EEPROM.)
  */
-#define EEPROM_SETTINGS       // Persistent storage with M500 and M501
+#define EEPROM_SETTINGS     // Persistent storage with M500 and M501
 //#define DISABLE_M503        // Saves ~2700 bytes of PROGMEM. Disable for release!
 #define EEPROM_CHITCHAT       // Give feedback on EEPROM commands. Disable to save PROGMEM.
 #define EEPROM_BOOT_SILENT    // Keep M503 quiet and only give errors during first load
@@ -1521,13 +1563,13 @@
 // Preheat Constants
 #define PREHEAT_1_LABEL       "PLA"
 #define PREHEAT_1_TEMP_HOTEND 180
-#define PREHEAT_1_TEMP_BED     70
-#define PREHEAT_1_FAN_SPEED     0 // Value from 0 to 255
+#define PREHEAT_1_TEMP_BED     60
+#define PREHEAT_1_FAN_SPEED   125 // Value from 0 to 255
 
 #define PREHEAT_2_LABEL       "ABS"
-#define PREHEAT_2_TEMP_HOTEND 240
+#define PREHEAT_2_TEMP_HOTEND 220
 #define PREHEAT_2_TEMP_BED    110
-#define PREHEAT_2_FAN_SPEED     0 // Value from 0 to 255
+#define PREHEAT_2_FAN_SPEED   125 // Value from 0 to 255
 
 /**
  * Nozzle Park
@@ -1544,8 +1586,8 @@
 
 #if ENABLED(NOZZLE_PARK_FEATURE)
   // Specify a park position as { X, Y, Z_raise }
-  #define NOZZLE_PARK_POINT { 50, (Y_MIN_POS + 10), 20 }
-  #define NOZZLE_PARK_XY_FEEDRATE 100   // (mm/s) X and Y axes feedrate (also used for delta Z axis)
+  #define NOZZLE_PARK_POINT { (50), (Y_MAX_POS - 30), 20 }
+  #define NOZZLE_PARK_XY_FEEDRATE 75    // (mm/s) X and Y axes feedrate (also used for delta Z axis)
   #define NOZZLE_PARK_Z_FEEDRATE 5      // (mm/s) Z axis feedrate (not used for delta printers)
 #endif
 
@@ -1686,7 +1728,7 @@
  *
  * :['JAPANESE', 'WESTERN', 'CYRILLIC']
  */
-#define DISPLAY_CHARSET_HD44780 JAPANESE
+#define DISPLAY_CHARSET_HD44780 WESTERN
 
 /**
  * Info Screen Style (0:Classic, 1:Prusa)
@@ -2085,7 +2127,7 @@
 //#define OLED_PANEL_TINYBOY2
 
 //
-// MKS OLED 1.3" 128 × 64 FULL GRAPHICS CONTROLLER
+// MKS OLED 1.3" 128 Ã— 64 FULL GRAPHICS CONTROLLER
 // http://reprap.org/wiki/MKS_12864OLED
 //
 // Tiny, but very sharp OLED display
@@ -2301,6 +2343,9 @@
 
 // Allow servo angle to be edited and saved to EEPROM
 //#define EDITABLE_SERVO_ANGLES
+
+
+/* Make sure these pins aren't used! */
 
 #ifdef ROXYs_TRex
   #define LED_PIN     -1
