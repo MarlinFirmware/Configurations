@@ -108,7 +108,6 @@
 
 /**
  * Select a secondary serial port on the board to use for communication with the host.
- *
  * :[-1, 0, 1, 2, 3, 4, 5, 6, 7]
  */
 // For programming port do NOT define

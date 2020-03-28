@@ -108,7 +108,6 @@
 
 /**
  * Select a secondary serial port on the board to use for communication with the host.
- *
  * :[-1, 0, 1, 2, 3, 4, 5, 6, 7]
  */
 //MKS Robin Lite3 AUX-1 and USB Use UART1(PA9-TX,PA10-RX)     #define SERIAL_PORT_2 1
