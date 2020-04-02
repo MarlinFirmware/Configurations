@@ -1,9 +1,12 @@
 /**
  * Made with Marlin Bitmap Converter
- * http://marlinfw.org/tools/u8glib/converter.html
+ * https://marlinfw.org/tools/u8glib/converter.html
+ *
+ * This bitmap from 80x44 C/C++ data
  */
+#pragma once
+
 #define CUSTOM_BOOTSCREEN_BMPWIDTH  80
-#define CUSTOM_BOOTSCREEN_Y          3
 
 const unsigned char custom_start_bmp[] PROGMEM = {
   B00000000,B00000000,B00000000,B00000000,B00000000,B00000000,B00000111,B11000000,B00000000,B00000000,
