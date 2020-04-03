@@ -1601,13 +1601,10 @@
     #define PTC_MAX_BED_TEMP BED_MAXTEMP
 
     // Park position to wait for probe cooldown
-    #define PTC_PARK_POS_X 245.0F // ((X_MAX_POS) - 10)
-    #define PTC_PARK_POS_Y   6.0F // ((Y_MIN_POS) + 10)
-    #define PTC_PARK_POS_Z 105.0F // ((Z_MAX_POS) / 2)
+    #define PTC_PARK_POS   { 245, 6, 105 }  // right-front
 
     // Probe position to probe and wait for probe to reach target temperature
-    #define PTC_PROBE_POS_X 127.5F // ((X_BED_SIZE) / 2)
-    #define PTC_PROBE_POS_Y 106.3F // ((Y_BED_SIZE) / 2)
+    #define PTC_PROBE_POS  { 127.5, 106.3 } // middle
 
     // Enable additional compensation using hotend temperature
     // Note: this values cannot be calibrated automatically but have to be set manually
