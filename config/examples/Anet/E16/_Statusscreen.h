@@ -36,7 +36,7 @@
 
 /**
  * Made with Marlin Bitmap Converter
- * http://marlinfw.org/tools/u8glib/converter.html
+ * https://marlinfw.org/tools/u8glib/converter.html
  *
  * This bitmap from the file '3dpc_tech_statusscreen.bmp'
  */

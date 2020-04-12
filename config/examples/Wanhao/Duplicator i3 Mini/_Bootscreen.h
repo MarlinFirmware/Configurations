@@ -1,6 +1,6 @@
 /**
  * Made with Marlin Bitmap Converter
- * http://marlinfw.org/tools/u8glib/converter.html
+ * https://marlinfw.org/tools/u8glib/converter.html
  */
 #define CUSTOM_BOOTSCREEN_BMPWIDTH  80
 #define CUSTOM_BOOTSCREEN_Y          3

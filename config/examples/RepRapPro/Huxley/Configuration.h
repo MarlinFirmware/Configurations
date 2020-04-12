@@ -859,7 +859,7 @@ Black rubber belt(MXL), 18 - tooth aluminium pulley : 87.489 step per mm (Huxley
 // @section probes
 
 //
-// See http://marlinfw.org/docs/configuration/probes.html
+// See https://marlinfw.org/docs/configuration/probes.html
 //
 
 /**
@@ -1132,7 +1132,7 @@ Black rubber belt(MXL), 18 - tooth aluminium pulley : 87.489 step per mm (Huxley
 
 // The size of the print bed
 // http://reprap.org/wiki/Configuring_Marlin_Bed_Dimensions
-// http://marlinfw.org/docs/configuration/configuration.html#movement-bounds
+// https://marlinfw.org/docs/configuration/configuration.html#movement-bounds
 #define X_BED_SIZE 140
 #define Y_BED_SIZE 140
 // Huxley with 110x110 PEI board.
@@ -1684,7 +1684,7 @@ Black rubber belt(MXL), 18 - tooth aluminium pulley : 87.489 step per mm (Huxley
  *  - Click the controller to view the LCD menu
  *  - The LCD will display Japanese, Western, or Cyrillic text
  *
- * See http://marlinfw.org/docs/development/lcd_language.html
+ * See https://marlinfw.org/docs/development/lcd_language.html
  *
  * :['JAPANESE', 'WESTERN', 'CYRILLIC']
  */
