@@ -23,7 +23,7 @@
 
 /**
  * Made with Marlin Bitmap Converter
- * http://marlinfw.org/tools/u8glib/converter.html
+ * https://marlinfw.org/tools/u8glib/converter.html
  *
  * This bitmap from 128x48 C/C++ data
  */
