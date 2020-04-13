@@ -1,3 +1,9 @@
+#
+# OS
+#
+applet/
+*.DS_Store
+
 # Prerequisites
 *.d
 
