@@ -936,16 +936,16 @@
 /**
  * I2C-based DIGIPOTs (e.g., Azteeg X3 Pro)
  */
-//#define DIGIPOT_MCP4018                 // Requires https://github.com/stawel/SlowSoftI2CMaster
+//#define DIGIPOT_MCP4018             // Requires https://github.com/stawel/SlowSoftI2CMaster
 //#define DIGIPOT_MCP4451
 #if EITHER(DIGIPOT_MCP4018, DIGIPOT_MCP4451)
-  #define DIGIPOT_I2C_NUM_CHANNELS 8    // 5DPRINT:4   AZTEEG_X3_PRO:8   MKS_SBASE:5   MIGHTYBOARD_REVE:5
+  #define DIGIPOT_I2C_NUM_CHANNELS 8  // 5DPRINT:4   AZTEEG_X3_PRO:8   MKS_SBASE:5   MIGHTYBOARD_REVE:5
 
   // Actual motor currents in Amps. The number of entries must match DIGIPOT_I2C_NUM_CHANNELS.
   // These correspond to the physical drivers, so be mindful if the order is changed.
   #define DIGIPOT_I2C_MOTOR_CURRENTS { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 }  // AZTEEG_X3_PRO
 
-  //#define DIGIPOT_USE_RAW_VALUES      // Use DIGIPOT_MOTOR_CURRENT raw wiper values (instead of A4988 motor currents)
+  //#define DIGIPOT_USE_RAW_VALUES    // Use DIGIPOT_MOTOR_CURRENT raw wiper values (instead of A4988 motor currents)
 
   /**
    * Common slave addresses:
@@ -2279,9 +2279,9 @@
   #define CHOPPER_TIMING CHOPPER_DEFAULT_12V
 
   /**
-   * Monitor Trinamic drivers for error conditions,
-   * like overtemperature and short to ground.
-   * In the case of overtemperature Marlin can decrease the driver current until error condition clears.
+   * Monitor Trinamic drivers
+   * for error conditions like overtemperature and short to ground.
+   * To manage over-temp Marlin can decrease the driver current until the error condition clears.
    * Other detected conditions can be used to stop the current print.
    * Relevant g-codes:
    * M906 - Set or get motor current in milliamps using axis codes X, Y, Z, E. Report values if no axis codes given.
