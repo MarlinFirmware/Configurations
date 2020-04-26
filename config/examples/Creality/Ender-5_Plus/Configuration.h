@@ -2061,7 +2061,6 @@
 // 1.) Copy DWIN_SET folder from [1] to SD card,
 // 2.) boot the display with SD plugged into its own SD reader (not the motherboard's).
 // [1] https://github.com/coldtobi/Marlin_DGUS_Resources
-// Note: Needs this issue to be fixed https://github.com/MarlinFirmware/Marlin/issues/17642
 #define DGUS_LCD_UI_ORIGIN
 //#define DGUS_LCD_UI_FYSETC
 //#define DGUS_LCD_UI_HIPRECY
