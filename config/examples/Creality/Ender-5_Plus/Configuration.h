@@ -720,8 +720,8 @@
  * Override with M92
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
-// TODO rubienr: find out the steps for the OEM gear, this 144.1 is for the hobbed gear
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 800, 144.1 }
+// E steps example: steps per revolution s=200, microstepping m=16, effective gear diameter d=10.95: sm/(πd) = 93.02
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 800, 93.02 }
 
 /**
  * Default Max Feed Rate (mm/s)
@@ -950,7 +950,7 @@
  *
  * Specify a Probe position as { X, Y, Z }
  */
-# Note on Creality Ender-5 Plus: Z offset must be adjusted (M851) every time once the probe has been loosen/unmounted.
+// Note on Creality Ender-5 Plus: Z offset must be adjusted (M851) every time once the probe has been loosen/unmounted.
 #define NOZZLE_TO_PROBE_OFFSET { -44, -5, -3.0 }
 
 // Most probes should stay away from the edges of the bed, but
@@ -1000,8 +1000,7 @@
 #define Z_PROBE_LOW_POINT           -2 // Farthest distance below the trigger-point to go before stopping
 
 // For M851 give a range for adjusting the Z probe offset
-// TODO rubienr: should be limited to +/-4 mm
-#define Z_PROBE_OFFSET_RANGE_MIN -20
+#define Z_PROBE_OFFSET_RANGE_MIN -4
 #define Z_PROBE_OFFSET_RANGE_MAX 20
 
 // Enable the M48 repeatability test to test probe accuracy
@@ -2062,6 +2061,7 @@
 // 1.) Copy DWIN_SET folder from [1] to SD card,
 // 2.) boot the display with SD plugged into its own SD reader (not the motherboard's).
 // [1] https://github.com/coldtobi/Marlin_DGUS_Resources
+// Note: Needs this issue to be fixed https://github.com/MarlinFirmware/Marlin/issues/17642
 #define DGUS_LCD_UI_ORIGIN
 //#define DGUS_LCD_UI_FYSETC
 //#define DGUS_LCD_UI_HIPRECY
