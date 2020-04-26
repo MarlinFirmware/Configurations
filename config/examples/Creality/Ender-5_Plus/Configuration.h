@@ -128,8 +128,8 @@
 
 // Choose the name from boards.h that matches your setup
 #ifndef MOTHERBOARD
-  #define X_MAX_PIN  3 // OEM creality connects X_MAX switch to X_MIN(_PIN) motherbard connector
-  #define Y_MAX_PIN 14 // OEM creality connects Y_MAX switch to Y_MIN(_PIN) motherbard connector
+  #define X_MAX_PIN  3 // creality connects X_MAX switch to X_MIN(_PIN) motherbard connector
+  #define Y_MAX_PIN 14 // creality connects Y_MAX switch to Y_MIN(_PIN) motherbard connector
   #define MOTHERBOARD BOARD_RAMPS_CREALITY
 #endif
 
@@ -692,7 +692,7 @@
  *
  * :[2,3,4,5,6,7]
  */
-// TODO rubienr: 100nF parallel to switch is too less -> find accurate capacity for the OEM constellation and disable ENDSTOP_NOISE_THRESHOLD
+// TODO rubienr: 100nF parallel to switch is too less -> find accurate capacity and disable ENDSTOP_NOISE_THRESHOLD
 #define ENDSTOP_NOISE_THRESHOLD 2
 
 //=============================================================================
