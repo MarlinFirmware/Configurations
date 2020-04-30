@@ -169,7 +169,7 @@
    * and/or decrease WATCH_TEMP_INCREASE. WATCH_TEMP_INCREASE should not be set
    * below 2.
    */
-  #define WATCH_TEMP_PERIOD 20                // Seconds
+  #define WATCH_TEMP_PERIOD 60                // Seconds, heating is quite slow in Rostock 301
   #define WATCH_TEMP_INCREASE 2               // Degrees Celsius
 #endif
 
