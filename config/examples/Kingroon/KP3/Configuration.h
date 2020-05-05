@@ -111,7 +111,6 @@
  * :[-1, 0, 1, 2, 3, 4, 5, 6, 7]
  */
 #define SERIAL_PORT_2 1
-#define NUM_SERIAL 2
 
 /**
  * This setting determines the communication speed of the printer.
@@ -388,6 +387,8 @@
  *    18 : ATC Semitec 204GT-2 (4.7k pullup) Dagoma.Fr - MKS_Base_DKU001327
  *    20 : Pt100 with circuit in the Ultimainboard V2.x with 5v excitation (AVR)
  *    21 : Pt100 with circuit in the Ultimainboard V2.x with 3.3v excitation (STM32 \ LPC176x....)
+ *    22 : 100k (hotend) with 4.7k pullup to 3.3V and 220R to analog input (as in GTM32 Pro vB)
+ *    23 : 100k (bed) with 4.7k pullup to 3.3v and 220R to analog input (as in GTM32 Pro vB)
  *   201 : Pt100 with circuit in Overlord, similar to Ultimainboard V2.x
  *    60 : 100k Maker's Tool Works Kapton Bed Thermistor beta=3950
  *    61 : 100k Formbot / Vivedino 3950 350C thermistor 4.7k pullup
@@ -1374,8 +1375,8 @@
 //#define Z_SAFE_HOMING
 
 #if ENABLED(Z_SAFE_HOMING)
-  #define Z_SAFE_HOMING_X_POINT ((X_BED_SIZE) / 2)    // X point for Z homing when homing all axes (G28).
-  #define Z_SAFE_HOMING_Y_POINT ((Y_BED_SIZE) / 2)    // Y point for Z homing when homing all axes (G28).
+  #define Z_SAFE_HOMING_X_POINT X_CENTER  // X point for Z homing when homing all axes (G28).
+  #define Z_SAFE_HOMING_Y_POINT Y_CENTER  // Y point for Z homing when homing all axes (G28).
 #endif
 
 // Homing speeds (mm/m)
@@ -1518,7 +1519,7 @@
   //#define NOZZLE_PARK_Y_ONLY          // Y move only is required to park
   #define NOZZLE_PARK_Z_RAISE_MIN   2   // (mm) Always raise Z by at least this distance
   #define NOZZLE_PARK_XY_FEEDRATE 100   // (mm/s) X and Y axes feedrate (also used for delta Z axis)
-  #define NOZZLE_PARK_Z_FEEDRATE 5      // (mm/s) Z axis feedrate (not used for delta printers)
+  #define NOZZLE_PARK_Z_FEEDRATE    5   // (mm/s) Z axis feedrate (not used for delta printers)
 #endif
 
 /**
@@ -2131,16 +2132,16 @@
   #define BUTTON_DELAY_MENU 100 // (ms) Button repeat delay for menus
 
   /* MKS Robin TFT v2.0 */
-  #define XPT2046_X_CALIBRATION    12013
-  #define XPT2046_Y_CALIBRATION    -8711
-  #define XPT2046_X_OFFSET           -32
-  #define XPT2046_Y_OFFSET           256
+  #define XPT2046_X_CALIBRATION   12013
+  #define XPT2046_Y_CALIBRATION   -8711
+  #define XPT2046_X_OFFSET          -32
+  #define XPT2046_Y_OFFSET          256
 
   /* MKS Robin TFT v1.1 */
-  //#define XPT2046_X_CALIBRATION -11792
-  //#define XPT2046_Y_CALIBRATION   8947
-  //#define XPT2046_X_OFFSET         342
-  //#define XPT2046_Y_OFFSET         -19
+  //#define XPT2046_X_CALIBRATION  -11792
+  //#define XPT2046_Y_CALIBRATION    8947
+  //#define XPT2046_X_OFFSET          342
+  //#define XPT2046_Y_OFFSET          -19
 #endif
 
 //
