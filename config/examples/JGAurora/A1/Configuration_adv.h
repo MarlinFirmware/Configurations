@@ -592,8 +592,7 @@
 
   // Default x offset in duplication mode (typically set to half print bed width)
   #define DEFAULT_DUPLICATION_X_OFFSET 100
-
-#endif // DUAL_X_CARRIAGE
+#endif
 
 // Activate a solenoid on the active extruder with M380. Disable all with M381.
 // Define SOL0_PIN, SOL1_PIN, etc., for each extruder that has a solenoid.
@@ -733,10 +732,9 @@
     // Define one position per Z stepper in stepper driver order.
     #define Z_STEPPER_ALIGN_STEPPER_XY { { 210.7, 102.5 }, { 152.6, 220.0 }, { 94.5, 102.5 } }
   #else
-    // Amplification factor. Used to scale the correction step up or down.
-    // In case the stepper (spindle) position is further out than the test point.
-    // Use a value > 1. NOTE: This may cause instability
-    #define Z_STEPPER_ALIGN_AMP 1.0
+    // Amplification factor. Used to scale the correction step up or down in case
+    // the stepper (spindle) position is farther out than the test point.
+    #define Z_STEPPER_ALIGN_AMP 1.0       // Use a value > 1.0 NOTE: This may cause instability!
   #endif
 
   #define G34_MAX_GRADE              5    // (%) Maximum incline that G34 will handle
