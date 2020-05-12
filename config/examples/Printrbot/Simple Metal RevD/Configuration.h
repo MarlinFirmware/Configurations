@@ -2085,6 +2085,11 @@
 //#define DGUS_LCD_UI_HIPRECY
 
 //
+// Ender-3 v2 OEM display. A DWIN display with Rotary Encoder.
+//
+//#define DWIN_ENDER3_V2
+
+//
 // Touch-screen LCD for Malyan M200/M300 printers
 //
 //#define MALYAN_LCD
