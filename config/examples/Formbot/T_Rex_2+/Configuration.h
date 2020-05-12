@@ -1390,19 +1390,6 @@ echo: PID_DEBUG 0: Input 209.69 Output 0.00 pTerm 0.00 iTerm 0.00 dTerm 0.00
 #endif // BED_LEVELING
 
 /**
- * Points to probe for all 3-point Leveling procedures.
- * Override if the automatically selected points are inadequate.
- */
-#if EITHER(AUTO_BED_LEVELING_3POINT, AUTO_BED_LEVELING_UBL)
-  #define PROBE_PT_1_X 35
-  #define PROBE_PT_1_Y 365
-  #define PROBE_PT_2_X 35
-  #define PROBE_PT_2_Y 35
-  #define PROBE_PT_3_X 365
-  #define PROBE_PT_3_Y 35
-#endif
-
-/**
  * Add a bed leveling sub-menu for ABL or MBL.
  * Include a guided procedure if manual probing is enabled.
  */

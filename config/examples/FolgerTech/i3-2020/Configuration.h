@@ -1326,19 +1326,6 @@
 #endif // BED_LEVELING
 
 /**
- * Points to probe for all 3-point Leveling procedures.
- * Override if the automatically selected points are inadequate.
- */
-#if EITHER(AUTO_BED_LEVELING_3POINT, AUTO_BED_LEVELING_UBL)
-  #define PROBE_PT_1_X 45
-  #define PROBE_PT_1_Y 170
-  #define PROBE_PT_2_X 45
-  #define PROBE_PT_2_Y 25
-  #define PROBE_PT_3_X 180
-  #define PROBE_PT_3_Y 25
-#endif
-
-/**
  * Add a bed leveling sub-menu for ABL or MBL.
  * Include a guided procedure if manual probing is enabled.
  */
