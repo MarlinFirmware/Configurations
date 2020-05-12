@@ -1663,6 +1663,16 @@
 //#define BEZIER_CURVE_SUPPORT
 
 /**
+ * Direct Stepping
+ *
+ * Comparable to the method used by Klipper, G6 direct stepping significantly
+ * reduces motion calculations, increases top printing speeds, and results in
+ * less step aliasing by calculating all motions in advance.
+ * Preparing your G-code: https://github.com/colinrgodsey/step-daemon
+ */
+//#define DIRECT_STEPPING
+
+/**
  * G38 Probe Target
  *
  * This option adds G38.2 and G38.3 (probe towards target)
