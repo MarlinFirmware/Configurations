@@ -3,7 +3,7 @@
 ## Requirements
 - [Prusa MK3S](https://www.prusa3d.com/original-prusa-i3-mk3/) or MK3 with MK3S upgrade (required for filament runout to work properly)
 - BigTreeTech BTT002 motherboard
-- 4 x BigTreeTech TMC2209s (DIAG pin location differs from Watterott's & similarl designs)
+- 4 x BigTreeTech TMC2209s (DIAG pin location differs from Watterott's & similar designs)
 
 ## Upgrade Notes
 * ⚠️ Cut or desolder the Z & E driver DIAG pins or they will interfere with PINDA & filament runout detection. ⚠️
