@@ -170,21 +170,21 @@
    * below 2.
    */
   #define WATCH_TEMP_PERIOD 20                // Seconds
-  #define WATCH_TEMP_INCREASE 8               // Degrees Celsius
+  #define WATCH_TEMP_INCREASE 2               // Degrees Celsius
 #endif
 
 /**
  * Thermal Protection parameters for the bed are just as above for hotends.
  */
 #if ENABLED(THERMAL_PROTECTION_BED)
-  #define THERMAL_PROTECTION_BED_PERIOD        40 // Seconds
+  #define THERMAL_PROTECTION_BED_PERIOD        20 // Seconds
   #define THERMAL_PROTECTION_BED_HYSTERESIS     8 // Degrees Celsius
 
   /**
    * As described above, except for the bed (M140/M190/M303).
    */
   #define WATCH_BED_TEMP_PERIOD                60 // Seconds
-  #define WATCH_BED_TEMP_INCREASE               8 // Degrees Celsius
+  #define WATCH_BED_TEMP_INCREASE               2 // Degrees Celsius
 #endif
 
 /**
@@ -286,11 +286,6 @@
   #endif
 #endif
 
-// Extra options for the M114 "Current Position" report
-//#define M114_DETAIL         // Use 'M114` for details to check planner calculations
-//#define M114_REALTIME       // Real current position based on forward kinematics
-//#define M114_LEGACY         // M114 used to synchronize on every call. Enable if needed.
-
 // Show Temperature ADC value
 // Enable for M105 to include ADC values read from temperature sensors.
 //#define SHOW_TEMP_ADC_VALUES
@@ -333,6 +328,18 @@
   #define EXTRUDER_RUNOUT_SECONDS 30
   #define EXTRUDER_RUNOUT_SPEED 1500  // (mm/m)
   #define EXTRUDER_RUNOUT_EXTRUDE 5   // (mm)
+#endif
+
+/**
+ * Hotend Idle Timeout
+ * Prevent filament in the nozzle from charring and causing a critical jam.
+ */
+//#define HOTEND_IDLE_TIMEOUT
+#if ENABLED(HOTEND_IDLE_TIMEOUT)
+  #define HOTEND_IDLE_DURATION_SEC    5     // (minutes) Time without extruder movement to trigger protection
+  #define HOTEND_IDLE_MIN_TRIGGER   180     // (°C) Minimum temperature to enable hotend protection
+  #define HOTEND_IDLE_NOZZLE_TARGET   0     // (°C) Safe temperature for the nozzle after timeout
+  #define HOTEND_IDLE_BED_TARGET      0     // (°C) Safe temperature for the bed after timeout
 #endif
 
 // @section temperature
@@ -385,7 +392,7 @@
  *
  * Define one or both of these to override the default 0-255 range.
  */
-#define FAN_MIN_PWM 55
+#define FAN_MIN_PWM 80
 //#define FAN_MAX_PWM 128
 
 /**
@@ -592,8 +599,7 @@
 
   // Default x offset in duplication mode (typically set to half print bed width)
   #define DEFAULT_DUPLICATION_X_OFFSET 100
-
-#endif // DUAL_X_CARRIAGE
+#endif
 
 // Activate a solenoid on the active extruder with M380. Disable all with M381.
 // Define SOL0_PIN, SOL1_PIN, etc., for each extruder that has a solenoid.
@@ -776,10 +782,14 @@
 //#define HOME_AFTER_DEACTIVATE  // Require rehoming after steppers are deactivated
 
 // Minimum time that a segment needs to take if the buffer is emptied
-#define DEFAULT_MINSEGMENTTIME        20000   // (ms)
+#define DEFAULT_MINSEGMENTTIME        20000   // (µs)
 
-// If defined the movements slow down when the look ahead buffer is only half full
+// Slow down the machine if the look ahead buffer is (by default) half full.
+// Increase the slowdown divisor for larger buffer sizes.
 #define SLOWDOWN
+#if ENABLED(SLOWDOWN)
+  #define SLOWDOWN_DIVISOR 2
+#endif
 
 /**
  * XY Frequency limit
@@ -1074,7 +1084,7 @@
 
   //#define MENU_ADDAUTOSTART               // Add a menu option to run auto#.g files
 
-  #define EVENT_GCODE_SD_STOP "G28XY"       // G-code to run on Stop Print (e.g., "G28XY" or "G27")
+  #define EVENT_GCODE_SD_STOP "G28XYE"       // G-code to run on Stop Print (e.g., "G28XY" or "G27")
 
   #if ENABLED(PRINTER_EVENT_LEDS)
     #define PE_LEDS_COMPLETED_TIME  (30*60) // (seconds) Time to keep the LED "done" color before restoring normal illumination
@@ -1256,7 +1266,8 @@
   // Show SD percentage next to the progress bar
   //#define DOGM_SD_PERCENT
 
-  // Enable to save many cycles by drawing a hollow frame on the Info Screen
+  // Save many cycles by drawing a hollow frame or no frame on the Info Screen
+  //#define XYZ_NO_FRAME
   #define XYZ_HOLLOW_FRAME
 
   // Enable to save many cycles by drawing a hollow frame on Menu Screens
@@ -1382,9 +1393,6 @@
   //#define AO_EXP2_PINMAP      // AlephObjects CLCD UI EXP2 mapping
   //#define CR10_TFT_PINMAP     // Rudolph Riedel's CR10 pin mapping
   //#define S6_TFT_PINMAP       // FYSETC S6 pin mapping
-  //#define CHEETAH_TFT_PINMAP  // FYSETC Cheetah pin mapping
-  //#define E3_EXP1_PINMAP      // E3 type boards (SKR E3/DIP, FYSETC Cheetah and Stock boards) EXP1 pin mapping
-  //#define GENERIC_EXP2_PINMAP // GENERIC EXP2 pin mapping
 
   //#define OTHER_PIN_LAYOUT  // Define pins manually below
   #if ENABLED(OTHER_PIN_LAYOUT)
@@ -1665,6 +1673,16 @@
 //#define BEZIER_CURVE_SUPPORT
 
 /**
+ * Direct Stepping
+ *
+ * Comparable to the method used by Klipper, G6 direct stepping significantly
+ * reduces motion calculations, increases top printing speeds, and results in
+ * less step aliasing by calculating all motions in advance.
+ * Preparing your G-code: https://github.com/colinrgodsey/step-daemon
+ */
+//#define DIRECT_STEPPING
+
+/**
  * G38 Probe Target
  *
  * This option adds G38.2 and G38.3 (probe towards target)
@@ -1732,14 +1750,16 @@
 //================================= Buffers =================================
 //===========================================================================
 
-// @section hidden
+// @section motion
 
-// The number of linear motions that can be in the plan at any give time.
-// THE BLOCK_BUFFER_SIZE NEEDS TO BE A POWER OF 2 (e.g. 8, 16, 32) because shifts and ors are used to do the ring-buffering.
-#if ENABLED(SDSUPPORT)
-  #define BLOCK_BUFFER_SIZE 32 // SD,LCD,Buttons take more memory, block buffer needs to be smaller
+// The number of lineear moves that can be in the planner at once.
+// The value of BLOCK_BUFFER_SIZE must be a power of 2 (e.g. 8, 16, 32)
+#if BOTH(SDSUPPORT, DIRECT_STEPPING)
+  #define BLOCK_BUFFER_SIZE  8
+#elif ENABLED(SDSUPPORT)
+  #define BLOCK_BUFFER_SIZE 32
 #else
-  #define BLOCK_BUFFER_SIZE 16 // maximize block buffer
+  #define BLOCK_BUFFER_SIZE 16
 #endif
 
 // @section serial
@@ -1782,10 +1802,14 @@
   //#define SERIAL_STATS_DROPPED_RX
 #endif
 
-// Enable an emergency-command parser to intercept certain commands as they
-// enter the serial receive buffer, so they cannot be blocked.
-// Currently handles M108, M112, M410
-// Does not work on boards using AT90USB (USBCON) processors!
+/**
+ * Emergency Command Parser
+ *
+ * Add a low-level parser to intercept certain commands as they
+ * enter the serial receive buffer, so they cannot be blocked.
+ * Currently handles M108, M112, M410, M876
+ * NOTE: Not yet implemented for all platforms.
+ */
 //#define EMERGENCY_PARSER
 
 // Bad Serial-connections can miss a received command by sending an 'ok'
@@ -1853,7 +1877,7 @@
  */
 #if EXTRUDERS > 1
   // Z raise distance for tool-change, as needed for some extruders
-  #define TOOLCHANGE_ZRAISE     2  // (mm)
+  #define TOOLCHANGE_ZRAISE                 2 // (mm)
   //#define TOOLCHANGE_ZRAISE_BEFORE_RETRACT  // Apply raise before swap retraction (if enabled)
   //#define TOOLCHANGE_NO_RETURN              // Never return to previous position on tool-change
   #if ENABLED(TOOLCHANGE_NO_RETURN)
@@ -1966,7 +1990,7 @@
   #define PAUSE_PARK_NO_STEPPER_TIMEOUT           // Enable for XYZ steppers to stay powered on during filament change.
 
   #define PARK_HEAD_ON_PAUSE                    // Park the nozzle during pause and filament change.
-  #define HOME_BEFORE_FILAMENT_CHANGE           // Ensure homing has been completed prior to parking for filament change
+  #define HOME_BEFORE_FILAMENT_CHANGE           // If needed, home before parking for filament change
 
   #define FILAMENT_LOAD_UNLOAD_GCODES           // Add M701/M702 Load/Unload G-codes, plus Load/Unload in the LCD Prepare menu.
   //#define FILAMENT_UNLOAD_ALL_EXTRUDERS         // Allow M702 to unload all extruders above a minimum target temp (as set by M302)
@@ -2137,7 +2161,7 @@
 
   #if AXIS_IS_TMC(Z)
     #define Z_CURRENT       600
-    #define Z_CURRENT_HOME  ((Z_CURRENT) / 2)
+    #define Z_CURRENT_HOME  Z_CURRENT
     #define Z_MICROSTEPS     16
     #define Z_RSENSE          0.11
     #define Z_CHAIN_POS      -1
@@ -2341,13 +2365,13 @@
    * STEALTHCHOP_(XY|Z|E) must be enabled to use HYBRID_THRESHOLD.
    * M913 X/Y/Z/E to live tune the setting
    */
-  //#define HYBRID_THRESHOLD
+  #define HYBRID_THRESHOLD
 
-  #define X_HYBRID_THRESHOLD     100  // [mm/s]
+  #define X_HYBRID_THRESHOLD     120  // [mm/s]
   #define X2_HYBRID_THRESHOLD    100
-  #define Y_HYBRID_THRESHOLD     100
+  #define Y_HYBRID_THRESHOLD     120
   #define Y2_HYBRID_THRESHOLD    100
-  #define Z_HYBRID_THRESHOLD       3
+  #define Z_HYBRID_THRESHOLD     100
   #define Z2_HYBRID_THRESHOLD      3
   #define Z3_HYBRID_THRESHOLD      3
   #define Z4_HYBRID_THRESHOLD      3
@@ -2387,10 +2411,14 @@
 
   #if EITHER(SENSORLESS_HOMING, SENSORLESS_PROBING)
     // TMC2209: 0...255. TMC2130: -64...63
-    #define X_STALL_SENSITIVITY  100
+    #define X_STALL_SENSITIVITY  90
     #define X2_STALL_SENSITIVITY X_STALL_SENSITIVITY
     #define Y_STALL_SENSITIVITY  100
+    #define Y2_STALL_SENSITIVITY Y_STALL_SENSITIVITY
     //#define Z_STALL_SENSITIVITY  8
+    //#define Z2_STALL_SENSITIVITY Z_STALL_SENSITIVITY
+    //#define Z3_STALL_SENSITIVITY Z_STALL_SENSITIVITY
+    //#define Z4_STALL_SENSITIVITY Z_STALL_SENSITIVITY
     //#define SPI_ENDSTOPS              // TMC2130 only
     #define IMPROVE_HOMING_RELIABILITY
   #endif
@@ -2918,6 +2946,9 @@
  * Include capabilities in M115 output
  */
 #define EXTENDED_CAPABILITIES_REPORT
+#if ENABLED(EXTENDED_CAPABILITIES_REPORT)
+  //#define M115_GEOMETRY_REPORT
+#endif
 
 /**
  * Expected Printer Check
@@ -2951,6 +2982,11 @@
  */
 //#define NO_WORKSPACE_OFFSETS
 
+// Extra options for the M114 "Current Position" report
+//#define M114_DETAIL         // Use 'M114` for details to check planner calculations
+//#define M114_REALTIME       // Real current position based on forward kinematics
+//#define M114_LEGACY         // M114 used to synchronize on every call. Enable if needed.
+
 /**
  * Set the number of proportional font spaces required to fill up a typical character space.
  * This can help to better align the output of commands like `G29 O` Mesh Output.
@@ -2970,6 +3006,8 @@
 #endif
 
 //#define GCODE_CASE_INSENSITIVE  // Accept G-code sent to the firmware in lowercase
+
+//#define REPETIER_GCODE_M360     // Add commands originally from Repetier FW
 
 /**
  * CNC G-code options
@@ -3253,7 +3291,7 @@
     // This is for Prusa MK3-style extruders. Customize for your hardware.
     #define MMU2_FILAMENTCHANGE_EJECT_FEED 80.0
     #define MMU2_LOAD_TO_NOZZLE_SEQUENCE \
-      {  7.2,  562 }, \
+      {  7.2, 1145 }, \
       { 14.4,  871 }, \
       { 36.0, 1393 }, \
       { 14.4,  871 }, \
@@ -3273,7 +3311,25 @@
       { -50.0, 2000 }
   #endif
 
-  // Using a sensor like the MMU2S
+  /**
+   * MMU Extruder Sensor
+   * Add support for Prusa IR Sensor (or other) to detect that filament reach the extruder to make loading filament more reliable
+   * If your extruder is equipped with a filament sensor located less than 38mm from the gears you can use this feature
+   * During loading to the extruder, the sensor will stop the loading command when he's triggered and make a last move to load filament to the gears
+   * If no filament is detected, MMU2 will make more loading attemps, if finally no filament is detected, the printer will enter in runout state
+   */
+
+  //#define MMU_EXTRUDER_SENSOR
+  #if ENABLED(MMU_EXTRUDER_SENSOR)
+    #define MMU_LOADING_ATTEMPTS_NR 5 //max. number of attempts to load filament if first load fail
+  #endif
+
+  /**
+   * Using a sensor like the MMU2S
+   * This mode only work if you have a MK3S extruder with sensor sensing the extruder idler mmu2s
+   * See https://help.prusa3d.com/en/guide/3b-mk3s-mk2-5s-extruder-upgrade_41560, step 11
+   */
+
   //#define PRUSA_MMU2_S_MODE
   #if ENABLED(PRUSA_MMU2_S_MODE)
     #define MMU2_C0_RETRY   5             // Number of retries (total time = timeout*retries)

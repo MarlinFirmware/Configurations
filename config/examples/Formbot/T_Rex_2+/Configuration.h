@@ -387,6 +387,8 @@
  *    18 : ATC Semitec 204GT-2 (4.7k pullup) Dagoma.Fr - MKS_Base_DKU001327
  *    20 : Pt100 with circuit in the Ultimainboard V2.x with 5v excitation (AVR)
  *    21 : Pt100 with circuit in the Ultimainboard V2.x with 3.3v excitation (STM32 \ LPC176x....)
+ *    22 : 100k (hotend) with 4.7k pullup to 3.3V and 220R to analog input (as in GTM32 Pro vB)
+ *    23 : 100k (bed) with 4.7k pullup to 3.3v and 220R to analog input (as in GTM32 Pro vB)
  *   201 : Pt100 with circuit in Overlord, similar to Ultimainboard V2.x
  *    60 : 100k Maker's Tool Works Kapton Bed Thermistor beta=3950
  *    61 : 100k Formbot / Vivedino 3950 350C thermistor 4.7k pullup
@@ -482,13 +484,8 @@
 #if ENABLED(PIDTEMP)
   #define PID_EDIT_MENU           // Add PID editing to the "Advanced Settings" menu. (~700 bytes of PROGMEM)
   #define PID_AUTOTUNE_MENU       // Add PID auto-tuning to the "Advanced Settings" menu. (~250 bytes of PROGMEM)
-  #define PID_DEBUG               // Sends debug data to the serial port.  Use M303 D to toggle activation.
-  //#define PID_OPENLOOP 1        // Puts PID in open loop. M104/M140 sets the output power from 0 to PID_MAX
-  //#define SLOW_PWM_HEATERS      // PWM with very low frequency (roughly 0.125Hz=8s) and minimum state time of approximately 1s useful for heaters driven by a relay
   #define PID_PARAMS_PER_HOTEND   // Uses separate PID parameters for each extruder (useful for mismatched extruders)
                                   // Set/get with gcode: M301 E[extruder number, 0-2]
-  #define PID_FUNCTIONAL_RANGE 8  // If the temperature difference between the target temperature and the actual temperature
-                                  // is more than PID_FUNCTIONAL_RANGE then the PID will be shut off and the heater will be set to min/max.
 
 /*
  *  For Roxy Formbot T-Rex2 Frankenstien dmachine:
@@ -622,6 +619,14 @@ echo: PID_DEBUG 0: Input 209.69 Output 0.00 pTerm 0.00 iTerm 0.00 dTerm 0.00
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #endif // PIDTEMPBED
+
+#if EITHER(PIDTEMP, PIDTEMPBED)
+  //#define PID_DEBUG             // Sends debug data to the serial port. Use 'M303 D' to toggle activation.
+  //#define PID_OPENLOOP          // Puts PID in open loop. M104/M140 sets the output power from 0 to PID_MAX
+  //#define SLOW_PWM_HEATERS      // PWM with very low frequency (roughly 0.125Hz=8s) and minimum state time of approximately 1s useful for heaters driven by a relay
+  #define PID_FUNCTIONAL_RANGE  8 // If the temperature difference between the target temperature and the actual temperature
+                                  // is more than PID_FUNCTIONAL_RANGE then the PID will be shut off and the heater will be set to min/max.
+#endif 
 
 // @section extruder
 
@@ -772,7 +777,7 @@ echo: PID_DEBUG 0: Input 209.69 Output 0.00 pTerm 0.00 iTerm 0.00 dTerm 0.00
  * Enable if your probe or endstops falsely trigger due to noise.
  *
  * - Higher values may affect repeatability or accuracy of some bed probes.
- * - To fix noise install a 100nF ceramic capacitor inline with the switch.
+ * - To fix noise install a 100nF ceramic capacitor in parallel with the switch.
  * - This feature is not required for common micro-switches mounted on PCBs
  *   based on the Makerbot design, which already have the 100nF capacitor.
  *
@@ -1386,19 +1391,6 @@ echo: PID_DEBUG 0: Input 209.69 Output 0.00 pTerm 0.00 iTerm 0.00 dTerm 0.00
   //#define MESH_G28_REST_ORIGIN // After homing all axes ('G28' or 'G28 XYZ') rest Z at Z_MIN_POS
 
 #endif // BED_LEVELING
-
-/**
- * Points to probe for all 3-point Leveling procedures.
- * Override if the automatically selected points are inadequate.
- */
-#if EITHER(AUTO_BED_LEVELING_3POINT, AUTO_BED_LEVELING_UBL)
-  #define PROBE_PT_1_X 35
-  #define PROBE_PT_1_Y 365
-  #define PROBE_PT_2_X 35
-  #define PROBE_PT_2_Y 35
-  #define PROBE_PT_3_X 365
-  #define PROBE_PT_3_Y 35
-#endif
 
 /**
  * Add a bed leveling sub-menu for ABL or MBL.
@@ -2158,15 +2150,12 @@ echo: PID_DEBUG 0: Input 209.69 Output 0.00 pTerm 0.00 iTerm 0.00 dTerm 0.00
 
 //
 // DGUS Touch Display with DWIN OS. (Choose one.)
+// ORIGIN : https://www.aliexpress.com/item/32993409517.html
+// FYSETC : https://www.aliexpress.com/item/32961471929.html
 //
 //#define DGUS_LCD_UI_ORIGIN
 //#define DGUS_LCD_UI_FYSETC
 //#define DGUS_LCD_UI_HIPRECY
-
-//
-// Ender-3 v2 OEM display. A DWIN display with Rotary Encoder.
-//
-//#define DWIN_ENDER3_V2
 
 //
 // Touch-screen LCD for Malyan M200/M300 printers
@@ -2197,6 +2186,11 @@ echo: PID_DEBUG 0: Input 209.69 Output 0.00 pTerm 0.00 iTerm 0.00 dTerm 0.00
 //=============================================================================
 //============================  Other Controllers  ============================
 //=============================================================================
+
+//
+// Ender-3 v2 OEM display. A DWIN display with Rotary Encoder.
+//
+//#define DWIN_CREALITY_LCD
 
 //
 // ADS7843/XPT2046 ADC Touchscreen such as ILI9341 2.8
