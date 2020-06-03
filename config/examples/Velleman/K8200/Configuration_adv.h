@@ -40,7 +40,7 @@
   *
   */
 
-#define CONFIGURATION_ADV_H_VERSION 020005
+#define CONFIGURATION_ADV_H_VERSION 020006
 
 // @section temperature
 
