@@ -21,6 +21,8 @@
  */
 #pragma once
 
+#define CONFIG_EXAMPLES_DIR "Intamsys/FunmatHT_4988"
+
 /**
  * Custom Bitmap for splashscreen
  *

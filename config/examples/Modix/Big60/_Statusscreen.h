@@ -21,6 +21,8 @@
  */
 #pragma once
 
+#define CONFIG_EXAMPLES_DIR "Modix/Big60"
+
 #define STATUS_LOGO_Y      1
 #define STATUS_LOGO_WIDTH 32
 

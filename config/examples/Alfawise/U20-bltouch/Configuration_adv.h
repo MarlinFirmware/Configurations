@@ -21,6 +21,8 @@
  */
 #pragma once
 
+#define CONFIG_EXAMPLES_DIR "Alfawise/U20-bltouch"
+
 /**
  * Configuration_adv.h
  *

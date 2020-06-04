@@ -21,6 +21,8 @@
  */
 #pragma once
 
+#define CONFIG_EXAMPLES_DIR "RapideLite/RL200"
+
 /**
  * Configuration.h
  *

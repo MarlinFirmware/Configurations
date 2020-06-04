@@ -21,6 +21,8 @@
  */
 #pragma once
 
+#define CONFIG_EXAMPLES_DIR "Tevo/Michelangelo"
+
 /**
  * Configuration_adv.h
  *

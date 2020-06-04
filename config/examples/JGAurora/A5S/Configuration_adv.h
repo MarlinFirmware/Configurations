@@ -21,6 +21,8 @@
  */
 #pragma once
 
+#define CONFIG_EXAMPLES_DIR "JGAurora/A5S"
+
 /**
  * Configuration_adv.h
  *

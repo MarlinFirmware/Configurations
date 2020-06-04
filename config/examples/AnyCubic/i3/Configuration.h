@@ -21,6 +21,8 @@
  */
 #pragma once
 
+#define CONFIG_EXAMPLES_DIR "AnyCubic/i3"
+
 /**
  * Configuration.h
  *

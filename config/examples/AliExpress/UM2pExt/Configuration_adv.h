@@ -21,6 +21,8 @@
  */
 #pragma once
 
+#define CONFIG_EXAMPLES_DIR "AliExpress/UM2pExt"
+
 /**
  * Configuration_adv.h
  *

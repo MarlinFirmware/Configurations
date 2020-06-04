@@ -21,6 +21,8 @@
  */
 #pragma once
 
+#define CONFIG_EXAMPLES_DIR "delta/Anycubic/Kossel Linear Plus"
+
 /**
  * Choose your version:
  */

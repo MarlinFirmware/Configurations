@@ -21,6 +21,8 @@
  */
 #pragma once
 
+#define CONFIG_EXAMPLES_DIR "Creality/CR-8"
+
 /**
  * Configuration_adv.h
  *

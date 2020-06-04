@@ -21,6 +21,8 @@
  */
 #pragma once
 
+#define CONFIG_EXAMPLES_DIR "FYSETC/Cheetah 1.2/BLTouch"
+
 /**
  * Configuration.h
  *

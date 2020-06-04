@@ -21,6 +21,8 @@
  */
 #pragma once
 
+#define CONFIG_EXAMPLES_DIR "Ortur 4"
+
 /**
  * Configuration_adv.h
  *

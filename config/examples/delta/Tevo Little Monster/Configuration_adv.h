@@ -21,6 +21,8 @@
  */
 #pragma once
 
+#define CONFIG_EXAMPLES_DIR "delta/Tevo Little Monster"
+
 /**
  * Configuration_adv.h
  *

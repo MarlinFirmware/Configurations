@@ -21,6 +21,8 @@
  */
 #pragma once
 
+#define CONFIG_EXAMPLES_DIR "Micromake/C1/basic"
+
 /**
  * Configuration.h
  *

@@ -21,6 +21,8 @@
  */
 #pragma once
 
+#define CONFIG_EXAMPLES_DIR "delta/Hatchbox_Alpha"
+
 /**
  * Configuration_adv.h
  *

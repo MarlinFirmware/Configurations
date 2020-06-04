@@ -21,6 +21,8 @@
  */
 #pragma once
 
+#define CONFIG_EXAMPLES_DIR "Formbot/T_Rex_2+"
+
 /**
  * Custom Status Screen bitmap
  *

@@ -21,6 +21,8 @@
  */
 #pragma once
 
+#define CONFIG_EXAMPLES_DIR "FYSETC/Cheetah/base"
+
 /**
  * Configuration_adv.h
  *

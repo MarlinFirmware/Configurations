@@ -21,6 +21,8 @@
  */
 #pragma once
 
+#define CONFIG_EXAMPLES_DIR "Infitary/i3-M508"
+
 /**
  * Configuration_adv.h
  *

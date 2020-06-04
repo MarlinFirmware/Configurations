@@ -21,6 +21,8 @@
  */
 #pragma once
 
+#define CONFIG_EXAMPLES_DIR "BQ/Hephestos_2"
+
 /**
  * Custom Boot Screen bitmap
  *

@@ -21,6 +21,8 @@
  */
 #pragma once
 
+#define CONFIG_EXAMPLES_DIR "ArmEd"
+
 /**
  * Configuration_adv.h
  *

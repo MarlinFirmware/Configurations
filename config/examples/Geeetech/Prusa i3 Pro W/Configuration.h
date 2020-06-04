@@ -21,6 +21,8 @@
  */
 #pragma once
 
+#define CONFIG_EXAMPLES_DIR "Geeetech/Prusa i3 Pro W"
+
 /**
  * Configuration.h
  *

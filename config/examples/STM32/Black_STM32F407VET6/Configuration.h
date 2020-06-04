@@ -21,6 +21,8 @@
  */
 #pragma once
 
+#define CONFIG_EXAMPLES_DIR "STM32/Black_STM32F407VET6"
+
 /**
  * Configuration.h
  *

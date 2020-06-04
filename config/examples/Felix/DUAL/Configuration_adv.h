@@ -21,6 +21,8 @@
  */
 #pragma once
 
+#define CONFIG_EXAMPLES_DIR "Felix/DUAL"
+
 /**
  * Configuration_adv.h
  *

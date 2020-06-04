@@ -29,6 +29,8 @@
 
 #pragma once
 
+#define CONFIG_EXAMPLES_DIR "Alfawise/U20"
+
 //
 // Status Screen Logo bitmap
 //

@@ -21,6 +21,8 @@
  */
 #pragma once
 
+#define CONFIG_EXAMPLES_DIR "Renkforce/RF100v2"
+
 /**
  * Configuration.h
  *
