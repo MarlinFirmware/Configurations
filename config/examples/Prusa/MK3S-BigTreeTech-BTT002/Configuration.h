@@ -21,7 +21,7 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "BigTreeTech/BTT002 - Prusa MK3S - TMC2209"
+#define CONFIG_EXAMPLES_DIR "Prusa/MK3S-BigTreeTech-BTT002"
 
 /**
  * Configuration.h
