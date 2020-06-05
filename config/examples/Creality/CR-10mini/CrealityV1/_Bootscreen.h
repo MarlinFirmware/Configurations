@@ -21,7 +21,7 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "Creality/CR-10mini"
+#define CONFIG_EXAMPLES_DIR "Creality/CR-10mini/CrealityV1"
 
 /**
  * Custom Boot Screen bitmap
