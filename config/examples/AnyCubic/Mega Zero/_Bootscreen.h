@@ -19,14 +19,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-
-/**
- * Made with Marlin Bitmap Converter
- * https://marlinfw.org/tools/u8glib/converter.html
- *
- * This bitmap from 128x64 C/C++ data
- */
 #pragma once
+
+#define CONFIG_EXAMPLES_DIR "AnyCubic/Mega Zero"
+
 // #define CUSTOM_BOOTSCREEN_TIMEOUT 2000
 #define CUSTOM_BOOTSCREEN_INVERTED
 
