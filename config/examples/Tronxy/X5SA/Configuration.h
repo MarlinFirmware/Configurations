@@ -2116,6 +2116,11 @@
 //
 #define FSMC_GRAPHICAL_TFT
 //TFT SETUP DONE BY CHITU BOARD
+#define FSMC_UPSCALE 3
+#define LCD_FULL_PIXEL_WIDTH  480
+#define LCD_PIXEL_OFFSET_X    48
+#define LCD_FULL_PIXEL_HEIGHT 320
+
 
 //=============================================================================
 //============================  Other Controllers  ============================
@@ -2126,15 +2131,15 @@
 //
 #define TOUCH_BUTTONS
 //DONE BY CHITU BOARD
-//#if ENABLED(TOUCH_BUTTONS)
-//  #define BUTTON_DELAY_EDIT  50 // (ms) Button repeat delay for edit screens
-//  #define BUTTON_DELAY_MENU 250 // (ms) Button repeat delay for menus
-//
-//  #define XPT2046_X_CALIBRATION   12316
-//  #define XPT2046_Y_CALIBRATION  -8981
-//  #define XPT2046_X_OFFSET       -43
-//  #define XPT2046_Y_OFFSET        257
-//#endif
+#if ENABLED(TOUCH_BUTTONS)
+  #define BUTTON_DELAY_EDIT  50 // (ms) Button repeat delay for edit screens
+  #define BUTTON_DELAY_MENU 250 // (ms) Button repeat delay for menus
+
+  #define XPT2046_X_CALIBRATION   -12316
+  #define XPT2046_Y_CALIBRATION   -8981
+  #define XPT2046_X_OFFSET        340
+  #define XPT2046_Y_OFFSET        429
+#endif
 
 // Change colors
 // some colors are predefined, see /src/lcd/dogm/u8g_dev_tft_480~.cpp Line 160
