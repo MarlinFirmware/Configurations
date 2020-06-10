@@ -21,6 +21,8 @@
  */
 #pragma once
 
+#define CONFIG_EXAMPLES_DIR "RepRapPro/Huxley"
+
 /**
  * Configuration.h
  *
@@ -71,7 +73,7 @@
 // @section info
 
 // Author info of this build printed to the host during boot and M115
-#define STRING_CONFIG_H_AUTHOR "(none, default config)" // Who made the changes.
+#define STRING_CONFIG_H_AUTHOR "(indazoo, Huxley v1)" // Who made the changes.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
 /**
@@ -128,11 +130,11 @@
 
 // Choose the name from boards.h that matches your setup
 #ifndef MOTHERBOARD
-  #define MOTHERBOARD BOARD_RAMPS_14_EFB
+  #define MOTHERBOARD BOARD_SANGUINOLOLU_12
 #endif
 
 // Name displayed in the LCD "Ready" message and Info menu
-//#define CUSTOM_MACHINE_NAME "3D Printer"
+#define CUSTOM_MACHINE_NAME "Huxley"
 
 // Printer's unique ID, used by some programs to differentiate between machines.
 // Choose your own or use a service like http://www.uuidgenerator.net/version4
@@ -423,8 +425,7 @@
 #define TEMP_SENSOR_5 0
 #define TEMP_SENSOR_6 0
 #define TEMP_SENSOR_7 0
-#define TEMP_SENSOR_BED 0
-#define TEMP_SENSOR_PROBE 0
+#define TEMP_SENSOR_BED 1 // Sanguinololu v1.3 with 4.7kOhm pullup
 #define TEMP_SENSOR_CHAMBER 0
 
 // Dummy thermistor constant temperature readings, for use with 998 and 999
@@ -731,6 +732,45 @@
  * Note that if EEPROM is enabled, saved values will override these.
  */
 
+//
+// Standard NEMA 17 with T2 belt and 20 tooth pulley
+//
+#define NEMA17_FULL_STEPS 200.0
+#define TEMP_XY_MICROSTEPS 16.0
+#define TEMP_E_MICROSTEPS 16.0
+#define TEMP_Z_MICROSTEPS 16.0
+
+/* RepRapPro belts
+http://forums.reprap.org/read.php?1,391198
+White polyurethane belt(T2.5), 14 - tooth printed pulley : 91.4286 step per mm (Original Huxley, Legacy Mendel)
+Black rubber belt(MXL), 17 - tooth printed pulley : 92.635 step per mm (Huxley, Mendel Mono and Tri since 1 / 4 / 2013)
+Black rubber belt(MXL), 18 - tooth aluminium pulley : 87.489 step per mm (Huxley, Mendel Mono and Tri since 1 / 1 / 2014)
+*/
+#define XY_PULLEY_PITCH 2.5   //RepRapPro Huxley has T2.5 belts
+#define XY_PULLEY_TEETH 14.0  //RepRapPro Huxley has 14 teeth pulleys
+
+//
+// Standard NEMA 17 with fancy 5mm lead screws
+//
+#define Z_RODS_PITCH 0.8
+
+#define XY_MOTOR_STEPS (NEMA17_FULL_STEPS * TEMP_XY_MICROSTEPS)
+#define Z_MOTOR_STEPS (NEMA17_FULL_STEPS * TEMP_Z_MICROSTEPS)
+#define E_MOTOR_STEPS (NEMA17_FULL_STEPS * TEMP_E_MICROSTEPS)
+
+//
+// MK7 Direct Drive
+//
+#define E_MOTOR_GEAR_TEETH 11.0 //Num of teeth of gear on extruder motor
+#define E_ROD_GEAR_TEETH 53.0   //Num of teeth of gear driving the extruder rod
+#define E_ROD_DIAM 5.4 // ca value. M6 rod drives the filament. Manual calibration needed.
+#define E_ROD_CIRC (M_PI * E_ROD_DIAM)
+#define E_STEPS (E_MOTOR_STEPS / (E_MOTOR_GEAR_TEETH/E_ROD_GEAR_TEETH) / E_ROD_CIRC)
+
+// Get steps/mm from selected results above
+#define XY_STEPS (XY_MOTOR_STEPS / (XY_PULLEY_PITCH * XY_PULLEY_TEETH))
+#define Z_STEPS (Z_MOTOR_STEPS / Z_RODS_PITCH)
+
 /**
  * With this option each E stepper can have its own factors for the
  * following movement settings. If fewer factors are given than the
@@ -743,14 +783,15 @@
  * Override with M92
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 4000, 500 }
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { XY_STEPS, XY_STEPS, Z_STEPS, E_STEPS }
 
 /**
  * Default Max Feed Rate (mm/s)
  * Override with M203
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_FEEDRATE          { 300, 300, 5, 25 }
+#define DEFAULT_MAX_Z_FEEDRATE        3.3 // older Huxley has problem with speeds > 3.3 mm/s on Z axis
+#define DEFAULT_MAX_FEEDRATE          { 200, 200, DEFAULT_MAX_Z_FEEDRATE, 25 }
 
 //#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
@@ -763,7 +804,7 @@
  * Override with M201
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 10000 }
+#define DEFAULT_MAX_ACCELERATION      { 1000, 1000, 50, 1000 }
 
 //#define LIMITED_MAX_ACCEL_EDITING     // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
 #if ENABLED(LIMITED_MAX_ACCEL_EDITING)
@@ -778,9 +819,9 @@
  *   M204 R    Retract Acceleration
  *   M204 T    Travel Acceleration
  */
-#define DEFAULT_ACCELERATION          3000    // X, Y, Z and E acceleration for printing moves
-#define DEFAULT_RETRACT_ACCELERATION  3000    // E acceleration for retracts
-#define DEFAULT_TRAVEL_ACCELERATION   3000    // X, Y, Z acceleration for travel (non printing) moves
+#define DEFAULT_ACCELERATION          1000    // X, Y, Z and E acceleration for printing moves
+#define DEFAULT_RETRACT_ACCELERATION  1000    // E acceleration for retracts
+#define DEFAULT_TRAVEL_ACCELERATION   1000    // X, Y, Z acceleration for travel (non printing) moves
 
 /**
  * Default Jerk limits (mm/s)
@@ -814,7 +855,7 @@
  *   http://blog.kyneticcnc.com/2018/10/computing-junction-deviation-for-marlin.html
  */
 #if DISABLED(CLASSIC_JERK)
-  #define JUNCTION_DEVIATION_MM 0.013 // (mm) Distance from real junction edge
+  #define JUNCTION_DEVIATION_MM 0.04  // (mm) Distance from real junction edge
 #endif
 
 /**
@@ -1072,14 +1113,14 @@
 // @section machine
 
 // Invert the stepper direction. Change (or reverse the motor connector) if an axis goes the wrong way.
-#define INVERT_X_DIR false
-#define INVERT_Y_DIR true
+#define INVERT_X_DIR true
+#define INVERT_Y_DIR false
 #define INVERT_Z_DIR false
 
 // @section extruder
 
 // For direct drive extruder v9 set to true, for geared extruder set to false.
-#define INVERT_E0_DIR false
+#define INVERT_E0_DIR true
 #define INVERT_E1_DIR false
 #define INVERT_E2_DIR false
 #define INVERT_E3_DIR false
@@ -1108,16 +1149,25 @@
 // @section machine
 
 // The size of the print bed
-#define X_BED_SIZE 200
-#define Y_BED_SIZE 200
+// http://reprap.org/wiki/Configuring_Marlin_Bed_Dimensions
+// https://marlinfw.org/docs/configuration/configuration.html#movement-bounds
+#define X_BED_SIZE 140
+#define Y_BED_SIZE 140
+// Huxley with 110x110 PEI board.
+//#define X_BED_SIZE 108
+//#define Y_BED_SIZE 108
 
 // Travel limits (mm) after homing, corresponding to endstop positions.
-#define X_MIN_POS 0
-#define Y_MIN_POS 0
+#define X_MIN_POS -9
+#define Y_MIN_POS -5
+// Huxley with 110x110 PEI board.
+//#define X_MIN_POS -25
+//#define Y_MIN_POS -21
 #define Z_MIN_POS 0
+
 #define X_MAX_POS X_BED_SIZE
 #define Y_MAX_POS Y_BED_SIZE
-#define Z_MAX_POS 200
+#define Z_MAX_POS 80
 
 /**
  * Software Endstops
@@ -1380,7 +1430,7 @@
 
 // Homing speeds (mm/m)
 #define HOMING_FEEDRATE_XY (50*60)
-#define HOMING_FEEDRATE_Z  (4*60)
+#define HOMING_FEEDRATE_Z  (DEFAULT_MAX_Z_FEEDRATE*60)
 
 // Validate that endstops are triggered on homing moves
 #define VALIDATE_HOMING_ENDSTOPS
@@ -1457,7 +1507,7 @@
  *   M501 - Read settings from EEPROM. (i.e., Throw away unsaved changes)
  *   M502 - Revert settings to "factory" defaults. (Follow with M500 to init the EEPROM.)
  */
-//#define EEPROM_SETTINGS     // Persistent storage with M500 and M501
+#define EEPROM_SETTINGS       // Persistent storage with M500 and M501
 //#define DISABLE_M503        // Saves ~2700 bytes of PROGMEM. Disable for release!
 #define EEPROM_CHITCHAT       // Give feedback on EEPROM commands. Disable to save PROGMEM.
 #define EEPROM_BOOT_SILENT    // Keep M503 quiet and only give errors during first load
@@ -1517,8 +1567,8 @@
   //#define NOZZLE_PARK_X_ONLY          // X move only is required to park
   //#define NOZZLE_PARK_Y_ONLY          // Y move only is required to park
   #define NOZZLE_PARK_Z_RAISE_MIN   2   // (mm) Always raise Z by at least this distance
-  #define NOZZLE_PARK_XY_FEEDRATE 100   // (mm/s) X and Y axes feedrate (also used for delta Z axis)
-  #define NOZZLE_PARK_Z_FEEDRATE    5   // (mm/s) Z axis feedrate (not used for delta printers)
+  #define NOZZLE_PARK_XY_FEEDRATE 100                        // (mm/s) X and Y axes feedrate (also used for delta Z axis)
+  #define NOZZLE_PARK_Z_FEEDRATE DEFAULT_MAX_Z_FEEDRATE      // (mm/s) Z axis feedrate (not used for delta printers)
 #endif
 
 /**
