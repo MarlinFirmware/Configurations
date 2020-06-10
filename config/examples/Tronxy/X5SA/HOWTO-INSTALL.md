@@ -181,3 +181,4 @@ TFT, Baby Steps and a lot of cool stuff are already configured for you!
 8. After the flash finished, put the back the boot jumper (1) and the v source jumper to 5V.
 9. Turn On your Printer!
 
+![alt text](./chitu-board.jpg)
