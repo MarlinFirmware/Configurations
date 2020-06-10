@@ -1,6 +1,6 @@
-# Befort start (Optional, but recommended)
+# Before start (Optional, but recommended)
 
-You can dump the current settings of your printer. It may help you to figure out some configs, like steps/mm of your extruder.
+You can (OR MUST) dump the current settings of your printer. It may help you to figure out some configs, like steps/mm of your extruder.
 
 1. Create a file named ``savesettings.gcode`` with the followig content:
 ```
@@ -83,15 +83,15 @@ Pro:
  *          TMC5130, TMC5130_STANDALONE, TMC5160, TMC5160_STANDALONE
  * :['A4988', 'A5984', 'DRV8825', 'LV8729', 'L6470', 'L6474', 'POWERSTEP01', 'TB6560', 'TB6600', 'TMC2100', 'TMC2130', 'TMC2130_STANDALONE', 'TMC2160', 'TMC2160_STANDALONE', 'TMC2208', 'TMC2208_STANDALONE', 'TMC2209', 'TMC2209_STANDALONE', 'TMC26X', 'TMC26X_STANDALONE', 'TMC2660', 'TMC2660_STANDALONE', 'TMC5130', 'TMC5130_STANDALONE', 'TMC5160', 'TMC5160_STANDALONE']
  */
-#define X_DRIVER_TYPE  A4988
-#define Y_DRIVER_TYPE  A4988
-#define Z_DRIVER_TYPE  A4988
+#define X_DRIVER_TYPE  TMC2208_STANDALONE
+#define Y_DRIVER_TYPE  TMC2208_STANDALONE
+#define Z_DRIVER_TYPE  TMC2208_STANDALONE
 //#define X2_DRIVER_TYPE A4988
 //#define Y2_DRIVER_TYPE A4988
 //#define Z2_DRIVER_TYPE A4988
 //#define Z3_DRIVER_TYPE A4988
 //#define Z4_DRIVER_TYPE A4988
-#define E0_DRIVER_TYPE A4988
+#define E0_DRIVER_TYPE TMC2208_STANDALONE
 //#define E1_DRIVER_TYPE A4988
 //#define E2_DRIVER_TYPE A4988
 //#define E3_DRIVER_TYPE A4988
@@ -130,7 +130,7 @@ so in marlin:
 
 Check your values!!
 
-Normal:
+Normal non tmc:
 ```cpp
 /**
  * Default Axis Steps Per Unit (steps/mm)
@@ -139,7 +139,19 @@ Normal:
  */
 #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 92.6 }
 ```
-Titan:
+Titan Non PRO:
+```cpp
+/**
+ * Default Axis Steps Per Unit (steps/mm)
+ * Override with M92
+ *                                      X, Y, Z, E0 [, E1[, E2...]]
+ */
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 420 }
+
+//extruder seems inverted on titan!
+#define INVERT_E0_DIR true
+```
+Titan PRO (tmc):
 ```cpp
 /**
  * Default Axis Steps Per Unit (steps/mm)
@@ -147,6 +159,9 @@ Titan:
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
 #define DEFAULT_AXIS_STEPS_PER_UNIT   { 160, 160, 800, 764 }
+
+//extruder seems inverted on titan!
+#define INVERT_E0_DIR true
 ```
 
 
