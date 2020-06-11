@@ -169,7 +169,25 @@ You can make your on setup.
 
 TFT, Baby Steps and a lot of cool stuff are already configured for you!
 
-# Flashing the new firmware
+# Flashing Marlin WITHOUT OPEN YOUR CASE, JUST USING SD!!
+
+Thanks to the amazing work of J.C. Nelson, now we can just use Marlin updating directly from SD!!
+
+1. After you compile Marlin with the above inscructions, it will generate a file: ``YOUR-MARLIN-DIR/.pio/build/chitu_f103/update.cbd``
+2. Turn off your printer
+3. Copy the ``update.cbd`` file to SD card.
+4. Put the SD card in your printer.
+5. Power it on.
+6. It will give some bips. After that, Marlin will start! 
+
+SIMPLES AS THAT!!!
+
+Again, thanks to J.C. Nelson @xC000000
+
+
+# Flashing the new firmware MANUALLY (NOT NEEED ANYMORE!!!!!!)
+
+YOU DONT NEED DO THIS ANYMORE!!! CAN USE THE FIRST METHOD.
 
 1. Turn off your printer
 2. Open your board case
