@@ -194,7 +194,7 @@ YOU DONT NEED DO THIS ANYMORE!!! CAN USE THE FIRST METHOD.
 3. Remove the "boot" jumper (1) as the image.
 4. Change the v source jumper (2) from 5V to USB.
 5. Open [STM Cube Programmer](https://www.st.com/en/development-tools/stm32cubeprog.html) (linux, mac, windows) or [FLASHER-STM32](https://www.st.com/en/development-tools/flasher-stm32.html) (only windows)
-6. **BACKUP** your current firmware
+6. **BACKUP** your current firmware. The size must be **512kb -> 0x80000**
 7. Flash the YOUR-MARLIN-DIR/.pio/build/chitu_f103/firmware.bin at 0x08000000 
 8. After the flash finished, put the back the boot jumper (1) and the v source jumper to 5V.
 9. Turn On your Printer!
