@@ -185,6 +185,8 @@ SIMPLES AS THAT!!!
 Again, thanks to J.C. Nelson @xC000000
 
 
+***Note for users that already flashed Marlin the old way: we need restore your Chitu backup first, to use this method.*** (worth it!)
+
 # Flashing the new firmware MANUALLY (NOT NEEED ANYMORE!!!!!!)
 
 YOU DONT NEED DO THIS ANYMORE!!! CAN USE THE FIRST METHOD.
