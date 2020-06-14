@@ -2117,12 +2117,6 @@
 // FSMC display (MKS Robin, Alfawise U20, JGAurora A5S, REXYZ A1, etc.)
 //
 #define FSMC_GRAPHICAL_TFT
-//TFT SETUP DONE BY CHITU BOARD
-#define FSMC_UPSCALE 3
-#define LCD_FULL_PIXEL_WIDTH  480
-#define LCD_PIXEL_OFFSET_X    48
-#define LCD_FULL_PIXEL_HEIGHT 320
-
 
 //=============================================================================
 //============================  Other Controllers  ============================
