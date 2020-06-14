@@ -1,4 +1,18 @@
-# Before start (Optional, but recommended)
+# Table of Contents <!-- omit in toc --> 
+- [Save your printer Settings (Optional, but recommended)](#save-your-printer-settings-optional-but-recommended)
+- [Configuring Marlin for your Printer](#configuring-marlin-for-your-printer)
+  - [1. Board Version](#1-board-version)
+  - [2. Bed size:](#2-bed-size)
+  - [3. Step Drivers.](#3-step-drivers)
+  - [4. Steps / mm](#4-steps--mm)
+  - [5. Other Marlin Config](#5-other-marlin-config)
+- [Backup your Chitu Firmare (Optional, but strongly recommended)](#backup-your-chitu-firmare-optional-but-strongly-recommended)
+- [Flashing Marlin JUST USING SD!!](#flashing-marlin-just-using-sd)
+- [Flashing the new firmware MANUALLY (NOT NEEED ANYMORE!!!!!!)](#flashing-the-new-firmware-manually-not-neeed-anymore)
+- [Known issues](#known-issues)
+
+
+# Save your printer Settings (Optional, but recommended)
 
 You can (OR MUST) dump the current settings of your printer. It may help you to figure out some configs, like steps/mm of your extruder.
 
@@ -16,12 +30,24 @@ You can read more about in: https://www.facebook.com/notes/tronxy-turnigy-x5s-x5
 
 Thanks to KEITH VARIN.
 
-# Configuring your board
+# Configuring Marlin for your Printer
 
-In the Configuration.h you can change board to V5, V6, and so on.
+You need to edit Configuration.h to setup your printer.
 
-### 1. Check your board ``#define MOTHERBOARD `` part
-### 2. Check your bed size:
+## 1. Board Version 
+
+For ***V5*** and ***V8***
+```cpp
+//For V5 and V8
+#define MOTHERBOARD BOARD_CHITU3D_V5
+```
+For ***V6***
+```cpp
+//For V6
+#define MOTHERBOARD BOARD_CHITU3D_V5
+```
+## 2. Bed size:
+
 ```cpp
 // The size of the print bed
 #define X_BED_SIZE 330
@@ -29,8 +55,11 @@ In the Configuration.h you can change board to V5, V6, and so on.
 ...
 #define Z_MAX_POS 400
 ```
-### 3. Check your drivers. Some PRO have TMC drivers. The non pro have generic A4988 ones:
-Non-Pro:
+## 3. Step Drivers. 
+
+Some PRO have TMC drivers. The non pro have generic A4988 ones.
+
+Non-Pro (without TMC Drivers):
 ```cpp
 /**
  * Stepper Drivers
@@ -65,7 +94,7 @@ Non-Pro:
 //#define E6_DRIVER_TYPE A4988
 //#define E7_DRIVER_TYPE A4988
 ```
-Pro:
+Pro (with TMC Drivers):
 ```cpp
 /**
  * Stepper Drivers
@@ -101,7 +130,7 @@ Pro:
 //#define E7_DRIVER_TYPE A4988
 ```
 
-### 4. Configure the steps
+## 4. Steps / mm 
 
 I think all machine have the same steps for X, Y and Z, and only extruder step is diferrent (titan and normal).
 
@@ -164,12 +193,28 @@ Titan PRO (tmc):
 #define INVERT_E0_DIR true
 ```
 
+## 5. Other Marlin Config
 
 You can make your on setup.
 
 TFT, Baby Steps and a lot of cool stuff are already configured for you!
 
-# Flashing Marlin WITHOUT OPEN YOUR CASE, JUST USING SD!!
+# Backup your Chitu Firmare (Optional, but strongly recommended)
+
+1. Turn off your printer
+2. Open your board case
+3. Remove the "boot" jumper (1) as the image.
+4. Change the "v source" jumper (2) from 5V to USB.
+5. Open [STM Cube Programmer](https://www.st.com/en/development-tools/stm32cubeprog.html) (linux, mac, windows) or [FLASHER-STM32](https://www.st.com/en/development-tools/flasher-stm32.html) (only windows)
+6. The size must be **512kb -> 0x80000**
+7. Save the file. It must have exactly 524288 bytes (512kb)
+8. Disconnect
+10. Unplug USB cable 
+11. Put back the "boot" jumper (1).
+12. Put back the "v source" jumper to 5V.
+
+
+# Flashing Marlin JUST USING SD!!
 
 Thanks to the amazing work of J.C. Nelson, now we can just use Marlin updating directly from SD!!
 
@@ -196,9 +241,40 @@ YOU DONT NEED DO THIS ANYMORE!!! CAN USE THE FIRST METHOD.
 3. Remove the "boot" jumper (1) as the image.
 4. Change the v source jumper (2) from 5V to USB.
 5. Open [STM Cube Programmer](https://www.st.com/en/development-tools/stm32cubeprog.html) (linux, mac, windows) or [FLASHER-STM32](https://www.st.com/en/development-tools/flasher-stm32.html) (only windows)
-6. **BACKUP** your current firmware. The size must be **512kb -> 0x80000**
-7. Flash the YOUR-MARLIN-DIR/.pio/build/chitu_f103/firmware.bin at 0x08000000 
-8. After the flash finished, put the back the boot jumper (1) and the v source jumper to 5V.
-9. Turn On your Printer!
+6. Flash the YOUR-MARLIN-DIR/.pio/build/chitu_f103/firmware.bin at 0x08000000 
+7. After the flash finished, put the back the boot jumper (1) and the v source jumper to 5V.
+8. Turn On your Printer!
 
 ![alt text](./chitu-board.jpg)
+
+
+# Known issues
+
+Some random V5 boards have a problem with the PIN the Z-MIN Probe is connected. 
+
+The problem happens this way: 
+
+ - You do Auto Home, when the nozzle stop at the center, the bed goes down a bit and stop. 
+ - You do Auto Home again, everythings repeat and the bed down more.
+ - You keep doing and the bed keeps going only down, never up.
+
+The reason is that Marlin thinks the probe sensor is enabled and very close to the bed.
+
+If you have this issue, you need to edit the file:
+``Marlin/buildroot/share/PlatformIO/variants/CHITU_F103/wirish/boards_setup.cpp``
+
+From:
+```cpp
+        __weak void board_setup_gpio(void) {
+            gpio_init_all();
+        }
+```
+To:
+```cpp
+        __weak void board_setup_gpio(void) {
+            GPIOA->regs->BSRR = (1U << PA14);
+            gpio_init_all();
+        }
+```
+
+We are testing and soon will send a fix to Marlin.
