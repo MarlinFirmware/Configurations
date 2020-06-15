@@ -21,7 +21,7 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "FYSETC/Cheetah/BLTouch"
+#define CONFIG_EXAMPLES_DIR "Creality/Ender-3/FYSETC Cheetah/BLTouch"
 
 /**
  * Configuration_adv.h
