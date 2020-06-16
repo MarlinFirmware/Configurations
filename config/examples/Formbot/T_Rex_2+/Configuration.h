@@ -885,6 +885,8 @@ echo: PID_DEBUG 0: Input 209.69 Output 0.00 pTerm 0.00 iTerm 0.00 dTerm 0.00
  */
 #if DISABLED(CLASSIC_JERK)
   #define JUNCTION_DEVIATION_MM 0.013 // (mm) Distance from real junction edge
+  #define JD_HANDLE_SMALL_SEGMENTS    // Use curvature estimation instead of just the junction angle
+                                      // for small segments (< 1mm) with large junction angles (> 135°).
 #endif
 
 /**
@@ -971,9 +973,11 @@ echo: PID_DEBUG 0: Input 209.69 Output 0.00 pTerm 0.00 iTerm 0.00 dTerm 0.00
  * The BLTouch probe uses a Hall effect sensor and emulates a servo.
  */
 #define BLTOUCH
-#if ENABLED(BLTOUCH)
-  //#define BLTOUCH_DELAY 375   // (ms) Enable and increase if needed
-#endif
+
+/**
+ * Pressure sensor with a BLTouch-like interface
+ */
+//#define CREALITY_TOUCH
 
 /**
  * Touch-MI Probe by hotends.fr
@@ -2063,6 +2067,12 @@ echo: PID_DEBUG 0: Input 209.69 Output 0.00 pTerm 0.00 iTerm 0.00 dTerm 0.00
 //#define MKS_MINI_12864
 
 //
+// MKS LCD12864A/B with graphic controller and SD support. Follows MKS_MINI_12864 pinout.
+// https://www.aliexpress.com/item/33018110072.html
+//
+//#define MKS_LCD12864
+
+//
 // FYSETC variant of the MINI12864 graphic controller with SD support
 // https://wiki.fysetc.com/Mini12864_Panel/
 //
@@ -2188,9 +2198,19 @@ echo: PID_DEBUG 0: Input 209.69 Output 0.00 pTerm 0.00 iTerm 0.00 dTerm 0.00
 //
 //#define FSMC_GRAPHICAL_TFT
 
+//
+// TFT Little VGL UI
+//
+//#define TFT_LITTLE_VGL_UI
+
 //=============================================================================
 //============================  Other Controllers  ============================
 //=============================================================================
+
+//
+// Robin nano v2.0 SPI touch screen
+//
+//#define SPI_GRAPHICAL_TFT
 
 //
 // Ender-3 v2 OEM display. A DWIN display with Rotary Encoder.
