@@ -134,7 +134,7 @@
 #if TEMP_SENSOR_CHAMBER
   #define CHAMBER_MINTEMP             5
   #define CHAMBER_MAXTEMP            60
-  #define TEMP_CHAMBER_HYSTERESIS     1   // (Â°C) Temperature proximity considered "close enough" to the target
+  #define TEMP_CHAMBER_HYSTERESIS     1   // (°C) Temperature proximity considered "close enough" to the target
   //#define CHAMBER_LIMIT_SWITCHING
   //#define HEATER_CHAMBER_PIN       44   // Chamber heater on/off pin
   //#define HEATER_CHAMBER_INVERTING false
@@ -867,7 +867,7 @@
  * and hotend offsets.
  *
  * Note: HOTEND_OFFSET and CALIBRATION_OBJECT_CENTER must be set to within
- *       Â±5mm of true values for G425 to succeed.
+ *       ±5mm of true values for G425 to succeed.
  */
 //#define CALIBRATION_GCODE
 #if ENABLED(CALIBRATION_GCODE)
@@ -1316,7 +1316,7 @@
    */
   #if ENABLED(U8GLIB_ST7920)
     // Enable this option and reduce the value to optimize screen updates.
-    // The normal delay is 10Âµs. Use the lowest value that still gives a reliable display.
+    // The normal delay is 10µs. Use the lowest value that still gives a reliable display.
     //#define DOGM_SPI_DELAY_US 5
 
     //#define LIGHTWEIGHT_UI
@@ -1342,7 +1342,7 @@
   //#define STATUS_FAN_FRAMES 3       // :[0,1,2,3,4] Number of fan animation frames
   //#define STATUS_HEAT_PERCENT       // Show heating in a progress bar
   //#define BOOT_MARLIN_LOGO_SMALL    // Show a smaller Marlin logo on the Boot Screen (saving 399 bytes of flash)
-  //#define BOOT_MARLIN_LOGO_ANIMATED // Animated Marlin logo. Costs ~â€­3260 (or ~940) bytes of PROGMEM.
+  //#define BOOT_MARLIN_LOGO_ANIMATED // Animated Marlin logo. Costs ~‭3260 (or ~940) bytes of PROGMEM.
 
   // Frivolous Game Options
   //#define MARLIN_BRICKOUT
@@ -1444,16 +1444,16 @@
     #if ENABLED(TOUCH_UI_UTF8_WESTERN_CHARSET)
       // Additional character groups. These characters require
       // full bitmaps and take up considerable storage:
-      //#define TOUCH_UI_UTF8_SUPERSCRIPTS  // Â¹ Â² Â³
-      //#define TOUCH_UI_UTF8_COPYRIGHT     // Â© Â®
-      //#define TOUCH_UI_UTF8_GERMANIC      // ÃŸ
-      //#define TOUCH_UI_UTF8_SCANDINAVIAN  // Ã† Ã Ã˜ Ãž Ã¦ Ã° Ã¸ Ã¾
-      //#define TOUCH_UI_UTF8_PUNCTUATION   // Â« Â» Â¿ Â¡
-      //#define TOUCH_UI_UTF8_CURRENCY      // Â¢ Â£ Â¤ Â¥
-      //#define TOUCH_UI_UTF8_ORDINALS      // Âº Âª
-      //#define TOUCH_UI_UTF8_MATHEMATICS   // Â± Ã— Ã·
-      //#define TOUCH_UI_UTF8_FRACTIONS     // Â¼ Â½ Â¾
-      //#define TOUCH_UI_UTF8_SYMBOLS       // Âµ Â¶ Â¦ Â§ Â¬
+      //#define TOUCH_UI_UTF8_SUPERSCRIPTS  // ¹ ² ³
+      //#define TOUCH_UI_UTF8_COPYRIGHT     // © ®
+      //#define TOUCH_UI_UTF8_GERMANIC      // ß
+      //#define TOUCH_UI_UTF8_SCANDINAVIAN  // Æ Ð Ø Þ æ ð ø þ
+      //#define TOUCH_UI_UTF8_PUNCTUATION   // « » ¿ ¡
+      //#define TOUCH_UI_UTF8_CURRENCY      // ¢ £ ¤ ¥
+      //#define TOUCH_UI_UTF8_ORDINALS      // º ª
+      //#define TOUCH_UI_UTF8_MATHEMATICS   // ± × ÷
+      //#define TOUCH_UI_UTF8_FRACTIONS     // ¼ ½ ¾
+      //#define TOUCH_UI_UTF8_SYMBOLS       // µ ¶ ¦ § ¬
     #endif
   #endif
 
@@ -1751,7 +1751,7 @@
 
 /**
  * Minimum delay before and after setting the stepper DIR (in ns)
- *     0 : No delay (Expect at least 10ÂµS since one Stepper ISR must transpire)
+ *     0 : No delay (Expect at least 10µS since one Stepper ISR must transpire)
  *    20 : Minimum for TMC2xxx drivers
  *   200 : Minimum for A4988 drivers
  *   400 : Minimum for A5984 drivers
@@ -1766,7 +1766,7 @@
 //#define MINIMUM_STEPPER_PRE_DIR_DELAY 650
 
 /**
- * Minimum stepper driver pulse width (in Âµs)
+ * Minimum stepper driver pulse width (in µs)
  *   0 : Smallest possible width the MCU can produce, compatible with TMC2xxx drivers
  *   0 : Minimum 500ns for LV8729, adjusted in stepper.h
  *   1 : Minimum for A4988 and A5984 stepper drivers
@@ -1801,7 +1801,7 @@
 //================================= Buffers =================================
 //===========================================================================
 
-// @section hidden
+// @section motion
 
 // The number of lineear moves that can be in the planner at once.
 // The value of BLOCK_BUFFER_SIZE must be a power of 2 (e.g. 8, 16, 32)
@@ -2785,9 +2785,9 @@
    *  Example pulse data for Nikon: https://bit.ly/2FKD0Aq
    *                     IR Wiring: https://git.io/JvJf7
    */
-  //#define PHOTO_PULSES_US { 2000, 27850, 400, 1580, 400, 3580, 400 }  // (Âµs) Durations for each 48.4kHz oscillation
+  //#define PHOTO_PULSES_US { 2000, 27850, 400, 1580, 400, 3580, 400 }  // (µs) Durations for each 48.4kHz oscillation
   #ifdef PHOTO_PULSES_US
-    #define PHOTO_PULSE_DELAY_US 13 // (Âµs) Approximate duration of each HIGH and LOW pulse in the oscillation
+    #define PHOTO_PULSE_DELAY_US 13 // (µs) Approximate duration of each HIGH and LOW pulse in the oscillation
   #endif
 #endif
 
@@ -3280,7 +3280,7 @@
   #define MAX7219_GCODE            // Add the M7219 G-code to control the LED matrix
   #define MAX7219_INIT_TEST    2   // Test pattern at startup: 0=none, 1=sweep, 2=spiral
   #define MAX7219_NUMBER_UNITS 3   // Number of Max7219 units in chain.
-  #define MAX7219_ROTATE       0   // Rotate the display clockwise (in multiples of +/- 90Â°)
+  #define MAX7219_ROTATE       0   // Rotate the display clockwise (in multiples of +/- 90°)
                                    // connector at:  right=0   bottom=-90  top=90  left=180
   #define MAX7219_REVERSE_ORDER    // The individual LED matrix units may be in reversed order
   //#define MAX7219_SIDE_BY_SIDE   // Big chip+matrix boards can be chained side-by-side
