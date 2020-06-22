@@ -1484,11 +1484,6 @@
 #define BUSY_WHILE_HEATING            // Some hosts require "busy" messages even during heating
 
 //
-// M100 Free Memory Watcher to debug memory usage
-//
-#define M100_FREE_MEMORY_WATCHER
-
-//
 // G20/G21 Inch mode support
 //
 #define INCH_MODE_SUPPORT
