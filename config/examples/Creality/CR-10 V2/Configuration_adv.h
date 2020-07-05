@@ -1548,7 +1548,7 @@
  *
  * Warning: Does not respect endstops!
  */
-#if ENABLED(BLTOUCH)
+#if ENABLED(CR10V2_BLTOUCH)
   #define BABYSTEPPING
 #endif
 #if ENABLED(BABYSTEPPING)
@@ -1572,7 +1572,7 @@
 
   //#define BABYSTEP_DISPLAY_TOTAL          // Display total babysteps since last G28
 
-  #if ENABLED(BLTOUCH)
+  #if ENABLED(CR10V2_BLTOUCH)
     #define BABYSTEP_ZPROBE_OFFSET          // Combine M851 Z and Babystepping
   #endif
   #if ENABLED(BABYSTEP_ZPROBE_OFFSET)
