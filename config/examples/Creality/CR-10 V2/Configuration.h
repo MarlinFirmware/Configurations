@@ -679,9 +679,9 @@
 #define Y_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define X_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define Y_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
-#define Z_MIN_ENDSTOP_INVERTING ENABLED(BLTOUCH) // Set to true to invert the logic of the endstop.
-#define Z_MAX_ENDSTOP_INVERTING ENABLED(BLTOUCH) // Set to true to invert the logic of the endstop.
-#define Z_MIN_PROBE_ENDSTOP_INVERTING ENABLED(BLTOUCH) // Set to true to invert the logic of the probe.
+#define Z_MIN_ENDSTOP_INVERTING ENABLED(CR10V2_BLTOUCH) // Set to true to invert the logic of the endstop.
+#define Z_MAX_ENDSTOP_INVERTING ENABLED(CR10V2_BLTOUCH) // Set to true to invert the logic of the endstop.
+#define Z_MIN_PROBE_ENDSTOP_INVERTING ENABLED(CR10V2_BLTOUCH) // Set to true to invert the logic of the probe.
 
 /**
  * Stepper Drivers
@@ -882,7 +882,7 @@
  */
 //#define Z_MIN_PROBE_PIN 32 // Pin 32 is the RAMPS default
 
-#if ENABLED(BLTOUCH)
+#if ENABLED(CR10V2_BLTOUCH)
   #define Z_STOP_PIN 19 // Source DWIN2
 #endif
 
@@ -924,7 +924,6 @@
  */
 #if ENABLED(CR10V2_BLTOUCH)
   #define BLTOUCH
-  #undef CR10V2_BLTOUCH
 #endif
 
 /**
@@ -1055,7 +1054,7 @@
 #define Z_PROBE_OFFSET_RANGE_MAX 9
 
 // Enable the M48 repeatability test to test probe accuracy
-#if ENABLED(BLTOUCH)
+#if ENABLED(CR10V2_BLTOUCH)
   #define Z_MIN_PROBE_REPEATABILITY_TEST
 #endif
 
@@ -1253,7 +1252,7 @@
  */
 //#define AUTO_BED_LEVELING_3POINT
 //#define AUTO_BED_LEVELING_LINEAR
-#if ENABLED(BLTOUCH)
+#if ENABLED(CR10V2_BLTOUCH)
   #define AUTO_BED_LEVELING_BILINEAR
 #endif
 //#define AUTO_BED_LEVELING_UBL
@@ -1263,7 +1262,7 @@
  * Normally G28 leaves leveling disabled on completion. Enable
  * this option to have G28 restore the prior leveling state.
  */
-#if ENABLED(BLTOUCH)
+#if ENABLED(CR10V2_BLTOUCH)
   #define RESTORE_LEVELING_AFTER_G28
 #endif
 
@@ -1364,7 +1363,7 @@
  * Add a bed leveling sub-menu for ABL or MBL.
  * Include a guided procedure if manual probing is enabled.
  */
-#if ENABLED(BLTOUCH)
+#if ENABLED(CR10V2_BLTOUCH)
   #define LCD_BED_LEVELING
 #endif
 
@@ -1410,7 +1409,7 @@
 // - Move the Z probe (or nozzle) to a defined XY point before Z Homing when homing all axes (G28).
 // - Prevent Z homing when the Z probe is outside bed area.
 //
-#if ENABLED(BLTOUCH)
+#if ENABLED(CR10V2_BLTOUCH)
   #define Z_SAFE_HOMING
 #endif
 
