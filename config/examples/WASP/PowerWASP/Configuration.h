@@ -505,9 +505,9 @@
   // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
 
   // POWERwasp
-    #define DEFAULT_Kp 27.56
-    #define DEFAULT_Ki 5.34
-    #define DEFAULT_Kd 35.56
+  #define DEFAULT_Kp 27.56
+  #define DEFAULT_Ki 5.34
+  #define DEFAULT_Kd 35.56
 
   // MakerGear
   //#define DEFAULT_Kp 7.0

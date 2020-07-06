@@ -764,9 +764,9 @@
 
 // Other common M150 values:
 // 16T MXL on X and Y
-// #define DEFAULT_AXIS_STEPS_PER_UNIT   { 3200/32.512, 3200/32.512, 1600, 103.00 }
+//#define DEFAULT_AXIS_STEPS_PER_UNIT   { 3200/32.512, 3200/32.512, 1600, 103.00 }
 // 16T GT2 on X and Y
-// #define DEFAULT_AXIS_STEPS_PER_UNIT   { 100, 100, 1600, 103.00 }
+//#define DEFAULT_AXIS_STEPS_PER_UNIT   { 100, 100, 1600, 103.00 }
 
 /**
  * Default Max Feed Rate (mm/s)
@@ -1556,7 +1556,7 @@
   //#define NOZZLE_PARK_Y_ONLY          // Y move only is required to park
   #define NOZZLE_PARK_Z_RAISE_MIN   2   // (mm) Always raise Z by at least this distance
   #define NOZZLE_PARK_XY_FEEDRATE 100   // (mm/s) X and Y axes feedrate (also used for delta Z axis)
-  #define NOZZLE_PARK_Z_FEEDRATE 5      // (mm/s) Z axis feedrate (not used for delta printers)
+  #define NOZZLE_PARK_Z_FEEDRATE    5   // (mm/s) Z axis feedrate (not used for delta printers)
 #endif
 
 /**

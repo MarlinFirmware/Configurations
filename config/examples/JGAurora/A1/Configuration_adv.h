@@ -119,7 +119,7 @@
 
 #define HEATER_BED_INVERTING 1
 #define HEATER_0_INVERTING 1
-// #define HEATER_1_INVERTING 0
+//#define HEATER_1_INVERTING 0
 #define FAN_INVERTING 1
 
 //
@@ -764,6 +764,7 @@
     #define Z_STEPPER_ALIGN_AMP 1.0       // Use a value > 1.0 NOTE: This may cause instability!
   #endif
 
+  // On a 300mm bed a 5% grade would give a misalignment of ~1.5cm
   #define G34_MAX_GRADE              5    // (%) Maximum incline that G34 will handle
   #define Z_STEPPER_ALIGN_ITERATIONS 3    // Number of iterations to apply during alignment
   #define Z_STEPPER_ALIGN_ACC        0.02 // Stop iterating early if the accuracy is better than this

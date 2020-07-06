@@ -492,9 +492,9 @@
   // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
 
   // Ultimaker
-  // #define DEFAULT_Kp 22.2
-  // #define DEFAULT_Ki 1.08
-  // #define DEFAULT_Kd 114
+  //#define DEFAULT_Kp 22.2
+  //#define DEFAULT_Ki 1.08
+  //#define DEFAULT_Kd 114
 
   // MakerGear
   //#define DEFAULT_Kp 7.0
@@ -508,9 +508,9 @@
 
   // TronXY XY-100 Standard Extruder at 210 Degree Celsius and 100% Fan
   // (measured after M106 S255 with M303 E0 S210 C8)
-  // #define DEFAULT_Kp 20.32
-  // #define DEFAULT_Ki 1.18
-  // #define DEFAULT_Kd 87.80
+  //#define DEFAULT_Kp 20.32
+  //#define DEFAULT_Ki 1.18
+  //#define DEFAULT_Kd 87.80
 
   // TronXY XY-100 Standard Extruder, from original firmware
   #define DEFAULT_Kp 7.0000
@@ -1539,7 +1539,7 @@
   //#define NOZZLE_PARK_Y_ONLY          // Y move only is required to park
   #define NOZZLE_PARK_Z_RAISE_MIN   2   // (mm) Always raise Z by at least this distance
   #define NOZZLE_PARK_XY_FEEDRATE 100   // (mm/s) X and Y axes feedrate (also used for delta Z axis)
-  #define NOZZLE_PARK_Z_FEEDRATE 5      // (mm/s) Z axis feedrate (not used for delta printers)
+  #define NOZZLE_PARK_Z_FEEDRATE    5   // (mm/s) Z axis feedrate (not used for delta printers)
 #endif
 
 /**

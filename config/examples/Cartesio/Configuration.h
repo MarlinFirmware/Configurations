@@ -492,20 +492,20 @@
 
   // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
 
-    // Cartesio extruderV6 40W Normal
-    #define DEFAULT_Kp 18
-    #define DEFAULT_Ki 1
-    #define DEFAULT_Kd 100
+  // Cartesio extruderV6 40W Normal
+  #define DEFAULT_Kp 18
+  #define DEFAULT_Ki 1
+  #define DEFAULT_Kd 100
 
-    // Cartesio extruderV6 40W Volcano
-    //#define DEFAULT_Kp 50
-    //#define DEFAULT_Ki 9
-    //#define DEFAULT_Kd 70
+  // Cartesio extruderV6 40W Volcano
+  //#define DEFAULT_Kp 50
+  //#define DEFAULT_Ki 9
+  //#define DEFAULT_Kd 70
 
-    // Cartesio extruderV6 40W Cyclops
-    //#define DEFAULT_Kp 18
-    //#define DEFAULT_Ki 1
-    //#define DEFAULT_Kd 100
+  // Cartesio extruderV6 40W Cyclops
+  //#define DEFAULT_Kp 18
+  //#define DEFAULT_Ki 1
+  //#define DEFAULT_Kd 100
 
 #endif // PIDTEMP
 
@@ -1527,7 +1527,7 @@
   //#define NOZZLE_PARK_Y_ONLY          // Y move only is required to park
   #define NOZZLE_PARK_Z_RAISE_MIN   2   // (mm) Always raise Z by at least this distance
   #define NOZZLE_PARK_XY_FEEDRATE 100   // (mm/s) X and Y axes feedrate (also used for delta Z axis)
-  #define NOZZLE_PARK_Z_FEEDRATE 5      // (mm/s) Z axis feedrate (not used for delta printers)
+  #define NOZZLE_PARK_Z_FEEDRATE    5   // (mm/s) Z axis feedrate (not used for delta printers)
 #endif
 
 /**

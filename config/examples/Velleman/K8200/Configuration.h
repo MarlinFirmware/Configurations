@@ -52,9 +52,9 @@
 // VM8201 Display unit
 #define K8200_VM8201
 // K8204 Z axis upgrade rod and coupler -> TODO
-// #define K8200_K8204
+//#define K8200_K8204
 // K8203 direct drive extruder -> TODO
-// #define K8200_K8203
+//#define K8200_K8203
 
 //===========================================================================
 //============================= Getting Started =============================
@@ -1556,7 +1556,7 @@
   //#define NOZZLE_PARK_Y_ONLY          // Y move only is required to park
   #define NOZZLE_PARK_Z_RAISE_MIN   2   // (mm) Always raise Z by at least this distance
   #define NOZZLE_PARK_XY_FEEDRATE 100   // (mm/s) X and Y axes feedrate (also used for delta Z axis)
-  #define NOZZLE_PARK_Z_FEEDRATE 5      // (mm/s) Z axis feedrate (not used for delta printers)
+  #define NOZZLE_PARK_Z_FEEDRATE    5   // (mm/s) Z axis feedrate (not used for delta printers)
 #endif
 
 /**
