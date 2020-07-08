@@ -38,7 +38,7 @@
 // @section temperature
 
 //===========================================================================
-//=============================Thermal Settings  ============================
+//============================= Thermal Settings ============================
 //===========================================================================
 
 /**
@@ -1834,7 +1834,7 @@
 
 // @section motion
 
-// The number of lineear moves that can be in the planner at once.
+// The number of linear moves that can be in the planner at once.
 // The value of BLOCK_BUFFER_SIZE must be a power of 2 (e.g. 8, 16, 32)
 #if BOTH(SDSUPPORT, DIRECT_STEPPING)
   #define BLOCK_BUFFER_SIZE  8
