@@ -1482,22 +1482,22 @@
 //
 // - Allow Z homing only after X and Y homing AND stepper drivers still enabled.
 // - If stepper drivers time out, it will need X and Y homing again before Z homing.
-// - Move the Z probe (or nozzle) to a defined XY point before Z Homing when homing all axes (G28).
+// - Move the Z probe (or nozzle) to a defined XY point before Z Homing.
 // - Prevent Z homing when the Z probe is outside bed area.
 //
 //#define Z_SAFE_HOMING
 
 #if ENABLED(Z_SAFE_HOMING)
-  #define Z_SAFE_HOMING_X_POINT X_CENTER  // X point for Z homing when homing all axes (G28).
-  #define Z_SAFE_HOMING_Y_POINT Y_CENTER  // Y point for Z homing when homing all axes (G28).
+  #define Z_SAFE_HOMING_X_POINT X_CENTER  // X point for Z homing
+  #define Z_SAFE_HOMING_Y_POINT Y_CENTER  // Y point for Z homing
 
   //Anet A6 with new X-Axis
-  //#define Z_SAFE_HOMING_X_POINT 113    // X point for Z homing when homing all axes (G28).
-  //#define Z_SAFE_HOMING_Y_POINT 112    // Y point for Z homing when homing all axes (G28).
+  //#define Z_SAFE_HOMING_X_POINT 113    // X point for Z homing
+  //#define Z_SAFE_HOMING_Y_POINT 112    // Y point for Z homing
 
   //Anet A6 with new X-Axis and defined X_HOME_POS -7, Y_HOME_POS -6
-  //#define Z_SAFE_HOMING_X_POINT 107    // X point for Z homing when homing all axes (G28).
-  //#define Z_SAFE_HOMING_Y_POINT 107    // Y point for Z homing when homing all axes (G28).
+  //#define Z_SAFE_HOMING_X_POINT 107    // X point for Z homing
+  //#define Z_SAFE_HOMING_Y_POINT 107    // Y point for Z homing
 
 #endif
 
