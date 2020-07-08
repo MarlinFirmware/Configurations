@@ -21,7 +21,7 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "delta/generic"
+#define CONFIG_EXAMPLES_DIR "delta/kossel_mini"
 
 /**
  * Configuration_adv.h
