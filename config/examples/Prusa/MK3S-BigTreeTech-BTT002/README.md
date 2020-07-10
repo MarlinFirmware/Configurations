@@ -14,7 +14,7 @@
 The `W` in Prusa's `G28 W ; home all without mesh bed level` G-code does not exist in Marlin and [`G80 ; mesh bed leveling`](https://marlinfw.org/docs/gcode/G080.html) cancels the current motion mode, so no bed leveling will take place.
 
 ### PrusaSlicer
-Paste the start g-code block below in the Printer Settings tab's Custom G-code section. Use the Filament Settings tab's Custom G-code section to add the [Linear Advance](https://marlinfw.org/docs/features/lin_advance.html) (`M900 K0.0`) value since it can be saved on a per-filament basis.
+Paste the start G-code block below in the Printer Settings tab's Custom G-code section. Use the Filament Settings tab's Custom G-code section to add the [Linear Advance](https://marlinfw.org/docs/features/lin_advance.html) (`M900 K0.0`) value since it can be saved on a per-filament basis.
 ```gcode
 G90 ; use absolute coordinates
 M83 ; extruder relative mode
@@ -32,7 +32,7 @@ G92 E0.0
 ```
 
 ### Cura
-Paste the start g-code block below in the Start G-code section. Don't forget to add your [Linear Advance](https://marlinfw.org/docs/features/lin_advance.html) (`M900 K0.0`) value in the start G-code block below:
+Paste the start G-code block below in the Start G-code section. Don't forget to add your [Linear Advance](https://marlinfw.org/docs/features/lin_advance.html) (`M900 K0.0`) value in the start G-code block below:
 ```gcode
 G90 ; use absolute coordinates
 M83 ; extruder relative mode
@@ -51,7 +51,7 @@ G92 E0.0
 ```
 
 ### Simplify3D
-Paste the start g-code block below in the Starting Script section. Don't forget to add your [Linear Advance](https://marlinfw.org/docs/features/lin_advance.html) (`M900 K0.0`) value in the start G-code block below:
+Paste the start G-code block below in the Starting Script section. Don't forget to add your [Linear Advance](https://marlinfw.org/docs/features/lin_advance.html) (`M900 K0.0`) value in the start G-code block below:
 ```gcode
 G90 ; use absolute coordinates
 M83 ; extruder relative mode
