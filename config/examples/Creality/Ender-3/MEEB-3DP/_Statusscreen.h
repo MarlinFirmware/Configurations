@@ -20,7 +20,7 @@
  *
  */
 #pragma once
- 
+
 #define CONFIG_EXAMPLES_DIR "Creality/Ender-3/MEEB-3DP"
 
 #define STATUS_LOGO_X            0
