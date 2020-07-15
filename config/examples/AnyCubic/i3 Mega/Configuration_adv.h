@@ -21,7 +21,7 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "AnyCubic/AI3M_BLTouch_reversed2208"
+#define CONFIG_EXAMPLES_DIR "AnyCubic/i3 Mega"
 
 /**
  * Configuration_adv.h
