@@ -1325,6 +1325,7 @@
  * Include a guided procedure if manual probing is enabled.
  */
 #define LCD_BED_LEVELING
+
 #if ENABLED(LCD_BED_LEVELING)
   #define MESH_EDIT_Z_STEP  0.025 // (mm) Step size while manually probing Z axis.
   #define LCD_PROBE_Z_RANGE 4     // (mm) Z Range centered on Z_MIN_POS for LCD Z adjustment
