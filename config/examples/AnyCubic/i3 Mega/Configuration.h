@@ -21,7 +21,10 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "AnyCubic/AI3M_stock"
+#define CONFIG_EXAMPLES_DIR "AnyCubic/i3 Mega"
+
+//#define I3MEGA_HAS_BLTOUCH
+//#define I3MEGA_HAS_TMC2208
 
 /**
  * Configuration.h
@@ -696,22 +699,27 @@
  *          TMC5130, TMC5130_STANDALONE, TMC5160, TMC5160_STANDALONE
  * :['A4988', 'A5984', 'DRV8825', 'LV8729', 'L6470', 'L6474', 'POWERSTEP01', 'TB6560', 'TB6600', 'TMC2100', 'TMC2130', 'TMC2130_STANDALONE', 'TMC2160', 'TMC2160_STANDALONE', 'TMC2208', 'TMC2208_STANDALONE', 'TMC2209', 'TMC2209_STANDALONE', 'TMC26X', 'TMC26X_STANDALONE', 'TMC2660', 'TMC2660_STANDALONE', 'TMC5130', 'TMC5130_STANDALONE', 'TMC5160', 'TMC5160_STANDALONE']
  */
-//#define X_DRIVER_TYPE  A4988
-//#define Y_DRIVER_TYPE  A4988
-//#define Z_DRIVER_TYPE  A4988
-//#define X2_DRIVER_TYPE A4988
-//#define Y2_DRIVER_TYPE A4988
-//#define Z2_DRIVER_TYPE A4988
-//#define Z3_DRIVER_TYPE A4988
-//#define Z4_DRIVER_TYPE A4988
-//#define E0_DRIVER_TYPE A4988
-//#define E1_DRIVER_TYPE A4988
-//#define E2_DRIVER_TYPE A4988
-//#define E3_DRIVER_TYPE A4988
-//#define E4_DRIVER_TYPE A4988
-//#define E5_DRIVER_TYPE A4988
-//#define E6_DRIVER_TYPE A4988
-//#define E7_DRIVER_TYPE A4988
+#if ENABLED(I3MEGA_HAS_TMC2208)
+  #define ALL_DRIVERS_TYPE TMC2208_STANDALONE
+#else
+  #define ALL_DRIVERS_TYPE A4988
+#endif
+#define X_DRIVER_TYPE  ALL_DRIVERS_TYPE
+#define Y_DRIVER_TYPE  ALL_DRIVERS_TYPE
+#define Z_DRIVER_TYPE  ALL_DRIVERS_TYPE
+#define X2_DRIVER_TYPE ALL_DRIVERS_TYPE
+#define Y2_DRIVER_TYPE ALL_DRIVERS_TYPE
+#define Z2_DRIVER_TYPE ALL_DRIVERS_TYPE
+#define Z3_DRIVER_TYPE ALL_DRIVERS_TYPE
+#define Z4_DRIVER_TYPE ALL_DRIVERS_TYPE
+#define E0_DRIVER_TYPE ALL_DRIVERS_TYPE
+#define E1_DRIVER_TYPE ALL_DRIVERS_TYPE
+#define E2_DRIVER_TYPE ALL_DRIVERS_TYPE
+#define E3_DRIVER_TYPE ALL_DRIVERS_TYPE
+#define E4_DRIVER_TYPE ALL_DRIVERS_TYPE
+//#define E5_DRIVER_TYPE ALL_DRIVERS_TYPE
+//#define E6_DRIVER_TYPE ALL_DRIVERS_TYPE
+//#define E7_DRIVER_TYPE ALL_DRIVERS_TYPE
 
 // Enable this feature if all enabled endstop pins are interrupt-capable.
 // This will remove the need to poll the interrupt pins, saving many CPU cycles.
@@ -890,7 +898,9 @@
  * Use G29 repeatedly, adjusting the Z height at each point with movement commands
  * or (with LCD_BED_LEVELING) the LCD controller.
  */
-#define PROBE_MANUALLY
+#if DISABLED(I3MEGA_HAS_BLTOUCH)
+  #define PROBE_MANUALLY
+#endif
 //#define MANUAL_PROBE_START_Z 0.2
 
 /**
@@ -914,7 +924,9 @@
 /**
  * The BLTouch probe uses a Hall effect sensor and emulates a servo.
  */
-//#define BLTOUCH
+#if ENABLED(I3MEGA_HAS_BLTOUCH)
+  #define BLTOUCH
+#endif
 
 /**
  * Pressure sensor with a BLTouch-like interface
@@ -1015,8 +1027,8 @@
  * A total of 2 does fast/slow probes with a weighted average.
  * A total of 3 or more adds more slow probes, taking the average.
  */
-//#define MULTIPLE_PROBING 2
-//#define EXTRA_PROBING    1
+#define MULTIPLE_PROBING 2
+#define EXTRA_PROBING    1
 
 /**
  * Z probes require clearance when deploying, stowing, and moving between
@@ -1044,7 +1056,9 @@
 #define Z_PROBE_OFFSET_RANGE_MAX 20
 
 // Enable the M48 repeatability test to test probe accuracy
-//#define Z_MIN_PROBE_REPEATABILITY_TEST
+#if ENABLED(I3MEGA_HAS_BLTOUCH)
+  #define Z_MIN_PROBE_REPEATABILITY_TEST
+#endif
 
 // Before deploy/stow pause for user confirmation
 //#define PAUSE_BEFORE_DEPLOY_STOW
@@ -1238,9 +1252,13 @@
  */
 //#define AUTO_BED_LEVELING_3POINT
 //#define AUTO_BED_LEVELING_LINEAR
-//#define AUTO_BED_LEVELING_BILINEAR
+#if ENABLED(I3MEGA_HAS_BLTOUCH)
+  #define AUTO_BED_LEVELING_BILINEAR
+#endif
 //#define AUTO_BED_LEVELING_UBL
-#define MESH_BED_LEVELING
+#if DISABLED(I3MEGA_HAS_BLTOUCH)
+  #define MESH_BED_LEVELING
+#endif
 
 /**
  * Normally G28 leaves leveling disabled on completion. Enable
