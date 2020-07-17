@@ -1150,6 +1150,7 @@
   #define FIL_RUNOUT_INVERTING false // Set to true to invert the logic of the sensor.
   #define FIL_RUNOUT_PULLUP          // Use internal pullup for filament runout pins.
   //#define FIL_RUNOUT_PULLDOWN      // Use internal pulldown for filament runout pins.
+  #define FIL_RUNOUT_PIN 2 // Creality CR20-S stock sensor
 
   // Set one or more commands to execute on filament runout.
   // (After 'M412 H' Marlin will ask the host to handle the process.)
@@ -1972,6 +1973,9 @@
 // https://reprap.org/wiki/MKS_MINI_12864
 //
 #define MKS_MINI_12864
+#define LCD_CONTRAST_MIN  140
+#define LCD_CONTRAST_INIT 155
+#define LCD_CONTRAST_MAX  165
 
 //
 // FYSETC variant of the MINI12864 graphic controller with SD support
