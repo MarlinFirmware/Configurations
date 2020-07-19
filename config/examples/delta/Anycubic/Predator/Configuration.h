@@ -481,6 +481,7 @@
 #define BANG_MAX 255     // Limits current to nozzle while in bang-bang mode; 255=full current
 #define PID_MAX BANG_MAX // Limits current to nozzle while PID is active (see PID_FUNCTIONAL_RANGE below); 255=full current
 #define PID_K1 0.95      // Smoothing factor within any PID loop
+
 #if ENABLED(PIDTEMP)
   #define PID_EDIT_MENU         // Add PID editing to the "Advanced Settings" menu. (~700 bytes of PROGMEM)
   #define PID_AUTOTUNE_MENU     // Add PID auto-tuning to the "Advanced Settings" menu. (~250 bytes of PROGMEM)
@@ -1265,7 +1266,6 @@
  *
  * RAMPS-based boards use SERVO3_PIN for the first runout sensor.
  * For other boards you may need to define FIL_RUNOUT_PIN, FIL_RUNOUT2_PIN, etc.
- * By default the firmware assumes HIGH=FILAMENT PRESENT.
  */
 #define FILAMENT_RUNOUT_SENSOR
 #if ENABLED(FILAMENT_RUNOUT_SENSOR)
@@ -2036,7 +2036,6 @@
 // NOTE: If the LCD is unresponsive you may need to reverse the plugs.
 //
 
-
 //
 // RepRapDiscount FULL GRAPHIC Smart Controller
 // http://reprap.org/wiki/RepRapDiscount_Full_Graphic_Smart_Controller
@@ -2244,27 +2243,6 @@
 // FSMC display (MKS Robin, Alfawise U20, JGAurora A5S, REXYZ A1, etc.)
 //
 #define FSMC_GRAPHICAL_TFT
-#if ENABLED(FSMC_GRAPHICAL_TFT)
-  //
-  // FSMC_UPSCALE 2 2x upscaler for 320x240 displays (default)
-  // FSMC_UPSCALE 3 3x upscaler for 480x320 displays
-  //
-  #define FSMC_UPSCALE 3
-
-  //
-  // Change colors
-  // some colors are predefined, see /src/lcd/dogm/u8g_dev_tft_480~.cpp Line 160
-  // or use 16bit color (e.g. 0x0000 = black, 0xFFE0 = yellow)
-  // see https://ee-programming-notepad.blogspot.com/2016/10/16-bit-color-generator-picker.html
-  //
-
-  #define TFT_MARLINUI_COLOR COLOR_WHITE // main foreground color
-  #define TFT_MARLINBG_COLOR COLOR_BLACK // background color
-  #define TFT_BTCANCEL_COLOR COLOR_RED // cancel button
-  #define TFT_BTARROWS_COLOR COLOR_WHITE // arrows up/down
-  #define TFT_BTOKMENU_COLOR COLOR_NAVY // enter button
-
-#endif
 
 //
 // TFT LVGL UI
