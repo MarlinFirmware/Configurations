@@ -27,7 +27,7 @@
  * and enable SHOW_CUSTOM_BOOTSCREEN in Configuration.h.
  *
  * Use the Marlin Bitmap Converter to make your own:
- * https://marlinfw.org/tools/u8glib/converter.html
+ * http://marlinfw.org/tools/u8glib/converter.html
  */
 
 #define CUSTOM_BOOTSCREEN_TIMEOUT 1000
