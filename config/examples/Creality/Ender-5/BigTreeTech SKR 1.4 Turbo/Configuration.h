@@ -74,12 +74,34 @@
 #define STRING_CONFIG_H_AUTHOR "(jagoosw, Ender-5)" // Who made the changes.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
+/*
+
+All you need to edit is the next few lines
+
+*/
 
 //#define E3D // Enable this if you have an E3D all metal hotend
 #define E3D_Extreme // Enable this if you want to print at more than 285 degrees, this is strongly not reccomended by E3D but I neeeded it briefly. They say a little over isn't too risky but should not be done long term
 #define chamber // Enable this to if you have a chamber with the thermistor in the E1 thermistor connector, the heater in the other heater port (beside the bed heater) and the hotend heatsink fan which was prevuiysly in this hole in a different, always on, fan pin
-#define TMC2209_Enabled // Enable if you have TMC2209 drivers
 #define SKR_14_Turbo // Enable if SKR 1.4 turbo
+
+/*Driver options
+ * A4988 is assumed for unspecified drivers.
+ *
+ * Options: A4988, A5984, DRV8825, LV8729, L6470, L6474, POWERSTEP01,
+ *          TB6560, TB6600, TMC2100,
+ *          TMC2130, TMC2130_STANDALONE, TMC2160, TMC2160_STANDALONE,
+ *          TMC2208, TMC2208_STANDALONE, TMC2209, TMC2209_STANDALONE,
+ *          TMC26X,  TMC26X_STANDALONE,  TMC2660, TMC2660_STANDALONE,
+ *          TMC5130, TMC5130_STANDALONE, TMC5160, TMC5160_STANDALONE
+*/
+#define drivers TMC2209 // Set the drivers you have (e.g. TMC2209)
+
+/*
+
+End of what is needed to get working
+
+*/
 
 /**
  * *** VENDORS PLEASE READ ***
@@ -701,17 +723,11 @@
  *          TMC5130, TMC5130_STANDALONE, TMC5160, TMC5160_STANDALONE
  * :['A4988', 'A5984', 'DRV8825', 'LV8729', 'L6470', 'L6474', 'POWERSTEP01', 'TB6560', 'TB6600', 'TMC2100', 'TMC2130', 'TMC2130_STANDALONE', 'TMC2160', 'TMC2160_STANDALONE', 'TMC2208', 'TMC2208_STANDALONE', 'TMC2209', 'TMC2209_STANDALONE', 'TMC26X', 'TMC26X_STANDALONE', 'TMC2660', 'TMC2660_STANDALONE', 'TMC5130', 'TMC5130_STANDALONE', 'TMC5160', 'TMC5160_STANDALONE']
  */
-#if ENABLED(TMC2209_Enabled)
-  #define X_DRIVER_TYPE  TMC2209
-  #define Y_DRIVER_TYPE  TMC2209
-  #define Z_DRIVER_TYPE  TMC2209
-  #define E0_DRIVER_TYPE TMC2209
-#else
-  #define X_DRIVER_TYPE  A4988
-  #define Y_DRIVER_TYPE  A4988
-  #define Z_DRIVER_TYPE  A4988
-  #define E0_DRIVER_TYPE A4988
-#endif
+
+#define X_DRIVER_TYPE  drivers
+#define Y_DRIVER_TYPE  drivers
+#define Z_DRIVER_TYPE  drivers
+#define E0_DRIVER_TYPE drivers
 //#define X2_DRIVER_TYPE A4988
 //#define Y2_DRIVER_TYPE A4988
 //#define Z2_DRIVER_TYPE A4988
