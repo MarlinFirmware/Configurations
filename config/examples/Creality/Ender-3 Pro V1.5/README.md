@@ -1,13 +1,8 @@
 # Ender 3 Pro V1.5
 
-This is a surprise upgrade to the Ender 3 Pro that some customers seem to have started receiving in mid July 2020 time frame.
-There seems to be no documentation about it nor is there any support page for it. 
-It appears to be an Ender 3 V2 board placed in an Ender 3 Pro body along with the stock Ender 3 Pro display.
-Best way to confirm you have this is to look at the control board and confirm it has a PCB v4.2.2 on it.
+This is a surprise upgrade to the Ender 3 Pro that some customers began to receive in mid-July 2020. No documentation or support page exists for this variant. It appears to be an Ender 3 Pro with the 32-bit Ender 3 V2 board and the stock Ender 3 Pro display. To see which version you have, examine the control board. The newer board is Creality v4.2.2.
 
-Please set default_envs = STM32F103RET6_creality in file platformio.ini in Marlin root folder.
-
-This config is derrived from the Ender 3 V2 config and support for CR-10 display is enabled (since that is the display it the product seems to be shipping with).
+This configuration is very similar to the Ender 3 V2 config except that the CR-10 stock display is enabled.
 
 ## Flashing Firmware
 
