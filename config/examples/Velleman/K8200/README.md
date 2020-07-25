@@ -1,6 +1,6 @@
 # Example Configuration for Vellemann [K8200](http://www.k8200.eu/)
 * Configuration files for **Vellemann K8200** (with [VM8201](http://www.vellemanprojects.eu/products/view/?id=416158) - LCD Option for K8200)
-* K8200 is a 3Drag clone - configuration should work with 3Drag http://reprap.org/wiki/3drag, too. Please report.
+* K8200 is a 3Drag clone - configuration should work with 3Drag https://reprap.org/wiki/3drag, too. Please report.
 
 * updated manually with parameters from genuine Vellemann Firmware "firmware_k8200_marlinv2" based on the recent development branch
 
