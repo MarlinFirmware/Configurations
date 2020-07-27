@@ -11,7 +11,7 @@ You might need (or want) to edit at least the following settings in `Configurati
 * Increase `DELTA_RADIUS` if the model comes out convex (with a bulge in the middle)
 * Increase `DELTA_DIAGONAL_ROD` if the model comes out larger than expected
 
-### [http://reprap.org/wiki/PID_Tuning](PID Tuning)
+### [https://reprap.org/wiki/PID_Tuning](PID Tuning)
 * `DEFAULT_Kp` - The proportional term
 * `DEFAULT_Ki` - The integral term
 * `DEFAULT_Kd` - The derivative term
