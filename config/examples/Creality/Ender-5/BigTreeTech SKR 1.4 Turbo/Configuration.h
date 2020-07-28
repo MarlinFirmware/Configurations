@@ -486,7 +486,6 @@
 #else 
   #define HEATER_0_MAXTEMP 275
 #endif
-#define HEATER_0_MAXTEMP 320
 #define HEATER_1_MAXTEMP 300
 #define HEATER_2_MAXTEMP 300
 #define HEATER_3_MAXTEMP 300
