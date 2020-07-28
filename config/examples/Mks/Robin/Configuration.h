@@ -113,7 +113,6 @@
  * :[-1, 0, 1, 2, 3, 4, 5, 6, 7]
  */
 #define SERIAL_PORT_2 1
-#define NUM_SERIAL 2
 
 /**
  * This setting determines the communication speed of the printer.
@@ -526,7 +525,7 @@
  * heater. If your configuration is significantly different than this and you don't understand
  * the issues involved, don't use bed PID until someone else verifies that your hardware works.
  */
-#define PIDTEMPBED
+//#define PIDTEMPBED
 
 //#define BED_LIMIT_SWITCHING
 
@@ -1598,6 +1597,10 @@
 
   // Enable for a purge/clean station that's always at the gantry height (thus no Z move)
   //#define NOZZLE_CLEAN_NO_Z
+
+  // Explicit wipe G-code script applies to a G12 with no arguments.
+  //#define WIPE_SEQUENCE_COMMANDS "G1 X-17 Y25 Z10 F4000\nG1 Z1\nM114\nG1 X-17 Y25\nG1 X-17 Y95\nG1 X-17 Y25\nG1 X-17 Y95\nG1 X-17 Y25\nG1 X-17 Y95\nG1 X-17 Y25\nG1 X-17 Y95\nG1 X-17 Y25\nG1 X-17 Y95\nG1 X-17 Y25\nG1 X-17 Y95\nG1 Z15\nM400\nG0 X-10.0 Y-9.0"
+
 #endif
 
 /**
@@ -2141,10 +2144,36 @@
 //=============================================================================
 
 //
+// TFT display with optional touch screen
+// Color Marlin UI with standard menu system
+//
+#define TFT_320x240
+//#define TFT_320x240_SPI
+//#define TFT_480x320
+//#define TFT_480x320_SPI
+
+//
+// Skip autodetect and force specific TFT driver
+// Mandatory for SPI screens with no MISO line
+// Available drivers are: ST7735, ST7789, ST7796, R61505, ILI9328, ILI9341, ILI9488
+//
+//#define TFT_DRIVER AUTO
+
+//
 // FSMC display (MKS Robin, Alfawise U20, JGAurora A5S, REXYZ A1, etc.)
 // Upscaled 128x64 Marlin UI
 //
-#define FSMC_GRAPHICAL_TFT
+//#define FSMC_GRAPHICAL_TFT
+
+//
+// TFT LVGL UI
+//
+// Using default MKS icons and fonts from: https://git.io/JJvzK
+// Just copy the 'assets' folder from the build directory to the
+// root of your SD card, together with the compiled firmware.
+//
+//#define TFT_LVGL_UI_FSMC  // Robin nano v1.2 uses FSMC
+//#define TFT_LVGL_UI_SPI   // Robin nano v2.0 uses SPI
 
 //
 // TFT LVGL UI
@@ -2174,10 +2203,12 @@
 //
 // ADS7843/XPT2046 ADC Touchscreen such as ILI9341 2.8
 //
-#define TOUCH_BUTTONS
-#if ENABLED(TOUCH_BUTTONS)
-  #define BUTTON_DELAY_EDIT  75 // (ms) Button repeat delay for edit screens
-  #define BUTTON_DELAY_MENU 100 // (ms) Button repeat delay for menus
+#define TOUCH_SCREEN
+#if ENABLED(TOUCH_SCREEN)
+  #define BUTTON_DELAY_EDIT  50 // (ms) Button repeat delay for edit screens
+  #define BUTTON_DELAY_MENU 250 // (ms) Button repeat delay for menus
+
+  #define TOUCH_SCREEN_CALIBRATION
 
   /* MKS Robin TFT v2.0 */
   #define XPT2046_X_CALIBRATION    12013
@@ -2185,16 +2216,23 @@
   #define XPT2046_X_OFFSET           -32
   #define XPT2046_Y_OFFSET           256
 
-  /* MKS Robin TFT v1.1 */
+  /* MKS Robin TFT v1.1 with ILI9328 */
   //#define XPT2046_X_CALIBRATION -11792
   //#define XPT2046_Y_CALIBRATION   8947
   //#define XPT2046_X_OFFSET         342
   //#define XPT2046_Y_OFFSET         -19
+
+  /* MKS Robin TFT v1.1 with R61505 */
+  //#define XPT2046_X_CALIBRATION  12489
+  //#define XPT2046_Y_CALIBRATION   9210
+  //#define XPT2046_X_OFFSET         -52
+  //#define XPT2046_Y_OFFSET         -17
+
 #endif
 
 //
 // RepRapWorld REPRAPWORLD_KEYPAD v1.1
-// http://reprapworld.com/?products_details&products_id=202&cPath=1591_1626
+// https://reprapworld.com/?products_details&products_id=202&cPath=1591_1626
 //
 //#define REPRAPWORLD_KEYPAD
 //#define REPRAPWORLD_KEYPAD_MOVE_STEP 10.0 // (mm) Distance to move per key-press
