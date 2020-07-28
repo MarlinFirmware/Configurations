@@ -16,10 +16,12 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  *
  */
 #pragma once
+
+#define CONFIG_EXAMPLES_DIR "BQ/Hephestos_2"
 
 /**
  * Configuration_adv.h
@@ -31,13 +33,26 @@
  * Basic settings can be found in Configuration.h
  *
  */
-#define CONFIGURATION_ADV_H_VERSION 020005
+#define CONFIGURATION_ADV_H_VERSION 020006
 
 // @section temperature
 
 //===========================================================================
-//=============================Thermal Settings  ============================
+//============================= Thermal Settings ============================
 //===========================================================================
+
+/**
+ * Thermocouple sensors are quite sensitive to noise.  Any noise induced in
+ * the sensor wires, such as by stepper motor wires run in parallel to them,
+ * may result in the thermocouple sensor reporting spurious errors.  This
+ * value is the number of errors which can occur in a row before the error
+ * is reported.  This allows us to ignore intermittent error conditions while
+ * still detecting an actual failure, which should result in a continuous
+ * stream of errors from the sensor.
+ *
+ * Set this value to 0 to fail on the first error to occur.
+ */
+#define THERMOCOUPLE_MAX_ERRORS 15
 
 //
 // Custom Thermistor 1000 parameters
@@ -336,7 +351,7 @@
  */
 //#define HOTEND_IDLE_TIMEOUT
 #if ENABLED(HOTEND_IDLE_TIMEOUT)
-  #define HOTEND_IDLE_DURATION_SEC    5     // (minutes) Time without extruder movement to trigger protection
+  #define HOTEND_IDLE_TIMEOUT_SEC (5*60)    // (seconds) Time without extruder movement to trigger protection
   #define HOTEND_IDLE_MIN_TRIGGER   180     // (°C) Minimum temperature to enable hotend protection
   #define HOTEND_IDLE_NOZZLE_TARGET   0     // (°C) Safe temperature for the nozzle after timeout
   #define HOTEND_IDLE_BED_TARGET      0     // (°C) Safe temperature for the bed after timeout
@@ -362,6 +377,7 @@
 #if ENABLED(USE_CONTROLLER_FAN)
   //#define CONTROLLER_FAN_PIN -1        // Set a custom pin for the controller fan
   //#define CONTROLLER_FAN_USE_Z_ONLY    // With this option only the Z axis is considered
+  //#define CONTROLLER_FAN_IGNORE_Z      // Ignore Z stepper. Useful when stepper timeout is disabled.
   #define CONTROLLERFAN_SPEED_MIN      0 // (0-255) Minimum speed. (If set below this value the fan is turned off.)
   #define CONTROLLERFAN_SPEED_ACTIVE 255 // (0-255) Active speed, used when any motor is enabled
   #define CONTROLLERFAN_SPEED_IDLE     0 // (0-255) Idle speed, used when motors are disabled
@@ -632,8 +648,8 @@
    * Do not activate settings that the probe might not understand. Clones might misunderstand
    * advanced commands.
    *
-   * Note: If the probe is not deploying, check a "Cmd: Reset" and "Cmd: Self-Test" and then
-   *       check the wiring of the BROWN, RED and ORANGE wires.
+   * Note: If the probe is not deploying, do a "Reset" and "Self-Test" and then check the
+   *       wiring of the BROWN, RED and ORANGE wires.
    *
    * Note: If the trigger signal of your probe is not being recognized, it has been very often
    *       because the BLACK and WHITE wires needed to be swapped. They are not "interchangeable"
@@ -744,6 +760,7 @@
     #define Z_STEPPER_ALIGN_AMP 1.0       // Use a value > 1.0 NOTE: This may cause instability!
   #endif
 
+  // On a 300mm bed a 5% grade would give a misalignment of ~1.5cm
   #define G34_MAX_GRADE              5    // (%) Maximum incline that G34 will handle
   #define Z_STEPPER_ALIGN_ITERATIONS 3    // Number of iterations to apply during alignment
   #define Z_STEPPER_ALIGN_ACC        0.02 // Stop iterating early if the accuracy is better than this
@@ -751,6 +768,34 @@
   // After G34, re-home Z (G28 Z) or just calculate it from the last probe heights?
   // Re-homing might be more precise in reproducing the actual 'G28 Z' homing height, especially on an uneven bed.
   #define HOME_AFTER_G34
+#endif
+
+//
+// Add the G35 command to read bed corners to help adjust screws.
+//
+//#define ASSISTED_TRAMMING
+#if ENABLED(ASSISTED_TRAMMING)
+
+  // Define positions for probing points, use the hotend as reference not the sensor.
+  #define TRAMMING_POINT_XY { {  20, 20 }, { 200,  20 }, { 200, 200 }, { 20, 200 } }
+
+  // Define positions names for probing points.
+  #define TRAMMING_POINT_NAME_1 "Front-Left"
+  #define TRAMMING_POINT_NAME_2 "Front-Right"
+  #define TRAMMING_POINT_NAME_3 "Back-Right"
+  #define TRAMMING_POINT_NAME_4 "Back-Left"
+
+  // Enable to restore leveling setup after operation
+  #define RESTORE_LEVELING_AFTER_G35
+
+  /**
+   * Screw thread:
+   *   M3: 30 = Clockwise, 31 = Counter-Clockwise
+   *   M4: 40 = Clockwise, 41 = Counter-Clockwise
+   *   M5: 50 = Clockwise, 51 = Counter-Clockwise
+   */
+  #define TRAMMING_SCREW_THREAD 30
+
 #endif
 
 // @section motion
@@ -793,7 +838,7 @@
 /**
  * XY Frequency limit
  * Reduce resonance by limiting the frequency of small zigzag infill moves.
- * See http://hydraraptor.blogspot.com/2010/12/frequency-limit.html
+ * See https://hydraraptor.blogspot.com/2010/12/frequency-limit.html
  * Use M201 F<freq> G<min%> to change limits at runtime.
  */
 //#define XY_FREQUENCY_LIMIT      10 // (Hz) Maximum frequency of small zigzag infill moves. Set with M201 F<hertz>.
@@ -855,6 +900,9 @@
 //#define CALIBRATION_GCODE
 #if ENABLED(CALIBRATION_GCODE)
 
+  //#define CALIBRATION_SCRIPT_PRE  "M117 Starting Auto-Calibration\nT0\nG28\nG12\nM117 Calibrating..."
+  //#define CALIBRATION_SCRIPT_POST "M500\nM117 Calibration data saved"
+
   #define CALIBRATION_MEASUREMENT_RESOLUTION     0.01 // mm
 
   #define CALIBRATION_FEEDRATE_SLOW             60    // mm/m
@@ -911,7 +959,7 @@
 //#define MICROSTEP16 LOW,LOW,HIGH
 //#define MICROSTEP32 HIGH,LOW,HIGH
 
-// Microstep setting (Only functional when stepper driver microstep pins are connected to MCU.
+// Microstep settings (Requires a board with pins named X_MS1, X_MS2, etc.)
 #define MICROSTEP_MODES { 16, 16, 16, 16, 16, 16 } // [1,2,4,8,16]
 
 /**
@@ -1078,6 +1126,8 @@
   // Enable this option and set to HIGH if your SD cards are incorrectly detected.
   //#define SD_DETECT_STATE HIGH
 
+  //#define SDCARD_READONLY                 // Read-only SD card (to save over 2K of flash)
+
   #define SD_PROCEDURE_DEPTH 1              // Increase if you need more nested M32 calls
 
   #define SD_FINISHED_STEPPERRELEASE false    // Disable steppers when SD Print is finished
@@ -1150,7 +1200,7 @@
   #if ENABLED(SDCARD_SORT_ALPHA)
     #define SDSORT_LIMIT       40     // Maximum number of sorted items (10-256). Costs 27 bytes each.
     #define FOLDER_SORTING     -1     // -1=above  0=none  1=below
-    #define SDSORT_GCODE       false  // Allow turning sorting on/off with LCD and M34 g-code.
+    #define SDSORT_GCODE       false  // Allow turning sorting on/off with LCD and M34 G-code.
     #define SDSORT_USES_RAM    false  // Pre-allocate a static array for faster pre-sorting.
     #define SDSORT_USES_STACK  false  // Prefer the stack for pre-sorting to give back some SRAM. (Negated by next 2 options.)
     #define SDSORT_CACHE_NAMES false  // Keep sorted items in RAM longer for speedy performance. Most expensive option.
@@ -1273,7 +1323,8 @@
   // Show SD percentage next to the progress bar
   //#define DOGM_SD_PERCENT
 
-  // Enable to save many cycles by drawing a hollow frame on the Info Screen
+  // Save many cycles by drawing a hollow frame or no frame on the Info Screen
+  //#define XYZ_NO_FRAME
   //#define XYZ_HOLLOW_FRAME
 
   // Enable to save many cycles by drawing a hollow frame on Menu Screens
@@ -1399,6 +1450,7 @@
   //#define AO_EXP2_PINMAP      // AlephObjects CLCD UI EXP2 mapping
   //#define CR10_TFT_PINMAP     // Rudolph Riedel's CR10 pin mapping
   //#define S6_TFT_PINMAP       // FYSETC S6 pin mapping
+  //#define F6_TFT_PINMAP       // FYSETC F6 pin mapping
 
   //#define OTHER_PIN_LAYOUT  // Define pins manually below
   #if ENABLED(OTHER_PIN_LAYOUT)
@@ -1482,7 +1534,7 @@
 // ADC Button Debounce
 //
 #if HAS_ADC_BUTTONS
-  #define ADC_BUTTON_DEBOUNCE_DELAY 16  // (ms) Increase if buttons bounce or repeat too fast
+  #define ADC_BUTTON_DEBOUNCE_DELAY 16  // Increase if buttons bounce or repeat too fast
 #endif
 
 // @section safety
@@ -1516,8 +1568,9 @@
   //#define BABYSTEP_WITHOUT_HOMING
   //#define BABYSTEP_XY                     // Also enable X/Y Babystepping. Not supported on DELTA!
   #define BABYSTEP_INVERT_Z false           // Change if Z babysteps should go the other way
-  #define BABYSTEP_MULTIPLICATOR_Z  2       // Babysteps are very small. Increase for faster motion.
-  #define BABYSTEP_MULTIPLICATOR_XY 2
+  //#define BABYSTEP_MILLIMETER_UNITS       // Specify BABYSTEP_MULTIPLICATOR_(XY|Z) in mm instead of micro-steps
+  #define BABYSTEP_MULTIPLICATOR_Z  2       // (steps or mm) Steps or millimeter distance for each Z babystep
+  #define BABYSTEP_MULTIPLICATOR_XY 2       // (steps or mm) Steps or millimeter distance for each XY babystep
 
   //#define DOUBLECLICK_FOR_Z_BABYSTEPPING  // Double-click on the Status Screen for Z Babystepping.
   #if ENABLED(DOUBLECLICK_FOR_Z_BABYSTEPPING)
@@ -1580,7 +1633,9 @@
 #endif
 
 /**
- * Override MIN_PROBE_EDGE for each side of the build plate
+ * Probing Margins
+ *
+ * Override PROBING_MARGIN for each side of the build plate
  * Useful to get probe points to exact positions on targets or
  * to allow leveling to avoid plate clamps on only specific
  * sides of the bed. With NOZZLE_AS_PROBE negative values are
@@ -1597,10 +1652,10 @@
  * the probe to be unable to reach any points.
  */
 #if PROBE_SELECTED && !IS_KINEMATIC
-  //#define MIN_PROBE_EDGE_LEFT MIN_PROBE_EDGE
-  //#define MIN_PROBE_EDGE_RIGHT MIN_PROBE_EDGE
-  //#define MIN_PROBE_EDGE_FRONT MIN_PROBE_EDGE
-  //#define MIN_PROBE_EDGE_BACK MIN_PROBE_EDGE
+  //#define PROBING_MARGIN_LEFT PROBING_MARGIN
+  //#define PROBING_MARGIN_RIGHT PROBING_MARGIN
+  //#define PROBING_MARGIN_FRONT PROBING_MARGIN
+  //#define PROBING_MARGIN_BACK PROBING_MARGIN
 #endif
 
 #if EITHER(MESH_BED_LEVELING, AUTO_BED_LEVELING_UBL)
@@ -1651,6 +1706,37 @@
     // Enable additional compensation using hotend temperature
     // Note: this values cannot be calibrated automatically but have to be set manually
     //#define USE_TEMP_EXT_COMPENSATION
+
+    // Probe temperature calibration generates a table of values starting at PTC_SAMPLE_START
+    // (e.g. 30), in steps of PTC_SAMPLE_RES (e.g. 5) with PTC_SAMPLE_COUNT (e.g. 10) samples.
+
+    //#define PTC_SAMPLE_START  30.0f
+    //#define PTC_SAMPLE_RES    5.0f
+    //#define PTC_SAMPLE_COUNT  10U
+
+    // Bed temperature calibration builds a similar table.
+
+    //#define BTC_SAMPLE_START  60.0f
+    //#define BTC_SAMPLE_RES    5.0f
+    //#define BTC_SAMPLE_COUNT  10U
+
+    // The temperature the probe should be at while taking measurements during bed temperature
+    // calibration.
+    //#define BTC_PROBE_TEMP 30.0f
+
+    // Height above Z=0.0f to raise the nozzle. Lowering this can help the probe to heat faster.
+    // Note: the Z=0.0f offset is determined by the probe offset which can be set using M851.
+    //#define PTC_PROBE_HEATING_OFFSET 0.5f
+
+    // Height to raise the Z-probe between heating and taking the next measurement. Some probes
+    // may fail to untrigger if they have been triggered for a long time, which can be solved by
+    // increasing the height the probe is raised to.
+    //#define PTC_PROBE_RAISE 15U
+
+    // If the probe is outside of the defined range, use linear extrapolation using the closest
+    // point and the PTC_LINEAR_EXTRAPOLATION'th next point. E.g. if set to 4 it will use data[0]
+    // and data[4] to perform linear extrapolation for values below PTC_SAMPLE_START.
+    //#define PTC_LINEAR_EXTRAPOLATION 4
   #endif
 #endif
 
@@ -1756,9 +1842,9 @@
 //================================= Buffers =================================
 //===========================================================================
 
-// @section hidden
+// @section motion
 
-// The number of lineear moves that can be in the planner at once.
+// The number of linear moves that can be in the planner at once.
 // The value of BLOCK_BUFFER_SIZE must be a power of 2 (e.g. 8, 16, 32)
 #if BOTH(SDSUPPORT, DIRECT_STEPPING)
   #define BLOCK_BUFFER_SIZE  8
@@ -1831,6 +1917,9 @@
 // This option inserts short delays between lines of serial output.
 #define SERIAL_OVERRUN_PROTECTION
 
+// For serial echo, the number of digits after the decimal point
+//#define SERIAL_FLOAT_PRECISION 4
+
 // @section extras
 
 /**
@@ -1883,7 +1972,7 @@
  */
 #if EXTRUDERS > 1
   // Z raise distance for tool-change, as needed for some extruders
-  #define TOOLCHANGE_ZRAISE     2  // (mm)
+  #define TOOLCHANGE_ZRAISE                 2 // (mm)
   //#define TOOLCHANGE_ZRAISE_BEFORE_RETRACT  // Apply raise before swap retraction (if enabled)
   //#define TOOLCHANGE_NO_RETURN              // Never return to previous position on tool-change
   #if ENABLED(TOOLCHANGE_NO_RETURN)
@@ -2337,6 +2426,7 @@
    * CHOPPER_DEFAULT_19V
    * CHOPPER_DEFAULT_24V
    * CHOPPER_DEFAULT_36V
+   * CHOPPER_09STEP_24V   // 0.9 degree steppers (24V)
    * CHOPPER_PRUSAMK3_24V // Imported parameters from the official Prusa firmware for MK3 (24V)
    * CHOPPER_MARLIN_119   // Old defaults from Marlin v1.1.9
    *
@@ -2350,7 +2440,7 @@
    * for error conditions like overtemperature and short to ground.
    * To manage over-temp Marlin can decrease the driver current until the error condition clears.
    * Other detected conditions can be used to stop the current print.
-   * Relevant g-codes:
+   * Relevant G-codes:
    * M906 - Set or get motor current in milliamps using axis codes X, Y, Z, E. Report values if no axis codes given.
    * M911 - Report stepper driver overtemperature pre-warn condition.
    * M912 - Clear stepper driver overtemperature pre-warn condition flag.
@@ -2641,7 +2731,7 @@
    * Monitor L6470 drivers for error conditions like over temperature and over current.
    * In the case of over temperature Marlin can decrease the drive until the error condition clears.
    * Other detected conditions can be used to stop the current print.
-   * Relevant g-codes:
+   * Relevant G-codes:
    * M906 - I1/2/3/4/5  Set or get motor drive level using axis codes X, Y, Z, E. Report values if no axis codes given.
    *         I not present or I0 or I1 - X, Y, Z or E0
    *         I2 - X2, Y2, Z2 or E1
@@ -2718,11 +2808,11 @@
   //#define PHOTO_RETRACT_MM   6.5                          // (mm) E retract/recover for the photo move (M240 R S)
 
   // Canon RC-1 or homebrew digital camera trigger
-  // Data from: http://www.doc-diy.net/photo/rc-1_hacked/
+  // Data from: https://www.doc-diy.net/photo/rc-1_hacked/
   //#define PHOTOGRAPH_PIN 23
 
   // Canon Hack Development Kit
-  // http://captain-slow.dk/2014/03/09/3d-printing-timelapses/
+  // https://captain-slow.dk/2014/03/09/3d-printing-timelapses/
   //#define CHDK_PIN        4
 
   // Optional second move with delay to trigger the camera shutter
@@ -2766,7 +2856,7 @@
 #if EITHER(SPINDLE_FEATURE, LASER_FEATURE)
   #define SPINDLE_LASER_ACTIVE_HIGH     false  // Set to "true" if the on/off function is active HIGH
   #define SPINDLE_LASER_PWM             true   // Set to "true" if your controller supports setting the speed/power
-  #define SPINDLE_LASER_PWM_INVERT      true   // Set to "true" if the speed/power goes up when you want it to go slower
+  #define SPINDLE_LASER_PWM_INVERT      false  // Set to "true" if the speed/power goes up when you want it to go slower
 
   #define SPINDLE_LASER_FREQUENCY       2500   // (Hz) Spindle/laser frequency (only on supported HALs: AVR and LPC)
 
@@ -2776,13 +2866,17 @@
    *  - PERCENT (S0 - S100)
    *  - RPM     (S0 - S50000)  Best for use with a spindle
    */
-  #define CUTTER_POWER_DISPLAY PWM255
+  #define CUTTER_POWER_UNIT PWM255
 
   /**
-   * Relative mode uses relative range (SPEED_POWER_MIN to SPEED_POWER_MAX) instead of normal range (0 to SPEED_POWER_MAX)
-   * Best use with SuperPID router controller where for example S0 = 5,000 RPM and S255 = 30,000 RPM
+   * Relative Cutter Power
+   * Normally, 'M3 O<power>' sets
+   * OCR power is relative to the range SPEED_POWER_MIN...SPEED_POWER_MAX.
+   * so input powers of 0...255 correspond to SPEED_POWER_MIN...SPEED_POWER_MAX
+   * instead of normal range (0 to SPEED_POWER_MAX).
+   * Best used with (e.g.) SuperPID router controller: S0 = 5,000 RPM and S255 = 30,000 RPM
    */
-  //#define CUTTER_POWER_RELATIVE              // Set speed proportional to [SPEED_POWER_MIN...SPEED_POWER_MAX] instead of directly
+  //#define CUTTER_POWER_RELATIVE              // Set speed proportional to [SPEED_POWER_MIN...SPEED_POWER_MAX]
 
   #if ENABLED(SPINDLE_FEATURE)
     //#define SPINDLE_CHANGE_DIR               // Enable if your spindle controller can change spindle direction
@@ -2793,25 +2887,25 @@
     #define SPINDLE_LASER_POWERDOWN_DELAY 5000 // (ms) Delay to allow the spindle to stop
 
     /**
-     * M3/M4 uses the following equation to convert speed/power to PWM duty cycle
-     * Power = ((DC / 255 * 100) - SPEED_POWER_INTERCEPT)) * (1 / SPEED_POWER_SLOPE)
-     *   where PWM DC varies from 0 to 255
+     * M3/M4 Power Equation
      *
-     * Set these required parameters for your controller
+     * Each tool uses different value ranges for speed / power control.
+     * These parameters are used to convert between tool power units and PWM.
+     *
+     * Speed/Power = (PWMDC / 255 * 100 - SPEED_POWER_INTERCEPT) / SPEED_POWER_SLOPE
+     * PWMDC = (spdpwr - SPEED_POWER_MIN) / (SPEED_POWER_MAX - SPEED_POWER_MIN) / SPEED_POWER_SLOPE
      */
-    #define SPEED_POWER_SLOPE           118.4  // SPEED_POWER_SLOPE = SPEED_POWER_MAX / 255
-    #define SPEED_POWER_INTERCEPT         0
-    #define SPEED_POWER_MIN            5000
-    #define SPEED_POWER_MAX           30000    // SuperPID router controller 0 - 30,000 RPM
-    #define SPEED_POWER_STARTUP       25000    // The default value for speed power when M3 is called without arguments
+    #define SPEED_POWER_INTERCEPT         0    // (%) 0-100 i.e., Minimum power percentage
+    #define SPEED_POWER_MIN            5000    // (RPM)
+    #define SPEED_POWER_MAX           30000    // (RPM) SuperPID router controller 0 - 30,000 RPM
+    #define SPEED_POWER_STARTUP       25000    // (RPM) M3/M4 speed/power default (with no arguments)
 
   #else
 
-    #define SPEED_POWER_SLOPE             0.3922 // SPEED_POWER_SLOPE = SPEED_POWER_MAX / 255
-    #define SPEED_POWER_INTERCEPT         0
-    #define SPEED_POWER_MIN               0
-    #define SPEED_POWER_MAX             100    // 0-100%
-    #define SPEED_POWER_STARTUP          80    // The default value for speed power when M3 is called without arguments
+    #define SPEED_POWER_INTERCEPT         0    // (%) 0-100 i.e., Minimum power percentage
+    #define SPEED_POWER_MIN               0    // (%) 0-100
+    #define SPEED_POWER_MAX             100    // (%) 0-100
+    #define SPEED_POWER_STARTUP          80    // (%) M3/M4 speed/power default (with no arguments)
 
     /**
      * Enable inline laser power to be handled in the planner / stepper routines.
@@ -2860,6 +2954,9 @@
         // Turn off the laser on G0 moves with no power parameter.
         // If a power parameter is provided, use that instead.
         //#define LASER_MOVE_G0_OFF
+
+        // Turn off the laser on G28 homing.
+        //#define LASER_MOVE_G28_OFF
       #endif
 
       /**
@@ -2936,6 +3033,24 @@
 #endif
 
 /**
+ * Power Monitor
+ * Monitor voltage (V) and/or current (A), and -when possible- power (W)
+ *
+ * Read and configure with M430
+ *
+ * The current sensor feeds DC voltage (relative to the measured current) to an analog pin
+ * The voltage sensor feeds DC voltage (relative to the measured voltage) to an analog pin
+ */
+//#define POWER_MONITOR_CURRENT   // Monitor the system current
+//#define POWER_MONITOR_VOLTAGE   // Monitor the system voltage
+#if EITHER(POWER_MONITOR_CURRENT, POWER_MONITOR_VOLTAGE)
+  #define POWER_MONITOR_VOLTS_PER_AMP   0.05000   // Input voltage to the MCU analog pin per amp  - DO NOT apply more than ADC_VREF!
+  #define POWER_MONITOR_CURRENT_OFFSET -1         // Offset value for current sensors with linear function output
+  #define POWER_MONITOR_VOLTS_PER_VOLT  0.11786   // Input voltage to the MCU analog pin per volt - DO NOT apply more than ADC_VREF!
+  #define POWER_MONITOR_FIXED_VOLTAGE   13.6      // Voltage for a current sensor with no voltage sensor (for power display)
+#endif
+
+/**
  * CNC Coordinate Systems
  *
  * Enables G53 and G54-G59.3 commands to select coordinate systems
@@ -2974,9 +3089,21 @@
    * Activate to make volumetric extrusion the default method,
    * with DEFAULT_NOMINAL_FILAMENT_DIA as the default diameter.
    *
-   * M200 D0 to disable, M200 Dn to set a new diameter.
+   * M200 D0 to disable, M200 Dn to set a new diameter (and enable volumetric).
+   * M200 S0/S1 to disable/enable volumetric extrusion.
    */
   //#define VOLUMETRIC_DEFAULT_ON
+
+  //#define VOLUMETRIC_EXTRUDER_LIMIT
+  #if ENABLED(VOLUMETRIC_EXTRUDER_LIMIT)
+    /**
+     * Default volumetric extrusion limit in cubic mm per second (mm^3/sec).
+     * This factory setting applies to all extruders.
+     * Use 'M200 [T<extruder>] L<limit>' to override and 'M502' to reset.
+     * A non-zero value activates Volume-based Extrusion Limiting.
+     */
+    #define DEFAULT_VOLUMETRIC_EXTRUDER_LIMIT 0.00      // (mm^3/sec)
+  #endif
 #endif
 
 /**
@@ -3105,11 +3232,11 @@
  * I2C position encoders for closed loop control.
  * Developed by Chris Barr at Aus3D.
  *
- * Wiki: http://wiki.aus3d.com.au/Magnetic_Encoder
+ * Wiki: https://wiki.aus3d.com.au/Magnetic_Encoder
  * Github: https://github.com/Aus3D/MagneticEncoder
  *
- * Supplier: http://aus3d.com.au/magnetic-encoder-module
- * Alternative Supplier: http://reliabuild3d.com/
+ * Supplier: https://aus3d.com.au/magnetic-encoder-module
+ * Alternative Supplier: https://reliabuild3d.com/
  *
  * Reliabuild encoders have been modified to improve reliability.
  */
@@ -3319,12 +3446,15 @@
 
   /**
    * MMU Extruder Sensor
-   * Add support for Prusa IR Sensor (or other) to detect that filament reach the extruder to make loading filament more reliable
-   * If your extruder is equipped with a filament sensor located less than 38mm from the gears you can use this feature
-   * During loading to the extruder, the sensor will stop the loading command when he's triggered and make a last move to load filament to the gears
-   * If no filament is detected, MMU2 will make more loading attemps, if finally no filament is detected, the printer will enter in runout state
+   *
+   * Support for a Prusa (or other) IR Sensor to detect filament near the extruder
+   * and make loading more reliable. Suitable for an extruder equipped with a filament
+   * sensor less than 38mm from the gears.
+   *
+   * During loading the extruder will stop when the sensor is triggered, then do a last
+   * move up to the gears. If no filament is detected, the MMU2 can make some more attempts.
+   * If all attempts fail, a filament runout will be triggered.
    */
-
   //#define MMU_EXTRUDER_SENSOR
   #if ENABLED(MMU_EXTRUDER_SENSOR)
     #define MMU_LOADING_ATTEMPTS_NR 5 //max. number of attempts to load filament if first load fail
@@ -3332,10 +3462,9 @@
 
   /**
    * Using a sensor like the MMU2S
-   * This mode only work if you have a MK3S extruder with sensor sensing the extruder idler mmu2s
+   * This mode requires a MK3S extruder with a sensor at the extruder idler, like the MMU2S.
    * See https://help.prusa3d.com/en/guide/3b-mk3s-mk2-5s-extruder-upgrade_41560, step 11
    */
-
   //#define PRUSA_MMU2_S_MODE
   #if ENABLED(PRUSA_MMU2_S_MODE)
     #define MMU2_C0_RETRY   5             // Number of retries (total time = timeout*retries)
