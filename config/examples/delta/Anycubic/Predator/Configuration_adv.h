@@ -1524,6 +1524,9 @@
   //
   #define FSMC_UPSCALE 3
 
+  #define LCD_FULL_PIXEL_WIDTH 480
+  #define LCD_FULL_PIXEL_HEIGHT 320
+
   //
   // Change colors
   // some colors are predefined, see /src/lcd/dogm/u8g_dev_tft_480~.cpp Line 160
