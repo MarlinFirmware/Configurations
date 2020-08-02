@@ -1118,7 +1118,7 @@
   // Enable this option and set to HIGH if your SD cards are incorrectly detected.
   //#define SD_DETECT_STATE HIGH
 
-  #if DISABLED(POWER_LOSS_RECOVERY)
+  #if DISABLED(POWER_LOSS_RECOVERY) && DISABLED(BINARY_FILE_TRANSFER) && DISABLED(SDCARD_EEPROM_EMULATION)
     #define SDCARD_READONLY                 // Read-only SD card (to save over 2K of flash)
   #endif
 
