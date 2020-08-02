@@ -1118,7 +1118,9 @@
   // Enable this option and set to HIGH if your SD cards are incorrectly detected.
   //#define SD_DETECT_STATE HIGH
 
-  //#define SDCARD_READONLY                 // Read-only SD card (to save over 2K of flash)
+  #if DISABLED(POWER_LOSS_RECOVERY)
+    #define SDCARD_READONLY                 // Read-only SD card (to save over 2K of flash)
+  #endif
 
   #define SD_PROCEDURE_DEPTH 1              // Increase if you need more nested M32 calls
 
