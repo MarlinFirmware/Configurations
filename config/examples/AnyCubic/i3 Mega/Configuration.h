@@ -136,6 +136,8 @@
   #define MOTHERBOARD BOARD_TRIGORILLA_14
 #endif
 
+#define ANYCUBIC_I3MEGA
+
 // Name displayed in the LCD "Ready" message and Info menu
 #define CUSTOM_MACHINE_NAME "Anycubic i3"
 
