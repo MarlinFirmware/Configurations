@@ -1,5 +1,18 @@
 # Ender 3 V2
 
+## Compiling
+Copy the Configuration.h and Configuration_adv.h to the Marlin subfolder 
+
+Change default_envs in platformio.ini
+```
+default_envs = STM32F103RET6_creality
+```
+
+Execute platformio in the top level Marlin folder
+```
+pio run
+```
+
 ## Flashing Firmware
 
 The bootloader which handles flashing new firmware on this board remembers the last filename you used.
