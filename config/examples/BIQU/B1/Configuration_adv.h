@@ -467,8 +467,6 @@
 #define CHAMBER_AUTO_FAN_TEMPERATURE 30
 #define CHAMBER_AUTO_FAN_SPEED 255
 
-#define FAN1_PIN -1  // Remove unnecessary Fan Speed menu item since hotend cooling fan is always on.
-
 /**
  * Part-Cooling Fan Multiplexer
  *
