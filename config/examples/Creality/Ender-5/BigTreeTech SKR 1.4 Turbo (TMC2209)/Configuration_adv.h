@@ -21,7 +21,7 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "Creality/Ender-5/BigTreeTech SKR 1.4 Turbo"
+#define CONFIG_EXAMPLES_DIR "Creality/Ender-5/BigTreeTech SKR 1.4 Turbo (TMC2209)"
 
 /**
  * Configuration_adv.h
@@ -136,7 +136,7 @@
   #define CHAMBER_MAXTEMP            80
   #define TEMP_CHAMBER_HYSTERESIS     5   // (°C) Temperature proximity considered "close enough" to the target
   //#define CHAMBER_LIMIT_SWITCHING
-  #define HEATER_CHAMBER_PIN      P2_04   // Chamber heater on/off pin 
+  #define HEATER_CHAMBER_PIN      P2_04   // Chamber heater on/off pin
   //#define HEATER_CHAMBER_INVERTING false
 #endif
 
@@ -1020,8 +1020,8 @@
    * AZTEEG_X5_MINI_WIFI         0x58              0x5C        MCP4451
    * MIGHTYBOARD_REVE      0x2F (0x5E)                         MCP4018
    */
-  #define DIGIPOT_I2C_ADDRESS_A 0x2C  // Unshifted slave address for first DIGIPOT
-  #define DIGIPOT_I2C_ADDRESS_B 0x2D  // Unshifted slave address for second DIGIPOT
+  //#define DIGIPOT_I2C_ADDRESS_A 0x2C  // Unshifted slave address for first DIGIPOT
+  //#define DIGIPOT_I2C_ADDRESS_B 0x2D  // Unshifted slave address for second DIGIPOT
 #endif
 
 //===========================================================================
