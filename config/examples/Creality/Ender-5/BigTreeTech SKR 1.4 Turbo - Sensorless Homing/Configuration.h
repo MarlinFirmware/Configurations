@@ -136,9 +136,9 @@
 //#define BLUETOOTH
 
 // Choose the name from boards.h that matches your setup
-#ifndef MOTHERBOARD 
+#ifndef MOTHERBOARD
   #if ENABLED(SKR_14_Turbo)
-    #define MOTHERBOARD BOARD_BTT_SKR_V1_4_TURBO 
+    #define MOTHERBOARD BOARD_BTT_SKR_V1_4_TURBO
   #else
     #define MOTHERBOARD BOARD_MELZI_CREALITY
   #endif
@@ -483,7 +483,7 @@
   #define HEATER_0_MAXTEMP 300
 #elif ENABLED(E3D_Extreme)
   #define HEATER_0_MAXTEMP 320
-#else 
+#else
   #define HEATER_0_MAXTEMP 275
 #endif
 #define HEATER_1_MAXTEMP 300
