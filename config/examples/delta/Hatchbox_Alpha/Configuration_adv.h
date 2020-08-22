@@ -21,7 +21,7 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "delta/generic"
+#define CONFIG_EXAMPLES_DIR "delta/Hatchbox_Alpha"
 
 /**
  * Configuration_adv.h
@@ -1625,12 +1625,12 @@
  * Override if the automatically selected points are inadequate.
  */
 #if EITHER(AUTO_BED_LEVELING_3POINT, AUTO_BED_LEVELING_UBL)
-  //#define PROBE_PT_1_X 15
-  //#define PROBE_PT_1_Y 180
-  //#define PROBE_PT_2_X 15
-  //#define PROBE_PT_2_Y 20
-  //#define PROBE_PT_3_X 170
-  //#define PROBE_PT_3_Y 20
+  #define PROBE_PT_1_X -116
+  #define PROBE_PT_1_Y -67.5
+  #define PROBE_PT_2_X 116
+  #define PROBE_PT_2_Y -67.5
+  #define PROBE_PT_3_X 0
+  #define PROBE_PT_3_Y 135
 #endif
 
 /**
