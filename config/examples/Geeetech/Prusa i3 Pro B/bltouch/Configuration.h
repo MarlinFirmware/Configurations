@@ -21,7 +21,7 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "Geeetech/Prusa i3 Pro B/bltouch"
+#define CONFIG_EXAMPLES_DIR "Geeetech/Průša i3 Pro B/bltouch"
 
 /**
  * Configuration.h
@@ -73,7 +73,7 @@
 // @section info
 
 // Author info of this build printed to the host during boot and M115
-#define STRING_CONFIG_H_AUTHOR "(1138-4EB, Geeetech Prusa i3 Pro B BLTouch config)" // Who made the changes.
+#define STRING_CONFIG_H_AUTHOR "(1138-4EB, Geeetech Průša i3 Pro B BLTouch config)" // Who made the changes.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
 /**
@@ -179,7 +179,7 @@
 #endif
 
 /**
- * Prusa Multi-Material Unit v2
+ * Průša Multi-Material Unit v2
  *
  * Requires NOZZLE_PARK_FEATURE to park print head in case MMU unit fails.
  * Requires EXTRUDERS = 5
@@ -375,7 +375,7 @@
  *     4 : 10k thermistor !! do not use it for a hotend. It gives bad resolution at high temp. !!
  *     5 : 100K thermistor - ATC Semitec 104GT-2/104NT-4-R025H42G (Used in ParCan, J-Head, and E3D) (4.7k pullup)
  *   501 : 100K Zonestar (Tronxy X3A) Thermistor
- *   502 : 100K Zonestar Thermistor used by hot bed in Zonestar Prusa P802M
+ *   502 : 100K Zonestar Thermistor used by hot bed in Zonestar Průša P802M
  *   512 : 100k RPW-Ultra hotend thermistor (4.7k pullup)
  *     6 : 100k EPCOS - Not as accurate as table 1 (created using a fluke thermocouple) (4.7k pullup)
  *     7 : 100k Honeywell thermistor 135-104LAG-J01 (4.7k pullup)
@@ -551,7 +551,7 @@
   //#define MIN_BED_POWER 0
   //#define PID_BED_DEBUG // Sends debug data to the serial port.
 
-  //12v (120 watt?) MK2a PCB Heatbed into 4mm borosilicate (Geeetech Prusa i3 Pro, Pro/B/C/X)
+  //12v (120 watt?) MK2a PCB Heatbed into 4mm borosilicate (Geeetech Průša i3 Pro, Pro/B/C/X)
   #define DEFAULT_bedKp 234.88
   #define DEFAULT_bedKi 42.79
   #define DEFAULT_bedKd 322.28
@@ -1741,9 +1741,9 @@
 #define DISPLAY_CHARSET_HD44780 JAPANESE
 
 /**
- * Info Screen Style (0:Classic, 1:Prusa)
+ * Info Screen Style (0:Classic, 1:Průša)
  *
- * :[0:'Classic', 1:'Prusa']
+ * :[0:'Classic', 1:'Průša']
  */
 #define LCD_INFO_SCREEN_STYLE 0
 

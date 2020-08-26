@@ -1,4 +1,4 @@
-These are example configurations for the low-cost [Acrylic Prusa I3 pro B 3D Printer DIY kit](http://www.geeetech.com/acrylic-geeetech-prusa-i3-pro-b-3d-printer-diy-kit-p-917.html) and the [3DTouch auto bed leveling sensor](http://www.geeetech.com/geeetech-3dtouch-auto-bed-leveling-sensor-for-3d-printer-p-1010.html) based on:
+These are example configurations for the low-cost [Acrylic Průša I3 pro B 3D Printer DIY kit](http://www.geeetech.com/acrylic-geeetech-prusa-i3-pro-b-3d-printer-diy-kit-p-917.html) and the [3DTouch auto bed leveling sensor](http://www.geeetech.com/geeetech-3dtouch-auto-bed-leveling-sensor-for-3d-printer-p-1010.html) based on:
 
 - `../GT2560/`
 - [Marlin 1.1.4 With 3DTouch / BLTouch for i3 Pro B](https://www.geeetech.com/forum/viewtopic.php?t=19846)
