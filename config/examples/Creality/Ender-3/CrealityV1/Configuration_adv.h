@@ -1133,9 +1133,6 @@
   // Enable this option and set to HIGH if your SD cards are incorrectly detected.
   //#define SD_DETECT_STATE HIGH
 
-  #if NONE(POWER_LOSS_RECOVERY, BINARY_FILE_TRANSFER, SDCARD_EEPROM_EMULATION)
-    #define SDCARD_READONLY                 // Read-only SD card (to save over 2K of flash)
-  #endif
 
   #define SD_PROCEDURE_DEPTH 1              // Increase if you need more nested M32 calls
 
@@ -1308,6 +1305,16 @@
    */
   //#define SDCARD_CONNECTION LCD
 
+  /**
+   * This check automatically enables SD drive readonly mode if no other features
+   * require write support.
+   * Comment out this section if errors occur when using another motherboard
+   * that relies on SDCARD_EEPROM_EMULATION
+   */
+  #if NONE(POWER_LOSS_RECOVERY, BINARY_FILE_TRANSFER, SDCARD_EEPROM_EMULATION)
+    #define SDCARD_READONLY                 // Read-only SD card (to save over 2K of flash)
+  #endif
+  
 #endif // SDSUPPORT
 
 /**
