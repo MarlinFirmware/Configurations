@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "CTC/i3 2560 Rev A/no probe"
-
 /**
  * Configuration.h
  *

@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "Weistek/wt150"
-
 /**
  * Configuration_adv.h
  *

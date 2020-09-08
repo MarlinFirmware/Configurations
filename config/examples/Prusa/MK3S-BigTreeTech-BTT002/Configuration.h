@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "Prusa/MK3S-BigTreeTech-BTT002"
-
 /**
  * Configuration.h
  *
@@ -532,9 +530,9 @@
   //#define PID_BED_DEBUG // Sends debug data to the serial port.
 
   // BTT002 MK3S
-  #define  DEFAULT_bedKp 126.13
-  #define  DEFAULT_bedKi 4.30
-  #define  DEFAULT_bedKd 924.76
+  #define DEFAULT_bedKp 126.13
+  #define DEFAULT_bedKi 4.30
+  #define DEFAULT_bedKd 924.76
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #endif // PIDTEMPBED

@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "JGAurora/A3"
-
 /**
  * Configuration.h
  *

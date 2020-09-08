@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "Tevo/Tornado/V1 (MKS Base)"
-
 /**
  * Configuration_adv.h
  *

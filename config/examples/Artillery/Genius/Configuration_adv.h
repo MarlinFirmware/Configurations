@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "Artillery/Genius"
-
 /**
  * Configuration_adv.h
  *

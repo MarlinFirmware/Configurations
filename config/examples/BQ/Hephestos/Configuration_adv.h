@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "BQ/Hephestos"
-
 /**
  * Configuration_adv.h
  *

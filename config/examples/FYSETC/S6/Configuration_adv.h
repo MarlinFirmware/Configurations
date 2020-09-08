@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "FYSETC/S6"
-
 /**
  * Configuration_adv.h
  *

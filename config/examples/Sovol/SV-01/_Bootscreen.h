@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "Sovol/SV-01"
-
 /**
  * Custom Boot Screen bitmap
  *
@@ -30,7 +28,7 @@
  * and enable SHOW_CUSTOM_BOOTSCREEN in Configuration.h.
  *
  * Use the Marlin Bitmap Converter to make your own:
- * http://marlinfw.org/tools/u8glib/converter.html
+ * https://marlinfw.org/tools/u8glib/converter.html
  */
 #define CUSTOM_BOOTSCREEN_BMPWIDTH  112
 

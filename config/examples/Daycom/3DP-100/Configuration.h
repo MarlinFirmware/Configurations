@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "Daycom/3DP-100"
-
 /**
  * Configuration.h
  *

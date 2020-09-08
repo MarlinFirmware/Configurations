@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "MBot/Cube"
-
 /**
  * Configuration_adv.h
  *

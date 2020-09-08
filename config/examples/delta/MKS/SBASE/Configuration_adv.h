@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "delta/MKS/SBASE"
-
 /**
  * Configuration_adv.h
  *

@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "Geeetech/MeCreator2"
-
 /**
  * Configuration_adv.h
  *

@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "Tevo/Tarantula Pro"
-
 /**
  * Configuration.h
  *

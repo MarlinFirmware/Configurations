@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "EXP3D/Imprimante multifonction"
-
 /**
  * Configuration.h
  *
@@ -492,9 +490,9 @@
   // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
 
   // Ultimaker
-    #define  DEFAULT_Kp 11.21//36.59//9.29//8.34//22.2
-    #define  DEFAULT_Ki 0.44//3.02//0.6//0.34//1.08
-    #define  DEFAULT_Kd 71.37//110.92//68.17//51.75//114
+  #define DEFAULT_Kp 11.21 // 36.59  //9.29  //8.34  //22.2
+  #define DEFAULT_Ki 0.44  // 3.02   //0.6   //0.34  //1.08
+  #define DEFAULT_Kd 71.37 // 110.92 //68.17 //51.75 //114
 
   // MakerGear
   //#define DEFAULT_Kp 7.0
@@ -543,9 +541,9 @@
 
   //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   //from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
-    #define  DEFAULT_bedKp 150//10.00
-    #define  DEFAULT_bedKi 1.41//.023
-    #define  DEFAULT_bedKd 1675.16//305.4
+    #define DEFAULT_bedKp 150//10.00
+    #define DEFAULT_bedKi 1.41//.023
+    #define DEFAULT_bedKd 1675.16//305.4
 
   //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   //from pidautotune
@@ -1109,6 +1107,8 @@
 #define INVERT_E3_DIR true
 #define INVERT_E4_DIR true
 #define INVERT_E5_DIR true
+#define INVERT_E6_DIR true
+#define INVERT_E7_DIR true
 
 // @section homing
 

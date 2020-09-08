@@ -29,8 +29,6 @@
 
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "Alfawise/U20-bltouch"
-
 //
 // Status Screen Logo bitmap
 //

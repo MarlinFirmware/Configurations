@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "Formbot/T_Rex_3"
-
 /**
  * Configuration_adv.h
  *

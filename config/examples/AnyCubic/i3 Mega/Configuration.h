@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "AnyCubic/i3 Mega"
-
 //#define I3MEGA_HAS_BLTOUCH
 //#define I3MEGA_HAS_TMC2208
 
@@ -497,9 +495,9 @@
   // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
 
   // i3 Mega stock v5 hotend, 40W heater cartridge (3.6Ω @ 22°C)
-  #define  DEFAULT_Kp 15.94
-  #define  DEFAULT_Ki 1.17
-  #define  DEFAULT_Kd 54.19
+  #define DEFAULT_Kp 15.94
+  #define DEFAULT_Ki 1.17
+  #define DEFAULT_Kd 54.19
 
   // Ultimaker
   //#define DEFAULT_Kp 22.2
@@ -871,6 +869,7 @@
  * (Automatically enables USE_PROBE_FOR_Z_HOMING.)
  */
 //#define Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN
+
 // Force the use of the probe for Z-axis homing
 //#define USE_PROBE_FOR_Z_HOMING
 

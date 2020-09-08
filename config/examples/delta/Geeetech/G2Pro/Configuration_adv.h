@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "delta/Geeetech/G2Pro"
-
 /**
  * Configuration_adv.h
  *

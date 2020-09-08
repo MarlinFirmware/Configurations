@@ -27,7 +27,7 @@
  * and enable CUSTOM_STATUS_SCREEN_IMAGE in Configuration.h.
  *
  * Use the Marlin Bitmap Converter to make your own:
- * http://marlinfw.org/tools/u8glib/converter.html
+ * https://marlinfw.org/tools/u8glib/converter.html
  */
 
 //

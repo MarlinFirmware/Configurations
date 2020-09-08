@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "AnyCubic/Mega Zero"
-
 //#define CUSTOM_BOOTSCREEN_TIMEOUT 2000
 #define CUSTOM_BOOTSCREEN_INVERTED
 

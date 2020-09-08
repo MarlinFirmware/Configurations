@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "delta/FLSUN/QQ-S"
-
 /**
  * Configuration.h
  *
@@ -1846,7 +1844,6 @@
  *
  */
 #define SDSUPPORT
-#define SDIO_SUPPORT
 
 /**
  * SD CARD: SPI SPEED

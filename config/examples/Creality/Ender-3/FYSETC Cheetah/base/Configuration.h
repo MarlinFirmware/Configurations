@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "Creality/Ender-3/FYSETC Cheetah/base"
-
 /**
  * Configuration.h
  *
@@ -492,9 +490,9 @@
   // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
 
   //PID for Makerlab J-head
-  #define  DEFAULT_Kp 21.73
-  #define  DEFAULT_Ki 1.54
-  #define  DEFAULT_Kd 76.55
+  #define DEFAULT_Kp 21.73
+  #define DEFAULT_Ki 1.54
+  #define DEFAULT_Kd 76.55
 
   // Ultimaker
   //#define DEFAULT_Kp 22.2

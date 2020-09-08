@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "Dagoma/Disco Ultimate"
-
 /**
  * Configuration_adv.h
  *

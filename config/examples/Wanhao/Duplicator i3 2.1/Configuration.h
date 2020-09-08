@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "Wanhao/Duplicator i3 2.1"
-
 /**
  * Configuration.h
  *
@@ -553,9 +551,9 @@
   //#define DEFAULT_bedKd 305.4
 
   // Wanhao Duplicator i3
-  #define  DEFAULT_bedKp 249.52
-  #define  DEFAULT_bedKi 47.89
-  #define  DEFAULT_bedKd 325.03
+  #define DEFAULT_bedKp 249.52
+  #define DEFAULT_bedKi 47.89
+  #define DEFAULT_bedKd 325.03
 
   //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   //from pidautotune

@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "delta/kossel_pro"
-
 /**
  * Example configuration file for OpenBeam Kossel Pro
  */

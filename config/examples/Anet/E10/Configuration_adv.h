@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "Anet/E10"
-
 /**
  * Configuration_adv.h
  *

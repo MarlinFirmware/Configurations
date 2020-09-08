@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "FolgerTech/i3-2020"
-
 /**
  * Configuration_adv.h
  *

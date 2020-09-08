@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "Geeetech/PI3A PRO"
-
 /**
  * Configuration.h
  *
@@ -490,10 +488,9 @@
                                   // Set/get with gcode: M301 E[extruder number, 0-2]
 
   // Geeetech MK8 Extruder
-    #define  DEFAULT_Kp 22.2
-    #define  DEFAULT_Ki 1.08
-    #define  DEFAULT_Kd 114
-
+  #define DEFAULT_Kp 22.2
+  #define DEFAULT_Ki 1.08
+  #define DEFAULT_Kd 114
 
   // CTC MK8 Extruder
   //#define DEFAULT_Kp 19.86
@@ -552,10 +549,10 @@
   //#define MIN_BED_POWER 0
   //#define PID_BED_DEBUG // Sends debug data to the serial port.
 
-  //12v (120 watt?) MK2a PCB Heatbed into 4mm borosilicate (Geeetech Průša i3 Pro, Pro/B/C/X)
-    #define  DEFAULT_bedKp 10.00
-    #define  DEFAULT_bedKi .023
-    #define  DEFAULT_bedKd 305.4
+  // 12v (120 watt?) MK2a PCB Heatbed into 4mm borosilicate (Geeetech Průša i3 Pro, Pro/B/C/X)
+  #define DEFAULT_bedKp 10.00
+  #define DEFAULT_bedKi .023
+  #define DEFAULT_bedKd 305.4
 
   //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   //from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
@@ -1130,6 +1127,8 @@
 #define INVERT_E3_DIR true
 #define INVERT_E4_DIR true
 #define INVERT_E5_DIR true
+#define INVERT_E6_DIR true
+#define INVERT_E7_DIR true
 
 // @section homing
 

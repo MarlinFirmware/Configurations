@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "Formbot/Raptor"
-
 /**
  * Configuration.h
  *
@@ -540,14 +538,15 @@
 
   // Ultimaker
   #if ENABLED(HotendAllMetal)
-    #define  DEFAULT_Kp 21.9
-    #define  DEFAULT_Ki 1.5
-    #define  DEFAULT_Kd 79.88
+    #define DEFAULT_Kp 21.9
+    #define DEFAULT_Ki 1.5
+    #define DEFAULT_Kd 79.88
   #else
-    #define  DEFAULT_Kp 22.2
-    #define  DEFAULT_Ki 1.08
-    #define  DEFAULT_Kd 114
+    #define DEFAULT_Kp 22.2
+    #define DEFAULT_Ki 1.08
+    #define DEFAULT_Kd 114
   #endif
+
   // MakerGear
   //#define DEFAULT_Kp 7.0
   //#define DEFAULT_Ki 0.1
@@ -595,9 +594,9 @@
 
   //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   //from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
-  #define  DEFAULT_bedKp 100.0
-  #define  DEFAULT_bedKi 15.0
-  #define  DEFAULT_bedKd 200.0
+  #define DEFAULT_bedKp 100.0
+  #define DEFAULT_bedKi 15.0
+  #define DEFAULT_bedKd 200.0
 
   //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   //from pidautotune

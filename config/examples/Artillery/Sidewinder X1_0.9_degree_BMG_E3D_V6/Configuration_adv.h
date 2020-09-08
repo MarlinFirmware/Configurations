@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "Artillery/Sidewinder X1_0.9_degree_BMG_E3D_V6"
-
 /**
  * Configuration_adv.h
  *

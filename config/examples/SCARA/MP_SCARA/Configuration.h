@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "SCARA/MP_SCARA"
-
 /**
  * Configuration.h
  *

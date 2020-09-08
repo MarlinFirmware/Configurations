@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "3DFabXYZ/Migbot"
-
 /**
  * Configuration_adv.h
  *

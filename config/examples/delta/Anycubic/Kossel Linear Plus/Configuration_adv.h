@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "delta/Anycubic/Kossel Linear Plus"
-
 /**
  * Configuration_adv.h
  *

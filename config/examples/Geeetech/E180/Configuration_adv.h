@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "Geeetech/E180"
-
 /**
  * Configuration_adv.h
  *

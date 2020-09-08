@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "Mks/Robin"
-
 /**
  * Configuration_adv.h
  *

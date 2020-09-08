@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "Tevo/Tornado/V2 (MKS GEN-L)"
-
 /**
  * Configuration_adv.h
  *

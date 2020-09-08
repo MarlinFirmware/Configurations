@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "HMS434"
-
 /**
  * Configuration.h
  *
@@ -425,6 +423,7 @@
 #define TEMP_SENSOR_4       0
 #define TEMP_SENSOR_5       0
 #define TEMP_SENSOR_BED     331
+#define TEMP_SENSOR_PROBE 0
 #define TEMP_SENSOR_CHAMBER 331
 
 // Dummy thermistor constant temperature readings, for use with 998 and 999

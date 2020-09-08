@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "Zonestar/P802QR2/BigTreeTech SKR 1.4 Turbo (A4988)"
-
 // See https://www.thingiverse.com/thing:4562533
 
 /**

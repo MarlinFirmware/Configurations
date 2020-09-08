@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "delta/Hatchbox_Alpha"
-
 /**
  * Configuration for Hatchbox Alpha with E3D v6 extruder
  * http://hatchbox3d.com/Guides/HATCHBOX%20Alpha%203D%20Printer%20User%20Manual.pdf

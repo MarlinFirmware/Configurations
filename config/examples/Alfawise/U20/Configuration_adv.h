@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "Alfawise/U20"
-
 /**
  * Configuration_adv.h
  *

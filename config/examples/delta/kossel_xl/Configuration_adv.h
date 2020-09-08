@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "delta/kossel_xl"
-
 /**
  * Configuration_adv.h
  *

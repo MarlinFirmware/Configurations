@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "MakerFarm/Pegasus_12"
-
 /**
  * Configuration.h
  *
@@ -542,22 +540,23 @@
   //#define PID_BED_DEBUG // Sends debug data to the serial port.
 
   //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
-//from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
-//    #define  DEFAULT_bedKp 10.00
-//    #define  DEFAULT_bedKi .023
-//    #define  DEFAULT_bedKd 305.4
+  //from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
+  //#define DEFAULT_bedKp 10.00
+  //#define DEFAULT_bedKi .023
+  //#define DEFAULT_bedKd 305.4
 
-//120v 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
-//from pidautotune
-//    #define  DEFAULT_bedKp 97.1
-//    #define  DEFAULT_bedKi 1.41
-//    #define  DEFAULT_bedKd 1675.16
+  //120v 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
+  //from pidautotune
+  //#define DEFAULT_bedKp 97.1
+  //#define DEFAULT_bedKi 1.41
+  //#define DEFAULT_bedKd 1675.16
 
-//12v 8" Maker Farm Heat bed with 4mm Glass
-//from pidautotune
-    #define  DEFAULT_bedKp 644.48
-    #define  DEFAULT_bedKi 117.07
-    #define  DEFAULT_bedKd 886.96
+  //12v 8" Maker Farm Heat bed with 4mm Glass
+  //from pidautotune
+  #define DEFAULT_bedKp 644.48
+  #define DEFAULT_bedKi 117.07
+  #define DEFAULT_bedKd 886.96
+
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #endif // PIDTEMPBED
 
@@ -1114,6 +1113,8 @@
 #define INVERT_E3_DIR true
 #define INVERT_E4_DIR true
 #define INVERT_E5_DIR true
+#define INVERT_E6_DIR true
+#define INVERT_E7_DIR true
 
 // @section homing
 

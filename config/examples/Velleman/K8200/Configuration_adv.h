@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "Velleman/K8200"
-
 /**
  * Configuration_adv.h
  *

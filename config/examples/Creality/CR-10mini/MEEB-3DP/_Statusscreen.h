@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "Creality/CR-10mini/MEEB-3DP"
-
 #define STATUS_LOGO_X            0
 #define STATUS_LOGO_Y            0
 #define STATUS_LOGO_WIDTH       39

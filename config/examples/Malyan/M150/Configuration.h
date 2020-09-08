@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "Malyan/M150"
-
 /**
  * Maylan M150 Configuration
  * Non-Automatic Bed Level config by default

@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "TheBorg"
-
 /**
  * Configuration_adv.h
  *

@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "AlephObjects/TAZ4"
-
 /**
  * Configuration_adv.h
  *

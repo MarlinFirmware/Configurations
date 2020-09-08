@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "Geeetech/Me_ducer"
-
 /**
  * Configuration.h
  *
@@ -427,6 +425,7 @@
 #define TEMP_SENSOR_6 0
 #define TEMP_SENSOR_7 0
 #define TEMP_SENSOR_BED 1
+#define TEMP_SENSOR_PROBE 0
 #define TEMP_SENSOR_CHAMBER 0
 
 // Dummy thermistor constant temperature readings, for use with 998 and 999
@@ -491,9 +490,9 @@
   // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
 
   // Ultimaker
-    #define  DEFAULT_Kp 19.86
-    #define  DEFAULT_Ki 1.00
-    #define  DEFAULT_Kd 98.93
+  #define DEFAULT_Kp 19.86
+  #define DEFAULT_Ki 1.00
+  #define DEFAULT_Kd 98.93
 
   // MakerGear
   //#define DEFAULT_Kp 7.0
@@ -1108,6 +1107,8 @@
 #define INVERT_E3_DIR true
 #define INVERT_E4_DIR true
 #define INVERT_E5_DIR true
+#define INVERT_E6_DIR true
+#define INVERT_E7_DIR true
 
 // @section homing
 

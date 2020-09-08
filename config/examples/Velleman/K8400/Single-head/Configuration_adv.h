@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "Velleman/K8400/Single-head"
-
 /**
  * Configuration_adv.h
  *

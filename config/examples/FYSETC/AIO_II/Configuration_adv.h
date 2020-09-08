@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "FYSETC/AIO_II"
-
 /**
  * Configuration_adv.h
  *

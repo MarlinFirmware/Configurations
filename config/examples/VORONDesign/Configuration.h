@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "VORONDesign"
-
 /**
  * Configuration.h
  *
@@ -507,8 +505,8 @@
   //#define DEFAULT_Kd 440
 
   // from VORON
-  #define  DEFAULT_Kp 23.72
-  #define  DEFAULT_Ki 1.56
+  #define DEFAULT_Kp 23.72
+  #define DEFAULT_Ki 1.56
   #define DEFAULT_Kd 90.34
 
 #endif // PIDTEMP
@@ -558,11 +556,12 @@
   //#define DEFAULT_bedKi 1.41
   //#define DEFAULT_bedKd 1675.16
 
-  // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
   // Results from VORON
   #define DEFAULT_bedKp 150.52
   #define DEFAULT_bedKi  12.25
   #define DEFAULT_bedKd 462.40
+
+  // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #endif // PIDTEMPBED
 
 #if EITHER(PIDTEMP, PIDTEMPBED)

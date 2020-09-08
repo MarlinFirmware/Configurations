@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "AliExpress/CL-260"
-
 /**
  * Configuration.h
  *

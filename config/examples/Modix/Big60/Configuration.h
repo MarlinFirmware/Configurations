@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "Modix/Big60"
-
 /**
  * Configuration.h
  *

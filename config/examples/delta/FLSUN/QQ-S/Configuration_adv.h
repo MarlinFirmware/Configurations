@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "delta/FLSUN/QQ-S"
-
 /**
  * Configuration_adv.h
  *

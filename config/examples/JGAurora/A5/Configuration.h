@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "JGAurora/A5"
-
 /**
  * JGAurora A5 configuration
  * Authors: Telli Mantelli, Kris Waclawski, Michael Gilardi & Samuel Pinches
@@ -432,6 +430,7 @@
 #define TEMP_SENSOR_6 0
 #define TEMP_SENSOR_7 0
 #define TEMP_SENSOR_BED 1 // measured to be satisfactorily accurate on center of bed within +/- 1 degC.
+#define TEMP_SENSOR_PROBE 0
 #define TEMP_SENSOR_CHAMBER 0
 
 // Dummy thermistor constant temperature readings, for use with 998 and 999

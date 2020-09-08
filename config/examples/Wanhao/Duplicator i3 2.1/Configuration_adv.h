@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "Wanhao/Duplicator i3 2.1"
-
 /**
  * Configuration_adv.h
  *
