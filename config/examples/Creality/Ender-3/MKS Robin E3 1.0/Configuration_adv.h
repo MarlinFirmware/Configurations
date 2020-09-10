@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "Creality/Ender-3/MKS Robin E3 1.0"
-
 /**
  * Configuration_adv.h
  *
