@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "delta/Geeetech/G2"
-
 /**
  * Configuration_adv.h
  *
@@ -1762,13 +1760,13 @@
 //
 //#define ARC_SUPPORT               // Disable this feature to save ~3226 bytes
 #if ENABLED(ARC_SUPPORT)
-  #define MM_PER_ARC_SEGMENT  1   // Length of each arc segment
+  #define MM_PER_ARC_SEGMENT      1 // (mm) Length (or minimum length) of each arc segment
   //#define ARC_SEGMENTS_PER_R    1 // Max segment length, MM_PER = Min
-  #define MIN_ARC_SEGMENTS   24   // Minimum number of segments in a complete circle
+  #define MIN_ARC_SEGMENTS       24 // Minimum number of segments in a complete circle
   //#define ARC_SEGMENTS_PER_SEC 50 // Use feedrate to choose segment length (with MM_PER_ARC_SEGMENT as the minimum)
-  #define N_ARC_CORRECTION   25   // Number of interpolated segments between corrections
-  //#define ARC_P_CIRCLES         // Enable the 'P' parameter to specify complete circles
-  //#define CNC_WORKSPACE_PLANES  // Allow G2/G3 to operate in XY, ZX, or YZ planes
+  #define N_ARC_CORRECTION       25 // Number of interpolated segments between corrections
+  //#define ARC_P_CIRCLES           // Enable the 'P' parameter to specify complete circles
+  //#define CNC_WORKSPACE_PLANES    // Allow G2/G3 to operate in XY, ZX, or YZ planes
 #endif
 
 // Support for G5 with XYZE destination and IJPQ offsets. Requires ~2666 bytes.
@@ -2491,7 +2489,7 @@
   #define E7_HYBRID_THRESHOLD     30
 
   /**
-   * Use StallGuard2 to home / probe X, Y, Z.
+   * Use StallGuard to home / probe X, Y, Z.
    *
    * TMC2130, TMC2160, TMC2209, TMC2660, TMC5130, and TMC5160 only
    * Connect the stepper driver's DIAG1 pin to the X/Y endstop pin.
@@ -2512,6 +2510,8 @@
    *
    * IMPROVE_HOMING_RELIABILITY tunes acceleration and jerk when
    * homing and adds a guard period for endstop triggering.
+   *
+   * Comment *_STALL_SENSITIVITY to disable sensorless homing for that axis.
    */
   //#define SENSORLESS_HOMING // StallGuard capable drivers only
 

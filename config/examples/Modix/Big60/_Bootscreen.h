@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "Modix/Big60"
-
 #define CUSTOM_BOOTSCREEN_BMPWIDTH  128
 
 const unsigned char custom_start_bmp[] PROGMEM = {

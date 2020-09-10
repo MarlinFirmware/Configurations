@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "Anet/A6"
-
 /**
  * Custom Status Screen bitmap
  *

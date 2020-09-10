@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "Tevo/Tornado/V1 (MKS Base)"
-
 /**
  * Configuration.h
  *
@@ -492,9 +490,9 @@
   // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
 
   // Tevo Tornado V1
-  #define  DEFAULT_Kp 20.37
-  #define  DEFAULT_Ki 1.50
-  #define  DEFAULT_Kd 69.26
+  #define DEFAULT_Kp 20.37
+  #define DEFAULT_Ki 1.50
+  #define DEFAULT_Kd 69.26
 
   // Ultimaker
   //#define DEFAULT_Kp 22.2
@@ -548,9 +546,9 @@
 
   //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   //from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
-  #define  DEFAULT_bedKp 128.82
-  #define  DEFAULT_bedKi 16.91
-  #define  DEFAULT_bedKd 245.36
+  #define DEFAULT_bedKp 128.82
+  #define DEFAULT_bedKi 16.91
+  #define DEFAULT_bedKd 245.36
 
   //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   //from pidautotune
@@ -615,7 +613,7 @@
 
 // @section machine
 
-// Uncomment one of these options to enable CoreXY, CoreXZ, or CoreYZ kinematics
+// Enable one of the options below for CoreXY, CoreXZ, or CoreYZ kinematics,
 // either in the usual order or reversed
 //#define COREXY
 //#define COREXZ
@@ -623,6 +621,7 @@
 //#define COREYX
 //#define COREZX
 //#define COREZY
+//#define MARKFORGED_XY  // MarkForged. See https://reprap.org/forum/read.php?152,504042
 
 //===========================================================================
 //============================== Endstop Settings ===========================

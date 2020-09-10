@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "Cartesio"
-
 /**
  * Configuration.h
  *
@@ -542,15 +540,15 @@
   //#define MIN_BED_POWER 0
   //#define PID_BED_DEBUG // Sends debug data to the serial port.
 
-    //24V 500W silicone heater on to 4mm glass CartesioW
-    #define DEFAULT_bedKp 390
-    #define DEFAULT_bedKi 70
-    #define DEFAULT_bedKd 546
+  //24V 500W silicone heater on to 4mm glass CartesioW
+  #define DEFAULT_bedKp 390
+  #define DEFAULT_bedKi 70
+  #define DEFAULT_bedKd 546
 
-    //24V 250W silicone heater on to 4mm glass CartesioM
-    //#define DEFAULT_bedKp 303
-    //#define DEFAULT_bedKi 42
-    //#define DEFAULT_bedKd 539
+  //24V 250W silicone heater on to 4mm glass CartesioM
+  //#define DEFAULT_bedKp 303
+  //#define DEFAULT_bedKi 42
+  //#define DEFAULT_bedKd 539
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #endif // PIDTEMPBED
@@ -609,7 +607,7 @@
 
 // @section machine
 
-// Uncomment one of these options to enable CoreXY, CoreXZ, or CoreYZ kinematics
+// Enable one of the options below for CoreXY, CoreXZ, or CoreYZ kinematics,
 // either in the usual order or reversed
 //#define COREXY
 //#define COREXZ
@@ -617,6 +615,7 @@
 //#define COREYX
 //#define COREZX
 //#define COREZY
+//#define MARKFORGED_XY  // MarkForged. See https://reprap.org/forum/read.php?152,504042
 
 //===========================================================================
 //============================== Endstop Settings ===========================

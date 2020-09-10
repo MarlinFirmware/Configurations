@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "Tevo/Michelangelo"
-
 /**
  * Made with Marlin Bitmap Converter
  * https://marlinfw.org/tools/u8glib/converter.html

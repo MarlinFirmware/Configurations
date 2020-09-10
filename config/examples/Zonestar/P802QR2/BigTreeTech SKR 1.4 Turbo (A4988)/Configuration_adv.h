@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "Zonestar/P802QR2/BigTreeTech SKR 1.4 Turbo (A4988)"
-
 /**
  * Configuration_adv.h
  *
@@ -1904,7 +1902,7 @@
  * Currently handles M108, M112, M410, M876
  * NOTE: Not yet implemented for all platforms.
  */
-//#define EMERGENCY_PARSER
+#define EMERGENCY_PARSER
 
 // Bad Serial-connections can miss a received command by sending an 'ok'
 // Therefore some clients abort after 30 seconds in a timeout.
@@ -2483,7 +2481,7 @@
   #define E7_HYBRID_THRESHOLD     30
 
   /**
-   * Use StallGuard2 to home / probe X, Y, Z.
+   * Use StallGuard to home / probe X, Y, Z.
    *
    * TMC2130, TMC2160, TMC2209, TMC2660, TMC5130, and TMC5160 only
    * Connect the stepper driver's DIAG1 pin to the X/Y endstop pin.
@@ -2504,6 +2502,8 @@
    *
    * IMPROVE_HOMING_RELIABILITY tunes acceleration and jerk when
    * homing and adds a guard period for endstop triggering.
+   *
+   * Comment *_STALL_SENSITIVITY to disable sensorless homing for that axis.
    */
   //#define SENSORLESS_HOMING // StallGuard capable drivers only
 

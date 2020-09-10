@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "Velleman/K8200"
-
 /**
  * Configuration.h
  *
@@ -577,13 +575,13 @@
   //#define DEFAULT_bedKi 1.41
   //#define DEFAULT_bedKd 1675.16
 
-  // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
+  //Vellemann K8200 PCB heatbed with standard PCU at 60 degreesC - calculated with PID Autotune and tested
+  //from pidautotune
+  #define DEFAULT_bedKp 341.88
+  #define DEFAULT_bedKi 25.32
+  #define DEFAULT_bedKd 1153.89
 
-    // Vellemann K8200 PCB heatbed with standard PCU at 60 degreesC - calculated with PID Autotune and tested
-    // from pidautotune
-    #define DEFAULT_bedKp 341.88
-    #define DEFAULT_bedKi 25.32
-    #define DEFAULT_bedKd 1153.89
+  // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #endif // PIDTEMPBED
 
 #if EITHER(PIDTEMP, PIDTEMPBED)
@@ -640,7 +638,7 @@
 
 // @section machine
 
-// Uncomment one of these options to enable CoreXY, CoreXZ, or CoreYZ kinematics
+// Enable one of the options below for CoreXY, CoreXZ, or CoreYZ kinematics,
 // either in the usual order or reversed
 //#define COREXY
 //#define COREXZ
@@ -648,6 +646,7 @@
 //#define COREYX
 //#define COREZX
 //#define COREZY
+//#define MARKFORGED_XY  // MarkForged. See https://reprap.org/forum/read.php?152,504042
 
 //===========================================================================
 //============================== Endstop Settings ===========================
@@ -1137,6 +1136,8 @@
 #define INVERT_E3_DIR true
 #define INVERT_E4_DIR true
 #define INVERT_E5_DIR true
+#define INVERT_E6_DIR true
+#define INVERT_E7_DIR true
 
 // @section homing
 

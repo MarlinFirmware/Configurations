@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "delta/Hatchbox_Alpha"
-
 /**
  * Configuration for Hatchbox Alpha with E3D v6 extruder
  * http://hatchbox3d.com/Guides/HATCHBOX%20Alpha%203D%20Printer%20User%20Manual.pdf
@@ -625,7 +623,7 @@
 
 // @section machine
 
-// Uncomment one of these options to enable CoreXY, CoreXZ, or CoreYZ kinematics
+// Enable one of the options below for CoreXY, CoreXZ, or CoreYZ kinematics,
 // either in the usual order or reversed
 //#define COREXY
 //#define COREXZ
@@ -633,6 +631,7 @@
 //#define COREYX
 //#define COREZX
 //#define COREZY
+//#define MARKFORGED_XY  // MarkForged. See https://reprap.org/forum/read.php?152,504042
 
 //===========================================================================
 //============================== Delta Settings =============================

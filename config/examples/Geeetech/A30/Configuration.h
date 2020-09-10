@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "Geeetech/A30"
-
 /**
  * Configuration.h
  *
@@ -493,9 +491,9 @@
 
   //FIND YOUR OWN: "M303 C8 S200 U" HOTEND PID
 
-  #define  DEFAULT_Kp 45.80
-  #define  DEFAULT_Ki 3.61
-  #define  DEFAULT_Kd 145.39
+  #define DEFAULT_Kp 45.80
+  #define DEFAULT_Ki 3.61
+  #define DEFAULT_Kd 145.39
 
 #endif // PIDTEMP
 
@@ -532,9 +530,9 @@
   //#define MIN_BED_POWER 0
   //#define PID_BED_DEBUG // Sends debug data to the serial port.
 
-  #define  DEFAULT_bedKp 369.610
-  #define  DEFAULT_bedKi 54.132
-  #define  DEFAULT_bedKd 602.870
+  #define DEFAULT_bedKp 369.610
+  #define DEFAULT_bedKi 54.132
+  #define DEFAULT_bedKd 602.870
 
   // FIND YOUR OWN: "M303 E-1 C8 S60"
 #endif // PIDTEMPBED
@@ -593,7 +591,7 @@
 
 // @section machine
 
-// Uncomment one of these options to enable CoreXY, CoreXZ, or CoreYZ kinematics
+// Enable one of the options below for CoreXY, CoreXZ, or CoreYZ kinematics,
 // either in the usual order or reversed
 //#define COREXY
 //#define COREXZ
@@ -601,6 +599,7 @@
 //#define COREYX
 //#define COREZX
 //#define COREZY
+//#define MARKFORGED_XY  // MarkForged. See https://reprap.org/forum/read.php?152,504042
 
 //===========================================================================
 //============================== Endstop Settings ===========================
@@ -1091,6 +1090,8 @@
 #define INVERT_E3_DIR true
 #define INVERT_E4_DIR true
 #define INVERT_E5_DIR true
+#define INVERT_E6_DIR true
+#define INVERT_E7_DIR true
 
 // @section homing
 

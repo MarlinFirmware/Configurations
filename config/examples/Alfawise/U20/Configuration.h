@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "Alfawise/U20"
-
 /**
  * Configuration.h
  *
@@ -161,17 +159,17 @@
 // Name displayed in the LCD "Ready" message and Info menu
 //#define CUSTOM_MACHINE_NAME "3D Printer"
 #ifdef U20
-#define CUSTOM_MACHINE_NAME "Alfawise U20"
+  #define CUSTOM_MACHINE_NAME "Alfawise U20"
 #elif defined(U30)
-#define CUSTOM_MACHINE_NAME "Alfawise U30"
+  #define CUSTOM_MACHINE_NAME "Alfawise U30"
 #elif defined(U20_PLUS)
-#define CUSTOM_MACHINE_NAME "Alfawise U20+"
+  #define CUSTOM_MACHINE_NAME "Alfawise U20+"
 #elif defined(LK1)
-#define CUSTOM_MACHINE_NAME "Longer3D LK1"
+  #define CUSTOM_MACHINE_NAME "Longer3D LK1"
 #elif defined(LK2)
-#define CUSTOM_MACHINE_NAME "Longer3D LK2"
+  #define CUSTOM_MACHINE_NAME "Longer3D LK2"
 #elif defined(LK4)
-#define CUSTOM_MACHINE_NAME "Longer3D LK4"
+  #define CUSTOM_MACHINE_NAME "Longer3D LK4"
 #endif
 
 // Printer's unique ID, used by some programs to differentiate between machines.
@@ -595,28 +593,28 @@
   //#define DEFAULT_bedKi 1.41
   //#define DEFAULT_bedKd 1675.16
 
-#if defined(U30) || defined(LK2) || defined(LK4)
-  //From M303 command for Alfawise U30 :
-  #define DEFAULT_bedKp 338.46
-  #define DEFAULT_bedKi 63.96
-  #define DEFAULT_bedKd 447.78
-#endif
+  #if defined(U30) || defined(LK2) || defined(LK4)
+    // From M303 command for Alfawise U30
+    #define DEFAULT_bedKp 338.46
+    #define DEFAULT_bedKi 63.96
+    #define DEFAULT_bedKd 447.78
+  #endif
 
-#if defined(U20) || defined(LK1)
-  //From M303 command for Alfawise U20 :
-  #define DEFAULT_bedKp 841.68
-  #define DEFAULT_bedKi 152.12
-  #define DEFAULT_bedKd 1164.25
-#endif
+  #if defined(U20) || defined(LK1)
+    // From M303 command for Alfawise U20
+    #define DEFAULT_bedKp 841.68
+    #define DEFAULT_bedKi 152.12
+    #define DEFAULT_bedKd 1164.25
+  #endif
 
-#ifdef U20_PLUS
-  // These PID setting MUST be updated.
+  #ifdef U20_PLUS
+    // These PID settings MUST be updated
+    #define DEFAULT_bedKp 841.68
+    #define DEFAULT_bedKi 152.12
+    #define DEFAULT_bedKd 1164.25
+  #endif
+
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
-  #define DEFAULT_bedKp 841.68
-  #define DEFAULT_bedKi 152.12
-  #define DEFAULT_bedKd 1164.25
-#endif
-
 #endif // PIDTEMPBED
 
 #if EITHER(PIDTEMP, PIDTEMPBED)
@@ -673,7 +671,7 @@
 
 // @section machine
 
-// Uncomment one of these options to enable CoreXY, CoreXZ, or CoreYZ kinematics
+// Enable one of the options below for CoreXY, CoreXZ, or CoreYZ kinematics,
 // either in the usual order or reversed
 //#define COREXY
 //#define COREXZ
@@ -681,6 +679,7 @@
 //#define COREYX
 //#define COREZX
 //#define COREZY
+//#define MARKFORGED_XY  // MarkForged. See https://reprap.org/forum/read.php?152,504042
 
 //===========================================================================
 //============================== Endstop Settings ===========================
@@ -1814,7 +1813,6 @@
  *
  */
 #define SDSUPPORT
-#define SDIO_SUPPORT // Note from Hobi : Added as was not present in the file...
 
 /**
  * SD CARD: SPI SPEED

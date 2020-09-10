@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "Malyan/M150"
-
 /**
  * Custom Boot Screen bitmap
  *

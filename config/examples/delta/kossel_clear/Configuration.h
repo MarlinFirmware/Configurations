@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "delta/kossel_clear"
-
 /**
  * Configuration.h
  *
@@ -610,7 +608,7 @@
 
 // @section machine
 
-// Uncomment one of these options to enable CoreXY, CoreXZ, or CoreYZ kinematics
+// Enable one of the options below for CoreXY, CoreXZ, or CoreYZ kinematics,
 // either in the usual order or reversed
 //#define COREXY
 //#define COREXZ
@@ -618,6 +616,7 @@
 //#define COREYX
 //#define COREZX
 //#define COREZY
+//#define MARKFORGED_XY  // MarkForged. See https://reprap.org/forum/read.php?152,504042
 
 //===========================================================================
 //============================== Delta Settings =============================
@@ -961,6 +960,12 @@
  *   (e.g., an inductive probe or a nozzle-based probe-switch.)
  */
 //#define FIX_MOUNTED_PROBE
+
+/**
+ * Use the nozzle as the probe, as with a conductive
+ * nozzle system or a piezo-electric smart effector.
+ */
+//#define NOZZLE_AS_PROBE
 
 /**
  * Z Servo Probe, such as an endstop switch on a rotating arm.

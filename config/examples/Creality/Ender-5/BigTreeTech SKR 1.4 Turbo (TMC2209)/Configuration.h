@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "Creality/Ender-5/BigTreeTech SKR 1.4 Turbo (TMC2209)"
-
 //#define E3D           // Enable for the E3D all metal hotend.
 #define E3D_Extreme     // Enable to print at over 285°C. Strongly discouraged by E3D but I neeeded it briefly. They say a little over isn't too risky but should not be done long term.
 #define chamber         // Enable for Heated Chamber. Thermistor should be connected to TEMP-E1, Heater to the port next to the bed heater (with the hotend heatsink fan moved to an always-on pin).
@@ -644,7 +642,7 @@
 
 // @section machine
 
-// Uncomment one of these options to enable CoreXY, CoreXZ, or CoreYZ kinematics
+// Enable one of the options below for CoreXY, CoreXZ, or CoreYZ kinematics,
 // either in the usual order or reversed
 //#define COREXY
 //#define COREXZ
@@ -652,6 +650,7 @@
 //#define COREYX
 //#define COREZX
 //#define COREZY
+//#define MARKFORGED_XY  // MarkForged. See https://reprap.org/forum/read.php?152,504042
 
 //===========================================================================
 //============================== Endstop Settings ===========================

@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "FlyingBear/P905H"
-
 /**
  * Configuration.h
  *
@@ -610,7 +608,7 @@
 
 // @section machine
 
-// Uncomment one of these options to enable CoreXY, CoreXZ, or CoreYZ kinematics
+// Enable one of the options below for CoreXY, CoreXZ, or CoreYZ kinematics,
 // either in the usual order or reversed
 //#define COREXY
 //#define COREXZ
@@ -618,6 +616,7 @@
 //#define COREYX
 //#define COREZX
 //#define COREZY
+//#define MARKFORGED_XY  // MarkForged. See https://reprap.org/forum/read.php?152,504042
 
 //===========================================================================
 //============================== Endstop Settings ===========================
@@ -844,7 +843,7 @@
 // @section probes
 
 //
-// See http://marlinfw.org/docs/configuration/probes.html
+// See https://marlinfw.org/docs/configuration/probes.html
 //
 
 /**
@@ -1719,7 +1718,7 @@
  *  - Click the controller to view the LCD menu
  *  - The LCD will display Japanese, Western, or Cyrillic text
  *
- * See http://marlinfw.org/docs/development/lcd_language.html
+ * See https://marlinfw.org/docs/development/lcd_language.html
  *
  * :['JAPANESE', 'WESTERN', 'CYRILLIC']
  */
@@ -2327,7 +2326,6 @@
 //#define PCA9632
 
 // Support for PCA9533 PWM LED driver
-// https://github.com/mikeshub/SailfishRGB_LED
 //#define PCA9533
 
 /**

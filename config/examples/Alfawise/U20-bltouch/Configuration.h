@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "Alfawise/U20-bltouch"
-
 /**
  * Configuration.h
  *
@@ -595,27 +593,26 @@
   //#define DEFAULT_bedKi 1.41
   //#define DEFAULT_bedKd 1675.16
 
-#if defined(U30) || defined(LK2) || defined(LK4)
-  //From M303 command for Alfawise U30 :
-  #define DEFAULT_bedKp 338.46
-  #define DEFAULT_bedKi 63.96
-  #define DEFAULT_bedKd 447.78
-#endif
+  #if defined(U30) || defined(LK2) || defined(LK4)
+    // From M303 command for Alfawise U30
+    #define DEFAULT_bedKp 338.46
+    #define DEFAULT_bedKi 63.96
+    #define DEFAULT_bedKd 447.78
+  #endif
 
-#if defined(U20) || defined(LK1)
-  //From M303 command for Alfawise U20 :
-  #define DEFAULT_bedKp 841.68
-  #define DEFAULT_bedKi 152.12
-  #define DEFAULT_bedKd 1164.25
-#endif
+  #if defined(U20) || defined(LK1)
+    // From M303 command for Alfawise U20
+    #define DEFAULT_bedKp 841.68
+    #define DEFAULT_bedKi 152.12
+    #define DEFAULT_bedKd 1164.25
+  #endif
 
-#ifdef U20_PLUS
-  // These PID setting MUST be updated.
-  // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
-  #define DEFAULT_bedKp 841.68
-  #define DEFAULT_bedKi 152.12
-  #define DEFAULT_bedKd 1164.25
-#endif
+  #ifdef U20_PLUS
+    // These PID settings MUST be updated
+    #define DEFAULT_bedKp 841.68
+    #define DEFAULT_bedKi 152.12
+    #define DEFAULT_bedKd 1164.25
+  #endif
 
 #endif // PIDTEMPBED
 
@@ -673,7 +670,7 @@
 
 // @section machine
 
-// Uncomment one of these options to enable CoreXY, CoreXZ, or CoreYZ kinematics
+// Enable one of the options below for CoreXY, CoreXZ, or CoreYZ kinematics,
 // either in the usual order or reversed
 //#define COREXY
 //#define COREXZ
@@ -681,6 +678,7 @@
 //#define COREYX
 //#define COREZX
 //#define COREZY
+//#define MARKFORGED_XY  // MarkForged. See https://reprap.org/forum/read.php?152,504042
 
 //===========================================================================
 //============================== Endstop Settings ===========================
@@ -1814,7 +1812,6 @@
  *
  */
 #define SDSUPPORT
-#define SDIO_SUPPORT // Note from Hobi : Added as was not present in the file...
 
 /**
  * SD CARD: SPI SPEED

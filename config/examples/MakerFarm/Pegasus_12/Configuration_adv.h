@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "MakerFarm/Pegasus_12"
-
 /**
  * Configuration_adv.h
  *
@@ -2482,7 +2480,7 @@
   #define E7_HYBRID_THRESHOLD     30
 
   /**
-   * Use StallGuard2 to home / probe X, Y, Z.
+   * Use StallGuard to home / probe X, Y, Z.
    *
    * TMC2130, TMC2160, TMC2209, TMC2660, TMC5130, and TMC5160 only
    * Connect the stepper driver's DIAG1 pin to the X/Y endstop pin.
@@ -2503,6 +2501,8 @@
    *
    * IMPROVE_HOMING_RELIABILITY tunes acceleration and jerk when
    * homing and adds a guard period for endstop triggering.
+   *
+   * Comment *_STALL_SENSITIVITY to disable sensorless homing for that axis.
    */
   //#define SENSORLESS_HOMING // StallGuard capable drivers only
 

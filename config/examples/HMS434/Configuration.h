@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "HMS434"
-
 /**
  * Configuration.h
  *
@@ -425,6 +423,7 @@
 #define TEMP_SENSOR_4       0
 #define TEMP_SENSOR_5       0
 #define TEMP_SENSOR_BED     331
+#define TEMP_SENSOR_PROBE 0
 #define TEMP_SENSOR_CHAMBER 331
 
 // Dummy thermistor constant temperature readings, for use with 998 and 999
@@ -596,7 +595,7 @@
 
 // @section machine
 
-// Uncomment one of these options to enable CoreXY, CoreXZ, or CoreYZ kinematics
+// Enable one of the options below for CoreXY, CoreXZ, or CoreYZ kinematics,
 // either in the usual order or reversed
 //#define COREXY
 //#define COREXZ
@@ -604,6 +603,7 @@
 //#define COREYX
 //#define COREZX
 //#define COREZY
+//#define MARKFORGED_XY  // MarkForged. See https://reprap.org/forum/read.php?152,504042
 
 //===========================================================================
 //============================== Endstop Settings ===========================

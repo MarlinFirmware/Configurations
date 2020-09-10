@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "Anet/A8plus"
-
 /**
  * Configuration.h
  *
@@ -509,9 +507,9 @@
 
   // ANET A8 Standard Extruder at 210 Degree Celsius and 100% Fan
   //(measured after M106 S255 with M303 E0 S210 C8)
-  #define  DEFAULT_Kp 49.19
-  #define  DEFAULT_Ki 6.33
-  #define  DEFAULT_Kd 95.60
+  #define DEFAULT_Kp 49.19
+  #define DEFAULT_Ki 6.33
+  #define DEFAULT_Kd 95.60
 #endif // PIDTEMP
 
 //===========================================================================
@@ -621,7 +619,7 @@
 
 // @section machine
 
-// Uncomment one of these options to enable CoreXY, CoreXZ, or CoreYZ kinematics
+// Enable one of the options below for CoreXY, CoreXZ, or CoreYZ kinematics,
 // either in the usual order or reversed
 //#define COREXY
 //#define COREXZ
@@ -629,6 +627,7 @@
 //#define COREYX
 //#define COREZX
 //#define COREZY
+//#define MARKFORGED_XY  // MarkForged. See https://reprap.org/forum/read.php?152,504042
 
 //===========================================================================
 //============================== Endstop Settings ===========================

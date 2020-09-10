@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "MakerParts"
-
 /**
  * Custom Boot Screen bitmap
  *

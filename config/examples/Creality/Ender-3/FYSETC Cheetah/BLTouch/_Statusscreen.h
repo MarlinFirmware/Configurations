@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "Creality/Ender-3/FYSETC Cheetah/BLTouch"
-
 /**
  * Custom Status Screen bitmap
  *
