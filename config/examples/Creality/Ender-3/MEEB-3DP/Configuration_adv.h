@@ -2134,7 +2134,7 @@
   #if AXIS_DRIVER_TYPE_Z(TMC26X)
     #define Z_MAX_CURRENT     1000
     #define Z_SENSE_RESISTOR    91
-    #define Z_MICROSTEPS 4
+    #define Z_MICROSTEPS        16
   #endif
 
   #if AXIS_DRIVER_TYPE_Z2(TMC26X)
@@ -2261,10 +2261,10 @@
   #endif
 
   #if AXIS_IS_TMC(Z)
-    #define Z_CURRENT 1000
+    #define Z_CURRENT      1000
     #define Z_CURRENT_HOME  Z_CURRENT
-    #define Z_MICROSTEPS 4
-    #define Z_RSENSE 0.1
+    #define Z_MICROSTEPS      4
+    #define Z_RSENSE          0.1
     #define Z_CHAIN_POS      -1
   #endif
 
@@ -2628,7 +2628,7 @@
   #endif
 
   #if AXIS_IS_L64XX(Z)
-    #define Z_MICROSTEPS 4
+    #define Z_MICROSTEPS       128
     #define Z_OVERCURRENT     2000
     #define Z_STALLCURRENT    1500
     #define Z_MAX_VOLTAGE      127
