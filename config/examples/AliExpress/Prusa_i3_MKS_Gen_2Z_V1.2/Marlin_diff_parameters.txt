@@ -1,0 +1,46 @@
+Configuration.h
+-------------------------------------------------------------------
+
+#define TEMP_SENSOR_BED 1
+
+#define HEATER_0_MAXTEMP 295
+#define HEATER_1_MAXTEMP 295
+#define HEATER_2_MAXTEMP 295
+#define HEATER_3_MAXTEMP 295
+#define X_MIN_ENDSTOP_INVERTING true 
+#define Y_MIN_ENDSTOP_INVERTING true
+#define Z_MIN_ENDSTOP_INVERTING true
+#define X_MAX_ENDSTOP_INVERTING true
+#define Y_MAX_ENDSTOP_INVERTING true
+#define Z_MAX_ENDSTOP_INVERTING true
+#define Z_MIN_PROBE_ENDSTOP_INVERTING true 
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 96 }
+#define DEFAULT_MAX_FEEDRATE          { 200, 200, 5, 25 }
+#define DEFAULT_MAX_ACCELERATION      { 1000, 1000, 100, 10000 }
+#define INVERT_X_DIR true
+#define INVERT_Z_DIR true
+#define Z_MAX_POS 180
+#define ULTRA_LCD   // Character based
+#define SDSUPPORT
+//#define ULTIMAKERCONTROLLER
+#define ULTIPANEL
+#define REPRAP_DISCOUNT_SMART_CONTROLLER
+#define FAN_MIN_PWM 50
+
+
+  #define PIDTEMP
+  
+  #define DEFAULT_bedKp 59.73
+  #define DEFAULT_bedKi 11.22
+  #define DEFAULT_bedKd 212.02
+  
+  #define PIDTEMPBED
+  
+  #define DEFAULT_Kp 26.89
+  #define DEFAULT_Ki 3.35
+  #define DEFAULT_Kd 53.97
+
+
+Configuration_adv.h
+-------------------------------------------------------------------
+#define Z_DUAL_STEPPER_DRIVERS
