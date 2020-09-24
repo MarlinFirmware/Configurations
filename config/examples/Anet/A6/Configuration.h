@@ -487,34 +487,18 @@
   //#define PID_PARAMS_PER_HOTEND // Uses separate PID parameters for each extruder (useful for mismatched extruders)
                                   // Set/get with gcode: M301 E[extruder number, 0-2]
 
-  // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
-
-  // Ultimaker
-  //#define DEFAULT_Kp 22.2
-  //#define DEFAULT_Ki 1.08
-  //#define DEFAULT_Kd 114
-
-  // MakerGear
-  //#define DEFAULT_Kp 7.0
-  //#define DEFAULT_Ki 0.1
-  //#define DEFAULT_Kd 12
-
-  // Mendel Parts V9 on 12V
-  //#define DEFAULT_Kp 63.0
-  //#define DEFAULT_Ki 2.25
-  //#define DEFAULT_Kd 440
-
-  // ANET A6 Firmware V2.0 Standard Extruder defaults:
-  // PID-P: +022.20, PID-I: +001.08, PID-D: +114.00, PID-C: 1
-  //#define DEFAULT_Kp 22.2
-  //#define DEFAULT_Ki 1.08
-  //#define DEFAULT_Kd 114.0
-
   // Tuned by ralf-e. Always re-tune for your machine!
-  #define DEFAULT_Kp 16.83
-  #define DEFAULT_Ki 1.02
-  #define DEFAULT_Kd 69.29
-
+  #if ENABLED(PID_PARAMS_PER_HOTEND)
+    // Specify between 1 and HOTENDS values per array.
+    // If fewer than EXTRUDER values are provided, the last element will be repeated.
+    #define DEFAULT_Kp_LIST {  16.83,  16.83 }
+    #define DEFAULT_Ki_LIST {   1.02,   1.02 }
+    #define DEFAULT_Kd_LIST {  69.29,  69.29 }
+  #else
+    #define DEFAULT_Kp  16.83
+    #define DEFAULT_Ki   1.02
+    #define DEFAULT_Kd  69.29
+  #endif
 #endif // PIDTEMP
 
 //===========================================================================

@@ -487,33 +487,28 @@
   //#define PID_PARAMS_PER_HOTEND // Uses separate PID parameters for each extruder (useful for mismatched extruders)
                                   // Set/get with gcode: M301 E[extruder number, 0-2]
 
-  // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
+  #if ENABLED(PID_PARAMS_PER_HOTEND)
+    // Specify between 1 and HOTENDS values per array.
+    // If fewer than EXTRUDER values are provided, the last element will be repeated.
+    #define DEFAULT_Kp_LIST {  35.92,  35.92 }
+    #define DEFAULT_Ki_LIST {   5.69,   5.69 }
+    #define DEFAULT_Kd_LIST {  56.64,  56.64 }
+  #else
+    // E3D V6 at 190C
+    //#define DEFAULT_Kp  38.87
+    //#define DEFAULT_Ki   4.61
+    //#define DEFAULT_Kd  82.00
 
-  // E3D V6 at 190C
-  //#define DEFAULT_Kp 38.87
-  //#define DEFAULT_Ki 4.61
-  //#define DEFAULT_Kd 82.00
+    // E3D at 200C
+    //#define DEFAULT_Kp  31.89
+    //#define DEFAULT_Ki   3.93
+    //#define DEFAULT_Kd  64.66
 
-  // E3D at 200C
-  //#define DEFAULT_Kp 31.89
-  //#define DEFAULT_Ki 3.93
-  //#define DEFAULT_Kd 64.66
-
-  // E3D at 240C
-  #define DEFAULT_Kp 35.92
-  #define DEFAULT_Ki 5.69
-  #define DEFAULT_Kd 56.64
-
-  // MakerGear
-  //#define DEFAULT_Kp 7.0
-  //#define DEFAULT_Ki 0.1
-  //#define DEFAULT_Kd 12
-
-  // Mendel Parts V9 on 12V
-  //#define DEFAULT_Kp 63.0
-  //#define DEFAULT_Ki 2.25
-  //#define DEFAULT_Kd 440
-
+    // E3D at 240C
+    #define DEFAULT_Kp  35.92
+    #define DEFAULT_Ki   5.69
+    #define DEFAULT_Kd  56.64
+  #endif
 #endif // PIDTEMP
 
 //===========================================================================

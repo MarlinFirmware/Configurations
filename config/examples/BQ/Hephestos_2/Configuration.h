@@ -495,16 +495,23 @@
   //#define PID_PARAMS_PER_HOTEND // Uses separate PID parameters for each extruder (useful for mismatched extruders)
                                   // Set/get with gcode: M301 E[extruder number, 0-2]
 
-  // Tuned PID values using M303
-  #define DEFAULT_Kp 23.75
-  #define DEFAULT_Ki  2.12
-  #define DEFAULT_Kd 66.63
+  #if ENABLED(PID_PARAMS_PER_HOTEND)
+    // Specify between 1 and HOTENDS values per array.
+    // If fewer than EXTRUDER values are provided, the last element will be repeated.
+    #define DEFAULT_Kp_LIST {  23.75,  23.75 }
+    #define DEFAULT_Ki_LIST {   2.12,   2.12 }
+    #define DEFAULT_Kd_LIST {  66.63,  66.63 }
+  #else
+    // Tuned PID values using M303
+    #define DEFAULT_Kp  23.75
+    #define DEFAULT_Ki   2.12
+    #define DEFAULT_Kd  66.63
 
-  // BQ firmware stock PID values
-  //#define DEFAULT_Kp 10.7
-  //#define DEFAULT_Ki 0.45
-  //#define DEFAULT_Kd 3
-
+    // BQ firmware stock PID values
+    //#define DEFAULT_Kp  10.70
+    //#define DEFAULT_Ki   0.45
+    //#define DEFAULT_Kd   3.00
+  #endif
 #endif // PIDTEMP
 
 //===========================================================================

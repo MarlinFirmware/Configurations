@@ -525,27 +525,21 @@
   //#define PID_PARAMS_PER_HOTEND // Uses separate PID parameters for each extruder (useful for mismatched extruders)
                                   // Set/get with gcode: M301 E[extruder number, 0-2]
 
-  // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
-
   // Alfawise U30/U20
   // Please refine the PID settings for your own machine to avoid the E1 hotend error. These a basic settings allowing first startups.
   // Use the command M303 E0 S200 C8 each time you make any changes to your extruder
 
-  #define DEFAULT_Kp 17.22
-  #define DEFAULT_Ki 1.00
-  #define DEFAULT_Kd 74.22
-
-
-  // MakerGear
-  //#define DEFAULT_Kp 7.0
-  //#define DEFAULT_Ki 0.1
-  //#define DEFAULT_Kd 12
-
-  // Mendel Parts V9 on 12V
-  //#define DEFAULT_Kp 63.0
-  //#define DEFAULT_Ki 2.25
-  //#define DEFAULT_Kd 440
-
+  #if ENABLED(PID_PARAMS_PER_HOTEND)
+    // Specify between 1 and HOTENDS values per array.
+    // If fewer than EXTRUDER values are provided, the last element will be repeated.
+    #define DEFAULT_Kp_LIST {  17.22,  17.22 }
+    #define DEFAULT_Ki_LIST {   1.00,   1.00 }
+    #define DEFAULT_Kd_LIST {  74.22,  74.22 }
+  #else
+    #define DEFAULT_Kp  17.22
+    #define DEFAULT_Ki   1.00
+    #define DEFAULT_Kd  74.22
+  #endif
 #endif // PIDTEMP
 
 //===========================================================================

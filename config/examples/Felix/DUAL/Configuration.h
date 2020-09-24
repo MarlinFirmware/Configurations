@@ -488,10 +488,17 @@
                                   // Set/get with gcode: M301 E[extruder number, 0-2]
 
   // Felix 2.0+ electronics with v4 Hotend
-  #define DEFAULT_Kp 12
-  #define DEFAULT_Ki 0.84
-  #define DEFAULT_Kd 85
-
+  #if ENABLED(PID_PARAMS_PER_HOTEND)
+    // Specify between 1 and HOTENDS values per array.
+    // If fewer than EXTRUDER values are provided, the last element will be repeated.
+    #define DEFAULT_Kp_LIST {  12.00,  12.00 }
+    #define DEFAULT_Ki_LIST {   0.84,   0.84 }
+    #define DEFAULT_Kd_LIST {  85.00,  85.00 }
+  #else
+    #define DEFAULT_Kp  12.00
+    #define DEFAULT_Ki   0.84
+    #define DEFAULT_Kd  85.00
+  #endif
 #endif // PIDTEMP
 
 //===========================================================================

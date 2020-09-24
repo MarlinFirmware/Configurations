@@ -488,10 +488,17 @@
                                   // Set/get with gcode: M301 E[extruder number, 0-2]
 
   // Hephestos i3
-  #define DEFAULT_Kp 23.05
-  #define DEFAULT_Ki 2.00
-  #define DEFAULT_Kd 66.47
-
+  #if ENABLED(PID_PARAMS_PER_HOTEND)
+    // Specify between 1 and HOTENDS values per array.
+    // If fewer than EXTRUDER values are provided, the last element will be repeated.
+    #define DEFAULT_Kp_LIST {  23.05,  23.05 }
+    #define DEFAULT_Ki_LIST {   2.00,   2.00 }
+    #define DEFAULT_Kd_LIST {  66.47,  66.47 }
+  #else
+    #define DEFAULT_Kp  23.05
+    #define DEFAULT_Ki   2.00
+    #define DEFAULT_Kd  66.47
+  #endif
 #endif // PIDTEMP
 
 //===========================================================================

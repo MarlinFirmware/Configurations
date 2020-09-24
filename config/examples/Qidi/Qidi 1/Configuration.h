@@ -487,18 +487,18 @@
   //#define PID_PARAMS_PER_HOTEND // Uses separate PID parameters for each extruder (useful for mismatched extruders)
                                   // Set/get with gcode: M301 E[extruder number, 0-2]
 
-  // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
-
-//#define DEFAULT_Kp 20.03
-//#define DEFAULT_Ki 1.22
-//#define DEFAULT_Kd 82.05
-
-//Qidi1 Auto tune
-#define DEFAULT_Kp 19.35
-#define DEFAULT_Ki 3.81
-#define DEFAULT_Kd 24.57
-
-
+  // Qidi1 Auto tune
+  #if ENABLED(PID_PARAMS_PER_HOTEND)
+    // Specify between 1 and HOTENDS values per array.
+    // If fewer than EXTRUDER values are provided, the last element will be repeated.
+    #define DEFAULT_Kp_LIST {  19.35,  19.35 }
+    #define DEFAULT_Ki_LIST {   3.81,   3.81 }
+    #define DEFAULT_Kd_LIST {  24.57,  24.57 }
+  #else
+    #define DEFAULT_Kp  19.35
+    #define DEFAULT_Ki   3.81
+    #define DEFAULT_Kd  24.57
+  #endif
 #endif // PIDTEMP
 
 //===========================================================================

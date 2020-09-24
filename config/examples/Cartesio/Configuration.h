@@ -488,23 +488,28 @@
   //#define PID_PARAMS_PER_HOTEND // Uses separate PID parameters for each extruder (useful for mismatched extruders)
                                   // Set/get with gcode: M301 E[extruder number, 0-2]
 
-  // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
+  #if ENABLED(PID_PARAMS_PER_HOTEND)
+    // Specify between 1 and HOTENDS values per array.
+    // If fewer than EXTRUDER values are provided, the last element will be repeated.
+    #define DEFAULT_Kp_LIST {  18.0,  18.0 }
+    #define DEFAULT_Ki_LIST {   1.0,   1.0 }
+    #define DEFAULT_Kd_LIST { 100.0, 100.0 }
+  #else
+    // Cartesio extruderV6 40W Normal
+    #define DEFAULT_Kp  18.0
+    #define DEFAULT_Ki   1.0
+    #define DEFAULT_Kd 100.0
 
-  // Cartesio extruderV6 40W Normal
-  #define DEFAULT_Kp 18
-  #define DEFAULT_Ki 1
-  #define DEFAULT_Kd 100
+    // Cartesio extruderV6 40W Volcano
+    //#define DEFAULT_Kp  50.0
+    //#define DEFAULT_Ki   9.0
+    //#define DEFAULT_Kd  70.0
 
-  // Cartesio extruderV6 40W Volcano
-  //#define DEFAULT_Kp 50
-  //#define DEFAULT_Ki 9
-  //#define DEFAULT_Kd 70
-
-  // Cartesio extruderV6 40W Cyclops
-  //#define DEFAULT_Kp 18
-  //#define DEFAULT_Ki 1
-  //#define DEFAULT_Kd 100
-
+    // Cartesio extruderV6 40W Cyclops
+    //#define DEFAULT_Kp  18.0
+    //#define DEFAULT_Ki   1.0
+    //#define DEFAULT_Kd 100.0
+  #endif
 #endif // PIDTEMP
 
 //===========================================================================

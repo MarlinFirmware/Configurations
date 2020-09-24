@@ -487,13 +487,18 @@
   //#define PID_PARAMS_PER_HOTEND // Uses separate PID parameters for each extruder (useful for mismatched extruders)
                                   // Set/get with gcode: M301 E[extruder number, 0-2]
 
-  // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
-
   // A10M [@thinkyhead]
-  #define DEFAULT_Kp 45.80
-  #define DEFAULT_Ki 3.61
-  #define DEFAULT_Kd 145.39
-
+  #if ENABLED(PID_PARAMS_PER_HOTEND)
+    // Specify between 1 and HOTENDS values per array.
+    // If fewer than EXTRUDER values are provided, the last element will be repeated.
+    #define DEFAULT_Kp_LIST {  45.80,  45.80 }
+    #define DEFAULT_Ki_LIST {   3.61,   3.61 }
+    #define DEFAULT_Kd_LIST { 145.39, 145.39 }
+  #else
+    #define DEFAULT_Kp  45.80
+    #define DEFAULT_Ki   3.61
+    #define DEFAULT_Kd 145.39
+  #endif
 #endif // PIDTEMP
 
 //===========================================================================

@@ -492,10 +492,17 @@
                                   // Set/get with gcode: M301 E[extruder number, 0-2]
 
   // Kossel Pro
-  #define DEFAULT_Kp 19.30
-  #define DEFAULT_Ki 3.51
-  #define DEFAULT_Kd 26.56
-
+  #if ENABLED(PID_PARAMS_PER_HOTEND)
+    // Specify between 1 and HOTENDS values per array.
+    // If fewer than EXTRUDER values are provided, the last element will be repeated.
+    #define DEFAULT_Kp_LIST {  19.30,  19.30 }
+    #define DEFAULT_Ki_LIST {   3.51,   3.51 }
+    #define DEFAULT_Kd_LIST {  26.56,  26.56 }
+  #else
+    #define DEFAULT_Kp  19.30
+    #define DEFAULT_Ki   3.51
+    #define DEFAULT_Kd  26.56
+  #endif
 #endif // PIDTEMP
 
 //===========================================================================

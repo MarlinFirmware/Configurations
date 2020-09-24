@@ -492,28 +492,18 @@
   //#define PID_PARAMS_PER_HOTEND // Uses separate PID parameters for each extruder (useful for mismatched extruders)
                                   // Set/get with gcode: M301 E[extruder number, 0-2]
 
-  // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
-
-  // Ultimaker
-  //#define DEFAULT_Kp 22.2
-  //#define DEFAULT_Ki 1.08
-  //#define DEFAULT_Kd 114
-
-  // MakerGear
-  //#define DEFAULT_Kp 7.0
-  //#define DEFAULT_Ki 0.1
-  //#define DEFAULT_Kd 12
-
-  // Mendel Parts V9 on 12V
-  //#define DEFAULT_Kp 63.0
-  //#define DEFAULT_Ki 2.25
-  //#define DEFAULT_Kd 440
-
   // JGAurora A5 (tuned at 210C)
-  #define DEFAULT_Kp 35.3//22.2
-  #define DEFAULT_Ki 4.35//1.08
-  #define DEFAULT_Kd 71.57//114
-
+  #if ENABLED(PID_PARAMS_PER_HOTEND)
+    // Specify between 1 and HOTENDS values per array.
+    // If fewer than EXTRUDER values are provided, the last element will be repeated.
+    #define DEFAULT_Kp_LIST {  35.30,  35.30 }
+    #define DEFAULT_Ki_LIST {   4.35,   4.35 }
+    #define DEFAULT_Kd_LIST {  71.57,  71.57 }
+  #else
+    #define DEFAULT_Kp  35.30
+    #define DEFAULT_Ki   4.35
+    #define DEFAULT_Kd  71.57
+  #endif
 #endif // PIDTEMP
 
 //===========================================================================

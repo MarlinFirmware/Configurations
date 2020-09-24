@@ -528,10 +528,17 @@
                                   // Set/get with gcode: M301 E[extruder number, 0-2]
 
   // Merlin Hotend: From Autotune
-  #define DEFAULT_Kp 24.5
-  #define DEFAULT_Ki 1.72
-  #define DEFAULT_Kd 87.73
-
+  #if ENABLED(PID_PARAMS_PER_HOTEND)
+    // Specify between 1 and HOTENDS values per array.
+    // If fewer than EXTRUDER values are provided, the last element will be repeated.
+    #define DEFAULT_Kp_LIST {  24.50,  24.50 }
+    #define DEFAULT_Ki_LIST {   1.72,   1.72 }
+    #define DEFAULT_Kd_LIST {  87.73,  87.73 }
+  #else
+    #define DEFAULT_Kp  24.50
+    #define DEFAULT_Ki   1.72
+    #define DEFAULT_Kd  87.73
+  #endif
 #endif // PIDTEMP
 
 //===========================================================================

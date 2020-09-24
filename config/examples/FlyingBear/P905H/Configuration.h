@@ -487,23 +487,18 @@
   //#define PID_PARAMS_PER_HOTEND // Uses separate PID parameters for each extruder (useful for mismatched extruders)
                                   // Set/get with gcode: M301 E[extruder number, 0-2]
 
-  // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
-
   // P905
-  #define DEFAULT_Kp 15.35
-  #define DEFAULT_Ki 1.16
-  #define DEFAULT_Kd 150.60
-
-  // MakerGear
-  //#define DEFAULT_Kp 7.0
-  //#define DEFAULT_Ki 0.1
-  //#define DEFAULT_Kd 12
-
-  // Mendel Parts V9 on 12V
-  //#define DEFAULT_Kp 63.0
-  //#define DEFAULT_Ki 2.25
-  //#define DEFAULT_Kd 440
-
+  #if ENABLED(PID_PARAMS_PER_HOTEND)
+    // Specify between 1 and HOTENDS values per array.
+    // If fewer than EXTRUDER values are provided, the last element will be repeated.
+    #define DEFAULT_Kp_LIST {  15.35,  15.35 }
+    #define DEFAULT_Ki_LIST {   1.16,   1.16 }
+    #define DEFAULT_Kd_LIST { 150.60, 150.60 }
+  #else
+    #define DEFAULT_Kp  15.35
+    #define DEFAULT_Ki   1.16
+    #define DEFAULT_Kd 150.60
+  #endif
 #endif // PIDTEMP
 
 //===========================================================================
