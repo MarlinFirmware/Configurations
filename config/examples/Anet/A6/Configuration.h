@@ -534,23 +534,8 @@
   //#define MIN_BED_POWER 0
   //#define PID_BED_DEBUG // Sends debug data to the serial port.
 
-  //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
-  //from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
-  //#define DEFAULT_bedKp 10.00
-  //#define DEFAULT_bedKi .023
-  //#define DEFAULT_bedKd 305.4
-
-  //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
-  //from pidautotune
-  //#define DEFAULT_bedKp 97.1
-  //#define DEFAULT_bedKi 1.41
-  //#define DEFAULT_bedKd 1675.16
-
   // ANET A6
   // original Bed + 0.3mm Heat conducting into 4mm borosilicate (PID-Autotune: M303 E-1 S60 C5):
-  //#define DEFAULT_bedKp 295.00
-  //#define DEFAULT_bedKi 35.65
-  //#define DEFAULT_bedKd 610.21
   #define DEFAULT_bedKp 295.00
   #define DEFAULT_bedKi 35.65
   #define DEFAULT_bedKd 610.21
@@ -770,7 +755,6 @@
 // Vmax x: 400, Vmax y: 400, Vmax z: 4, Vmax e: 25
 #define DEFAULT_MAX_FEEDRATE          { 400, 400, 4, 25 }
 //#define DEFAULT_MAX_FEEDRATE          { 400, 400, 20, 50 }
-
 
 //#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
