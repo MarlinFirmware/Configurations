@@ -1079,7 +1079,7 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
- //BL Touch with John Ecker Custom Mount
+ // BL Touch with John Ecker Custom Mount
 #define NOZZLE_TO_PROBE_OFFSET { 0, -29, -3.4 }
 
 // Most probes should stay away from the edges of the bed, but

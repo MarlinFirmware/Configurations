@@ -554,8 +554,8 @@
   //#define MIN_BED_POWER 0
   //#define PID_BED_DEBUG // Sends debug data to the serial port.
 
-  //Vellemann K8200 PCB heatbed with standard PCU at 60 degreesC - calculated with PID Autotune and tested
-  //from pidautotune
+  // Vellemann K8200 PCB heatbed with standard PCU at 60 degreesC - calculated with PID Autotune and tested
+  // from pidautotune
   #define DEFAULT_bedKp 341.88
   #define DEFAULT_bedKi 25.32
   #define DEFAULT_bedKd 1153.89

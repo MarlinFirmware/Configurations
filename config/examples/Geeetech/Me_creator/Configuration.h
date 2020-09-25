@@ -128,7 +128,7 @@
 
 // Choose the name from boards.h that matches your setup
 #ifndef MOTHERBOARD
-#define MOTHERBOARD BOARD_RAMPS_13_EFB //Some had BOARD_SANGUINOLOLU_12
+#define MOTHERBOARD BOARD_RAMPS_13_EFB // Some had BOARD_SANGUINOLOLU_12
 #endif
 
 // Name displayed in the LCD "Ready" message and Info menu

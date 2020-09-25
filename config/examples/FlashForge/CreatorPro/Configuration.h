@@ -1119,7 +1119,7 @@
 
 // @section machine
 
-//these values are used in your slicer
+// these values are used in your slicer
 #define X_BED_SIZE 227
 #define Y_BED_SIZE 148
 

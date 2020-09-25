@@ -823,7 +823,7 @@
  *
  * See https://github.com/synthetos/TinyG/wiki/Jerk-Controlled-Motion-Explained
  */
-//P905H works with s-curve but I saw no quality improvements
+// P905H works with s-curve but I saw no quality improvements
 //#define S_CURVE_ACCELERATION
 
 //===========================================================================

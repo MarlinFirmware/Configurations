@@ -3210,10 +3210,10 @@
   #define USER_GCODE_2 "G28\nG29 P4 R999 T\nG29 S0 A F10\nM500"
 
   #define USER_DESC_3 "Print Test Pattern"
-  #define USER_GCODE_3 "G26 C P O2.25" //Do a typical test sequence
+  #define USER_GCODE_3 "G26 C P O2.25" // Do a typical test sequence
 
   #define USER_DESC_4 "Move Bed Forward"
-  #define USER_GCODE_4 "G28 X0 Y0\nG1 X0 Y180 F3000\nM84" //move X/Y to min endstops & Feed the bed forward & steppers off
+  #define USER_GCODE_4 "G28 X0 Y0\nG1 X0 Y180 F3000\nM84" // move X/Y to min endstops & Feed the bed forward & steppers off
 
   /*
   #define USER_DESC_2 "Preheat for " PREHEAT_1_LABEL
@@ -3487,7 +3487,7 @@
    */
   //#define MMU_EXTRUDER_SENSOR
   #if ENABLED(MMU_EXTRUDER_SENSOR)
-    #define MMU_LOADING_ATTEMPTS_NR 5 //max. number of attempts to load filament if first load fail
+    #define MMU_LOADING_ATTEMPTS_NR 5 // max. number of attempts to load filament if first load fail
   #endif
 
   /**

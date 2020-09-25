@@ -534,7 +534,7 @@
   //#define MIN_BED_POWER 0
   //#define PID_BED_DEBUG // Sends debug data to the serial port.
 
-  //D-force
+  // D-force
   #define DEFAULT_bedKp 22.97
   #define DEFAULT_bedKi 3.76
   #define DEFAULT_bedKd 29.2

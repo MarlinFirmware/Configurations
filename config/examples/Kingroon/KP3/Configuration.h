@@ -533,7 +533,7 @@
   //#define MIN_BED_POWER 0
   //#define PID_BED_DEBUG // Sends debug data to the serial port.
 
-  //KINGROON KP3
+  // KINGROON KP3
   #define DEFAULT_bedKp 690.34
   #define DEFAULT_bedKi 111.47
   #define DEFAULT_bedKd 1068.83

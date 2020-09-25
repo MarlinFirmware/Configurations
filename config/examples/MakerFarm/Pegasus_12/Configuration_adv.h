@@ -3196,10 +3196,10 @@
   #define USER_SCRIPT_AUDIBLE_FEEDBACK
   #define USER_SCRIPT_RETURN  // Return to status screen after a script
 
-  #define USER_DESC_1 "Manual UBL" //Use nozzle & paper to setup UBL
+  #define USER_DESC_1 "Manual UBL" // Use nozzle & paper to setup UBL
   #define USER_GCODE_1 "G28\nG29 P4 R999\nG29 A\nG29 S\nM500"
 
-  #define USER_DESC_2 "Adjust Point Near" //Adjust nearest mesh point
+  #define USER_DESC_2 "Adjust Point Near" // Adjust nearest mesh point
   #define USER_GCODE_2 "G29 P4\nM500"
 
   #define USER_DESC_3 "PID Autotune End"
@@ -3470,7 +3470,7 @@
    */
   //#define MMU_EXTRUDER_SENSOR
   #if ENABLED(MMU_EXTRUDER_SENSOR)
-    #define MMU_LOADING_ATTEMPTS_NR 5 //max. number of attempts to load filament if first load fail
+    #define MMU_LOADING_ATTEMPTS_NR 5 // max. number of attempts to load filament if first load fail
   #endif
 
   /**

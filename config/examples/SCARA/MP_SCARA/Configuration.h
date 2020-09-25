@@ -574,8 +574,8 @@
   //#define MIN_BED_POWER 0
   //#define PID_BED_DEBUG // Sends debug data to the serial port.
 
-  //12v Heatbed Mk3 12V in parallel
-  //from pidautotune
+  // 12v Heatbed Mk3 12V in parallel
+  // from pidautotune
   #define DEFAULT_bedKp 630.14
   #define DEFAULT_bedKi 121.71
   #define DEFAULT_bedKd 815.64

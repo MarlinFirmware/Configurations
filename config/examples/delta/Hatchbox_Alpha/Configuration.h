@@ -539,7 +539,7 @@
   //#define MIN_BED_POWER 0
   //#define PID_BED_DEBUG // Sends debug data to the serial port.
 
-  //HatchBox Alpha
+  // HatchBox Alpha
   #define DEFAULT_bedKp 72.11
   #define DEFAULT_bedKi 7.1
   #define DEFAULT_bedKd 488.31

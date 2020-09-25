@@ -543,7 +543,7 @@
   //#define MIN_BED_POWER 0
   //#define PID_BED_DEBUG // Sends debug data to the serial port.
 
-  //Stock CR-10 Bed Tuned for 70C
+  // Stock CR-10 Bed Tuned for 70C
   #define DEFAULT_bedKp 426.68
   #define DEFAULT_bedKi 78.92
   #define DEFAULT_bedKd 576.71

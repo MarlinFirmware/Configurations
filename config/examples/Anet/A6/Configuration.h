@@ -1014,7 +1014,7 @@
 // ANET A6 with BLTouch/3D-Touch mounted right to the nozzle
 #define NOZZLE_TO_PROBE_OFFSET { 39, 0, 0 }
 
-//ANET A6 with BLTouch/3D-Touch betwen Fan and Belt
+// ANET A6 with BLTouch/3D-Touch betwen Fan and Belt
 // (mount: https://github.com/ralf-e/ANET_A6_modifications/tree/master/A6_X-Axis)
 //#define NOZZLE_TO_PROBE_OFFSET { -30, 15, 0.75 }
 
@@ -1126,7 +1126,7 @@
 #define INVERT_X_DIR false
 //#define INVERT_Y_DIR true
 //#define INVERT_Z_DIR false
-//ANET A6:
+// ANET A6:
 #define INVERT_Y_DIR false
 #define INVERT_Z_DIR true
 
@@ -1471,11 +1471,11 @@
   #define Z_SAFE_HOMING_X_POINT X_CENTER  // X point for Z homing
   #define Z_SAFE_HOMING_Y_POINT Y_CENTER  // Y point for Z homing
 
-  //Anet A6 with new X-Axis
+  // Anet A6 with new X-Axis
   //#define Z_SAFE_HOMING_X_POINT 113    // X point for Z homing
   //#define Z_SAFE_HOMING_Y_POINT 112    // Y point for Z homing
 
-  //Anet A6 with new X-Axis and defined X_HOME_POS -7, Y_HOME_POS -6
+  // Anet A6 with new X-Axis and defined X_HOME_POS -7, Y_HOME_POS -6
   //#define Z_SAFE_HOMING_X_POINT 107    // X point for Z homing
   //#define Z_SAFE_HOMING_Y_POINT 107    // Y point for Z homing
 

@@ -534,7 +534,7 @@
   //#define MIN_BED_POWER 0
   //#define PID_BED_DEBUG // Sends debug data to the serial port.
 
-  //Ortur 4 V1 90
+  // Ortur 4 V1 90
   #define DEFAULT_bedKp 190.43
   #define DEFAULT_bedKi 30.19
   #define DEFAULT_bedKd 800.81

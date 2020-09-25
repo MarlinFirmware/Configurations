@@ -534,7 +534,7 @@
   //#define MIN_BED_POWER 0
   //#define PID_BED_DEBUG // Sends debug data to the serial port.
 
-  //Overlord Pro heater into 5.5mm aluminium bed, update using M303
+  // Overlord Pro heater into 5.5mm aluminium bed, update using M303
   #define DEFAULT_bedKp 253.16
   #define DEFAULT_bedKi 24.14
   #define DEFAULT_bedKd 663.66
