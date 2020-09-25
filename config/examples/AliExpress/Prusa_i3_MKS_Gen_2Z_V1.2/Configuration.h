@@ -345,7 +345,7 @@
 #define HEATER_2_MINTEMP 5
 #define HEATER_3_MINTEMP 5
 #define HEATER_4_MINTEMP 5
-#define BED_MINTEMP 5
+#define BED_MINTEMP      5
 
 // When temperature exceeds max temp, your heater will be switched off.
 // This feature exists to protect your hotend from overheating accidentally, but *NOT* from thermistor short/failure!
@@ -355,7 +355,7 @@
 #define HEATER_2_MAXTEMP 275
 #define HEATER_3_MAXTEMP 275
 #define HEATER_4_MAXTEMP 275
-#define BED_MAXTEMP 150
+#define BED_MAXTEMP      150
 
 //===========================================================================
 //============================= PID Settings ================================
@@ -379,10 +379,10 @@
 
   // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
 
-  // Ultimaker
-  #define DEFAULT_bedKp 59.73
-  #define DEFAULT_bedKi 11.22
-  #define DEFAULT_bedKd 212.02
+  // Calibrated by author
+  #define DEFAULT_Kp 59.73
+  #define DEFAULT_Ki 11.22
+  #define DEFAULT_Kd 212.02
 
   // MakerGear
   //#define DEFAULT_Kp 7.0
@@ -429,11 +429,10 @@
 
   //#define PID_BED_DEBUG // Sends debug data to the serial port.
 
-  //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
-  //from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
-  #define DEFAULT_Kp 26.89
-  #define DEFAULT_Ki 3.35
-  #define DEFAULT_Kd 53.97
+  // Calibrated by author
+  #define DEFAULT_bedKp 26.89
+  #define DEFAULT_bedKi  3.35
+  #define DEFAULT_bedKd 53.97
 
   //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   //from pidautotune
