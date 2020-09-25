@@ -1170,6 +1170,7 @@
   #if ENABLED(POWER_LOSS_RECOVERY)
     #define PLR_ENABLED_DEFAULT   false // Power Loss Recovery enabled by default. (Set with 'M413 Sn' & M500)
     //#define BACKUP_POWER_SUPPLY       // Backup power / UPS to move the steppers on power loss
+    //#define POWER_LOSS_RECOVER_ZHOME  // Z homing is needed for proper recovery. 99.9% of the time this should be disabled!
     //#define POWER_LOSS_ZRAISE       2 // (mm) Z axis raise on resume (on power loss with UPS)
     //#define POWER_LOSS_PIN         44 // Pin to detect power loss. Set to -1 to disable default pin on boards without module.
     //#define POWER_LOSS_STATE     HIGH // State of pin indicating power loss
@@ -3209,10 +3210,10 @@
   #define USER_GCODE_2 "G28\nG29 P4 R999 T\nG29 S0 A F10\nM500"
 
   #define USER_DESC_3 "Print Test Pattern"
-  #define USER_GCODE_3 "G26 C P O2.25" //Do a typical test sequence
+  #define USER_GCODE_3 "G26 C P O2.25" // Do a typical test sequence
 
   #define USER_DESC_4 "Move Bed Forward"
-  #define USER_GCODE_4 "G28 X0 Y0\nG1 X0 Y180 F3000\nM84" //move X/Y to min endstops & Feed the bed forward & steppers off
+  #define USER_GCODE_4 "G28 X0 Y0\nG1 X0 Y180 F3000\nM84" // move X/Y to min endstops & Feed the bed forward & steppers off
 
   /*
   #define USER_DESC_2 "Preheat for " PREHEAT_1_LABEL
@@ -3486,7 +3487,7 @@
    */
   //#define MMU_EXTRUDER_SENSOR
   #if ENABLED(MMU_EXTRUDER_SENSOR)
-    #define MMU_LOADING_ATTEMPTS_NR 5 //max. number of attempts to load filament if first load fail
+    #define MMU_LOADING_ATTEMPTS_NR 5 // max. number of attempts to load filament if first load fail
   #endif
 
   /**

@@ -545,12 +545,12 @@
   //#define MIN_BED_POWER 0
   //#define PID_BED_DEBUG // Sends debug data to the serial port.
 
-  //24V 500W silicone heater on to 4mm glass CartesioW
+  // 24V 500W silicone heater on to 4mm glass CartesioW
   #define DEFAULT_bedKp 390
   #define DEFAULT_bedKi 70
   #define DEFAULT_bedKd 546
 
-  //24V 250W silicone heater on to 4mm glass CartesioM
+  // 24V 250W silicone heater on to 4mm glass CartesioM
   //#define DEFAULT_bedKp 303
   //#define DEFAULT_bedKi 42
   //#define DEFAULT_bedKd 539

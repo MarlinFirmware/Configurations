@@ -538,8 +538,8 @@
   //#define MIN_BED_POWER 0
   //#define PID_BED_DEBUG // Sends debug data to the serial port.
 
-  //Kossel Pro heated bed plate with borosilicate glass
-  //from pidautotune (M303 E-1 S60 C8)
+  // Kossel Pro heated bed plate with borosilicate glass
+  // from pidautotune (M303 E-1 S60 C8)
   #define DEFAULT_bedKp 370.25
   #define DEFAULT_bedKi 62.77
   #define DEFAULT_bedKd 545.98

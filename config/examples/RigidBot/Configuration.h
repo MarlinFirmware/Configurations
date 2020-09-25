@@ -547,7 +547,7 @@
   //#define MIN_BED_POWER 0
   //#define PID_BED_DEBUG // Sends debug data to the serial port.
 
-  //RigidBot, from pid autotune
+  // RigidBot, from pid autotune
   #define DEFAULT_bedKp 355
   #define DEFAULT_bedKi 66.5
   #define DEFAULT_bedKd 480

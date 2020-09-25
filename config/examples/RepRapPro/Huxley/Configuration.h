@@ -533,17 +533,11 @@
   //#define MIN_BED_POWER 0
   //#define PID_BED_DEBUG // Sends debug data to the serial port.
 
-  //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
-  //from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
+  // 120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
+  // from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
   #define DEFAULT_bedKp 10.00
   #define DEFAULT_bedKi .023
   #define DEFAULT_bedKd 305.4
-
-  //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
-  //from pidautotune
-  //#define DEFAULT_bedKp 97.1
-  //#define DEFAULT_bedKi 1.41
-  //#define DEFAULT_bedKd 1675.16
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #endif // PIDTEMPBED
@@ -744,8 +738,8 @@ White polyurethane belt(T2.5), 14 - tooth printed pulley : 91.4286 step per mm (
 Black rubber belt(MXL), 17 - tooth printed pulley : 92.635 step per mm (Huxley, Mendel Mono and Tri since 1 / 4 / 2013)
 Black rubber belt(MXL), 18 - tooth aluminium pulley : 87.489 step per mm (Huxley, Mendel Mono and Tri since 1 / 1 / 2014)
 */
-#define XY_PULLEY_PITCH 2.5   //RepRapPro Huxley has T2.5 belts
-#define XY_PULLEY_TEETH 14.0  //RepRapPro Huxley has 14 teeth pulleys
+#define XY_PULLEY_PITCH 2.5   // RepRapPro Huxley has T2.5 belts
+#define XY_PULLEY_TEETH 14.0  // RepRapPro Huxley has 14 teeth pulleys
 
 //
 // Standard NEMA 17 with fancy 5mm lead screws
@@ -759,8 +753,8 @@ Black rubber belt(MXL), 18 - tooth aluminium pulley : 87.489 step per mm (Huxley
 //
 // MK7 Direct Drive
 //
-#define E_MOTOR_GEAR_TEETH 11.0 //Num of teeth of gear on extruder motor
-#define E_ROD_GEAR_TEETH 53.0   //Num of teeth of gear driving the extruder rod
+#define E_MOTOR_GEAR_TEETH 11.0 // Num of teeth of gear on extruder motor
+#define E_ROD_GEAR_TEETH 53.0   // Num of teeth of gear driving the extruder rod
 #define E_ROD_DIAM 5.4 // ca value. M6 rod drives the filament. Manual calibration needed.
 #define E_ROD_CIRC (M_PI * E_ROD_DIAM)
 #define E_STEPS (E_MOTOR_STEPS / (E_MOTOR_GEAR_TEETH/E_ROD_GEAR_TEETH) / E_ROD_CIRC)

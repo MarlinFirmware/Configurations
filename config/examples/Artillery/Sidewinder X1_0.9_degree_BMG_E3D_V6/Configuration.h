@@ -544,21 +544,15 @@
   //#define MIN_BED_POWER 0
   //#define PID_BED_DEBUG // Sends debug data to the serial port.
 
-  //Artillery Sidewinder heated bed at 60C
+  // Artillery Sidewinder heated bed at 60C
   //#define DEFAULT_bedKp 32.49
   //#define DEFAULT_bedKi 5.29
   //#define DEFAULT_bedKd 133.10
 
-  //Artillery Sidewinder heated bed at 100C
+  // Artillery Sidewinder heated bed at 100C
   #define DEFAULT_bedKp 41.68
   #define DEFAULT_bedKi 6.88
   #define DEFAULT_bedKd 168.43
-
-  //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
-  //from pidautotune
-  //#define DEFAULT_bedKp 97.1
-  //#define DEFAULT_bedKi 1.41
-  //#define DEFAULT_bedKd 1675.16
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #endif // PIDTEMPBED

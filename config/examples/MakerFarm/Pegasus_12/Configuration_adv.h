@@ -1170,6 +1170,7 @@
   #if ENABLED(POWER_LOSS_RECOVERY)
     #define PLR_ENABLED_DEFAULT   false // Power Loss Recovery enabled by default. (Set with 'M413 Sn' & M500)
     //#define BACKUP_POWER_SUPPLY       // Backup power / UPS to move the steppers on power loss
+    //#define POWER_LOSS_RECOVER_ZHOME  // Z homing is needed for proper recovery. 99.9% of the time this should be disabled!
     //#define POWER_LOSS_ZRAISE       2 // (mm) Z axis raise on resume (on power loss with UPS)
     //#define POWER_LOSS_PIN         44 // Pin to detect power loss. Set to -1 to disable default pin on boards without module.
     //#define POWER_LOSS_STATE     HIGH // State of pin indicating power loss
@@ -3195,10 +3196,10 @@
   #define USER_SCRIPT_AUDIBLE_FEEDBACK
   #define USER_SCRIPT_RETURN  // Return to status screen after a script
 
-  #define USER_DESC_1 "Manual UBL" //Use nozzle & paper to setup UBL
+  #define USER_DESC_1 "Manual UBL" // Use nozzle & paper to setup UBL
   #define USER_GCODE_1 "G28\nG29 P4 R999\nG29 A\nG29 S\nM500"
 
-  #define USER_DESC_2 "Adjust Point Near" //Adjust nearest mesh point
+  #define USER_DESC_2 "Adjust Point Near" // Adjust nearest mesh point
   #define USER_GCODE_2 "G29 P4\nM500"
 
   #define USER_DESC_3 "PID Autotune End"
@@ -3469,7 +3470,7 @@
    */
   //#define MMU_EXTRUDER_SENSOR
   #if ENABLED(MMU_EXTRUDER_SENSOR)
-    #define MMU_LOADING_ATTEMPTS_NR 5 //max. number of attempts to load filament if first load fail
+    #define MMU_LOADING_ATTEMPTS_NR 5 // max. number of attempts to load filament if first load fail
   #endif
 
   /**
