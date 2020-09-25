@@ -71,7 +71,7 @@ Report bugs to the [Issues section of my Marlin fork](https://github.com/davidtg
 - DRIVERS: TMC2208 (silent) / A4988 (noisy)
 - USB TO SERIAL CONVERTER: [CH340G](https://www.mpja.com/download/35227cpdata.pdf)
 - FLASH: [WINBOND W25Q128JVSQ](https://www.winbond.com/resource-files/w25q128jv%20revf%2003272018%20plus.pdf) (128M-bit) Serial Flash memory
-- EEPROM: [AT24C04C](https://datasheet.lcsc.com/szlcsc/1809192313_Microchip-Tech-AT24C04C-SSHM-T_C6205.pdf) (ATMLH744 04CM) 4 Kb 
+- EEPROM: [AT24C04C](https://datasheet.lcsc.com/szlcsc/1809192313_Microchip-Tech-AT24C04C-SSHM-T_C6205.pdf) (ATMLH744 04CM) 4 Kb
 - LCD: [ST7789V](https://www.crystalfontz.com/controllers/- Sitronix/ST7789V/470/) | [STP320240_0280E2T](https://a.aliexpress.com/_dV4Bghv) (40P/1,5): ST7789 (YT280S008)
 - TOUCH: [XPT2046](https://ldm-systems.ru/f/doc/catalog/HY-TFT-2,8/XPT2046.pdf)
 - MOSFETS (BED/HOTEND): G90N04

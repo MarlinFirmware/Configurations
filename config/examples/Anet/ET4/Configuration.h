@@ -498,7 +498,7 @@
     //#define DEFAULT_Kp 40.00
     //#define DEFAULT_Ki 0.70
     //#define DEFAULT_Kd 50.00
-    
+
     // ET4 Autotune PID results
     #define DEFAULT_Kp  18.62
     #define DEFAULT_Ki   1.38
