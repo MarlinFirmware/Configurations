@@ -489,13 +489,18 @@
   //#define PID_PARAMS_PER_HOTEND // Uses separate PID parameters for each extruder (useful for mismatched extruders)
                                   // Set/get with gcode: M301 E[extruder number, 0-2]
 
-  // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
-
   // Creality Ender-5 Plus, auto tune result of: M303 E0 S225 C10
-  #define DEFAULT_Kp 19.41
-  #define DEFAULT_Ki 1.38
-  #define DEFAULT_Kd 68.38
-
+  #if ENABLED(PID_PARAMS_PER_HOTEND)
+    // Specify between 1 and HOTENDS values per array.
+    // If fewer than EXTRUDER values are provided, the last element will be repeated.
+    #define DEFAULT_Kp_LIST {  19.41,  19.41 }
+    #define DEFAULT_Ki_LIST {   1.38,   1.38 }
+    #define DEFAULT_Kd_LIST {  68.38,  68.38 }
+  #else
+    #define DEFAULT_Kp  19.41
+    #define DEFAULT_Ki   1.38
+    #define DEFAULT_Kd  68.38
+  #endif
 #endif // PIDTEMP
 
 //===========================================================================
@@ -534,8 +539,8 @@
   // Creality Ender-5 Plus, auto tune result of: M303 E-1 S60 C10
   // TODO rubienr auto tune: Command has an issue with "PID Autotune failed! Bad extruder number" -> auto tune postponed.
 
-  //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
-  //from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
+  // 120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
+  // from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
   #define DEFAULT_bedKp 10.00
   #define DEFAULT_bedKi .023
   #define DEFAULT_bedKd 305.4
@@ -2165,6 +2170,9 @@
 // Touch-screen LCD for Malyan M200/M300 printers
 //
 //#define MALYAN_LCD
+#if ENABLED(MALYAN_LCD)
+  #define LCD_SERIAL_PORT 1  // Default is 1 for Malyan M200
+#endif
 
 //
 // Touch UI for FTDI EVE (FT800/FT810) displays
@@ -2178,7 +2186,7 @@
 //#define ANYCUBIC_LCD_I3MEGA
 //#define ANYCUBIC_LCD_CHIRON
 #if EITHER(ANYCUBIC_LCD_I3MEGA, ANYCUBIC_LCD_CHIRON)
-  #define ANYCUBIC_LCD_SERIAL_PORT 3
+  #define LCD_SERIAL_PORT 3  // Default is 3 for Anycubic
   //#define ANYCUBIC_LCD_DEBUG
 #endif
 

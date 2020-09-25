@@ -487,23 +487,17 @@
   //#define PID_PARAMS_PER_HOTEND // Uses separate PID parameters for each extruder (useful for mismatched extruders)
                                   // Set/get with gcode: M301 E[extruder number, 0-2]
 
-  // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
-
-  // Ultimaker
-  #define DEFAULT_Kp 25.20
-  #define DEFAULT_Ki 2.11
-  #define DEFAULT_Kd 75.35
-
-  // MakerGear
-  #define DEFAULT_Kp 25.20
-  #define DEFAULT_Ki 2.11
-  #define DEFAULT_Kd 75.35
-
-  // Mendel Parts V9 on 12V
-  #define DEFAULT_Kp 25.20
-  #define DEFAULT_Ki 2.11
-  #define DEFAULT_Kd 75.35
-
+  #if ENABLED(PID_PARAMS_PER_HOTEND)
+    // Specify between 1 and HOTENDS values per array.
+    // If fewer than EXTRUDER values are provided, the last element will be repeated.
+    #define DEFAULT_Kp_LIST {  25.20,  25.20 }
+    #define DEFAULT_Ki_LIST {   2.11,   2.11 }
+    #define DEFAULT_Kd_LIST {  75.35,  75.35 }
+  #else
+    #define DEFAULT_Kp  25.20
+    #define DEFAULT_Ki   2.11
+    #define DEFAULT_Kd  75.35
+  #endif
 #endif // PIDTEMP
 
 //===========================================================================
@@ -539,14 +533,14 @@
   //#define MIN_BED_POWER 0
   //#define PID_BED_DEBUG // Sends debug data to the serial port.
 
-  //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
-  //from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
+  // 120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
+  // from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
   #define DEFAULT_bedKp 356.34
   #define DEFAULT_bedKi 70.15
   #define DEFAULT_bedKd 452.51
 
-  //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
-  //from pidautotune
+  // 120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
+  // from pidautotune
   #define DEFAULT_bedKp 356.34
   #define DEFAULT_bedKi 70.15
   #define DEFAULT_bedKd 452.51
@@ -2172,6 +2166,9 @@
 // Touch-screen LCD for Malyan M200/M300 printers
 //
 //#define MALYAN_LCD
+#if ENABLED(MALYAN_LCD)
+  #define LCD_SERIAL_PORT 1  // Default is 1 for Malyan M200
+#endif
 
 //
 // Touch UI for FTDI EVE (FT800/FT810) displays
@@ -2185,7 +2182,7 @@
 //#define ANYCUBIC_LCD_I3MEGA
 //#define ANYCUBIC_LCD_CHIRON
 #if EITHER(ANYCUBIC_LCD_I3MEGA, ANYCUBIC_LCD_CHIRON)
-  #define ANYCUBIC_LCD_SERIAL_PORT 3
+  #define LCD_SERIAL_PORT 3  // Default is 3 for Anycubic
   //#define ANYCUBIC_LCD_DEBUG
 #endif
 

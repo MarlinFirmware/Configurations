@@ -492,28 +492,18 @@
   //#define PID_PARAMS_PER_HOTEND // Uses separate PID parameters for each extruder (useful for mismatched extruders)
                                   // Set/get with gcode: M301 E[extruder number, 0-2]
 
-  // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
-
-  // Ultimaker
-  //#define DEFAULT_Kp 22.2
-  //#define DEFAULT_Ki 1.08
-  //#define DEFAULT_Kd 114
-
-  // MakerGear
-  //#define DEFAULT_Kp 7.0
-  //#define DEFAULT_Ki 0.1
-  //#define DEFAULT_Kd 12
-
-  // Mendel Parts V9 on 12V
-  //#define DEFAULT_Kp 63.0
-  //#define DEFAULT_Ki 2.25
-  //#define DEFAULT_Kd 440
-
   // JGAurora A5 (tuned at 210C)
-  #define DEFAULT_Kp 35.3//22.2
-  #define DEFAULT_Ki 4.35//1.08
-  #define DEFAULT_Kd 71.57//114
-
+  #if ENABLED(PID_PARAMS_PER_HOTEND)
+    // Specify between 1 and HOTENDS values per array.
+    // If fewer than EXTRUDER values are provided, the last element will be repeated.
+    #define DEFAULT_Kp_LIST {  35.30,  35.30 }
+    #define DEFAULT_Ki_LIST {   4.35,   4.35 }
+    #define DEFAULT_Kd_LIST {  71.57,  71.57 }
+  #else
+    #define DEFAULT_Kp  35.30
+    #define DEFAULT_Ki   4.35
+    #define DEFAULT_Kd  71.57
+  #endif
 #endif // PIDTEMP
 
 //===========================================================================
@@ -549,19 +539,13 @@
   //#define MIN_BED_POWER 0
   //#define PID_BED_DEBUG // Sends debug data to the serial port.
 
-  //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
-  //from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
+  // 120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
+  // from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
 
   // JGAurora A5 (tuned at 70C)
   #define DEFAULT_bedKp 10.00
   #define DEFAULT_bedKi .023
   #define DEFAULT_bedKd 305.4
-
-  //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
-  //from pidautotune
-  //#define DEFAULT_bedKp 97.1
-  //#define DEFAULT_bedKi 1.41
-  //#define DEFAULT_bedKd 1675.16
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #endif // PIDTEMPBED
@@ -2184,6 +2168,9 @@
 // Touch-screen LCD for Malyan M200/M300 printers
 //
 //#define MALYAN_LCD
+#if ENABLED(MALYAN_LCD)
+  #define LCD_SERIAL_PORT 1  // Default is 1 for Malyan M200
+#endif
 
 //
 // Touch UI for FTDI EVE (FT800/FT810) displays
@@ -2197,7 +2184,7 @@
 //#define ANYCUBIC_LCD_I3MEGA
 //#define ANYCUBIC_LCD_CHIRON
 #if EITHER(ANYCUBIC_LCD_I3MEGA, ANYCUBIC_LCD_CHIRON)
-  #define ANYCUBIC_LCD_SERIAL_PORT 3
+  #define LCD_SERIAL_PORT 3  // Default is 3 for Anycubic
   //#define ANYCUBIC_LCD_DEBUG
 #endif
 

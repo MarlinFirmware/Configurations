@@ -487,13 +487,18 @@
   //#define PID_PARAMS_PER_HOTEND // Uses separate PID parameters for each extruder (useful for mismatched extruders)
                                   // Set/get with gcode: M301 E[extruder number, 0-2]
 
-  // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
-
   // A10M [@thinkyhead]
-  #define DEFAULT_Kp 45.80
-  #define DEFAULT_Ki 3.61
-  #define DEFAULT_Kd 145.39
-
+  #if ENABLED(PID_PARAMS_PER_HOTEND)
+    // Specify between 1 and HOTENDS values per array.
+    // If fewer than EXTRUDER values are provided, the last element will be repeated.
+    #define DEFAULT_Kp_LIST {  45.80,  45.80 }
+    #define DEFAULT_Ki_LIST {   3.61,   3.61 }
+    #define DEFAULT_Kd_LIST { 145.39, 145.39 }
+  #else
+    #define DEFAULT_Kp  45.80
+    #define DEFAULT_Ki   3.61
+    #define DEFAULT_Kd 145.39
+  #endif
 #endif // PIDTEMP
 
 //===========================================================================
@@ -2155,6 +2160,9 @@
 // Touch-screen LCD for Malyan M200/M300 printers
 //
 //#define MALYAN_LCD
+#if ENABLED(MALYAN_LCD)
+  #define LCD_SERIAL_PORT 1  // Default is 1 for Malyan M200
+#endif
 
 //
 // Touch UI for FTDI EVE (FT800/FT810) displays
@@ -2168,7 +2176,7 @@
 //#define ANYCUBIC_LCD_I3MEGA
 //#define ANYCUBIC_LCD_CHIRON
 #if EITHER(ANYCUBIC_LCD_I3MEGA, ANYCUBIC_LCD_CHIRON)
-  #define ANYCUBIC_LCD_SERIAL_PORT 3
+  #define LCD_SERIAL_PORT 3  // Default is 3 for Anycubic
   //#define ANYCUBIC_LCD_DEBUG
 #endif
 

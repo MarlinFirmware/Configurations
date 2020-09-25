@@ -492,10 +492,17 @@
                                   // Set/get with gcode: M301 E[extruder number, 0-2]
 
   // Kossel Pro
-  #define DEFAULT_Kp 19.30
-  #define DEFAULT_Ki 3.51
-  #define DEFAULT_Kd 26.56
-
+  #if ENABLED(PID_PARAMS_PER_HOTEND)
+    // Specify between 1 and HOTENDS values per array.
+    // If fewer than EXTRUDER values are provided, the last element will be repeated.
+    #define DEFAULT_Kp_LIST {  19.30,  19.30 }
+    #define DEFAULT_Ki_LIST {   3.51,   3.51 }
+    #define DEFAULT_Kd_LIST {  26.56,  26.56 }
+  #else
+    #define DEFAULT_Kp  19.30
+    #define DEFAULT_Ki   3.51
+    #define DEFAULT_Kd  26.56
+  #endif
 #endif // PIDTEMP
 
 //===========================================================================
@@ -531,8 +538,8 @@
   //#define MIN_BED_POWER 0
   //#define PID_BED_DEBUG // Sends debug data to the serial port.
 
-  //Kossel Pro heated bed plate with borosilicate glass
-  //from pidautotune (M303 E-1 S60 C8)
+  // Kossel Pro heated bed plate with borosilicate glass
+  // from pidautotune (M303 E-1 S60 C8)
   #define DEFAULT_bedKp 370.25
   #define DEFAULT_bedKi 62.77
   #define DEFAULT_bedKd 545.98
@@ -2273,6 +2280,9 @@
 // Touch-screen LCD for Malyan M200/M300 printers
 //
 //#define MALYAN_LCD
+#if ENABLED(MALYAN_LCD)
+  #define LCD_SERIAL_PORT 1  // Default is 1 for Malyan M200
+#endif
 
 //
 // Touch UI for FTDI EVE (FT800/FT810) displays
@@ -2286,7 +2296,7 @@
 //#define ANYCUBIC_LCD_I3MEGA
 //#define ANYCUBIC_LCD_CHIRON
 #if EITHER(ANYCUBIC_LCD_I3MEGA, ANYCUBIC_LCD_CHIRON)
-  #define ANYCUBIC_LCD_SERIAL_PORT 3
+  #define LCD_SERIAL_PORT 3  // Default is 3 for Anycubic
   //#define ANYCUBIC_LCD_DEBUG
 #endif
 

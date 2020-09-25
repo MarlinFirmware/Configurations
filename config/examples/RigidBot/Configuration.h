@@ -490,23 +490,28 @@
   //#define PID_PARAMS_PER_HOTEND // Uses separate PID parameters for each extruder (useful for mismatched extruders)
                                   // Set/get with gcode: M301 E[extruder number, 0-2]
 
-  // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
+  #if ENABLED(PID_PARAMS_PER_HOTEND)
+    // Specify between 1 and HOTENDS values per array.
+    // If fewer than EXTRUDER values are provided, the last element will be repeated.
+    #define DEFAULT_Kp_LIST {  16.17,  16.17 }
+    #define DEFAULT_Ki_LIST {   0.85,   0.85 }
+    #define DEFAULT_Kd_LIST {  76.55,  76.55 }
+  #else
+    // Rigidbot hotend
+    #define DEFAULT_Kp  16.17
+    #define DEFAULT_Ki   0.85
+    #define DEFAULT_Kd  76.55
 
-  // Rigidbot hotend
-  #define DEFAULT_Kp 16.17
-  #define DEFAULT_Ki 0.85
-  #define DEFAULT_Kd 76.55
+    // Base DGlass3D/E3Dv6 hotend
+    //#define DEFAULT_Kp 10
+    //#define DEFAULT_Ki 0.85
+    //#define DEFAULT_Kd 245
 
-  // Base DGlass3D/E3Dv6 hotend
-  //#define DEFAULT_Kp 10
-  //#define DEFAULT_Ki 0.85
-  //#define DEFAULT_Kd 245
-
-  // E3D w/ rigidbot cartridge
-  //#define DEFAULT_Kp 16.30
-  //#define DEFAULT_Ki 0.95
-  //#define DEFAULT_Kd 69.69
-
+    // E3D w/ rigidbot cartridge
+    //#define DEFAULT_Kp 16.30
+    //#define DEFAULT_Ki 0.95
+    //#define DEFAULT_Kd 69.69
+  #endif
 #endif // PIDTEMP
 
 //===========================================================================
@@ -542,7 +547,7 @@
   //#define MIN_BED_POWER 0
   //#define PID_BED_DEBUG // Sends debug data to the serial port.
 
-  //RigidBot, from pid autotune
+  // RigidBot, from pid autotune
   #define DEFAULT_bedKp 355
   #define DEFAULT_bedKi 66.5
   #define DEFAULT_bedKd 480
@@ -2172,6 +2177,9 @@
 // Touch-screen LCD for Malyan M200/M300 printers
 //
 //#define MALYAN_LCD
+#if ENABLED(MALYAN_LCD)
+  #define LCD_SERIAL_PORT 1  // Default is 1 for Malyan M200
+#endif
 
 //
 // Touch UI for FTDI EVE (FT800/FT810) displays
@@ -2185,7 +2193,7 @@
 //#define ANYCUBIC_LCD_I3MEGA
 //#define ANYCUBIC_LCD_CHIRON
 #if EITHER(ANYCUBIC_LCD_I3MEGA, ANYCUBIC_LCD_CHIRON)
-  #define ANYCUBIC_LCD_SERIAL_PORT 3
+  #define LCD_SERIAL_PORT 3  // Default is 3 for Anycubic
   //#define ANYCUBIC_LCD_DEBUG
 #endif
 
