@@ -23,7 +23,7 @@ Use these example config files (adjusted to your needs) and build Marlin as usua
    Move jumper **SW1** to **USB**.
 - **JP1** is connected to the **BOOT0** pin which blocks programming.
    Remove the **JP1** jumper.
-   
+
 ### 3. Get STM32 Flasher
 
 Download the _STM32 Flasher_ software at the ST Micro [download page](https://www.st.com/en/development-tools/flasher-stm32.html#get-software). Use _STM32 Flasher_ to flash your Marlin binary file to the board following the procedure shown in the video.
