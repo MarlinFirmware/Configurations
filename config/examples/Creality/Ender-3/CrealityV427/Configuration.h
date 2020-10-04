@@ -2069,7 +2069,11 @@
 // (For CR-10 owners who want to replace the Melzi Creality board but retain the display)
 //
 #define CR10_STOCKDISPLAY
-#define RET6_12864_LCD
+
+// Specific to the SoC (can either be RET / VET)
+#if ENABLED(CR10_STOCKDISPLAY)
+  #define RET6_12864_LCD
+#endif
 
 //
 // Ender-2 OEM display, a variant of the MKS_MINI_12864

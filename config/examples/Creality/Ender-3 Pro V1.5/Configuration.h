@@ -2066,7 +2066,7 @@
 
 // Specific to the SoC (can either be RET / VET)
 #if ENABLED(CR10_STOCKDISPLAY)
-  #define  RET6_12864_LCD
+  #define RET6_12864_LCD
 #endif
 
 //
