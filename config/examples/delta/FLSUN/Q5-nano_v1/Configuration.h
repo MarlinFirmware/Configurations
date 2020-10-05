@@ -495,9 +495,9 @@
     #define DEFAULT_Kd_LIST { 114.00, 112.0 }
   #else
     // flsun Q5 via M303 C8 E-1 S60
-    #define DEFAULT_bedKp 80.77
-    #define DEFAULT_bedKi 15.74
-    #define DEFAULT_bedKd 276.27
+    #define DEFAULT_Kp 80.77
+    #define DEFAULT_Ki 15.74
+    #define DEFAULT_Kd 276.27
   #endif
 #endif // PIDTEMP
 
