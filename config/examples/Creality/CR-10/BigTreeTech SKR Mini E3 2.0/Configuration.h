@@ -1515,15 +1515,15 @@
 #define PREHEAT_2_TEMP_BED    110
 #define PREHEAT_2_FAN_SPEED   255 // Value from 0 to 255
 
-#define PREHEAT_1_LABEL       "petG"
-#define PREHEAT_1_TEMP_HOTEND 220 
-#define PREHEAT_1_TEMP_BED     45
-#define PREHEAT_1_FAN_SPEED   255 // Value from 0 to 255
+#define PREHEAT_3_LABEL       "petG"
+#define PREHEAT_3_TEMP_HOTEND 220 
+#define PREHEAT_3_TEMP_BED     45
+#define PREHEAT_3_FAN_SPEED   255 // Value from 0 to 255
 
-#define PREHEAT_2_LABEL       "Nylon"
-#define PREHEAT_2_TEMP_HOTEND 230
-#define PREHEAT_2_TEMP_BED    45
-#define PREHEAT_2_FAN_SPEED   255 // Value from 0 to 255
+#define PREHEAT_4_LABEL       "Nylon"
+#define PREHEAT_4_TEMP_HOTEND 230
+#define PREHEAT_4_TEMP_BED    45
+#define PREHEAT_4_FAN_SPEED   255 // Value from 0 to 255
 
 /**
  * Nozzle Park
