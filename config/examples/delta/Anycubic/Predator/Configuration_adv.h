@@ -1567,10 +1567,10 @@
 //
 #if TFT_SCALED_DOGLCD
   //
-  // FSMC_UPSCALE 2 2x upscaler for 320x240 displays (default)
-  // FSMC_UPSCALE 3 3x upscaler for 480x320 displays
+  // GRAPHICAL_TFT_UPSCALE 2 2x upscaler for 320x240 displays (default)
+  // GRAPHICAL_TFT_UPSCALE 3 3x upscaler for 480x320 displays
   //
-  #define FSMC_UPSCALE 3
+  #define GRAPHICAL_TFT_UPSCALE 3
 
   //
   // Change colors
