@@ -1566,7 +1566,6 @@
 // FSMC / SPI Graphical TFT
 //
 #if TFT_SCALED_DOGLCD
-  //#define GRAPHICAL_TFT_ROTATE_180
   //
   // FSMC_UPSCALE 2 2x upscaler for 320x240 displays (default)
   // FSMC_UPSCALE 3 3x upscaler for 480x320 displays

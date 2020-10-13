@@ -1564,7 +1564,6 @@
 // FSMC / SPI Graphical TFT
 //
 #if TFT_SCALED_DOGLCD
-  //#define GRAPHICAL_TFT_ROTATE_180
   // see https://ee-programming-notepad.blogspot.com/2016/10/16-bit-color-generator-picker.html
   #define TFT_MARLINUI_COLOR COLOR_WHITE
   #define TFT_MARLINBG_COLOR COLOR_BLACK
