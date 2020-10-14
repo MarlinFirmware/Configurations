@@ -2330,9 +2330,6 @@ Black rubber belt(MXL), 18 - tooth aluminium pulley : 87.489 step per mm (Huxley
   //#define TFT_RES_320x240
   //#define TFT_RES_480x272
   //#define TFT_RES_480x320
-
-  // DOGM upscaling to fit
-  //#define GRAPHICAL_TFT_UPSCALE 2   // :[ 2, 3 ]
 #endif
 
 /**
