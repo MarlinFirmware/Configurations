@@ -2275,8 +2275,8 @@
   #define TFT_DRIVER AUTO
 
   // Interface. Enable one of the following options:
-  //#define TFT_INTERFACE_FSMC
-  #define TFT_INTERFACE_SPI
+  #define TFT_INTERFACE_FSMC
+  //#define TFT_INTERFACE_SPI
 
   // TFT Resolution. Enable one of the following options:
   #define TFT_RES_320x240
@@ -2294,8 +2294,8 @@
  *   For LVGL_UI also copy the 'assets' folder from the build directory to the
  *   root of your SD card, together with the compiled firmware.
  */
-#define TFT_CLASSIC_UI
-//#define TFT_COLOR_UI
+//#define TFT_CLASSIC_UI
+#define TFT_COLOR_UI
 //#define TFT_LVGL_UI
 
 /**
