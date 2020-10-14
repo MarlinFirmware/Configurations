@@ -2349,7 +2349,7 @@
   //#define TFT_INTERFACE_SPI
 
   // TFT Resolution. Enable one of the following options:
-  //#define TFT_RES_320x240
+  #define TFT_RES_320x240
   //#define TFT_RES_480x272
   //#define TFT_RES_480x320
 
@@ -2368,7 +2368,7 @@
  *   root of your SD card, together with the compiled firmware.
  */
 //#define TFT_CLASSIC_UI
-//#define TFT_COLOR_UI
+#define TFT_COLOR_UI
 //#define TFT_LVGL_UI
 
 /**
