@@ -71,8 +71,8 @@
 
 // @section info
 // Author info of this build printed to the host during boot and M115
-//#define STRING_CONFIG_H_AUTHOR "(AndersSahlman, QQ-S)" // Who made the changes.
-#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
+#define STRING_CONFIG_H_AUTHOR "(Foxies-CSTL, QQS-Pro)" // Who made the changes.
+//#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
 /**
  * *** VENDORS PLEASE READ ***
@@ -2362,13 +2362,13 @@
 // 320x240, 2.8", FSMC Display From MKS
 // Normally used in MKS Robin Nano V1.2
 //
-//#define MKS_ROBIN_TFT28
+#define MKS_ROBIN_TFT28
 
 //
 // 320x240, 3.2", FSMC Display From MKS
 // Normally used in MKS Robin Nano V1.2
 //
-#define MKS_ROBIN_TFT32
+//#define MKS_ROBIN_TFT32
 
 //
 // 480x320, 3.5", FSMC Display From MKS
@@ -2461,36 +2461,12 @@
     #define BUTTON_DELAY_EDIT  50 // (ms) Button repeat delay for edit screens
     #define BUTTON_DELAY_MENU 250 // (ms) Button repeat delay for menus
 
-//  #define TOUCH_SCREEN_CALIBRATION
+  //#define TOUCH_SCREEN_CALIBRATION
 
   //#define XPT2046_X_CALIBRATION 12316
   //#define XPT2046_Y_CALIBRATION -8981
   //#define XPT2046_X_OFFSET        -43
   //#define XPT2046_Y_OFFSET        257
-
-  // Define in pins QQS-Pro (M995)
-  //#define XPT2046_X_CALIBRATION 12218
-  //#define XPT2046_Y_CALIBRATION -8814
-  //#define XPT2046_X_OFFSET        -34
-  //#define XPT2046_Y_OFFSET        256
-
-  /* MKS Robin TFT v2.0 */
-  //#define XPT2046_X_CALIBRATION  12013
-  //#define XPT2046_Y_CALIBRATION  -8711
-  //#define XPT2046_X_OFFSET         -32
-  //#define XPT2046_Y_OFFSET         256
-  
-  /* MKS Robin TFT v1.1 with ILI9328 */
-  //#define XPT2046_X_CALIBRATION -11792
-  //#define XPT2046_Y_CALIBRATION   8947
-  //#define XPT2046_X_OFFSET         342
-  //#define XPT2046_Y_OFFSET         -19
-
-  /* MKS Robin TFT v1.1 with R61505 */
-  //#define XPT2046_X_CALIBRATION  12489
-  //#define XPT2046_Y_CALIBRATION   9210
-  //#define XPT2046_X_OFFSET         -52
-  //#define XPT2046_Y_OFFSET         -17
 #endif
 
 //
