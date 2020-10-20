@@ -502,13 +502,11 @@
     #define DEFAULT_Ki_LIST {   3.38,   3.38 }
     #define DEFAULT_Kd_LIST {  58.69,  58.69 }
   #else
+ // FLSUN QQS-Pro 1.6mm aluminium heater with 4mm lattice glass
     //#define DEFAULT_Kp  28.16
     //#define DEFAULT_Ki   3.38
     //#define DEFAULT_Kd  58.69
-  // (measured after M106 S180 with M303 E0 S230 C8) Memo: M301 P23.24 I1.87 D72.35 (sonde11)
-  // FLSUN QQ-S, PET 235 C with 70% part cooling
-  //M301 P21.67 I1.25 D93.81 PLA
-  //M301 P21.6708 I1.2515 D93.8127 PET 
+  // FLSUN QQS-Pro, PET 235 C with 70% part cooling
     #define DEFAULT_Kp 21.6708
     #define DEFAULT_Ki 1.2515
     #define DEFAULT_Kd 93.8127
@@ -554,7 +552,7 @@
   //#define DEFAULT_bedKi .023
   //#define DEFAULT_bedKd 305.4
 
-  // FLSUN QQ-S stock 1.6mm aluminium heater with 4mm lattice glass
+  // FLSUN QQS-Pro 1.6mm aluminium heater with 4mm lattice glass
   //#define DEFAULT_bedKp 325.10
   //#define DEFAULT_bedKi 63.35
   //#define DEFAULT_bedKd 417.10
@@ -1161,7 +1159,7 @@
 
 // For M851 give a range for adjusting the Z probe offset
 #define Z_PROBE_OFFSET_RANGE_MIN -30
-#define Z_PROBE_OFFSET_RANGE_MAX 30
+#define Z_PROBE_OFFSET_RANGE_MAX  30
 
 // Enable the M48 repeatability test to test probe accuracy
 #define Z_MIN_PROBE_REPEATABILITY_TEST
