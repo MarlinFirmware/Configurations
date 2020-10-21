@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "Creality/Ender-2"
-
 /**
  * Custom Status Screen bitmap
  *
