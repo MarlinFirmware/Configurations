@@ -499,10 +499,10 @@
     #define DEFAULT_Ki_LIST {   1.08,   1.0 }
     #define DEFAULT_Kd_LIST { 114.00, 112.0 }
   #else
-    // flsun Q5 via M303 C8 E-1 S60
-    #define DEFAULT_bedKp 80.77
-    #define DEFAULT_bedKi 15.74
-    #define DEFAULT_bedKd 276.27
+    // flsun Q5
+    #define DEFAULT_Kp 12.88
+    #define DEFAULT_Ki 0.72
+    #define DEFAULT_Kd 57.54
   #endif
 #endif // PIDTEMP
 
@@ -572,7 +572,7 @@
  * Note: For Bowden Extruders make this large enough to allow load/unload.
  */
 #define PREVENT_LENGTHY_EXTRUDE
-#define EXTRUDE_MAXLENGTH 200
+#define EXTRUDE_MAXLENGTH 800
 
 //===========================================================================
 //======================== Thermal Runaway Protection =======================
@@ -593,7 +593,7 @@
 
 #define THERMAL_PROTECTION_HOTENDS // Enable thermal protection for all extruders
 #define THERMAL_PROTECTION_BED     // Enable thermal protection for the heated bed
-#define THERMAL_PROTECTION_CHAMBER // Enable thermal protection for the heated chamber
+//#define THERMAL_PROTECTION_CHAMBER // Enable thermal protection for the heated chamber
 
 //===========================================================================
 //============================= Mechanical Settings =========================
