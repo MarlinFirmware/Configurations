@@ -1,7 +1,7 @@
-# BigTreeTech BTT002/TMC2209 Config for Prusa MK3S
+# BigTreeTech BTT002/TMC2209 Config for Průša MK3S
 
 ## Requirements
-- [Prusa MK3S](https://www.prusa3d.com/original-prusa-i3-mk3/) or MK3 with MK3S upgrade (required for filament runout to work properly)
+- [Průša MK3S](https://www.prusa3d.com/original-prusa-i3-mk3/) or MK3 with MK3S upgrade (required for filament runout to work properly)
 - BigTreeTech BTT002 motherboard
 - 4 x BigTreeTech TMC2209s (DIAG pin location differs from Watterott's & similar designs)
 
@@ -11,7 +11,7 @@
 ![image](https://user-images.githubusercontent.com/13375512/74117621-24415000-4b6d-11ea-8811-f867e187ea0c.png)
 
 ## Changes to Start G-code
-The `W` in Prusa's `G28 W ; home all without mesh bed level` G-code does not exist in Marlin and [`G80 ; mesh bed leveling`](https://marlinfw.org/docs/gcode/G080.html) cancels the current motion mode, so no bed leveling will take place.
+The `W` in Průša's `G28 W ; home all without mesh bed level` G-code does not exist in Marlin and [`G80 ; mesh bed leveling`](https://marlinfw.org/docs/gcode/G080.html) cancels the current motion mode, so no bed leveling will take place.
 
 ### PrusaSlicer
 Paste the start G-code block below in the Printer Settings tab's Custom G-code section. Use the Filament Settings tab's Custom G-code section to add the [Linear Advance](https://marlinfw.org/docs/features/lin_advance.html) (`M900 K0.0`) value since it can be saved on a per-filament basis.

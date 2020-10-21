@@ -29,44 +29,44 @@ USB and SDCARD Firmware flashing for the ARDUINO ATMEGA 2560 and ADK
 ---------------------------------------------------------------------
 The bootloader looks for byte in eeprom at address 0x3FF:
 
-	-if it is set to 0xF0 bootloader will look for a bin file on the sdcard named
-	 firmware.bin and use it to flash the firmware then reset the byte to 0xFF so it
-	 does this only once
+  -if it is set to 0xF0 bootloader will look for a bin file on the sdcard named
+   firmware.bin and use it to flash the firmware then reset the byte to 0xFF so it
+   does this only once
 
-	-otherwise no action is taken and bootloader works as a arduino bootloader except
-	 some of the debugging functions are missing
+  -otherwise no action is taken and bootloader works as a arduino bootloader except
+   some of the debugging functions are missing
 
 Setup
 
-	ADAFruit micro sdcard 5V ready:
+  ADAFruit micro sdcard 5V ready:
 
-	SDCARD on ATMEGA 2560 or ADK
+  SDCARD on ATMEGA 2560 or ADK
 
-	pin 50  -  DO
+  pin 50  -  DO
 
-	pin 51  -  DI
+  pin 51  -  DI
 
-	pin 52  -  CLK
+  pin 52  -  CLK
 
-	pin 53  -  CS
+  pin 53  -  CS
 
 Generate BIN file for firmware update:
 
 To generate a bin file you need issue the following command on you apps elf executable:
 
-	avr-objcopy -I elf32-avr -O binary firmware.cpp.elf firmware.bin
+  avr-objcopy -I elf32-avr -O binary firmware.cpp.elf firmware.bin
 
 this generates firmware.bin which can be put on the sd for flashing your firmware. You can find the elf
 file in you apps build directory.
 
 Using olimex usb to upload bootloader:
 
-	avrdude -c stk500v2 -p m2560 -P /dev/tty.usbmodemfd131 -B 500 -e -u -U lock:w:0x3F:m -U efuse:w:0xFD:m -U hfuse:w:0xD8:m -U efuse:w:0xFF:m -F
+  avrdude -c stk500v2 -p m2560 -P /dev/tty.usbmodemfd131 -B 500 -e -u -U lock:w:0x3F:m -U efuse:w:0xFD:m -U hfuse:w:0xD8:m -U efuse:w:0xFF:m -F
 
-	avrdude -p m2560 -c stk500v2 -P /dev/tty.usbmodemfa131 -F -U flash:w:stk500boot.hex -b 115200 -B1 -U lock:w:0x0F:m
+  avrdude -p m2560 -c stk500v2 -P /dev/tty.usbmodemfa131 -F -U flash:w:stk500boot.hex -b 115200 -B1 -U lock:w:0x0F:m
 
-	avrdude -p m168 -c usbtiny -e -u -U lock:w:0x3f:m -U efuse:w:0x00:m -U hfuse:w:0xDD:m -U lfuse:w:0xFF:m
+  avrdude -p m168 -c usbtiny -e -u -U lock:w:0x3f:m -U efuse:w:0x00:m -U hfuse:w:0xDD:m -U lfuse:w:0xFF:m
 
 
-	avrdude -p m2560 -c stk500v2 -P /dev/tty.usbmodemfd131 -U flash:w:stk500boot_v2_mega2560.hex -U lock:w:0x0F:m -v
-	avrdude -c stk500v2 -p m2560 -P /dev/tty.usbmodemfd131 -U lock:w:0x3F:m -U efuse:w:0xFD:m -U hfuse:w:0xD8:m -U lfuse:w:0xFF:m -e -v
+  avrdude -p m2560 -c stk500v2 -P /dev/tty.usbmodemfd131 -U flash:w:stk500boot_v2_mega2560.hex -U lock:w:0x0F:m -v
+  avrdude -c stk500v2 -p m2560 -P /dev/tty.usbmodemfd131 -U lock:w:0x3F:m -U efuse:w:0xFD:m -U hfuse:w:0xD8:m -U lfuse:w:0xFF:m -e -v

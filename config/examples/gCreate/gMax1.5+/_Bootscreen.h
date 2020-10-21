@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "gCreate/gMax1.5+"
-
 /**
  * Custom Boot Screen bitmap
  *
