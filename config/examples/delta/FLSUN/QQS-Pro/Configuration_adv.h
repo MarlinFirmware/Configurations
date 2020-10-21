@@ -22,6 +22,7 @@
 #pragma once
 
 #define CONFIG_EXAMPLES_DIR "delta/FLSUN/QQS-Pro"
+
 /**
  * Configuration_adv.h
  *
@@ -1147,6 +1148,10 @@
   #if ENABLED(SHOW_REMAINING_TIME)
     #define USE_M73_REMAINING_TIME     //OPT  Use remaining time from M73 command instead of estimation
     #define ROTATE_PROGRESS_DISPLAY    //OPT Display (P)rogress, (E)lapsed, and (R)emaining time
+  #endif
+
+  #if HAS_MARLINUI_U8GLIB
+    //#define PRINT_PROGRESS_SHOW_DECIMALS // Show progress with decimal digits
   #endif
 
   #if EITHER(HAS_MARLINUI_HD44780, IS_TFTGLCD_PANEL)
