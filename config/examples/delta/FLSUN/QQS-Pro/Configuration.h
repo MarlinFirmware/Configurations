@@ -21,8 +21,6 @@
  */
 #pragma once
 
-//#define CONFIG_EXAMPLES_DIR "delta/FLSUN/QQS-Pro"
-
 /**
  * Configuration.h
  *
@@ -70,6 +68,7 @@
 //
 
 // @section info
+
 // Author info of this build printed to the host during boot and M115
 #define STRING_CONFIG_H_AUTHOR "(Foxies-CSTL, QQS-Pro)" // Who made the changes.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
@@ -109,10 +108,10 @@
 
 /**
  * Select a secondary serial port on the board to use for communication with the host.
- * :[-1, 0, 1, 2, 3, 4, 5, 6, 7]
+ * Currently Ethernet (-2) is only supported on Teensy 4.1 boards.
+ * :[-2, -1, 0, 1, 2, 3, 4, 5, 6, 7]
  */
 #define SERIAL_PORT_2 1
-#define NUM_SERIAL 2
 
 /**
  * This setting determines the communication speed of the printer.
@@ -336,6 +335,9 @@
 
   //#define PSU_DEFAULT_OFF         // Keep power off until enabled directly with M80
   //#define PSU_POWERUP_DELAY 250   // (ms) Delay for the PSU to warm up to full power
+
+  //#define PSU_POWERUP_GCODE  "M355 S1"  // G-code to run after power-on (e.g., case light on)
+  //#define PSU_POWEROFF_GCODE "M355 S0"  // G-code to run before power-off (e.g., case light off)
 
   //#define AUTO_POWER_CONTROL      // Enable automatic control of the PS_ON pin
   #if ENABLED(AUTO_POWER_CONTROL)
@@ -2454,9 +2456,9 @@
 // ADS7843/XPT2046 ADC Touchscreen such as ILI9341 2.8
 //
 #define TOUCH_SCREEN
-  #if ENABLED(TOUCH_SCREEN)
-    #define BUTTON_DELAY_EDIT  50 // (ms) Button repeat delay for edit screens
-    #define BUTTON_DELAY_MENU 250 // (ms) Button repeat delay for menus
+#if ENABLED(TOUCH_SCREEN)
+  #define BUTTON_DELAY_EDIT  50 // (ms) Button repeat delay for edit screens
+  #define BUTTON_DELAY_MENU 250 // (ms) Button repeat delay for menus
 
   //#define TOUCH_SCREEN_CALIBRATION
 
