@@ -36,8 +36,8 @@
 //
 // Status Screen Logo bitmap
 //
-#define STATUS_LOGO_X            0
-#define STATUS_LOGO_Y            0
+#define STATUS_LOGO_X      0
+#define STATUS_LOGO_Y      0
 #define STATUS_LOGO_WIDTH 40
 
 const unsigned char status_logo_bmp[] PROGMEM = {
@@ -64,8 +64,7 @@ const unsigned char status_logo_bmp[] PROGMEM = {
   B00000000,B11110011,B10000001,B11001110,B00000000,
   B00000000,B00001111,B00000000,B11110000,B00000000,
   B00000000,B00000000,B11000011,B00000000,B00000000,
-  B00000000,B00000000,B01111100,B00000000,B00000000,
-  B00000000,B00000000,B00000000,B00000000,B00000000
+  B00000000,B00000000,B01111100,B00000000,B00000000
 };
 
 //
@@ -73,6 +72,5 @@ const unsigned char status_logo_bmp[] PROGMEM = {
 //
 #define STATUS_HOTEND_ANIM
 #define STATUS_BED_ANIM
-// 
 #define STATUS_HEATERS_X      48
 #define STATUS_BED_X          70
