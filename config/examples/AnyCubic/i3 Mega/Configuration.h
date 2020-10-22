@@ -110,7 +110,8 @@
 
 /**
  * Select a secondary serial port on the board to use for communication with the host.
- * :[-1, 0, 1, 2, 3, 4, 5, 6, 7]
+ * Currently Ethernet (-2) is only supported on Teensy 4.1 boards.
+ * :[-2, -1, 0, 1, 2, 3, 4, 5, 6, 7]
  */
 //#define SERIAL_PORT_2 -1
 
@@ -338,6 +339,9 @@
 
   //#define PSU_DEFAULT_OFF         // Keep power off until enabled directly with M80
   //#define PSU_POWERUP_DELAY 250   // (ms) Delay for the PSU to warm up to full power
+
+  //#define PSU_POWERUP_GCODE  "M355 S1"  // G-code to run after power-on (e.g., case light on)
+  //#define PSU_POWEROFF_GCODE "M355 S0"  // G-code to run before power-off (e.g., case light off)
 
   //#define AUTO_POWER_CONTROL      // Enable automatic control of the PS_ON pin
   #if ENABLED(AUTO_POWER_CONTROL)
@@ -694,13 +698,13 @@
 #define X2_DRIVER_TYPE ALL_DRIVERS_TYPE
 #define Y2_DRIVER_TYPE ALL_DRIVERS_TYPE
 #define Z2_DRIVER_TYPE ALL_DRIVERS_TYPE
-#define Z3_DRIVER_TYPE ALL_DRIVERS_TYPE
-#define Z4_DRIVER_TYPE ALL_DRIVERS_TYPE
+//#define Z3_DRIVER_TYPE ALL_DRIVERS_TYPE
+//#define Z4_DRIVER_TYPE ALL_DRIVERS_TYPE
 #define E0_DRIVER_TYPE ALL_DRIVERS_TYPE
-#define E1_DRIVER_TYPE ALL_DRIVERS_TYPE
-#define E2_DRIVER_TYPE ALL_DRIVERS_TYPE
-#define E3_DRIVER_TYPE ALL_DRIVERS_TYPE
-#define E4_DRIVER_TYPE ALL_DRIVERS_TYPE
+//#define E1_DRIVER_TYPE ALL_DRIVERS_TYPE
+//#define E2_DRIVER_TYPE ALL_DRIVERS_TYPE
+//#define E3_DRIVER_TYPE ALL_DRIVERS_TYPE
+//#define E4_DRIVER_TYPE ALL_DRIVERS_TYPE
 //#define E5_DRIVER_TYPE ALL_DRIVERS_TYPE
 //#define E6_DRIVER_TYPE ALL_DRIVERS_TYPE
 //#define E7_DRIVER_TYPE ALL_DRIVERS_TYPE
