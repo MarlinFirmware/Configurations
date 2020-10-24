@@ -504,7 +504,7 @@
     #define DEFAULT_Ki_LIST {   3.38,   3.38 }
     #define DEFAULT_Kd_LIST {  58.69,  58.69 }
   #else
- // FLSUN QQS-Pro 1.6mm aluminium heater with 4mm lattice glass
+ // FLSUN QQS-S
     //#define DEFAULT_Kp  28.16
     //#define DEFAULT_Ki   3.38
     //#define DEFAULT_Kd  58.69
@@ -1602,7 +1602,7 @@
 #define EEPROM_CHITCHAT       // Give feedback on EEPROM commands. Disable to save PROGMEM.
 #define EEPROM_BOOT_SILENT    // Keep M503 quiet and only give errors during first load
 #if ENABLED(EEPROM_SETTINGS)
-  #define EEPROM_AUTO_INIT    // OPT Init EEPROM automatically on any errors.
+  #define EEPROM_AUTO_INIT  // Init EEPROM automatically on any errors.
 #endif
 
 //
@@ -1631,7 +1631,7 @@
 #define PREHEAT_1_LABEL       "PLA"
 #define PREHEAT_1_TEMP_HOTEND 210
 #define PREHEAT_1_TEMP_BED     60
-#define PREHEAT_1_FAN_SPEED    90 // Value from 0 to 255
+#define PREHEAT_1_FAN_SPEED   200 // Value from 0 to 255
 
 #define PREHEAT_2_LABEL       "TPU"
 #define PREHEAT_2_TEMP_HOTEND 230
