@@ -1989,10 +1989,7 @@
 // RepRapDiscount FULL GRAPHIC Smart Controller
 // https://reprap.org/wiki/RepRapDiscount_Full_Graphic_Smart_Controller
 //
-#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
-#define ST7920_DELAY_1 DELAY_NS(250)
-#define ST7920_DELAY_2 DELAY_NS(250)
-#define ST7920_DELAY_3 DELAY_NS(250)
+//#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
 
 //
 // ReprapWorld Graphical LCD
@@ -2093,6 +2090,9 @@
 // different pins/wiring (see pins_ANET_10.h).
 //
 #define ANET_FULL_GRAPHICS_LCD
+#define ST7920_DELAY_1 DELAY_NS(250)
+#define ST7920_DELAY_2 DELAY_NS(250)
+#define ST7920_DELAY_3 DELAY_NS(250)
 
 //
 // AZSMZ 12864 LCD with SD

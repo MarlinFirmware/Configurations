@@ -2174,11 +2174,11 @@
 // DGUS Touch Display with DWIN OS. (Choose one.)
 //
 // Flash display with DGUS Displays for Marlin:
-//  1. Format the SD card to FAT32 with a allocation size of 4k.
-//  2. Download https://github.com/coldtobi/Marlin_DGUS_Resources
-//  3. Copy the downloaded DWIN_SET folder to the SD card.
-//  4. Plug the microSD card into the back of the display.
-//  4. Boot the display and wait for the update to complete.
+//  - Format the SD card to FAT32 with a allocation size of 4k.
+//  - Download https://github.com/coldtobi/Marlin_DGUS_Resources
+//  - Copy the downloaded DWIN_SET folder to the SD card.
+//  - Plug the microSD card into the back of the display.
+//  - Boot the display and wait for the update to complete.
 //
 #define DGUS_LCD_UI_ORIGIN
 //#define DGUS_LCD_UI_FYSETC
