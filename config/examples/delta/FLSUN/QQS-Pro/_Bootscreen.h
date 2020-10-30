@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "delta/FLSUN/QQS-Pro"
-
 /**
  * Custom Boot Screen bitmap
  *
