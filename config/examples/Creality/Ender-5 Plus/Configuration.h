@@ -2172,13 +2172,22 @@
 
 //
 // DGUS Touch Display with DWIN OS. (Choose one.)
+//
 // Flash display with DGUS Displays for Marlin:
-// 1.) Copy DWIN_SET folder from [1] to SD card,
-// 2.) boot the display with SD plugged into its own SD reader (not the motherboard's).
-// [1] https://github.com/coldtobi/Marlin_DGUS_Resources
+//  - Format the SD card to FAT32 with a allocation size of 4k.
+//  - Download https://github.com/coldtobi/Marlin_DGUS_Resources
+//  - Copy the downloaded DWIN_SET folder to the SD card.
+//  - Plug the microSD card into the back of the display.
+//  - Boot the display and wait for the update to complete.
+//
 #define DGUS_LCD_UI_ORIGIN
 //#define DGUS_LCD_UI_FYSETC
 //#define DGUS_LCD_UI_HIPRECY
+
+//
+// CR-6 OEM touch screen. A DWIN display with touch.
+//
+//#define DGUS_LCD_UI_CREALITY_TOUCH
 
 //
 // Touch-screen LCD for Malyan M200/M300 printers
@@ -2206,7 +2215,7 @@
 
 //
 // Third-party or vendor-customized controller interfaces.
-// Sources should be installed in 'src/lcd/extensible_ui'.
+// Sources should be installed in 'src/lcd/extui'.
 //
 //#define EXTENSIBLE_UI
 
