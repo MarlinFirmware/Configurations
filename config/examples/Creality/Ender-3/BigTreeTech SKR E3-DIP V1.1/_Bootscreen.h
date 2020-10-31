@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "Creality/Ender-3/BigTreeTech SKR E3-DIP V1.1"
-
 /**
  * Custom Boot Screen bitmap
  *
