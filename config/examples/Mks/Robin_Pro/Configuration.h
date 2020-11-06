@@ -103,20 +103,16 @@
  *
  * :[-1, 0, 1, 2, 3, 4, 5, 6, 7]
  */
-#define SERIAL_PORT -1
+// Serial port 3 connects to the MKS Robin Pro USB port
+#define SERIAL_PORT 3
 
 /**
  * Select a secondary serial port on the board to use for communication with the host.
  * Currently Ethernet (-2) is only supported on Teensy 4.1 boards.
  * :[-2, -1, 0, 1, 2, 3, 4, 5, 6, 7]
  */
-// MKS Robin Lite3 AUX-1 and USB Use UART1(PA9-TX,PA10-RX)     #define SERIAL_PORT_2 1
-// MKS Robin Pro USB Use UART3(PB10-TX,PB11-RX)     #define SERIAL_PORT_2 3
-// MKS SBASE AUX-1 Use UART0(P0.2-TXD0,P0.3-RXD0)     #define SERIAL_PORT_2 0
-// MKS SGEN AUX-1 Use UART0(P0.2-TXD0,P0.3-RXD0)     #define SERIAL_PORT_2 0
-// MKS SGEN_L AUX-1 Use UART0(P0.2-TXD0,P0.3-RXD0)     #define SERIAL_PORT_2 0
-// MKS Robin Nano USB Use UART3(PB10-TX,PB11-RX)     #define SERIAL_PORT_2 3
-#define SERIAL_PORT_2 3
+// Serial port 1 connects to the MKS Robin Pro Wifi connector
+//#define SERIAL_PORT_2 1
 
 /**
  * This setting determines the communication speed of the printer.
