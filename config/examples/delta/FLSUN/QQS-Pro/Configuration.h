@@ -499,14 +499,14 @@
   #if ENABLED(PID_PARAMS_PER_HOTEND)
     // Specify between 1 and HOTENDS values per array.
     // If fewer than EXTRUDER values are provided, the last element will be repeated.
-    #define DEFAULT_Kp_LIST {  21.6708,  21.6708 }
-    #define DEFAULT_Ki_LIST {   1.2515,   1.2515 }
-    #define DEFAULT_Kd_LIST {  93.8127,  93.8127 }
+    #define DEFAULT_Kp_LIST { 21.6708, 21.6708 }
+    #define DEFAULT_Ki_LIST {  1.2515,  1.2515 }
+    #define DEFAULT_Kd_LIST { 93.8127, 93.8127 }
   #else
     // FLSUN QQS-Pro, PET 235 C with 70% part cooling
-    #define DEFAULT_Kp  21.6708
-    #define DEFAULT_Ki   1.2515
-    #define DEFAULT_Kd  93.8127
+    #define DEFAULT_Kp 21.6708
+    #define DEFAULT_Ki  1.2515
+    #define DEFAULT_Kd 93.8127
   #endif
 #endif // PIDTEMP
 
