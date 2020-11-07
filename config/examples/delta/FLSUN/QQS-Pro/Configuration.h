@@ -499,18 +499,14 @@
   #if ENABLED(PID_PARAMS_PER_HOTEND)
     // Specify between 1 and HOTENDS values per array.
     // If fewer than EXTRUDER values are provided, the last element will be repeated.
-    #define DEFAULT_Kp_LIST {  28.16,  28.16 }
-    #define DEFAULT_Ki_LIST {   3.38,   3.38 }
-    #define DEFAULT_Kd_LIST {  58.69,  58.69 }
+    #define DEFAULT_Kp_LIST {  21.6708,  21.6708 }
+    #define DEFAULT_Ki_LIST {   1.2515,   1.2515 }
+    #define DEFAULT_Kd_LIST {  93.8127,  93.8127 }
   #else
- // FLSUN QQS-S
-    //#define DEFAULT_Kp  28.16
-    //#define DEFAULT_Ki   3.38
-    //#define DEFAULT_Kd  58.69
-  // FLSUN QQS-Pro, PET 235 C with 70% part cooling
-    #define DEFAULT_Kp 21.6708
-    #define DEFAULT_Ki 1.2515
-    #define DEFAULT_Kd 93.8127
+    // FLSUN QQS-Pro, PET 235 C with 70% part cooling
+    #define DEFAULT_Kp  21.6708
+    #define DEFAULT_Ki   1.2515
+    #define DEFAULT_Kd  93.8127
   #endif
 #endif // PIDTEMP
 
@@ -559,11 +555,6 @@
   #define DEFAULT_bedKd 417.10
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
-  //M303 E-1 C8 S80 =>MEMO M304 P97.282 I18.961 D332.738
-  //#define DEFAULT_bedKp 73.94
-  //#define DEFAULT_bedKi 14.41
-  //#define DEFAULT_bedKd 252.92
-
 #endif // PIDTEMPBED
 
 #if EITHER(PIDTEMP, PIDTEMPBED)
@@ -1232,7 +1223,7 @@
 
 //#define UNKNOWN_Z_NO_RAISE      // Don't raise Z (lower the bed) if Z is "unknown." For beds that fall when Z is powered off.
 
-//#define Z_HOMING_HEIGHT  4      //(mm) Minimal Z height before homing (G28) for Z clearance above the bed, clamps, ...
+//#define Z_HOMING_HEIGHT  4      // (mm) Minimal Z height before homing (G28) for Z clearance above the bed, clamps, ...
                                   // Be sure to have this much clearance over your Z_MAX_POS to prevent grinding.
 
 //#define Z_AFTER_HOMING  10      // (mm) Height to move to after homing Z
@@ -2345,20 +2336,8 @@
 //=============================================================================
 
 /**
- * TFT Type - Select your Display type
- *
- * Available options are:
- *   MKS_TS35_V2_0,
- *   MKS_ROBIN_TFT24, MKS_ROBIN_TFT28, MKS_ROBIN_TFT32, MKS_ROBIN_TFT35,
- *   MKS_ROBIN_TFT43, MKS_ROBIN_TFT_V1_1R
- *   TFT_TRONXY_X5SA, ANYCUBIC_TFT35, LONGER_LK_TFT28
- *   TFT_GENERIC
- *
- * For TFT_GENERIC, you need to configure these 3 options:
- *   Driver:     TFT_DRIVER
- *               Current Drivers are: AUTO, ST7735, ST7789, ST7796, R61505, ILI9328, ILI9341, ILI9488
- *   Resolution: TFT_WIDTH and TFT_HEIGHT
- *   Interface:  TFT_INTERFACE_FSMC or TFT_INTERFACE_SPI
+ * Specific TFT Model Presets. Enable one of the following options
+ * or enable TFT_GENERIC and set sub-options.
  */
 
 //
@@ -2467,12 +2446,6 @@
 // Ender-3 v2 OEM display. A DWIN display with Rotary Encoder.
 //
 //#define DWIN_CREALITY_LCD
-
-//
-// MarlinUI for Creality's DWIN display (and others)
-//
-//#define DWIN_MARLINUI_PORTRAIT
-//#define DWIN_MARLINUI_LANDSCAPE
 
 //
 // ADS7843/XPT2046 ADC Touchscreen such as ILI9341 2.8
