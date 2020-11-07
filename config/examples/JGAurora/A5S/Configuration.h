@@ -2355,6 +2355,10 @@
   #define XPT2046_Y_OFFSET        257
 
   #define XPT2046_Z1_THRESHOLD 1
+
+  #if ENABLED(TFT_COLOR_UI)
+    //#define SINGLE_TOUCH_NAVIGATION
+  #endif
 #endif
 
 //

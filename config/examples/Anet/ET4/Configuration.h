@@ -2355,6 +2355,10 @@
   #define XPT2046_X_OFFSET         333
   #define XPT2046_Y_OFFSET         -17
   #define XPT2046_ORIENTATION TOUCH_PORTRAIT
+
+  #if ENABLED(TFT_COLOR_UI)
+    //#define SINGLE_TOUCH_NAVIGATION
+  #endif
 #endif
 
 //
