@@ -1528,7 +1528,7 @@
 #define PREHEAT_2_FAN_SPEED     0 // Value from 0 to 255
 
 #define PREHEAT_3_LABEL       "PETG"
-#define PREHEAT_3_TEMP_HOTEND 220 
+#define PREHEAT_3_TEMP_HOTEND 220
 #define PREHEAT_3_TEMP_BED     45
 #define PREHEAT_3_FAN_SPEED   255 // Value from 0 to 255
 
