@@ -21,6 +21,8 @@
  */
 #pragma once
 
+#define CONFIG_EXAMPLES_DIR "Creality/Ender-3/MKS Robin E3P"
+
 /**
  * Configuration_adv.h
  *
@@ -1085,7 +1087,7 @@
   #endif
 
   // Include a page of printer information in the LCD Main Menu
-  //#define LCD_INFO_MENU
+  #define LCD_INFO_MENU
   #if ENABLED(LCD_INFO_MENU)
     //#define LCD_PRINTER_INFO_IS_BOOTSCREEN // Show bootscreen(s) instead of Printer Info pages
   #endif
@@ -1368,7 +1370,7 @@
  */
 #if HAS_MARLINUI_U8GLIB
   // Show SD percentage next to the progress bar
-  //#define DOGM_SD_PERCENT
+  #define DOGM_SD_PERCENT
 
   // Save many cycles by drawing a hollow frame or no frame on the Info Screen
   //#define XYZ_NO_FRAME
@@ -1609,7 +1611,7 @@
  *
  * Warning: Does not respect endstops!
  */
-//#define BABYSTEPPING
+#define BABYSTEPPING
 #if ENABLED(BABYSTEPPING)
   //#define INTEGRATED_BABYSTEPPING         // EXPERIMENTAL integration of babystepping into the Stepper ISR
   //#define BABYSTEP_WITHOUT_HOMING
@@ -3543,7 +3545,7 @@
   // Add an LCD menu for MMU2
   //#define MMU2_MENUS
 
-  // Settings for filament load / unload from the LCD menu.
+  // Settings for filament load / unload.
   // This is for Průša MK3-style extruders. Customize for your hardware.
   #define MMU2_FILAMENTCHANGE_EJECT_FEED 80.0
   #define MMU2_LOAD_TO_NOZZLE_SEQUENCE \
