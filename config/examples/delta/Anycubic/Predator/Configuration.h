@@ -2396,6 +2396,7 @@
 // 480x320, 3.5", FSMC Stock Display from AnyCubic
 //
 #define ANYCUBIC_TFT35
+#define TFT_ROTATION TFT_ROTATE_180
 
 //
 // 320x240, 2.8", FSMC Stock Display from Longer/Alfawise
