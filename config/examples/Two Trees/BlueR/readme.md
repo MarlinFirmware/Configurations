@@ -8,5 +8,5 @@ BlueR V2 (formely BlueR out of The box) - BMG extruder with Blue parts and integ
 
 BlueR V1 - First version of BlueR, with metal extruder 
 
-Note: Some users with BlueR V2 related issues with motor extruder directions. Two Trees send Two Configuration for it
-if your motor rotate in wrong position, please install inverted version.
+Note: Some users with BlueR V2 related issues with motor extruder directions. Two Trees send Two Configuration for it.
+If your motor rotate in wrong position, please install inverted version.
