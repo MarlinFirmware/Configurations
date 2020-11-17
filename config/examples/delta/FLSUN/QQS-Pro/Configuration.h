@@ -85,7 +85,8 @@
  */
 
 // Show the Marlin bootscreen on startup. ** ENABLE FOR PRODUCTION **
-#define SHOW_BOOTSCREEN
+//#define SHOW_BOOTSCREEN
+
 
 // Show the bitmap in Marlin/_Bootscreen.h on startup.
 //#define SHOW_CUSTOM_BOOTSCREEN
@@ -500,13 +501,17 @@
   #if ENABLED(PID_PARAMS_PER_HOTEND)
     // Specify between 1 and HOTENDS values per array.
     // If fewer than EXTRUDER values are provided, the last element will be repeated.
-    #define DEFAULT_Kp_LIST { 21.6708, 21.6708 }
-    #define DEFAULT_Ki_LIST {  1.2515,  1.2515 }
-    #define DEFAULT_Kd_LIST { 93.8127, 93.8127 }
+    #define DEFAULT_Kp_LIST {  28.16,  28.16 }
+    #define DEFAULT_Ki_LIST {   3.38,   3.38 }
+    #define DEFAULT_Kd_LIST {  58.69,  58.69 }
   #else
-    // FLSUN QQS-Pro, PET 235 C with 70% part cooling
+ // FLSUN QQS-Pro 1.6mm aluminium heater with 4mm lattice glass
+    //#define DEFAULT_Kp  28.16
+    //#define DEFAULT_Ki   3.38
+    //#define DEFAULT_Kd  58.69
+  // FLSUN QQS-Pro, PET 235 C with 70% part cooling
     #define DEFAULT_Kp 21.6708
-    #define DEFAULT_Ki  1.2515
+    #define DEFAULT_Ki 1.2515
     #define DEFAULT_Kd 93.8127
   #endif
 #endif // PIDTEMP
@@ -551,11 +556,16 @@
   //#define DEFAULT_bedKd 305.4
 
   // FLSUN QQS-Pro 1.6mm aluminium heater with 4mm lattice glass
-  #define DEFAULT_bedKp 325.10
-  #define DEFAULT_bedKi 63.35
-  #define DEFAULT_bedKd 417.10
+  //#define DEFAULT_bedKp 325.10
+  //#define DEFAULT_bedKi 63.35
+  //#define DEFAULT_bedKd 417.10
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
+  //M303 E-1 C8 S80 =>MEMO M304 P97.282 I18.961 D332.738
+  #define DEFAULT_bedKp 73.94
+  #define DEFAULT_bedKi 14.41
+  #define DEFAULT_bedKd 252.92
+
 #endif // PIDTEMPBED
 
 #if EITHER(PIDTEMP, PIDTEMPBED)
@@ -752,9 +762,9 @@
  *          TMC5130, TMC5130_STANDALONE, TMC5160, TMC5160_STANDALONE
  * :['A4988', 'A5984', 'DRV8825', 'LV8729', 'L6470', 'L6474', 'POWERSTEP01', 'TB6560', 'TB6600', 'TMC2100', 'TMC2130', 'TMC2130_STANDALONE', 'TMC2160', 'TMC2160_STANDALONE', 'TMC2208', 'TMC2208_STANDALONE', 'TMC2209', 'TMC2209_STANDALONE', 'TMC26X', 'TMC26X_STANDALONE', 'TMC2660', 'TMC2660_STANDALONE', 'TMC5130', 'TMC5130_STANDALONE', 'TMC5160', 'TMC5160_STANDALONE']
  */
-#define X_DRIVER_TYPE  A4988
-#define Y_DRIVER_TYPE  A4988
-#define Z_DRIVER_TYPE  A4988
+#define X_DRIVER_TYPE TMC2208_STANDALONE
+#define Y_DRIVER_TYPE TMC2208_STANDALONE
+#define Z_DRIVER_TYPE TMC2208_STANDALONE
 //#define X2_DRIVER_TYPE A4988
 //#define Y2_DRIVER_TYPE A4988
 //#define Z2_DRIVER_TYPE A4988
@@ -1060,12 +1070,16 @@
   #define Z_PROBE_ALLEN_KEY_STOW_1_FEEDRATE XY_PROBE_SPEED
   // Move the nozzle down further to push the probe into retracted position.
   #define Z_PROBE_ALLEN_KEY_STOW_2 { -64.0, 56.0, 3.0 } // Push it down
+  //#define Z_PROBE_ALLEN_KEY_STOW_2 { -64.0, 56.0, 23.0-(Z_PROBE_ALLEN_KEY_STOW_DEPTH) }
   #define Z_PROBE_ALLEN_KEY_STOW_2_FEEDRATE (XY_PROBE_SPEED)/10
   // Raise things back up slightly so we don't bump into anything
   #define Z_PROBE_ALLEN_KEY_STOW_3 { -64.0, 56.0, 23.0+(Z_PROBE_ALLEN_KEY_STOW_DEPTH) }
   #define Z_PROBE_ALLEN_KEY_STOW_3_FEEDRATE (XY_PROBE_SPEED)/2
+  //#define Z_PROBE_ALLEN_KEY_STOW_3 { -64.0, 56.0, 50.0 } // Move it up to clear
+  //#define Z_PROBE_ALLEN_KEY_STOW_3_FEEDRATE XY_PROBE_SPEED
 
   #define Z_PROBE_ALLEN_KEY_STOW_4 { 0.0, 0.0, 23.0+(Z_PROBE_ALLEN_KEY_STOW_DEPTH) }
+  //#define Z_PROBE_ALLEN_KEY_STOW_4 { 0.0, 0.0, 50.0 }
   #define Z_PROBE_ALLEN_KEY_STOW_4_FEEDRATE XY_PROBE_SPEED
 
 #endif // Z_PROBE_ALLEN_KEY
@@ -1200,14 +1214,14 @@
 // @section machine
 
 // Invert the stepper direction. Change (or reverse the motor connector) if an axis goes the wrong way.
-#define INVERT_X_DIR false  // Set 'true' for TMC220x
-#define INVERT_Y_DIR false
-#define INVERT_Z_DIR false
+#define INVERT_X_DIR true
+#define INVERT_Y_DIR true
+#define INVERT_Z_DIR true
 
 // @section extruder
 
 // For direct drive extruder v9 set to true, for geared extruder set to false.
-#define INVERT_E0_DIR true  // TITAN Extruder
+#define INVERT_E0_DIR true //extruder TITAN
 #define INVERT_E1_DIR false
 #define INVERT_E2_DIR false
 #define INVERT_E3_DIR false
@@ -1222,7 +1236,7 @@
 
 //#define UNKNOWN_Z_NO_RAISE      // Don't raise Z (lower the bed) if Z is "unknown." For beds that fall when Z is powered off.
 
-//#define Z_HOMING_HEIGHT  4      // (mm) Minimal Z height before homing (G28) for Z clearance above the bed, clamps, ...
+//#define Z_HOMING_HEIGHT  4      //act (mm) Minimal Z height before homing (G28) for Z clearance above the bed, clamps, ...
                                   // Be sure to have this much clearance over your Z_MAX_POS to prevent grinding.
 
 //#define Z_AFTER_HOMING  10      // (mm) Height to move to after homing Z
@@ -1291,7 +1305,7 @@
  */
 #define FILAMENT_RUNOUT_SENSOR
 #if ENABLED(FILAMENT_RUNOUT_SENSOR)
-  #define FIL_RUNOUT_ENABLED_DEFAULT false // Enable the sensor on startup. Override with M412 followed by M500.
+  #define FIL_RUNOUT_ENABLED_DEFAULT true // Enable the sensor on startup. Override with M412 followed by M500.
   #define NUM_RUNOUT_SENSORS   1          // Number of sensors, up to one per extruder. Define a FIL_RUNOUT#_PIN for each.
 
   #define FIL_RUNOUT_STATE     LOW        // Pin state indicating that filament is NOT present.
@@ -1615,7 +1629,7 @@
 #define EEPROM_CHITCHAT       // Give feedback on EEPROM commands. Disable to save PROGMEM.
 #define EEPROM_BOOT_SILENT    // Keep M503 quiet and only give errors during first load
 #if ENABLED(EEPROM_SETTINGS)
-  #define EEPROM_AUTO_INIT  // Init EEPROM automatically on any errors.
+  #define EEPROM_AUTO_INIT    // OPT Init EEPROM automatically on any errors.
 #endif
 
 //
@@ -1644,7 +1658,7 @@
 #define PREHEAT_1_LABEL       "PLA"
 #define PREHEAT_1_TEMP_HOTEND 210
 #define PREHEAT_1_TEMP_BED     60
-#define PREHEAT_1_FAN_SPEED   200 // Value from 0 to 255
+#define PREHEAT_1_FAN_SPEED    90 // Value from 0 to 255
 
 #define PREHEAT_2_LABEL       "TPU"
 #define PREHEAT_2_TEMP_HOTEND 230
