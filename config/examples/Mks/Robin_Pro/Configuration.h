@@ -346,9 +346,10 @@
     #define AUTO_POWER_E_FANS
     #define AUTO_POWER_CONTROLLERFAN
     #define AUTO_POWER_CHAMBER_FAN
-    //#define AUTO_POWER_E_TEMP        50 // (°C) Turn on PSU over this temperature
-    //#define AUTO_POWER_CHAMBER_TEMP  30 // (°C) Turn on PSU over this temperature
-    #define POWER_TIMEOUT 30
+    //#define AUTO_POWER_E_TEMP        50 // (°C) Turn on PSU if any extruder is over this temperature
+    //#define AUTO_POWER_CHAMBER_TEMP  30 // (°C) Turn on PSU if the chamber is over this temperature
+    #define POWER_TIMEOUT              30 // (s) Turn off power if the machine is idle for this duration
+    //#define POWER_OFF_DELAY          60 // (s) Delay of poweroff after M81 command. Useful to let fans run for extra time.
   #endif
 #endif
 
@@ -1187,9 +1188,27 @@
 #if ENABLED(FILAMENT_RUNOUT_SENSOR)
   #define FIL_RUNOUT_ENABLED_DEFAULT true // Enable the sensor on startup. Override with M412 followed by M500.
   #define NUM_RUNOUT_SENSORS   1          // Number of sensors, up to one per extruder. Define a FIL_RUNOUT#_PIN for each.
+
   #define FIL_RUNOUT_STATE     LOW        // Pin state indicating that filament is NOT present.
-  #define FIL_RUNOUT_PULLUP               // Use internal pullup for filament runout pins.
-  //#define FIL_RUNOUT_PULLDOWN           // Use internal pulldown for filament runout pins.
+  #define FIL_RUNOUT_PULL                 // Use internal pullup / pulldown for filament runout pins.
+
+  // Override individually if the runout sensors vary
+  //#define FIL_RUNOUT1_STATE LOW
+  //#define FIL_RUNOUT1_PULL
+  //#define FIL_RUNOUT2_STATE LOW
+  //#define FIL_RUNOUT2_PULL
+  //#define FIL_RUNOUT3_STATE LOW
+  //#define FIL_RUNOUT3_PULL
+  //#define FIL_RUNOUT4_STATE LOW
+  //#define FIL_RUNOUT4_PULL
+  //#define FIL_RUNOUT5_STATE LOW
+  //#define FIL_RUNOUT5_PULL
+  //#define FIL_RUNOUT6_STATE LOW
+  //#define FIL_RUNOUT6_PULL
+  //#define FIL_RUNOUT7_STATE LOW
+  //#define FIL_RUNOUT7_PULL
+  //#define FIL_RUNOUT8_STATE LOW
+  //#define FIL_RUNOUT8_PULL
 
   // Set one or more commands to execute on filament runout.
   // (After 'M412 H' Marlin will ask the host to handle the process.)

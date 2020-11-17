@@ -811,6 +811,7 @@
 
   //#define ASSISTED_TRAMMING_MENU_ITEM // Add a menu item to run G35 Assisted Tramming (MarlinUI)
   //#define ASSISTED_TRAMMING_WIZARD    // Make the menu item open a Tramming Wizard sub-menu
+  //#define ASSISTED_TRAMMING_WAIT_POSITION { X_CENTER, Y_CENTER, 30 } // Move the nozzle out of the way for adjustment
 
   /**
    * Screw thread:
@@ -3542,7 +3543,7 @@
   // Add an LCD menu for MMU2
   //#define MMU2_MENUS
 
-  // Settings for filament load / unload.
+  // Settings for filament load / unload from the LCD menu.
   // This is for Průša MK3-style extruders. Customize for your hardware.
   #define MMU2_FILAMENTCHANGE_EJECT_FEED 80.0
   #define MMU2_LOAD_TO_NOZZLE_SEQUENCE \
