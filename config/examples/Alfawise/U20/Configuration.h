@@ -2423,26 +2423,26 @@
 
   #if ENABLED(TS_V11)
     // Alfawise U20 ILI9341 2.8 TP Ver 1.1 / Green PCB on the back of touchscreen
-    #define XPT2046_X_CALIBRATION   12000
-    #define XPT2046_Y_CALIBRATION   9000
-    #define XPT2046_X_OFFSET       -24
-    #define XPT2046_Y_OFFSET       -17
+    #define TOUCH_CALIBRATION_X  12000
+    #define TOUCH_CALIBRATION_Y  9000
+    #define TOUCH_OFFSET_X      -24
+    #define TOUCH_OFFSET_Y      -17
   #endif
 
   #if ENABLED(TS_V12)
     // Alfawise U30 ILI9341 2.8 TP Ver 1.2 / Blue PCB on the back of touchscreen
-    #define XPT2046_X_CALIBRATION   12000
-    #define XPT2046_Y_CALIBRATION  -9000
-    #define XPT2046_X_OFFSET       -43
-    #define XPT2046_Y_OFFSET        257
+    #define TOUCH_CALIBRATION_X  12000
+    #define TOUCH_CALIBRATION_Y -9000
+    #define TOUCH_OFFSET_X      -43
+    #define TOUCH_OFFSET_Y       257
   #endif
 
   #if ENABLED(TS_V19)
     // Longer LK4/U30 2.8" Ver 2019 / Blue PCB, SID240x320-8PCB-D
-    #define XPT2046_X_CALIBRATION  -12000
-    #define XPT2046_Y_CALIBRATION   9000
-    #define XPT2046_X_OFFSET        320
-    #define XPT2046_Y_OFFSET        0
+    #define TOUCH_CALIBRATION_X -12000
+    #define TOUCH_CALIBRATION_Y  9000
+    #define TOUCH_OFFSET_X       320
+    #define TOUCH_OFFSET_Y       0
   #endif
 
   #if ENABLED(TFT_COLOR_UI)

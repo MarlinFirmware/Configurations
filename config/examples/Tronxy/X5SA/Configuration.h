@@ -2351,10 +2351,10 @@
 
   #define TOUCH_SCREEN_CALIBRATION
 
-  #define XPT2046_X_CALIBRATION -12316
-  #define XPT2046_Y_CALIBRATION   8981
-  #define XPT2046_X_OFFSET         340
-  #define XPT2046_Y_OFFSET         -20
+  #define TOUCH_CALIBRATION_X -12316
+  #define TOUCH_CALIBRATION_Y   8981
+  #define TOUCH_OFFSET_X         340
+  #define TOUCH_OFFSET_Y         -20
 #endif
 
 // Change colors
