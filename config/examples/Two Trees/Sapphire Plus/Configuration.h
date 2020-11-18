@@ -501,12 +501,12 @@
     // Specify between 1 and HOTENDS values per array.
     // If fewer than EXTRUDER values are provided, the last element will be repeated.
     #define DEFAULT_Kp_LIST { 11.03, 11.03 }
-    #define DEFAULT_Ki_LIST {  0.63,  0.63 }
+    #define DEFAULT_Ki_LIST {  0.43,  0.43 }
     #define DEFAULT_Kd_LIST { 48.43, 48.43 }
   #else
     // Sapphire Plus
     #define DEFAULT_Kp 11.03
-    #define DEFAULT_Ki  0.63
+    #define DEFAULT_Ki  0.43
     #define DEFAULT_Kd 48.43
   #endif
 #endif // PIDTEMP
@@ -578,7 +578,7 @@
  * Note: For Bowden Extruders make this large enough to allow load/unload.
  */
 #define PREVENT_LENGTHY_EXTRUDE
-#define EXTRUDE_MAXLENGTH 850
+#define EXTRUDE_MAXLENGTH 900
 
 //===========================================================================
 //======================== Thermal Runaway Protection =======================
@@ -1123,9 +1123,9 @@
 
 // Direction of endstops when homing; 1=MAX, -1=MIN
 // :[-1,1]
-    #define X_HOME_DIR -1
-    #define Y_HOME_DIR 1
-    #define Z_HOME_DIR -1
+#define X_HOME_DIR -1
+#define Y_HOME_DIR 1
+#define Z_HOME_DIR -1
 
 // @section machine
 
@@ -1386,7 +1386,7 @@
 
 #if ENABLED(LEVEL_BED_CORNERS)
   #define LEVEL_CORNERS_INSET_LFRB { 35, 35, 35, 35 } // (mm) Left, Front, Right, Back insets
-  #define LEVEL_CORNERS_HEIGHT      0.1   // (mm) Z height of nozzle at leveling points
+  #define LEVEL_CORNERS_HEIGHT      0.0   // (mm) Z height of nozzle at leveling points
   #define LEVEL_CORNERS_Z_HOP       4.0   // (mm) Z height of nozzle between leveling points
   //#define LEVEL_CENTER_TOO              // Move to the center after the last corner
 #endif
