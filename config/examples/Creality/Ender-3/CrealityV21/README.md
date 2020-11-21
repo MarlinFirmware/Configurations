@@ -8,7 +8,8 @@ limited memory in the original board.
 ## Enabled features
 
 It has the BLTouch enabled and configured for the Creality BLTouch kit and
-mounting bracket.
+mounting bracket. The outer probe points are positioned over the springs.
+Also corder levelling menu is enabled to allow the springs to be adjusted.
 
 It has S-curve acceleration enabled, and some tweaks to the jerk settings to
 prevent layer skips, and in general produce less shaking while printing.
