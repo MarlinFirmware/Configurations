@@ -23,6 +23,7 @@
 
 //#define BLUER_TMC2209    // Enable for the TMC2209 driver version
 //#define BLUER_INVERTED_E // Enable if the extruder runs the wrong way
+//#define BLUER_BLTOUCH // Enable if you want to use BLTOUCH
 
 /**
  * Configuration.h
@@ -848,8 +849,9 @@
  * The probe replaces the Z-MIN endstop and is used for Z homing.
  * (Automatically enables USE_PROBE_FOR_Z_HOMING.)
  */
+#ifdef BLUER_BLTOUCH
 #define Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN
-
+#endif
 // Force the use of the probe for Z-axis homing
 //#define USE_PROBE_FOR_Z_HOMING
 
@@ -905,8 +907,11 @@
 
 /**
  * The BLTouch probe uses a Hall effect sensor and emulates a servo.
+ * 
  */
-//#define BLTOUCH
+#ifdef BLUER_BLTOUCH
+#define BLTOUCH
+#endif
 
 /**
  * Pressure sensor with a BLTouch-like interface
@@ -1276,11 +1281,13 @@
  *   With an LCD controller the process is guided step-by-step.
  */
 //#define AUTO_BED_LEVELING_3POINT
-//#define AUTO_BED_LEVELING_LINEAR
-//#define AUTO_BED_LEVELING_BILINEAR
+//#define AUTO_BED_LEVELING_LINEAR								
 //#define AUTO_BED_LEVELING_UBL
+#ifdef BLUER_BLTOUCH
+#define AUTO_BED_LEVELING_BILINEAR
+#else
 #define MESH_BED_LEVELING
-
+#endif
 /**
  * Normally G28 leaves leveling disabled on completion. Enable
  * this option to have G28 restore the prior leveling state.
@@ -1428,7 +1435,9 @@
 // - Move the Z probe (or nozzle) to a defined XY point before Z Homing.
 // - Prevent Z homing when the Z probe is outside bed area.
 //
-//#define Z_SAFE_HOMING
+#ifdef BLUER_BLTOUCH
+#define Z_SAFE_HOMING
+#endif
 
 #if ENABLED(Z_SAFE_HOMING)
   #define Z_SAFE_HOMING_X_POINT X_CENTER  // X point for Z homing
