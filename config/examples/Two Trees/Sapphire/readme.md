@@ -1,8 +1,5 @@
 ## Two Trees Sapphire Configurations
 
-This folder contains default configurations for the Two Trees Sapphire.
+This folder contains default configurations for the Two Trees Sapphire Plus V2. The V2 has Dual Z Axis limit switches.
 
-One initial configuration is provided:
-
-- `Sapphire Plus V2` : Standard Marlin touch UI. V2 has dual Z axis limit switches.
-- `Sapphire Plus V2 MKS UI` : MKS UI. V2 has dual Z axis limit switches.
+By default the standard Marlin Touch UI will be used. Enable the `SAPPHIRE_PRO_MKS_UI` option for the MKS UI.
