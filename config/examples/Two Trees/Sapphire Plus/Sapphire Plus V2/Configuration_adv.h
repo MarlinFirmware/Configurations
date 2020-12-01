@@ -1092,6 +1092,7 @@
       // Enable to init the Probe Z-Offset when starting the Wizard.
       // Use the estimated nozzle-to-probe Z offset, plus a little more.
       //
+      #define PROBE_OFFSET_WIZARD_START_Z -2.0
       #define PROBE_OFFSET_START -2.0
 
       // Set a convenient position to do the calibration (probing point and nozzle/bed-distance)

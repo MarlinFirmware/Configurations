@@ -1162,7 +1162,7 @@
 #define Z_MIN_POS 0
 #define X_MAX_POS X_BED_SIZE
 #define Y_MAX_POS Y_BED_SIZE
-#define Z_MAX_POS 335   // Printer can do 340, but extra clearance is needed for homing
+#define Z_MAX_POS TERN(SAPPHIRE_PLUS_BLTOUCH,335,340) // BLTouch needs clearance for homing
 
 /**
  * Software Endstops
