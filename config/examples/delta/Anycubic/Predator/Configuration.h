@@ -2475,10 +2475,10 @@
 
   #define TOUCH_SCREEN_CALIBRATION
 
-  #define TOUCH_CALIBRATION_X 12316
-  #define TOUCH_CALIBRATION_Y -8981
-  #define TOUCH_OFFSET_X        -43
-  #define TOUCH_OFFSET_Y        257
+  #define TOUCH_CALIBRATION_X  16810
+  #define TOUCH_CALIBRATION_Y -11570
+  #define TOUCH_OFFSET_X         -13
+  #define TOUCH_OFFSET_Y         338
 
   #if ENABLED(TFT_COLOR_UI)
     //#define SINGLE_TOUCH_NAVIGATION
