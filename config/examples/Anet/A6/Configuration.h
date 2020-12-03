@@ -1056,14 +1056,13 @@
 #if 1 // 0 for less clearance
   #define Z_CLEARANCE_DEPLOY_PROBE   10 // Z Clearance for Deploy/Stow
   #define Z_CLEARANCE_BETWEEN_PROBES  5 // Z Clearance between probe points
-  //#define Z_AFTER_PROBING           5 // Z position after probing is done
 #else
   #define Z_CLEARANCE_DEPLOY_PROBE    5 // Z Clearance for Deploy/Stow
   #define Z_CLEARANCE_BETWEEN_PROBES  3 // Z Clearance between probe points
-  //#define Z_AFTER_PROBING           3 // Z position after probing is done
 #endif
 
 #define Z_CLEARANCE_MULTI_PROBE       5 // Z Clearance between multiple probes
+//#define Z_AFTER_PROBING           5 // Z position after probing is done
 #define Z_PROBE_LOW_POINT          -2 // Farthest distance below the trigger-point to go before stopping
 
 // For M851 give a range for adjusting the Z probe offset
@@ -1365,6 +1364,9 @@
   // at which point movement will be level to the machine's XY plane.
   // The height can be set with M420 Z<height>
   #define ENABLE_LEVELING_FADE_HEIGHT
+  #if ENABLED(ENABLE_LEVELING_FADE_HEIGHT)
+    #define DEFAULT_LEVELING_FADE_HEIGHT 10.0 // (mm) Default fade height.
+  #endif
 
   // For Cartesian machines, instead of dividing moves on mesh boundaries,
   // split up moves into short segments like a Delta. This follows the
@@ -1466,6 +1468,12 @@
   #define LEVEL_CORNERS_HEIGHT      0.0   // (mm) Z height of nozzle at leveling points
   #define LEVEL_CORNERS_Z_HOP       4.0   // (mm) Z height of nozzle between leveling points
   //#define LEVEL_CENTER_TOO              // Move to the center after the last corner
+  //#define LEVEL_CORNERS_USE_PROBE
+  #if ENABLED(LEVEL_CORNERS_USE_PROBE)
+    #define LEVEL_CORNERS_PROBE_TOLERANCE 0.1
+    #define LEVEL_CORNERS_VERIFY_RAISED   // After adjustment triggers the probe, re-probe to verify
+    //#define LEVEL_CORNERS_AUDIO_FEEDBACK
+  #endif
 #endif
 
 /**
