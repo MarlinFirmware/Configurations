@@ -22,6 +22,8 @@
 #pragma once
 
 //#define SPRO_INVERTED_E // Enable if the extruder runs the wrong way
+//#define SPRO_TMC2209 // Enable for the TMC2209 driver version
+//#define SPRO_BLTOUCH // Enable if you want to use BLTOUCH
 
 /**
  * Configuration.h
@@ -672,15 +674,25 @@
  *          TMC5130, TMC5130_STANDALONE, TMC5160, TMC5160_STANDALONE
  * :['A4988', 'A5984', 'DRV8825', 'LV8729', 'L6470', 'L6474', 'POWERSTEP01', 'TB6560', 'TB6600', 'TMC2100', 'TMC2130', 'TMC2130_STANDALONE', 'TMC2160', 'TMC2160_STANDALONE', 'TMC2208', 'TMC2208_STANDALONE', 'TMC2209', 'TMC2209_STANDALONE', 'TMC26X', 'TMC26X_STANDALONE', 'TMC2660', 'TMC2660_STANDALONE', 'TMC5130', 'TMC5130_STANDALONE', 'TMC5160', 'TMC5160_STANDALONE']
  */
-#define X_DRIVER_TYPE  TMC2208_STANDALONE
-#define Y_DRIVER_TYPE  TMC2208_STANDALONE
-#define Z_DRIVER_TYPE  A4988
+#if ENABLED(SPRO_TMC2209)
+  #define X_DRIVER_TYPE TMC2209_STANDALONE
+  #define Y_DRIVER_TYPE TMC2209_STANDALONE
+  #define Z_DRIVER_TYPE TMC2209_STANDALONE
+#else
+  #define X_DRIVER_TYPE TMC2208_STANDALONE
+  #define Y_DRIVER_TYPE TMC2208_STANDALONE
+  #define Z_DRIVER_TYPE A4988
+#endif
 //#define X2_DRIVER_TYPE A4988
 //#define Y2_DRIVER_TYPE A4988
 //#define Z2_DRIVER_TYPE A4988
 //#define Z3_DRIVER_TYPE A4988
 //#define Z4_DRIVER_TYPE A4988
-#define E0_DRIVER_TYPE A4988
+#if ENABLED(SPRO_TMC2209)
+  #define E0_DRIVER_TYPE TMC2209_STANDALONE
+#else
+  #define E0_DRIVER_TYPE A4988
+#endif
 //#define E1_DRIVER_TYPE A4988
 //#define E2_DRIVER_TYPE A4988
 //#define E3_DRIVER_TYPE A4988
@@ -835,7 +847,9 @@
  * The probe replaces the Z-MIN endstop and is used for Z homing.
  * (Automatically enables USE_PROBE_FOR_Z_HOMING.)
  */
-#define Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN
+#if ENABLED(SPRO_BLTOUCH)
+  #define Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN
+#endif
 
 // Force the use of the probe for Z-axis homing
 //#define USE_PROBE_FOR_Z_HOMING
@@ -893,7 +907,9 @@
 /**
  * The BLTouch probe uses a Hall effect sensor and emulates a servo.
  */
-//#define BLTOUCH
+#if ENABLED(SPRO_BLTOUCH)
+  #define BLTOUCH
+#endif
 
 /**
  * Pressure sensor with a BLTouch-like interface
@@ -1082,13 +1098,21 @@
 // Invert the stepper direction. Change (or reverse the motor connector) if an axis goes the wrong way.
 #define INVERT_X_DIR true
 #define INVERT_Y_DIR true
-#define INVERT_Z_DIR false
+#if ENABLED(SPRO_TMC2209)
+  #define INVERT_Z_DIR true
+#else
+  #define INVERT_Z_DIR false
+#endif
 
 // @section extruder
 
 // For direct drive extruder v9 set to true, for geared extruder set to false.
 #ifdef SPRO_INVERTED_E
-  #define INVERT_E0_DIR true
+  #if ENABLED(SPRO_TMC2209)
+    #define INVERT_E0_DIR true
+  #else
+    #define INVERT_E0_DIR false
+  #endif
 #else
   #define INVERT_E0_DIR false
 #endif
@@ -1099,6 +1123,7 @@
 #define INVERT_E5_DIR false
 #define INVERT_E6_DIR false
 #define INVERT_E7_DIR false
+
 
 // @section homing
 
@@ -1272,9 +1297,12 @@
  */
 //#define AUTO_BED_LEVELING_3POINT
 //#define AUTO_BED_LEVELING_LINEAR
-//#define AUTO_BED_LEVELING_BILINEAR
 //#define AUTO_BED_LEVELING_UBL
-#define MESH_BED_LEVELING
+#if ENABLED(SPRO_BLTOUCH)
+  #define AUTO_BED_LEVELING_BILINEAR
+#else
+  #define MESH_BED_LEVELING
+#endif
 
 /**
  * Normally G28 leaves leveling disabled on completion. Enable
@@ -1432,7 +1460,9 @@
 // - Move the Z probe (or nozzle) to a defined XY point before Z Homing.
 // - Prevent Z homing when the Z probe is outside bed area.
 //
-//#define Z_SAFE_HOMING
+#if ENABLED(SPRO_BLTOUCH)
+  #define Z_SAFE_HOMING
+#endif
 
 #if ENABLED(Z_SAFE_HOMING)
   #define Z_SAFE_HOMING_X_POINT X_CENTER  // X point for Z homing

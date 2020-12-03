@@ -12,4 +12,4 @@ Extra options are provided for BlueR stepper driver variants:
 
 - Enable `BLUER_TMC2209` if your board has TMC2209 drivers.
 - Enable `BLUER_INVERTED_E` for the BlueR V2 if the E motor goes in reverse.
-- Enable `BLUER_BLTOUCH` if you want to enable BLTOUCH.
+- Enable `BLUER_BLTOUCH` if you want to enable BLTOUCH. (BLTOUCH Will Replace Z_Min_Plug)
