@@ -13,7 +13,7 @@ Please follow the instructions below. Failure to do so may result in your issue 
 
 ### Before Reporting a Bug
 
-1. Test with the `import-2.0.x` branch to see whether the issue still exists.
+1. Test with the `import-2.0.x` branch to see whether the issue still exists. This will require testing with the Marlin `bugfix-2.0.x` branch.
 
 2. Get troubleshooting help from the Marlin community to confirm it's a bug and not just a configuration error. Links at https://github.com/MarlinFirmware/Configurations/issues/new/choose
 
