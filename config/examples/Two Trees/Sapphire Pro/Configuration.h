@@ -1114,7 +1114,7 @@
     #define INVERT_E0_DIR true
   #endif
 #else
-  #define INVERT_E0_DIR true
+  #define INVERT_E0_DIR false
 #endif
 #define INVERT_E1_DIR false
 #define INVERT_E2_DIR false
