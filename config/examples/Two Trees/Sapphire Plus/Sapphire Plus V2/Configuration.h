@@ -21,8 +21,9 @@
  */
 #pragma once
 
-//#define SAPPHIRE_PRO_MKS_UI
-//#define SAPPHIRE_PRO_BLTOUCH
+//#define SAPPHIRE_PLUS_MKS_UI
+//#define SAPPHIRE_PLUS_BLTOUCH
+//#define SAPPHIRE_PLUS_TMC_UART
 
 /**
  * Configuration.h
@@ -113,7 +114,9 @@
  * Currently Ethernet (-2) is only supported on Teensy 4.1 boards.
  * :[-2, -1, 0, 1, 2, 3, 4, 5, 6, 7]
  */
-#define SERIAL_PORT_2 1
+#if DISABLED(SAPPHIRE_PLUS_TMC_UART)
+  #define SERIAL_PORT_2 1
+#endif
 
 /**
  * This setting determines the communication speed of the printer.
@@ -491,14 +494,14 @@
   #if ENABLED(PID_PARAMS_PER_HOTEND)
     // Specify between 1 and HOTENDS values per array.
     // If fewer than EXTRUDER values are provided, the last element will be repeated.
-    #define DEFAULT_Kp_LIST { 11.03, 11.03 }
-    #define DEFAULT_Ki_LIST {  0.43,  0.43 }
-    #define DEFAULT_Kd_LIST { 48.43, 48.43 }
+    #define DEFAULT_Kp_LIST { 12.02, 12.02 }
+    #define DEFAULT_Ki_LIST {  0.75,  0.75 }
+    #define DEFAULT_Kd_LIST { 49.50, 49.50 }
   #else
     // Sapphire S/Pro/Plus
-    #define DEFAULT_Kp 11.03
-    #define DEFAULT_Ki  0.43
-    #define DEFAULT_Kd 48.43
+    #define DEFAULT_Kp 12.02
+    #define DEFAULT_Ki  0.75
+    #define DEFAULT_Kd 49.50
   #endif
 #endif // PIDTEMP
 
@@ -535,11 +538,10 @@
   //#define MIN_BED_POWER 0
   //#define PID_BED_DEBUG // Sends debug data to the serial port.
 
-  // 120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
-  // from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
-  #define DEFAULT_bedKp 10.00
-  #define DEFAULT_bedKi 0.023
-  #define DEFAULT_bedKd 305.4
+  // Sapphire Plus
+  #define DEFAULT_bedKp 91.90
+  #define DEFAULT_bedKi 15.49
+  #define DEFAULT_bedKd 363.6
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #endif // PIDTEMPBED
@@ -569,7 +571,7 @@
  * Note: For Bowden Extruders make this large enough to allow load/unload.
  */
 #define PREVENT_LENGTHY_EXTRUDE
-#define EXTRUDE_MAXLENGTH TERN(SAPPHIRE_PRO_BLTOUCH, 720, 950)
+#define EXTRUDE_MAXLENGTH 950
 
 //===========================================================================
 //======================== Thermal Runaway Protection =======================
@@ -622,7 +624,7 @@
 #define USE_ZMIN_PLUG
 //#define USE_XMAX_PLUG
 #define USE_YMAX_PLUG
-#if DISABLED(BLTOUCH)
+#if DISABLED(SAPPHIRE_PLUS_BLTOUCH)
   #define USE_ZMAX_PLUG
 #endif
 
@@ -653,10 +655,10 @@
 #endif
 
 // Mechanical endstop with COM to ground and NC to Signal uses "false" here (most common setup).
-#if ENABLED(SAPPHIRE_PRO_BLTOUCH)
-  #define SP_INVERTING false
-#else
+#if DISABLED(SAPPHIRE_PLUS_BLTOUCH)
   #define SP_INVERTING true
+#else
+  #define SP_INVERTING false
 #endif
 #define X_MIN_ENDSTOP_INVERTING true // Set to true to invert the logic of the endstop.
 #define Y_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
@@ -684,15 +686,15 @@
  *          TMC5130, TMC5130_STANDALONE, TMC5160, TMC5160_STANDALONE
  * :['A4988', 'A5984', 'DRV8825', 'LV8729', 'L6470', 'L6474', 'POWERSTEP01', 'TB6560', 'TB6600', 'TMC2100', 'TMC2130', 'TMC2130_STANDALONE', 'TMC2160', 'TMC2160_STANDALONE', 'TMC2208', 'TMC2208_STANDALONE', 'TMC2209', 'TMC2209_STANDALONE', 'TMC26X', 'TMC26X_STANDALONE', 'TMC2660', 'TMC2660_STANDALONE', 'TMC5130', 'TMC5130_STANDALONE', 'TMC5160', 'TMC5160_STANDALONE']
  */
-#define X_DRIVER_TYPE  TMC2208_STANDALONE
-#define Y_DRIVER_TYPE  TMC2208_STANDALONE
+#define X_DRIVER_TYPE  TERN(SAPPHIRE_PLUS_TMC_UART,TMC2208,TMC2208_STANDALONE)
+#define Y_DRIVER_TYPE  TERN(SAPPHIRE_PLUS_TMC_UART,TMC2208,TMC2208_STANDALONE)
 #define Z_DRIVER_TYPE  A4988
 //#define X2_DRIVER_TYPE A4988
 //#define Y2_DRIVER_TYPE A4988
 #define Z2_DRIVER_TYPE A4988
 //#define Z3_DRIVER_TYPE A4988
 //#define Z4_DRIVER_TYPE A4988
-#define E0_DRIVER_TYPE TMC2208_STANDALONE
+#define E0_DRIVER_TYPE TERN(SAPPHIRE_PLUS_TMC_UART,TMC2208,TMC2208_STANDALONE)
 //#define E1_DRIVER_TYPE A4988
 //#define E2_DRIVER_TYPE A4988
 //#define E3_DRIVER_TYPE A4988
@@ -700,6 +702,20 @@
 //#define E5_DRIVER_TYPE A4988
 //#define E6_DRIVER_TYPE A4988
 //#define E7_DRIVER_TYPE A4988
+
+#if ENABLED(SAPPHIRE_PLUS_TMC_UART)
+#define X_SERIAL_TX_PIN                   PA9   // Wifi TX
+#define X_SERIAL_RX_PIN                   PA9
+#define Y_SERIAL_TX_PIN                   PA10  // Wifi RX
+#define Y_SERIAL_RX_PIN                   PA10
+#define Z_SERIAL_TX_PIN                   PC13  // WIFI IO0
+#define Z_SERIAL_RX_PIN                   PC13
+#define E0_SERIAL_TX_PIN                  PE5   // MAX31855 CS
+#define E0_SERIAL_RX_PIN                  PE5
+#define E1_SERIAL_TX_PIN                  PC7   // WIFI IO1
+#define E1_SERIAL_RX_PIN                  PC7
+#define TMC_BAUD_RATE                     19200 // Reduced to improve software serial reliability
+#endif
 
 // Enable this feature if all enabled endstop pins are interrupt-capable.
 // This will remove the need to poll the interrupt pins, saving many CPU cycles.
@@ -911,7 +927,7 @@
 /**
  * The BLTouch probe uses a Hall effect sensor and emulates a servo.
  */
-#if ENABLED(SAPPHIRE_PRO_BLTOUCH)
+#if ENABLED(SAPPHIRE_PLUS_BLTOUCH)
   #define BLTOUCH
 #endif
 
@@ -1010,8 +1026,9 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
-#if ENABLED(SAPPHIRE_PRO_BLTOUCH)
-  #define NOZZLE_TO_PROBE_OFFSET { 0, -44.0, -2.94 }
+#if ENABLED(SAPPHIRE_PLUS_BLTOUCH)
+  // https://www.thingiverse.com/thing:4361883
+  #define NOZZLE_TO_PROBE_OFFSET { 0, -42.0, -2.94 }
 #else
   #define NOZZLE_TO_PROBE_OFFSET { 0, 0, 0 }
 #endif
@@ -1067,7 +1084,7 @@
 #define Z_PROBE_OFFSET_RANGE_MAX 20
 
 // Enable the M48 repeatability test to test probe accuracy
-#if ENABLED(SAPPHIRE_PRO_BLTOUCH)
+#if ENABLED(SAPPHIRE_PLUS_BLTOUCH)
   #define Z_MIN_PROBE_REPEATABILITY_TEST
 #endif
 
@@ -1156,12 +1173,12 @@
 #define Y_BED_SIZE 295 // To stop pulleys hitting stepper mounts
 
 // Travel limits (mm) after homing, corresponding to endstop positions.
-#define X_MIN_POS -5
+#define X_MIN_POS -5    // Centre printable area on the bed
 #define Y_MIN_POS 0
 #define Z_MIN_POS 0
 #define X_MAX_POS X_BED_SIZE
 #define Y_MAX_POS Y_BED_SIZE
-#define Z_MAX_POS 340
+#define Z_MAX_POS TERN(SAPPHIRE_PLUS_BLTOUCH, 335, 340) // BLTouch needs clearance for homing
 
 /**
  * Software Endstops
@@ -1205,7 +1222,7 @@
  * RAMPS-based boards use SERVO3_PIN for the first runout sensor.
  * For other boards you may need to define FIL_RUNOUT_PIN, FIL_RUNOUT2_PIN, etc.
  */
-#if DISABLED(SAPPHIRE_PRO_MKS_UI)
+#if DISABLED(SAPPHIRE_PLUS_MKS_UI)
   #define FILAMENT_RUNOUT_SENSOR
 #endif
 #if ENABLED(FILAMENT_RUNOUT_SENSOR)
@@ -1306,7 +1323,7 @@
  */
 //#define AUTO_BED_LEVELING_3POINT
 //#define AUTO_BED_LEVELING_LINEAR
-#if ENABLED(SAPPHIRE_PRO_BLTOUCH)
+#if ENABLED(SAPPHIRE_PLUS_BLTOUCH)
   #define AUTO_BED_LEVELING_BILINEAR
 #else
   #define MESH_BED_LEVELING
@@ -1428,7 +1445,7 @@
  * Add a bed leveling sub-menu for ABL or MBL.
  * Include a guided procedure if manual probing is enabled.
  */
-#if DISABLED(SAPPHIRE_PRO_MKS_UI)
+#if DISABLED(SAPPHIRE_PLUS_MKS_UI)
   #define LCD_BED_LEVELING
 #endif
 
@@ -1480,7 +1497,7 @@
 // - Move the Z probe (or nozzle) to a defined XY point before Z Homing.
 // - Prevent Z homing when the Z probe is outside bed area.
 //
-#if ENABLED(SAPPHIRE_PRO_BLTOUCH)
+#if ENABLED(SAPPHIRE_PLUS_BLTOUCH)
   #define Z_SAFE_HOMING
 #endif
 
@@ -1573,7 +1590,9 @@
 #define EEPROM_CHITCHAT       // Give feedback on EEPROM commands. Disable to save PROGMEM.
 #define EEPROM_BOOT_SILENT    // Keep M503 quiet and only give errors during first load
 #if ENABLED(EEPROM_SETTINGS)
-  //#define EEPROM_AUTO_INIT  // Init EEPROM automatically on any errors.
+  #if ENABLED(SAPPHIRE_PLUS_MKS_UI)
+    #define EEPROM_AUTO_INIT  // Init EEPROM automatically on any errors.
+  #endif
 #endif
 
 //
@@ -2397,7 +2416,7 @@
  *   root of your SD card, together with the compiled firmware.
  */
 //#define TFT_CLASSIC_UI
-#if ENABLED(SAPPHIRE_PRO_MKS_UI)
+#if DISABLED(SAPPHIRE_PLUS_MKS_UI)
   #define TFT_COLOR_UI
 #else
   #define TFT_LVGL_UI
@@ -2425,7 +2444,7 @@
 //
 // ADS7843/XPT2046 ADC Touchscreen such as ILI9341 2.8
 //
-#if DISABLED(SAPPHIRE_PRO_MKS_UI)
+#if DISABLED(SAPPHIRE_PLUS_MKS_UI)
   #define TOUCH_SCREEN
 #endif
 #if ENABLED(TOUCH_SCREEN)

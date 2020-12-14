@@ -576,7 +576,7 @@
 #define NUM_Z_STEPPER_DRIVERS 2   // (1-4) Z options change based on how many
 
 #if NUM_Z_STEPPER_DRIVERS > 1
-  #if DISABLED(SAPPHIRE_PRO_BLTOUCH)
+  #if DISABLED(SAPPHIRE_PLUS_BLTOUCH)
     #define Z_MULTI_ENDSTOPS
   #endif
   #if ENABLED(Z_MULTI_ENDSTOPS)
@@ -743,7 +743,7 @@
  * Z Steppers Auto-Alignment
  * Add the G34 command to align multiple Z steppers using a bed probe.
  */
-#if DISABLED(SAPPHIRE_PRO_BLTOUCH)
+#if ENABLED(SAPPHIRE_PLUS_BLTOUCH)
   #define Z_STEPPER_AUTO_ALIGN
 #endif
 #if ENABLED(Z_STEPPER_AUTO_ALIGN)
@@ -802,7 +802,7 @@
 //
 // Add the G35 command to read bed corners to help adjust screws. Requires a bed probe.
 //
-#if ENABLED(SAPPHIRE_PRO_BLTOUCH)
+#if ENABLED(SAPPHIRE_PLUS_BLTOUCH)
   #define ASSISTED_TRAMMING
 #endif
 #if ENABLED(ASSISTED_TRAMMING)
@@ -820,7 +820,7 @@
   #define REPORT_TRAMMING_MM            // Report Z deviation (mm) for each point relative to the first
 
   //#define ASSISTED_TRAMMING_MENU_ITEM // Add a menu item to run G35 Assisted Tramming (MarlinUI)
-  //#define ASSISTED_TRAMMING_WIZARD    // Make the menu item open a Tramming Wizard sub-menu
+  #define ASSISTED_TRAMMING_WIZARD    // Make the menu item open a Tramming Wizard sub-menu
   //#define ASSISTED_TRAMMING_WAIT_POSITION { X_CENTER, Y_CENTER, 30 } // Move the nozzle out of the way for adjustment
 
   /**
@@ -1093,7 +1093,7 @@
       // Use a height slightly above the estimated nozzle-to-probe Z offset.
       // For example, with an offset of -5, consider a starting height of -4.
       //
-      #define PROBE_OFFSET_WIZARD_START_Z -4.0
+      #define PROBE_OFFSET_WIZARD_START_Z -2.0
 
       // Set a convenient position to do the calibration (probing point and nozzle/bed-distance)
       //#define PROBE_OFFSET_WIZARD_XY_POS { X_CENTER, Y_CENTER }
@@ -1190,6 +1190,8 @@
 
   //#define SD_IGNORE_AT_STARTUP            // Don't mount the SD card when starting up
   //#define SDCARD_READONLY                 // Read-only SD card (to save over 2K of flash)
+
+  //#define GCODE_REPEAT_MARKERS            // Enable G-code M808 to set repeat markers and do looping
 
   #define SD_PROCEDURE_DEPTH 1              // Increase if you need more nested M32 calls
 
@@ -2118,38 +2120,26 @@
  * Requires NOZZLE_PARK_FEATURE.
  * This feature is required for the default FILAMENT_RUNOUT_SCRIPT.
  */
-#if DISABLED(SAPPHIRE_PRO_MKS_UI)
+#if DISABLED(SAPPHIRE_PLUS_MKS_UI)
   #define ADVANCED_PAUSE_FEATURE
 #endif
 #if ENABLED(ADVANCED_PAUSE_FEATURE)
   #define PAUSE_PARK_RETRACT_FEEDRATE         45  // (mm/s) Initial retract feedrate.
-  #if ENABLED(SAPPHIRE_PRO_BLTOUCH)
-    #define PAUSE_PARK_RETRACT_LENGTH          7  // (mm) Initial retract.
-  #else                                           // This short retract is done immediately, before parking the nozzle.
-    #define PAUSE_PARK_RETRACT_LENGTH          9
-  #endif
+  #define PAUSE_PARK_RETRACT_LENGTH            9  // (mm) Initial retract.
   #define FILAMENT_CHANGE_UNLOAD_FEEDRATE     30  // (mm/s) Unload filament feedrate. This can be pretty fast.
   #define FILAMENT_CHANGE_UNLOAD_ACCEL        25  // (mm/s^2) Lower acceleration may allow a faster feedrate.
-  #if ENABLED(SAPPHIRE_PRO_BLTOUCH)
-    #define FILAMENT_CHANGE_UNLOAD_LENGTH    950  // (mm) The length of filament for a complete unload.
+  #define FILAMENT_CHANGE_UNLOAD_LENGTH      950  // (mm) The length of filament for a complete unload.
                                                   //   For Bowden, the full length of the tube and nozzle.
                                                   //   For direct drive, the full length of the nozzle.
                                                   //   Set to 0 for manual unloading.
-  #else
-    #define FILAMENT_CHANGE_UNLOAD_LENGTH    720
-  #endif
   #define FILAMENT_CHANGE_SLOW_LOAD_FEEDRATE   6  // (mm/s) Slow move when starting load.
   #define FILAMENT_CHANGE_SLOW_LOAD_LENGTH     0  // (mm) Slow length, to allow time to insert material.
                                                   // 0 to disable start loading and skip to fast load only
   #define FILAMENT_CHANGE_FAST_LOAD_FEEDRATE  15  // (mm/s) Load filament feedrate. This can be pretty fast.
   #define FILAMENT_CHANGE_FAST_LOAD_ACCEL     25  // (mm/s^2) Lower acceleration may allow a faster feedrate.
-  #if ENABLED(SAPPHIRE_PRO_BLTOUCH)
-    #define FILAMENT_CHANGE_FAST_LOAD_LENGTH 920  // (mm) Load length of filament, from extruder gear to nozzle.
+  #define FILAMENT_CHANGE_FAST_LOAD_LENGTH   920  // (mm) Load length of filament, from extruder gear to nozzle.
                                                   //   For Bowden, the full length of the tube and nozzle.
                                                   //   For direct drive, the full length of the nozzle.
-  #else
-    #define FILAMENT_CHANGE_UNLOAD_LENGTH    690
-  #endif
   //#define ADVANCED_PAUSE_CONTINUOUS_PURGE       // Purge continuously up to the purge length until interrupted.
   #define ADVANCED_PAUSE_PURGE_FEEDRATE        3  // (mm/s) Extrude feedrate (after loading). Should be slower than load feedrate.
   #define ADVANCED_PAUSE_PURGE_LENGTH         20  // (mm) Length to extrude after loading.
@@ -2160,11 +2150,7 @@
   //#define ADVANCED_PAUSE_FANS_PAUSE             // Turn off print-cooling fans while the machine is paused.
 
                                                   // Filament Unload does a Retract, Delay, and Purge first:
-  #if ENABLED(SAPPHIRE_PRO_BLTOUCH)
-    #define FILAMENT_UNLOAD_PURGE_RETRACT      9  // (mm) Unload initial retract length.
-  #else
-    #define FILAMENT_UNLOAD_PURGE_RETRACT      7
-  #endif
+  #define FILAMENT_UNLOAD_PURGE_RETRACT        9  // (mm) Unload initial retract length.
   #define FILAMENT_UNLOAD_PURGE_DELAY       5000  // (ms) Delay for the filament to cool after retract.
   #define FILAMENT_UNLOAD_PURGE_LENGTH         0  // (mm) An unretract is done, then this length is purged.
   #define FILAMENT_UNLOAD_PURGE_FEEDRATE      25  // (mm/s) feedrate to purge before unload
