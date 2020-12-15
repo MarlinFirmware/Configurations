@@ -2343,6 +2343,16 @@
 //#define LONGER_LK_TFT28
 
 //
+// 320x240, 2.8", FSMC Stock Display from ET4
+//
+#define ANET_ET4_TFT28
+
+//
+// 480x320, 3.5", FSMC Stock Display from ET5
+//
+//#define ANET_ET5_TFT35
+
+//
 // Generic TFT with detailed options
 //
 //#define TFT_GENERIC
@@ -2371,7 +2381,7 @@
  *   root of your SD card, together with the compiled firmware.
  */
 //#define TFT_CLASSIC_UI
-//#define TFT_COLOR_UI
+#define TFT_COLOR_UI
 //#define TFT_LVGL_UI
 
 /**
@@ -2396,18 +2406,18 @@
 //
 // ADS7843/XPT2046 ADC Touchscreen such as ILI9341 2.8
 //
-//#define TOUCH_SCREEN
+#define TOUCH_SCREEN
 #if ENABLED(TOUCH_SCREEN)
   #define BUTTON_DELAY_EDIT  50 // (ms) Button repeat delay for edit screens
   #define BUTTON_DELAY_MENU 250 // (ms) Button repeat delay for menus
 
-  #define TOUCH_SCREEN_CALIBRATION
+  //#define TOUCH_SCREEN_CALIBRATION
 
-  #define TOUCH_CALIBRATION_X -11838
-  #define TOUCH_CALIBRATION_Y   8776
-  #define TOUCH_OFFSET_X         333
-  #define TOUCH_OFFSET_Y         -17
-  #define TOUCH_ORIENTATION TOUCH_PORTRAIT
+  //#define TOUCH_CALIBRATION_X -11838
+  //#define TOUCH_CALIBRATION_Y   8776
+  //#define TOUCH_OFFSET_X         333
+  //#define TOUCH_OFFSET_Y         -17
+  //#define TOUCH_ORIENTATION TOUCH_PORTRAIT
 
   #if ENABLED(TFT_COLOR_UI)
     //#define SINGLE_TOUCH_NAVIGATION
