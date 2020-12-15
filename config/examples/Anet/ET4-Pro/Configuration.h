@@ -128,7 +128,7 @@
 
 // Choose the name from boards.h that matches your setup
 #ifndef MOTHERBOARD
-  #define MOTHERBOARD BOARD_ET4
+  #define MOTHERBOARD BOARD_ANET_ET4
 #endif
 
 // Name displayed in the LCD "Ready" message and Info menu
