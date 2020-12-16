@@ -2392,10 +2392,10 @@
 
 /* ET4/ET5 Black Theme */
 
-#define COLOR_RED2              0xF003
-#define COLOR_ORANGE2           0xFDE0
-#define COLOR_LIME2             0xA7E0
-#define COLOR_BLACK2            0x2124
+#define COLOR_RED2              0xF003 // #F70019
+#define COLOR_ORANGE2           0xFDE0 // #FFBE00
+#define COLOR_LIME2             0xA7E0 // #A5FF00
+#define COLOR_BLACK2            0x2124 // #212421
 
 #define COLOR_BACKGROUND        COLOR_BLACK2
 #define COLOR_SELECTION_BG      COLOR_ORANGE2
