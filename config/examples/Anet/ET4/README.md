@@ -4,12 +4,12 @@ A debugging/programming probe (_e.g._, ST-Link, J-Link, or Black Magic Probe) is
 
 ## Flashing OpenBLT Bootloader with an ST-Link V2
 
-1. Using three female to female Dupont jumper cables, connect `GND`, `SWDIO`, and `SWCLK` pins from the ST-Link to the Serial Wire Debug (SWD) header on the motherboard. Pay close attention that the cables on SWD header side match the order below using the `V` and `G` letters printed on the motherboard as a reference:
+1. Using three female to female Dupont jumper cables, connect `GND`, `SWDIO`, and `SWCLK` pins from the ST-Link to the Serial Wire Debug (SWD) header on the motherboard. Pay close attention that the cables on SWD header side match the order below using the `U` and `G` letters printed on the motherboard as a reference:
 
     ```
       SWD Header on ET Series motherboard
          ___
-      V | o |  3.3V (not connected)
+      U | o |  (not connected)
         |---|
         | o |  SWDIO
         |---|
@@ -18,6 +18,11 @@ A debugging/programming probe (_e.g._, ST-Link, J-Link, or Black Magic Probe) is
       G | o |  GND
          ---
     ```
+    Photo reference:
+
+    <img src="https://i.imgur.com/IBqE0i0.jpeg" width="50%">
+
+    _`GND` is connected to `GND` (black wire), `SWDIO` to `SWDIO` (yellow wire), and `SWCLK` to `SWCLK` (green wire). Your ST-Link pinout may differ from the one pictured, so double-check pinout._
 2. Plug in the ST-Link to your computer's USB port & power on your printer.
 3. Download & install [STM32 ST-Link Utility](https://www.st.com/en/development-tools/stsw-link004.html).
 4. Launch STM32 ST-Link Utility & click `Target` then `Connect`.
