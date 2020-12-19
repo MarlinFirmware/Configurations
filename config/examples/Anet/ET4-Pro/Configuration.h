@@ -128,7 +128,7 @@
 
 // Choose the name from boards.h that matches your setup
 #ifndef MOTHERBOARD
-  #define MOTHERBOARD BOARD_ANET_ET4
+  #define MOTHERBOARD BOARD_ANET_ET4P
 #endif
 
 // Name displayed in the LCD "Ready" message and Info menu
@@ -997,7 +997,7 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
-#define NOZZLE_TO_PROBE_OFFSET { -23, -10, -0.77 }
+#define NOZZLE_TO_PROBE_OFFSET { -25, -8.5, 0 }
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
@@ -2380,6 +2380,16 @@
 //#define LONGER_LK_TFT28
 
 //
+// 320x240, 2.8", FSMC Stock Display from ET4
+//
+#define ANET_ET4_TFT28
+
+//
+// 480x320, 3.5", FSMC Stock Display from ET5
+//
+//#define ANET_ET5_TFT35
+
+//
 // Generic TFT with detailed options
 //
 //#define TFT_GENERIC
@@ -2408,8 +2418,39 @@
  *   root of your SD card, together with the compiled firmware.
  */
 //#define TFT_CLASSIC_UI
-//#define TFT_COLOR_UI
+#define TFT_COLOR_UI
 //#define TFT_LVGL_UI
+
+/* ET4/ET5 Black Theme */
+
+#define COLOR_RED2              0xF003 // #F70019
+#define COLOR_ORANGE2           0xFDE0 // #FFBE00
+#define COLOR_LIME2             0xA7E0 // #A5FF00
+#define COLOR_BLACK2            0x2124 // #212421
+
+#define COLOR_BACKGROUND        COLOR_BLACK2
+#define COLOR_SELECTION_BG      COLOR_ORANGE2
+#define COLOR_COLD              COLOR_WHITE
+#define COLOR_HOTEND            COLOR_RED2
+#define COLOR_HEATED_BED        COLOR_RED2
+#define COLOR_CHAMBER           COLOR_WHITE
+#define COLOR_FAN               COLOR_WHITE
+#define COLOR_AXIS_FRAME        COLOR_WHITE
+#define COLOR_AXIS_HOMED        COLOR_ORANGE2
+#define COLOR_AXIS_NOT_HOMED    COLOR_ORANGE2
+#define COLOR_RATE_100          COLOR_LIME2
+#define COLOR_RATE_ALTERED      COLOR_ORANGE2
+#define COLOR_PRINT_TIME        COLOR_WHITE
+#define COLOR_PROGRESS_BAR      COLOR_ORANGE2
+#define COLOR_STATUS_MESSAGE    COLOR_ORANGE2
+#define COLOR_SD_ENABLED        COLOR_CONTROL_ENABLED
+#define COLOR_SD_DISABLED       COLOR_CONTROL_DISABLED
+#define COLOR_MENU_TEXT         COLOR_WHITE
+#define COLOR_MENU_VALUE_FONT   COLOR_ORANGE2
+#define COLOR_SLIDER            COLOR_ORANGE2
+#define COLOR_INCREASE          COLOR_WHITE
+#define COLOR_DECREASE          COLOR_WHITE
+#define COLOR_TICK              COLOR_VIVID_GREEN
 
 /**
  * TFT Rotation. Set to one of the following values:
@@ -2433,17 +2474,17 @@
 //
 // ADS7843/XPT2046 ADC Touchscreen such as ILI9341 2.8
 //
-//#define TOUCH_SCREEN
+#define TOUCH_SCREEN
 #if ENABLED(TOUCH_SCREEN)
   #define BUTTON_DELAY_EDIT  50 // (ms) Button repeat delay for edit screens
   #define BUTTON_DELAY_MENU 250 // (ms) Button repeat delay for menus
 
-  #define TOUCH_SCREEN_CALIBRATION
+  //#define TOUCH_SCREEN_CALIBRATION
 
-  #define TOUCH_CALIBRATION_X -11838
-  #define TOUCH_CALIBRATION_Y   8776
-  #define TOUCH_OFFSET_X         -43
-  #define TOUCH_OFFSET_Y         257
+  //#define TOUCH_CALIBRATION_X -11838
+  //#define TOUCH_CALIBRATION_Y   8776
+  //#define TOUCH_OFFSET_X         -43
+  //#define TOUCH_OFFSET_Y         257
 
   #if ENABLED(TFT_COLOR_UI)
     //#define SINGLE_TOUCH_NAVIGATION
