@@ -26,7 +26,7 @@ A debugging/programming probe (_e.g._, ST-Link, J-Link, or Black Magic Probe) is
 2. Plug in the ST-Link to your computer's USB port & power on your printer.
 3. Download & install [STM32 ST-Link Utility](https://www.st.com/en/development-tools/stsw-link004.html).
 4. Launch STM32 ST-Link Utility & click `Target` then `Connect`.
-5. Backup the original motherboard firmware from `0x08000000` with a size of `0x100000`.
+5. Back up the original motherboard firmware from `0x08000000` with a size of `0x100000`.
     <img src="https://i.imgur.com/RGG4B6L.png" width="50%">
 6. Download & extract [OpenBLT bootloader for Anet ET4/ET5 series printers](https://github.com/davidtgbe/openblt/releases).
 7. Click on `Target` then `Program...`
