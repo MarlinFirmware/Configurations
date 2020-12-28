@@ -6,13 +6,13 @@ The Ender 6 does not ship with an accessible USB port. It is a good idea to open
 
 ## BLTouch Instructions
 
-There are two Configuration.h options. One contains values for factory installed or retrofitted BLTouch sensors. While Creality is not shipping printers with this option at this time, the existence of factory mounts, wiring, and OEM firmware supporting it suggests this may change in the future. Select the file appropriate for your setup.
+After installing a BLTouch probe, enable the custom option `ENABLE_BLTOUCH_PROBE` at the top of `Configuration.h` to get all the settings needed to support the probe. Creality is not shipping printers with a BLTouch option at this time, but the existence of factory mounts, wiring, and OEM firmware supporting it suggests this may change in the future.
 
-NOTE: Due to slight manufacturing differences, each user should tune the BLTouch z-offset for their specific printer.
+NOTE: Due to slight manufacturing differences, you will still need to tune your probe's `NOZZLE_TO_PROBE_OFFSET` values, at least for Z. For best results use the Probe Offset Wizard.
 
 ## Flashing Instructions
 
-Copy the compiled "firmware.bin" file to an SD card. Insert it into the printer while powered off, then power it on. The procedure will take a few seconds.
+Copy the compiled "`firmware.bin`" file to an SD card. Insert it into the printer while powered off, then power it on. The update will take a few seconds.
 
 The printer remembers the name of the last used firmware file. Every new firmware file name must be different from the previously used file name.
 
