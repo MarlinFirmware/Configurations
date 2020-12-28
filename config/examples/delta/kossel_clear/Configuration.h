@@ -971,11 +971,6 @@
 #define BLTOUCH
 
 /**
- * Pressure sensor with a BLTouch-like interface
- */
-//#define CREALITY_TOUCH
-
-/**
  * Touch-MI Probe by hotends.fr
  *
  * This probe is deployed and activated by moving the X-axis to a magnet at the edge of the bed.
@@ -1596,8 +1591,9 @@
   #define Z_SAFE_HOMING_Y_POINT Y_CENTER  // Y point for Z homing
 #endif
 
-// Delta only homes to Z
-#define HOMING_FEEDRATE_MM_M { (60*60), (60*60), (60*60) }
+// Homing speeds (mm/min)
+#define HOMING_FEEDRATE_Z (60*60)
+#define HOMING_FEEDRATE_MM_M { HOMING_FEEDRATE_Z, HOMING_FEEDRATE_Z, HOMING_FEEDRATE_Z }
 
 // Validate that endstops are triggered on homing moves
 #define VALIDATE_HOMING_ENDSTOPS
@@ -2553,6 +2549,7 @@
   //#define TOUCH_CALIBRATION_Y -8981
   //#define TOUCH_OFFSET_X        -43
   //#define TOUCH_OFFSET_Y        257
+  //#define TOUCH_ORIENTATION TOUCH_LANDSCAPE
 
   #if ENABLED(TFT_COLOR_UI)
     //#define SINGLE_TOUCH_NAVIGATION
