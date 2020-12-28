@@ -903,11 +903,6 @@
 //#define BLTOUCH
 
 /**
- * Pressure sensor with a BLTouch-like interface
- */
-//#define CREALITY_TOUCH
-
-/**
  * Touch-MI Probe by hotends.fr
  *
  * This probe is deployed and activated by moving the X-axis to a magnet at the edge of the bed.
@@ -1017,7 +1012,7 @@
  * A switch indicating proper deployment, or an optical
  * switch triggered when the carriage is near the bed.
  */
-//#define PROBE_ACTIVATION_SWITCH
+#define PROBE_ACTIVATION_SWITCH
 #if ENABLED(PROBE_ACTIVATION_SWITCH)
   #define PROBE_ACTIVATION_SWITCH_STATE LOW // State indicating probe is active
   //#define PROBE_ACTIVATION_SWITCH_PIN PC6 // Override default pin
@@ -1028,7 +1023,7 @@
  * Useful for a strain gauge or piezo sensor that needs to factor out
  * elements such as cables pulling on the carriage.
  */
-//#define PROBE_TARE
+#define PROBE_TARE
 #if ENABLED(PROBE_TARE)
   #define PROBE_TARE_TIME  200    // (ms) Time to hold tare pin
   #define PROBE_TARE_DELAY 200    // (ms) Delay after tare before
@@ -2454,6 +2449,7 @@
   //#define TOUCH_CALIBRATION_Y -8981
   //#define TOUCH_OFFSET_X        -43
   //#define TOUCH_OFFSET_Y        257
+  //#define TOUCH_ORIENTATION TOUCH_LANDSCAPE
 
   #if ENABLED(TFT_COLOR_UI)
     //#define SINGLE_TOUCH_NAVIGATION
