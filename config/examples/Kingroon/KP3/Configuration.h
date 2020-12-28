@@ -2456,6 +2456,7 @@
   //#define TOUCH_CALIBRATION_Y   8947
   //#define TOUCH_OFFSET_X         342
   //#define TOUCH_OFFSET_Y         -19
+  //#define TOUCH_ORIENTATION TOUCH_LANDSCAPE
 
   #if ENABLED(TFT_COLOR_UI)
     //#define SINGLE_TOUCH_NAVIGATION
