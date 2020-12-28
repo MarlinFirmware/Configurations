@@ -1,4 +1,4 @@
-## Two Trees BlueR Configurations
+## Two Trees Sapphire Pro Configurations
 
 This folder contains default configurations for the Sapphire Pro.
 
