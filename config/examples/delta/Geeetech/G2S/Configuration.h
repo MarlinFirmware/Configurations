@@ -1590,8 +1590,9 @@
   #define Z_SAFE_HOMING_Y_POINT Y_CENTER  // Y point for Z homing
 #endif
 
-// Delta only homes to Z
-#define HOMING_FEEDRATE_MM_M { (60*60), (60*60), (60*60) }
+// Homing speeds (mm/min)
+#define HOMING_FEEDRATE_Z (60*60)
+#define HOMING_FEEDRATE_MM_M { HOMING_FEEDRATE_Z, HOMING_FEEDRATE_Z, HOMING_FEEDRATE_Z }
 
 // Validate that endstops are triggered on homing moves
 #define VALIDATE_HOMING_ENDSTOPS
