@@ -54,6 +54,25 @@ G1 X60.0 E9.0 F1000.0 ; intro line
 G1 X100.0 E12.5 F1000.0 ; intro line
 G92 E0.0
 ```
+### IdeaMaker
+Paste the start G-code block below in the filament's "Start GCode" section. Add your [Linear Advance](https://marlinfw.org/docs/features/lin_advance.html) (`M900 K0.0`) value in the start G-code block below:
+```gcode
+G90 ; use absolute coordinates
+M83 ; extruder relative mode
+M900 K0.0 ; place your linear advance value here
+M104 S170 ; preheat hotend to 170
+M140 S{temperature_heatbed} ; set bed temp
+M190 S{temperature_heatbed} ; wait for bed temp
+G28 ; home all
+G29 ; mesh bed leveling
+G1 X0 Z0.6 Y-3.0 F1000.0 ; go outside print area
+M104 S{temperature_extruder1} ; set hotend temp
+M109 S{temperature_extruder1} ; wait for hotend temp
+G92 E0.0
+G1 X60.0 E9.0 F1000.0 ; intro line
+G1 X100.0 E12.5 F1000.0 ; intro line
+G92 E0.0
+```
 
 ### Simplify3D
 Paste the start G-code block below in the "Starting Script" section. Add your [Linear Advance](https://marlinfw.org/docs/features/lin_advance.html) (`M900 K0.0`) value in the start G-code block below:
