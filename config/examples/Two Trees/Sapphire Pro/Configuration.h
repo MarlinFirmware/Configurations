@@ -1177,10 +1177,10 @@
 //#define HOME_AFTER_DEACTIVATE   // Require rehoming after steppers are deactivated. Also enable NO_MOTION_BEFORE_HOMING for extra safety.
 //#define UNKNOWN_Z_NO_RAISE      // Don't raise Z (lower the bed) if Z is "unknown." For beds that fall when Z is powered off.
 
-#define Z_HOMING_HEIGHT  10        // (mm) Minimal Z height before homing (G28) for Z clearance above the bed, clamps, ...
+#define Z_HOMING_HEIGHT  10       // (mm) Minimal Z height before homing (G28) for Z clearance above the bed, clamps, ...
                                   // Be sure to have this much clearance over your Z_MAX_POS to prevent grinding.
 
-//#define Z_AFTER_HOMING  10        // (mm) Height to move to after homing Z
+//#define Z_AFTER_HOMING  10      // (mm) Height to move to after homing Z
 
 // Direction of endstops when homing; 1=MAX, -1=MIN
 // :[-1,1]
@@ -2479,12 +2479,10 @@
 
   #define TOUCH_SCREEN_CALIBRATION
 
-  // XPT2046 Touch Screen calibration
-
-    #define XPT2046_X_CALIBRATION          17880
-    #define XPT2046_Y_CALIBRATION         -12234
-    #define XPT2046_X_OFFSET              -45
-    #define XPT2046_Y_OFFSET               349
+  #define XPT2046_X_CALIBRATION  17880
+  #define XPT2046_Y_CALIBRATION -12234
+  #define XPT2046_X_OFFSET      -45
+  #define XPT2046_Y_OFFSET       349
    //#define TOUCH_ORIENTATION TOUCH_LANDSCAPE
 
   #if ENABLED(TFT_COLOR_UI)
