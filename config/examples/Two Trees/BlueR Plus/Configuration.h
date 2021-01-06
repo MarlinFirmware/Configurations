@@ -2450,10 +2450,10 @@
   #define TOUCH_SCREEN_CALIBRATION
 
   // XPT2046 Touch Screen calibration
-    #define XPT2046_X_CALIBRATION          17880
-    #define XPT2046_Y_CALIBRATION         -12234
-    #define XPT2046_X_OFFSET              -45
-    #define XPT2046_Y_OFFSET               349
+  //#define XPT2046_X_CALIBRATION          17880
+  //#define XPT2046_Y_CALIBRATION         -12234
+  //#define XPT2046_X_OFFSET              -45
+  //#define XPT2046_Y_OFFSET               349
   //#define TOUCH_ORIENTATION TOUCH_LANDSCAPE
 
   #if ENABLED(TFT_COLOR_UI)
