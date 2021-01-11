@@ -500,9 +500,6 @@
   #endif
 #endif // PIDTEMP
 
-
-
-
 //===========================================================================
 //====================== PID > Bed Temperature Control ======================
 //===========================================================================
@@ -1155,7 +1152,7 @@
 //#define HOME_AFTER_DEACTIVATE   // Require rehoming after steppers are deactivated. Also enable NO_MOTION_BEFORE_HOMING for extra safety.
 //#define UNKNOWN_Z_NO_RAISE      // Don't raise Z (lower the bed) if Z is "unknown." For beds that fall when Z is powered off.
 
-#define Z_HOMING_HEIGHT  10        // (mm) Minimal Z height before homing (G28) for Z clearance above the bed, clamps, ...
+#define Z_HOMING_HEIGHT  10       // (mm) Minimal Z height before homing (G28) for Z clearance above the bed, clamps, ...
                                   // Be sure to have this much clearance over your Z_MAX_POS to prevent grinding.
 
  //#define Z_AFTER_HOMING  10        // (mm) Height to move to after homing Z
@@ -1837,16 +1834,6 @@
 #define SDSUPPORT
 
 /**
- * SD CARD: SPI SPEED
- *
- * Enable one of the following items for a slower SPI transfer speed.
- * This may be required to resolve "volume init" errors.
- */
-//#define SPI_SPEED SPI_HALF_SPEED
-//#define SPI_SPEED SPI_QUARTER_SPEED
-//#define SPI_SPEED SPI_EIGHTH_SPEED
-
-/**
  * SD CARD: ENABLE CRC
  *
  * Use CRC checks and retries on the SD communication.
@@ -2459,9 +2446,6 @@
 	#define TOUCH_OFFSET_Y -36
 	#define TOUCH_OFFSET_Y -36
   //#define TOUCH_ORIENTATION TOUCH_LANDSCAPE
-  
-
-
 
   #if ENABLED(TFT_COLOR_UI)
     //#define SINGLE_TOUCH_NAVIGATION
