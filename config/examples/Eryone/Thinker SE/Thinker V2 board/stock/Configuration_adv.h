@@ -1671,7 +1671,7 @@
   //#define BABYSTEP_XY                     // Also enable X/Y Babystepping. Not supported on DELTA!
   #define BABYSTEP_INVERT_Z false           // Change if Z babysteps should go the other way
   //#define BABYSTEP_MILLIMETER_UNITS       // Specify BABYSTEP_MULTIPLICATOR_(XY|Z) in mm instead of micro-steps
-  #ifdef BLTOUCH 
+  #ifdef BLTOUCH
     #define BABYSTEP_MULTIPLICATOR_Z  0.5       // (steps or mm) Steps or millimeter distance for each Z babystep
   #else
     #define BABYSTEP_MULTIPLICATOR_Z  1       // (steps or mm) Steps or millimeter distance for each Z babystep

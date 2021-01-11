@@ -21,6 +21,8 @@
  */
 #pragma once
 
+//#define THINKERV2_BLTOUCH  // Enable for an installed BLTOUCH
+
 /**
  * Configuration.h
  *
@@ -128,11 +130,11 @@
 
 // Choose the name from boards.h that matches your setup
 #ifndef MOTHERBOARD
-  #define MOTHERBOARD BOARD_RAMBO
+  #define MOTHERBOARD BOARD_RAMBO_THINKERV2
 #endif
 
 // Name displayed in the LCD "Ready" message and Info menu
-#ifdef BLTOUCH 
+#ifdef THINKERV2_BLTOUCH
   #define CUSTOM_MACHINE_NAME "Thinker V2_BL"
 #else
   #define CUSTOM_MACHINE_NAME "Thinker V2"
@@ -904,7 +906,9 @@
 /**
  * The BLTouch probe uses a Hall effect sensor and emulates a servo.
  */
-//#define BLTOUCH
+#ifdef THINKERV2_BLTOUCH
+  #define BLTOUCH
+#endif
 
 /**
  * Touch-MI Probe by hotends.fr
@@ -1318,19 +1322,20 @@
  */
 //#define AUTO_BED_LEVELING_3POINT
 //#define AUTO_BED_LEVELING_LINEAR
-#if ENABLED(BLTOUCH)||ENABLED(FIX_MOUNTED_PROBE)
+#if EITHER(BLTOUCH, FIX_MOUNTED_PROBE)
   #define AUTO_BED_LEVELING_BILINEAR
 #endif
 //#define AUTO_BED_LEVELING_UBL
-#ifndef AUTO_BED_LEVELING_BILINEAR
+#if DISABLED(AUTO_BED_LEVELING_BILINEAR)
   #define MESH_BED_LEVELING
 #endif
+
 /**
  * Normally G28 leaves leveling disabled on completion. Enable one of
  * these options to restore the prior leveling state or to always enable
  * leveling immediately after G28.
  */
-#ifndef BLTOUCH
+#if NONE(BLTOUCH, FIX_MOUNTED_PROBE)
   #define RESTORE_LEVELING_AFTER_G28
 #endif
 //#define ENABLE_LEVELING_AFTER_G28
@@ -1369,7 +1374,7 @@
   /**
    * Enable the G26 Mesh Validation Pattern tool.
    */
-  #ifndef BLTOUCH
+  #if EITHER(BLTOUCH, FIX_MOUNTED_PROBE)
     #define G26_MESH_VALIDATION
   #endif
   #if ENABLED(G26_MESH_VALIDATION)
@@ -1497,7 +1502,7 @@
 // - Prevent Z homing when the Z probe is outside bed area.
 //
 //
-#ifdef BLTOUCH
+#if EITHER(BLTOUCH, FIX_MOUNTED_PROBE)
   #define Z_SAFE_HOMING
 #endif
 
