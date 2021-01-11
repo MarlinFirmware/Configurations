@@ -21,8 +21,6 @@
  */
 #pragma once
 
-//#define BLUER_TMC2209 // Enable for the TMC2209 driver version
-//#define BLUER_BLTOUCH // Enable if you want to use BLTOUCH
 
 /**
  * Configuration.h
@@ -73,7 +71,7 @@
 // @section info
 
 // Author info of this build printed to the host during boot and M115
-#define STRING_CONFIG_H_AUTHOR "(ils15, BlueR)" // Who made the changes.
+#define STRING_CONFIG_H_AUTHOR "(ils15, BlueR Plus)" // Who made the changes.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
 /**
@@ -135,7 +133,7 @@
 #endif
 
 // Name displayed in the LCD "Ready" message and Info menu
-#define CUSTOM_MACHINE_NAME "Two Trees BlueR"
+#define CUSTOM_MACHINE_NAME "Two Trees BlueR Plus"
 
 // Printer's unique ID, used by some programs to differentiate between machines.
 // Choose your own or use a service like https://www.uuidgenerator.net/version4
@@ -496,9 +494,9 @@
     #define DEFAULT_Kd_LIST { 48.43, 48.43 }
   #else
     // Bluer
-    #define DEFAULT_Kp 11.03
-    #define DEFAULT_Ki  0.63
-    #define DEFAULT_Kd 48.43
+    #define DEFAULT_Kp 24.6
+    #define DEFAULT_Ki 2.90
+    #define DEFAULT_Kd 52.3
   #endif
 #endif // PIDTEMP
 
@@ -537,9 +535,9 @@
 
   // 120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   // from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
-  #define DEFAULT_bedKp 10.00
-  #define DEFAULT_bedKi .023
-  #define DEFAULT_bedKd 305.4
+  #define DEFAULT_bedKp  60.1
+  #define DEFAULT_bedKi  8.07
+  #define DEFAULT_bedKd 298.9
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #endif // PIDTEMPBED
@@ -569,7 +567,7 @@
  * Note: For Bowden Extruders make this large enough to allow load/unload.
  */
 #define PREVENT_LENGTHY_EXTRUDE
-#define EXTRUDE_MAXLENGTH 500
+#define EXTRUDE_MAXLENGTH 600
 
 //===========================================================================
 //======================== Thermal Runaway Protection =======================
@@ -657,7 +655,7 @@
 #define X_MAX_ENDSTOP_INVERTING true // Set to true to invert the logic of the endstop.
 #define Y_MAX_ENDSTOP_INVERTING true // Set to true to invert the logic of the endstop.
 #define Z_MAX_ENDSTOP_INVERTING true // Set to true to invert the logic of the endstop.
-#define Z_MIN_PROBE_ENDSTOP_INVERTING true // Set to true to invert the logic of the probe.
+#define Z_MIN_PROBE_ENDSTOP_INVERTING false // Set to true to invert the logic of the probe.
 
 /**
  * Stepper Drivers
@@ -677,25 +675,15 @@
  *          TMC5130, TMC5130_STANDALONE, TMC5160, TMC5160_STANDALONE
  * :['A4988', 'A5984', 'DRV8825', 'LV8729', 'L6470', 'L6474', 'POWERSTEP01', 'TB6560', 'TB6600', 'TMC2100', 'TMC2130', 'TMC2130_STANDALONE', 'TMC2160', 'TMC2160_STANDALONE', 'TMC2208', 'TMC2208_STANDALONE', 'TMC2209', 'TMC2209_STANDALONE', 'TMC26X', 'TMC26X_STANDALONE', 'TMC2660', 'TMC2660_STANDALONE', 'TMC5130', 'TMC5130_STANDALONE', 'TMC5160', 'TMC5160_STANDALONE']
  */
-#if ENABLED(BLUER_TMC2209)
-  #define X_DRIVER_TYPE TMC2209_STANDALONE
-  #define Y_DRIVER_TYPE TMC2209_STANDALONE
-  #define Z_DRIVER_TYPE TMC2209_STANDALONE
-#else
-  #define X_DRIVER_TYPE TMC2208_STANDALONE
-  #define Y_DRIVER_TYPE TMC2208_STANDALONE
-  #define Z_DRIVER_TYPE A4988
-#endif
+  #define X_DRIVER_TYPE  TMC2209_STANDALONE
+  #define Y_DRIVER_TYPE  TMC2209_STANDALONE
+  #define Z_DRIVER_TYPE  TMC2209_STANDALONE       
 //#define X2_DRIVER_TYPE A4988
 //#define Y2_DRIVER_TYPE A4988
 //#define Z2_DRIVER_TYPE A4988
 //#define Z3_DRIVER_TYPE A4988
 //#define Z4_DRIVER_TYPE A4988
-#if ENABLED(BLUER_TMC2209)
   #define E0_DRIVER_TYPE TMC2209_STANDALONE
-#else
-  #define E0_DRIVER_TYPE A4988
-#endif
 //#define E1_DRIVER_TYPE A4988
 //#define E2_DRIVER_TYPE A4988
 //#define E3_DRIVER_TYPE A4988
@@ -750,11 +738,7 @@
  * Override with M92
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
-#if ENABLED(BLUER_TMC2209)
-  #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 415 }
-#else
   #define DEFAULT_AXIS_STEPS_PER_UNIT   { 160, 160, 400, 415 }
-#endif
 
 /**
  * Default Max Feed Rate (mm/s)
@@ -854,9 +838,7 @@
  * The probe replaces the Z-MIN endstop and is used for Z homing.
  * (Automatically enables USE_PROBE_FOR_Z_HOMING.)
  */
-#if ENABLED(BLUER_BLTOUCH)
   #define Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN
-#endif
 
 // Force the use of the probe for Z-axis homing
 //#define USE_PROBE_FOR_Z_HOMING
@@ -920,9 +902,8 @@
 /**
  * The BLTouch probe uses a Hall effect sensor and emulates a servo.
  */
-#if ENABLED(BLUER_BLTOUCH)
   #define BLTOUCH
-#endif
+
 
 /**
  * Touch-MI Probe by hotends.fr
@@ -1014,11 +995,11 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
-#define NOZZLE_TO_PROBE_OFFSET { 10, 10, 0 }
+#define NOZZLE_TO_PROBE_OFFSET { 18, 28.5, -2.8 }
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
-#define PROBING_MARGIN 10
+#define PROBING_MARGIN 15
 
 // X and Y axis travel speed (mm/min) between probes
 #define XY_PROBE_SPEED (133*60)
@@ -1149,21 +1130,14 @@
 
 // Invert the stepper direction. Change (or reverse the motor connector) if an axis goes the wrong way.
 #define INVERT_X_DIR false
-#define INVERT_Y_DIR false
-#if ENABLED(BLUER_TMC2209)
-  #define INVERT_Z_DIR false
-#else
-  #define INVERT_Z_DIR true
-#endif
+#define INVERT_Y_DIR true
+#define INVERT_Z_DIR true
 
 // @section extruder
 
 // For direct drive extruder v9 set to true, for geared extruder set to false.
-#if ENABLED(BLUER_TMC2209)
-  #define INVERT_E0_DIR false
-#else
-  #define INVERT_E0_DIR true
-#endif
+
+#define INVERT_E0_DIR true
 #define INVERT_E1_DIR false
 #define INVERT_E2_DIR false
 #define INVERT_E3_DIR false
@@ -1181,7 +1155,7 @@
 #define Z_HOMING_HEIGHT  10       // (mm) Minimal Z height before homing (G28) for Z clearance above the bed, clamps, ...
                                   // Be sure to have this much clearance over your Z_MAX_POS to prevent grinding.
 
-//#define Z_AFTER_HOMING  10      // (mm) Height to move to after homing Z
+ //#define Z_AFTER_HOMING  10        // (mm) Height to move to after homing Z
 
 // Direction of endstops when homing; 1=MAX, -1=MIN
 // :[-1,1]
@@ -1192,16 +1166,16 @@
 // @section machine
 
 // The size of the print bed
-#define X_BED_SIZE 235
-#define Y_BED_SIZE 235
+#define X_BED_SIZE 300
+#define Y_BED_SIZE 300
 
 // Travel limits (mm) after homing, corresponding to endstop positions.
 #define X_MIN_POS 0
-#define Y_MIN_POS -5
+#define Y_MIN_POS -2
 #define Z_MIN_POS 0
 #define X_MAX_POS X_BED_SIZE
 #define Y_MAX_POS Y_BED_SIZE
-#define Z_MAX_POS 280
+#define Z_MAX_POS 400
 
 /**
  * Software Endstops
@@ -1345,11 +1319,8 @@
 //#define AUTO_BED_LEVELING_3POINT
 //#define AUTO_BED_LEVELING_LINEAR
 //#define AUTO_BED_LEVELING_UBL
-#if ENABLED(BLUER_BLTOUCH)
   #define AUTO_BED_LEVELING_BILINEAR
-#else
-  #define MESH_BED_LEVELING
-#endif
+
 /**
  * Normally G28 leaves leveling disabled on completion. Enable one of
  * these options to restore the prior leveling state or to always enable
@@ -1417,13 +1388,13 @@
 
     // Beyond the probed grid, continue the implied tilt?
     // Default is to maintain the height of the nearest edge.
-    //#define EXTRAPOLATE_BEYOND_GRID
+    #define EXTRAPOLATE_BEYOND_GRID
 
     //
     // Experimental Subdivision of the grid by Catmull-Rom method.
     // Synthesizes intermediate points to produce a more detailed mesh.
     //
-    //#define ABL_BILINEAR_SUBDIVISION
+    #define ABL_BILINEAR_SUBDIVISION
     #if ENABLED(ABL_BILINEAR_SUBDIVISION)
       // Number of subdivisions between probe points
       #define BILINEAR_SUBDIVISIONS 3
@@ -1517,9 +1488,8 @@
 // - Move the Z probe (or nozzle) to a defined XY point before Z Homing.
 // - Prevent Z homing when the Z probe is outside bed area.
 //
-#if ENABLED(BLUER_BLTOUCH)
   #define Z_SAFE_HOMING
-#endif
+
 
 #if ENABLED(Z_SAFE_HOMING)
   #define Z_SAFE_HOMING_X_POINT X_CENTER  // X point for Z homing
@@ -1636,7 +1606,7 @@
 
 // Preheat Constants
 #define PREHEAT_1_LABEL       "PLA"
-#define PREHEAT_1_TEMP_HOTEND 180
+#define PREHEAT_1_TEMP_HOTEND 200
 #define PREHEAT_1_TEMP_BED     70
 #define PREHEAT_1_FAN_SPEED     0 // Value from 0 to 255
 
@@ -2370,12 +2340,12 @@
 // 480x320, 3.5", FSMC Display From MKS
 // Normally used in MKS Robin Nano V1.2
 //
-#define MKS_ROBIN_TFT35
+//#define MKS_ROBIN_TFT35
 
 //
 // 480x272, 4.3", FSMC Display From MKS
 //
-//#define MKS_ROBIN_TFT43
+#define MKS_ROBIN_TFT43
 
 //
 // 320x240, 3.2", FSMC Display From MKS
@@ -2422,8 +2392,8 @@
 
   // TFT Resolution. Enable one of the following options:
   //#define TFT_RES_320x240
-  //#define TFT_RES_480x272
-  #define TFT_RES_480x320
+  #define TFT_RES_480x272
+  //#define TFT_RES_480x320
 #endif
 
 /**
@@ -2448,7 +2418,7 @@
  *   TFT_ROTATE_270, TFT_ROTATE_270_MIRROR_X, TFT_ROTATE_270_MIRROR_Y,
  *   TFT_MIRROR_X, TFT_MIRROR_Y, TFT_NO_ROTATION
  */
-//#define TFT_ROTATION TFT_NO_ROTATION
+#define TFT_ROTATION TFT_ROTATE_180
 
 //=============================================================================
 //============================  Other Controllers  ============================
@@ -2469,10 +2439,11 @@
 
   #define TOUCH_SCREEN_CALIBRATION
 
-  #define TOUCH_CALIBRATION_X  17880
-  #define TOUCH_CALIBRATION_Y -12234
-  #define TOUCH_OFFSET_X         -45
-  #define TOUCH_OFFSET_Y         349
+  // XPT2046 Touch Screen calibration
+  #define TOUCH_CALIBRATION_X 16128
+  #define TOUCH_CALIBRATION_Y 10841
+  #define TOUCH_OFFSET_X        -13
+  #define TOUCH_OFFSET_Y        -36
   //#define TOUCH_ORIENTATION TOUCH_LANDSCAPE
 
   #if ENABLED(TFT_COLOR_UI)
