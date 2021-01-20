@@ -136,7 +136,7 @@
 #define X_MAX_PIN       43
 
 // Name displayed in the LCD "Ready" message and Info menu
-#define CUSTOM_MACHINE_NAME "3D Printer"
+#define CUSTOM_MACHINE_NAME "Anycubic Chiron"
 
 // Printer's unique ID, used by some programs to differentiate between machines.
 // Choose your own or use a service like https://www.uuidgenerator.net/version4
@@ -881,7 +881,7 @@
  * A Fix-Mounted Probe either doesn't deploy or needs manual deployment.
  *   (e.g., an inductive probe or a nozzle-based probe-switch.)
  */
-#define FIX_MOUNTED_PROBE
+//#define FIX_MOUNTED_PROBE
 
 /**
  * Use the nozzle as the probe, with the hotend
@@ -893,7 +893,7 @@
  * Use the nozzle as the probe, as with a conductive
  * nozzle system or a piezo-electric smart effector.
  */
-//#define NOZZLE_AS_PROBE
+#define NOZZLE_AS_PROBE
 
 /**
  * Z Servo Probe, such as an endstop switch on a rotating arm.
@@ -1064,16 +1064,16 @@
  * Example: `M851 Z-5` with a CLEARANCE of 4  =>  9mm from bed to nozzle.
  *     But: `M851 Z+1` with a CLEARANCE of 2  =>  2mm from bed to nozzle.
  */
-#define Z_CLEARANCE_DEPLOY_PROBE   10 // Z Clearance for Deploy/Stow
+#define Z_CLEARANCE_DEPLOY_PROBE   35 // Z Clearance for Deploy/Stow
 #define Z_CLEARANCE_BETWEEN_PROBES  5 // Z Clearance between probe points
 #define Z_CLEARANCE_MULTI_PROBE     3 // Z Clearance between multiple probes
 //#define Z_AFTER_PROBING           5 // Z position after probing is done
 
-#define Z_PROBE_LOW_POINT          -10 // Farthest distance below the trigger-point to go before stopping
+#define Z_PROBE_LOW_POINT          -2 // Farthest distance below the trigger-point to go before stopping
 
 // For M851 give a range for adjusting the Z probe offset
 #define Z_PROBE_OFFSET_RANGE_MIN -30
-#define Z_PROBE_OFFSET_RANGE_MAX 10
+#define Z_PROBE_OFFSET_RANGE_MAX   0
 
 // Enable the M48 repeatability test to test probe accuracy
 //#define Z_MIN_PROBE_REPEATABILITY_TEST
@@ -1173,8 +1173,8 @@
 #define X_MIN_POS -10
 #define Y_MIN_POS 0
 #define Z_MIN_POS 0
-#define X_MAX_POS X_BED_SIZE +10
-#define Y_MAX_POS Y_BED_SIZE +10
+#define X_MAX_POS (X_BED_SIZE + 10)
+#define Y_MAX_POS (Y_BED_SIZE + 10)
 #define Z_MAX_POS 450
 
 /**
@@ -1486,7 +1486,7 @@
  * Commands to execute at the end of G29 probing.
  * Useful to retract or move the Z probe out of the way.
  */
-#define Z_PROBE_END_SCRIPT "G27/n G1 Y0 F5000"
+#define Z_PROBE_END_SCRIPT "G27\nG1 Y0 F5000"
 
 // @section homing
 
