@@ -732,12 +732,13 @@
 #define TEMP_E_MICROSTEPS 16.0
 #define TEMP_Z_MICROSTEPS 16.0
 
-/* RepRapPro belts
-http://forums.reprap.org/read.php?1,391198
-White polyurethane belt(T2.5), 14 - tooth printed pulley : 91.4286 step per mm (Original Huxley, Legacy Mendel)
-Black rubber belt(MXL), 17 - tooth printed pulley : 92.635 step per mm (Huxley, Mendel Mono and Tri since 1 / 4 / 2013)
-Black rubber belt(MXL), 18 - tooth aluminium pulley : 87.489 step per mm (Huxley, Mendel Mono and Tri since 1 / 1 / 2014)
-*/
+/**
+ * RepRapPro belts
+ * http://forums.reprap.org/read.php?1,391198
+ * White polyurethane belt(T2.5), 14 - tooth printed pulley : 91.4286 step per mm (Original Huxley, Legacy Mendel)
+ * Black rubber belt(MXL), 17 - tooth printed pulley : 92.635 step per mm (Huxley, Mendel Mono and Tri since 1 / 4 / 2013)
+ * Black rubber belt(MXL), 18 - tooth aluminium pulley : 87.489 step per mm (Huxley, Mendel Mono and Tri since 1 / 1 / 2014)
+ */
 #define XY_PULLEY_PITCH 2.5   // RepRapPro Huxley has T2.5 belts
 #define XY_PULLEY_TEETH 14.0  // RepRapPro Huxley has 14 teeth pulleys
 
