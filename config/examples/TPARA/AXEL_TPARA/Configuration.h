@@ -817,7 +817,7 @@
 // TPARA uses only angles units are (steps/angle)
 // 200 steps per 360 deg rev * 32 microsteps * 32:9 gear ratio
 // 200/360*32*32/9 = 63.21
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 63.21,63.21,63.21, 50 }  // default steps per unit for SCARA
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 63.21,63.21,63.21, 200 }  // default steps per unit for SCARA
 
 /**
  * Default Max Feed Rate (mm/s)
