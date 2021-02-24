@@ -7,3 +7,6 @@ changes in the new version:
 Z-STEP signal change to PC14
 Z-DIR signal change to PC15
 Add support AT24C32D eeprom on the board
+
+MKS E3 New hardware can be found here
+https://github.com/makerbase-mks/MKS-Robin-E3-E3D/tree/master/hardware
