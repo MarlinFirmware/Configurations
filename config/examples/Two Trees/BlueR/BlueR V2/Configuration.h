@@ -502,8 +502,8 @@
   #else
     // Bluer
     #define DEFAULT_Kp 15.72
-	#define DEFAULT_Ki 1.24
-	#define DEFAULT_Kd 49.77
+    #define DEFAULT_Ki 1.24
+    #define DEFAULT_Kd 49.77
   #endif
 #endif // PIDTEMP
 
