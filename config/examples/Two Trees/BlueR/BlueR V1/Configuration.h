@@ -492,7 +492,7 @@
   //#define PID_PARAMS_PER_HOTEND // Uses separate PID parameters for each extruder (useful for mismatched extruders)
                                   // Set/get with gcode: M301 E[extruder number, 0-2]
 
-  #if ENABLED(PID_PARAMS_PER_HOTEND)
+    #if ENABLED(PID_PARAMS_PER_HOTEND)
     // Specify between 1 and HOTENDS values per array.
     // If fewer than EXTRUDER values are provided, the last element will be repeated.
     #define DEFAULT_Kp_LIST { 11.03, 11.03 }
@@ -500,9 +500,9 @@
     #define DEFAULT_Kd_LIST { 48.43, 48.43 }
   #else
     // Bluer
-    #define DEFAULT_Kp 11.03
-    #define DEFAULT_Ki  0.63
-    #define DEFAULT_Kd 48.43
+    #define DEFAULT_Kp 15.72
+	#define DEFAULT_Ki 1.24
+	#define DEFAULT_Kd 49.77
   #endif
 #endif // PIDTEMP
 
@@ -541,9 +541,10 @@
 
   // 120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   // from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
-  #define DEFAULT_bedKp 10.00
-  #define DEFAULT_bedKi .023
-  #define DEFAULT_bedKd 305.4
+  //BlueR PID Settings
+  #define DEFAULT_bedKp 66.39
+  #define DEFAULT_bedKi 12.94
+  #define DEFAULT_bedKd 227.14
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #endif // PIDTEMPBED
