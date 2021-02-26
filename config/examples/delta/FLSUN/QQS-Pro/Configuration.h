@@ -538,6 +538,9 @@
 
   // FLSUN QQS-Pro 1.6mm aluminium heater with 4mm lattice glass
   #define DEFAULT_bedKp 82.98
+                               
+                                
+        
   #define DEFAULT_bedKi 15.93
   #define DEFAULT_bedKd 288.25
 
@@ -548,7 +551,7 @@
   //#define PID_DEBUG             // Sends debug data to the serial port. Use 'M303 D' to toggle activation.
   //#define PID_OPENLOOP          // Puts PID in open loop. M104/M140 sets the output power from 0 to PID_MAX
   //#define SLOW_PWM_HEATERS      // PWM with very low frequency (roughly 0.125Hz=8s) and minimum state time of approximately 1s useful for heaters driven by a relay
-  #define PID_FUNCTIONAL_RANGE 10 // If the temperature difference between the target temperature and the actual temperature
+  #define PID_FUNCTIONAL_RANGE 30 // If the temperature difference between the target temperature and the actual temperature
                                   // is more than PID_FUNCTIONAL_RANGE then the PID will be shut off and the heater will be set to min/max.
 #endif
 
@@ -648,10 +651,13 @@
                                                                                            
                                                                                    
                                                                                                   
-  #define DELTA_PRINTABLE_RADIUS 130.0    // (mm)
+  #define DELTA_PRINTABLE_RADIUS 130    // (mm)
 
   // Center-to-center distance of the holes in the diagonal push rods.
   #define DELTA_DIAGONAL_ROD 280.0        // (mm)
+                                                         
+                                                        
+                                                                         
 
   // Distance between bed and nozzle Z home position
   #define DELTA_HEIGHT 370.00             // (mm) Get this value from G33 auto calibrate
@@ -1623,7 +1629,7 @@
 #endif
 
 // Delta only homes to Z
-//#define HOMING_FEEDRATE_MM_M { (50*60), (50*60), (100*60) }
+//#define HOMING_FEEDRATE_MM_M { (70*60), (70*60), (70*60) }
 
 // Validate that endstops are triggered on homing moves
 #define VALIDATE_HOMING_ENDSTOPS
@@ -1714,8 +1720,8 @@
 // When enabled Marlin will send a busy status message to the host
 // every couple of seconds when it can't accept commands.
 //
-//#define HOST_KEEPALIVE_FEATURE        // Disable this if your host doesn't like keepalive messages
-#define DEFAULT_KEEPALIVE_INTERVAL 3  // Number of seconds between "busy" messages. Set with M113.
+#define HOST_KEEPALIVE_FEATURE        // Disable this if your host doesn't like keepalive messages
+#define DEFAULT_KEEPALIVE_INTERVAL 2  // Number of seconds between "busy" messages. Set with M113.
 #define BUSY_WHILE_HEATING            // Some hosts require "busy" messages even during heating
 
 //
@@ -1740,12 +1746,12 @@
 
 #define PREHEAT_2_LABEL       "ABS"
 #define PREHEAT_2_TEMP_HOTEND 240
-#define PREHEAT_2_TEMP_BED    110
+#define PREHEAT_2_TEMP_BED    100
 #define PREHEAT_2_FAN_SPEED     0 // Value from 0 to 255
 
 #define PREHEAT_3_LABEL       "PETG"
 #define PREHEAT_3_TEMP_HOTEND 230
-#define PREHEAT_3_TEMP_BED     60
+#define PREHEAT_3_TEMP_BED     80
 #define PREHEAT_3_FAN_SPEED     0 // Value from 0 to 255
 
 #define PREHEAT_4_LABEL       "TPU"
