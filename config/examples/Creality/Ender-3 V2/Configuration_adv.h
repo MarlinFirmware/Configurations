@@ -3739,6 +3739,8 @@
     #define MMU2_CAN_LOAD_INCREMENT_SEQUENCE \
       { -MMU2_CAN_LOAD_INCREMENT, MMU2_CAN_LOAD_FEEDRATE }
 
+    // Continue unloading if sensor detects filament after the initial unload move
+    //#define MMU_IR_UNLOAD_MOVE
   #else
 
     /**
