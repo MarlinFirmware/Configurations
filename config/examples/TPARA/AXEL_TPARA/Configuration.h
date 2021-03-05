@@ -82,7 +82,7 @@
   #define MIDDLE_DEAD_ZONE_R   0  // (mm)
 
   // Calculated from Calibration Guide and M360 / M114. See http://reprap.harleystudio.co.za/?page_id=1073
-  #define THETA_HOMING_OFFSET  0  
+  #define THETA_HOMING_OFFSET  0
   #define PSI_HOMING_OFFSET    0
 #endif
 
@@ -183,8 +183,8 @@
  *   PRUSA_MMU1      : Průša MMU1 (The "multiplexer" version)
  *   PRUSA_MMU2      : Průša MMU2
  *   PRUSA_MMU2S     : Průša MMU2S (Requires MK3S extruder with motion sensor, EXTRUDERS = 5)
- *   SMUFF_EMU_MMU2  : Technik Gegg SMUFF (Průša MMU2 emulation mode)
- *   SMUFF_EMU_MMU2S : Technik Gegg SMUFF (Průša MMU2S emulation mode)
+ *   SMUFF_EMU_MMU2  : Technik Gegg SMuFF (Průša MMU2 emulation mode)
+ *   SMUFF_EMU_MMU2S : Technik Gegg SMuFF (Průša MMU2S emulation mode)
  *
  * Requires NOZZLE_PARK_FEATURE to park print head in case MMU unit fails.
  * See additional options in Configuration_adv.h.
@@ -1234,7 +1234,7 @@
 //#define Z_AFTER_HOMING  10      // (mm) Height to move to after homing Z
 
 // Direction of endstops when homing; 1=MAX, -1=MIN
-// For TPARA robot, A (base),B(shoulder),C(elbow): 
+// For TPARA robot, A (base),B(shoulder),C(elbow):
 // A:[1=CCW, -1=CW], B & C:[1 = Decrease Radius and Up, -1=Increase Radius and up]
 // :[-1,1]
 #define X_HOME_DIR -1
