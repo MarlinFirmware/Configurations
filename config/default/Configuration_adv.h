@@ -3218,16 +3218,6 @@
 #endif
 
 /**
- * Synchronous Laser Control with M106/M107
- *
- * By default M106 / M107 applies the new fan speed immediately. This is fine
- * for fans, but unsuitable for a PWM/TTL laser attached to the fan header.
- *
- * NOTE: This option sacrifices some cooling fan speed options.
- */
-//#define LASER_SYNCHRONOUS_M106_M107
-
-/**
  * Coolant Control
  *
  * Add the M7, M8, and M9 commands to turn mist or flood coolant on and off.
@@ -3430,7 +3420,7 @@
 //#define CUSTOM_USER_BUTTONS
 #if ENABLED(CUSTOM_USER_BUTTONS)
   //#define BUTTON1_PIN -1
-  #if PIN_EXISTS(BUTTON1_PIN)
+  #if PIN_EXISTS(BUTTON1)
     #define BUTTON1_HIT_STATE     LOW       // State of the triggered button. NC=LOW. NO=HIGH.
     #define BUTTON1_WHEN_PRINTING false     // Button allowed to trigger during printing?
     #define BUTTON1_GCODE         "G28"
@@ -3438,7 +3428,7 @@
   #endif
 
   //#define BUTTON2_PIN -1
-  #if PIN_EXISTS(BUTTON2_PIN)
+  #if PIN_EXISTS(BUTTON2)
     #define BUTTON2_HIT_STATE     LOW
     #define BUTTON2_WHEN_PRINTING false
     #define BUTTON2_GCODE         "M140 S" STRINGIFY(PREHEAT_1_TEMP_BED) "\nM104 S" STRINGIFY(PREHEAT_1_TEMP_HOTEND)
@@ -3446,7 +3436,7 @@
   #endif
 
   //#define BUTTON3_PIN -1
-  #if PIN_EXISTS(BUTTON3_PIN)
+  #if PIN_EXISTS(BUTTON3)
     #define BUTTON3_HIT_STATE     LOW
     #define BUTTON3_WHEN_PRINTING false
     #define BUTTON3_GCODE         "M140 S" STRINGIFY(PREHEAT_2_TEMP_BED) "\nM104 S" STRINGIFY(PREHEAT_2_TEMP_HOTEND)
