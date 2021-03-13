@@ -3468,22 +3468,28 @@
   #define CUSTOM_USER_MENU_TITLE "Commissioning"
   //#define USER_SCRIPT_DONE "M117 User Script Done"
   #define USER_SCRIPT_AUDIBLE_FEEDBACK
-  #define USER_SCRIPT_RETURN  // Return to status screen after a script
+  #define USER_SCRIPT_RETURN    // Return to status screen after a script
+  #define CUSTOM_MENU_ONLY_IDLE   // Only show custom menu when the machine is idle
 
   #define USER_DESC_1 "UBL Commission Step 1"
   #define USER_GCODE_1 "M502\nM500\nM501\nM190 S75\nG28\nG29 P1\nG29 S1\nM117 Run Step 2"
+  //#define USER_CONFIRM_1        // Show a confirmation dialog before this action
 
   #define USER_DESC_2 "UBL Commission Step 2"
   #define USER_GCODE_2 "G29 S1\nG29 S0\nG29 F 10.0\nG29 A\nM500\nG28\nG29 L1\nM109 S225\nG1 X150 Y 150\nG1 Z0\nM117 Set Z Offset"
+  //#define USER_CONFIRM_2
 
   #define USER_DESC_3 "Prep for Z Adjust"
   #define USER_GCODE_3 "M190 75\nM104 235\nG28\nG29 L1\nG1 X150 Y 150\nG1 Z0"
+  //#define USER_CONFIRM_3
 
   #define USER_DESC_4 "Fill Mesh Points"
   #define USER_GCODE_4 "G29 P3\nG29 P3\nG29 P3\nG29 T"
+  //#define USER_CONFIRM_4
 
   #define USER_DESC_5 "Run Mesh Validation"
   #define USER_GCODE_5 "G26"
+  //#define USER_CONFIRM_5
 #endif
 
 /**

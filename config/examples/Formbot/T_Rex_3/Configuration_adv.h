@@ -3466,19 +3466,24 @@
 //#define CUSTOM_USER_MENUS
 #if ENABLED(CUSTOM_USER_MENUS)
   //#define USER_SCRIPT_AUDIBLE_FEEDBACK
-  #define USER_SCRIPT_RETURN  // Return to status screen after a script
+  #define USER_SCRIPT_RETURN    // Return to status screen after a script
+  #define CUSTOM_MENU_ONLY_IDLE   // Only show custom menu when the machine is idle
 
   #define USER_DESC_1  "User cmd 1"
   #define USER_GCODE_1 "G28 X \n"
+  //#define USER_CONFIRM_1        // Show a confirmation dialog before this action
 
   #define USER_DESC_2  "User cmd 2"
   #define USER_GCODE_2 "G28 \nG1 X100 \n"
+  //#define USER_CONFIRM_2
 
   #define USER_DESC_3  "User cmd 3"
   #define USER_GCODE_3 "M48 \n"
+  //#define USER_CONFIRM_3
 
   #define USER_DESC_4  "User cmd 4"
   #define USER_GCODE_4 "M114 \n"
+  //#define USER_CONFIRM_4
 #endif
 
 /**

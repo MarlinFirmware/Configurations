@@ -3464,22 +3464,28 @@
   //#define CUSTOM_USER_MENU_TITLE "Custom Commands"
   #define USER_SCRIPT_DONE "M117 User Script Done"
   #define USER_SCRIPT_AUDIBLE_FEEDBACK
-  #define USER_SCRIPT_RETURN  // Return to status screen after a script
+  #define USER_SCRIPT_RETURN    // Return to status screen after a script
+  #define CUSTOM_MENU_ONLY_IDLE   // Only show custom menu when the machine is idle
 
   #define USER_DESC_1 "T°_lit/pos_init/Niv_plat"
   #define USER_GCODE_1 "M140 S60\nM190 S60\nM117 Position initial\nG28\nM117 Nivelage du plateau\nG29\nM420 S1\nM420 Z5\nM500"
+  //#define USER_CONFIRM_1        // Show a confirmation dialog before this action
 
   #define USER_DESC_2 "Net_buse plus "
   #define USER_GCODE_2 "M104 S210 \nM109 S210 \nG28 \nG12 P1"
+  //#define USER_CONFIRM_2
 
   //#define USER_DESC_3 "Préchauffage " PREHEAT_2_LABEL
   //#define USER_GCODE_3 "M140 S" STRINGIFY(PREHEAT_2_TEMP_BED) "\nM104 S" STRINGIFY(PREHEAT_2_TEMP_HOTEND)
+  //#define USER_CONFIRM_3
 
   #define USER_DESC_3 "Net_buse NORMAL"
   #define USER_GCODE_3 "G28 \nG12"
+  //#define USER_CONFIRM_3
 
   //#define USER_DESC_5 "Home & Info"
   //#define USER_GCODE_5 "G28\nM503"
+  //#define USER_CONFIRM_5
 #endif
 
 /**

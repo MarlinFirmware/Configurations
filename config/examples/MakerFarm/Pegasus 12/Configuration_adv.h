@@ -3456,22 +3456,28 @@
   #define CUSTOM_USER_MENU_TITLE "Tools"
   //#define USER_SCRIPT_DONE "M117 User Script Done"
   #define USER_SCRIPT_AUDIBLE_FEEDBACK
-  #define USER_SCRIPT_RETURN  // Return to status screen after a script
+  #define USER_SCRIPT_RETURN    // Return to status screen after a script
+  #define CUSTOM_MENU_ONLY_IDLE   // Only show custom menu when the machine is idle
 
   #define USER_DESC_1 "Manual UBL" // Use nozzle & paper to setup UBL
   #define USER_GCODE_1 "G28\nG29 P4 R999\nG29 A\nG29 S\nM500"
+  //#define USER_CONFIRM_1        // Show a confirmation dialog before this action
 
   #define USER_DESC_2 "Adjust Point Near" // Adjust nearest mesh point
   #define USER_GCODE_2 "G29 P4\nM500"
+  //#define USER_CONFIRM_2
 
   #define USER_DESC_3 "PID Autotune End"
   #define USER_GCODE_3 "M303 U1 E0 S200 C8\nM500"
+  //#define USER_CONFIRM_3
 
   #define USER_DESC_4 "PID Autotune Bed"
   #define USER_GCODE_4 "M303 U1 E-1 S60 C8\nM500"
+  //#define USER_CONFIRM_4
 
   #define USER_DESC_5 "Park Toolhead"
   #define USER_GCODE_5 "G27"
+  //#define USER_CONFIRM_5
 
 #endif
 

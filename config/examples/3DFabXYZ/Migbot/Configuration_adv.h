@@ -3464,33 +3464,24 @@
   #define CUSTOM_USER_MENU_TITLE "Tools"
   #define USER_SCRIPT_DONE "M117 Done"
   #define USER_SCRIPT_AUDIBLE_FEEDBACK
-  //#define USER_SCRIPT_RETURN  // Return to status screen after a script
+  //#define USER_SCRIPT_RETURN    // Return to status screen after a script
+  #define CUSTOM_MENU_ONLY_IDLE   // Only show custom menu when the machine is idle
 
   #define USER_DESC_1 "Probe Mesh&Save"
   #define USER_GCODE_1 "G28\nG29 P1\nG29 P3 T0\nG29 S0 A F10\nG29 J2\nM500"
+  //#define USER_CONFIRM_1        // Show a confirmation dialog before this action
 
   #define USER_DESC_2 "Manual Mesh&Save"
   #define USER_GCODE_2 "G28\nG29 P4 R999 T\nG29 S0 A F10\nM500"
+  //#define USER_CONFIRM_2
 
   #define USER_DESC_3 "Print Test Pattern"
   #define USER_GCODE_3 "G26 C P O2.25" // Do a typical test sequence
+  //#define USER_CONFIRM_3
 
   #define USER_DESC_4 "Move Bed Forward"
   #define USER_GCODE_4 "G28 X0 Y0\nG1 X0 Y180 F3000\nM84" // move X/Y to min endstops & Feed the bed forward & steppers off
-
-  /*
-  #define USER_DESC_2 "Preheat for " PREHEAT_1_LABEL
-  #define USER_GCODE_2 "M140 S" STRINGIFY(PREHEAT_1_TEMP_BED) "\nM104 S" STRINGIFY(PREHEAT_1_TEMP_HOTEND)
-
-  #define USER_DESC_3 "Preheat for " PREHEAT_2_LABEL
-  #define USER_GCODE_3 "M140 S" STRINGIFY(PREHEAT_2_TEMP_BED) "\nM104 S" STRINGIFY(PREHEAT_2_TEMP_HOTEND)
-
-  #define USER_DESC_4 "Heat Bed/Home/Level"
-  #define USER_GCODE_4 "M140 S" STRINGIFY(PREHEAT_2_TEMP_BED) "\nG28\nG29"
-
-  #define USER_DESC_5 "Home & Info"
-  #define USER_GCODE_5 "G28\nM503"
-  */
+  //#define USER_CONFIRM_4
 #endif
 
 /**

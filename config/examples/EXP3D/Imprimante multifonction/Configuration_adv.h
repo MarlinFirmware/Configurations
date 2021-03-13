@@ -3464,22 +3464,28 @@
   #define CUSTOM_USER_MENU_TITLE "Lin Adv Presets"
   #define USER_SCRIPT_DONE "M117 Set & Saved"
   #define USER_SCRIPT_AUDIBLE_FEEDBACK
-  #define USER_SCRIPT_RETURN  // Return to status screen after a script
+  #define USER_SCRIPT_RETURN    // Return to status screen after a script
+  #define CUSTOM_MENU_ONLY_IDLE   // Only show custom menu when the machine is idle
 
   #define USER_DESC_1 "K0 Off"
   #define USER_GCODE_1 "M900 K0\nM500"
+  //#define USER_CONFIRM_1        // Show a confirmation dialog before this action
 
   #define USER_DESC_2 "K0.2"
   #define USER_GCODE_2 "M900 K0.2\nM500"
+  //#define USER_CONFIRM_2
 
   #define USER_DESC_3 "K0.3"
   #define USER_GCODE_3 "M900 K0.3\nM500"
+  //#define USER_CONFIRM_3
 
   #define USER_DESC_4 "K0.4"
   #define USER_GCODE_4 "M900 K0.4\nM500"
+  //#define USER_CONFIRM_4
 
   #define USER_DESC_5 "K0.5"
   #define USER_GCODE_5 "M900 K0.5\nM500"
+  //#define USER_CONFIRM_5
 #endif
 
 /**
