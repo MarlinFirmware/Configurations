@@ -2422,7 +2422,7 @@
 //
 //#define NEXTION_TFT
 #if ENABLED(NEXTION_TFT)
-  #define LCD_SERIAL_PORT 1
+  #define LCD_SERIAL_PORT 1  // Default is 1 for Nextion
 #endif
 
 //
