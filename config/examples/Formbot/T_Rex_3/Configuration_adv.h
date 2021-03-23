@@ -3429,6 +3429,65 @@
 #endif
 
 /**
+ * User-defined menu items to run custom G-code.
+ * Up to 25 may be defined, but the actual number is LCD-dependent.
+ */
+
+// Custom Menu: Main Menu
+//#define CUSTOM_MENU_MAIN
+#if ENABLED(CUSTOM_MENU_MAIN)
+  //#define CUSTOM_MENU_MAIN_SCRIPT_AUDIBLE_FEEDBACK
+  #define CUSTOM_MENU_MAIN_SCRIPT_RETURN    // Return to status screen after a script
+  #define CUSTOM_MENU_MAIN_ONLY_IDLE         // Only show custom menu when the machine is idle
+
+  #define MAIN_MENU_ITEM_1_DESC  "User cmd 1"
+  #define MAIN_MENU_ITEM_1_GCODE "G28 X \n"
+  //#define MAIN_MENU_ITEM_1_CONFIRM          // Show a confirmation dialog before this action
+
+  #define MAIN_MENU_ITEM_2_DESC  "User cmd 2"
+  #define MAIN_MENU_ITEM_2_GCODE "G28 \nG1 X100 \n"
+  //#define MAIN_MENU_ITEM_2_CONFIRM
+
+  #define MAIN_MENU_ITEM_3_DESC  "User cmd 3"
+  #define MAIN_MENU_ITEM_3_GCODE "M48 \n"
+  //#define MAIN_MENU_ITEM_3_CONFIRM
+
+  #define MAIN_MENU_ITEM_4_DESC  "User cmd 4"
+  #define MAIN_MENU_ITEM_4_GCODE "M114 \n"
+  //#define MAIN_MENU_ITEM_4_CONFIRM
+#endif
+
+// Custom Menu: Configuration Menu
+//#define CUSTOM_MENU_CONFIG
+#if ENABLED(CUSTOM_MENU_CONFIG)
+  //#define CUSTOM_MENU_CONFIG_TITLE "Custom Commands"
+  #define CUSTOM_MENU_CONFIG_SCRIPT_DONE "M117 Wireless Script Done"
+  #define CUSTOM_MENU_CONFIG_SCRIPT_AUDIBLE_FEEDBACK
+  //#define CUSTOM_MENU_CONFIG_SCRIPT_RETURN  // Return to status screen after a script
+  #define CUSTOM_MENU_CONFIG_ONLY_IDLE        // Only show custom menu when the machine is idle
+
+  #define CONFIG_MENU_ITEM_1_DESC "Wifi ON"
+  #define CONFIG_MENU_ITEM_1_GCODE "M118 [ESP110] WIFI-STA pwd=12345678"
+  //#define CONFIG_MENU_ITEM_1_CONFIRM        // Show a confirmation dialog before this action
+
+  #define CONFIG_MENU_ITEM_2_DESC "Bluetooth ON"
+  #define CONFIG_MENU_ITEM_2_GCODE "M118 [ESP110] BT pwd=12345678"
+  //#define CONFIG_MENU_ITEM_2_CONFIRM
+
+  //#define CONFIG_MENU_ITEM_3_DESC "Radio OFF"
+  //#define CONFIG_MENU_ITEM_3_GCODE "M118 [ESP110] OFF pwd=12345678"
+  //#define CONFIG_MENU_ITEM_3_CONFIRM
+
+  //#define CONFIG_MENU_ITEM_4_DESC "Wifi ????"
+  //#define CONFIG_MENU_ITEM_4_GCODE "M118 ????"
+  //#define CONFIG_MENU_ITEM_4_CONFIRM
+
+  //#define CONFIG_MENU_ITEM_5_DESC "Wifi ????"
+  //#define CONFIG_MENU_ITEM_5_GCODE "M118 ????"
+  //#define CONFIG_MENU_ITEM_5_CONFIRM
+#endif
+
+/**
  * User-defined buttons to run custom G-code.
  * Up to 25 may be defined.
  */
@@ -3457,33 +3516,6 @@
     #define BUTTON3_GCODE         "M140 S" STRINGIFY(PREHEAT_2_TEMP_BED) "\nM104 S" STRINGIFY(PREHEAT_2_TEMP_HOTEND)
     #define BUTTON3_DESC          "Preheat for " PREHEAT_2_LABEL
   #endif
-#endif
-
-/**
- * User-defined menu items to run custom G-code.
- * Up to 25 may be defined, but the actual number is LCD-dependent.
- */
-//#define CUSTOM_USER_MENUS
-#if ENABLED(CUSTOM_USER_MENUS)
-  //#define USER_SCRIPT_AUDIBLE_FEEDBACK
-  #define USER_SCRIPT_RETURN    // Return to status screen after a script
-  #define CUSTOM_MENU_ONLY_IDLE   // Only show custom menu when the machine is idle
-
-  #define USER_DESC_1  "User cmd 1"
-  #define USER_GCODE_1 "G28 X \n"
-  //#define USER_CONFIRM_1        // Show a confirmation dialog before this action
-
-  #define USER_DESC_2  "User cmd 2"
-  #define USER_GCODE_2 "G28 \nG1 X100 \n"
-  //#define USER_CONFIRM_2
-
-  #define USER_DESC_3  "User cmd 3"
-  #define USER_GCODE_3 "M48 \n"
-  //#define USER_CONFIRM_3
-
-  #define USER_DESC_4  "User cmd 4"
-  #define USER_GCODE_4 "M114 \n"
-  //#define USER_CONFIRM_4
 #endif
 
 /**

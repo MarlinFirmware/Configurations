@@ -3425,6 +3425,67 @@
 #endif
 
 /**
+ * User-defined menu items to run custom G-code.
+ * Up to 25 may be defined, but the actual number is LCD-dependent.
+ */
+
+// Custom Menu: Main Menu
+#define CUSTOM_MENU_MAIN
+#if ENABLED(CUSTOM_MENU_MAIN)
+  #define CUSTOM_MENU_MAIN_TITLE "Tools"
+  #define CUSTOM_MENU_MAIN_SCRIPT_DONE "M117 Done"
+  #define CUSTOM_MENU_MAIN_SCRIPT_AUDIBLE_FEEDBACK
+  //#define CUSTOM_MENU_MAIN_SCRIPT_RETURN   // Return to status screen after a script
+  #define CUSTOM_MENU_MAIN_ONLY_IDLE         // Only show custom menu when the machine is idle
+
+  #define MAIN_MENU_ITEM_1_DESC "Probe Mesh&Save"
+  #define MAIN_MENU_ITEM_1_GCODE "G28\nG29 P1\nG29 P3 T0\nG29 S0 A F10\nG29 J2\nM500"
+  //#define MAIN_MENU_ITEM_1_CONFIRM          // Show a confirmation dialog before this action
+
+  #define MAIN_MENU_ITEM_2_DESC "Manual Mesh&Save"
+  #define MAIN_MENU_ITEM_2_GCODE "G28\nG29 P4 R999 T\nG29 S0 A F10\nM500"
+  //#define MAIN_MENU_ITEM_2_CONFIRM
+
+  #define MAIN_MENU_ITEM_3_DESC "Print Test Pattern"
+  #define MAIN_MENU_ITEM_3_GCODE "G26 C P O2.25" // Do a typical test sequence
+  //#define MAIN_MENU_ITEM_3_CONFIRM
+
+  #define MAIN_MENU_ITEM_4_DESC "Move Bed Forward"
+  #define MAIN_MENU_ITEM_4_GCODE "G28 X0 Y0\nG1 X0 Y180 F3000\nM84" // move X/Y to min endstops & Feed the bed forward & steppers off
+  //#define MAIN_MENU_ITEM_4_CONFIRM
+#endif
+
+// Custom Menu: Configuration Menu
+//#define CUSTOM_MENU_CONFIG
+#if ENABLED(CUSTOM_MENU_CONFIG)
+  //#define CUSTOM_MENU_CONFIG_TITLE "Custom Commands"
+  #define CUSTOM_MENU_CONFIG_SCRIPT_DONE "M117 Wireless Script Done"
+  #define CUSTOM_MENU_CONFIG_SCRIPT_AUDIBLE_FEEDBACK
+  //#define CUSTOM_MENU_CONFIG_SCRIPT_RETURN  // Return to status screen after a script
+  #define CUSTOM_MENU_CONFIG_ONLY_IDLE        // Only show custom menu when the machine is idle
+
+  #define CONFIG_MENU_ITEM_1_DESC "Wifi ON"
+  #define CONFIG_MENU_ITEM_1_GCODE "M118 [ESP110] WIFI-STA pwd=12345678"
+  //#define CONFIG_MENU_ITEM_1_CONFIRM        // Show a confirmation dialog before this action
+
+  #define CONFIG_MENU_ITEM_2_DESC "Bluetooth ON"
+  #define CONFIG_MENU_ITEM_2_GCODE "M118 [ESP110] BT pwd=12345678"
+  //#define CONFIG_MENU_ITEM_2_CONFIRM
+
+  //#define CONFIG_MENU_ITEM_3_DESC "Radio OFF"
+  //#define CONFIG_MENU_ITEM_3_GCODE "M118 [ESP110] OFF pwd=12345678"
+  //#define CONFIG_MENU_ITEM_3_CONFIRM
+
+  //#define CONFIG_MENU_ITEM_4_DESC "Wifi ????"
+  //#define CONFIG_MENU_ITEM_4_GCODE "M118 ????"
+  //#define CONFIG_MENU_ITEM_4_CONFIRM
+
+  //#define CONFIG_MENU_ITEM_5_DESC "Wifi ????"
+  //#define CONFIG_MENU_ITEM_5_GCODE "M118 ????"
+  //#define CONFIG_MENU_ITEM_5_CONFIRM
+#endif
+
+/**
  * User-defined buttons to run custom G-code.
  * Up to 25 may be defined.
  */
@@ -3453,35 +3514,6 @@
     #define BUTTON3_GCODE         "M140 S" STRINGIFY(PREHEAT_2_TEMP_BED) "\nM104 S" STRINGIFY(PREHEAT_2_TEMP_HOTEND)
     #define BUTTON3_DESC          "Preheat for " PREHEAT_2_LABEL
   #endif
-#endif
-
-/**
- * User-defined menu items to run custom G-code.
- * Up to 25 may be defined, but the actual number is LCD-dependent.
- */
-#define CUSTOM_USER_MENUS
-#if ENABLED(CUSTOM_USER_MENUS)
-  #define CUSTOM_USER_MENU_TITLE "Tools"
-  #define USER_SCRIPT_DONE "M117 Done"
-  #define USER_SCRIPT_AUDIBLE_FEEDBACK
-  //#define USER_SCRIPT_RETURN    // Return to status screen after a script
-  #define CUSTOM_MENU_ONLY_IDLE   // Only show custom menu when the machine is idle
-
-  #define USER_DESC_1 "Probe Mesh&Save"
-  #define USER_GCODE_1 "G28\nG29 P1\nG29 P3 T0\nG29 S0 A F10\nG29 J2\nM500"
-  //#define USER_CONFIRM_1        // Show a confirmation dialog before this action
-
-  #define USER_DESC_2 "Manual Mesh&Save"
-  #define USER_GCODE_2 "G28\nG29 P4 R999 T\nG29 S0 A F10\nM500"
-  //#define USER_CONFIRM_2
-
-  #define USER_DESC_3 "Print Test Pattern"
-  #define USER_GCODE_3 "G26 C P O2.25" // Do a typical test sequence
-  //#define USER_CONFIRM_3
-
-  #define USER_DESC_4 "Move Bed Forward"
-  #define USER_GCODE_4 "G28 X0 Y0\nG1 X0 Y180 F3000\nM84" // move X/Y to min endstops & Feed the bed forward & steppers off
-  //#define USER_CONFIRM_4
 #endif
 
 /**
