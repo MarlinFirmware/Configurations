@@ -1220,12 +1220,12 @@
 // For direct drive extruder v9 set to true, for geared extruder set to false.
 #ifdef SPRO_INVERTED_E
   #if ENABLED(SPRO_TMC2209)
-    #define INVERT_E0_DIR false
-  #else
     #define INVERT_E0_DIR true
+  #else
+    #define INVERT_E0_DIR false
   #endif
 #else
-  #define INVERT_E0_DIR false
+  #define INVERT_E0_DIR true
 #endif
 #define INVERT_E1_DIR false
 #define INVERT_E2_DIR false
@@ -2606,7 +2606,7 @@
   #define TOUCH_CALIBRATION_Y -12234
   #define TOUCH_OFFSET_X         -45
   #define TOUCH_OFFSET_Y         349
- //#define TOUCH_ORIENTATION TOUCH_LANDSCAPE
+  //#define TOUCH_ORIENTATION TOUCH_LANDSCAPE
 
   #if ENABLED(TFT_COLOR_UI)
     //#define SINGLE_TOUCH_NAVIGATION
