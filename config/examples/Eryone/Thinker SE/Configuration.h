@@ -1394,7 +1394,6 @@
  *   leveling in steps so you can manually adjust the Z height at each grid-point.
  *   With an LCD controller the process is guided step-by-step.
  */
-
 #if EITHER(BLTOUCH, FIX_MOUNTED_PROBE)
   //#define AUTO_BED_LEVELING_3POINT
   //#define AUTO_BED_LEVELING_LINEAR
@@ -1601,6 +1600,9 @@
 //
 #if EITHER(BLTOUCH, FIX_MOUNTED_PROBE)
   #define Z_SAFE_HOMING
+#endif
+
+#if ENABLED(Z_SAFE_HOMING)
   #define Z_SAFE_HOMING_X_POINT X_CENTER  // X point for Z homing
   #define Z_SAFE_HOMING_Y_POINT Y_CENTER  // Y point for Z homing
 #endif
