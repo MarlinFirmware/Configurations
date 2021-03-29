@@ -12,9 +12,9 @@ Compile this in the `STM32F103RC_btt_512K` environment. The test board had 512K 
 This configuration uses only the probe for Z homing. The Z-stop switch is NOT enabled and can be disconnected. 
 
 ```cpp
-#define Z_MIN_PROBE_PIN PC14  //Zstop Pin in Z-Probe port 
+#define Z_MIN_PROBE_PIN PC14
 ```
-Plug the BL Touch Blk/Wht connector in to the top two pins of the 5 pin Z-Probe port with the white whire "up". Do not plug the connector in to the Z-min port where the limit switch was plugged in.
+Plug the BLTouch Black/White connector into the top two pins of the 5-pin Z-PROBE port with the white whire "up". Do not plug the connector in to the Z-MIN port where the limit switch was plugged in.
 
 ```cpp
 #define NOZZLE_TO_PROBE_OFFSET { -38, -8, 0 }
@@ -79,11 +79,11 @@ If you are using the stock display on your CR-10 Mini, this **MUST** be enabled.
 This is enabled, but the K value is set to 0 which effectively disables LIN_ADVANCE. Calibrate Linear Advance and set your own K value and recompile.
 
 ```cpp
-#define ARC_SUPPORT               // Disable this feature to save ~3226 bytes
+#define ARC_SUPPORT
 ```
 Enables G2/G3 moves to smooth curves in your prints. Required for the Arc Welder plugin for OctoPrint etc.
 
 ```cpp
-#define ARC_P_CIRCLES           // Enable the 'P' parameter to specify complete circles
+#define ARC_P_CIRCLES
 ```
 Normally disabled by default. 
