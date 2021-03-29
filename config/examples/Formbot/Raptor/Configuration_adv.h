@@ -3427,6 +3427,74 @@
 #endif
 
 /**
+ * User-defined menu items to run custom G-code.
+ * Up to 25 may be defined, but the actual number is LCD-dependent.
+ */
+
+#if ENABLED(UBL)
+  #define CUSTOM_MENU_MAIN
+#endif
+
+// Custom Menu: Main Menu
+#if ENABLED(CUSTOM_MENU_MAIN)
+  #define CUSTOM_MENU_MAIN_TITLE "Commissioning"
+  //#define CUSTOM_MENU_MAIN_SCRIPT_DONE "M117 User Script Done"
+  #define CUSTOM_MENU_MAIN_SCRIPT_AUDIBLE_FEEDBACK
+  #define CUSTOM_MENU_MAIN_SCRIPT_RETURN    // Return to status screen after a script
+  #define CUSTOM_MENU_MAIN_ONLY_IDLE         // Only show custom menu when the machine is idle
+
+  #define MAIN_MENU_ITEM_1_DESC "UBL Commission Step 1"
+  #define MAIN_MENU_ITEM_1_GCODE "M502\nM500\nM501\nM190 S75\nG28\nG29 P1\nG29 S1\nM117 Run Step 2"
+  //#define MAIN_MENU_ITEM_1_CONFIRM          // Show a confirmation dialog before this action
+
+  #define MAIN_MENU_ITEM_2_DESC "UBL Commission Step 2"
+  #define MAIN_MENU_ITEM_2_GCODE "G29 S1\nG29 S0\nG29 F 10.0\nG29 A\nM500\nG28\nG29 L1\nM109 S225\nG1 X150 Y 150\nG1 Z0\nM117 Set Z Offset"
+  //#define MAIN_MENU_ITEM_2_CONFIRM
+
+  #define MAIN_MENU_ITEM_3_DESC "Prep for Z Adjust"
+  #define MAIN_MENU_ITEM_3_GCODE "M190 75\nM104 235\nG28\nG29 L1\nG1 X150 Y 150\nG1 Z0"
+  //#define MAIN_MENU_ITEM_3_CONFIRM
+
+  #define MAIN_MENU_ITEM_4_DESC "Fill Mesh Points"
+  #define MAIN_MENU_ITEM_4_GCODE "G29 P3\nG29 P3\nG29 P3\nG29 T"
+  //#define MAIN_MENU_ITEM_4_CONFIRM
+
+  #define MAIN_MENU_ITEM_5_DESC "Run Mesh Validation"
+  #define MAIN_MENU_ITEM_5_GCODE "G26"
+  //#define MAIN_MENU_ITEM_5_CONFIRM
+#endif
+
+// Custom Menu: Configuration Menu
+//#define CUSTOM_MENU_CONFIG
+#if ENABLED(CUSTOM_MENU_CONFIG)
+  //#define CUSTOM_MENU_CONFIG_TITLE "Custom Commands"
+  #define CUSTOM_MENU_CONFIG_SCRIPT_DONE "M117 Wireless Script Done"
+  #define CUSTOM_MENU_CONFIG_SCRIPT_AUDIBLE_FEEDBACK
+  //#define CUSTOM_MENU_CONFIG_SCRIPT_RETURN  // Return to status screen after a script
+  #define CUSTOM_MENU_CONFIG_ONLY_IDLE        // Only show custom menu when the machine is idle
+
+  #define CONFIG_MENU_ITEM_1_DESC "Wifi ON"
+  #define CONFIG_MENU_ITEM_1_GCODE "M118 [ESP110] WIFI-STA pwd=12345678"
+  //#define CONFIG_MENU_ITEM_1_CONFIRM        // Show a confirmation dialog before this action
+
+  #define CONFIG_MENU_ITEM_2_DESC "Bluetooth ON"
+  #define CONFIG_MENU_ITEM_2_GCODE "M118 [ESP110] BT pwd=12345678"
+  //#define CONFIG_MENU_ITEM_2_CONFIRM
+
+  //#define CONFIG_MENU_ITEM_3_DESC "Radio OFF"
+  //#define CONFIG_MENU_ITEM_3_GCODE "M118 [ESP110] OFF pwd=12345678"
+  //#define CONFIG_MENU_ITEM_3_CONFIRM
+
+  //#define CONFIG_MENU_ITEM_4_DESC "Wifi ????"
+  //#define CONFIG_MENU_ITEM_4_GCODE "M118 ????"
+  //#define CONFIG_MENU_ITEM_4_CONFIRM
+
+  //#define CONFIG_MENU_ITEM_5_DESC "Wifi ????"
+  //#define CONFIG_MENU_ITEM_5_GCODE "M118 ????"
+  //#define CONFIG_MENU_ITEM_5_CONFIRM
+#endif
+
+/**
  * User-defined buttons to run custom G-code.
  * Up to 25 may be defined.
  */
@@ -3455,41 +3523,6 @@
     #define BUTTON3_GCODE         "M140 S" STRINGIFY(PREHEAT_2_TEMP_BED) "\nM104 S" STRINGIFY(PREHEAT_2_TEMP_HOTEND)
     #define BUTTON3_DESC          "Preheat for " PREHEAT_2_LABEL
   #endif
-#endif
-
-/**
- * User-defined menu items to run custom G-code.
- * Up to 25 may be defined, but the actual number is LCD-dependent.
- */
-#if ENABLED(UBL)
-  #define CUSTOM_USER_MENUS
-#endif
-#if ENABLED(CUSTOM_USER_MENUS)
-  #define CUSTOM_USER_MENU_TITLE "Commissioning"
-  //#define USER_SCRIPT_DONE "M117 User Script Done"
-  #define USER_SCRIPT_AUDIBLE_FEEDBACK
-  #define USER_SCRIPT_RETURN    // Return to status screen after a script
-  #define CUSTOM_MENU_ONLY_IDLE   // Only show custom menu when the machine is idle
-
-  #define USER_DESC_1 "UBL Commission Step 1"
-  #define USER_GCODE_1 "M502\nM500\nM501\nM190 S75\nG28\nG29 P1\nG29 S1\nM117 Run Step 2"
-  //#define USER_CONFIRM_1        // Show a confirmation dialog before this action
-
-  #define USER_DESC_2 "UBL Commission Step 2"
-  #define USER_GCODE_2 "G29 S1\nG29 S0\nG29 F 10.0\nG29 A\nM500\nG28\nG29 L1\nM109 S225\nG1 X150 Y 150\nG1 Z0\nM117 Set Z Offset"
-  //#define USER_CONFIRM_2
-
-  #define USER_DESC_3 "Prep for Z Adjust"
-  #define USER_GCODE_3 "M190 75\nM104 235\nG28\nG29 L1\nG1 X150 Y 150\nG1 Z0"
-  //#define USER_CONFIRM_3
-
-  #define USER_DESC_4 "Fill Mesh Points"
-  #define USER_GCODE_4 "G29 P3\nG29 P3\nG29 P3\nG29 T"
-  //#define USER_CONFIRM_4
-
-  #define USER_DESC_5 "Run Mesh Validation"
-  #define USER_GCODE_5 "G26"
-  //#define USER_CONFIRM_5
 #endif
 
 /**
