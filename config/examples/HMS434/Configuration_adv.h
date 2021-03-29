@@ -204,6 +204,20 @@
   #endif
 #endif
 
+//
+// Laser Coolant Flow Meter
+//
+//#define LASER_COOLANT_FLOW_METER
+#if ENABLED(LASER_COOLANT_FLOW_METER)
+  #define FLOWMETER_PIN         20  // Requires an external interrupt-enabled pin (e.g., RAMPS 2,3,18,19,20,21)
+  #define FLOWMETER_PPL       5880  // (pulses/liter) Flow meter pulses-per-liter on the input pin
+  #define FLOWMETER_INTERVAL  1000  // (ms) Flow rate calculation interval in milliseconds
+  #define FLOWMETER_SAFETY          // Prevent running the laser without the minimum flow rate set below
+  #if ENABLED(FLOWMETER_SAFETY)
+    #define FLOWMETER_MIN_LITERS_PER_MINUTE 1.5 // (liters/min) Minimum flow required when enabled
+  #endif
+#endif
+
 /**
  * Thermal Protection provides additional protection to your printer from damage
  * and fire. Marlin always includes safe min and max temperature ranges which
@@ -523,14 +537,24 @@
  * Multiple extruders can be assigned to the same pin in which case
  * the fan will turn on when any selected extruder is above the threshold.
  */
+//#define E0_AUTO_FAN_PIN -1
+#define E1_AUTO_FAN_PIN -1
+#define E2_AUTO_FAN_PIN -1
+#define E3_AUTO_FAN_PIN -1
+#define E4_AUTO_FAN_PIN -1
+#define E5_AUTO_FAN_PIN -1
+#define E6_AUTO_FAN_PIN -1
+#define E7_AUTO_FAN_PIN -1
+#define CHAMBER_AUTO_FAN_PIN -1
+#define COOLER_AUTO_FAN_PIN -1
 #define COOLER_FAN_PIN -1
 
-#define EXTRUDER_AUTO_FAN_TEMPERATURE 35
+#define EXTRUDER_AUTO_FAN_TEMPERATURE  35
 #define EXTRUDER_AUTO_FAN_SPEED       255   // 255 == full speed
-#define CHAMBER_AUTO_FAN_TEMPERATURE  28
+#define CHAMBER_AUTO_FAN_TEMPERATURE   28
 #define CHAMBER_AUTO_FAN_SPEED        255
-#define COOLER_AUTO_FAN_TEMPERATURE 18
-#define COOLER_AUTO_FAN_SPEED 255
+#define COOLER_AUTO_FAN_TEMPERATURE    18
+#define COOLER_AUTO_FAN_SPEED         255
 
 /**
  * Part-Cooling Fan Multiplexer
@@ -1529,6 +1553,7 @@
   #define STATUS_CHAMBER_ANIM         // Use a second bitmap to indicate chamber heating
   //#define STATUS_CUTTER_ANIM        // Use a second bitmap to indicate spindle / laser active
   //#define STATUS_COOLER_ANIM        // Use a second bitmap to indicate laser cooling
+  //#define STATUS_FLOWMETER_ANIM     // Use multiple bitmaps to indicate coolant flow
   //#define STATUS_ALT_BED_BITMAP     // Use the alternative bed bitmap
   //#define STATUS_ALT_FAN_BITMAP     // Use the alternative fan bitmap
   //#define STATUS_FAN_FRAMES 3       // :[0,1,2,3,4] Number of fan animation frames
@@ -1734,7 +1759,7 @@
   #define BABYSTEP_INVERT_Z false           // Change if Z babysteps should go the other way
   //#define BABYSTEP_MILLIMETER_UNITS       // Specify BABYSTEP_MULTIPLICATOR_(XY|Z) in mm instead of micro-steps
   #define BABYSTEP_MULTIPLICATOR_Z  16      // (steps or mm) Steps or millimeter distance for each Z babystep
-  #define BABYSTEP_MULTIPLICATOR_XY 16      // (steps or mm) Steps or millimeter distance for each Z babystep
+  #define BABYSTEP_MULTIPLICATOR_XY 16      // (steps or mm) Steps or millimeter distance for each XY babystep
 
   //#define DOUBLECLICK_FOR_Z_BABYSTEPPING  // Double-click on the Status Screen for Z Babystepping.
   #if ENABLED(DOUBLECLICK_FOR_Z_BABYSTEPPING)
@@ -3210,8 +3235,10 @@
 /**
  * Synchronous Laser Control with M106/M107
  *
- * By default M106 / M107 applies the new fan speed immediately. This is fine
- * for fans, but unsuitable for a PWM/TTL laser attached to the fan header.
+ * Marlin normally applies M106/M107 fan speeds at a time "soon after" processing
+ * a planner block. This is too inaccurate for a PWM/TTL laser attached to the fan
+ * header (as with some add-on laser kits). Enable this option to set fan/laser
+ * speeds with much more exact timing for improved print fidelity.
  *
  * NOTE: This option sacrifices some cooling fan speed options.
  */
