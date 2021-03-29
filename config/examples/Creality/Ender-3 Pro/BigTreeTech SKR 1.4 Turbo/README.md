@@ -1,12 +1,16 @@
-# Ender 3 Pro Configurations for SKR 1.4 Turbo with TMC2209 Bugfix CONFIGURATION_H_VERSION 020008
+# Ender 3 Pro with SKR 1.4 Turbo + TMC2209
 
-This configuration is for an Ender 3 Pro with the following options enabled:
-- Motherboard BigTreeTech SKR 1.4 Turbo
-- Drivers TMC2209 (sensorless homing enabled)
-- BLtouch Bed leveling Sensor (Bilinear Mode 5x5 Grid) (sensor plugged into the probe pins)
-- Auto Fillament Load and unload enabled (measure your bowden length + extruder up to nozzle and change values FILAMENT_CHANGE_UNLOAD_LENGTH and FILAMENT_CHANGE_FAST_LOAD_LENGTH)
-- Linear Advance enabled (Do a calibration for your correct values)
-- TFT 35V3 (EXP3 + TFT cables using #define CR10_STOCKDISPLAY or change it to #define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER and use EXP1 and EXP2)
-- Extruder Auto Fan at 50C (Extruder Fan connected to Pin P2_04 HE1)
+Configurations for Ender 3 Pro with the following options enabled:
 
-I may have some other options enabled that i dont remember, be careful to check everything that corresponds to your machine.
+  - Motherboard: BigTreeTech SKR 1.4 Turbo
+  - Drivers: TMC2209 (sensorless homing enabled)
+  - BLTouch Probe plugged into in the PROBE port - ABL Bilinear 5x5
+  - Automatic Filament Load / Unload
+    - Measure the full filament path up to the nozzle and update `FILAMENT_CHANGE_UNLOAD_LENGTH` and `FILAMENT_CHANGE_FAST_LOAD_LENGTH`.
+  - Linear Advance Extrusion (Do a calibration for your correct values)
+  - TFT 35V3 Controller with two options:
+    - EXP3 + TFT cables using `CR10_STOCKDISPLAY`, or
+    - EXP1/2 with `REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER`
+  - Extruder Auto Fan at 50C (Fan connected to Pin P2_04 HE1)
+
+I may have some other options enabled that I don't remember so be careful to check everything that corresponds to your machine.
