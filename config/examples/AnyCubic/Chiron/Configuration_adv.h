@@ -1357,7 +1357,7 @@
    *  - SDSORT_CACHE_NAMES will retain the sorted file listing in RAM. (Expensive!)
    *  - SDSORT_DYNAMIC_RAM only uses RAM when the SD menu is visible. (Use with caution!)
    */
-  //#define SDCARD_SORT_ALPHA
+  #define SDCARD_SORT_ALPHA
 
   // SD Card Sorting options
   #if ENABLED(SDCARD_SORT_ALPHA)
@@ -1630,7 +1630,7 @@
   // NOTE: If used with the new panel, each line will have '.gcode' added at the end of each line.
   //       This is the only way to get the panel to show the folder navigation lines.
 
-#endif // ANYCUBIC_CHIRON
+#endif // ANYCUBIC_LCD_CHIRON
 //
 // Specify additional languages for the UI. Default specified by LCD_LANGUAGE.
 //
