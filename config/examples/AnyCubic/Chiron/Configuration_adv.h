@@ -21,7 +21,8 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "AnyCubic/Chiron"											 
+#define CONFIG_EXAMPLES_DIR "AnyCubic/Chiron"
+
 /**
  * Configuration_adv.h
  *
@@ -239,7 +240,7 @@
   #define THERMAL_PROTECTION_PERIOD     40    // Seconds
   #define THERMAL_PROTECTION_HYSTERESIS 10    // Degrees Celsius
 
-  //#define ADAPTIVE_FAN_SLOWING                // Slow part cooling fan if temperature drops
+  //#define ADAPTIVE_FAN_SLOWING              // Slow part cooling fan if temperature drops
   #if BOTH(ADAPTIVE_FAN_SLOWING, PIDTEMP)
     //#define NO_FAN_SLOWING_IN_PID_TUNING    // Don't slow fan speed during M303
   #endif
@@ -1629,7 +1630,7 @@
   // NOTE: If used with the new panel, each line will have '.gcode' added at the end of each line.
   //       This is the only way to get the panel to show the folder navigation lines.
 
-#endif // ANYCUBIC_CHIRON													  
+#endif // ANYCUBIC_CHIRON
 //
 // Specify additional languages for the UI. Default specified by LCD_LANGUAGE.
 //
