@@ -141,7 +141,7 @@
 
 // This defines the number of extruders
 // :[0, 1, 2, 3, 4, 5, 6, 7, 8]
-#define EXTRUDERS 1 // FLSUN Q5, da robin_nano_config.txt: NUM_EXTRUDER
+#define EXTRUDERS 1
 
 // Generally expected filament diameter (1.75, 2.85, 3.0, ...). Used for Volumetric, Filament Width Sensor, etc.
 #define DEFAULT_NOMINAL_FILAMENT_DIA 1.75
@@ -409,7 +409,7 @@
  *   998 : Dummy Table that ALWAYS reads 25°C or the temperature defined below.
  *   999 : Dummy Table that ALWAYS reads 100°C or the temperature defined below.
  */
-#define TEMP_SENSOR_0 1 // FLSUN Q5, da robin_nano_config.txt: EXT0_TEMPSENSOR_TYPE
+#define TEMP_SENSOR_0 1
 #define TEMP_SENSOR_1 0
 #define TEMP_SENSOR_2 0
 #define TEMP_SENSOR_3 0
@@ -417,7 +417,7 @@
 #define TEMP_SENSOR_5 0
 #define TEMP_SENSOR_6 0
 #define TEMP_SENSOR_7 0
-#define TEMP_SENSOR_BED 1 // FLSUN Q5, da robin_nano_config.txt: HEATED_BED_SENSOR_TYPE
+#define TEMP_SENSOR_BED 1
 #define TEMP_SENSOR_PROBE 0
 #define TEMP_SENSOR_CHAMBER 0
 #define TEMP_SENSOR_COOLER 0
@@ -465,7 +465,7 @@
 // Above this temperature the heater will be switched off.
 // This can protect components from overheating, but NOT from shorts and failures.
 // (Use MINTEMP for thermistor short/failure protection.)
-#define HEATER_0_MAXTEMP 270 // FLSUN Q5, da robin_nano_config.txt: MAX_EXTRUDER_TEMP
+#define HEATER_0_MAXTEMP 270
 #define HEATER_1_MAXTEMP 275
 #define HEATER_2_MAXTEMP 275
 #define HEATER_3_MAXTEMP 275
@@ -473,7 +473,7 @@
 #define HEATER_5_MAXTEMP 275
 #define HEATER_6_MAXTEMP 275
 #define HEATER_7_MAXTEMP 275
-#define BED_MAXTEMP      110 // FLSUN Q5, da robin_nano_config.txt: MAX_HEATED_BED_TEMP
+#define BED_MAXTEMP      110
 #define CHAMBER_MAXTEMP  60
 
 /**
@@ -492,7 +492,7 @@
 // PID Tuning Guide here: https://reprap.org/wiki/PID_Tuning
 
 // Comment the following line to disable PID and enable bang-bang.
-#define PIDTEMP          // FLSUN Q5, da robin_nano_config.txt: EXT0_HEAT_MANAGER
+#define PIDTEMP
 #define BANG_MAX 255     // Limits current to nozzle while in bang-bang mode; 255=full current
 #define PID_MAX BANG_MAX // Limits current to nozzle while PID is active (see PID_FUNCTIONAL_RANGE below); 255=full current
 #define PID_K1 0.95      // Smoothing factor within any PID loop
@@ -510,7 +510,7 @@
     #define DEFAULT_Ki_LIST {   1.08,   1.0 }
     #define DEFAULT_Kd_LIST { 114.00, 112.0 }
   #else
-    // FLSUN Q5 via M303 E0 C8 S210, override di robin_nano_config.txt: EXT0_PID_P, EXT0_PID_I, EXT0_PID_D
+
     #define DEFAULT_Kp 10.28
     #define DEFAULT_Ki 0.58
     #define DEFAULT_Kd 45.74
@@ -550,7 +550,7 @@
   //#define MIN_BED_POWER 0
   //#define PID_BED_DEBUG // Sends debug data to the serial port.
 
-  // FLSUN Q5 via M303 E-1 C8 S60
+
   #define DEFAULT_bedKp 17.83
   #define DEFAULT_bedKi 1.66
   #define DEFAULT_bedKd 127.67
@@ -620,14 +620,14 @@
  * *** IT IS HIGHLY RECOMMENDED TO LEAVE THIS OPTION ENABLED! ***
  */
 #define PREVENT_COLD_EXTRUSION
-#define EXTRUDE_MINTEMP 175 // FLSUN Q5, da robin_nano_config.txt: MIN_EXTRUDER_TEMP
+#define EXTRUDE_MINTEMP 175
 
 /**
  * Prevent a single extrusion longer than EXTRUDE_MAXLENGTH.
  * Note: For Bowden Extruders make this large enough to allow load/unload.
  */
 #define PREVENT_LENGTHY_EXTRUDE
-#define EXTRUDE_MAXLENGTH 600 // FLSUN Q5, da robin_nano_config.txt: cfg_filament_load_length, cfg_filament_unload_speed
+#define EXTRUDE_MAXLENGTH 600
 
 //===========================================================================
 //======================== Thermal Runaway Protection =======================
@@ -707,7 +707,7 @@
   #define DELTA_PRINTABLE_RADIUS 100.0   // (mm)
 
   // Center-to-center distance of the holes in the diagonal push rods.
-  #define DELTA_DIAGONAL_ROD 215.0       // (mm)                                           // FLSUN Q5, da robin_nano_config.txt
+  #define DELTA_DIAGONAL_ROD 215.0       // (mm)
 
   // Distance between bed and nozzle Z home position
   #define DELTA_HEIGHT 200.00 // (mm) Get this value from G33 auto calibrate
@@ -728,7 +728,7 @@
 
 #endif
 
-//===========================================================================														 
+//===========================================================================
 //============================== Endstop Settings ===========================
 //===========================================================================
 
@@ -740,9 +740,9 @@
 //#define USE_XMIN_PLUG
 //#define USE_YMIN_PLUG
 #define USE_ZMIN_PLUG // Z-probe
-#define USE_XMAX_PLUG // FLSUN Q5, da robin_nano_config.txt: MAX_HARDWARE_ENDSTOP_X
-#define USE_YMAX_PLUG // FLSUN Q5, da robin_nano_config.txt: MAX_HARDWARE_ENDSTOP_Y
-#define USE_ZMAX_PLUG // FLSUN Q5, da robin_nano_config.txt: MAX_HARDWARE_ENDSTOP_Z
+#define USE_XMAX_PLUG
+#define USE_YMAX_PLUG
+#define USE_ZMAX_PLUG
 
 // Enable pullup for all endstops to prevent a floating state
 #define ENDSTOPPULLUPS
@@ -774,9 +774,9 @@
 #define X_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define Y_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define Z_MIN_ENDSTOP_INVERTING true // Set to true to invert the logic of the endstop.
-#define X_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop. // FLSUN Q5, da robin_nano_config.txt: ENDSTOP_X_MAX_INVERTING
-#define Y_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop. // FLSUN Q5, da robin_nano_config.txt: ENDSTOP_Y_MAX_INVERTING
-#define Z_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop. // FLSUN Q5, da robin_nano_config.txt: ENDSTOP_Z_MAX_INVERTING
+#define X_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
+#define Y_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
+#define Z_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define Z_MIN_PROBE_ENDSTOP_INVERTING true // Set to true to invert the logic of the probe.
 
 /**
@@ -868,15 +868,15 @@
 #define XYZ_PULLEY_TEETH 20
 
 // delta speeds must be the same on xyz
-#define DEFAULT_XYZ_STEPS_PER_UNIT ((XYZ_FULL_STEPS_PER_ROTATION) * (XYZ_MICROSTEPS) / double(XYZ_BELT_PITCH) / double(XYZ_PULLEY_TEETH)) // FLSUN Q5, da robin_nano_config.txt: XAXIS_STEPS_PER_MM, YAXIS_STEPS_PER_MM, ZAXIS_STEPS_PER_MM
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { DEFAULT_XYZ_STEPS_PER_UNIT, DEFAULT_XYZ_STEPS_PER_UNIT, DEFAULT_XYZ_STEPS_PER_UNIT, 428 } // FLSUN Q5, override da robin_nano_config.txt: EXT0_STEPS_PER_MM (400)
+#define DEFAULT_XYZ_STEPS_PER_UNIT ((XYZ_FULL_STEPS_PER_ROTATION) * (XYZ_MICROSTEPS) / double(XYZ_BELT_PITCH) / double(XYZ_PULLEY_TEETH))
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { DEFAULT_XYZ_STEPS_PER_UNIT, DEFAULT_XYZ_STEPS_PER_UNIT, DEFAULT_XYZ_STEPS_PER_UNIT, 428 }
 
 /**
  * Default Max Feed Rate (mm/s)
  * Override with M203
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_FEEDRATE          { 200, 200, 200, 200 } // FLSUN Q5, da robin_nano_config.txt: MAX_FEEDRATE_X, MAX_FEEDRATE_Y, MAX_FEEDRATE_Z, MAX_FEEDRATE_EXT0
+#define DEFAULT_MAX_FEEDRATE          { 200, 200, 200, 200 }
 
 //#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
@@ -889,7 +889,7 @@
  * Override with M201
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_ACCELERATION      { 1000, 1000, 1000, 1000 } // FLSUN Q5, da robin_nano_config.txt: MAX_ACCELERATION_UNITS_PER_SQ_SECOND_X, MAX_ACCELERATION_UNITS_PER_SQ_SECOND_Y, MAX_ACCELERATION_UNITS_PER_SQ_SECOND_Z, MAX_ACCELERATION_EXT0
+#define DEFAULT_MAX_ACCELERATION      { 1000, 1000, 1000, 1000 }
 
 //#define LIMITED_MAX_ACCEL_EDITING     // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
 #if ENABLED(LIMITED_MAX_ACCEL_EDITING)
@@ -904,9 +904,9 @@
  *   M204 R    Retract Acceleration
  *   M204 T    Travel Acceleration
  */
-#define DEFAULT_ACCELERATION          1000    // X, Y, Z and E acceleration for printing moves          // FLSUN Q5, da robin_nano_config.txt: MAX_ACCELERATION_UNITS_PER_SQ_SECOND_X, MAX_ACCELERATION_UNITS_PER_SQ_SECOND_Y, MAX_ACCELERATION_UNITS_PER_SQ_SECOND_Z, MAX_ACCELERATION_EXT0
-#define DEFAULT_RETRACT_ACCELERATION  1000    // E acceleration for retracts                            // FLSUN Q5, da robin_nano_config.txt: MAX_ACCELERATION_EXT0
-#define DEFAULT_TRAVEL_ACCELERATION   1000    // X, Y, Z acceleration for travel (non printing) moves   // FLSUN Q5, da robin_nano_config.txt: MAX_TRAVEL_ACCELERATION_UNITS_PER_SQ_SECOND_X, MAX_TRAVEL_ACCELERATION_UNITS_PER_SQ_SECOND_Y, MAX_TRAVEL_ACCELERATION_UNITS_PER_SQ_SECOND_Z
+#define DEFAULT_ACCELERATION          1000    // X, Y, Z and E acceleration for printing moves
+#define DEFAULT_RETRACT_ACCELERATION  1000    // E acceleration for retracts
+#define DEFAULT_TRAVEL_ACCELERATION   1000    // X, Y, Z acceleration for travel (non printing) moves
 
 /**
  * Default Jerk limits (mm/s)
@@ -1155,17 +1155,17 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
-#define NOZZLE_TO_PROBE_OFFSET { 0, 0, -19.42 }  // FLSUN Q5, override da robin_nano_config.txt: Z_PROBE_HEIGHT
+#define NOZZLE_TO_PROBE_OFFSET { 0, 0, -19.42 }
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
-#define PROBING_MARGIN 15 // FLSUN Q5, da robin_nano_config.txt: DELTA_FLOOR_SAFETY_MARGIN_MM
+#define PROBING_MARGIN 15
 
 // X and Y axis travel speed (mm/min) between probes
-#define XY_PROBE_FEEDRATE (2000) // FLSUN Q5, da robin_nano_config.txt: cfg_leveling_xy_speed
+#define XY_PROBE_FEEDRATE (2000)
 
 // Feedrate (mm/min) for the first approach when double-probing (MULTIPLE_PROBING == 2)
-#define Z_PROBE_FEEDRATE_FAST (2000) // FLSUN Q5, da robin_nano_config.txt: cfg_leveling_z_speed
+#define Z_PROBE_FEEDRATE_FAST (2000)
 
 // Feedrate (mm/min) for the "accurate" probe of each point
 #define Z_PROBE_FEEDRATE_SLOW (Z_PROBE_FEEDRATE_FAST / 4) //override FLSUN Q5, da robin_nano_config.txt: Z_PROBE_SPEED
@@ -1268,9 +1268,9 @@
 
 // For Inverting Stepper Enable Pins (Active Low) use 0, Non Inverting (Active High) use 1
 // :{ 0:'Low', 1:'High' }
-#define X_ENABLE_ON 0 // FLSUN Q5, da robin_nano_config.txt: X_ENABLE_ON
-#define Y_ENABLE_ON 0 // FLSUN Q5, da robin_nano_config.txt: Y_ENABLE_ON
-#define Z_ENABLE_ON 0 // FLSUN Q5, da robin_nano_config.txt: Z_ENABLE_ON
+#define X_ENABLE_ON 0
+#define Y_ENABLE_ON 0
+#define Z_ENABLE_ON 0
 #define E_ENABLE_ON 0 // For all extruders, FLSUN Q5, da robin_nano_config.txt: EXT0_ENABLE_ON
 
 // Disable axis steppers immediately when they're not being stepped.
@@ -1290,14 +1290,14 @@
 // @section machine
 
 // Invert the stepper direction. Change (or reverse the motor connector) if an axis goes the wrong way.
-#define INVERT_X_DIR false // FLSUN Q5, da robin_nano_config.txt: INVERT_X_DIR
-#define INVERT_Y_DIR false // FLSUN Q5, da robin_nano_config.txt: INVERT_Y_DIR
-#define INVERT_Z_DIR false // FLSUN Q5, da robin_nano_config.txt: INVERT_Z_DIR
+#define INVERT_X_DIR false
+#define INVERT_Y_DIR false
+#define INVERT_Z_DIR false
 
 // @section extruder
 
 // For direct drive extruder v9 set to true, for geared extruder set to false.
-#define INVERT_E0_DIR true // FLSUN Q5, da robin_nano_config.txt: EXT0_INVERSE
+#define INVERT_E0_DIR true
 #define INVERT_E1_DIR false
 #define INVERT_E2_DIR false
 #define INVERT_E3_DIR false
@@ -1691,7 +1691,7 @@
 #endif
 
 // Homing speeds (mm/min)
-#define HOMING_FEEDRATE_MM_M { (30*60), (30*60), (30*60) } // FLSUN Q5, da robin_nano_config.txt: HOMING_FEEDRATE_X, HOMING_FEEDRATE_Y, HOMING_FEEDRATE_Z
+#define HOMING_FEEDRATE_MM_M { (30*60), (30*60), (30*60) }
 
 // Validate that endstops are triggered on homing moves
 #define VALIDATE_HOMING_ENDSTOPS
@@ -2663,7 +2663,7 @@
  *   TFT_ROTATE_270, TFT_ROTATE_270_MIRROR_X, TFT_ROTATE_270_MIRROR_Y,
  *   TFT_MIRROR_X, TFT_MIRROR_Y, TFT_NO_ROTATION
  */
-#define TFT_ROTATION TFT_ROTATE_180  // FLSUN Q5, da robin_nano_config.txt: cfg_screen_overturn_180
+#define TFT_ROTATION TFT_ROTATE_180
 
 //=============================================================================
 //============================  Other Controllers  ============================
