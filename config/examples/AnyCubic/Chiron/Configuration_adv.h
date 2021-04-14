@@ -1623,26 +1623,27 @@
 // Additional options for AnyCubic Chiron TFT displays
 //
 #if ENABLED(ANYCUBIC_LCD_CHIRON)
-  // Panel type detection
-  // The default behavior is to auto detect the panel type
-  // If necessary you can override this by uncommenting one of the lines below.
+  // By default the type of panel is automatically detected.
+  // Enable one of these options if you know the panel type.
   //#define CHIRON_TFT_STANDARD
   //#define CHIRON_TFT_NEW
 
-  // Powerup tune
-  // Enable the standard Anycubic powerup tune instead of the short one
+  // Enable the longer Anycubic powerup startup tune
   //#define AC_DEFAULT_STARTUP_TUNE
 
-  // SD Card file display
-  // The default behaviour is a flat list of all GCODE files on the card, including subfolders.
-  // If you are not using folder view, it is advisable to enable SDCARD_SORT_ALPHA with folders shown after files.
-  // Enable folder view to display and navigate folders
+  /**
+   * Display Folders
+   * By default the file browser lists all G-code files (including those in subfolders) in a flat list.
+   * Enable this option to display a hierarchical file browser.
+   *
+   * NOTES:
+   * - Without this option it helps to enable SDCARD_SORT_ALPHA so files are sorted before/after folders.
+   * - When used with the "new" panel, folder names will also have '.gcode' appended to their names.
+   *   This hack is currently required to force the panel to show folders.
+   */
   #define AC_SD_FOLDER_VIEW
+#endif
 
-  // NOTE: If used with the new panel, each line will have '.gcode' added at the end of each line.
-  //       This is the only way to get the panel to show the folder navigation lines.
-
-#endif // ANYCUBIC_LCD_CHIRON
 //
 // Specify additional languages for the UI. Default specified by LCD_LANGUAGE.
 //
