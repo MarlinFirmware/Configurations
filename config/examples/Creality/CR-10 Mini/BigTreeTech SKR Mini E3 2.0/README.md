@@ -1,15 +1,15 @@
 ## CR-10 Mini with BLTouch
 
 Configuration for the BigTreeTech SKR E3 Mini V2 in a Creality CR-10 Mini using the stock CR-10 display, and a BL Touch v3.1 ABL probe mounted on a Bullseye fan duct. Additional features are enabled to take advantage of the capabilities of the BTT SKR E3 Mini V2 board, detailed below.
- 
+
 Compile this in the `STM32F103RC_btt_512K` environment. The test board had 512K of Flash and this configuration uses a little over half of that. If your board has only 256K, you will have to disable some features to make the firmware fit.
- 
+
 ### Configuration.h notes:
 
 ```cpp
 #define USE_PROBE_FOR_Z_HOMING
 ```
-This configuration uses only the probe for Z homing. The Z-stop switch is NOT enabled and can be disconnected. 
+This configuration uses only the probe for Z homing. The Z-stop switch is NOT enabled and can be disconnected.
 
 ```cpp
 #define Z_MIN_PROBE_PIN PC14
@@ -50,14 +50,14 @@ This configuration is set to use a 5x5 (25 point) probing grid. Change as desire
 #define EXTRAPOLATE_BEYOND_GRID
 ```
 By default, this is disabled. Enabling this seemed to provide better mesh data.
- 
+
 ```cpp
 #define LCD_BED_LEVELING
 ```
 Provides control panel probe controls.
- 
+
 ```cpp
-#define LEVEL_BED_CORNERS 
+#define LEVEL_BED_CORNERS
 ```
 Provides control panel bed tramming controls.
 
@@ -86,4 +86,4 @@ Enables G2/G3 moves to smooth curves in your prints. Required for the Arc Welder
 ```cpp
 #define ARC_P_CIRCLES
 ```
-Normally disabled by default. 
+Normally disabled by default.
