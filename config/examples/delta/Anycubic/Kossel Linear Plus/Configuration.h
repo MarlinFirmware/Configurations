@@ -1052,7 +1052,6 @@
  */
 #if ANYCUBIC_PROBE_VERSION == 0
   #define PROBE_MANUALLY
-  #define MANUAL_PROBE_START_Z 1.5
 #endif
 
 /**
@@ -1563,6 +1562,11 @@
  * NOTE: Requires a lot of PROGMEM!
  */
 //#define DEBUG_LEVELING_FEATURE
+
+#if ANY(MESH_BED_LEVELING, AUTO_BED_LEVELING_UBL, PROBE_MANUALLY)
+  // Set a height for the start of manual adjustment
+  #define MANUAL_PROBE_START_Z 1.5  // (mm) Comment out to use the last-measured height
+#endif
 
 #if ANY(MESH_BED_LEVELING, AUTO_BED_LEVELING_BILINEAR, AUTO_BED_LEVELING_UBL)
   // Gradually reduce leveling correction until a set height is reached,
