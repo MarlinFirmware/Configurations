@@ -1231,7 +1231,7 @@
 
 // @section machine
 
-// The size of the print bed
+// The size of the printable area
 #define X_BED_SIZE 240
 #define Y_BED_SIZE 240
 

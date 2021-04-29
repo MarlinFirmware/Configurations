@@ -1234,7 +1234,7 @@
 
 // @section machine
 
-// The size of the print bed
+// The size of the printable area
 // P905H bed is 220x220 but effective size more like 218x218
 #define X_BED_SIZE 218
 #define Y_BED_SIZE 218

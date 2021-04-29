@@ -1271,7 +1271,7 @@
 
 // @section machine
 
-// The size of the print bed
+// The size of the printable area
 // https://reprap.org/wiki/Configuring_Marlin_Bed_Dimensions
 // https://marlinfw.org/docs/configuration/configuration.html#movement-bounds
 #define X_BED_SIZE 140

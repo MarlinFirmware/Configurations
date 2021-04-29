@@ -1271,7 +1271,7 @@
 
 // @section machine
 
-// The size of the print bed
+// The size of the printable area
 // Tinyboy2: 100mm are marketed, actual length between endstop and end of rail is 98mm
 #define X_BED_SIZE 98
 #define Y_BED_SIZE 98

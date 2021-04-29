@@ -1330,7 +1330,7 @@
 
 // @section machine
 
-// The size of the print bed
+// The size of the printable area
 #define X_BED_SIZE ((DELTA_PRINTABLE_RADIUS) * 2)
 #define Y_BED_SIZE ((DELTA_PRINTABLE_RADIUS) * 2)
 

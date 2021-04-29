@@ -52,7 +52,7 @@ For ***V6***
 ## 2. Bed size
 
 ```cpp
-// The size of the print bed
+// The size of the printable area
 #define X_BED_SIZE 330
 #define Y_BED_SIZE 330
 ...

@@ -1245,7 +1245,7 @@
 
 // @section machine
 
-// The size of the print bed
+// The size of the printable area
 #define X_BED_SIZE 254  // RigidBot regular is 254mm, RigitBot Big is 406mm
 #define Y_BED_SIZE 248  // RigidBot regular is 248mm, RigitBot Big is 304mm
 

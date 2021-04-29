@@ -1232,7 +1232,7 @@
 
 // @section machine
 
-// The size of the print bed
+// The size of the printable area
 #define X_BED_SIZE 510 // Nozzle is at X4 when homed
 #define Y_BED_SIZE 510 // Nozzle is at Y2 when homed
 

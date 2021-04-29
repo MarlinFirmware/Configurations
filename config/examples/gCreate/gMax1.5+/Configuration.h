@@ -1237,7 +1237,7 @@
 
 // @section machine
 
-// The size of the print bed
+// The size of the printable area
 #define X_BED_SIZE 420   // These numbers are not accurate for an unaltered gMax 1.5+ printer.  My print bed
 #define Y_BED_SIZE 420   // is inset a noticable amount from the edge of the bed.  Combined with the inset,
                          // the nozzle can reach all cordinates of the mesh.

@@ -1232,7 +1232,7 @@
 
 // @section machine
 
-// The size of the print bed
+// The size of the printable area
 #define X_BED_SIZE (X_MAX_POS-X_MIN_POS)
 #define Y_BED_SIZE (Y_MAX_POS-Y_MIN_POS)
 
