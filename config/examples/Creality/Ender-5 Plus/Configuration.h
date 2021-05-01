@@ -2386,6 +2386,8 @@
 
 //
 // DGUS Touch Display with DWIN OS. (Choose one.)
+// ORIGIN : https://www.aliexpress.com/item/32993409517.html
+// FYSETC : https://www.aliexpress.com/item/32961471929.html
 //
 // Flash display with DGUS Displays for Marlin:
 //  - Format the SD card to FAT32 with a allocation size of 4k.
