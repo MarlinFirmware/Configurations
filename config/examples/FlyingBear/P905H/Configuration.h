@@ -1234,7 +1234,7 @@
 
 // @section machine
 
-// The size of the print bed
+// The size of the printable area
 // P905H bed is 220x220 but effective size more like 218x218
 #define X_BED_SIZE 218
 #define Y_BED_SIZE 218
@@ -1501,6 +1501,8 @@
 
   //#define UBL_Z_RAISE_WHEN_OFF_MESH 2.5 // When the nozzle is off the mesh, this value is used
                                           // as the Z-Height correction value.
+
+  //#define UBL_MESH_WIZARD         // Run several commands in a row to get a complete mesh
 
 #elif ENABLED(MESH_BED_LEVELING)
 

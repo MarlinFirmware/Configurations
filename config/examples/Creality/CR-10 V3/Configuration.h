@@ -1252,7 +1252,7 @@
 
 // @section machine
 
-// The size of the print bed
+// The size of the printable area
 #define X_BED_SIZE 310 // Nozzle is at X0 when homed
 #define Y_BED_SIZE 310 // Nozzle is at Y0 when homed
 
@@ -1523,6 +1523,8 @@
 
   #define UBL_Z_RAISE_WHEN_OFF_MESH 0 // When the nozzle is off the mesh, this value is used
                                           // as the Z-Height correction value.
+
+  //#define UBL_MESH_WIZARD         // Run several commands in a row to get a complete mesh
 
 #elif ENABLED(MESH_BED_LEVELING)
 
