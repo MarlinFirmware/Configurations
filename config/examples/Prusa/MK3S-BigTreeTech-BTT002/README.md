@@ -55,7 +55,7 @@ G1 X100.0 E12.5 F1000.0 ; intro line
 G92 E0.0
 ```
 ### IdeaMaker
-Paste the start G-code block below in the filament's "Start GCode" section. Add your [Linear Advance](https://marlinfw.org/docs/features/lin_advance.html) (`M900 K0.0`) value in the start G-code block below:
+Paste the start G-code block below in the filament's "Start G-code" section. Add your [Linear Advance](https://marlinfw.org/docs/features/lin_advance.html) (`M900 K0.0`) value in the start G-code block below:
 ```gcode
 G90 ; use absolute coordinates
 M83 ; extruder relative mode
