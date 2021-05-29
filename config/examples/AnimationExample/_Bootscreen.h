@@ -23,7 +23,7 @@
 
 /**
  * Animated boot screen example
- * 
+ *
  * Create your own with Marlin Bitmap Converter
  * https://marlinfw.org/tools/u8glib/converter.html
  */
@@ -34,7 +34,7 @@
 /**
  * Use the following settings instead, to use custom frame times:
  * Also change "custom_bootscreen_animation" at the bottom of this file.
- * 
+ *
  * #define CUSTOM_BOOTSCREEN_ANIMATED
  * #define CUSTOM_BOOTSCREEN_ANIMATED_FRAME_TIME // Use custom frame times
  * #define CUSTOM_BOOTSCREEN_TIMEOUT 500 // Extra timeout on last frame
@@ -204,7 +204,7 @@ const unsigned char custom_start_bmp[] PROGMEM = {
 /**
  * Use the following settings instead, to use custom frame times.
  * This will show the first image 2 seconds, the last image 0.5 seconds and the rest 0.1 seconds:
- * 
+ *
  * const boot_frame_t custom_bootscreen_animation[] PROGMEM = {
  *    {custom_start_bmp1, 2000}, {custom_start_bmp2, 100}, {custom_start_bmp3, 100},
  *    {custom_start_bmp4, 100}, {custom_start_bmp5, 100}, {custom_start_bmp6, 100},
