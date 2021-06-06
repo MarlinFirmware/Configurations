@@ -1,6 +1,6 @@
 /**
  * Marlin 3D Printer Firmware
- * Copyright (c) 2020 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
+ * Copyright (c) 2021 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
  *
  * Based on Sprinter and grbl.
  * Copyright (c) 2011 Camiel Gubbels / Erik van der Zalm
@@ -65,14 +65,6 @@
 // Examples are located in config/examples/delta, .../SCARA, and .../TPARA.
 //
 //===========================================================================
-
-//===========================================================================
-//=========================== FOAMCUTTER_XYUV ==============================
-//===========================================================================
-// For a hot wire cutter with parallel horizontal axes X, I where the hights
-// of the two wire ends are controlled by parallel axes Y, J.
-//
-//#define FOAMCUTTER_XYUV
 
 // @section info
 
@@ -2513,6 +2505,11 @@
 #endif
 
 //
+// CR-6 OEM touch screen. A DWIN display with touch.
+//
+//#define DWIN_CREALITY_TOUCHLCD
+
+//
 // Touch-screen LCD for Malyan M200/M300 printers
 //
 //#define MALYAN_LCD
@@ -2543,6 +2540,12 @@
 #if ENABLED(NEXTION_TFT)
   #define LCD_SERIAL_PORT 1  // Default is 1 for Nextion
 #endif
+
+//
+// PanelDue touch controller by Escher3D
+// http://escher3d.com/pages/order/products/product2.php
+//
+//#define PANELDUE
 
 //
 // Third-party or vendor-customized controller interfaces.
