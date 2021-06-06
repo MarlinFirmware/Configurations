@@ -140,6 +140,20 @@
 // Enable the Bluetooth serial interface on AT90USB devices
 //#define BLUETOOTH
 
+/**
+ * Select your version of the Trigorilla (RAMPS1.4) board here.
+ *
+ * 0 = Default Trigorilla
+ * 1 = Newer Trigorilla v1.1 (first seen late 2018)
+ *
+ * The only major difference is a slight change on the servo pin mapping.
+ * This setting only is relevant if you want to use BLtouch or similar
+ * mods to be used via servo pins.
+ * The new version is to be identified by a "TRIGORILLA1.1" lettering
+ * on the upper left of the PCB silkscreen.
+ */
+#define TRIGORILLA_VERSION 0
+
 // Choose the name from boards.h that matches your setup
 #if TRIGORILLA_VERSION == 1
   #define MOTHERBOARD BOARD_TRIGORILLA_14_11
@@ -2700,20 +2714,6 @@
  *   TFT_MIRROR_X, TFT_MIRROR_Y, TFT_NO_ROTATION
  */
 //#define TFT_ROTATION TFT_NO_ROTATION
-
-/**
- * Select your version of the Trigorilla (RAMPS1.4) board here.
- *
- * 0 = Default Trigorilla
- * 1 = Newer Trigorilla v1.1 (first seen late 2018)
- *
- * The only major difference is a slight change on the servo pin mapping.
- * This setting only is relevant if you want to use BLtouch or similar
- * mods to be used via servo pins.
- * The new version is to be identified by a "TRIGORILLA1.1" lettering
- * on the upper left of the PCB silkscreen.
- */
-#define TRIGORILLA_VERSION 0
 
 //=============================================================================
 //============================  Other Controllers  ============================
