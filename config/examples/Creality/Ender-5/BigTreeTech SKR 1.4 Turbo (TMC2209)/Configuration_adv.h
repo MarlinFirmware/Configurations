@@ -1967,14 +1967,14 @@
     // Probe temperature calibration generates a table of values starting at PTC_SAMPLE_START
     // (e.g. 30), in steps of PTC_SAMPLE_RES (e.g. 5) with PTC_SAMPLE_COUNT (e.g. 10) samples.
 
-    //#define PTC_SAMPLE_START  30
-    //#define PTC_SAMPLE_RES    5
+    //#define PTC_SAMPLE_START  30  // (°C)
+    //#define PTC_SAMPLE_RES     5  // (°C)
     //#define PTC_SAMPLE_COUNT  10
 
     // Bed temperature calibration builds a similar table.
 
-    //#define BTC_SAMPLE_START  60
-    //#define BTC_SAMPLE_RES    5
+    //#define BTC_SAMPLE_START  60  // (°C)
+    //#define BTC_SAMPLE_RES     5  // (°C)
     //#define BTC_SAMPLE_COUNT  10
 
     // The temperature the probe should be at while taking measurements during bed temperature
