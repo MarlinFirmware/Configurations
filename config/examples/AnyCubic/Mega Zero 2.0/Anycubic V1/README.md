@@ -1,6 +1,6 @@
 # Anycubic Mega Zero 2.0 Support
 
-This branch is a reverse-engineered version based on the published firmware v0.0.4 from Anycubic. It is **not** the authoritative source, but has been carefully re-built by looking at their firmware and inferring the base version and configuration they used.
+This configuration is based on the published firmware v0.0.4 from Anycubic. It is **not** the authoritative source, but has been carefully re-built by looking at their firmware and inferring the base version and configuration they used.
 
 ## Bitmaps
 
