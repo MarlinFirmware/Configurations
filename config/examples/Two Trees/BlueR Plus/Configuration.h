@@ -2724,8 +2724,8 @@
 
   // XPT2046 Touch Screen calibration
   #define TOUCH_CALIBRATION_X 14839
-  #define TOUCH_CALIBRATION_Y 9218
-  #define TOUCH_OFFSET_X        8
+  #define TOUCH_CALIBRATION_Y  9218
+  #define TOUCH_OFFSET_X          8
   #define TOUCH_OFFSET_Y        -16
   //#define TOUCH_ORIENTATION TOUCH_LANDSCAPE
 
