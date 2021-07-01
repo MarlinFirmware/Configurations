@@ -1699,6 +1699,9 @@
 #define MANUAL_X_HOME_POS TRONXY_X_BED_OFFSET // The X3A has a standard X offset (17mm) between the left endstop and bed left bed edge
 #define MANUAL_Y_HOME_POS TRONXY_Y_BED_OFFSET // The X3A has a standard Y offset (25mm) between the y endstop and the front bet edge
 #define MANUAL_Z_HOME_POS 0
+//#define MANUAL_I_HOME_POS 0
+//#define MANUAL_J_HOME_POS 0
+//#define MANUAL_K_HOME_POS 0
 
 // Use "Z Safe Homing" to avoid homing with a Z probe outside the bed area.
 //
