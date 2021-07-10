@@ -25,7 +25,6 @@
  * Made with Marlin Bitmap Converter
  * https://marlinfw.org/tools/u8glib/converter.html
  */
-#define CUSTOM_BOOTSCREEN_TIMEOUT      1500
 #define CUSTOM_BOOTSCREEN_BMPWIDTH      120
 
 const unsigned char custom_start_bmp[] PROGMEM = {
