@@ -1815,12 +1815,16 @@
 // Classic UI Options
 //
 #if TFT_SCALED_DOGLCD
-  //#define TFT_MARLINUI_COLOR 0xFFFF // White
-  //#define TFT_MARLINBG_COLOR 0x0000 // Black
+  // Change colors
+  // some colors are predefined, see /src/lcd/dogm/u8g_dev_tft_480~.cpp Line 160
+  // or use 16bit color (e.g. 0x0000 = black, 0xFFE0 = yellow)
+  // see https://ee-programming-notepad.blogspot.com/2016/10/16-bit-color-generator-picker.html
+  #define TFT_MARLINUI_COLOR COLOR_WHITE  // main foreground color
+  #define TFT_MARLINBG_COLOR COLOR_BLACK  // background color
   //#define TFT_DISABLED_COLOR 0x0003 // Almost black
-  //#define TFT_BTCANCEL_COLOR 0xF800 // Red
-  //#define TFT_BTARROWS_COLOR 0xDEE6 // 11011 110111 00110 Yellow
-  //#define TFT_BTOKMENU_COLOR 0x145F // 00010 100010 11111 Cyan
+  #define TFT_BTCANCEL_COLOR COLOR_RED    // cancel button
+  #define TFT_BTARROWS_COLOR COLOR_WHITE  // arrows up/down
+  #define TFT_BTOKMENU_COLOR COLOR_GREEN  // enter button
 #endif
 
 //
