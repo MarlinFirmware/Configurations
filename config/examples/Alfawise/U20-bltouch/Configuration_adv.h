@@ -1828,7 +1828,7 @@
   // see https://ee-programming-notepad.blogspot.com/2016/10/16-bit-color-generator-picker.html
   #define TFT_MARLINUI_COLOR COLOR_WHITE
   #define TFT_MARLINBG_COLOR COLOR_BLACK
-  #define TFT_DISABLED_COLOR 0x10A2 // almost black
+  #define TFT_DISABLED_COLOR 0x10A2
   #define TFT_BTCANCEL_COLOR COLOR_RED
   #define TFT_BTARROWS_COLOR COLOR_WHITE
   #define TFT_BTOKMENU_COLOR COLOR_BLUE
