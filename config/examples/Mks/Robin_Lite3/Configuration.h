@@ -102,7 +102,7 @@
  *
  * :[-1, 0, 1, 2, 3, 4, 5, 6, 7]
  */
-#define SERIAL_PORT -1
+#define SERIAL_PORT 1
 
 /**
  * Serial Port Baud Rate
@@ -130,7 +130,7 @@
 // MKS SGEN AUX-1 Use UART0(P0.2-TXD0,P0.3-RXD0)     #define SERIAL_PORT_2 0
 // MKS SGEN_L AUX-1 Use UART0(P0.2-TXD0,P0.3-RXD0)     #define SERIAL_PORT_2 0
 // MKS Robin Nano USB Use UART3(PB10-TX,PB11-RX)     #define SERIAL_PORT_2 3
-#define SERIAL_PORT_2 1
+//#define SERIAL_PORT_2 1
 //#define BAUDRATE_2 250000   // Enable to override BAUDRATE
 
 /**
