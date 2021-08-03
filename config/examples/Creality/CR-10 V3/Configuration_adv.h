@@ -816,7 +816,7 @@
 
   // Safety: The probe needs time to recognize the command.
   //         Minimum command delay (ms). Enable and increase if needed.
-  //#define BLTOUCH_DELAY 500
+  #define BLTOUCH_DELAY 250
 
   /**
    * Settings for BLTOUCH Classic 1.2, 1.3 or BLTouch Smart 1.0, 2.0, 2.2, 3.0, 3.1, and most clones:
@@ -928,11 +928,11 @@
 //
 // Add the G35 command to read bed corners to help adjust screws. Requires a bed probe.
 //
-//#define ASSISTED_TRAMMING
+#define ASSISTED_TRAMMING
 #if ENABLED(ASSISTED_TRAMMING)
 
   // Define positions for probe points.
-  #define TRAMMING_POINT_XY { {  20, 20 }, { 180,  20 }, { 180, 180 }, { 20, 180 } }
+  #define TRAMMING_POINT_XY { {  45, 45 }, { 255,  45 }, { 255, 255 }, { 45, 255 } }
 
   // Define position names for probe points.
   #define TRAMMING_POINT_NAME_1 "Front-Left"
@@ -943,7 +943,7 @@
   #define RESTORE_LEVELING_AFTER_G35    // Enable to restore leveling setup after operation
   //#define REPORT_TRAMMING_MM          // Report Z deviation (mm) for each point relative to the first
 
-  //#define ASSISTED_TRAMMING_WIZARD    // Add a Tramming Wizard to the LCD menu
+  #define ASSISTED_TRAMMING_WIZARD    // Add a Tramming Wizard to the LCD menu
 
   //#define ASSISTED_TRAMMING_WAIT_POSITION { X_CENTER, Y_CENTER, 30 } // Move the nozzle out of the way for adjustment
 
@@ -1435,8 +1435,8 @@
     #define SDSORT_GCODE       false  // Allow turning sorting on/off with LCD and M34 G-code.
     #define SDSORT_USES_RAM    true   // Pre-allocate a static array for faster pre-sorting.
     #define SDSORT_USES_STACK  true   // Prefer the stack for pre-sorting to give back some SRAM. (Negated by next 2 options.)
-    #define SDSORT_CACHE_NAMES false  // Keep sorted items in RAM longer for speedy performance. Most expensive option.
-    #define SDSORT_DYNAMIC_RAM false  // Use dynamic allocation (within SD menus). Least expensive option. Set SDSORT_LIMIT before use!
+    #define SDSORT_CACHE_NAMES true   // Keep sorted items in RAM longer for speedy performance. Most expensive option.
+    #define SDSORT_DYNAMIC_RAM true   // Use dynamic allocation (within SD menus). Least expensive option. Set SDSORT_LIMIT before use!
     #define SDSORT_CACHE_VFATS 2      // Maximum number of 13-byte VFAT entries to use for sorting.
                                       // Note: Only affects SCROLL_LONG_FILENAMES with SDSORT_CACHE_NAMES but not SDSORT_DYNAMIC_RAM.
   #endif
@@ -1459,7 +1459,7 @@
    * This feature must be enabled with "M540 S1" or from the LCD menu.
    * To have any effect, endstops must be enabled during SD printing.
    */
-  //#define SD_ABORT_ON_ENDSTOP_HIT
+  #define SD_ABORT_ON_ENDSTOP_HIT
 
   /**
    * This option makes it easier to print the same SD Card file again.
@@ -2391,7 +2391,7 @@
                                                   // This short retract is done immediately, before parking the nozzle.
   #define FILAMENT_CHANGE_UNLOAD_FEEDRATE     40  // (mm/s) Unload filament feedrate. This can be pretty fast.
   #define FILAMENT_CHANGE_UNLOAD_ACCEL        25  // (mm/s^2) Lower acceleration may allow a faster feedrate.
-  #define FILAMENT_CHANGE_UNLOAD_LENGTH      435  // (mm) The length of filament for a complete unload.
+  #define FILAMENT_CHANGE_UNLOAD_LENGTH       10  // (mm) The length of filament for a complete unload.
                                                   //   For Bowden, the full length of the tube and nozzle.
                                                   //   For direct drive, the full length of the nozzle.
                                                   //   Set to 0 for manual unloading.
@@ -2400,7 +2400,7 @@
                                                   // 0 to disable start loading and skip to fast load only
   #define FILAMENT_CHANGE_FAST_LOAD_FEEDRATE  30  // (mm/s) Load filament feedrate. This can be pretty fast.
   #define FILAMENT_CHANGE_FAST_LOAD_ACCEL     15  // (mm/s^2) Lower acceleration may allow a faster feedrate.
-  #define FILAMENT_CHANGE_FAST_LOAD_LENGTH   430  // (mm) Load length of filament, from extruder gear to nozzle.
+  #define FILAMENT_CHANGE_FAST_LOAD_LENGTH     0  // (mm) Load length of filament, from extruder gear to nozzle.
                                                   //   For Bowden, the full length of the tube and nozzle.
                                                   //   For direct drive, the full length of the nozzle.
   //#define ADVANCED_PAUSE_CONTINUOUS_PURGE       // Purge continuously up to the purge length until interrupted.
@@ -2413,12 +2413,12 @@
   #define ADVANCED_PAUSE_FANS_PAUSE             // Turn off print-cooling fans while the machine is paused.
 
                                                   // Filament Unload does a Retract, Delay, and Purge first:
-  #define FILAMENT_UNLOAD_PURGE_RETRACT        4  // (mm) Unload initial retract length.
+  #define FILAMENT_UNLOAD_PURGE_RETRACT        6  // (mm) Unload initial retract length.
   #define FILAMENT_UNLOAD_PURGE_DELAY       5000  // (ms) Delay for the filament to cool after retract.
   #define FILAMENT_UNLOAD_PURGE_LENGTH         0  // (mm) An unretract is done, then this length is purged.
   #define FILAMENT_UNLOAD_PURGE_FEEDRATE      25  // (mm/s) feedrate to purge before unload
 
-  #define PAUSE_PARK_NOZZLE_TIMEOUT           45  // (seconds) Time limit before the nozzle is turned off for safety.
+  #define PAUSE_PARK_NOZZLE_TIMEOUT           180 // (seconds) Time limit before the nozzle is turned off for safety.
   #define FILAMENT_CHANGE_ALERT_BEEPS          2  // Number of alert beeps to play when a response is needed.
   #define PAUSE_PARK_NO_STEPPER_TIMEOUT           // Enable for XYZ steppers to stay powered on during filament change.
 
@@ -4155,10 +4155,10 @@
 #if ENABLED(PRINTCOUNTER)
   #define SERVICE_WARNING_BUZZES  3
   // Activate up to 3 service interval watchdogs
-  //#define SERVICE_NAME_1      "Service S"
-  //#define SERVICE_INTERVAL_1  100 // print hours
-  //#define SERVICE_NAME_2      "Service L"
-  //#define SERVICE_INTERVAL_2  200 // print hours
+  #define SERVICE_NAME_1      "Service 50h"
+  #define SERVICE_INTERVAL_1  50 // print hours
+  #define SERVICE_NAME_2      "Service 300h"
+  #define SERVICE_INTERVAL_2  300 // print hours
   //#define SERVICE_NAME_3      "Service 3"
   //#define SERVICE_INTERVAL_3    1 // print hours
 #endif
