@@ -21,6 +21,8 @@
  */
 #pragma once
 
+#define CONFIG_EXAMPLES_DIR "FoamCutter"
+
 /**
  * Configuration.h
  *
@@ -58,13 +60,12 @@
  */
 
 //===========================================================================
-//========================== DELTA / SCARA / TPARA ==========================
+//============================= Foam Cutter =================================
 //===========================================================================
+// For a hot wire cutter with parallel horizontal axes X, I where the heights
+// of the two wire ends are controlled by parallel axes Y, J.
 //
-// Download configurations from the link above and customize for your machine.
-// Examples are located in config/examples/delta, .../SCARA, and .../TPARA.
-//
-//===========================================================================
+#define FOAMCUTTER_XYUV
 
 // @section info
 
@@ -507,7 +508,7 @@
 
 // Resistor values when using MAX31865 sensors (-5) on TEMP_SENSOR_0 / 1
 //#define MAX31865_SENSOR_OHMS_0      100   // (Ω) Typically 100 or 1000 (PT100 or PT1000)
-//#define MAX31865_CALIBRATION_OHMS_0 430   // (Ω) Typically 430 for Adafruit PT100; 4300 for Adafruit PT1000
+//#define MAX31865_CALIBRATION_OHMS_0 430   // (Ω) Typically 430 for AdaFruit PT100; 4300 for AdaFruit PT1000
 //#define MAX31865_SENSOR_OHMS_1      100
 //#define MAX31865_CALIBRATION_OHMS_1 430
 
