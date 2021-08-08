@@ -1737,7 +1737,6 @@
 // @section homing
 
 // The center of the bed is at (X=0, Y=0)
-// Require 0,0 bed center for Delta and SCARA
 //#define BED_CENTER_AT_0_0
 
 // Manually set the home position. Leave these undefined for automatic settings.

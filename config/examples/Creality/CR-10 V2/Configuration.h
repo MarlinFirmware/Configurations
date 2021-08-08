@@ -1035,6 +1035,7 @@
 #if ENABLED(CR10V2_BLTOUCH)
   #define USE_PROBE_FOR_Z_HOMING
 #endif
+
 /**
  * Z_MIN_PROBE_PIN
  *
