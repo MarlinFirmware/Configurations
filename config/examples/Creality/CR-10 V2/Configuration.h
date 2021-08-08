@@ -518,7 +518,7 @@
 //#define MAX31865_SENSOR_OHMS_1      100
 //#define MAX31865_CALIBRATION_OHMS_1 430
 
-#define TEMP_RESIDENCY_TIME          2  // (seconds) Time to wait for hotend to "settle" in M109
+#define TEMP_RESIDENCY_TIME          5  // (seconds) Time to wait for hotend to "settle" in M109
 #define TEMP_WINDOW                  1  // (°C) Temperature proximity for the "temperature reached" timer
 #define TEMP_HYSTERESIS              3  // (°C) Temperature proximity considered "close enough" to the target
 
@@ -1035,6 +1035,7 @@
 #if ENABLED(CR10V2_BLTOUCH)
   #define USE_PROBE_FOR_Z_HOMING
 #endif
+
 /**
  * Z_MIN_PROBE_PIN
  *
