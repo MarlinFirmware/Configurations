@@ -78,9 +78,9 @@
 //     These defines are set in platformio.ini build parameters, sample for U20 -DU20 -DTS_V12
 //     U20_PLUS was not tested, as we do not have a printer to test. Print bed PID settings MUST be tuned for it.
 
-// Valid platformio.ini submodel values are U20_PLUS U20 U30 LK1 LK2 LK4
+// Valid platformio.ini submodel values are U20_PLUS U20 U30 LK1 LK1_PLUS LK2 LK4
 
-// Valid platformio.ini touchscreens are TS_V11 TS_V12 TS_V19
+// Valid platformio.ini touchscreens are TS_V11 TS_V12 and TS_V19 (2019)
 
 // 2 - Select the screen controller type. Most common is ILI9341 - First option. If your screen remains white,
 //     Try the alternate setting - this should enable ST7789V or ILI9328. For other LCDs... code is needed
@@ -141,7 +141,7 @@
  * :[2400, 9600, 19200, 38400, 57600, 115200, 250000, 500000, 1000000]
  */
 #define BAUDRATE 250000
-//#define BAUD_RATE_GCODE     // Enable G-code M575 to set the baud rate
+#define BAUD_RATE_GCODE       // Enable G-code M575 to set the baud rate
 
 /**
  * Select a secondary serial port on the board to use for communication with the host.
@@ -149,15 +149,15 @@
  * :[-2, -1, 0, 1, 2, 3, 4, 5, 6, 7]
  */
 //#define SERIAL_PORT_2 2
-//#define BAUDRATE_2 250000   // Enable to override BAUDRATE
+//#define BAUDRATE_2 115200   // Enable to override BAUDRATE
 
 /**
  * Select a third serial port on the board to use for communication with the host.
  * Currently only supported for AVR, DUE, LPC1768/9 and STM32/STM32F1
  * :[-1, 0, 1, 2, 3, 4, 5, 6, 7]
  */
-//#define SERIAL_PORT_3 1
-//#define BAUDRATE_3 250000   // Enable to override BAUDRATE
+//#define SERIAL_PORT_3 3
+//#define BAUDRATE_3 115200   // Enable to override BAUDRATE
 
 // Enable the Bluetooth serial interface on AT90USB devices
 //#define BLUETOOTH
@@ -177,6 +177,8 @@
   #define CUSTOM_MACHINE_NAME "Alfawise U20+"
 #elif defined(LK1)
   #define CUSTOM_MACHINE_NAME "Longer3D LK1"
+#elif defined(LK1_PLUS)
+  #define CUSTOM_MACHINE_NAME "Longer3D LK1+"
 #elif defined(LK2)
   #define CUSTOM_MACHINE_NAME "Longer3D LK2"
 #elif defined(LK4)
@@ -696,7 +698,7 @@
     #define DEFAULT_bedKd 1164.25
   #endif
 
-  #ifdef U20_PLUS
+  #if defined(U20_PLUS) || defined(LK1_PLUS)
     // These PID settings MUST be updated
     #define DEFAULT_bedKp 841.68
     #define DEFAULT_bedKi 152.12
@@ -1431,7 +1433,7 @@
 #define Z_MACHINE_MAX 400
 #endif
 
-#ifdef U20_PLUS
+#if defined(U20_PLUS) || defined(LK1_PLUS)
 #define X_BED_SIZE 400
 #define Y_BED_SIZE 400
 #define Z_MACHINE_MAX 500
