@@ -75,12 +75,23 @@
 //
 // 1 - Select your Alfawise U30 or U20 or U20+ printer (NO MORE REQUIRED HERE)
 //     and the touchscreen version, either 1.1 or 1.2. Most recent in France are v1.2 (blue pcb)
-//     These defines are set in platformio.ini build parameters, sample for U20 -DU20 -DTS_V12
 //     U20_PLUS was not tested, as we do not have a printer to test. Print bed PID settings MUST be tuned for it.
 
-// Valid platformio.ini submodel values are U20_PLUS U20 U30 LK1 LK1_PLUS LK2 LK4
+// Valid submodels: U20, U20_PLUS, U30, LK1, LK1_PLUS, LK2, and LK4
 
-// Valid platformio.ini touchscreens are TS_V11 TS_V12 and TS_V19 (2019)
+#define U20
+//#define U20_PLUS
+//#define U30
+//#define LK1
+//#define LK1_PLUS
+//#define LK2
+//#define LK4
+
+// Valid touchscreens: TS_V11, TS_V12, and TS_V19 (2019)
+
+//#define TS_V11
+#define TS_V12
+//#define TS_V19
 
 // 2 - Select the screen controller type. Most common is ILI9341 - First option. If your screen remains white,
 //     Try the alternate setting - this should enable ST7789V or ILI9328. For other LCDs... code is needed
@@ -169,20 +180,22 @@
 
 // Name displayed in the LCD "Ready" message and Info menu
 //#define CUSTOM_MACHINE_NAME "3D Printer"
-#ifdef U20
+#if ENABLED(U20)
   #define CUSTOM_MACHINE_NAME "Alfawise U20"
-#elif defined(U30)
+#elif ENABLED(U30)
   #define CUSTOM_MACHINE_NAME "Alfawise U30"
-#elif defined(U20_PLUS)
+#elif ENABLED(U20_PLUS)
   #define CUSTOM_MACHINE_NAME "Alfawise U20+"
-#elif defined(LK1)
+#elif ENABLED(LK1)
   #define CUSTOM_MACHINE_NAME "Longer3D LK1"
-#elif defined(LK1_PLUS)
+#elif ENABLED(LK1_PLUS)
   #define CUSTOM_MACHINE_NAME "Longer3D LK1+"
-#elif defined(LK2)
+#elif ENABLED(LK2)
   #define CUSTOM_MACHINE_NAME "Longer3D LK2"
-#elif defined(LK4)
+#elif ENABLED(LK4)
   #define CUSTOM_MACHINE_NAME "Longer3D LK4"
+#else
+  #error "Please specify U20, U20_PLUS, U30, LK1, LK1_PLUS, LK2, or LK4."
 #endif
 
 // Printer's unique ID, used by some programs to differentiate between machines.
@@ -684,21 +697,17 @@
   //#define MIN_BED_POWER 0
   //#define PID_BED_DEBUG // Sends debug data to the serial port.
 
-  #if defined(U30) || defined(LK2) || defined(LK4)
+  #if ANY(U30, LK2, LK4)
     // From M303 command for Alfawise U30
     #define DEFAULT_bedKp 338.46
     #define DEFAULT_bedKi 63.96
     #define DEFAULT_bedKd 447.78
-  #endif
-
-  #if defined(U20) || defined(LK1)
+  #elif EITHER(U20, LK1)
     // From M303 command for Alfawise U20
     #define DEFAULT_bedKp 841.68
     #define DEFAULT_bedKi 152.12
     #define DEFAULT_bedKd 1164.25
-  #endif
-
-  #if defined(U20_PLUS) || defined(LK1_PLUS)
+  #elif EITHER(U20_PLUS, LK1_PLUS)
     // These PID settings MUST be updated
     #define DEFAULT_bedKp 841.68
     #define DEFAULT_bedKi 152.12
@@ -1421,22 +1430,18 @@
 
 // @section machine
 
-#if defined(U30) || defined(LK2) || defined(LK4)
-#define X_BED_SIZE 220
-#define Y_BED_SIZE 220
-#define Z_MACHINE_MAX 250
-#endif
-
-#if defined(U20) || defined(LK1)
-#define X_BED_SIZE 300
-#define Y_BED_SIZE 300
-#define Z_MACHINE_MAX 400
-#endif
-
-#if defined(U20_PLUS) || defined(LK1_PLUS)
-#define X_BED_SIZE 400
-#define Y_BED_SIZE 400
-#define Z_MACHINE_MAX 500
+#if ANY(U30, LK2, LK4)
+  #define X_BED_SIZE    220
+  #define Y_BED_SIZE    220
+  #define Z_MAX_POS     250
+#elif EITHER(U20, LK1)
+  #define X_BED_SIZE    300
+  #define Y_BED_SIZE    300
+  #define Z_MAX_POS     400
+#elif EITHER(U20_PLUS, LK1_PLUS)
+  #define X_BED_SIZE    400
+  #define Y_BED_SIZE    400
+  #define Z_MAX_POS     500
 #endif
 
 // Travel limits (mm) after homing, corresponding to endstop positions.
@@ -1445,7 +1450,7 @@
 #define Z_MIN_POS 0
 #define X_MAX_POS X_BED_SIZE
 #define Y_MAX_POS Y_BED_SIZE
-#define Z_MAX_POS Z_MACHINE_MAX
+//#define Z_MAX_POS 250
 //#define I_MIN_POS 0
 //#define I_MAX_POS 50
 //#define J_MIN_POS 0
@@ -2858,22 +2863,20 @@
     #define TOUCH_CALIBRATION_Y  9000
     #define TOUCH_OFFSET_X      -24
     #define TOUCH_OFFSET_Y      -17
-  #endif
-
-  #if ENABLED(TS_V12)
+  #elif ENABLED(TS_V12)
     // Alfawise U30 ILI9341 2.8 TP Ver 1.2 / Blue PCB on the back of touchscreen
     #define TOUCH_CALIBRATION_X  12000
     #define TOUCH_CALIBRATION_Y -9000
     #define TOUCH_OFFSET_X      -43
     #define TOUCH_OFFSET_Y       257
-  #endif
-
-  #if ENABLED(TS_V19)
+  #elif ENABLED(TS_V19)
     // Longer LK4/U30 2.8" Ver 2019 / Blue PCB, SID240x320-8PCB-D
     #define TOUCH_CALIBRATION_X -12000
     #define TOUCH_CALIBRATION_Y  9000
     #define TOUCH_OFFSET_X       320
     #define TOUCH_OFFSET_Y       0
+  #else
+    #error "Please specify TS_V11, TS_V12, or TS_V19."
   #endif
 
   //#define TOUCH_ORIENTATION TOUCH_LANDSCAPE
