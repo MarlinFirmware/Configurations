@@ -78,7 +78,20 @@
 //     U20_PLUS was not tested, as we do not have a printer to test. Print bed PID settings MUST be tuned for it.
 
 // Valid submodels: U20, U20_PLUS, U30, LK1, LK1_PLUS, LK2, and LK4
-// Valid touchscreens: TS_V11, TS_V12, and TS_V19 (2019)
+
+//#define U20
+//#define U20_PLUS
+//#define U30
+//#define LK1
+//#define LK1_PLUS
+//#define LK2
+//#define LK4
+
+// Valid touchscreens: TS_V11, TS_V12, and TS_V19 (2019). Select none for user-calibration.
+
+//#define TS_V11
+//#define TS_V12
+//#define TS_V19
 
 // 2 - Select the screen controller type. Most common is ILI9341 - First option. If your screen remains white,
 //     Try the alternate setting - this should enable ST7789V or ILI9328. For other LCDs... code is needed
