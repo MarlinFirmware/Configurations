@@ -163,7 +163,7 @@
  *
  * :[3, 4, 5, 6]
  */
-#define LINEAR_AXES 5
+#define LINEAR_AXES 6
 
 /**
  * Axis codes for additional axes:
