@@ -74,24 +74,11 @@
 // https://www.lesimprimantes3d.fr/forum/topic/18260-alfawise-u20x-u30-marlin-2x-firmware-alternatif/
 //
 // 1 - Select your Alfawise U30 or U20 or U20+ printer (NO MORE REQUIRED HERE)
-//     and the touchscreen version, either 1.1 or 1.2. Most recent in France are v1.2 (blue pcb)
+//     and the touchscreen version. Most recent in France are TS_V19 (blue pcb)
 //     U20_PLUS was not tested, as we do not have a printer to test. Print bed PID settings MUST be tuned for it.
 
 // Valid submodels: U20, U20_PLUS, U30, LK1, LK1_PLUS, LK2, and LK4
-
-#define U20
-//#define U20_PLUS
-//#define U30
-//#define LK1
-//#define LK1_PLUS
-//#define LK2
-//#define LK4
-
 // Valid touchscreens: TS_V11, TS_V12, and TS_V19 (2019)
-
-//#define TS_V11
-#define TS_V12
-//#define TS_V19
 
 // 2 - Select the screen controller type. Most common is ILI9341 - First option. If your screen remains white,
 //     Try the alternate setting - this should enable ST7789V or ILI9328. For other LCDs... code is needed
@@ -2875,8 +2862,6 @@
     #define TOUCH_CALIBRATION_Y  9000
     #define TOUCH_OFFSET_X       320
     #define TOUCH_OFFSET_Y       0
-  #else
-    #error "Please specify TS_V11, TS_V12, or TS_V19."
   #endif
 
   //#define TOUCH_ORIENTATION TOUCH_LANDSCAPE
