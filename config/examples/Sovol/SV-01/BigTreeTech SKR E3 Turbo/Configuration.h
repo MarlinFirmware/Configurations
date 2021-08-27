@@ -37,6 +37,8 @@
  */
 #define CONFIGURATION_H_VERSION 02000901
 
+//#define SV01_DUAL_Z_ENABLE
+
 //===========================================================================
 //============================= Getting Started =============================
 //===========================================================================
@@ -856,7 +858,9 @@
 #define Z_DRIVER_TYPE  TMC2209
 //#define X2_DRIVER_TYPE A4988
 //#define Y2_DRIVER_TYPE A4988
-//#define Z2_DRIVER_TYPE A4988
+#if ENABLED(SV01_DUAL_Z_ENABLE)
+  #define Z2_DRIVER_TYPE TMC2209
+#endif
 //#define Z3_DRIVER_TYPE A4988
 //#define Z4_DRIVER_TYPE A4988
 //#define I_DRIVER_TYPE  A4988
