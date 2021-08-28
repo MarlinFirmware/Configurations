@@ -67,7 +67,7 @@
 //===========================================================================
 
 //===========================================================================
-//============================= Alfawise Printer ============================
+//======================== Alfawise/Longer3D Printers =======================
 //===========================================================================
 
 // Forum link to help with a tutorial, in French! :
@@ -75,6 +75,8 @@
 //
 // 1 - Select your Alfawise U30 or U20 or U20+ printer (NO MORE REQUIRED HERE)
 //     and the touchscreen version. Most recent in France are TS_V19 (blue pcb)
+//     The models are currently set in ini/stm32f1.ini & ini/stm32f1-maple.ini in the STM32F103VE_longer section.
+//     Please remove them if you want to set them directly in this configuration file.
 //     U20_PLUS was not tested, as we do not have a printer to test. Print bed PID settings MUST be tuned for it.
 
 // Valid submodels: U20, U20_PLUS, U30, LK1, LK1_PLUS, LK2, and LK4
