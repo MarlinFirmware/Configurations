@@ -4164,3 +4164,8 @@
  */
 //#define SOFT_RESET_VIA_SERIAL         // 'KILL' and '^X' commands will soft-reset the controller
 //#define SOFT_RESET_ON_KILL            // Use a digital button to soft-reset the controller after KILL
+
+/**
+ * RS485 Hardware serial port definition
+ */
+#define RS485_SERIAL_PORT           1
