@@ -596,8 +596,8 @@
 
   // Felix 2.0+ electronics with v4 Hotend
   #if ENABLED(PID_PARAMS_PER_HOTEND)
-    // Specify between 1 and HOTENDS values per array.
-    // If fewer than EXTRUDER values are provided, the last element will be repeated.
+    // Specify up to one value per hotend here, according to your setup.
+    // If there are fewer values, the last one applies to the remaining hotends.
     #define DEFAULT_Kp_LIST {  12.00,  12.00 }
     #define DEFAULT_Ki_LIST {   0.84,   0.84 }
     #define DEFAULT_Kd_LIST {  85.00,  85.00 }

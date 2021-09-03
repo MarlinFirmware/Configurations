@@ -596,8 +596,8 @@
 
   // Qidi1 Auto tune
   #if ENABLED(PID_PARAMS_PER_HOTEND)
-    // Specify between 1 and HOTENDS values per array.
-    // If fewer than EXTRUDER values are provided, the last element will be repeated.
+    // Specify up to one value per hotend here, according to your setup.
+    // If there are fewer values, the last one applies to the remaining hotends.
     #define DEFAULT_Kp_LIST {  19.35,  19.35 }
     #define DEFAULT_Ki_LIST {   3.81,   3.81 }
     #define DEFAULT_Kd_LIST {  24.57,  24.57 }

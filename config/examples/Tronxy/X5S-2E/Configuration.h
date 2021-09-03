@@ -602,8 +602,8 @@
   // The OEM stock model uses an E3D Cyclops clone hotend (2 in 1 out, color mixing) and a long 12V/40W heater catridge.
   // Tested with command(s): "M301 P50 I5 D100" and "M303 C10 E0 S210"
   #if ENABLED(PID_PARAMS_PER_HOTEND)
-    // Specify between 1 and HOTENDS values per array.
-    // If fewer than EXTRUDER values are provided, the last element will be repeated.
+    // Specify up to one value per hotend here, according to your setup.
+    // If there are fewer values, the last one applies to the remaining hotends.
     #define DEFAULT_Kp_LIST {  26.19,  26.19 }
     #define DEFAULT_Ki_LIST {   2.41,   2.41 }
     #define DEFAULT_Kd_LIST {  71.28,  71.28 }

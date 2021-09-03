@@ -596,8 +596,8 @@
 
   // Tevo Tarantula Pro
   #if ENABLED(PID_PARAMS_PER_HOTEND)
-    // Specify between 1 and HOTENDS values per array.
-    // If fewer than EXTRUDER values are provided, the last element will be repeated.
+    // Specify up to one value per hotend here, according to your setup.
+    // If there are fewer values, the last one applies to the remaining hotends.
     #define DEFAULT_Kp_LIST {  26.27,  26.27 }
     #define DEFAULT_Ki_LIST {   2.49,   2.49 }
     #define DEFAULT_Kd_LIST {  69.41,  69.41 }

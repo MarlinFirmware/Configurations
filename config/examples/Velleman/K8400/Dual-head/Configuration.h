@@ -596,8 +596,8 @@
 
   // Mendel Parts V9 on 12V
   #if ENABLED(PID_PARAMS_PER_HOTEND)
-    // Specify between 1 and HOTENDS values per array.
-    // If fewer than EXTRUDER values are provided, the last element will be repeated.
+    // Specify up to one value per hotend here, according to your setup.
+    // If there are fewer values, the last one applies to the remaining hotends.
     #define DEFAULT_Kp_LIST {  63.00,  63.00 }
     #define DEFAULT_Ki_LIST {   2.25,   2.25 }
     #define DEFAULT_Kd_LIST { 440.00, 440.00 }

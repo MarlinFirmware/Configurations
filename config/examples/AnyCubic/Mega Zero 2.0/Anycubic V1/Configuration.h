@@ -597,8 +597,8 @@
 
   // Anycubic Mega Zero, generated with M303 C8 S190
   #if ENABLED(PID_PARAMS_PER_HOTEND)
-    // Specify between 1 and HOTENDS values per array.
-    // If fewer than EXTRUDER values are provided, the last element will be repeated.
+    // Specify up to one value per hotend here, according to your setup.
+    // If there are fewer values, the last one applies to the remaining hotends.
     #define DEFAULT_Kp_LIST {  17.72,  17.72 }
     #define DEFAULT_Ki_LIST {   1.18,   1.18 }
     #define DEFAULT_Kd_LIST {  66.76,  66.76 }

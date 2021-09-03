@@ -596,8 +596,8 @@
 
   // Tuned by ralf-e. Always re-tune for your machine!
   #if ENABLED(PID_PARAMS_PER_HOTEND)
-    // Specify between 1 and HOTENDS values per array.
-    // If fewer than EXTRUDER values are provided, the last element will be repeated.
+    // Specify up to one value per hotend here, according to your setup.
+    // If there are fewer values, the last one applies to the remaining hotends.
     #define DEFAULT_Kp_LIST {  16.83,  16.83 }
     #define DEFAULT_Ki_LIST {   1.02,   1.02 }
     #define DEFAULT_Kd_LIST {  69.29,  69.29 }
