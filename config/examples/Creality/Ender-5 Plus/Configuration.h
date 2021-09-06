@@ -2574,6 +2574,10 @@
 //  - Download https://github.com/makerbase-mks/MKS-H43
 //  - Copy the downloaded DWIN_SET folder to the SD card.
 //
+// RELOADED (T5UID1)
+//  - Download https://github.com/Desuuuu/DGUS-reloaded
+//  - Copy the downloaded DWIN_SET folder to the SD card.
+//
 // Flash display with DGUS Displays for Marlin:
 //  - Format the SD card to FAT32 with a allocation size of 4k.
 //  - Download https://github.com/coldtobi/Marlin_DGUS_Resources
@@ -2585,6 +2589,7 @@
 //#define DGUS_LCD_UI_FYSETC
 //#define DGUS_LCD_UI_HIPRECY
 //#define DGUS_LCD_UI_MKS
+//#define DGUS_LCD_UI_RELOADED
 #if ENABLED(DGUS_LCD_UI_MKS)
   #define USE_MKS_GREEN_UI
 #endif
