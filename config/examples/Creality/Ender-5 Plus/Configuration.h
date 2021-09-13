@@ -2575,7 +2575,7 @@
 //  - Copy the downloaded DWIN_SET folder to the SD card.
 //
 // RELOADED (T5UID1)
-//  - Download https://github.com/Desuuuu/DGUS-reloaded
+//  - Download https://github.com/Desuuuu/DGUS-reloaded/releases
 //  - Copy the downloaded DWIN_SET folder to the SD card.
 //
 // Flash display with DGUS Displays for Marlin:
