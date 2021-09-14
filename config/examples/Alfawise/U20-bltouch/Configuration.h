@@ -2861,6 +2861,8 @@
   #define BUTTON_DELAY_EDIT  75 // (ms) Button repeat delay for edit screens
   #define BUTTON_DELAY_MENU 100 // (ms) Button repeat delay for menus
 
+  //#define TOUCH_IDLE_SLEEP 300 // (secs) Turn off the TFT backlight if set (5mn)
+
   #define TOUCH_SCREEN_CALIBRATION
 
   #if ENABLED(TS_V11)
