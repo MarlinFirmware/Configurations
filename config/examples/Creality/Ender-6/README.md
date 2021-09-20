@@ -22,7 +22,7 @@ NOTE: The factory LCD firmware is only compatible with Creality's firmware. The 
 
 The Ender-6 stock LCD can optionally use a [customized Marlin DGUS interface](https://github.com/coldtobi/Marlin_DGUS_Resources). With the stock LCD firmware Marlin can only be controlled from a host over USB (see first section).
 
-- Copy the `DWIN_SET` folder to a microSD card. The microSD card must be <= 8 GB and formatted with a 4K cluster size.
+- Copy the `DWIN_SET` folder to a microSD card. The microSD card must be smaller than 8 GB and formatted with a 4K cluster size.
 - Power off the printer and disassemble the front panel to get access to the LCD board.
 - Insert the SD card into the slot on the back of the LCD (not the main SD slot).
 - Power on the printer. The screen will turn blue and display several messages, finishing with "SD Card Process... END!".
