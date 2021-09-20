@@ -813,7 +813,6 @@
    *
    * Settings for all BLTouch and clone probes:
    */
-  #undef PROBE_MANUALLY
 
   // Safety: The probe needs time to recognize the command.
   //         Minimum command delay (ms). Enable and increase if needed.
