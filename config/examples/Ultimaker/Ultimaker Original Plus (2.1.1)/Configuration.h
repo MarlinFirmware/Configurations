@@ -495,7 +495,7 @@
 #define TEMP_SENSOR_5 0
 #define TEMP_SENSOR_6 0
 #define TEMP_SENSOR_7 0
-#define TEMP_SENSOR_BED 20 //PT100 used for nozzle and bed in v2.0 board UM2/UMO+ https://support.ultimaker.com/hc/en-us/articles/360011640020-Stopped-temp-sensor-ER01
+#define TEMP_SENSOR_BED 20 // PT100 used for nozzle and bed in v2.0 board UM2/UMO+ https://support.ultimaker.com/hc/en-us/articles/360011640020-Stopped-temp-sensor-ER01
 #define TEMP_SENSOR_PROBE 0
 #define TEMP_SENSOR_CHAMBER 0
 #define TEMP_SENSOR_COOLER 0
