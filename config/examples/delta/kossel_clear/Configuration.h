@@ -795,6 +795,9 @@
   // Print surface diameter/2 minus unreachable space (avoid collisions with vertical towers).
   #define DELTA_PRINTABLE_RADIUS 100      // (mm)
 
+  // Maximum reachable area
+  #define DELTA_MAX_RADIUS       100      // (mm)
+
   // Center-to-center distance of the holes in the diagonal push rods.
   #define DELTA_DIAGONAL_ROD 290.5        // (mm) Kossel Clear OG Settings
 

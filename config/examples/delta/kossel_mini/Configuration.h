@@ -797,6 +797,9 @@
   // Print surface diameter/2 minus unreachable space (avoid collisions with vertical towers).
   #define DELTA_PRINTABLE_RADIUS 90.0     // (mm)
 
+  // Maximum reachable area
+  #define DELTA_MAX_RADIUS       90.0     // (mm)
+
   // Center-to-center distance of the holes in the diagonal push rods.
   #define DELTA_DIAGONAL_ROD 215.0        // (mm)
 
