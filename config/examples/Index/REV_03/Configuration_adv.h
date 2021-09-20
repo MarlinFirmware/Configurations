@@ -1,6 +1,6 @@
 /**
  * Marlin 3D Printer Firmware
- * Copyright (c) 2020 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
+ * Copyright (c) 2021 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
  *
  * Based on Sprinter and grbl.
  * Copyright (c) 2011 Camiel Gubbels / Erik van der Zalm
@@ -30,7 +30,7 @@
  *
  * Basic settings can be found in Configuration.h
  */
-#define CONFIGURATION_ADV_H_VERSION 02000901
+#define CONFIGURATION_ADV_H_VERSION 02000902
 
 //===========================================================================
 //============================= Thermal Settings ============================
@@ -496,13 +496,13 @@
  * The fan turns on automatically whenever any driver is enabled and turns
  * off (or reduces to idle speed) shortly after drivers are turned off.
  */
-#define USE_CONTROLLER_FAN
+//#define USE_CONTROLLER_FAN
 #if ENABLED(USE_CONTROLLER_FAN)
-  #define CONTROLLER_FAN_PIN  2             // Set a custom pin for the controller fan
+  //#define CONTROLLER_FAN_PIN -1           // Set a custom pin for the controller fan
   //#define CONTROLLER_FAN_USE_Z_ONLY       // With this option only the Z axis is considered
   //#define CONTROLLER_FAN_IGNORE_Z         // Ignore Z stepper. Useful when stepper timeout is disabled.
   #define CONTROLLERFAN_SPEED_MIN         0 // (0-255) Minimum speed. (If set below this value the fan is turned off.)
-  #define CONTROLLERFAN_SPEED_ACTIVE    130 // (0-255) Active speed, used when any motor is enabled
+  #define CONTROLLERFAN_SPEED_ACTIVE    255 // (0-255) Active speed, used when any motor is enabled
   #define CONTROLLERFAN_SPEED_IDLE        0 // (0-255) Idle speed, used when motors are disabled
   #define CONTROLLERFAN_IDLE_TIME        60 // (seconds) Extra time to keep the fan running after disabling motors
 
@@ -786,14 +786,14 @@
 
 //#define SENSORLESS_BACKOFF_MM  { 2, 2, 0 }  // (mm) Backoff from endstops before sensorless homing
 
-#define HOMING_BUMP_MM      { 5, 5, 4 }       // (mm) Backoff from endstops after first bump
-#define HOMING_BUMP_DIVISOR { 2, 2, 4 }       // Re-Bump Speed Divisor (Divides the Homing Feedrate)
+#define HOMING_BUMP_MM      { 5, 5, 2, 2, 2, 5 }       // (mm) Backoff from endstops after first bump
+#define HOMING_BUMP_DIVISOR { 2, 2, 4, 4, 4, 2 }       // Re-Bump Speed Divisor (Divides the Homing Feedrate)
 
 //#define HOMING_BACKOFF_POST_MM { 2, 2, 2 }  // (mm) Backoff from endstops after homing
 
-#define QUICK_HOME                            // If G28 contains XY do a diagonal move first
+#define QUICK_HOME                          // If G28 contains XY do a diagonal move first
 //#define HOME_Y_BEFORE_X                     // If G28 contains XY home Y before X
-//#define HOME_Z_FIRST                        // Home Z first. Requires a Z-MIN endstop (not a probe).
+#define HOME_Z_FIRST                        // Home Z first. Requires a Z-MIN endstop (not a probe).
 //#define CODEPENDENT_XY_HOMING               // If X/Y can't home without homing Y/X first
 
 // @section bltouch
@@ -917,7 +917,7 @@
 
   // On a 300mm bed a 5% grade would give a misalignment of ~1.5cm
   #define G34_MAX_GRADE              5    // (%) Maximum incline that G34 will handle
-  #define Z_STEPPER_ALIGN_ITERATIONS 3    // Number of iterations to apply during alignment
+  #define Z_STEPPER_ALIGN_ITERATIONS 5    // Number of iterations to apply during alignment
   #define Z_STEPPER_ALIGN_ACC        0.02 // Stop iterating early if the accuracy is better than this
   #define RESTORE_LEVELING_AFTER_G34      // Restore leveling after G34 is done?
   // After G34, re-home Z (G28 Z) or just calculate it from the last probe heights?
@@ -959,7 +959,7 @@
 
 // @section motion
 
-#define AXIS_RELATIVE_MODES { false, false, false, false }
+#define AXIS_RELATIVE_MODES { false, false, false, false, false, false }
 
 // Add a Duplicate option for well-separated conjoined nozzles
 //#define MULTI_NOZZLE_DUPLICATION
@@ -978,7 +978,7 @@
  * Set DISABLE_INACTIVE_? 'true' to shut down axis steppers after an idle period.
  * The Deactive Time can be overridden with M18 and M84. Set to 0 for No Timeout.
  */
-#define DEFAULT_STEPPER_DEACTIVE_TIME 60
+#define DEFAULT_STEPPER_DEACTIVE_TIME 120
 #define DISABLE_INACTIVE_X true
 #define DISABLE_INACTIVE_Y true
 #define DISABLE_INACTIVE_Z true  // Set 'false' if the nozzle could fall onto your printed part!
@@ -1136,7 +1136,7 @@
 //#define MICROSTEP32 HIGH,LOW,HIGH
 
 // Microstep settings (Requires a board with pins named X_MS1, X_MS2, etc.)
-#define MICROSTEP_MODES { 16, 16, 4, 16, 16, 16 } // [1,2,4,8,16]
+#define MICROSTEP_MODES { 16, 16, 16, 16, 16, 16 } // [1,2,4,8,16]
 
 /**
  *  @section  stepper motor current
@@ -1196,7 +1196,7 @@
 
 // @section lcd
 
-#if ANY(IS_ULTIPANEL, EXTENSIBLE_UI, DWIN_CREALITY_LCD)
+#if ANY(HAS_LCD_MENU, EXTENSIBLE_UI, HAS_DWIN_E3V2)
   #define MANUAL_FEEDRATE { 50*60, 50*60, 4*60, 2*60 } // (mm/min) Feedrates for manual moves along X, Y, Z, E from panel
   #define FINE_MANUAL_MOVE 0.025    // (mm) Smallest manual move (< 0.1mm) applying to Z on most machines
   #if IS_ULTIPANEL
@@ -1304,11 +1304,14 @@
   //#define LCD_SHOW_E_TOTAL
 #endif
 
-#if EITHER(SDSUPPORT, LCD_SET_PROGRESS_MANUALLY) && ANY(HAS_MARLINUI_U8GLIB, HAS_MARLINUI_HD44780, IS_TFTGLCD_PANEL, EXTENSIBLE_UI)
-  //#define SHOW_REMAINING_TIME       // Display estimated time to completion
-  #if ENABLED(SHOW_REMAINING_TIME)
-    //#define USE_M73_REMAINING_TIME  // Use remaining time from M73 command instead of estimation
-    //#define ROTATE_PROGRESS_DISPLAY // Display (P)rogress, (E)lapsed, and (R)emaining time
+// LCD Print Progress options
+#if EITHER(SDSUPPORT, LCD_SET_PROGRESS_MANUALLY)
+  #if ANY(HAS_MARLINUI_U8GLIB, EXTENSIBLE_UI, HAS_MARLINUI_HD44780, IS_TFTGLCD_PANEL, IS_DWIN_MARLINUI)
+    //#define SHOW_REMAINING_TIME         // Display estimated time to completion
+    #if ENABLED(SHOW_REMAINING_TIME)
+      //#define USE_M73_REMAINING_TIME    // Use remaining time from M73 command instead of estimation
+      //#define ROTATE_PROGRESS_DISPLAY   // Display (P)rogress, (E)lapsed, and (R)emaining time
+    #endif
   #endif
 
   #if EITHER(HAS_MARLINUI_U8GLIB, EXTENSIBLE_UI)
@@ -1576,15 +1579,9 @@
  * printing performance versus fast display updates.
  */
 #if HAS_MARLINUI_U8GLIB
-  // Show SD percentage next to the progress bar
-  //#define DOGM_SD_PERCENT
-
   // Save many cycles by drawing a hollow frame or no frame on the Info Screen
   //#define XYZ_NO_FRAME
   #define XYZ_HOLLOW_FRAME
-
-  // Enable to save many cycles by drawing a hollow frame on Menu Screens
-  #define MENU_HOLLOW_FRAME
 
   // A bigger font is available for edit items. Costs 3120 bytes of PROGMEM.
   // Western only. Not available for Cyrillic, Kana, Turkish, Greek, or Chinese.
@@ -1593,9 +1590,6 @@
   // A smaller font may be used on the Info Screen. Costs 2434 bytes of PROGMEM.
   // Western only. Not available for Cyrillic, Kana, Turkish, Greek, or Chinese.
   //#define USE_SMALL_INFOFONT
-
-  // Swap the CW/CCW indicators in the graphics overlay
-  //#define OVERLAY_GFX_REVERSE
 
   /**
    * ST7920-based LCDs can emulate a 16 x 4 character display using
@@ -1647,6 +1641,17 @@
   //#define GAMES_EASTER_EGG          // Add extra blank lines above the "Games" sub-menu
 
 #endif // HAS_MARLINUI_U8GLIB
+
+#if HAS_MARLINUI_U8GLIB || IS_DWIN_MARLINUI
+  // Show SD percentage next to the progress bar
+  //#define SHOW_SD_PERCENT
+
+  // Enable to save many cycles by drawing a hollow frame on Menu Screens
+  #define MENU_HOLLOW_FRAME
+
+  // Swap the CW/CCW indicators in the graphics overlay
+  //#define OVERLAY_GFX_REVERSE
+#endif
 
 //
 // Additional options for DGUS / DWIN displays
@@ -1732,7 +1737,7 @@
   //#define LCD_4DSYSTEMS_4DLCD_FT843 // 4D Systems 4.3" (480x272)
   //#define LCD_HAOYU_FT800CB         // Haoyu with 4.3" or 5" (480x272)
   //#define LCD_HAOYU_FT810CB         // Haoyu with 5" (800x480)
-  //#define LCD_ALEPHOBJECTS_CLCD_UI  // Aleph Objects Color LCD UI
+  //#define LCD_LULZBOT_CLCD_UI       // LulzBot Color LCD UI
   //#define LCD_FYSETC_TFT81050       // FYSETC with 5" (800x480)
   //#define LCD_EVE3_50G              // Matrix Orbital 5.0", 800x480, BT815
   //#define LCD_EVE2_50G              // Matrix Orbital 5.0", 800x480, FT813
@@ -1743,8 +1748,8 @@
   //#define TOUCH_UI_800x480
 
   // Mappings for boards with a standard RepRapDiscount Display connector
-  //#define AO_EXP1_PINMAP      // AlephObjects CLCD UI EXP1 mapping
-  //#define AO_EXP2_PINMAP      // AlephObjects CLCD UI EXP2 mapping
+  //#define AO_EXP1_PINMAP      // LulzBot CLCD UI EXP1 mapping
+  //#define AO_EXP2_PINMAP      // LulzBot CLCD UI EXP2 mapping
   //#define CR10_TFT_PINMAP     // Rudolph Riedel's CR10 pin mapping
   //#define S6_TFT_PINMAP       // FYSETC S6 pin mapping
   //#define F6_TFT_PINMAP       // FYSETC F6 pin mapping
@@ -2047,20 +2052,23 @@
 //
 // G2/G3 Arc Support
 //
-#define ARC_SUPPORT                 // Disable this feature to save ~3226 bytes
+#define ARC_SUPPORT                   // Requires ~3226 bytes
 #if ENABLED(ARC_SUPPORT)
-  #define MM_PER_ARC_SEGMENT      1 // (mm) Length (or minimum length) of each arc segment
-  //#define ARC_SEGMENTS_PER_R    1 // Max segment length, MM_PER = Min
-  #define MIN_ARC_SEGMENTS       24 // Minimum number of segments in a complete circle
-  //#define ARC_SEGMENTS_PER_SEC 50 // Use feedrate to choose segment length (with MM_PER_ARC_SEGMENT as the minimum)
-  #define N_ARC_CORRECTION       25 // Number of interpolated segments between corrections
-  //#define ARC_P_CIRCLES           // Enable the 'P' parameter to specify complete circles
-  //#define CNC_WORKSPACE_PLANES    // Allow G2/G3 to operate in XY, ZX, or YZ planes
-  //#define SF_ARC_FIX              // Enable only if using SkeinForge with "Arc Point" fillet procedure
+  #define MIN_ARC_SEGMENT_MM      0.1 // (mm) Minimum length of each arc segment
+  #define MAX_ARC_SEGMENT_MM      1.0 // (mm) Maximum length of each arc segment
+  #define MIN_CIRCLE_SEGMENTS    72   // Minimum number of segments in a complete circle
+  //#define ARC_SEGMENTS_PER_SEC 50   // Use the feedrate to choose the segment length
+  #define N_ARC_CORRECTION       25   // Number of interpolated segments between corrections
+  //#define ARC_P_CIRCLES             // Enable the 'P' parameter to specify complete circles
+  //#define SF_ARC_FIX                // Enable only if using SkeinForge with "Arc Point" fillet procedure
 #endif
 
-// Support for G5 with XYZE destination and IJPQ offsets. Requires ~2666 bytes.
-//#define BEZIER_CURVE_SUPPORT
+// G5 Bézier Curve Support with XYZE destination and IJPQ offsets
+//#define BEZIER_CURVE_SUPPORT        // Requires ~2666 bytes
+
+#if EITHER(ARC_SUPPORT, BEZIER_CURVE_SUPPORT)
+  //#define CNC_WORKSPACE_PLANES      // Allow G2/G3/G5 to operate in XY, ZX, or YZ planes
+#endif
 
 /**
  * Direct Stepping
@@ -2417,6 +2425,8 @@
   #define PAUSE_PARK_NOZZLE_TIMEOUT           45  // (seconds) Time limit before the nozzle is turned off for safety.
   #define FILAMENT_CHANGE_ALERT_BEEPS         10  // Number of alert beeps to play when a response is needed.
   #define PAUSE_PARK_NO_STEPPER_TIMEOUT           // Enable for XYZ steppers to stay powered on during filament change.
+  //#define FILAMENT_CHANGE_RESUME_ON_INSERT      // Automatically continue / load filament when runout sensor is triggered again.
+  //#define PAUSE_REHEAT_FAST_RESUME              // Reduce number of waits by not prompting again post-timeout before continuing.
 
   //#define PARK_HEAD_ON_PAUSE                    // Park the nozzle during pause and filament change.
   //#define HOME_BEFORE_FILAMENT_CHANGE           // If needed, home before parking for filament change
@@ -3315,11 +3325,13 @@
 //#define SPINDLE_FEATURE
 //#define LASER_FEATURE
 #if EITHER(SPINDLE_FEATURE, LASER_FEATURE)
-  #define SPINDLE_LASER_ACTIVE_STATE    LOW    // Set to "HIGH" if the on/off function is active HIGH
-  #define SPINDLE_LASER_PWM             true   // Set to "true" if your controller supports setting the speed/power
-  #define SPINDLE_LASER_PWM_INVERT      false  // Set to "true" if the speed/power goes up when you want it to go slower
+  #define SPINDLE_LASER_ACTIVE_STATE    LOW    // Set to "HIGH" if SPINDLE_LASER_ENA_PIN is active HIGH
 
-  #define SPINDLE_LASER_FREQUENCY       2500   // (Hz) Spindle/laser frequency (only on supported HALs: AVR and LPC)
+  #define SPINDLE_LASER_USE_PWM                // Enable if your controller supports setting the speed/power
+  #if ENABLED(SPINDLE_LASER_USE_PWM)
+    #define SPINDLE_LASER_PWM_INVERT    false  // Set to "true" if the speed/power goes up when you want it to go slower
+    #define SPINDLE_LASER_FREQUENCY     2500   // (Hz) Spindle/laser frequency (only on supported HALs: AVR and LPC)
+  #endif
 
   //#define AIR_EVACUATION                     // Cutter Vacuum / Laser Blower motor control with G-codes M10-M11
   #if ENABLED(AIR_EVACUATION)
@@ -3375,17 +3387,21 @@
      * Speed/Power = (PWMDC / 255 * 100 - SPEED_POWER_INTERCEPT) / SPEED_POWER_SLOPE
      * PWMDC = (spdpwr - SPEED_POWER_MIN) / (SPEED_POWER_MAX - SPEED_POWER_MIN) / SPEED_POWER_SLOPE
      */
-    #define SPEED_POWER_INTERCEPT         0    // (%) 0-100 i.e., Minimum power percentage
-    #define SPEED_POWER_MIN            5000    // (RPM)
-    #define SPEED_POWER_MAX           30000    // (RPM) SuperPID router controller 0 - 30,000 RPM
-    #define SPEED_POWER_STARTUP       25000    // (RPM) M3/M4 speed/power default (with no arguments)
+    #if ENABLED(SPINDLE_LASER_USE_PWM)
+      #define SPEED_POWER_INTERCEPT       0    // (%) 0-100 i.e., Minimum power percentage
+      #define SPEED_POWER_MIN          5000    // (RPM)
+      #define SPEED_POWER_MAX         30000    // (RPM) SuperPID router controller 0 - 30,000 RPM
+      #define SPEED_POWER_STARTUP     25000    // (RPM) M3/M4 speed/power default (with no arguments)
+    #endif
 
   #else
 
-    #define SPEED_POWER_INTERCEPT         0    // (%) 0-100 i.e., Minimum power percentage
-    #define SPEED_POWER_MIN               0    // (%) 0-100
-    #define SPEED_POWER_MAX             100    // (%) 0-100
-    #define SPEED_POWER_STARTUP          80    // (%) M3/M4 speed/power default (with no arguments)
+    #if ENABLED(SPINDLE_LASER_USE_PWM)
+      #define SPEED_POWER_INTERCEPT       0    // (%) 0-100 i.e., Minimum power percentage
+      #define SPEED_POWER_MIN             0    // (%) 0-100
+      #define SPEED_POWER_MAX           100    // (%) 0-100
+      #define SPEED_POWER_STARTUP        80    // (%) M3/M4 speed/power default (with no arguments)
+    #endif
 
     // Define the minimum and maximum test pulse time values for a laser test fire function
     #define LASER_TEST_PULSE_MIN           1   // Used with Laser Control Menu
@@ -3662,7 +3678,7 @@
 #define FASTER_GCODE_PARSER
 
 #if ENABLED(FASTER_GCODE_PARSER)
-  //#define GCODE_QUOTED_STRINGS  // Support for quoted string parameters
+  #define GCODE_QUOTED_STRINGS  // Support for quoted string parameters
 #endif
 
 // Support for MeatPack G-code compression (https://github.com/scottmudge/OctoPrint-MeatPack)
@@ -3731,12 +3747,12 @@
   #define MAIN_MENU_ITEM_2_GCODE "M140 S" STRINGIFY(PREHEAT_1_TEMP_BED) "\nM104 S" STRINGIFY(PREHEAT_1_TEMP_HOTEND)
   //#define MAIN_MENU_ITEM_2_CONFIRM
 
-  #define MAIN_MENU_ITEM_3_DESC "Preheat for " PREHEAT_2_LABEL
-  #define MAIN_MENU_ITEM_3_GCODE "M140 S" STRINGIFY(PREHEAT_2_TEMP_BED) "\nM104 S" STRINGIFY(PREHEAT_2_TEMP_HOTEND)
+  //#define MAIN_MENU_ITEM_3_DESC "Preheat for " PREHEAT_2_LABEL
+  //#define MAIN_MENU_ITEM_3_GCODE "M140 S" STRINGIFY(PREHEAT_2_TEMP_BED) "\nM104 S" STRINGIFY(PREHEAT_2_TEMP_HOTEND)
   //#define MAIN_MENU_ITEM_3_CONFIRM
 
-  #define MAIN_MENU_ITEM_4_DESC "Heat Bed/Home/Level"
-  #define MAIN_MENU_ITEM_4_GCODE "M140 S" STRINGIFY(PREHEAT_2_TEMP_BED) "\nG28\nG29"
+  //#define MAIN_MENU_ITEM_4_DESC "Heat Bed/Home/Level"
+  //#define MAIN_MENU_ITEM_4_GCODE "M140 S" STRINGIFY(PREHEAT_2_TEMP_BED) "\nG28\nG29"
   //#define MAIN_MENU_ITEM_4_CONFIRM
 
   //#define MAIN_MENU_ITEM_5_DESC "Home & Info"

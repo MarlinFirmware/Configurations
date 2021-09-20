@@ -35,7 +35,7 @@
  *
  * Advanced settings can be found in Configuration_adv.h
  */
-#define CONFIGURATION_H_VERSION 02000901
+#define CONFIGURATION_H_VERSION 02000902
 
 //===========================================================================
 //============================= Getting Started =============================
@@ -367,6 +367,7 @@
 //#define PSU_NAME "Power Supply"
 
 #if ENABLED(PSU_CONTROL)
+  //#define MKS_PWC                 // Using the MKS PWC add-on
   //#define PS_OFF_CONFIRM          // Confirm dialog when power off
   //#define PS_OFF_SOUND            // Beep 1s when power off
   #define PSU_ACTIVE_STATE LOW      // Set 'LOW' for ATX, 'HIGH' for X-Box
@@ -507,7 +508,7 @@
 
 // Resistor values when using MAX31865 sensors (-5) on TEMP_SENSOR_0 / 1
 //#define MAX31865_SENSOR_OHMS_0      100   // (Ω) Typically 100 or 1000 (PT100 or PT1000)
-//#define MAX31865_CALIBRATION_OHMS_0 430   // (Ω) Typically 430 for AdaFruit PT100; 4300 for AdaFruit PT1000
+//#define MAX31865_CALIBRATION_OHMS_0 430   // (Ω) Typically 430 for Adafruit PT100; 4300 for Adafruit PT1000
 //#define MAX31865_SENSOR_OHMS_1      100
 //#define MAX31865_CALIBRATION_OHMS_1 430
 
@@ -595,8 +596,8 @@
 
   // Creality Ender-3
   #if ENABLED(PID_PARAMS_PER_HOTEND)
-    // Specify between 1 and HOTENDS values per array.
-    // If fewer than EXTRUDER values are provided, the last element will be repeated.
+    // Specify up to one value per hotend here, according to your setup.
+    // If there are fewer values, the last one applies to the remaining hotends.
     #define DEFAULT_Kp_LIST {  21.73,  21.73 }
     #define DEFAULT_Ki_LIST {   1.54,   1.54 }
     #define DEFAULT_Kd_LIST {  76.55,  76.55 }
@@ -640,14 +641,14 @@
   //#define MIN_BED_POWER 0
   //#define PID_BED_DEBUG // Sends debug data to the serial port.
 
-  //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
-  //from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
+  // 120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
+  // from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
   #define DEFAULT_bedKp 10.00
   #define DEFAULT_bedKi .023
   #define DEFAULT_bedKd 305.4
 
-  //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
-  //from pidautotune
+  // 120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
+  // from pidautotune
   //#define DEFAULT_bedKp 97.1
   //#define DEFAULT_bedKi 1.41
   //#define DEFAULT_bedKd 1675.16
@@ -763,6 +764,16 @@
 //#define COREZX
 //#define COREZY
 //#define MARKFORGED_XY  // MarkForged. See https://reprap.org/forum/read.php?152,504042
+
+// Enable for a belt style printer with endless "Z" motion
+//#define BELTPRINTER
+
+// Enable for Polargraph Kinematics
+//#define POLARGRAPH
+#if ENABLED(POLARGRAPH)
+  #define POLARGRAPH_MAX_BELT_LEN 1035.0
+  #define POLAR_SEGMENTS_PER_SECOND 5
+#endif
 
 //===========================================================================
 //============================== Endstop Settings ===========================
@@ -1338,8 +1349,8 @@
 
 // @section homing
 
-//#define NO_MOTION_BEFORE_HOMING // Inhibit movement until all axes have been homed
-
+//#define NO_MOTION_BEFORE_HOMING // Inhibit movement until all axes have been homed. Also enable HOME_AFTER_DEACTIVATE for extra safety.
+//#define HOME_AFTER_DEACTIVATE   // Require rehoming after steppers are deactivated. Also enable NO_MOTION_BEFORE_HOMING for extra safety.
 
 /**
  * Set Z_IDLE_HEIGHT if the Z-Axis moves on its own when steppers are disabled.
@@ -1441,6 +1452,39 @@
   //#define WATCH_ALL_RUNOUT_SENSORS      // Execute runout script on any triggering sensor, not only for the active extruder.
                                           // This is automatically enabled for MIXING_EXTRUDERs.
 
+  // Override individually if the runout sensors vary
+  //#define FIL_RUNOUT1_STATE LOW
+  //#define FIL_RUNOUT1_PULLUP
+  //#define FIL_RUNOUT1_PULLDOWN
+
+  //#define FIL_RUNOUT2_STATE LOW
+  //#define FIL_RUNOUT2_PULLUP
+  //#define FIL_RUNOUT2_PULLDOWN
+
+  //#define FIL_RUNOUT3_STATE LOW
+  //#define FIL_RUNOUT3_PULLUP
+  //#define FIL_RUNOUT3_PULLDOWN
+
+  //#define FIL_RUNOUT4_STATE LOW
+  //#define FIL_RUNOUT4_PULLUP
+  //#define FIL_RUNOUT4_PULLDOWN
+
+  //#define FIL_RUNOUT5_STATE LOW
+  //#define FIL_RUNOUT5_PULLUP
+  //#define FIL_RUNOUT5_PULLDOWN
+
+  //#define FIL_RUNOUT6_STATE LOW
+  //#define FIL_RUNOUT6_PULLUP
+  //#define FIL_RUNOUT6_PULLDOWN
+
+  //#define FIL_RUNOUT7_STATE LOW
+  //#define FIL_RUNOUT7_PULLUP
+  //#define FIL_RUNOUT7_PULLDOWN
+
+  //#define FIL_RUNOUT8_STATE LOW
+  //#define FIL_RUNOUT8_PULLUP
+  //#define FIL_RUNOUT8_PULLDOWN
+
   // Commands to execute on filament runout.
   // With multiple runout sensors use the %c placeholder for the current tool in commands (e.g., "M600 T%c")
   // NOTE: After 'M412 H1' the host handles filament runout and this script does not apply.
@@ -1537,6 +1581,9 @@
   // at which point movement will be level to the machine's XY plane.
   // The height can be set with M420 Z<height>
   #define ENABLE_LEVELING_FADE_HEIGHT
+  #if ENABLED(ENABLE_LEVELING_FADE_HEIGHT)
+    #define DEFAULT_LEVELING_FADE_HEIGHT 10.0 // (mm) Default fade height.
+  #endif
 
   // For Cartesian machines, instead of dividing moves on mesh boundaries,
   // split up moves into short segments like a Delta. This follows the
@@ -1643,6 +1690,31 @@
   #define LEVEL_CORNERS_HEIGHT      0.0   // (mm) Z height of nozzle at leveling points
   #define LEVEL_CORNERS_Z_HOP       4.0   // (mm) Z height of nozzle between leveling points
   //#define LEVEL_CENTER_TOO              // Move to the center after the last corner
+  //#define LEVEL_CORNERS_USE_PROBE
+  #if ENABLED(LEVEL_CORNERS_USE_PROBE)
+    #define LEVEL_CORNERS_PROBE_TOLERANCE 0.1
+    #define LEVEL_CORNERS_VERIFY_RAISED   // After adjustment triggers the probe, re-probe to verify
+    //#define LEVEL_CORNERS_AUDIO_FEEDBACK
+  #endif
+
+  /**
+   * Corner Leveling Order
+   *
+   * Set 2 or 4 points. When 2 points are given, the 3rd is the center of the opposite edge.
+   *
+   *  LF  Left-Front    RF  Right-Front
+   *  LB  Left-Back     RB  Right-Back
+   *
+   * Examples:
+   *
+   *      Default        {LF,RB,LB,RF}         {LF,RF}           {LB,LF}
+   *  LB --------- RB   LB --------- RB    LB --------- RB   LB --------- RB
+   *  |  4       3  |   | 3         2 |    |     <3>     |   | 1           |
+   *  |             |   |             |    |             |   |          <3>|
+   *  |  1       2  |   | 1         4 |    | 1         2 |   | 2           |
+   *  LF --------- RF   LF --------- RF    LF --------- RF   LF --------- RF
+   */
+  #define LEVEL_CORNERS_LEVELING_ORDER { LF, RF, RB, LB }
 #endif
 
 /**
@@ -1986,10 +2058,10 @@
  *
  * Select the language to display on the LCD. These languages are available:
  *
- *   en, an, bg, ca, cz, da, de, el, el_gr, es, eu, fi, fr, gl, hr, hu, it,
+ *   en, an, bg, ca, cz, da, de, el, el_CY, es, eu, fi, fr, gl, hr, hu, it,
  *   jp_kana, ko_KR, nl, pl, pt, pt_br, ro, ru, sk, sv, tr, uk, vi, zh_CN, zh_TW
  *
- * :{ 'en':'English', 'an':'Aragonese', 'bg':'Bulgarian', 'ca':'Catalan', 'cz':'Czech', 'da':'Danish', 'de':'German', 'el':'Greek', 'el_gr':'Greek (Greece)', 'es':'Spanish', 'eu':'Basque-Euskera', 'fi':'Finnish', 'fr':'French', 'gl':'Galician', 'hr':'Croatian', 'hu':'Hungarian', 'it':'Italian', 'jp_kana':'Japanese', 'ko_KR':'Korean (South Korea)', 'nl':'Dutch', 'pl':'Polish', 'pt':'Portuguese', 'pt_br':'Portuguese (Brazilian)', 'ro':'Romanian', 'ru':'Russian', 'sk':'Slovak', 'sv':'Swedish', 'tr':'Turkish', 'uk':'Ukrainian', 'vi':'Vietnamese', 'zh_CN':'Chinese (Simplified)', 'zh_TW':'Chinese (Traditional)' }
+ * :{ 'en':'English', 'an':'Aragonese', 'bg':'Bulgarian', 'ca':'Catalan', 'cz':'Czech', 'da':'Danish', 'de':'German', 'el':'Greek (Greece)', 'el_CY':'Greek (Cyprus)', 'es':'Spanish', 'eu':'Basque-Euskera', 'fi':'Finnish', 'fr':'French', 'gl':'Galician', 'hr':'Croatian', 'hu':'Hungarian', 'it':'Italian', 'jp_kana':'Japanese', 'ko_KR':'Korean (South Korea)', 'nl':'Dutch', 'pl':'Polish', 'pt':'Portuguese', 'pt_br':'Portuguese (Brazilian)', 'ro':'Romanian', 'ru':'Russian', 'sk':'Slovak', 'sv':'Swedish', 'tr':'Turkish', 'uk':'Ukrainian', 'vi':'Vietnamese', 'zh_CN':'Chinese (Simplified)', 'zh_TW':'Chinese (Traditional)' }
  */
 #define LCD_LANGUAGE en
 
@@ -2101,6 +2173,7 @@
 // Add individual axis homing items (Home X, Home Y, and Home Z) to the LCD menu.
 //
 //#define INDIVIDUAL_AXIS_HOMING_MENU
+//#define INDIVIDUAL_AXIS_HOMING_SUBMENU
 
 //
 // SPEAKER/BUZZER
@@ -2509,10 +2582,15 @@
 //  - Download https://github.com/makerbase-mks/MKS-H43
 //  - Copy the downloaded DWIN_SET folder to the SD card.
 //
+// RELOADED (T5UID1)
+//  - Download https://github.com/Desuuuu/DGUS-reloaded/releases
+//  - Copy the downloaded DWIN_SET folder to the SD card.
+//
 //#define DGUS_LCD_UI_ORIGIN
 //#define DGUS_LCD_UI_FYSETC
 //#define DGUS_LCD_UI_HIPRECY
 //#define DGUS_LCD_UI_MKS
+//#define DGUS_LCD_UI_RELOADED
 #if ENABLED(DGUS_LCD_UI_MKS)
   #define USE_MKS_GREEN_UI
 #endif
@@ -2520,7 +2598,7 @@
 //
 // CR-6 OEM touch screen. A DWIN display with touch.
 //
-//#define DGUS_LCD_UI_CREALITY_TOUCH
+//#define DWIN_CREALITY_TOUCHLCD
 
 //
 // Touch-screen LCD for Malyan M200/M300 printers
@@ -2666,6 +2744,7 @@
   //#define TFT_RES_320x240
   //#define TFT_RES_480x272
   //#define TFT_RES_480x320
+  //#define TFT_RES_1024x600
 #endif
 
 /**
@@ -2706,6 +2785,16 @@
 //#define DWIN_CREALITY_LCD
 
 //
+// Ender-3 v2 OEM display, enhanced.
+//
+//#define DWIN_CREALITY_LCD_ENHANCED
+
+//
+// Ender-3 v2 OEM display with enhancements by Jacob Myers
+//
+//#define DWIN_CREALITY_LCD_JYERSUI
+
+//
 // MarlinUI for Creality's DWIN display (and others)
 //
 //#define DWIN_MARLINUI_PORTRAIT
@@ -2718,6 +2807,8 @@
 #if ENABLED(TOUCH_SCREEN)
   #define BUTTON_DELAY_EDIT  50 // (ms) Button repeat delay for edit screens
   #define BUTTON_DELAY_MENU 250 // (ms) Button repeat delay for menus
+
+  //#define TOUCH_IDLE_SLEEP 300 // (secs) Turn off the TFT backlight if set (5mn)
 
   #define TOUCH_SCREEN_CALIBRATION
 
@@ -2873,9 +2964,9 @@
  * Set this manually if there are extra servos needing manual control.
  * Set to 0 to turn off servo support.
  */
-//#define NUM_SERVOS 3 // Servo index starts with 0 for M280 command
+//#define NUM_SERVOS 3 // Note: Servo index starts with 0 for M280-M282 commands
 
-// (ms) Delay  before the next move will start, to give the servo time to reach its target angle.
+// (ms) Delay before the next move will start, to give the servo time to reach its target angle.
 // 300ms is a good value but you can try less delay.
 // If the servo can't reach the requested position, increase it.
 #define SERVO_DELAY { 300 }
@@ -2885,3 +2976,6 @@
 
 // Edit servo angles with M281 and save to EEPROM with M500
 //#define EDITABLE_SERVO_ANGLES
+
+// Disable servo with M282 to reduce power consumption, noise, and heat when not in use
+//#define SERVO_DETACH_GCODE

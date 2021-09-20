@@ -35,7 +35,7 @@
  *
  * Advanced settings can be found in Configuration_adv.h
  */
-#define CONFIGURATION_H_VERSION 02000901
+#define CONFIGURATION_H_VERSION 02000902
 
 //===========================================================================
 //============================= Getting Started =============================
@@ -367,6 +367,7 @@
 //#define PSU_NAME "Power Supply"
 
 #if ENABLED(PSU_CONTROL)
+  //#define MKS_PWC                 // Using the MKS PWC add-on
   //#define PS_OFF_CONFIRM          // Confirm dialog when power off
   //#define PS_OFF_SOUND            // Beep 1s when power off
   #define PSU_ACTIVE_STATE HIGH     // Set 'LOW' for ATX, 'HIGH' for X-Box
@@ -507,7 +508,7 @@
 
 // Resistor values when using MAX31865 sensors (-5) on TEMP_SENSOR_0 / 1
 //#define MAX31865_SENSOR_OHMS_0      100   // (Ω) Typically 100 or 1000 (PT100 or PT1000)
-//#define MAX31865_CALIBRATION_OHMS_0 430   // (Ω) Typically 430 for AdaFruit PT100; 4300 for AdaFruit PT1000
+//#define MAX31865_CALIBRATION_OHMS_0 430   // (Ω) Typically 430 for Adafruit PT100; 4300 for Adafruit PT1000
 //#define MAX31865_SENSOR_OHMS_1      100
 //#define MAX31865_CALIBRATION_OHMS_1 430
 
@@ -594,8 +595,8 @@
                                   // Set/get with gcode: M301 E[extruder number, 0-2]
 
   #if ENABLED(PID_PARAMS_PER_HOTEND)
-    // Specify between 1 and HOTENDS values per array.
-    // If fewer than EXTRUDER values are provided, the last element will be repeated.
+    // Specify up to one value per hotend here, according to your setup.
+    // If there are fewer values, the last one applies to the remaining hotends.
     #define DEFAULT_Kp_LIST {  22.04,  22.04 }
     #define DEFAULT_Ki_LIST {   1.65,   1.65 }
     #define DEFAULT_Kd_LIST {  73.67,  73.67 }
@@ -2145,10 +2146,10 @@
  *
  * Select the language to display on the LCD. These languages are available:
  *
- *   en, an, bg, ca, cz, da, de, el, el_gr, es, eu, fi, fr, gl, hr, hu, it,
+ *   en, an, bg, ca, cz, da, de, el, el_CY, es, eu, fi, fr, gl, hr, hu, it,
  *   jp_kana, ko_KR, nl, pl, pt, pt_br, ro, ru, sk, sv, tr, uk, vi, zh_CN, zh_TW
  *
- * :{ 'en':'English', 'an':'Aragonese', 'bg':'Bulgarian', 'ca':'Catalan', 'cz':'Czech', 'da':'Danish', 'de':'German', 'el':'Greek', 'el_gr':'Greek (Greece)', 'es':'Spanish', 'eu':'Basque-Euskera', 'fi':'Finnish', 'fr':'French', 'gl':'Galician', 'hr':'Croatian', 'hu':'Hungarian', 'it':'Italian', 'jp_kana':'Japanese', 'ko_KR':'Korean (South Korea)', 'nl':'Dutch', 'pl':'Polish', 'pt':'Portuguese', 'pt_br':'Portuguese (Brazilian)', 'ro':'Romanian', 'ru':'Russian', 'sk':'Slovak', 'sv':'Swedish', 'tr':'Turkish', 'uk':'Ukrainian', 'vi':'Vietnamese', 'zh_CN':'Chinese (Simplified)', 'zh_TW':'Chinese (Traditional)' }
+ * :{ 'en':'English', 'an':'Aragonese', 'bg':'Bulgarian', 'ca':'Catalan', 'cz':'Czech', 'da':'Danish', 'de':'German', 'el':'Greek (Greece)', 'el_CY':'Greek (Cyprus)', 'es':'Spanish', 'eu':'Basque-Euskera', 'fi':'Finnish', 'fr':'French', 'gl':'Galician', 'hr':'Croatian', 'hu':'Hungarian', 'it':'Italian', 'jp_kana':'Japanese', 'ko_KR':'Korean (South Korea)', 'nl':'Dutch', 'pl':'Polish', 'pt':'Portuguese', 'pt_br':'Portuguese (Brazilian)', 'ro':'Romanian', 'ru':'Russian', 'sk':'Slovak', 'sv':'Swedish', 'tr':'Turkish', 'uk':'Ukrainian', 'vi':'Vietnamese', 'zh_CN':'Chinese (Simplified)', 'zh_TW':'Chinese (Traditional)' }
  */
 #define LCD_LANGUAGE en
 
@@ -2260,6 +2261,7 @@
 // Add individual axis homing items (Home X, Home Y, and Home Z) to the LCD menu.
 //
 //#define INDIVIDUAL_AXIS_HOMING_MENU
+//#define INDIVIDUAL_AXIS_HOMING_SUBMENU
 
 //
 // SPEAKER/BUZZER
@@ -2665,10 +2667,15 @@
 //  - Download https://github.com/makerbase-mks/MKS-H43
 //  - Copy the downloaded DWIN_SET folder to the SD card.
 //
+// RELOADED (T5UID1)
+//  - Download https://github.com/Desuuuu/DGUS-reloaded/releases
+//  - Copy the downloaded DWIN_SET folder to the SD card.
+//
 //#define DGUS_LCD_UI_ORIGIN
 //#define DGUS_LCD_UI_FYSETC
 //#define DGUS_LCD_UI_HIPRECY
 //#define DGUS_LCD_UI_MKS
+//#define DGUS_LCD_UI_RELOADED
 #if ENABLED(DGUS_LCD_UI_MKS)
   #define USE_MKS_GREEN_UI
 #endif
@@ -2822,6 +2829,7 @@
   //#define TFT_RES_320x240
   //#define TFT_RES_480x272
   //#define TFT_RES_480x320
+  //#define TFT_RES_1024x600
 #endif
 
 /**
@@ -2862,6 +2870,16 @@
 //#define DWIN_CREALITY_LCD
 
 //
+// Ender-3 v2 OEM display, enhanced.
+//
+//#define DWIN_CREALITY_LCD_ENHANCED
+
+//
+// Ender-3 v2 OEM display with enhancements by Jacob Myers
+//
+//#define DWIN_CREALITY_LCD_JYERSUI
+
+//
 // MarlinUI for Creality's DWIN display (and others)
 //
 //#define DWIN_MARLINUI_PORTRAIT
@@ -2874,6 +2892,8 @@
 #if ENABLED(TOUCH_SCREEN)
   #define BUTTON_DELAY_EDIT  50 // (ms) Button repeat delay for edit screens
   #define BUTTON_DELAY_MENU 250 // (ms) Button repeat delay for menus
+
+  //#define TOUCH_IDLE_SLEEP 300 // (secs) Turn off the TFT backlight if set (5mn)
 
   #define TOUCH_SCREEN_CALIBRATION
 
@@ -3029,9 +3049,9 @@
  * Set this manually if there are extra servos needing manual control.
  * Set to 0 to turn off servo support.
  */
-//#define NUM_SERVOS 3 // Servo index starts with 0 for M280 command
+//#define NUM_SERVOS 3 // Note: Servo index starts with 0 for M280-M282 commands
 
-// (ms) Delay  before the next move will start, to give the servo time to reach its target angle.
+// (ms) Delay before the next move will start, to give the servo time to reach its target angle.
 // 300ms is a good value but you can try less delay.
 // If the servo can't reach the requested position, increase it.
 #define SERVO_DELAY { 300 }
@@ -3041,3 +3061,6 @@
 
 // Edit servo angles with M281 and save to EEPROM with M500
 //#define EDITABLE_SERVO_ANGLES
+
+// Disable servo with M282 to reduce power consumption, noise, and heat when not in use
+//#define SERVO_DETACH_GCODE
