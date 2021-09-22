@@ -57,15 +57,6 @@
  *                      https://www.thingiverse.com/thing:1278865
  */
 
-//===========================================================================
-//========================== DELTA / SCARA / TPARA ==========================
-//===========================================================================
-//
-// Download configurations from the link above and customize for your machine.
-// Examples are located in config/examples/delta, .../SCARA, and .../TPARA.
-//
-//===========================================================================
-
 // @section info
 
 // Author info of this build printed to the host during boot and M115
