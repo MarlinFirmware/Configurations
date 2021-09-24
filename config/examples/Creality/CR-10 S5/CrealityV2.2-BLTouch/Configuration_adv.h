@@ -21,8 +21,6 @@
  */
 #pragma once
 
-//#define CONFIG_EXAMPLES_DIR "Creality/CR-10S/CrealityV2.2-BLTouch"
-
 /**
  * Configuration_adv.h
  *
