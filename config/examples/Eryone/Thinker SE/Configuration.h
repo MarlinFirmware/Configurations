@@ -21,7 +21,9 @@
  */
 #pragma once
 
-#define THINKERV2_BLTOUCH  // Enable for an installed BLTOUCH
+//#define THINKERV2_BLTOUCH  // Enable for an installed BLTOUCH
+//#define THINKERV2_FL  //Enable for an installed Filament runout sensor
+//#define THINKERV2_Direct //Enable for Direct drive extruder system
 
 /**
  * Configuration.h
@@ -71,7 +73,7 @@
 // @section info
 
 // Author info of this build printed to the host during boot and M115
-#define STRING_CONFIG_H_AUTHOR "(Dana Olson, BLTouch+Runout)" // Who made the changes.
+#define STRING_CONFIG_H_AUTHOR "(Dana Olson&Eryone, All in one config)" // Who made the changes.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
 /**
@@ -145,10 +147,10 @@
 #endif
 
 // Name displayed in the LCD "Ready" message and Info menu
-#ifdef THINKERV2_BLTOUCH
-  #define CUSTOM_MACHINE_NAME "Thinker SE+"
+#if ANY (THINKERV2_BL, THINKERV2_FL, THINKERV2_Direct)
+    #define CUSTOM_MACHINE_NAME "THINKER SE MOD"
 #else
-  #define CUSTOM_MACHINE_NAME "Thinker SE"
+  #define CUSTOM_MACHINE_NAME "THINKER SE"
 #endif
 
 // Printer's unique ID, used by some programs to differentiate between machines.
@@ -837,7 +839,13 @@
 // Mechanical endstop with COM to ground and NC to Signal uses "false" here (most common setup).
 #define X_MIN_ENDSTOP_INVERTING true  // Set to true to invert the logic of the endstop.
 #define Y_MIN_ENDSTOP_INVERTING true  // Set to true to invert the logic of the endstop.
-#define Z_MIN_ENDSTOP_INVERTING false  // Set to true to invert the logic of the endstop.
+
+#ifdef THINKERV2_BLTOUCH
+  #define Z_MIN_ENDSTOP_INVERTING false  // Set to true to invert the logic of the endstop.
+#else
+  #define Z_MIN_ENDSTOP_INVERTING true  // Set to true to invert the logic of the endstop.
+#endif
+
 #define I_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define J_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define K_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
@@ -940,8 +948,11 @@
  * Override with M203
  *                                      X, Y, Z [, I [, J [, K]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_FEEDRATE          { 300, 300, 35, 25 }
-
+#ifdef THINKERV2_Direct
+  #define DEFAULT_MAX_FEEDRATE          { 200, 200, 35, 100 }
+#else
+  #define DEFAULT_MAX_FEEDRATE          { 300, 300, 35, 25 }
+#endif
 //#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
   #define MAX_FEEDRATE_EDIT_VALUES    { 600, 600, 10, 50 } // ...or, set your own edit limits
@@ -953,7 +964,11 @@
  * Override with M201
  *                                      X, Y, Z [, I [, J [, K]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_ACCELERATION      { 1500, 1500, 150, 1500 }
+#ifdef THINKERV2_Direct
+  #define DEFAULT_MAX_ACCELERATION      { 1000, 1000, 150, 3000 }
+#else
+  #define DEFAULT_MAX_ACCELERATION      { 1500, 1500, 150, 1500 }
+#endif
 
 //#define LIMITED_MAX_ACCEL_EDITING     // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
 #if ENABLED(LIMITED_MAX_ACCEL_EDITING)
@@ -968,9 +983,15 @@
  *   M204 R    Retract Acceleration
  *   M204 T    Travel Acceleration
  */
-#define DEFAULT_ACCELERATION          1250   // X, Y, Z and E acceleration for printing moves
-#define DEFAULT_RETRACT_ACCELERATION  1250   // E acceleration for retracts
-#define DEFAULT_TRAVEL_ACCELERATION   1500   // X, Y, Z acceleration for travel (non printing) moves
+#ifdef THINKERV2_Direct
+  #define DEFAULT_ACCELERATION          700   // X, Y, Z and E acceleration for printing moves
+  #define DEFAULT_RETRACT_ACCELERATION  1250   // E acceleration for retracts
+  #define DEFAULT_TRAVEL_ACCELERATION   750   // X, Y, Z acceleration for travel (non printing) moves
+#else
+  #define DEFAULT_ACCELERATION          1250   // X, Y, Z and E acceleration for printing moves
+  #define DEFAULT_RETRACT_ACCELERATION  1250   // E acceleration for retracts
+  #define DEFAULT_TRAVEL_ACCELERATION   1500   // X, Y, Z acceleration for travel (non printing) moves
+#endif
 
 /**
  * Default Jerk limits (mm/s)
@@ -1443,16 +1464,22 @@
  * RAMPS-based boards use SERVO3_PIN for the first runout sensor.
  * For other boards you may need to define FIL_RUNOUT_PIN, FIL_RUNOUT2_PIN, etc.
  */
-#define FILAMENT_RUNOUT_SENSOR
-#if ENABLED(FILAMENT_RUNOUT_SENSOR)
-  #define FIL_RUNOUT_ENABLED_DEFAULT true // Enable the sensor on startup. Override with M412 followed by M500.
-  #define NUM_RUNOUT_SENSORS   1          // Number of sensors, up to one per extruder. Define a FIL_RUNOUT#_PIN for each.
 
-  #define FIL_RUNOUT_STATE     HIGH       // Pin state indicating that filament is NOT present.
-  #define FIL_RUNOUT_PULLUP               // Use internal pullup for filament runout pins.
+#ifdef THINKERV2_FL
+  #define FILAMENT_RUNOUT_SENSOR
+#else
+  //#define FILAMENT_RUNOUT_SENSOR
+#endif
+  #if ENABLED(FILAMENT_RUNOUT_SENSOR)
+    #define FIL_RUNOUT_ENABLED_DEFAULT true // Enable the sensor on startup. Override with M412 followed by M500.
+    #define NUM_RUNOUT_SENSORS   1          // Number of sensors, up to one per extruder. Define a FIL_RUNOUT#_PIN for each.
+
+    #define FIL_RUNOUT_STATE     HIGH       // Pin state indicating that filament is NOT present.
+    #define FIL_RUNOUT_PULLUP               // Use internal pullup for filament runout pins.
   //#define FIL_RUNOUT_PULLDOWN           // Use internal pulldown for filament runout pins.
   //#define WATCH_ALL_RUNOUT_SENSORS      // Execute runout script on any triggering sensor, not only for the active extruder.
                                           // This is automatically enabled for MIXING_EXTRUDERs.
+
 
   // Override individually if the runout sensors vary
   //#define FIL_RUNOUT1_STATE LOW
