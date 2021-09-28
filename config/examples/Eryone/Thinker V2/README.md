@@ -1,8 +1,7 @@
-## Eryone Thinker SE
+## Eryone Thinker V2
 
  - BLTouch probe
  - Filament runout Sensor
- - TMC2208 (standalone) stepper drivers
 
 ## How to use the config
 
@@ -19,5 +18,8 @@
   - Enable this line (Remove the "`//`" prefix)<br/>
     `//#define THINKERV2_Direct // Enable for Direct drive extruder system`
 5. Can I use all of the mods? The answer is yes. You can use all of them or just some of them.
+6. If your printer's PSU has a reset problem you can disable the `PIDTEMPBED` feature:
+  - Disable this line (Prefix with "`//`")<br/>
+    `#define PIDTEMPBED  // If your PSU has a reset problem then try to disable it to improve this problem`
 
 ## Have fun :)
