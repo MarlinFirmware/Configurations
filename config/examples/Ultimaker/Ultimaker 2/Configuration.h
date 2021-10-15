@@ -2393,6 +2393,11 @@
 //#define miniVIKI
 
 //
+// Alfawise Ex8 printer LCD marked as WYH L12864 COG
+//
+//#define WYH_L12864
+
+//
 // MakerLab Mini Panel with graphic
 // controller and SD support - https://reprap.org/wiki/Mini_panel
 //
@@ -2602,6 +2607,11 @@
 #endif
 
 //
+// CR-6 OEM touch screen. A DWIN display with touch.
+//
+//#define DWIN_CREALITY_TOUCHLCD
+
+//
 // Touch-screen LCD for Malyan M200/M300 printers
 //
 //#define MALYAN_LCD
@@ -2632,6 +2642,12 @@
 #if ENABLED(NEXTION_TFT)
   #define LCD_SERIAL_PORT 1  // Default is 1 for Nextion
 #endif
+
+//
+// PanelDue touch controller by Escher3D
+// http://escher3d.com/pages/order/products/product2.php
+//
+//#define PANELDUE
 
 //
 // Third-party or vendor-customized controller interfaces.
