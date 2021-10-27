@@ -1996,65 +1996,81 @@
 
 /**
  * Thermal Probe Compensation
- * Probe measurements are adjusted to compensate for temperature distortion.
- * Use G76 to calibrate this feature. Use M871 to set values manually.
- * For a more detailed explanation of the process see G76_M871.cpp.
+ * Probe measurements are adjusted to compensate for temperature distortion
+ * caused by any or all of probe, bed and extruder temperatures.
+ * Use G76 to automatically calibrate this feature for probe and bed temperatures
+ * (both probe and bed sensors must be present).
+ * Extruder temperatures must be calibrated manually (use the Z Probe Offset Wizard).
+ * Use M871 to set values manually.
+ * For a more detailed explanation of the process see https://marlinfw.org/docs/features/probe_temp_compensation.html.
  */
-#if HAS_BED_PROBE && TEMP_SENSOR_PROBE && TEMP_SENSOR_BED
-  // Enable thermal first layer compensation using bed and probe temperatures
+#if HAS_BED_PROBE
   #define PROBE_TEMP_COMPENSATION
-
-  // Add additional compensation depending on hotend temperature
-  // Note: this values cannot be calibrated and have to be set manually
   #if ENABLED(PROBE_TEMP_COMPENSATION)
-    // Park position to wait for probe cooldown
-    #define PTC_PARK_POS   { 0, 0, 100 }
-
-    // Probe position to probe and wait for probe to reach target temperature
-    #define PTC_PROBE_POS  { 90, 100 }
-
-    // Enable additional compensation using hotend temperature
-    // Note: this values cannot be calibrated automatically but have to be set manually via M871.
-    //#define USE_TEMP_EXT_COMPENSATION
-
-    // Probe temperature calibration generates a table of values starting at PTC_SAMPLE_START
-    // (e.g., 30), in steps of PTC_SAMPLE_RES (e.g., 5) with PTC_SAMPLE_COUNT (e.g., 10) samples.
-
-    //#define PTC_SAMPLE_START  30  // (°C)
-    //#define PTC_SAMPLE_RES     5  // (°C)
-    //#define PTC_SAMPLE_COUNT  10
-
-    // Bed temperature calibration builds a similar table.
-
-    //#define BTC_SAMPLE_START  60  // (°C)
-    //#define BTC_SAMPLE_RES     5  // (°C)
-    //#define BTC_SAMPLE_COUNT  10
-
-    #if ENABLED(USE_TEMP_EXT_COMPENSATION)
-      //#define ETC_SAMPLE_START 180  // (°C)
-      //#define ETC_SAMPLE_RES     5  // (°C)
-      //#define ETC_SAMPLE_COUNT  20
+    #if TEMP_SENSOR_PROBE
+      // Enable compensation using probe temperature
+      #define USE_TEMP_PROBE_COMPENSATION
+      #if ENABLED(USE_TEMP_PROBE_COMPENSATION)
+        // Probe temperature calibration generates a table of values starting at PTC_SAMPLE_START
+        // (e.g., 30), in steps of PTC_SAMPLE_RES (e.g., 5) with PTC_SAMPLE_COUNT (e.g., 10) samples.
+        #define PTC_SAMPLE_START  30  // (°C)
+        #define PTC_SAMPLE_RES     5  // (°C)
+        #define PTC_SAMPLE_COUNT  10
+        // Z offsets in µm. +ve means the probe triggers further from the bed than at temperature PTC_SAMPLE_START.
+        #define PTC_SAMPLE_VALUES {0}
+      #endif
     #endif
 
-    // The temperature the probe should be at while taking measurements during bed temperature
-    // calibration.
-    //#define BTC_PROBE_TEMP    30  // (°C)
+    #if TEMP_SENSOR_BED
+      // Enable compensation using bed temperature
+      #define USE_TEMP_BED_COMPENSATION
+      #if ENABLED(USE_TEMP_BED_COMPENSATION)
+        // Bed temperature calibration builds a similar table.
+        #define BTC_SAMPLE_START  60  // (°C)
+        #define BTC_SAMPLE_RES     5  // (°C)
+        #define BTC_SAMPLE_COUNT  10
+        // Z offsets in µm. +ve means the probe triggers further from the bed than at temperature BTC_SAMPLE_START.
+        #define BTC_SAMPLE_VALUES {0}
+      #endif
+    #endif
 
-    // Height above Z=0.0 to raise the nozzle. Lowering this can help the probe to heat faster.
-    // Note: the Z=0.0 offset is determined by the probe offset which can be set using M851.
-    //#define PTC_PROBE_HEATING_OFFSET 0.5
+    #if TEMP_SENSOR_0
+      // Enable additional compensation using hotend temperature
+      // Note: these values cannot be calibrated automatically but have to be set manually via M871.
+      //#define USE_TEMP_EXT_COMPENSATION
+      #if ENABLED(USE_TEMP_EXT_COMPENSATION)
+        #define ETC_SAMPLE_START 180  // (°C)
+        #define ETC_SAMPLE_RES     5  // (°C)
+        #define ETC_SAMPLE_COUNT  20
+        // Z offsets in µm. +ve means the probe triggers when extruder is further from the bed than at temperature ETC_SAMPLE_START.
+        #define ETC_SAMPLE_VALUES {0}
+      #endif
+    #endif
 
-    // Height to raise the Z-probe between heating and taking the next measurement. Some probes
-    // may fail to untrigger if they have been triggered for a long time, which can be solved by
-    // increasing the height the probe is raised to.
-    //#define PTC_PROBE_RAISE 15
+    // G76 options
+    #if TEMP_SENSOR_PROBE && TEMP_SENSOR_BED
+      // Park position to wait for probe cooldown
+      #define PTC_PARK_POS   { 0, 0, 100 }
+
+      // Probe position to probe and wait for probe to reach target temperature
+      //#define PTC_PROBE_POS  { 12.0f, 7.3f };   // Coordinates for the MK52 magnetic heatbed
+      #define PTC_PROBE_POS  { 90, 100 }
+
+      // The temperature the probe should be at while taking measurements during bed temperature
+      // calibration.
+      #define BTC_PROBE_TEMP    30  // (°C)
+
+      // Height above Z=0.0 to raise the nozzle. Lowering this can help the probe to heat faster.
+      // Note: the Z=0.0 offset is determined by the probe offset which can be set using M851.
+      #define PTC_PROBE_HEATING_OFFSET 0.5
+    #endif
 
     // If the probe is outside of the defined range, use linear extrapolation using the closest
     // point and the PTC_LINEAR_EXTRAPOLATION'th next point. E.g. if set to 4 it will use data[0]
     // and data[4] to perform linear extrapolation for values below PTC_SAMPLE_START.
     //#define PTC_LINEAR_EXTRAPOLATION 4
-  #endif
-#endif
+  #endif // PROBE_TEMP_COMPENSATION
+#endif // HAS_BED_PROBE
 
 // @section extras
 
