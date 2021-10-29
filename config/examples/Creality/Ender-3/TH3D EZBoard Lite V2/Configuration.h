@@ -139,7 +139,7 @@
 
 // Choose the name from boards.h that matches your setup
 #ifndef MOTHERBOARD
-  #define MOTHERBOARD BOARD_TH3D_EZBOARD_LITE_V2
+  #define MOTHERBOARD BOARD_TH3D_EZBOARD_V2
 #endif
 
 // Name displayed in the LCD "Ready" message and Info menu
