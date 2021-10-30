@@ -35,7 +35,7 @@
  *
  * Advanced settings can be found in Configuration_adv.h
  */
-#define CONFIGURATION_H_VERSION 02000902
+#define CONFIGURATION_H_VERSION 02000903
 
 //===========================================================================
 //============================= Getting Started =============================
@@ -139,7 +139,7 @@
 
 // Choose the name from boards.h that matches your setup
 #ifndef MOTHERBOARD
-  #define MOTHERBOARD BOARD_TH3D_EZBOARD_LITE_V2
+  #define MOTHERBOARD BOARD_TH3D_EZBOARD_V2
 #endif
 
 // Name displayed in the LCD "Ready" message and Info menu
