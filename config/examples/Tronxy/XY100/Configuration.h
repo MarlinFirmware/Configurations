@@ -1228,6 +1228,15 @@
 #endif
 
 /**
+ * Probe Enable / Disable
+ * The probe only provides a triggered signal when enabled.
+ */
+//#define PROBE_ENABLE_DISABLE
+#if ENABLED(PROBE_ENABLE_DISABLE)
+  //#define PROBE_ENABLE_PIN -1   // Override the default pin here
+#endif
+
+/**
  * Multiple Probing
  *
  * You may get improved results by probing 2 or more times.
