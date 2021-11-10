@@ -72,6 +72,18 @@
 #define STRING_CONFIG_H_AUTHOR "(thisiskeithb & codiac2600: BTT002 MK3S/TMC2209s)" // Who made the changes.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
+// Disable this for FAN_PIN PB9 and FAN1_PIN PB8
+#define MK3_FAN_PINS
+
+// Is printer equipped with a 3.5:1 gearbox on the extruder?
+//#define GEARBOX_BEAR
+
+// Tall Bear (320mm)?
+//#define TALLBEAR
+
+// SuperPinda present?
+//#define SUPERPINDA
+
 /**
  * *** VENDORS PLEASE READ ***
  *
@@ -495,7 +507,11 @@
 #define TEMP_SENSOR_6 0
 #define TEMP_SENSOR_7 0
 #define TEMP_SENSOR_BED 1
-#define TEMP_SENSOR_PROBE 1
+#if ENABLED(SUPERPINDA)
+ #define TEMP_SENSOR_PROBE 0
+#else
+ #define TEMP_SENSOR_PROBE 1
+#endif
 #define TEMP_SENSOR_CHAMBER 0
 #define TEMP_SENSOR_COOLER 0
 #define TEMP_SENSOR_BOARD 0
@@ -926,7 +942,11 @@
  * Override with M92
  *                                      X, Y, Z [, I [, J [, K]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 100, 100, 400, 280 }
+#if ENABLED(GEARBOX_BEAR)
+  #define DEFAULT_AXIS_STEPS_PER_UNIT { 100, 100, 3200/8, 490 }
+#else
+  #define DEFAULT_AXIS_STEPS_PER_UNIT { 100, 100, 3200/8, 280 }
+#endif
 
 /**
  * Default Max Feed Rate (mm/s)
@@ -1386,7 +1406,11 @@
 #define Z_MIN_POS 0
 #define X_MAX_POS X_BED_SIZE
 #define Y_MAX_POS Y_BED_SIZE
-#define Z_MAX_POS 210
+#if ENABLED(TALLBEAR)
+ #define Z_MAX_POS 320
+#else
+ #define Z_MAX_POS 210
+#endif
 //#define I_MIN_POS 0
 //#define I_MAX_POS 50
 //#define J_MIN_POS 0
