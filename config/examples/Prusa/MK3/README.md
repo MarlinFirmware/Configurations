@@ -1,24 +1,18 @@
-# BigTreeTech BTT002/TMC2209 Config for Průša MK3S
+# Einsy Rambo Config for Průša MK3S
 
 ## Requirements
 - [Průša MK3S, MK3S+, or MK3 with MK3S/MK3S+ upgrade](https://www.prusa3d.com/original-prusa-i3-mk3/) is required for filament runout to work properly.
-- BigTreeTech BTT002 motherboard
-- 4 x BigTreeTech TMC2209s (DIAG pin location differs from Watterott's & similar designs)
+- Stock Einsy Rambo with integrated TMC2130s
 
 ## Configuration Options
 
 Flags specific to this printer/configuration:
 
-- `MK3_FAN_PINS` - Disable this for `FAN_PIN PB9` and `FAN1_PIN PB8`
+- `MK3_FAN_PINS` - Disable this for `FAN_PIN 8` and `FAN1_PIN 6`
 - `GEARBOX_BEAR` - Is printer equipped with a 3.5:1 gearbox on the extruder?
+- `LOWBAUD` - Printer needs lower baudrate?
 - `TALLBEAR` - Tall Bear (320mm)?
 - `SUPERPINDA` - SuperPinda present?
-
-## Upgrade Notes
-* ⚠️ Cut or desolder the Z & E driver DIAG pins or they will interfere with PINDA & filament runout detection. ⚠️
-* Set the jumpers under your drivers to "TMC2208-UART MODE":
-
-  <img src="https://user-images.githubusercontent.com/13375512/74117621-24415000-4b6d-11ea-8811-f867e187ea0c.png" width="50%">
 
 ## Changes to Start G-code
 The `W` in Průša's `G28 W ; home all without mesh bed level` default G-code does not exist in Marlin and [`G80 ; mesh bed leveling`](https://marlinfw.org/docs/gcode/G080.html) cancels the current motion mode, so no bed leveling will take place.
