@@ -21,6 +21,8 @@
  */
 #pragma once
 
+#define CONFIG_EXAMPLES_DIR "FoamCutter"
+
 /**
  * Configuration.h
  *
@@ -58,13 +60,12 @@
  */
 
 //===========================================================================
-//========================== DELTA / SCARA / TPARA ==========================
+//============================= Foam Cutter =================================
 //===========================================================================
+// For a hot wire cutter with parallel horizontal axes X, I where the heights
+// of the two wire ends are controlled by parallel axes Y, J.
 //
-// Download configurations from the link above and customize for your machine.
-// Examples are located in config/examples/delta, .../SCARA, and .../TPARA.
-//
-//===========================================================================
+#define FOAMCUTTER_XYUV
 
 // @section info
 
