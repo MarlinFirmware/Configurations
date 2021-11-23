@@ -1894,6 +1894,7 @@
   #define NOZZLE_PARK_Z_RAISE_MIN   2   // (mm) Always raise Z by at least this distance
   #define NOZZLE_PARK_XY_FEEDRATE 150   // (mm/s) X and Y axes feedrate (also used for delta Z axis)
   #define NOZZLE_PARK_Z_FEEDRATE  15    // (mm/s) Z axis feedrate (not used for delta printers)
+  //#define NOZZLE_PARK_ON_TEMP_ERROR   // Park Nozzle before Halt on temperature error
 #endif
 
 /**
