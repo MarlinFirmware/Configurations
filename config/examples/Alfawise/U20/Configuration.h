@@ -182,20 +182,22 @@
 
 // Name displayed in the LCD "Ready" message and Info menu
 //#define CUSTOM_MACHINE_NAME "3D Printer"
+// You must manually pick and uncomment one of the selections below so Autobuild Marlin
+// can display proper custom machine name.
 #if ENABLED(U20)
-  #define CUSTOM_MACHINE_NAME "Alfawise U20"
+//  #define CUSTOM_MACHINE_NAME "Alfawise U20"
 #elif ENABLED(U30)
-  #define CUSTOM_MACHINE_NAME "Alfawise U30"
+//  #define CUSTOM_MACHINE_NAME "Alfawise U30"
 #elif ENABLED(U20_PLUS)
-  #define CUSTOM_MACHINE_NAME "Alfawise U20+"
+//  #define CUSTOM_MACHINE_NAME "Alfawise U20+"
 #elif ENABLED(LK1)
-  #define CUSTOM_MACHINE_NAME "Longer3D LK1"
+//  #define CUSTOM_MACHINE_NAME "Longer3D LK1"
 #elif ENABLED(LK1_PLUS)
-  #define CUSTOM_MACHINE_NAME "Longer3D LK1+"
+//  #define CUSTOM_MACHINE_NAME "Longer3D LK1+"
 #elif ENABLED(LK2)
-  #define CUSTOM_MACHINE_NAME "Longer3D LK2"
+//  #define CUSTOM_MACHINE_NAME "Longer3D LK2"
 #elif ENABLED(LK4)
-  #define CUSTOM_MACHINE_NAME "Longer3D LK4"
+//  #define CUSTOM_MACHINE_NAME "Longer3D LK4"
 #else
   #error "Please specify U20, U20_PLUS, U30, LK1, LK1_PLUS, LK2, or LK4."
 #endif
