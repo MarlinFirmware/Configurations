@@ -1,0 +1,31 @@
+#
+# check-pr.yml
+# Close PRs directed at `bugfix-2.0.x`
+#
+
+name: PR Bad Target
+
+on:
+  pull_request_target:
+    types: [opened]
+    branches:
+    - bugfix-2.0.x
+
+jobs:
+  bad_target:
+    name: PR Bad Target
+    if: github.repository == 'MarlinFirmware/Configurations'
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: superbrothers/close-pull-request@v3
+      with:
+        comment: >
+          Thanks for your contribution! Unfortunately we can't accept PRs directed at the `bugfix-2.0.x` branch. We make patches to `import-2.0.x` and then generate `bugfix-2.0.x` and `release-x.x.x` from that.
+
+          Please redo this PR starting with the current `import-2.0.x` branch and be careful to target `import-2.0.x` when resubmitting the PR.
+
+          It may help to set your fork's default branch to `import-2.0.x`.
+
+          See [this page](http://marlinfw.org/docs/development/getting_started_pull_requests.html) for full instructions.
