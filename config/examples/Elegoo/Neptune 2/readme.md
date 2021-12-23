@@ -1,0 +1,1 @@
+For update from SD firmware file must be named 'elegoo.bin'
