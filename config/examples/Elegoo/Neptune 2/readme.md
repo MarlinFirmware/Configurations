@@ -1,1 +1,1 @@
-For update from SD firmware file must be named 'elegoo.bin'
+When updating the firmware from the SD card, the firmware file must be named 'elegoo.bin'.
