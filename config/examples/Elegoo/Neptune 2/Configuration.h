@@ -142,6 +142,8 @@
   #define MOTHERBOARD BOARD_MKS_ROBIN_NANO
 #endif
 
+#define FIRMWARE_BIN elegoo.bin
+
 // Name displayed in the LCD "Ready" message and Info menu
 #define CUSTOM_MACHINE_NAME "Elegoo Neptune 2"
 
