@@ -94,6 +94,15 @@
 
 // @section machine
 
+// Choose the name from boards.h that matches your setup
+#ifndef MOTHERBOARD
+  //#define MOTHERBOARD BOARD_RAMPS_14_EEF
+  #define MOTHERBOARD BOARD_RAMPS_14_EFB  // gMax users please note: This is a Roxy modification. I print on glass and
+                                          // use Marlin to control the bed temperature. So, if you have a single nozzle
+                                          // machine, this will work fine for you. Just set the TEMP_SENSOR_BED to 0 down
+                                          // below so Marlin doesn't mess with the bed temp.
+#endif
+
 /**
  * Select the serial port on the board to use for communication with the host.
  * This allows the connection of wireless adapters (for instance) to non-default port pins.
@@ -137,14 +146,6 @@
 // Enable the Bluetooth serial interface on AT90USB devices
 //#define BLUETOOTH
 
-// Choose the name from boards.h that matches your setup
-#ifndef MOTHERBOARD
-  //#define MOTHERBOARD BOARD_RAMPS_14_EEF
-  #define MOTHERBOARD BOARD_RAMPS_14_EFB  // gMax users please note: This is a Roxy modification. I print on glass and
-                                          // use Marlin to control the bed temperature. So, if you have a single nozzle
-                                          // machine, this will work fine for you. Just set the TEMP_SENSOR_BED to 0 down
-                                          // below so Marlin doesn't mess with the bed temp.
-#endif
 
 // Name displayed in the LCD "Ready" message and Info menu
 #define CUSTOM_MACHINE_NAME "gMax"

@@ -94,6 +94,13 @@
 
 // @section machine
 
+// Choose the name from boards.h that matches your setup
+#ifndef MOTHERBOARD
+  // for Rigidbot V1 : BOARD_RIGIDBOARD
+  // for Rigidbot V2 : BOARD_RIGIDBOARD_V2
+  #define MOTHERBOARD BOARD_RIGIDBOARD_V2
+#endif
+
 /**
  * Select the serial port on the board to use for communication with the host.
  * This allows the connection of wireless adapters (for instance) to non-default port pins.
@@ -136,14 +143,6 @@
 
 // Enable the Bluetooth serial interface on AT90USB devices
 //#define BLUETOOTH
-
-// Choose the name from boards.h that matches your setup
-// for Rigidbot version 1 : #define MOTHERBOARD BOARD_RIGIDBOARD
-// for Rigidbot Version 2 : #define MOTHERBOARD BOARD_RIGIDBOARD_V2
-
-#ifndef MOTHERBOARD
-  #define MOTHERBOARD BOARD_RIGIDBOARD_V2
-#endif
 
 // Name displayed in the LCD "Ready" message and Info menu
 #define CUSTOM_MACHINE_NAME "Rigidbot"
