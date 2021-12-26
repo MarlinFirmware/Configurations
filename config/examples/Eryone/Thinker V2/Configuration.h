@@ -146,7 +146,6 @@
 // Enable the Bluetooth serial interface on AT90USB devices
 //#define BLUETOOTH
 
-
 // Name displayed in the LCD "Ready" message and Info menu
 #if ANY (THINKERV2_BL, THINKERV2_FL, THINKERV2_Direct)
     #define CUSTOM_MACHINE_NAME "THINKER V2 MOD"
