@@ -8,6 +8,7 @@ Pre-tested Configurations for Marlin Firmware. Links below…
 - **Release** branches will apply to most users. Select the branch for your version of Marlin.
   Version|File Tree|Download
   ---|---|---
+  2.0.9.3|([Browse](//github.com/MarlinFirmware/Configurations/tree/release-2.0.9.3))|([Download ZIP](//github.com/MarlinFirmware/Configurations/archive/refs/heads/release-2.0.9.3.zip))
   2.0.9.2|([Browse](//github.com/MarlinFirmware/Configurations/tree/release-2.0.9.2))|([Download ZIP](//github.com/MarlinFirmware/Configurations/archive/refs/heads/release-2.0.9.2.zip))
   2.0.9.1|([Browse](//github.com/MarlinFirmware/Configurations/tree/release-2.0.9.1))|([Download ZIP](//github.com/MarlinFirmware/Configurations/archive/refs/heads/release-2.0.9.1.zip))
   2.0.9|([Browse](//github.com/MarlinFirmware/Configurations/tree/release-2.0.9))|([Download ZIP](//github.com/MarlinFirmware/Configurations/archive/refs/heads/release-2.0.9.zip))
