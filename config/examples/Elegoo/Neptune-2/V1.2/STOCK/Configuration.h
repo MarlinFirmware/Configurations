@@ -72,7 +72,7 @@
 #define STRING_CONFIG_H_AUTHOR "(Trey Wentz, Neptune 2 - Marlin 2 Color UI)" // Who made the changes.
 #define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
-// @section custom overrides
+// @section custom
 /**
  * Consolidated list of overrides that are not required in this file. They either simplify
  * managing multiple configurations or override values specified in other files.
