@@ -5,6 +5,15 @@
 - BigTreeTech BTT002 motherboard
 - 4 x BigTreeTech TMC2209s (DIAG pin location differs from Watterott's & similar designs)
 
+## Configuration Options
+
+Flags specific to this printer/configuration:
+
+- `MK3_FAN_PINS` - Disable this for `FAN_PIN PB9` and `FAN1_PIN PB8`
+- `GEARBOX_BEAR` - Is printer equipped with a 3.5:1 gearbox on the extruder?
+- `TALLBEAR` - Tall Bear (320mm)?
+- `SUPERPINDA` - SuperPinda present?
+
 ## Upgrade Notes
 * ⚠️ Cut or desolder the Z & E driver DIAG pins or they will interfere with PINDA & filament runout detection. ⚠️
 * Set the jumpers under your drivers to "TMC2208-UART MODE":
