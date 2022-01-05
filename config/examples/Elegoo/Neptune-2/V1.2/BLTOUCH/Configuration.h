@@ -1142,7 +1142,7 @@
  * The BLTouch probe uses a Hall effect sensor and emulates a servo.
  */
 #if ENABLED(HAS_BLTOUCH)
-	#define BLTOUCH
+  #define BLTOUCH
 #endif
 
 /**
