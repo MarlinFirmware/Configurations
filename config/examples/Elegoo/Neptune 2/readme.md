@@ -1,5 +1,7 @@
 # Elegoo Neptune 2/Neptune 2D/Neptune 2S Configuration
 
+*IMPORTANT:* Once compiled, be sure to rename `Robin_nano35.bin` to `elegoo.bin` before flashing.
+
 Compiled binaries of configurations are available here: https://github.com/just-trey/Marlin/tree/elegoo-neptune-2/config/Elegoo/Neptune-2
 
 The configuration provided has custom switches in the `Configuration.h` file `// @section custom` to simplify the build options. This configuration supports the ZNP Robin Nano 1.2 and 1.3 Boards with only minor changes in `// @section custom` and a `default_envs` change in the `platformio.ini` file. The configuration is currently set for the 1.3 board without BLTouch, which is the most common option.
