@@ -1,6 +1,6 @@
 /**
  * Marlin 3D Printer Firmware
- * Copyright (c) 2021 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
+ * Copyright (c) 2020 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
  *
  * Based on Sprinter and grbl.
  * Copyright (c) 2011 Camiel Gubbels / Erik van der Zalm
@@ -178,8 +178,8 @@
  *
  * :[2400, 9600, 19200, 38400, 57600, 115200, 250000, 500000, 1000000]
  */
-#define BAUDRATE 115200     // See https://github.com/MarlinFirmware/Marlin/issues/12174
-#define BAUD_RATE_GCODE     // Enable G-code M575 to set the baud rate
+#define BAUDRATE 115200       // See https://github.com/MarlinFirmware/Marlin/issues/12174
+#define BAUD_RATE_GCODE       // Enable G-code M575 to set the baud rate
 
 /**
  * Select a secondary serial port on the board to use for communication with the host.
@@ -199,6 +199,8 @@
 
 // Enable the Bluetooth serial interface on AT90USB devices
 //#define BLUETOOTH
+
+#define FIRMWARE_BIN elegoo.bin
 
 // Name displayed in the LCD "Ready" message and Info menu
 #if IS_2D
@@ -672,7 +674,7 @@
     #define DEFAULT_Ki_LIST {   1.08,   1.08 }
     #define DEFAULT_Kd_LIST { 114.00, 114.00 }
   #else
-    // tuned for my Elegoo Neptune 2, but you should tune on you own machine once you have it setup
+    // Tuned by the author. Tune your machine with M303.
     #define DEFAULT_Kp  25.47
     #define DEFAULT_Ki   2.11
     #define DEFAULT_Kd  76.90
@@ -715,7 +717,7 @@
   // 120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   // from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
 
-  // tuned for Elegoo Neptune 2, but you should tune on you own machine once you haev it setup
+  // Tuned by the author. Tune your machine with M303.
   #define DEFAULT_bedKp 31.30
   #define DEFAULT_bedKi 6.02
   #define DEFAULT_bedKd 108.50
