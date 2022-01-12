@@ -283,8 +283,8 @@
  * THERMAL_PROTECTION_HYSTERESIS and/or THERMAL_PROTECTION_PERIOD
  */
 #if ENABLED(THERMAL_PROTECTION_HOTENDS)
-  #define THERMAL_PROTECTION_PERIOD            60 // Seconds
-  #define THERMAL_PROTECTION_HYSTERESIS         5 // Degrees Celsius
+  #define THERMAL_PROTECTION_PERIOD            40 // Seconds
+  #define THERMAL_PROTECTION_HYSTERESIS         4 // Degrees Celsius
 
   //#define ADAPTIVE_FAN_SLOWING              // Slow part cooling fan if temperature drops
   #if BOTH(ADAPTIVE_FAN_SLOWING, PIDTEMP)
@@ -311,13 +311,13 @@
  * Thermal Protection parameters for the bed are just as above for hotends.
  */
 #if ENABLED(THERMAL_PROTECTION_BED)
-  #define THERMAL_PROTECTION_BED_PERIOD        60 // Seconds
-  #define THERMAL_PROTECTION_BED_HYSTERESIS     5 // Degrees Celsius
+  #define THERMAL_PROTECTION_BED_PERIOD        40 // Seconds
+  #define THERMAL_PROTECTION_BED_HYSTERESIS     2 // Degrees Celsius
 
   /**
    * As described above, except for the bed (M140/M190/M303).
    */
-  #define WATCH_BED_TEMP_PERIOD               120 // Seconds
+  #define WATCH_BED_TEMP_PERIOD                60 // Seconds
   #define WATCH_BED_TEMP_INCREASE               2 // Degrees Celsius
 #endif
 
@@ -486,7 +486,7 @@
  * Hotend Idle Timeout
  * Prevent filament in the nozzle from charring and causing a critical jam.
  */
-//#define HOTEND_IDLE_TIMEOUT
+#define HOTEND_IDLE_TIMEOUT
 #if ENABLED(HOTEND_IDLE_TIMEOUT)
   #define HOTEND_IDLE_TIMEOUT_SEC (5*60)    // (seconds) Time without extruder movement to trigger protection
   #define HOTEND_IDLE_MIN_TRIGGER   180     // (°C) Minimum temperature to enable hotend protection
@@ -532,7 +532,7 @@
 // When first starting the main fan, run it at full speed for the
 // given number of milliseconds.  This gets the fan spinning reliably
 // before setting a PWM value. (Does not work with software PWM for fan on Sanguinololu)
-//#define FAN_KICKSTART_TIME 100
+#define FAN_KICKSTART_TIME 100
 
 // Some coolers may require a non-zero "off" state.
 //#define FAN_OFF_PWM  1
@@ -549,22 +549,25 @@
  *
  * Define one or both of these to override the default 0-255 range.
  */
-#define FAN_MIN_PWM 100
-#define FAN_MAX_PWM 255
+//#define FAN_MIN_PWM 50
+//#define FAN_MAX_PWM 128
 
 /**
- * FAST PWM FAN Settings
+ * Fan Fast PWM
  *
- * Use to change the FAST FAN PWM frequency (if enabled in Configuration.h)
- * Combinations of PWM Modes, prescale values and TOP resolutions are used internally to produce a
- * frequency as close as possible to the desired frequency.
+ * Combinations of PWM Modes, prescale values and TOP resolutions are used internally
+ * to produce a frequency as close as possible to the desired frequency.
  *
- * FAST_PWM_FAN_FREQUENCY [undefined by default]
+ * FAST_PWM_FAN_FREQUENCY
  *   Set this to your desired frequency.
- *   If left undefined this defaults to F = F_CPU/(2*255*1)
- *   i.e., F = 31.4kHz on 16MHz microcontrollers or F = 39.2kHz on 20MHz microcontrollers.
- *   These defaults are the same as with the old FAST_PWM_FAN implementation - no migration is required
+ *   For AVR, if left undefined this defaults to F = F_CPU/(2*255*1)
+ *            i.e., F = 31.4kHz on 16MHz microcontrollers or F = 39.2kHz on 20MHz microcontrollers.
+ *   For non AVR, if left undefined this defaults to F = 1Khz.
+ *   This F value is only to protect the hardware from an absence of configuration
+ *   and not to complete it when users are not aware that the frequency must be specifically set to support the target board.
+ *
  *   NOTE: Setting very low frequencies (< 10 Hz) may result in unexpected timer behavior.
+ *         Setting very high frequencies can damage your hardware.
  *
  * USE_OCR2A_AS_TOP [undefined by default]
  *   Boards that use TIMER2 for PWM have limitations resulting in only a few possible frequencies on TIMER2:
@@ -574,9 +577,17 @@
  *   PWM on pin OC2A. Only use this option if you don't need PWM on 0C2A. (Check your schematic.)
  *   USE_OCR2A_AS_TOP sacrifices duty cycle control resolution to achieve this broader range of frequencies.
  */
+//#define FAST_PWM_FAN    // Increase the fan PWM frequency. Removes the PWM noise but increases heating in the FET/Arduino
 #if ENABLED(FAST_PWM_FAN)
-  //#define FAST_PWM_FAN_FREQUENCY 31400
+  //#define FAST_PWM_FAN_FREQUENCY 31400  // Define here to override the defaults below
   //#define USE_OCR2A_AS_TOP
+  #ifndef FAST_PWM_FAN_FREQUENCY
+    #ifdef __AVR__
+      #define FAST_PWM_FAN_FREQUENCY ((F_CPU) / (2 * 255 * 1))
+    #else
+      #define FAST_PWM_FAN_FREQUENCY 1000U
+    #endif
+  #endif
 #endif
 
 /**
@@ -598,8 +609,8 @@
  * Multiple extruders can be assigned to the same pin in which case
  * the fan will turn on when any selected extruder is above the threshold.
  */
-#define E0_AUTO_FAN_PIN PB0
-#define E1_AUTO_FAN_PIN -1
+#define E0_AUTO_FAN_PIN FAN1_PIN
+#define E1_AUTO_FAN_PIN FAN1_PIN
 #define E2_AUTO_FAN_PIN -1
 #define E3_AUTO_FAN_PIN -1
 #define E4_AUTO_FAN_PIN -1
@@ -839,7 +850,7 @@
 
 //#define HOMING_BACKOFF_POST_MM { 2, 2, 2 }  // (mm) Backoff from endstops after homing
 
-//#define QUICK_HOME                          // If G28 contains XY do a diagonal move first
+#define QUICK_HOME                            // If G28 contains XY do a diagonal move first
 //#define HOME_Y_BEFORE_X                     // If G28 contains XY home Y before X
 //#define HOME_Z_FIRST                        // Home Z first. Requires a Z-MIN endstop (not a probe).
 //#define CODEPENDENT_XY_HOMING               // If X/Y can't home without homing Y/X first
@@ -982,7 +993,7 @@
 #if ENABLED(ASSISTED_TRAMMING)
 
   // Define positions for probe points.
-  #define TRAMMING_POINT_XY { {  20, 20 }, { 180,  20 }, { 180, 180 }, { 20, 180 } }
+  #define TRAMMING_POINT_XY { {  53, 35 }, { 200,  35 }, { 200, 200 }, { 53, 200 } }
 
   // Define position names for probe points.
   #define TRAMMING_POINT_NAME_1 "Front-Left"
@@ -1172,7 +1183,7 @@
  * vibration and surface artifacts. The algorithm adapts to provide the best possible step smoothing at the
  * lowest stepping frequencies.
  */
-//#define ADAPTIVE_STEP_SMOOTHING
+#define ADAPTIVE_STEP_SMOOTHING
 
 /**
  * Custom Microstepping
@@ -1273,17 +1284,17 @@
 
   // Add Probe Z Offset calibration to the Z Probe Offsets menu
   #if HAS_BED_PROBE
-    //#define PROBE_OFFSET_WIZARD
+    #define PROBE_OFFSET_WIZARD
     #if ENABLED(PROBE_OFFSET_WIZARD)
       //
       // Enable to init the Probe Z-Offset when starting the Wizard.
       // Use a height slightly above the estimated nozzle-to-probe Z offset.
       // For example, with an offset of -5, consider a starting height of -4.
       //
-      //#define PROBE_OFFSET_WIZARD_START_Z -4.0
+      #define PROBE_OFFSET_WIZARD_START_Z 0
 
       // Set a convenient position to do the calibration (probing point and nozzle/bed-distance)
-      //#define PROBE_OFFSET_WIZARD_XY_POS { X_CENTER, Y_CENTER }
+      #define PROBE_OFFSET_WIZARD_XY_POS { X_CENTER, Y_CENTER }
     #endif
 
     #if ENABLED(AUTO_BED_LEVELING_BILINEAR)
@@ -1359,13 +1370,13 @@
   #endif
 
   // Scroll a longer status message into view
-  #define STATUS_MESSAGE_SCROLLING
+  //#define STATUS_MESSAGE_SCROLLING
 
   // On the Info Screen, display XY with one decimal place when possible
   //#define LCD_DECIMAL_SMALL_XY
 
   // Add an 'M73' G-code to set the current percentage
-  #define LCD_SET_PROGRESS_MANUALLY
+  //#define LCD_SET_PROGRESS_MANUALLY
 
   // Show the E position (filament used) during printing
   //#define LCD_SHOW_E_TOTAL
@@ -1452,7 +1463,7 @@
    */
   //#define POWER_LOSS_RECOVERY
   #if ENABLED(POWER_LOSS_RECOVERY)
-    #define PLR_ENABLED_DEFAULT   false // Power Loss Recovery enabled by default. (Set with 'M413 Sn' & M500)
+    //#define PLR_ENABLED_DEFAULT    true // Power Loss Recovery enabled by default. (Set with 'M413 Sn' & M500)
     //#define BACKUP_POWER_SUPPLY       // Backup power / UPS to move the steppers on power loss
     //#define POWER_LOSS_ZRAISE       2 // (mm) Z axis raise on resume (on power loss with UPS)
     //#define POWER_LOSS_PIN         44 // Pin to detect power loss. Set to -1 to disable default pin on boards without module.
@@ -1522,7 +1533,7 @@
   #define SCROLL_LONG_FILENAMES
 
   // Leave the heaters on after Stop Print (not recommended!)
-  #define SD_ABORT_NO_COOLDOWN
+  //#define SD_ABORT_NO_COOLDOWN
 
   /**
    * This option allows you to abort SD printing when any endstop is triggered.
@@ -1608,7 +1619,7 @@
   //#define CONFIGURATION_EMBEDDING
 
   // Add an optimized binary file transfer mode, initiated with 'M28 B1'
-  #define BINARY_FILE_TRANSFER
+  //#define BINARY_FILE_TRANSFER
 
   #if ENABLED(BINARY_FILE_TRANSFER)
     // Include extra facilities (e.g., 'M20 F') supporting firmware upload via BINARY_FILE_TRANSFER
@@ -1724,7 +1735,7 @@
 
 #if HAS_MARLINUI_U8GLIB || IS_DWIN_MARLINUI
   // Show SD percentage next to the progress bar
-  //#define SHOW_SD_PERCENT
+  #define SHOW_SD_PERCENT
 
   // Enable to save many cycles by drawing a hollow frame on Menu Screens
   #define MENU_HOLLOW_FRAME
@@ -1963,7 +1974,9 @@
 
   //#define BABYSTEP_DISPLAY_TOTAL          // Display total babysteps since last G28
 
-  //#define BABYSTEP_ZPROBE_OFFSET          // Combine M851 Z and Babystepping
+  #if HAS_BLTOUCH
+    #define BABYSTEP_ZPROBE_OFFSET          // Combine M851 Z and Babystepping
+  #endif
   #if ENABLED(BABYSTEP_ZPROBE_OFFSET)
     //#define BABYSTEP_HOTEND_Z_OFFSET      // For multiple hotends, babystep relative Z offsets
     //#define BABYSTEP_ZPROBE_GFX_OVERLAY   // Enable graphical overlay on Z-offset editor
@@ -2264,18 +2277,18 @@
 // For debug-echo: 128 bytes for the optimal speed.
 // Other output doesn't need to be that speedy.
 // :[0, 2, 4, 8, 16, 32, 64, 128, 256]
-#define TX_BUFFER_SIZE 32
+#define TX_BUFFER_SIZE 0
 
 // Host Receive Buffer Size
 // Without XON/XOFF flow control (see SERIAL_XON_XOFF below) 32 bytes should be enough.
 // To use flow control, set this buffer size to at least 1024 bytes.
 // :[0, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048]
-#define RX_BUFFER_SIZE 1024
+//#define RX_BUFFER_SIZE 1024
 
 #if RX_BUFFER_SIZE >= 1024
   // Enable to have the controller send XON/XOFF control characters to
   // the host to signal the RX buffer is becoming full.
-  #define SERIAL_XON_XOFF
+  //#define SERIAL_XON_XOFF
 #endif
 
 #if ENABLED(SDSUPPORT)
@@ -2302,7 +2315,7 @@
  * Currently handles M108, M112, M410, M876
  * NOTE: Not yet implemented for all platforms.
  */
-#define EMERGENCY_PARSER
+//#define EMERGENCY_PARSER
 
 /**
  * Realtime Reporting (requires EMERGENCY_PARSER)
@@ -2331,7 +2344,7 @@
 //#define NO_TIMEOUTS 1000 // Milliseconds
 
 // Some clients will have this feature soon. This could make the NO_TIMEOUTS unnecessary.
-#define ADVANCED_OK
+//#define ADVANCED_OK
 
 // Printrun may have trouble receiving long strings all at once.
 // This option inserts short delays between lines of serial output.
@@ -2416,10 +2429,10 @@
    * Retract and prime filament on tool-change to reduce
    * ooze and stringing and to get cleaner transitions.
    */
-  //#define TOOLCHANGE_FILAMENT_SWAP
+  #define TOOLCHANGE_FILAMENT_SWAP
   #if ENABLED(TOOLCHANGE_FILAMENT_SWAP)
     // Load / Unload
-    #define TOOLCHANGE_FS_LENGTH              12  // (mm) Load / Unload length
+    #define TOOLCHANGE_FS_LENGTH              80  // (mm) Load / Unload length
     #define TOOLCHANGE_FS_EXTRA_RESUME_LENGTH  0  // (mm) Extra length for better restart, fine tune by LCD/Gcode)
     #define TOOLCHANGE_FS_RETRACT_SPEED   (50*60) // (mm/min) (Unloading)
     #define TOOLCHANGE_FS_UNRETRACT_SPEED (25*60) // (mm/min) (On SINGLENOZZLE or Bowden loading must be slowed down)
@@ -2483,20 +2496,20 @@
 #define ADVANCED_PAUSE_FEATURE
 #if ENABLED(ADVANCED_PAUSE_FEATURE)
   #define PAUSE_PARK_RETRACT_FEEDRATE         60  // (mm/s) Initial retract feedrate.
-  #define PAUSE_PARK_RETRACT_LENGTH           2   // (mm) Initial retract.
+  #define PAUSE_PARK_RETRACT_LENGTH            3  // (mm) Initial retract.
                                                   // This short retract is done immediately, before parking the nozzle.
-  #define FILAMENT_CHANGE_UNLOAD_FEEDRATE     30  // (mm/s) Unload filament feedrate. This can be pretty fast.
+  #define FILAMENT_CHANGE_UNLOAD_FEEDRATE     15  // (mm/s) Unload filament feedrate. This can be pretty fast.
   #define FILAMENT_CHANGE_UNLOAD_ACCEL        25  // (mm/s^2) Lower acceleration may allow a faster feedrate.
-  #define FILAMENT_CHANGE_UNLOAD_LENGTH      400  // (mm) The length of filament for a complete unload.
+  #define FILAMENT_CHANGE_UNLOAD_LENGTH      200  // (mm) The length of filament for a complete unload.
                                                   //   For Bowden, the full length of the tube and nozzle.
                                                   //   For direct drive, the full length of the nozzle.
                                                   //   Set to 0 for manual unloading.
   #define FILAMENT_CHANGE_SLOW_LOAD_FEEDRATE   6  // (mm/s) Slow move when starting load.
   #define FILAMENT_CHANGE_SLOW_LOAD_LENGTH     0  // (mm) Slow length, to allow time to insert material.
                                                   // 0 to disable start loading and skip to fast load only
-  #define FILAMENT_CHANGE_FAST_LOAD_FEEDRATE  30  // (mm/s) Load filament feedrate. This can be pretty fast.
+  #define FILAMENT_CHANGE_FAST_LOAD_FEEDRATE  15  // (mm/s) Load filament feedrate. This can be pretty fast.
   #define FILAMENT_CHANGE_FAST_LOAD_ACCEL     25  // (mm/s^2) Lower acceleration may allow a faster feedrate.
-  #define FILAMENT_CHANGE_FAST_LOAD_LENGTH   400  // (mm) Load length of filament, from extruder gear to nozzle.
+  #define FILAMENT_CHANGE_FAST_LOAD_LENGTH   200  // (mm) Load length of filament, from extruder gear to nozzle.
                                                   //   For Bowden, the full length of the tube and nozzle.
                                                   //   For direct drive, the full length of the nozzle.
   //#define ADVANCED_PAUSE_CONTINUOUS_PURGE       // Purge continuously up to the purge length until interrupted.
@@ -2505,7 +2518,7 @@
                                                   //   Set to 0 for manual extrusion.
                                                   //   Filament can be extruded repeatedly from the Filament Change menu
                                                   //   until extrusion is consistent, and to purge old filament.
-  #define ADVANCED_PAUSE_RESUME_PRIME          10 // (mm) Extra distance to prime nozzle after returning from park.
+  #define ADVANCED_PAUSE_RESUME_PRIME         10  // (mm) Extra distance to prime nozzle after returning from park.
   #define ADVANCED_PAUSE_FANS_PAUSE               // Turn off print-cooling fans while the machine is paused.
 
                                                   // Filament Unload does a Retract, Delay, and Purge first:
@@ -2514,8 +2527,8 @@
   #define FILAMENT_UNLOAD_PURGE_LENGTH         8  // (mm) An unretract is done, then this length is purged.
   #define FILAMENT_UNLOAD_PURGE_FEEDRATE      25  // (mm/s) feedrate to purge before unload
 
-  #define PAUSE_PARK_NOZZLE_TIMEOUT           300  // (seconds) Time limit before the nozzle is turned off for safety.
-  #define FILAMENT_CHANGE_ALERT_BEEPS         3   // Number of alert beeps to play when a response is needed.
+  #define PAUSE_PARK_NOZZLE_TIMEOUT           45  // (seconds) Time limit before the nozzle is turned off for safety.
+  #define FILAMENT_CHANGE_ALERT_BEEPS          3  // Number of alert beeps to play when a response is needed.
   #define PAUSE_PARK_NO_STEPPER_TIMEOUT           // Enable for XYZ steppers to stay powered on during filament change.
   //#define FILAMENT_CHANGE_RESUME_ON_INSERT      // Automatically continue / load filament when runout sensor is triggered again.
   //#define PAUSE_REHEAT_FAST_RESUME              // Reduce number of waits by not prompting again post-timeout before continuing.
@@ -2523,7 +2536,7 @@
   #define PARK_HEAD_ON_PAUSE                      // Park the nozzle during pause and filament change.
   //#define HOME_BEFORE_FILAMENT_CHANGE           // If needed, home before parking for filament change
 
-  //#define FILAMENT_LOAD_UNLOAD_GCODES           // Add M701/M702 Load/Unload G-codes, plus Load/Unload in the LCD Prepare menu.
+  #define FILAMENT_LOAD_UNLOAD_GCODES             // Add M701/M702 Load/Unload G-codes, plus Load/Unload in the LCD Prepare menu.
   //#define FILAMENT_UNLOAD_ALL_EXTRUDERS         // Allow M702 to unload all extruders above a minimum target temp (as set by M302)
 #endif
 
@@ -2964,7 +2977,7 @@
    * Define your own with:
    * { <off_time[1..15]>, <hysteresis_end[-3..12]>, hysteresis_start[1..8] }
    */
-  #define CHOPPER_TIMING CHOPPER_DEFAULT_12V        // All axes (override below)
+  #define CHOPPER_TIMING CHOPPER_DEFAULT_24V        // All axes (override below)
   //#define CHOPPER_TIMING_X  CHOPPER_TIMING        // For X Axes (override below)
   //#define CHOPPER_TIMING_X2 CHOPPER_TIMING_X
   //#define CHOPPER_TIMING_Y  CHOPPER_TIMING        // For Y Axes (override below)
@@ -3737,7 +3750,7 @@
  */
 #define EXTENDED_CAPABILITIES_REPORT
 #if ENABLED(EXTENDED_CAPABILITIES_REPORT)
-  #define M115_GEOMETRY_REPORT
+  //#define M115_GEOMETRY_REPORT
 #endif
 
 /**
@@ -3782,11 +3795,11 @@
  *  - M206 and M428 are disabled.
  *  - G92 will revert to its behavior from Marlin 1.0.
  */
-//#define NO_WORKSPACE_OFFSETS
+#define NO_WORKSPACE_OFFSETS
 
 // Extra options for the M114 "Current Position" report
 //#define M114_DETAIL         // Use 'M114` for details to check planner calculations
-#define M114_REALTIME       // Real current position based on forward kinematics
+//#define M114_REALTIME       // Real current position based on forward kinematics
 //#define M114_LEGACY         // M114 used to synchronize on every call. Enable if needed.
 
 //#define REPORT_FAN_CHANGE   // Report the new fan speed when changed by M106 (and others)
@@ -3967,7 +3980,7 @@
 #if ENABLED(HOST_ACTION_COMMANDS)
   #define HOST_PAUSE_M76
   #define HOST_PROMPT_SUPPORT
-  #define HOST_START_MENU_ITEM      // Add a menu item that tells the host to start
+  //#define HOST_START_MENU_ITEM      // Add a menu item that tells the host to start
   //#define HOST_SHUTDOWN_MENU_ITEM   // Add a menu item that tells the host to shut down
 #endif
 
