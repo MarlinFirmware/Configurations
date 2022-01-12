@@ -1009,9 +1009,9 @@
  *                                      X, Y, Z [, I [, J [, K]]], E0 [, E1[, E2...]]
  */
 #if IS_2D
-  #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 95, 95 }
+  #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 133, 133 }
 #else
-  #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 95 }
+  #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 133 }
 #endif
 
 /**
