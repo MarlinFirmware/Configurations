@@ -115,11 +115,6 @@
   #define CHAMBER_BETA                 3950    // Beta value
 #endif
 
-#define HEATER_BED_INVERTING 1
-#define HEATER_0_INVERTING 1
-//#define HEATER_1_INVERTING 0
-#define FAN_INVERTING 1
-
 #if TEMP_SENSOR_COOLER == 1000
   #define COOLER_PULLUP_RESISTOR_OHMS 4700    // Pullup resistor
   #define COOLER_RESISTANCE_25C_OHMS  100000  // Resistance at 25C
@@ -171,6 +166,12 @@
   #define TEMP_SENSOR_BED 70
   #define HEATER_BED_INVERTING true
 #endif
+
+// JGAurora A5S
+#define HEATER_BED_INVERTING true
+#define HEATER_0_INVERTING true
+//#define HEATER_1_INVERTING false
+#define FAN_ACTIVE_STATE LOW
 
 //
 // Heated Bed Bang-Bang options
