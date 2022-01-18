@@ -113,10 +113,6 @@
   #define CHAMBER_BETA                 3950    // Beta value
 #endif
 
-#define HEATER_BED_INVERTING true
-#define HEATER_0_INVERTING true
-#define HEATER_1_INVERTING true
-
 #if TEMP_SENSOR_COOLER == 1000
   #define COOLER_PULLUP_RESISTOR_OHMS 4700    // Pullup resistor
   #define COOLER_RESISTANCE_25C_OHMS  100000  // Resistance at 25C
@@ -168,6 +164,11 @@
   #define TEMP_SENSOR_BED 70
   #define HEATER_BED_INVERTING true
 #endif
+
+// ArmEd
+#define HEATER_BED_INVERTING true
+#define HEATER_0_INVERTING true
+#define HEATER_1_INVERTING true
 
 //
 // Heated Bed Bang-Bang options
