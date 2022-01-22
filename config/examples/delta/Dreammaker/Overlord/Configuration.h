@@ -801,7 +801,7 @@
   // Distance between bed and nozzle Z home position
   #define DELTA_HEIGHT 186.14             // (mm) Overlord - Update this value using G33 auto calibrate
 
-  #define DELTA_ENDSTOP_ADJ { -0.33, 0.0, -0.85 } // Update these values using G33 auto calibrate
+  #define DELTA_ENDSTOP_ADJ { 0.0, 0.0, 0.0 } // Update these values using G33 auto calibrate
 
   // Horizontal distance bridged by diagonal push rods when effector is centered.
   #define DELTA_RADIUS 100.63             // (mm) Overlord - Update this value using G33 auto calibrate
