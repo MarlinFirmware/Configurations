@@ -803,7 +803,7 @@
   // Distance between bed and nozzle Z home position
   #define DELTA_HEIGHT 437.21             // (mm) Get this value from G33 auto calibrate
 
-  #define DELTA_ENDSTOP_ADJ { -0.25, 0.0, -0.84 } // Get these values from G33 auto calibrate
+  #define DELTA_ENDSTOP_ADJ { 0.0, 0.0, 0.0 } // Get these values from G33 auto calibrate
 
   // Horizontal distance bridged by diagonal push rods when effector is centered.
   #define DELTA_RADIUS 227.4              // (mm) Get this value from G33 auto calibrate
