@@ -14,7 +14,7 @@ Currently there is no Marlin-specific firmware available, so flash the latest of
 
 Download the latest Ender 3 S1 firmware [from www.creality.com/download](https://www.creality.com/download) and flash as follows:
 
-- Copy the `private` folder to a 4096k formatted DAT32 microSD card and insert the card into the slot on the back of the display unit.
+- Copy the `private` folder to a 4096k formatted FAT32 microSD card and insert the card into the slot on the back of the display unit.
 - Power on the machine and wait for the screen to show a filled progress bar and show "Update finished!". The display will reset shortly after displaying this message.
 - Power off the machine.
 - Remove the SD card from the back of the display.
