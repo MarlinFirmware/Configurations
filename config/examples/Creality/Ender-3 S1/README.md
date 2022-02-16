@@ -1,5 +1,7 @@
 # Ender 3 S1
 
+# Ender 3 V2
+
 ## Flashing Firmware
 
 The bootloader which handles flashing new firmware on this board remembers the last filename you used.
@@ -8,7 +10,7 @@ Therefore, to flash the compiled firmware binary onto the board you must give th
 
 ## Updating the Display
 
-Currently there is no Marlin display firmware available, so flash the latest official firmware to the display. There are some minor graphical glitches but the display is very usable.
+Currently there is no Marlin-specific firmware available, so flash the latest official firmware to the display. There are some minor graphical glitches but the display is very usable.
 
 Download the latest Ender 3 S1 firmware [from www.creality.com/download](https://www.creality.com/download) and flash as follows:
 
@@ -17,6 +19,3 @@ Download the latest Ender 3 S1 firmware [from www.creality.com/download](https:/
 - Power off the machine.
 - Remove the SD card from the back of the display.
 - Power on to confirm a successful flash.
-
-
-
