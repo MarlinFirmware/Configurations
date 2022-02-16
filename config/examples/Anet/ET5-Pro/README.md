@@ -26,13 +26,19 @@ A debugging/programming probe (_e.g._, ST-Link, J-Link, or Black Magic Probe) is
 2. Plug in the ST-Link to your computer's USB port & power on your printer.
 3. Download & install [STM32 ST-Link Utility](https://www.st.com/en/development-tools/stsw-link004.html).
 4. Launch STM32 ST-Link Utility & click `Target` then `Connect`.
-5. Backup the original motherboard firmware or, at the very least, back up the bootloader. This will allow you to recover the full stock firmware by flashing the original bootloader to the `0x08000000` - `0x8010000` address range, and flashing any of the available Anet firmware binaries (_e.g._, `et4.bin`, `et5.bin`, etc.) to address `0x08010000`. _Note:_ You can restore your motherboard to stock by downloading printer-specific firmware from [Anet's Download section](https://www.anet3d.com/download/) and flashing the included hex (_e.g._, `et4p20191211V1.0.2.hex`, `et520200612V1.1.7.hex`, etc.) to address `0x08000000`.
+5. Back up the original motherboard firmware starting at address `0x08000000` with a size of `0x100000`:
+    <img src="https://i.imgur.com/RGG4B6L.png" width="50%">
 6. Download & extract [OpenBLT bootloader for Anet ET4/ET5 series printers](https://github.com/davidtgbe/openblt/releases).
 7. Click on `Target` then `Program...`
 8. Set the `Start Address` to `0x08000000`.
 9. Under `File Path`, click `Browse` and select `openblt_et4.bin` extracted in Step 6.
 10. Click `Start` to initiate the flashing process.
-11. OpenBLT for Anet ET4/ET5 series printers is now be installed on your motherboard.
+11. OpenBLT for Anet ET4/ET5 series printers is now installed on your motherboard.
+
+## Compiling Marlin
+
+1. Overwrite the default Marlin configs with the ones from this folder.
+2. Compile with the `Anet_ET4_OpenBLT` PlatformIO environment.
 
 ## Installing Marlin
 
