@@ -1,5 +1,4 @@
 /**
-QWG-104F-3950/**
  * Marlin 3D Printer Firmware
  * Copyright (c) 2020 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
  *
@@ -72,7 +71,7 @@ QWG-104F-3950/**
 // @section info
 
 // Author info of this build printed to the host during boot and M115
-#define STRING_CONFIG_H_AUTHOR "(gjpc 5-5-2020, SKR V1.4 Turbo)" // Who made the changes.
+#define STRING_CONFIG_H_AUTHOR "(gjpc 2-17-2022, SKR V1.4 Turbo)" // Who made the changes.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
 /**
@@ -499,15 +498,15 @@ QWG-104F-3950/**
  *   999 : Dummy Table that ALWAYS reads 100°C or the temperature defined below.
  *
  */
-#define TEMP_SENSOR_0 5
-#define TEMP_SENSOR_1 5
+#define TEMP_SENSOR_0 504
+#define TEMP_SENSOR_1 504
 #define TEMP_SENSOR_2 0
 #define TEMP_SENSOR_3 0
 #define TEMP_SENSOR_4 0
 #define TEMP_SENSOR_5 0
 #define TEMP_SENSOR_6 0
 #define TEMP_SENSOR_7 0
-#define TEMP_SENSOR_BED 11    // close match to Zonestar 57 may have to add their file
+#define TEMP_SENSOR_BED 505
 #define TEMP_SENSOR_PROBE 0
 #define TEMP_SENSOR_CHAMBER 0
 #define TEMP_SENSOR_COOLER 0
@@ -601,9 +600,9 @@ QWG-104F-3950/**
 #define PID_K1 0.95      // Smoothing factor within any PID loop
 
 #if ENABLED(PIDTEMP)
-  //#define PID_EDIT_MENU         // Add PID editing to the "Advanced Settings" menu. (~700 bytes of PROGMEM)
-  //#define PID_AUTOTUNE_MENU     // Add PID auto-tuning to the "Advanced Settings" menu. (~250 bytes of PROGMEM)
-  //#define PID_PARAMS_PER_HOTEND // Uses separate PID parameters for each extruder (useful for mismatched extruders)
+  #define PID_EDIT_MENU           // Add PID editing to the "Advanced Settings" menu. (~700 bytes of PROGMEM)
+  #define PID_AUTOTUNE_MENU       // Add PID auto-tuning to the "Advanced Settings" menu. (~250 bytes of PROGMEM)
+  #define PID_PARAMS_PER_HOTEND   // Uses separate PID parameters for each extruder (useful for mismatched extruders)
                                   // Set/get with gcode: M301 E[extruder number, 0-2]
 
   #if ENABLED(PID_PARAMS_PER_HOTEND)
@@ -636,7 +635,7 @@ QWG-104F-3950/**
  * heater. If your configuration is significantly different than this and you don't understand
  * the issues involved, don't use bed PID until someone else verifies that your hardware works.
  */
-//#define PIDTEMPBED
+#define PIDTEMPBED
 
 //#define BED_LIMIT_SWITCHING
 
@@ -650,7 +649,7 @@ QWG-104F-3950/**
 
 #if ENABLED(PIDTEMPBED)
   //#define MIN_BED_POWER 0
-  //#define PID_BED_DEBUG // Sends debug data to the serial port.
+  #define PID_BED_DEBUG // Sends debug data to the serial port.
 
   // 120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   // from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
@@ -1205,14 +1204,14 @@ QWG-104F-3950/**
  *     |    [-]    |
  *     O-- FRONT --+
  */
-#define NOZZLE_TO_PROBE_OFFSET { 30, 0, 0 }
+#define NOZZLE_TO_PROBE_OFFSET { 40, 0, -7.95 }
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
-#define PROBING_MARGIN 10
+#define PROBING_MARGIN 20
 
 // X and Y axis travel speed (mm/min) between probes
-#define XY_PROBE_FEEDRATE (100*60)
+#define XY_PROBE_FEEDRATE (133*60)
 
 // Feedrate (mm/min) for the first approach when double-probing (MULTIPLE_PROBING == 2)
 #define Z_PROBE_FEEDRATE_FAST (4*60)
@@ -1265,8 +1264,8 @@ QWG-104F-3950/**
  * A total of 2 does fast/slow probes with a weighted average.
  * A total of 3 or more adds more slow probes, taking the average.
  */
-//#define MULTIPLE_PROBING 2
-//#define EXTRA_PROBING    1
+#define MULTIPLE_PROBING 2
+#define EXTRA_PROBING    1
 
 /**
  * Z probes require clearance when deploying, stowing, and moving between
@@ -1294,7 +1293,7 @@ QWG-104F-3950/**
 #define Z_PROBE_OFFSET_RANGE_MAX 20
 
 // Enable the M48 repeatability test to test probe accuracy
-//#define Z_MIN_PROBE_REPEATABILITY_TEST
+#define Z_MIN_PROBE_REPEATABILITY_TEST
 
 // Before deploy/stow pause for user confirmation
 //#define PAUSE_BEFORE_DEPLOY_STOW
@@ -1571,8 +1570,8 @@ QWG-104F-3950/**
  */
 //#define AUTO_BED_LEVELING_3POINT
 //#define AUTO_BED_LEVELING_LINEAR
-//#define AUTO_BED_LEVELING_BILINEAR
-#define AUTO_BED_LEVELING_UBL
+#define AUTO_BED_LEVELING_BILINEAR
+//#define AUTO_BED_LEVELING_UBL
 //#define MESH_BED_LEVELING
 
 /**
@@ -1597,7 +1596,7 @@ QWG-104F-3950/**
  * Turn on with the command 'M111 S32'.
  * NOTE: Requires a lot of PROGMEM!
  */
-//#define DEBUG_LEVELING_FEATURE
+#define DEBUG_LEVELING_FEATURE
 
 #if ANY(MESH_BED_LEVELING, AUTO_BED_LEVELING_UBL, PROBE_MANUALLY)
   // Set a height for the start of manual adjustment
@@ -1897,9 +1896,9 @@ QWG-104F-3950/**
 #define PREHEAT_1_TEMP_CHAMBER 35
 #define PREHEAT_1_FAN_SPEED     0 // Value from 0 to 255
 
-#define PREHEAT_2_LABEL       "ABS"
+#define PREHEAT_2_LABEL       "PETG"
 #define PREHEAT_2_TEMP_HOTEND 230
-#define PREHEAT_2_TEMP_BED    90
+#define PREHEAT_2_TEMP_BED    80
 #define PREHEAT_2_TEMP_CHAMBER 35
 #define PREHEAT_2_FAN_SPEED     0 // Value from 0 to 255
 
@@ -2130,14 +2129,14 @@ QWG-104F-3950/**
  * SD Card support is disabled by default. If your controller has an SD slot,
  * you must uncomment the following option or it won't work.
  */
-//#define SDSUPPORT
+#define SDSUPPORT
 
 /**
  * SD CARD: ENABLE CRC
  *
  * Use CRC checks and retries on the SD communication.
  */
-//#define SD_CHECK_AND_RETRY
+#define SD_CHECK_AND_RETRY
 
 /**
  * LCD Menu Items
@@ -2209,7 +2208,7 @@ QWG-104F-3950/**
 // If you have a speaker that can produce tones, enable it here.
 // By default Marlin assumes you have a buzzer with a fixed frequency.
 //
-//#define SPEAKER
+#define SPEAKER
 
 //
 // The duration and frequency for the UI feedback sound.
@@ -2390,7 +2389,7 @@ QWG-104F-3950/**
 // RepRapDiscount FULL GRAPHIC Smart Controller
 // https://reprap.org/wiki/RepRapDiscount_Full_Graphic_Smart_Controller
 //
-//#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
+#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
 
 //
 // K.3D Full Graphic Smart Controller
