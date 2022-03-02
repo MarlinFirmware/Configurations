@@ -99,10 +99,6 @@
   #define MOTHERBOARD BOARD_CREALITY_V24S1_301
 #endif
 
- // Needed until screen firmware is available
-#define USE_STOCK_DWIN_SET
-#define USE_STRING_HEADINGS
-#define USE_STRING_TITLES
 
 /**
  * Select the serial port on the board to use for communication with the host.
