@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "Creality/CR-10S/BigTreeTech SKR 1.4 Turbo TMC2209"
-
 /**
  * Custom Boot Screen bitmap
  *
