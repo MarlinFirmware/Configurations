@@ -776,10 +776,6 @@
 #if ENABLED(POLARGRAPH)
   #define POLARGRAPH_MAX_BELT_LEN 1035.0
   #define POLAR_SEGMENTS_PER_SECOND 5
-  #define X_MIN_PIN 35
-  #define X_MAX_PIN 37
-  #define Y_MIN_PIN 34
-  #define Y_MAX_PIN 36
 #endif
 
 //===========================================================================
@@ -2231,7 +2227,7 @@
 //
 // Note: Usually sold with a white PCB.
 //
-#define REPRAP_DISCOUNT_SMART_CONTROLLER
+//#define REPRAP_DISCOUNT_SMART_CONTROLLER
 
 //
 // GT2560 (YHCB2004) LCD Display
