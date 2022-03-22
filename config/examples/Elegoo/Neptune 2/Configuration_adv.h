@@ -283,8 +283,8 @@
  * THERMAL_PROTECTION_HYSTERESIS and/or THERMAL_PROTECTION_PERIOD
  */
 #if ENABLED(THERMAL_PROTECTION_HOTENDS)
-  #define THERMAL_PROTECTION_PERIOD            40 // Seconds
-  #define THERMAL_PROTECTION_HYSTERESIS         4 // Degrees Celsius
+  #define THERMAL_PROTECTION_PERIOD 40        // Seconds
+  #define THERMAL_PROTECTION_HYSTERESIS 4     // Degrees Celsius
 
   //#define ADAPTIVE_FAN_SLOWING              // Slow part cooling fan if temperature drops
   #if BOTH(ADAPTIVE_FAN_SLOWING, PIDTEMP)
@@ -1537,7 +1537,7 @@
   #define UTF_FILENAME_SUPPORT
 
   #define LONG_FILENAME_HOST_SUPPORT      // Get the long filename of a file/folder with 'M33 <dosname>' and list long filenames with 'M20 L'
-  //#define LONG_FILENAME_WRITE_SUPPORT   // Create / delete files with long filenames via M28, M30, and Binary Transfer Protocol
+  #define LONG_FILENAME_WRITE_SUPPORT     // Create / delete files with long filenames via M28, M30, and Binary Transfer Protocol
 
   #define SCROLL_LONG_FILENAMES           // Scroll long filenames in the SD card menu
 
@@ -3818,7 +3818,7 @@
  *  - M206 and M428 are disabled.
  *  - G92 will revert to its behavior from Marlin 1.0.
  */
-#define NO_WORKSPACE_OFFSETS
+//#define NO_WORKSPACE_OFFSETS
 
 // Extra options for the M114 "Current Position" report
 //#define M114_DETAIL         // Use 'M114` for details to check planner calculations
