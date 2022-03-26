@@ -4131,6 +4131,7 @@
 //#define FREEZE_FEATURE
 #if ENABLED(FREEZE_FEATURE)
   //#define FREEZE_PIN 41   // Override the default (KILL) pin here
+  #define FREEZE_STATE LOW  // State of pin indicating freeze
 #endif
 
 /**
