@@ -601,6 +601,7 @@
 //===========================================================================
 //============================= PID Settings ================================
 //===========================================================================
+
 // Enable PIDTEMP for PID control or MPCTEMP for Predictive Model.
 // temperature control. Disable both for bang-bang heating.
 #define PIDTEMP          // See the PID Tuning Guide at https://reprap.org/wiki/PID_Tuning
