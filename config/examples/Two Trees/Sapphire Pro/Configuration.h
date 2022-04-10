@@ -20,6 +20,8 @@
  *
  */
 #pragma once
+#error "Don't build with import-2.0.x configurations!"
+#error "Use the 'bugfix...' or 'release...' configurations matching your Marlin version."
 
 //#define SPRO_INVERTED_E // Enable if the extruder runs the wrong way
 //#define SPRO_TMC2209 // Enable for the TMC2209 driver version

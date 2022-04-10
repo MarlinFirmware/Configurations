@@ -20,6 +20,8 @@
  *
  */
 #pragma once
+#error "Don't build with import-2.0.x configurations!"
+#error "Use the 'bugfix...' or 'release...' configurations matching your Marlin version."
 
 //#define THINKERV2_BLTOUCH  // Enable for an installed BLTOUCH
 //#define THINKERV2_FL  //Enable for an installed Filament runout sensor
