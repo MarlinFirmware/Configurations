@@ -20,6 +20,8 @@
  *
  */
 #pragma once
+#error "Don't build with import-2.0.x configurations!"
+#error "Use the 'bugfix...' or 'release...' configurations matching your Marlin version."
 
 /**
  * Configuration for Hatchbox Alpha with E3D v6 extruder
