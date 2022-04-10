@@ -2047,12 +2047,6 @@
 #define PREHEAT_6_TEMP_CHAMBER 35
 #define PREHEAT_6_FAN_SPEED     0  // Value from 0 to 255
 
-#define PREHEAT_7_LABEL       "NYLON"
-#define PREHEAT_7_TEMP_HOTEND 240  // NYLON
-#define PREHEAT_7_TEMP_BED     80
-#define PREHEAT_7_TEMP_CHAMBER 35
-#define PREHEAT_7_FAN_SPEED     0  // Value from 0 to 255
-
 /**
  * Nozzle Park
  *
