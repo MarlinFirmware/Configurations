@@ -80,7 +80,7 @@
  * managing multiple configurations or override values specified in other files.
  */
 
-// MAIN CONFIGURATION SWITCHES FOR FEATURES - see readme.md for more details.
+// MAIN CONFIGURATION SWITCHES FOR FEATURES - see README.md for more details.
 
 #define IS_BOARD_1_3            true  // True if you have the 1.3 board, false for 1.2 board
 #define HAS_BLTOUCH             false  // Enable if you have a BlTouch, false fo no BlTouch
