@@ -1025,9 +1025,7 @@
  * Override with M92
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-// Really Sailfish... got enough precision on that float for an 8 bit system?
-// I'm leaving this in for the sake of posterity.
-#define DEFAULT_AXIS_STEPS_PER_UNIT   {  94.139704, 94.139704, 400, 96.275201870333662468889989185642 }
+#define DEFAULT_AXIS_STEPS_PER_UNIT   {  94.139704, 94.139704, 400, 96.275201870 }
 
 /**
  * Default Max Feed Rate (linear=mm/s, rotational=°/s)
