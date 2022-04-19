@@ -1,5 +1,8 @@
 blank_issues_enabled: false
 contact_links:
+  - name: Configuration Request
+    url: https://github.com/MarlinFirmware/Configurations/issues/649
+    about: Request a new Configuration or variant of an existing Configuration here.
   - name: Marlin Documentation
     url: http://marlinfw.org/
     about: Lots of documentation on installing and using Marlin.
