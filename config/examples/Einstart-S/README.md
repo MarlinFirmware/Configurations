@@ -31,6 +31,7 @@ Triple check your pinouts, it shouldn't fry if connected backwards but if your p
 
 See the comments in the ArduinoISP sketch under File:Examples:ArduinoISP
 
+```
 1 MOSI  D11
 2 5v    Vcc
 3 N/C
@@ -41,6 +42,7 @@ See the comments in the ArduinoISP sketch under File:Examples:ArduinoISP
 8 N/C
 9 MISO  D12
 10 GND  GND
+```
 
 #### Einstart Motherboard ISP Header Pinout
 
@@ -48,6 +50,7 @@ The 10 pin ISP Header is located to the right of the ATMEGA chip, just above the
 
 #### ISP Diagram
 
+```
 <--- Face of chassis
 
 MOSI ( 1 ) ( 2 ) Vcc
@@ -57,9 +60,11 @@ MOSI ( 1 ) ( 2 ) Vcc
 MISO ( 9 ) (10 ) GND
 
 Component Plugs --->
+```
 
 ### Motherboard Diagram
 
+```
  |1234|1234|1234|1234|12|12|12|12|12|12|12|12|12|12|123|12|1234|
  ---------------------------------------------------------------
 | XMOT YMOT ZMOT EMOT EF HB HE PF ZS YS XS PS BT ET PT1 TC VBRG |
@@ -97,6 +102,7 @@ L       LEFT
 R       RIGHT
 U       UP
 O       OK   (MIDDLE)
+```
 
 ## Uploading Marlin firmware to a stock Einstart S
 
@@ -122,6 +128,7 @@ As a permanent modification to enable direct USB upload from the arduino IDE, yo
 
 #### FTDI Chip Diagram (IC1)
 
+```
            ______
    TXD  --|1   28|--OSCO
    DTR  --|2   27|--OSCI
@@ -138,15 +145,18 @@ As a permanent modification to enable direct USB upload from the arduino IDE, yo
    CBUS2--|13  16|--USBDM
    CBUS3--|14  15|--USBDP
           |______|
+```
 
 #### Arduino Reset Circuit
 
+```
    DTR-----||----GND----/\/\/\/----Vcc
           100nf           10k
+```
 
 With this modification you no longer need the reset button and you can program directly from the Arduino IDE.
 
-### Power notes during flashing.
+### Power notes during flashing
 
 You do NOT need power connected when flashing via ISP.
 You DO need power when flashing via USB Serial but you MUST time the release of the reset line to allow the upload unless you've performed the permanent modification.
