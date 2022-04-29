@@ -170,8 +170,6 @@
 // Enable the Bluetooth serial interface on AT90USB devices
 //#define BLUETOOTH
 
-#define FIRMWARE_BIN elegoo.bin
-
 // Name displayed in the LCD "Ready" message and Info menu
 #if IS_2D
   #define CUSTOM_MACHINE_NAME "Elegoo Neptune 2D"
@@ -195,7 +193,7 @@
  *             DEFAULT_MAX_ACCELERATION, AXIS_RELATIVE_MODES,
  *             MICROSTEP_MODES, MANUAL_FEEDRATE
  *
- * :[3, 4, 5, 6, 7, 8, 9]
+   * :[3, 4, 5, 6, 7, 8, 9]
  */
 //#define NUM_AXES 3
 
