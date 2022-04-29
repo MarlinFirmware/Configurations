@@ -19,11 +19,5 @@ NOTE: The original Neptune 2 and 2S use the same configurations except the 2S is
 ## To enable BlTouch (All boards):
   - In the `Configuration.h` file, ensure `#define HAS_BLTOUCH` is set to `true`.
 
-## To enable the MKS COLOR UI (All boards):
-  - In the `Configuration.h` file, ensure `#define IS_COLOR_UI` is set to `true`.
-
-## To enable the MKS LVGL UI (All boards):
-  - In the `Configuration.h` file, ensure `#define HAS_BLTOUCH` is set to `false`.
-
 ## For the Neptune 2D (All boards):
   - In the `Configuration.h` file, ensure `#define IS_2D` is set to `true`.
