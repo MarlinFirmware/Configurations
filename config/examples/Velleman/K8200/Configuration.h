@@ -45,6 +45,8 @@
  * and Arduino 1.6.12 (Mac OS X) by @CONSULitAS, 2016-11-18
  * https://github.com/CONSULitAS/Marlin-K8200/archive/K8200_stable_2016-11-18.zip
  *
+ * Updated by pau1ie to include the full graphic controller and K8204 Z axis
+ * 
  * Please choose your hardware options for the K8200:
  */
 
@@ -1040,13 +1042,14 @@
  * Override with M92
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 64.25, 64.25,
+
 #if ENABLED(K8200_K8204)
- 2133.333
+  #define ZSTEPS 2133.333
 #else
- 2560,
+  #define ZSTEPS 2560
 #endif
-600 }
+
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 64.25, 64.25, ZSTEPS, 600 }
 /**
  * Default Max Feed Rate (linear=mm/s, rotational=°/s)
  * Override with M203
