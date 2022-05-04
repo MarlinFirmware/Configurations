@@ -101,7 +101,6 @@
   #define MOTHERBOARD BOARD_CREALITY_V24S1_301
 #endif
 
-
 /**
  * Select the serial port on the board to use for communication with the host.
  * This allows the connection of wireless adapters (for instance) to non-default port pins.
