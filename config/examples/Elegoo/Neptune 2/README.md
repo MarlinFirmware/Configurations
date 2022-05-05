@@ -6,7 +6,8 @@ Compiled binaries of configurations are available here: https://github.com/just-
 
 The configuration provided has custom switches in the `Configuration.h` file `// @section custom` to simplify the build options. This configuration supports the ZNP Robin Nano 1.2 and 1.3 Boards with only minor changes in `// @section custom` and a `default_envs` change in the `platformio.ini` file. The configuration is currently set for the 1.3 board without BLTouch, which is the most common option.
 
-NOTE: The original Neptune 2 and 2S use the same configurations except the 2S is always a 1.2 version of the board.
+NOTE: The original Neptune 2 and 2S use the same configurations except the 2S is always a 1.3 version of the board.
+
 ## For ZNP Robin Nano 1.2 boards:
   - In the `Configuration.h` file, ensure `#define IS_BOARD_1_3` is set to `false`.
   - Update/Ensure `default_envs = mks_robin_nano35` in the `platformio.ini` file.
