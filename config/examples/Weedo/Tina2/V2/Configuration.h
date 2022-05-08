@@ -98,7 +98,7 @@
 
 // Choose the name from boards.h that matches your setup
 #ifndef MOTHERBOARD
-  #define MOTHERBOARD BOARD_WEEDO_62A_TINA2
+  #define MOTHERBOARD BOARD_WEEDO_62A
 #endif
 
 /**
