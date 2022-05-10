@@ -6,4 +6,6 @@ Anycubic 4Max Pro Support This configuration is based on the published firmware 
 
 Note:
 All offset values are based on the carriage mentioned in item three.
-Bitmaps The bootscreen and custom status screens come from Anycubic's firmware.
+Bitmaps The bootscreen and custom status screens will change to TFT_LVGL_UI which is the newer TFT user interface based on LVGL (Light Weight Embedded Library) standard.
+If you have the stock Anycubic 4Max Pro or 4Max Pro II or if your system doesn't have the above mentioned modifications don't use this firmware. 
+
