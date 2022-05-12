@@ -46,7 +46,7 @@
  * CR10_STOCKDISPLAY (RAMPS-compatible with single 10-pin plug)
  */
 
-#define CONFIGURATION_H_VERSION 02000903
+#define CONFIGURATION_H_VERSION 02000904
 
 //===========================================================================
 //============================= Getting Started =============================
