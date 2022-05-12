@@ -1,6 +1,6 @@
 /**
  * Marlin 3D Printer Firmware
- * Copyright (c) 2020 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
+ * Copyright (c) 2022 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
  *
  * Based on Sprinter and grbl.
  * Copyright (c) 2011 Camiel Gubbels / Erik van der Zalm
@@ -37,7 +37,7 @@
  *
  * Advanced settings can be found in Configuration_adv.h
  */
-#define CONFIGURATION_H_VERSION 02000903
+#define CONFIGURATION_H_VERSION 02010000
 
 /**
  * Sample configuration file for Vellemann K8200
@@ -51,20 +51,16 @@
  */
 
 // VM8201 Display unit
-//#define K8200_VM8201
+// #define K8200_VM8201
+// Full Graphic Controller e.g.
+//    https://reprap.org/wiki/RepRapDiscount_Full_Graphic_Smart_Controller
+//    or from https://www.open-electronics.org/full-graphic-smart-controller-display-for-3drag-3dprinter/
+#define FULLGRAPHIC_CONTROLLER_LCD_SD
 
-// K8204 Z axis upgrade rod and coupler -> TODO
-//#define K8200_K8204
-
+// K8204 Z axis upgrade rod and coupler
+#define K8200_K8204
 // K8203 direct drive extruder -> TODO
 //#define K8200_K8203
-
-//
-// Full Graphic Controller
-//  e.g., https://reprap.org/wiki/RepRapDiscount_Full_Graphic_Smart_Controller
-//     or https://www.open-electronics.org/full-graphic-smart-controller-display-for-3drag-3dprinter/
-//
-#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
 
 //===========================================================================
 //============================= Getting Started =============================
@@ -2123,7 +2119,7 @@
 // @section lcd
 
 // K8200: for Display VM8201 with SD slot
-#if EITHER(K8200_VM8201, REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER)
+#if EITHER(K8200_VM8201, FULLGRAPHIC_CONTROLLER_LCD_SD)
 
 /**
  * LCD LANGUAGE
@@ -2198,13 +2194,15 @@
 // This option overrides the default number of encoder pulses needed to
 // produce one step. Should be increased for high-resolution encoders.
 //
-#define ENCODER_PULSES_PER_STEP 4 // K8200_VM8201/REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER: four steps per encoder step
+#define ENCODER_PULSES_PER_STEP 4 // K8200_VM8201: four steps per encoder step
+// FULLGRAPHIC_CONTROLLER_LCD_SD: four steps per menu item
 
 //
 // Use this option to override the number of step signals required to
 // move between next/prev menu items.
 //
-#define ENCODER_STEPS_PER_MENU_ITEM 1 // K8200_VM8201/REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER: One step per menu item
+#define ENCODER_STEPS_PER_MENU_ITEM 1 // K8200_VM8201: One step per menu item
+// FULLGRAPHIC_CONTROLLER_LCD_SD: One step per menu item
 
 /**
  * Encoder Direction Options
@@ -2221,7 +2219,7 @@
 //
 //  Set this option if CLOCKWISE causes values to DECREASE
 //
-#if ENABLED(REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER)
+#if ENABLED(FULLGRAPHIC_CONTROLLER_LCD_SD)
   #define REVERSE_ENCODER_DIRECTION
 #endif
 
@@ -2440,7 +2438,9 @@
 // RepRapDiscount FULL GRAPHIC Smart Controller
 // https://reprap.org/wiki/RepRapDiscount_Full_Graphic_Smart_Controller
 //
-//#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
+#if ENABLED(FULLGRAPHIC_CONTROLLER_LCD_SD)
+  #define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
+#endif
 
 //
 // K.3D Full Graphic Smart Controller
@@ -2576,7 +2576,7 @@
 //
 //#define SILVER_GATE_GLCD_CONTROLLER
 
-#endif // K8200_VM8201 || REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
+#endif // K8200_VM8201 || FULLGRAPHIC_CONTROLLER_LCD_SD
 
 //=============================================================================
 //==============================  OLED Displays  ==============================
