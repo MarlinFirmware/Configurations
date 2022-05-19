@@ -6,7 +6,7 @@ The Ender-6 doesn't have an accessible USB port, so it's a good idea to connect 
 
 ## BLTouch Instructions
 
-To use an installed BLTouch probe, enable the custom option `ENABLE_BLTOUCH_PROBE` at the top of `Configuration.h` to get all the settings needed to support the probe. Creality isn't shipping printers with a BLTouch option at this time, but the existence of factory mounts, wiring, and OEM firmware supporting it suggests this may change in the future.
+To use an installed BLTouch probe, enable the custom option `E6_USE_BLTOUCH` at the top of `Configuration.h` to get all the settings needed to support the probe. Creality isn't shipping printers with a BLTouch option at this time, but the existence of factory mounts, wiring, and OEM firmware supporting it suggests this may change in the future.
 
 NOTE: Due to slight manufacturing differences, you will still need to tune your probe's `NOZZLE_TO_PROBE_OFFSET` values, at least for Z. For best results use the Probe Offset Wizard.
 
