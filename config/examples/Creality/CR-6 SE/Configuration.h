@@ -2734,6 +2734,7 @@
 // CR-6 OEM touch screen. A DWIN display with touch.
 //
 #define DWIN_CREALITY_TOUCHLCD
+#define LCD_SERIAL_PORT 3
 
 //
 // Touch-screen LCD for Malyan M200/M300 printers
