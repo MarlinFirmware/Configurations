@@ -23,6 +23,9 @@
 #error "Don't build with import-2.0.x configurations!"
 #error "Use the 'bugfix...' or 'release...' configurations matching your Marlin version."
 
+// Overlord Pro needs larger PSU than stock PSU. Uncomment `#define OVERLORD_PRO_UPGRADED_PSU` to enable heated bed. See README.md for more details.
+//#define OVERLORD_PRO_UPGRADED_PSU
+
 /**
  * Configuration.h
  *
@@ -539,7 +542,11 @@
 #define TEMP_SENSOR_5 0
 #define TEMP_SENSOR_6 0
 #define TEMP_SENSOR_7 0
-#define TEMP_SENSOR_BED 1
+#ifdef OVERLORD_PRO_UPGRADED_PSU
+  #define TEMP_SENSOR_BED 1
+#else
+  #define TEMP_SENSOR_BED 0
+#endif
 #define TEMP_SENSOR_PROBE 0
 #define TEMP_SENSOR_CHAMBER 0
 #define TEMP_SENSOR_COOLER 0
@@ -721,18 +728,6 @@
  * so don't use it unless you are OK with PWM on your bed. (See the comment on enabling PIDTEMPBED)
  */
 #define MAX_BED_POWER 255 // limits duty cycle to bed; 255=full current
-#if TEMP_SENSOR_BED != 0
-  /*
-   * For Overlord Pro, the default PSU isn't powerful to run hotend/bed/etc.
-   * Problem is Hotend heater is 24V 60W, Bed is 24V 160W, Standard Overlord Pro PSU is 24V 220.8W
-   * Hotend and bed are PWMed to keep their average power less than the max power but they can both be on at the same time.
-   * If both are on at the same time, then there is no power available for anything else
-   * and power supply will shutdown if steppers are moving while both hotend and bed are on
-   * Recommend upgrade PSU
-   *  A Meanwell RSP-500-24 works, a RSP-350-24 should work but has not been tested
-   */
-  #error "Overlord Pro needs larger PSU than stock PSU, comment out this line if you have a larger PSU, otherwise set TEMP_SENSOR_BED to 0"
-#endif
 
 #if ENABLED(PIDTEMPBED)
   //#define MIN_BED_POWER 0
