@@ -23,6 +23,8 @@
 #error "Don't build with import-2.0.x configurations!"
 #error "Use the 'bugfix...' or 'release...' configurations matching your Marlin version."
 
+// See https://www.thingiverse.com/thing:4562533
+
 /**
  * Configuration.h
  *

@@ -20,8 +20,11 @@
  *
  */
 #pragma once
+#error "Don't build with import-2.0.x configurations!"
+#error "Use the 'bugfix...' or 'release...' configurations matching your Marlin version."
 
-//#define B1_WITH_BLTOUCH
+// Enable this option for BLTouch support
+//#define B1_USE_BLTOUCH
 
 /**
  * Configuration.h
@@ -948,7 +951,7 @@
 // Mechanical endstop with COM to ground and NC to Signal uses "false" here (most common setup).
 #define X_MIN_ENDSTOP_INVERTING true  // Set to true to invert the logic of the endstop.
 #define Y_MIN_ENDSTOP_INVERTING true  // Set to true to invert the logic of the endstop.
-#ifdef B1_WITH_BLTOUCH
+#ifdef B1_USE_BLTOUCH
   #define Z_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #else
   #define Z_MIN_ENDSTOP_INVERTING true  // Set to true to invert the logic of the endstop.
@@ -1179,7 +1182,7 @@
 /**
  * The BLTouch probe uses a Hall effect sensor and emulates a servo.
  */
-#ifdef B1_WITH_BLTOUCH
+#ifdef B1_USE_BLTOUCH
   #define BLTOUCH
 #endif
 
@@ -1344,7 +1347,7 @@
  * A total of 2 does fast/slow probes with a weighted average.
  * A total of 3 or more adds more slow probes, taking the average.
  */
-#ifdef B1_WITH_BLTOUCH
+#ifdef B1_USE_BLTOUCH
   #define MULTIPLE_PROBING 2
 #endif
 //#define EXTRA_PROBING    1
@@ -1534,7 +1537,7 @@
 #if ENABLED(MIN_SOFTWARE_ENDSTOPS)
   #define MIN_SOFTWARE_ENDSTOP_X
   #define MIN_SOFTWARE_ENDSTOP_Y
-  #ifndef B1_WITH_BLTOUCH
+  #ifndef B1_USE_BLTOUCH
     #define MIN_SOFTWARE_ENDSTOP_Z
   #endif
   #define MIN_SOFTWARE_ENDSTOP_I
@@ -1679,7 +1682,7 @@
 //#define AUTO_BED_LEVELING_3POINT
 //#define AUTO_BED_LEVELING_LINEAR
 //#define AUTO_BED_LEVELING_UBL
-#ifdef B1_WITH_BLTOUCH
+#ifdef B1_USE_BLTOUCH
   #define AUTO_BED_LEVELING_BILINEAR
 #else
   #define MESH_BED_LEVELING
