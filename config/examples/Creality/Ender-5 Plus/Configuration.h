@@ -2746,7 +2746,7 @@
 #if ENABLED(DGUS_LCD_UI_MKS)
   #define USE_MKS_GREEN_UI
 #endif
-#define LCD_SERIAL_PORT 3
+#define LCD_SERIAL_PORT 2
 
 //
 // CR-6 OEM touch screen. A DWIN display with touch.
