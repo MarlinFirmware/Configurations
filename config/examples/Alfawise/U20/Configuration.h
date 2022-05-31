@@ -660,7 +660,7 @@
 
 #if ENABLED(PIDTEMP)
   //#define PID_PARAMS_PER_HOTEND // Uses separate PID parameters for each extruder (useful for mismatched extruders)
-                                  // Set/get with gcode: M301 E[extruder number, 0-2]
+                                  // Set/get with G-code: M301 E[extruder number, 0-2]
 
   // Alfawise U30/U20
   // Please refine the PID settings for your own machine to avoid the E1 hotend error. These a basic settings allowing first startups.

@@ -609,7 +609,7 @@
 
 #if ENABLED(PIDTEMP)
   //#define PID_PARAMS_PER_HOTEND // Uses separate PID parameters for each extruder (useful for mismatched extruders)
-                                  // Set/get with gcode: M301 E[extruder number, 0-2]
+                                  // Set/get with G-code: M301 E[extruder number, 0-2]
 
   // Tronxy X5S-2E:
   // The OEM stock model uses an E3D Cyclops clone hotend (2 in 1 out, color mixing) and a long 12V/40W heater catridge.

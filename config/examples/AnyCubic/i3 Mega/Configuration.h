@@ -624,7 +624,7 @@
 
 #if ENABLED(PIDTEMP)
   //#define PID_PARAMS_PER_HOTEND // Uses separate PID parameters for each extruder (useful for mismatched extruders)
-                                  // Set/get with gcode: M301 E[extruder number, 0-2]
+                                  // Set/get with G-code: M301 E[extruder number, 0-2]
 
   // i3 Mega stock v5 hotend, 40W heater cartridge (3.6Ω @ 22°C)
   #if ENABLED(PID_PARAMS_PER_HOTEND)
