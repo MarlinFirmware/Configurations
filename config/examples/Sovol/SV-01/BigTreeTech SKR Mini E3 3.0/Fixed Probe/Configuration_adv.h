@@ -21,8 +21,6 @@
  */
 #pragma once
 
-
-
 /**
  * Configuration_adv.h
  *
