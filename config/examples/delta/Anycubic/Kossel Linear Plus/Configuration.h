@@ -652,7 +652,7 @@
 
 #if ENABLED(PIDTEMP)
   //#define PID_PARAMS_PER_HOTEND // Uses separate PID parameters for each extruder (useful for mismatched extruders)
-                                  // Set/get with gcode: M301 E[extruder number, 0-2]
+                                  // Set/get with G-code: M301 E[extruder number, 0-2]
 
   // Anycubic Kossel - run 'M106 S255' & 'M303 E0 C10 S200'
   #if ENABLED(PID_PARAMS_PER_HOTEND)
