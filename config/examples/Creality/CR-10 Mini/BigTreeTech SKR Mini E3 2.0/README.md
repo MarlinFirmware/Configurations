@@ -57,7 +57,7 @@ By default, this is disabled. Enabling this seemed to provide better mesh data.
 Provides control panel probe controls.
 
 ```cpp
-#define LEVEL_BED_CORNERS
+#define LCD_BED_TRAMMING
 ```
 Provides control panel bed tramming controls.
 
