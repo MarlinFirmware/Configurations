@@ -10,7 +10,7 @@ The main characteristics of these configurations are:
 - An example `SKEW_CORRECTION` for a particular printer is enabled. See comments below about how to adjust it to a particular printer.
 - Using the LCD controller for bed leveling is enabled.
   - `PROBE_MANUALLY` is enabled, which *provides a means to do "Auto" Bed Leveling without a probe*.
-  - The `LEVEL_BED_CORNERS` option for manual bed adjustment is enabled.
+  - The `LCD_BED_TRAMMING` option for manual bed adjustment is enabled.
   - Bilinear bed leveling is enabled, the boundaries for probing are adjusted to the glass size, and extrapolation is enabled.
 - `PRINTCOUNTER` is enabled, in order to track statistical data.
 - `INDIVIDUAL_AXIS_HOMING_MENU` is enabled, which adds individual axis homing items (Home X, Home Y, and Home Z) to the LCD menu.
