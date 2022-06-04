@@ -21,6 +21,8 @@
  */
 #pragma once
 
+#define CONFIG_EXAMPLES_DIR "FoamCutter"
+
 /**
  * Configuration.h
  *
@@ -58,13 +60,12 @@
  */
 
 //===========================================================================
-//========================== DELTA / SCARA / TPARA ==========================
+//============================= Foam Cutter =================================
 //===========================================================================
+// For a hot wire cutter with parallel horizontal axes X, I where the heights
+// of the two wire ends are controlled by parallel axes Y, J.
 //
-// Download configurations from the link above and customize for your machine.
-// Examples are located in config/examples/delta, .../SCARA, and .../TPARA.
-//
-//===========================================================================
+#define FOAMCUTTER_XYUV
 
 // @section info
 
@@ -1809,7 +1810,7 @@
 //#define LCD_BED_TRAMMING
 
 #if ENABLED(LCD_BED_TRAMMING)
-  #define BED_TRAMMING_INSET_LFRB { 30, 30, 30, 30 }  // (mm) Left, Front, Right, Back insets
+  #define BED_TRAMMING_INSET_LFRB { 30, 30, 30, 30 } // (mm) Left, Front, Right, Back insets
   #define BED_TRAMMING_HEIGHT      0.0        // (mm) Z height of nozzle at leveling points
   #define BED_TRAMMING_Z_HOP       4.0        // (mm) Z height of nozzle between leveling points
   //#define BED_TRAMMING_INCLUDE_CENTER       // Move to the center after the last corner
