@@ -33,7 +33,7 @@ The configuration was made on a Phaetus Dragon hotend and a BMG clone extruder, 
 - Enabled `MESH_EDIT_GFX_OVERLAY`, set `MESH_INSET` to `10` and `GRID_MAX_POINTS_X` to `9` (for UBL)
 - Enabled `LCD_BED_LEVELING`
 - Enabled `MESH_EDIT_MENU`
-- Enabled `LEVEL_BED_CORNERS`
+- Enabled `LCD_BED_TRAMMING`
 - Enabled `Z_SAFE_HOMING`
 - Set `HOMING_FEEDRATE_MM_M` to faster values
 - Enabled `NOZZLE_PARK_FEATURE`
