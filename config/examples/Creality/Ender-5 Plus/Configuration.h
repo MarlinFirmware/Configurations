@@ -98,10 +98,11 @@
 
 // Choose the name from boards.h that matches your setup
 #ifndef MOTHERBOARD
-  #define X_MAX_PIN  3 // creality connects X_MAX switch to X_MIN(_PIN) motherbard connector
-  #define Y_MAX_PIN 14 // creality connects Y_MAX switch to Y_MIN(_PIN) motherbard connector
   #define MOTHERBOARD BOARD_RAMPS_CREALITY
 #endif
+
+#define X_MAX_PIN  3 // Creality connects X_MAX to X_MIN(_PIN) motherboard connector
+#define Y_MAX_PIN 14 // Creality connects Y_MAX to Y_MIN(_PIN) motherboard connector
 
 /**
  * Select the serial port on the board to use for communication with the host.
@@ -2689,6 +2690,7 @@
 #if ENABLED(DGUS_LCD_UI_MKS)
   #define USE_MKS_GREEN_UI
 #endif
+#define LCD_SERIAL_PORT 3
 
 //
 // CR-6 OEM touch screen. A DWIN display with touch.
@@ -2699,9 +2701,6 @@
 // Touch-screen LCD for Malyan M200/M300 printers
 //
 //#define MALYAN_LCD
-#if ENABLED(MALYAN_LCD)
-  #define LCD_SERIAL_PORT 1  // Default is 1 for Malyan M200
-#endif
 
 //
 // Touch UI for FTDI EVE (FT800/FT810) displays
@@ -2715,7 +2714,6 @@
 //#define ANYCUBIC_LCD_I3MEGA
 //#define ANYCUBIC_LCD_CHIRON
 #if EITHER(ANYCUBIC_LCD_I3MEGA, ANYCUBIC_LCD_CHIRON)
-  #define LCD_SERIAL_PORT 3  // Default is 3 for Anycubic
   //#define ANYCUBIC_LCD_DEBUG
 #endif
 
@@ -2723,9 +2721,6 @@
 // 320x240 Nextion 2.8" serial TFT Resistive Touch Screen NX3224T028
 //
 //#define NEXTION_TFT
-#if ENABLED(NEXTION_TFT)
-  #define LCD_SERIAL_PORT 1  // Default is 1 for Nextion
-#endif
 
 //
 // PanelDue touch controller by Escher3D
