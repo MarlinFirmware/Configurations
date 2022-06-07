@@ -20,7 +20,7 @@
  *
  */
 #pragma once
-#error "Don't build with import-2.0.x configurations!"
+#error "Don't build with import-2.1.x configurations!"
 #error "Use the 'bugfix...' or 'release...' configurations matching your Marlin version."
 
 //#define I3MEGA_HAS_BLTOUCH

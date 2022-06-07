@@ -20,7 +20,7 @@
  *
  */
 #pragma once
-#error "Don't build with import-2.0.x configurations!"
+#error "Don't build with import-2.1.x configurations!"
 #error "Use the 'bugfix...' or 'release...' configurations matching your Marlin version."
 
 // Overlord Pro needs larger PSU than stock PSU. Uncomment `#define OVERLORD_PRO_UPGRADED_PSU` to enable heated bed. See README.md for more details.
