@@ -12,7 +12,7 @@ In addition to the existing options
 I believe the configuration should work for all these options, but since I was
 only able to test with the VM8204 and full graphic LCD, I have created a new
 configuration. If you don't have an upgraded K8200 or 3drag, you may wish to
-use the original version. 
+use the original version.
 
 # Instructions
 
@@ -36,8 +36,8 @@ the following is uncommented, otherwise comment it out
 ## Notes
 
 I (pau1ie) tested this configuration on my K8200 with VM8204 Z axis and
-full graphic controller. I purchased a 3drag controller main board which is 
-identical to the Velleman supplied one, so I am confident this firmware 
+full graphic controller. I purchased a 3drag controller main board which is
+identical to the Velleman supplied one, so I am confident this firmware
 will also work with the 3drag as CONSULiTAS states below.
 
 Only one LCD screen is supported (they plug into the same place), so only one of them should be uncommented.
