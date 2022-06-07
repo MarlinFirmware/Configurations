@@ -24,7 +24,7 @@
 #error "Use the 'bugfix...' or 'release...' configurations matching your Marlin version."
 
 // Enable this option for BLTouch support
-//#define E6_BLTOUCH_PROBE
+//#define E6_USE_BLTOUCH
 
 /**
  * Configuration.h
