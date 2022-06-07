@@ -46,7 +46,7 @@
  * https://github.com/CONSULitAS/Marlin-K8200/archive/K8200_stable_2016-11-18.zip
  *
  * Updated by pau1ie to include the full graphic controller and K8204 Z axis
- * 
+ *
  * Please choose your hardware options for the K8200:
  */
 
