@@ -867,11 +867,11 @@
   #define POLAR_SEGMENTS_PER_SECOND 5
 #endif
 
-// Enable for an articulated robot (robot arm). Joints are directly mapped to axes (no kinematics).
+// Articulated robot (arm). Joints are directly mapped to axes with no kinematics.
 //#define ARTICULATED_ROBOT_ARM
 
-// For a hot wire cutter with parallel horizontal axes X, I where the heights
-// of the two wire ends are controlled by parallel axes Y, J. Joints are directly mapped to axes (no kinematics).
+// For a hot wire cutter with parallel horizontal axes (X, I) where the heights of the two wire
+// ends are controlled by parallel axes (Y, J). Joints are directly mapped to axes (no kinematics).
 #define FOAMCUTTER_XYUV
 
 //===========================================================================

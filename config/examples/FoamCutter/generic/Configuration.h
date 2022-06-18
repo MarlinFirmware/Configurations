@@ -59,14 +59,6 @@
  *                      https://www.thingiverse.com/thing:1278865
  */
 
-//===========================================================================
-//============================= Foam Cutter =================================
-//===========================================================================
-// For a hot wire cutter with parallel horizontal axes X, I where the heights
-// of the two wire ends are controlled by parallel axes Y, J. Joints are directly mapped to axes (no kinematics).
-//
-#define FOAMCUTTER_XYUV
-
 // @section info
 
 // Author info of this build printed to the host during boot and M115
@@ -865,6 +857,13 @@
   #define POLARGRAPH_MAX_BELT_LEN 1035.0
   #define POLAR_SEGMENTS_PER_SECOND 5
 #endif
+
+// Articulated robot (arm). Joints are directly mapped to axes with no kinematics.
+//#define ARTICULATED_ROBOT_ARM
+
+// For a hot wire cutter with parallel horizontal axes (X, I) where the heights of the two wire
+// ends are controlled by parallel axes (Y, J). Joints are directly mapped to axes (no kinematics).
+#define FOAMCUTTER_XYUV
 
 //===========================================================================
 //============================== Endstop Settings ===========================
