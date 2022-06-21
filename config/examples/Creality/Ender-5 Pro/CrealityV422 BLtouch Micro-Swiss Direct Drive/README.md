@@ -8,6 +8,18 @@ This configuration has some tweaks to jerk and acceleration. If you don't want t
 
 It also has z-offset preconfigured at -1.45 which works well for a glass bed with the magnet removed. If you want to define your own offset or you don't want the offset configured in the firmware then change line 1279 to `#define NOZZLE_TO_PROBE_OFFSET { -40, -13, 0 }``
 
+## Direct Drive
+
+If you aren't using a direct drive, then change line 1013 in `Configuration.h` from 
+
+this
+
+`#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 800, 137.6 }`
+
+to this
+
+`#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 800, 93 }`
+
 ## Notice
 
 If you are upgrading from the stock Creality firmware that either came with your printer or off of their website then you will notice the plate seems fliped. The reality is that the plate was flipped on the stock firmware and the Marlin update fixes that. You have probably noticed before that your prints came out oriented differently than what you saw in Cura. No longer! But this will cause your default Cura start code to behave differently than you are used to. You can change this start code
