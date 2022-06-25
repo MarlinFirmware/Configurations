@@ -10,7 +10,7 @@ Currently Creality provides two kinds of screen units:
 **Original Ender 3S1 DACAI display**  
 ![Ender3S1-DACAI](https://user-images.githubusercontent.com/2745567/156829472-2c38a4ab-bdde-4c21-b78f-a30692c96500.jpg)
 
-The `DWIN_SET` display firmware / icon assets only apply to the Ender 3V2 original display, for the Ender 3S1 you must to use the `private` display firmware / icon assets.
+For the Ender 3S1 you must to use the `private` display firmware / icon assets, available here: `../config/examples/Creality/Ender-3 V2/LCD Files`
 
 
 ## How to install
@@ -32,7 +32,7 @@ inside of the DWIN_SET folder.
 If you weren't able to update the display, verify the format of the µSD Card
 (MBR, FAT32 and allocation unit of 4096 bytes) and the CRC of the files.
   
-Be sure to leave **only** the `DWIN_SET` or `private` folder at the root of the card.  
+Be sure to leave **only** the `private` folder at the root of the card.  
   
 <br>
 
