@@ -1,6 +1,6 @@
 # Marlin 2.1+ Firmware configuration for the Velleman Vertex Delta K8800
 
-**PLEASE READ THE WARNINGS SECTION CAREFULLY, ESPECIALLY IF YOU INTEND TO USE THE UBL VERSION.**
+**PLEASE READ THE WARNINGS SECTION CAREFULLY, ESPECIALLY IF YOU INTEND TO USE THE UBL VARIANT.**
 
 ## Introduction
 
@@ -26,7 +26,7 @@ The firmware here is for the stock Velleman K8800, without any modifications. Fo
 - The calibration and bed levelling are more thorough and appear more accurate, although they are slower.
 - There are far fewer head-to-bed crashes
 - Providing that lubrication is adequate, belt slippage seems to be entirely eliminated.
-- When using the UBL version, bed adhesion is far superior, even with the stock supplied BuildTak.
+- When using the UBL variant, bed adhesion is far superior, even with the stock supplied BuildTak.
 
 ## WARNINGS
 
