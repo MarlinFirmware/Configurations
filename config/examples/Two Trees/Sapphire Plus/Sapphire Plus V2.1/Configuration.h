@@ -1,6 +1,6 @@
 /**
  * Marlin 3D Printer Firmware
- * Copyright (c) 2020 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
+ * Copyright (c) 2022 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
  *
  * Based on Sprinter and grbl.
  * Copyright (c) 2011 Camiel Gubbels / Erik van der Zalm
@@ -20,8 +20,8 @@
  *
  */
 #pragma once
-
-#define CONFIG_EXAMPLES_DIR "Two Trees/Sapphire Plus/Sapphire Plus V2"
+#error "Don't build with import-2.1.x configurations!"
+#error "Use the 'bugfix...' or 'release...' configurations matching your Marlin version."
 
 //#define SAPPHIRE_PLUS_MKS_UI
 //#define SAPPHIRE_PLUS_BLTOUCH
@@ -173,8 +173,8 @@
  *          TMC5130, TMC5130_STANDALONE, TMC5160, TMC5160_STANDALONE
  * :['A4988', 'A5984', 'DRV8825', 'LV8729', 'L6470', 'L6474', 'POWERSTEP01', 'TB6560', 'TB6600', 'TMC2100', 'TMC2130', 'TMC2130_STANDALONE', 'TMC2160', 'TMC2160_STANDALONE', 'TMC2208', 'TMC2208_STANDALONE', 'TMC2209', 'TMC2209_STANDALONE', 'TMC26X', 'TMC26X_STANDALONE', 'TMC2660', 'TMC2660_STANDALONE', 'TMC5130', 'TMC5130_STANDALONE', 'TMC5160', 'TMC5160_STANDALONE']
  */
-#define X_DRIVER_TYPE  TERN(SAPPHIRE_PLUS_TMC_UART,TMC2208,TMC2208_STANDALONE)
-#define Y_DRIVER_TYPE  TERN(SAPPHIRE_PLUS_TMC_UART,TMC2208,TMC2208_STANDALONE)
+#define X_DRIVER_TYPE  TERN(SAPPHIRE_PLUS_TMC_UART, TMC2208,TMC2208_STANDALONE)
+#define Y_DRIVER_TYPE  X_DRIVER_TYPE
 #define Z_DRIVER_TYPE  A4988
 //#define X2_DRIVER_TYPE A4988
 //#define Y2_DRIVER_TYPE A4988
@@ -651,7 +651,7 @@
 
 #if ENABLED(PIDTEMP)
   //#define PID_PARAMS_PER_HOTEND // Uses separate PID parameters for each extruder (useful for mismatched extruders)
-                                  // Set/get with gcode: M301 E[extruder number, 0-2]
+                                  // Set/get with G-code: M301 E[extruder number, 0-2]
 
   #if ENABLED(PID_PARAMS_PER_HOTEND)
     // Specify up to one value per hotend here, according to your setup.
@@ -697,15 +697,15 @@
     //#define MPC_FAN_0_ACTIVE_HOTEND
   #endif
 
-  #define FILAMENT_HEAT_CAPACITY_PERMM 5.6e-3f        // 0.0056 J/K/mm for 1.75mm PLA (0.0149 J/K/mm for 2.85mm PLA).
-  //#define FILAMENT_HEAT_CAPACITY_PERMM 3.6e-3f      // 0.0036 J/K/mm for 1.75mm PETG (0.0094 J/K/mm for 2.85mm PETG).
+  #define FILAMENT_HEAT_CAPACITY_PERMM { 5.6e-3f }    // 0.0056 J/K/mm for 1.75mm PLA (0.0149 J/K/mm for 2.85mm PLA).
+  //#define FILAMENT_HEAT_CAPACITY_PERMM { 3.6e-3f }  // 0.0036 J/K/mm for 1.75mm PETG (0.0094 J/K/mm for 2.85mm PETG).
 
   // Advanced options
   #define MPC_SMOOTHING_FACTOR 0.5f                   // (0.0...1.0) Noisy temperature sensors may need a lower value for stabilization.
   #define MPC_MIN_AMBIENT_CHANGE 1.0f                 // (K/s) Modeled ambient temperature rate of change, when correcting model inaccuracies.
   #define MPC_STEADYSTATE 0.5f                        // (K/s) Temperature change rate for steady state logic to be enforced.
 
-  #define MPC_TUNING_POS { X_CENTER, Y_CENTER, 1.0f } // (mm) M306 Autotuning position, ideally bed center just above the surface.
+  #define MPC_TUNING_POS { X_CENTER, Y_CENTER, 1.0f } // (mm) M306 Autotuning position, ideally bed center at first layer height.
   #define MPC_TUNING_END_Z 10.0f                      // (mm) M306 Autotuning final Z position.
 #endif
 
@@ -872,6 +872,13 @@
   #define POLARGRAPH_MAX_BELT_LEN 1035.0
   #define POLAR_SEGMENTS_PER_SECOND 5
 #endif
+
+// Articulated robot (arm). Joints are directly mapped to axes with no kinematics.
+//#define ARTICULATED_ROBOT_ARM
+
+// For a hot wire cutter with parallel horizontal axes (X, I) where the heights of the two wire
+// ends are controlled by parallel axes (Y, J). Joints are directly mapped to axes (no kinematics).
+//#define FOAMCUTTER_XYUV
 
 //===========================================================================
 //============================== Endstop Settings ===========================
@@ -1581,7 +1588,7 @@
 #endif
 
 #if EITHER(MIN_SOFTWARE_ENDSTOPS, MAX_SOFTWARE_ENDSTOPS)
-  #define SOFT_ENDSTOPS_MENU_ITEM  // Enable/Disable software endstops from the LCD
+  #define SOFT_ENDSTOPS_MENU_ITEM    // Enable/Disable software endstops from the LCD
 #endif
 
 /**
@@ -1804,7 +1811,7 @@
   //#define MESH_EDIT_GFX_OVERLAY   // Display a graphics overlay while editing the mesh
 
   #define MESH_INSET 1              // Set Mesh bounds as an inset region of the bed
-  #define GRID_MAX_POINTS_X 9      // Don't use more than 15 points per axis, implementation limited.
+  #define GRID_MAX_POINTS_X  9      // Don't use more than 15 points per axis, implementation limited.
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
   //#define UBL_HILBERT_CURVE       // Use Hilbert distribution for less travel when probing multiple points
@@ -3144,4 +3151,3 @@
 
 // Disable servo with M282 to reduce power consumption, noise, and heat when not in use
 //#define SERVO_DETACH_GCODE
-
