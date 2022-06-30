@@ -98,7 +98,7 @@
 
 // Choose the name from boards.h that matches your setup
 #ifndef MOTHERBOARD
-  #define MOTHERBOARD BOARD_OPULO_LUMEN_REV3
+  #define MOTHERBOARD BOARD_OPULO_REV3
 #endif
 
 /**
