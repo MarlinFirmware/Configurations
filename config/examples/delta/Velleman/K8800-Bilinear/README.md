@@ -44,18 +44,18 @@ Updates to firmware cannot fix underlying mechanical issues or user neglect. In 
 These are the result of design _"features";_ The cute circular Pyrex bed plate never goes back into the exactly the same position twice - so every print is different.
 
 Also:
-- The nozzle **must** be wiped at 120+ deg C temperature before each print - a tiny amount of residue on the end can easily throw the calibration and leveling off.
+- The nozzle **must** be wiped at 120+ deg C temperature before each print - a tiny amount of residue on the end can easily throw the calibration and levelling off.
 - You **must** clean and lubricate after every ten prints, or after a week of non-use. The supplied machine oil for the rails is pretty poor in my experience when compared to fine grade sewing machine oil, and you do need PTFE lubricant (not included) for the magnetic joints.
 
 ## Leveling Options
 
-Choose bed leveling at the top of `Configuration.h` with either `K8800_UBL` or `K8800_BILINEAR`.
+Choose bed leveling at the top of `Configuration.h` with either `K8800_UBL` or `K8800_BILINEAR`. `K8800_BILINEAR` is the default.
 
-Bilinear Leveling uses the same approach as the original firmware, with the advantage of being able to work with the same K8800 profile shipped with Cura.
+The BiLinear leveling uses the same leveling approach as the original firmware, with the advantage of being able to work with the same K8800 profile shipped with Cura, but produces less consistent adhesion.
 
 ## Unified Bed Leveling and Cura
 
-Unified Bed Leveling is more accurate due to the addition of manual probing, but requires changes to the Cura settings. **AT THIS TIME OF WRITING, THE AS-SHIPPED CURA PROFILE INCLUDES G-CODE COMMANDS THAT ARE INCOMPATIBLE WITH UBL AND IN ONE CASE MAY FORCE A HEAD CRASH DURING PREFLIGHT.**
+The Unified Bed Leveling variant of the firmware is more accurate, but requires changes to the Cura settings. **AT THIS TIME OF WRITING, THE AS-SHIPPED CURA PROFILE INCLUDES G-CODE COMMANDS THAT ARE INCOMPATIBLE WITH UBL AND IN ONE CASE MAY FORCE A HEAD CRASH DURING PREFLIGHT.**
 
 Here is my amended version of the Start G-Code from Cura. To use this in Cura, go to:
 
@@ -95,3 +95,12 @@ G1 Z5 F2000
 G1 Z5 X0 Y0
 M117 Vertex Delta printing
 ```
+## UUIDs
+
+Each variant has a different known Machine UUID to allow the variant to be correctly identified in the slicer or host software. They are as follows:
+
+|Variant|UUID|
+|-------|----|
+|Bilinear Leveling|`096ca084-14f6-4c40-ac17-530a8286043a`|
+|Unified Bed Leveling|`31155684-ee17-447b-9614-f0f3dc880a47`|
+

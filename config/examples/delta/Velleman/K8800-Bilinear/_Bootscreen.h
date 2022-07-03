@@ -36,7 +36,7 @@
 #define CUSTOM_BOOTSCREEN_ANIMATED
 #define CUSTOM_BOOTSCREEN_ANIMATED_FRAME_TIME // Each frame also has a duration
 
-const unsigned char custom_start_bmp1[] PROGMEM = {
+const unsigned char custom_start_bmp[] PROGMEM = {
   B00000000,B00000000,B00000000,B00000000,B00000000,B00000111,B11111111,B11111111,B11111110,B00000000,B00000000,B00000000,B00000000,B00000000,B00000000,B00000000,
   B00000000,B00000000,B00000000,B00000000,B00000000,B00000111,B11111111,B11111111,B11111111,B00000000,B00000000,B00000000,B00000000,B00000000,B00000000,B00000000,
   B00000000,B00000000,B00000000,B00000000,B00000000,B00000111,B11111111,B11111111,B11111111,B10000000,B00000000,B00000000,B00000000,B00000000,B00000000,B00000000,
@@ -282,7 +282,7 @@ const unsigned char custom_start_bmp4[] PROGMEM = {
 
   // Each frame has its own custom duration
   const boot_frame_t custom_bootscreen_animation[] PROGMEM = {
-    { custom_start_bmp1,  1000 },  // 1.0s
+    { custom_start_bmp,  1000 },  // 1.0s
     { custom_start_bmp2,  1000 },  // 1.0s
     { custom_start_bmp3,  1000 },  // 1.0s
     { custom_start_bmp4,   500 }   // 0.5s
