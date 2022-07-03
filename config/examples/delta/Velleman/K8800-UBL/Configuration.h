@@ -1,6 +1,6 @@
 /**
  * Marlin 3D Printer Firmware
- * Copyright (c) 2022 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
+ * Copyright (c) 2020 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
  *
  * Based on Sprinter and grbl.
  * Copyright (c) 2011 Camiel Gubbels / Erik van der Zalm
@@ -24,7 +24,7 @@
 #error "Use the 'bugfix...' or 'release...' configurations matching your Marlin version."
 
 /**
- * Velleman Vertex Delta K8800 (Bilinear Variant)
+ * Velleman Vertex Delta K8800 (UBL Variant)
  * See README.md for more details.
  */
 
@@ -67,7 +67,7 @@
 // @section info
 
 // Author info of this build printed to the host during boot and M115
-#define STRING_CONFIG_H_AUTHOR "(sgparry, Vertex Delta K8800)" // Who made the changes.
+#define STRING_CONFIG_H_AUTHOR "(sgparry, Vertex Delta K8800 - UBL)" // Who made the changes.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
 /**
@@ -145,7 +145,7 @@
 
 // Printer's unique ID, used by some programs to differentiate between machines.
 // Choose your own or use a service like https://www.uuidgenerator.net/version4
-#define MACHINE_UUID "096ca084-14f6-4c40-ac17-530a8286043a"
+#define MACHINE_UUID "31155684-ee17-447b-9614-f0f3dc880a47"
 
 /**
  * Stepper Drivers
@@ -1783,8 +1783,8 @@
  */
 //#define AUTO_BED_LEVELING_3POINT
 //#define AUTO_BED_LEVELING_LINEAR
-#define AUTO_BED_LEVELING_BILINEAR
-//#define AUTO_BED_LEVELING_UBL
+//#define AUTO_BED_LEVELING_BILINEAR
+#define AUTO_BED_LEVELING_UBL
 //#define MESH_BED_LEVELING
 
 /**

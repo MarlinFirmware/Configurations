@@ -4,7 +4,7 @@
 
 ## Introduction
 
-This configuration is for the Velleman Vertex Delta K8800; it is the bilinear leveling variant. It was derived by Stephen Parry:
+This configuration is for the Velleman Vertex Delta K8800; it is the UBL variant. It was derived by Stephen Parry:
 
 - sgparry@mainscreen.com
 - stephen@EduMake.org
