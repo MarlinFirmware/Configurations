@@ -24,6 +24,11 @@
 #error "Use the 'bugfix...' or 'release...' configurations matching your Marlin version."
 
 /**
+ * Uncomment for the V3.0 board, otherwise V2.0 is assumed
+ */
+//#define MOTHERBOARD BOARD_BTT_SKR_SE_BX_V3
+
+/**
  * Configuration.h
  *
  * Basic settings such as:
@@ -98,7 +103,7 @@
 
 // Choose the name from boards.h that matches your setup
 #ifndef MOTHERBOARD
-  #define MOTHERBOARD BOARD_BTT_SKR_SE_BX
+  #define MOTHERBOARD BOARD_BTT_SKR_SE_BX_V2
 #endif
 
 /**
