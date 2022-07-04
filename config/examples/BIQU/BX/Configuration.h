@@ -23,6 +23,8 @@
 #error "Don't build with import-2.1.x configurations!"
 #error "Use the 'bugfix...' or 'release...' configurations matching your Marlin version."
 
+//#define BIQU_BX_HAS_V3_MOTHERBOARD  // Uncomment to enable BTT SKR SE BX V3.0 motherboard, otherwise V2.0 will be enabled by default.
+
 /**
  * Configuration.h
  *
@@ -98,7 +100,11 @@
 
 // Choose the name from boards.h that matches your setup
 #ifndef MOTHERBOARD
-  #define MOTHERBOARD BOARD_BTT_SKR_SE_BX
+  #if ENABLED(BIQU_BX_HAS_V3_MOTHERBOARD)
+    #define MOTHERBOARD BOARD_BTT_SKR_SE_BX_V3
+  #else
+    #define MOTHERBOARD BOARD_BTT_SKR_SE_BX_V2
+  #endif
 #endif
 
 /**
