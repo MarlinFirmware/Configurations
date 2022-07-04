@@ -835,6 +835,7 @@
 //#define SENSORLESS_BACKOFF_MM  { 2, 2, 0 }  // (linear=mm, rotational=°) Backoff from endstops before sensorless homing
 
 #define HOMING_BUMP_MM      { 5, 5, 5 }       // (linear=mm, rotational=°) Backoff from endstops after first bump
+                                              // For delta all values must be the same
 #define HOMING_BUMP_DIVISOR { 5, 5, 5 }       // Re-Bump Speed Divisor (Divides the Homing Feedrate)
 
 //#define HOMING_BACKOFF_POST_MM { 2, 2, 2 }  // (linear=mm, rotational=°) Backoff from endstops after homing
@@ -1054,8 +1055,7 @@
 
 // Slow down the machine if the lookahead buffer is (by default) half full.
 // Increase the slowdown divisor for larger buffer sizes.
-// (don't use SLOWDOWN with DELTA because DELTA generates hundreds of segments per second)
-// #define SLOWDOWN
+//#define SLOWDOWN
 #if ENABLED(SLOWDOWN)
   #define SLOWDOWN_DIVISOR 2
 #endif
@@ -1344,7 +1344,7 @@
 
 #if EITHER(HAS_DISPLAY, DWIN_LCD_PROUI)
   // The timeout to return to the status screen from sub-menus
-  #define LCD_TIMEOUT_TO_STATUS 15000   // (ms)
+  #define LCD_TIMEOUT_TO_STATUS 15000     // (ms)
 
   #if ENABLED(SHOW_BOOTSCREEN)
     #define BOOTSCREEN_TIMEOUT 4000       // (ms) Total Duration to display the boot screen(s)
@@ -1663,6 +1663,15 @@
  * storage device. This option hides the SD card from the host PC.
  */
 //#define NO_SD_HOST_DRIVE   // Disable SD Card access over USB (for security).
+
+/**
+ * By default the framework is responsible for the shared media I/O.
+ * Enable this if you need Marlin to take care of the shared media I/O.
+ * Useful if shared media isn't working properly on some boards.
+ */
+#if ENABLED(SDSUPPORT) && DISABLED(NO_SD_HOST_DRIVE)
+  //#define DISKIO_HOST_DRIVE
+#endif
 
 /**
  * Additional options for Graphical Displays
@@ -2191,7 +2200,7 @@
   #define MIN_ARC_SEGMENT_MM      0.1 // (mm) Minimum length of each arc segment
   #define MAX_ARC_SEGMENT_MM      1.0 // (mm) Maximum length of each arc segment
   #define MIN_CIRCLE_SEGMENTS    72   // Minimum number of segments in a complete circle
-  #define ARC_SEGMENTS_PER_SEC 50     // Use the feedrate to choose the segment length
+  #define ARC_SEGMENTS_PER_SEC   50   // Use the feedrate to choose the segment length
   #define N_ARC_CORRECTION       25   // Number of interpolated segments between corrections
   #define ARC_P_CIRCLES               // Enable the 'P' parameter to specify complete circles
   //#define SF_ARC_FIX                // Enable only if using SkeinForge with "Arc Point" fillet procedure
@@ -2201,7 +2210,7 @@
 //#define BEZIER_CURVE_SUPPORT        // Requires ~2666 bytes
 
 #if EITHER(ARC_SUPPORT, BEZIER_CURVE_SUPPORT)
-  #define CNC_WORKSPACE_PLANES      // Allow G2/G3/G5 to operate in XY, ZX, or YZ planes
+  #define CNC_WORKSPACE_PLANES        // Allow G2/G3/G5 to operate in XY, ZX, or YZ planes
 #endif
 
 /**
@@ -3594,9 +3603,6 @@
   #if ENABLED(SPINDLE_LASER_USE_PWM)
     #define SPINDLE_LASER_PWM_INVERT    false  // Set to "true" if the speed/power goes up when you want it to go slower
     #define SPINDLE_LASER_FREQUENCY     2500   // (Hz) Spindle/laser frequency (only on supported HALs: AVR, ESP32, and LPC)
-                                               // ESP32: If SPINDLE_LASER_PWM_PIN is onboard then <=78125Hz. For I2S expander
-                                               //  the frequency determines the PWM resolution. 2500Hz = 0-100, 977Hz = 0-255, ...
-                                               //  (250000 / SPINDLE_LASER_FREQUENCY) = max value.
   #endif
 
   //#define AIR_EVACUATION                     // Cutter Vacuum / Laser Blower motor control with G-codes M10-M11
@@ -3883,6 +3889,14 @@
  * and G92.1 to reset the workspace to native machine space.
  */
 //#define CNC_COORDINATE_SYSTEMS
+
+/**
+ * CNC Drilling Cycle - UNDER DEVELOPMENT
+ *
+ * Enables G81 to perform a drilling cycle.
+ * Currently only supports a single cycle, no G-code chaining.
+ */
+//#define CNC_DRILLING_CYCLE
 
 /**
  * Auto-report fan speed with M123 S<seconds>
@@ -4431,6 +4445,8 @@
     #define MMU2_CAN_LOAD_INCREMENT_SEQUENCE \
       { -MMU2_CAN_LOAD_INCREMENT, MMU2_CAN_LOAD_FEEDRATE }
 
+    // Continue unloading if sensor detects filament after the initial unload move
+    //#define MMU_IR_UNLOAD_MOVE
   #else
 
     /**
