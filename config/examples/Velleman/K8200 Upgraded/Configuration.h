@@ -2680,6 +2680,12 @@
 
 #endif // K8200_VM8201, FULLGRAPHIC_CONTROLLER_LCD_SD
 
+//
+// eMotion Tech LCD with SD
+// https://www.reprap-france.com/produit/1234568748-ecran-graphique-128-x-64-points-2-1
+//
+//#define EMOTION_TECH_LCD
+
 //=============================================================================
 //==============================  OLED Displays  ==============================
 //=============================================================================
