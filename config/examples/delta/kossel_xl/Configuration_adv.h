@@ -836,6 +836,7 @@
 
 #define HOMING_BUMP_MM      { 2, 2, 2 }       // (mm) Backoff from endstops after first bump
                                               // For delta all values must be the same
+
 #define HOMING_BUMP_DIVISOR { 2, 2, 4 }       // Re-Bump Speed Divisor (Divides the Homing Feedrate)
 
 //#define HOMING_BACKOFF_POST_MM { 2, 2, 2 }  // (mm) Backoff from endstops after homing
