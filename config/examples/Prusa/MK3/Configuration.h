@@ -77,7 +77,7 @@
 // Tall Bear (320mm)?
 //#define TALLBEAR
 
-// SuperPinda present?
+// SuperPINDA present?
 //#define SUPERPINDA
 
 /**
