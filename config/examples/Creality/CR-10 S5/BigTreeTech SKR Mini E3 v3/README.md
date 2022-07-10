@@ -4,6 +4,7 @@
  - Stock LCD (connected to the LCD's EXT3 spare port, with one single straight ribbon cable)
  - Bondtech or stock extruder
  - Bowden setup
+ - All 4 fans are PWM controlled.
 
 ## Flashing Mainboard Firmware
 
