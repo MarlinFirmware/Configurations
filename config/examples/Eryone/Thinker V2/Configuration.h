@@ -1191,6 +1191,8 @@
  *   M204 P    Acceleration
  *   M204 R    Retract Acceleration
  *   M204 T    Travel Acceleration
+ *   M204 I    Angular Acceleration
+ *   M204 J    Angular Travel Acceleration
  */
 #ifdef THINKERV2_Direct
   #define DEFAULT_ACCELERATION          700   // X, Y, Z and E acceleration for printing moves
