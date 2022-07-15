@@ -20,7 +20,9 @@ The `W` in Průša's `G28 W ; home all without mesh bed level` default G-code do
 Below are some example start G-code scripts from popular slicers to get you started.
 
 ### PrusaSlicer
-Paste the start G-code block below in the "Custom G-code" section under "Printer Settings". Use the "Custom G-code" section under "Filament Settings" to add the [Linear Advance](https://marlinfw.org/docs/features/lin_advance.html) (`M900 K0.0`) value since it can be saved on a per-filament basis.
+- Set your G-code flavor to "Marlin 2" under "Printer Settings" -> "General" -> "Firmware" -> "G-code flavor".
+- Paste the start G-code block below in the "Custom G-code" section under "Printer Settings".
+- Use the "Custom G-code" section under "Filament Settings" to add the [Linear Advance](https://marlinfw.org/docs/features/lin_advance.html) (`M900 K0.0`) value since it can be saved on a per-filament basis.
 ```gcode
 G90 ; use absolute coordinates
 M83 ; extruder relative mode
