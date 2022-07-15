@@ -35,7 +35,9 @@ M140 S[first_layer_bed_temperature] ; set bed temp
 M190 S[first_layer_bed_temperature] ; wait for bed temp
 G28 ; home all
 G29 ; mesh bed leveling
+M211 S0 ; Disable software endstops for intro line
 G1 X0 Z0.6 Y-3.0 F1000.0 ; go outside print area
+M211 S1 ; Enable software endstops
 M104 S[first_layer_temperature] ; set hotend temp
 M109 S[first_layer_temperature] ; wait for hotend temp
 G92 E0.0
@@ -55,7 +57,9 @@ M140 S{material_bed_temperature_layer_0} ; set bed temp
 M190 S{material_bed_temperature_layer_0} ; wait for bed temp
 G28 ; home all
 G29 ; mesh bed leveling
+M211 S0 ; Disable software endstops for intro line
 G1 X0 Z0.6 Y-3.0 F1000.0 ; go outside print area
+M211 S1 ; Enable software endstops
 M104 S{material_print_temperature_layer_0} ; set hotend temp
 M109 S{material_print_temperature_layer_0} ; wait for hotend temp
 G92 E0.0
@@ -74,7 +78,9 @@ M140 S{temperature_heatbed} ; set bed temp
 M190 S{temperature_heatbed} ; wait for bed temp
 G28 ; home all
 G29 ; mesh bed leveling
+M211 S0 ; Disable software endstops for intro line
 G1 X0 Z0.6 Y-3.0 F1000.0 ; go outside print area
+M211 S1 ; Enable software endstops
 M104 S{temperature_extruder1} ; set hotend temp
 M109 S{temperature_extruder1} ; wait for hotend temp
 G92 E0.0
@@ -94,7 +100,9 @@ M140 S[bed0_temperature] ; set bed temp
 M190 S[bed0_temperature] ; wait for bed temp
 G28 ; home all
 G29 ; mesh bed leveling
+M211 S0 ; Disable software endstops for intro line
 G1 X0 Z0.6 Y-3.0 F1000.0 ; go outside print area
+M211 S1 ; Enable software endstops
 M104 S[extruder0_temperature] T0 ; set hotend temp
 M109 S[extruder0_temperature] T0 ; wait for hotend temp
 G92 E0.0
