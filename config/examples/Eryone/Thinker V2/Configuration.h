@@ -962,7 +962,6 @@
 // ends are controlled by parallel axes (Y, J). Joints are directly mapped to axes (no kinematics).
 //#define FOAMCUTTER_XYUV
 
-
 //===========================================================================
 //============================== Endstop Settings ===========================
 //===========================================================================
@@ -1169,13 +1168,13 @@
  *   M204 T    Travel Acceleration
  */
 #ifdef THINKERV2_Direct
-  #define DEFAULT_ACCELERATION          700   // X, Y, Z and E acceleration for printing moves
+  #define DEFAULT_ACCELERATION          700   // X, Y, Z ... and E acceleration for printing moves
   #define DEFAULT_RETRACT_ACCELERATION  1250   // E acceleration for retracts
-  #define DEFAULT_TRAVEL_ACCELERATION   750   // X, Y, Z acceleration for travel (non printing) moves
+  #define DEFAULT_TRAVEL_ACCELERATION   750   // X, Y, Z ... acceleration for travel (non printing) moves
 #else
-  #define DEFAULT_ACCELERATION          1250   // X, Y, Z and E acceleration for printing moves
+  #define DEFAULT_ACCELERATION          1250   // X, Y, Z ... and E acceleration for printing moves
   #define DEFAULT_RETRACT_ACCELERATION  1250   // E acceleration for retracts
-  #define DEFAULT_TRAVEL_ACCELERATION   1500   // X, Y, Z acceleration for travel (non printing) moves
+  #define DEFAULT_TRAVEL_ACCELERATION   1500   // X, Y, Z ... acceleration for travel (non printing) moves
 #endif
 
 /**

@@ -159,17 +159,21 @@
 //#define LINEAR_AXES 3
 
 /**
- * Axis codes for additional axes:
- * This defines the axis code that is used in G-code commands to
- * reference a specific axis.
- * 'A' for rotational axis parallel to X
- * 'B' for rotational axis parallel to Y
- * 'C' for rotational axis parallel to Z
- * 'U' for secondary linear axis parallel to X
- * 'V' for secondary linear axis parallel to Y
- * 'W' for secondary linear axis parallel to Z
- * Regardless of the settings, firmware-internal axis IDs are
- * I (AXIS4), J (AXIS5), K (AXIS6).
+ * Additional Axis Settings
+ *
+ * Define AXISn_ROTATES for all axes that rotate or pivot.
+ * Rotational axis coordinates are expressed in degrees.
+ *
+ * AXISn_NAME defines the letter used to refer to the axis in (most) G-code commands.
+ * By convention the names and roles are typically:
+ *   'A' : Rotational axis parallel to X
+ *   'B' : Rotational axis parallel to Y
+ *   'C' : Rotational axis parallel to Z
+ *   'U' : Secondary linear axis parallel to X
+ *   'V' : Secondary linear axis parallel to Y
+ *   'W' : Secondary linear axis parallel to Z
+ *
+ * Regardless of these settings the axes are internally named I, J, K, U, V, W.
  */
 #if LINEAR_AXES >= 4
   #define AXIS4_NAME 'A' // :['A', 'B', 'C', 'U', 'V', 'W']
@@ -588,8 +592,6 @@
 #define PIDTEMP          // See the PID Tuning Guide at https://reprap.org/wiki/PID_Tuning
 //#define MPCTEMP        // ** EXPERIMENTAL **
 
-// Comment the following line to disable PID and enable bang-bang.
-#define PIDTEMP
 #define BANG_MAX 255     // Limits current to nozzle while in bang-bang mode; 255=full current
 #define PID_MAX BANG_MAX // Limits current to nozzle while PID is active (see PID_FUNCTIONAL_RANGE below); 255=full current
 #define PID_K1 0.95      // Smoothing factor within any PID loop
@@ -953,7 +955,6 @@
 // ends are controlled by parallel axes (Y, J). Joints are directly mapped to axes (no kinematics).
 //#define FOAMCUTTER_XYUV
 
-
 //===========================================================================
 //============================== Endstop Settings ===========================
 //===========================================================================
@@ -1146,9 +1147,9 @@
  *   M204 R    Retract Acceleration
  *   M204 T    Travel Acceleration
  */
-#define DEFAULT_ACCELERATION          500    // X, Y, Z and E acceleration for printing moves
-#define DEFAULT_RETRACT_ACCELERATION  500    // E acceleration for retracts
-#define DEFAULT_TRAVEL_ACCELERATION   1000    // X, Y, Z acceleration for travel (non printing) moves
+#define DEFAULT_ACCELERATION           500    // X, Y, Z ... and E acceleration for printing moves
+#define DEFAULT_RETRACT_ACCELERATION   500    // E acceleration for retracts
+#define DEFAULT_TRAVEL_ACCELERATION   1000    // X, Y, Z ... acceleration for travel (non printing) moves
 
 /**
  * Default Jerk limits (mm/s)

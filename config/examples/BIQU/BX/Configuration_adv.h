@@ -54,87 +54,87 @@
 // Custom Thermistor 1000 parameters
 //
 #if TEMP_SENSOR_0 == 1000
-  #define HOTEND0_PULLUP_RESISTOR_OHMS 4700    // Pullup resistor
-  #define HOTEND0_RESISTANCE_25C_OHMS  100000  // Resistance at 25C
-  #define HOTEND0_BETA                 3950    // Beta value
+  #define HOTEND0_PULLUP_RESISTOR_OHMS    4700 // Pullup resistor
+  #define HOTEND0_RESISTANCE_25C_OHMS   100000 // Resistance at 25C
+  #define HOTEND0_BETA                    3950 // Beta value
 #endif
 
 #if TEMP_SENSOR_1 == 1000
-  #define HOTEND1_PULLUP_RESISTOR_OHMS 4700    // Pullup resistor
-  #define HOTEND1_RESISTANCE_25C_OHMS  100000  // Resistance at 25C
-  #define HOTEND1_BETA                 3950    // Beta value
+  #define HOTEND1_PULLUP_RESISTOR_OHMS    4700 // Pullup resistor
+  #define HOTEND1_RESISTANCE_25C_OHMS   100000 // Resistance at 25C
+  #define HOTEND1_BETA                    3950 // Beta value
 #endif
 
 #if TEMP_SENSOR_2 == 1000
-  #define HOTEND2_PULLUP_RESISTOR_OHMS 4700    // Pullup resistor
-  #define HOTEND2_RESISTANCE_25C_OHMS  100000  // Resistance at 25C
-  #define HOTEND2_BETA                 3950    // Beta value
+  #define HOTEND2_PULLUP_RESISTOR_OHMS    4700 // Pullup resistor
+  #define HOTEND2_RESISTANCE_25C_OHMS   100000 // Resistance at 25C
+  #define HOTEND2_BETA                    3950 // Beta value
 #endif
 
 #if TEMP_SENSOR_3 == 1000
-  #define HOTEND3_PULLUP_RESISTOR_OHMS 4700    // Pullup resistor
-  #define HOTEND3_RESISTANCE_25C_OHMS  100000  // Resistance at 25C
-  #define HOTEND3_BETA                 3950    // Beta value
+  #define HOTEND3_PULLUP_RESISTOR_OHMS    4700 // Pullup resistor
+  #define HOTEND3_RESISTANCE_25C_OHMS   100000 // Resistance at 25C
+  #define HOTEND3_BETA                    3950 // Beta value
 #endif
 
 #if TEMP_SENSOR_4 == 1000
-  #define HOTEND4_PULLUP_RESISTOR_OHMS 4700    // Pullup resistor
-  #define HOTEND4_RESISTANCE_25C_OHMS  100000  // Resistance at 25C
-  #define HOTEND4_BETA                 3950    // Beta value
+  #define HOTEND4_PULLUP_RESISTOR_OHMS    4700 // Pullup resistor
+  #define HOTEND4_RESISTANCE_25C_OHMS   100000 // Resistance at 25C
+  #define HOTEND4_BETA                    3950 // Beta value
 #endif
 
 #if TEMP_SENSOR_5 == 1000
-  #define HOTEND5_PULLUP_RESISTOR_OHMS 4700    // Pullup resistor
-  #define HOTEND5_RESISTANCE_25C_OHMS  100000  // Resistance at 25C
-  #define HOTEND5_BETA                 3950    // Beta value
+  #define HOTEND5_PULLUP_RESISTOR_OHMS    4700 // Pullup resistor
+  #define HOTEND5_RESISTANCE_25C_OHMS   100000 // Resistance at 25C
+  #define HOTEND5_BETA                    3950 // Beta value
 #endif
 
 #if TEMP_SENSOR_6 == 1000
-  #define HOTEND6_PULLUP_RESISTOR_OHMS 4700    // Pullup resistor
-  #define HOTEND6_RESISTANCE_25C_OHMS  100000  // Resistance at 25C
-  #define HOTEND6_BETA                 3950    // Beta value
+  #define HOTEND6_PULLUP_RESISTOR_OHMS    4700 // Pullup resistor
+  #define HOTEND6_RESISTANCE_25C_OHMS   100000 // Resistance at 25C
+  #define HOTEND6_BETA                    3950 // Beta value
 #endif
 
 #if TEMP_SENSOR_7 == 1000
-  #define HOTEND7_PULLUP_RESISTOR_OHMS 4700    // Pullup resistor
-  #define HOTEND7_RESISTANCE_25C_OHMS  100000  // Resistance at 25C
-  #define HOTEND7_BETA                 3950    // Beta value
+  #define HOTEND7_PULLUP_RESISTOR_OHMS    4700 // Pullup resistor
+  #define HOTEND7_RESISTANCE_25C_OHMS   100000 // Resistance at 25C
+  #define HOTEND7_BETA                    3950 // Beta value
 #endif
 
 #if TEMP_SENSOR_BED == 1000
-  #define BED_PULLUP_RESISTOR_OHMS     4700    // Pullup resistor
-  #define BED_RESISTANCE_25C_OHMS      100000  // Resistance at 25C
-  #define BED_BETA                     3950    // Beta value
+  #define BED_PULLUP_RESISTOR_OHMS        4700 // Pullup resistor
+  #define BED_RESISTANCE_25C_OHMS       100000 // Resistance at 25C
+  #define BED_BETA                        3950 // Beta value
 #endif
 
 #if TEMP_SENSOR_CHAMBER == 1000
-  #define CHAMBER_PULLUP_RESISTOR_OHMS 4700    // Pullup resistor
-  #define CHAMBER_RESISTANCE_25C_OHMS  100000  // Resistance at 25C
-  #define CHAMBER_BETA                 3950    // Beta value
+  #define CHAMBER_PULLUP_RESISTOR_OHMS    4700 // Pullup resistor
+  #define CHAMBER_RESISTANCE_25C_OHMS   100000 // Resistance at 25C
+  #define CHAMBER_BETA                    3950 // Beta value
 #endif
 
 #if TEMP_SENSOR_COOLER == 1000
-  #define COOLER_PULLUP_RESISTOR_OHMS 4700    // Pullup resistor
-  #define COOLER_RESISTANCE_25C_OHMS  100000  // Resistance at 25C
-  #define COOLER_BETA                 3950    // Beta value
+  #define COOLER_PULLUP_RESISTOR_OHMS     4700 // Pullup resistor
+  #define COOLER_RESISTANCE_25C_OHMS    100000 // Resistance at 25C
+  #define COOLER_BETA                     3950 // Beta value
 #endif
 
 #if TEMP_SENSOR_PROBE == 1000
-  #define PROBE_PULLUP_RESISTOR_OHMS   4700    // Pullup resistor
-  #define PROBE_RESISTANCE_25C_OHMS    100000  // Resistance at 25C
-  #define PROBE_BETA                   3950    // Beta value
+  #define PROBE_PULLUP_RESISTOR_OHMS      4700 // Pullup resistor
+  #define PROBE_RESISTANCE_25C_OHMS     100000 // Resistance at 25C
+  #define PROBE_BETA                      3950 // Beta value
 #endif
 
 #if TEMP_SENSOR_BOARD == 1000
-  #define BOARD_PULLUP_RESISTOR_OHMS   4700    // Pullup resistor
-  #define BOARD_RESISTANCE_25C_OHMS    100000  // Resistance at 25C
-  #define BOARD_BETA                   3950    // Beta value
+  #define BOARD_PULLUP_RESISTOR_OHMS      4700 // Pullup resistor
+  #define BOARD_RESISTANCE_25C_OHMS     100000 // Resistance at 25C
+  #define BOARD_BETA                      3950 // Beta value
 #endif
 
 #if TEMP_SENSOR_REDUNDANT == 1000
-  #define REDUNDANT_PULLUP_RESISTOR_OHMS   4700    // Pullup resistor
-  #define REDUNDANT_RESISTANCE_25C_OHMS    100000  // Resistance at 25C
-  #define REDUNDANT_BETA                   3950    // Beta value
+  #define REDUNDANT_PULLUP_RESISTOR_OHMS  4700 // Pullup resistor
+  #define REDUNDANT_RESISTANCE_25C_OHMS 100000 // Resistance at 25C
+  #define REDUNDANT_BETA                  3950 // Beta value
 #endif
 
 /**
@@ -1625,7 +1625,7 @@
    *
    * :[ 'LCD', 'ONBOARD', 'CUSTOM_CABLE' ]
    */
-  //#define SDCARD_CONNECTION LCD
+  #define SDCARD_CONNECTION ONBOARD
 
   // Enable if SD detect is rendered useless (e.g., by using an SD extender)
   //#define NO_SD_DETECT
@@ -1956,29 +1956,28 @@
  */
 #define BABYSTEPPING
 #if ENABLED(BABYSTEPPING)
-  #define INTEGRATED_BABYSTEPPING         // EXPERIMENTAL integration of babystepping into the Stepper ISR
+  #define INTEGRATED_BABYSTEPPING           // EXPERIMENTAL integration of babystepping into the Stepper ISR
   //#define BABYSTEP_WITHOUT_HOMING
   //#define BABYSTEP_ALWAYS_AVAILABLE       // Allow babystepping at all times (not just during movement).
   //#define BABYSTEP_XY                     // Also enable X/Y Babystepping. Not supported on DELTA!
   #define BABYSTEP_INVERT_Z false           // Change if Z babysteps should go the other way
   //#define BABYSTEP_MILLIMETER_UNITS       // Specify BABYSTEP_MULTIPLICATOR_(XY|Z) in mm instead of micro-steps
-  #define BABYSTEP_MULTIPLICATOR_Z  10       // (steps or mm) Steps or millimeter distance for each Z babystep
+  #define BABYSTEP_MULTIPLICATOR_Z  10      // (steps or mm) Steps or millimeter distance for each Z babystep
   #define BABYSTEP_MULTIPLICATOR_XY 1       // (steps or mm) Steps or millimeter distance for each XY babystep
 
-  #define DOUBLECLICK_FOR_Z_BABYSTEPPING  // Double-click on the Status Screen for Z Babystepping.
+  #define DOUBLECLICK_FOR_Z_BABYSTEPPING    // Double-click on the Status Screen for Z Babystepping.
   #if ENABLED(DOUBLECLICK_FOR_Z_BABYSTEPPING)
     #define DOUBLECLICK_MAX_INTERVAL 1250   // Maximum interval between clicks, in milliseconds.
                                             // Note: Extra time may be added to mitigate controller latency.
-    #define BABYSTEP_ALWAYS_AVAILABLE     // Allow babystepping at all times (not just during movement).
-    //#define MOVE_Z_WHEN_IDLE              // Jump to the move Z menu on doubleclick when printer is idle.
+    #define MOVE_Z_WHEN_IDLE                // Jump to the move Z menu on doubleclick when printer is idle.
     #if ENABLED(MOVE_Z_WHEN_IDLE)
       #define MOVE_Z_IDLE_MULTIPLICATOR 1   // Multiply 1mm by this factor for the move step size.
     #endif
   #endif
 
-  #define BABYSTEP_DISPLAY_TOTAL          // Display total babysteps since last G28
+  //#define BABYSTEP_DISPLAY_TOTAL          // Display total babysteps since last G28
 
-  #define BABYSTEP_ZPROBE_OFFSET          // Combine M851 Z and Babystepping
+  #define BABYSTEP_ZPROBE_OFFSET            // Combine M851 Z and Babystepping
   #if ENABLED(BABYSTEP_ZPROBE_OFFSET)
     //#define BABYSTEP_HOTEND_Z_OFFSET      // For multiple hotends, babystep relative Z offsets
     //#define BABYSTEP_ZPROBE_GFX_OVERLAY   // Enable graphical overlay on Z-offset editor

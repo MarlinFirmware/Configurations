@@ -160,6 +160,22 @@
 //#define LINEAR_AXES 3
 
 /**
+ * Define the number of coordinated linear axes.
+ * See https://github.com/DerAndere1/Marlin/wiki
+ * Each linear axis gets its own stepper control and endstop:
+ *
+ *   Steppers: *_STEP_PIN, *_ENABLE_PIN, *_DIR_PIN, *_ENABLE_ON
+ *   Endstops: *_STOP_PIN, USE_*MIN_PLUG, USE_*MAX_PLUG
+ *       Axes: *_MIN_POS, *_MAX_POS, INVERT_*_DIR
+ *    Planner: DEFAULT_AXIS_STEPS_PER_UNIT, DEFAULT_MAX_FEEDRATE
+ *             DEFAULT_MAX_ACCELERATION, AXIS_RELATIVE_MODES,
+ *             MICROSTEP_MODES, MANUAL_FEEDRATE
+ *
+ * :[3, 4, 5, 6]
+ */
+//#define LINEAR_AXES 3
+
+/**
  * Additional Axis Settings
  *
  * Define AXISn_ROTATES for all axes that rotate or pivot.
@@ -1014,9 +1030,9 @@
  *   M204 R    Retract Acceleration
  *   M204 T    Travel Acceleration
  */
-#define DEFAULT_ACCELERATION           500    // X, Y, Z and E acceleration for printing moves
+#define DEFAULT_ACCELERATION           500    // X, Y, Z ... and E acceleration for printing moves
 #define DEFAULT_RETRACT_ACCELERATION   500    // E acceleration for retracts
-#define DEFAULT_TRAVEL_ACCELERATION   1000    // X, Y, Z acceleration for travel (non printing) moves
+#define DEFAULT_TRAVEL_ACCELERATION   1000    // X, Y, Z ... acceleration for travel (non printing) moves
 
 /**
  * Default Jerk limits (mm/s)

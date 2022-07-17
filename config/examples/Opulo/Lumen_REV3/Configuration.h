@@ -132,11 +132,6 @@
 //#define SERIAL_PORT_3 1
 //#define BAUDRATE_3 250000   // Enable to override BAUDRATE
 
-/**
- * RS485 Hardware serial port definition
- */
-#define RS485_SERIAL_PORT 1
-
 // Enable the Bluetooth serial interface on AT90USB devices
 //#define BLUETOOTH
 
@@ -161,7 +156,7 @@
  *
  * :[3, 4, 5, 6]
  */
-#define LINEAR_AXES 6
+//#define LINEAR_AXES 3
 
 /**
  * Additional Axis Settings
@@ -960,7 +955,6 @@
 // ends are controlled by parallel axes (Y, J). Joints are directly mapped to axes (no kinematics).
 //#define FOAMCUTTER_XYUV
 
-
 //===========================================================================
 //============================== Endstop Settings ===========================
 //===========================================================================
@@ -1153,9 +1147,9 @@
  *   M204 R    Retract Acceleration
  *   M204 T    Travel Acceleration
  */
-#define DEFAULT_ACCELERATION          1000    // X, Y, Z and E acceleration for printing moves
+#define DEFAULT_ACCELERATION          1000    // X, Y, Z ... and E acceleration for printing moves
 #define DEFAULT_RETRACT_ACCELERATION  3000    // E acceleration for retracts
-#define DEFAULT_TRAVEL_ACCELERATION   3000    // X, Y, Z acceleration for travel (non printing) moves
+#define DEFAULT_TRAVEL_ACCELERATION   3000    // X, Y, Z ... acceleration for travel (non printing) moves
 
 /**
  * Default Jerk limits (mm/s)
@@ -1918,7 +1912,7 @@
 //#define LCD_BED_TRAMMING
 
 #if ENABLED(LCD_BED_TRAMMING)
-  #define BED_TRAMMING_INSET_LFRB { 30, 30, 30, 30 }  // (mm) Left, Front, Right, Back insets
+  #define BED_TRAMMING_INSET_LFRB { 30, 30, 30, 30 } // (mm) Left, Front, Right, Back insets
   #define BED_TRAMMING_HEIGHT      0.0        // (mm) Z height of nozzle at leveling points
   #define BED_TRAMMING_Z_HOP       4.0        // (mm) Z height of nozzle between leveling points
   //#define BED_TRAMMING_INCLUDE_CENTER       // Move to the center after the last corner

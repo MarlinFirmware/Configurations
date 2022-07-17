@@ -39,6 +39,21 @@
  */
 #define CONFIGURATION_H_VERSION 02000905
 
+//
+// Simulator currently supports these displays. Choose one!
+//
+#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
+//#define LIGHTWEIGHT_UI
+//#define TFT_CLASSIC_UI
+//#define TFT_COLOR_UI
+
+// Enable parent LCD based on your selection above
+#if EITHER(TFT_CLASSIC_UI, TFT_COLOR_UI)
+  #define TFT_GENERIC
+#elif ENABLED(LIGHTWEIGHT_UI)
+  #define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
+#endif
+
 //===========================================================================
 //============================= Getting Started =============================
 //===========================================================================
@@ -955,7 +970,6 @@
 // ends are controlled by parallel axes (Y, J). Joints are directly mapped to axes (no kinematics).
 //#define FOAMCUTTER_XYUV
 
-
 //===========================================================================
 //============================== Endstop Settings ===========================
 //===========================================================================
@@ -1148,9 +1162,9 @@
  *   M204 R    Retract Acceleration
  *   M204 T    Travel Acceleration
  */
-#define DEFAULT_ACCELERATION          3000    // X, Y, Z and E acceleration for printing moves
+#define DEFAULT_ACCELERATION          3000    // X, Y, Z ... and E acceleration for printing moves
 #define DEFAULT_RETRACT_ACCELERATION  3000    // E acceleration for retracts
-#define DEFAULT_TRAVEL_ACCELERATION   3000    // X, Y, Z acceleration for travel (non printing) moves
+#define DEFAULT_TRAVEL_ACCELERATION   3000    // X, Y, Z ... acceleration for travel (non printing) moves
 
 /**
  * Default Jerk limits (mm/s)
@@ -2330,7 +2344,7 @@
  * SD Card support is disabled by default. If your controller has an SD slot,
  * you must uncomment the following option or it won't work.
  */
-//#define SDSUPPORT
+#define SDSUPPORT
 
 /**
  * SD CARD: ENABLE CRC
@@ -2590,7 +2604,7 @@
 // RepRapDiscount FULL GRAPHIC Smart Controller
 // https://reprap.org/wiki/RepRapDiscount_Full_Graphic_Smart_Controller
 //
-#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
+//#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
 
 //
 // K.3D Full Graphic Smart Controller
@@ -2960,12 +2974,12 @@
 
   // Interface. Enable one of the following options:
   //#define TFT_INTERFACE_FSMC
-  //#define TFT_INTERFACE_SPI
+  #define TFT_INTERFACE_SPI
 
   // TFT Resolution. Enable one of the following options:
   //#define TFT_RES_320x240
   //#define TFT_RES_480x272
-  //#define TFT_RES_480x320
+  #define TFT_RES_480x320
   //#define TFT_RES_1024x600
 #endif
 

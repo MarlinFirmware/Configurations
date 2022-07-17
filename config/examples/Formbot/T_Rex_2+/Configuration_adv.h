@@ -54,87 +54,87 @@
 // Custom Thermistor 1000 parameters
 //
 #if TEMP_SENSOR_0 == 1000
-  #define HOTEND0_PULLUP_RESISTOR_OHMS 4700    // Pullup resistor
-  #define HOTEND0_RESISTANCE_25C_OHMS  100000  // Resistance at 25C
-  #define HOTEND0_BETA                 3950    // Beta value
+  #define HOTEND0_PULLUP_RESISTOR_OHMS    4700 // Pullup resistor
+  #define HOTEND0_RESISTANCE_25C_OHMS   100000 // Resistance at 25C
+  #define HOTEND0_BETA                    3950 // Beta value
 #endif
 
 #if TEMP_SENSOR_1 == 1000
-  #define HOTEND1_PULLUP_RESISTOR_OHMS 4700    // Pullup resistor
-  #define HOTEND1_RESISTANCE_25C_OHMS  100000  // Resistance at 25C
-  #define HOTEND1_BETA                 3950    // Beta value
+  #define HOTEND1_PULLUP_RESISTOR_OHMS    4700 // Pullup resistor
+  #define HOTEND1_RESISTANCE_25C_OHMS   100000 // Resistance at 25C
+  #define HOTEND1_BETA                    3950 // Beta value
 #endif
 
 #if TEMP_SENSOR_2 == 1000
-  #define HOTEND2_PULLUP_RESISTOR_OHMS 4700    // Pullup resistor
-  #define HOTEND2_RESISTANCE_25C_OHMS  100000  // Resistance at 25C
-  #define HOTEND2_BETA                 3950    // Beta value
+  #define HOTEND2_PULLUP_RESISTOR_OHMS    4700 // Pullup resistor
+  #define HOTEND2_RESISTANCE_25C_OHMS   100000 // Resistance at 25C
+  #define HOTEND2_BETA                    3950 // Beta value
 #endif
 
 #if TEMP_SENSOR_3 == 1000
-  #define HOTEND3_PULLUP_RESISTOR_OHMS 4700    // Pullup resistor
-  #define HOTEND3_RESISTANCE_25C_OHMS  100000  // Resistance at 25C
-  #define HOTEND3_BETA                 3950    // Beta value
+  #define HOTEND3_PULLUP_RESISTOR_OHMS    4700 // Pullup resistor
+  #define HOTEND3_RESISTANCE_25C_OHMS   100000 // Resistance at 25C
+  #define HOTEND3_BETA                    3950 // Beta value
 #endif
 
 #if TEMP_SENSOR_4 == 1000
-  #define HOTEND4_PULLUP_RESISTOR_OHMS 4700    // Pullup resistor
-  #define HOTEND4_RESISTANCE_25C_OHMS  100000  // Resistance at 25C
-  #define HOTEND4_BETA                 3950    // Beta value
+  #define HOTEND4_PULLUP_RESISTOR_OHMS    4700 // Pullup resistor
+  #define HOTEND4_RESISTANCE_25C_OHMS   100000 // Resistance at 25C
+  #define HOTEND4_BETA                    3950 // Beta value
 #endif
 
 #if TEMP_SENSOR_5 == 1000
-  #define HOTEND5_PULLUP_RESISTOR_OHMS 4700    // Pullup resistor
-  #define HOTEND5_RESISTANCE_25C_OHMS  100000  // Resistance at 25C
-  #define HOTEND5_BETA                 3950    // Beta value
+  #define HOTEND5_PULLUP_RESISTOR_OHMS    4700 // Pullup resistor
+  #define HOTEND5_RESISTANCE_25C_OHMS   100000 // Resistance at 25C
+  #define HOTEND5_BETA                    3950 // Beta value
 #endif
 
 #if TEMP_SENSOR_6 == 1000
-  #define HOTEND6_PULLUP_RESISTOR_OHMS 4700    // Pullup resistor
-  #define HOTEND6_RESISTANCE_25C_OHMS  100000  // Resistance at 25C
-  #define HOTEND6_BETA                 3950    // Beta value
+  #define HOTEND6_PULLUP_RESISTOR_OHMS    4700 // Pullup resistor
+  #define HOTEND6_RESISTANCE_25C_OHMS   100000 // Resistance at 25C
+  #define HOTEND6_BETA                    3950 // Beta value
 #endif
 
 #if TEMP_SENSOR_7 == 1000
-  #define HOTEND7_PULLUP_RESISTOR_OHMS 4700    // Pullup resistor
-  #define HOTEND7_RESISTANCE_25C_OHMS  100000  // Resistance at 25C
-  #define HOTEND7_BETA                 3950    // Beta value
+  #define HOTEND7_PULLUP_RESISTOR_OHMS    4700 // Pullup resistor
+  #define HOTEND7_RESISTANCE_25C_OHMS   100000 // Resistance at 25C
+  #define HOTEND7_BETA                    3950 // Beta value
 #endif
 
 #if TEMP_SENSOR_BED == 1000
-  #define BED_PULLUP_RESISTOR_OHMS     4700    // Pullup resistor
-  #define BED_RESISTANCE_25C_OHMS      100000  // Resistance at 25C
-  #define BED_BETA                     3950    // Beta value
+  #define BED_PULLUP_RESISTOR_OHMS        4700 // Pullup resistor
+  #define BED_RESISTANCE_25C_OHMS       100000 // Resistance at 25C
+  #define BED_BETA                        3950 // Beta value
 #endif
 
 #if TEMP_SENSOR_CHAMBER == 1000
-  #define CHAMBER_PULLUP_RESISTOR_OHMS 4700    // Pullup resistor
-  #define CHAMBER_RESISTANCE_25C_OHMS  100000  // Resistance at 25C
-  #define CHAMBER_BETA                 3950    // Beta value
+  #define CHAMBER_PULLUP_RESISTOR_OHMS    4700 // Pullup resistor
+  #define CHAMBER_RESISTANCE_25C_OHMS   100000 // Resistance at 25C
+  #define CHAMBER_BETA                    3950 // Beta value
 #endif
 
 #if TEMP_SENSOR_COOLER == 1000
-  #define COOLER_PULLUP_RESISTOR_OHMS 4700    // Pullup resistor
-  #define COOLER_RESISTANCE_25C_OHMS  100000  // Resistance at 25C
-  #define COOLER_BETA                 3950    // Beta value
+  #define COOLER_PULLUP_RESISTOR_OHMS     4700 // Pullup resistor
+  #define COOLER_RESISTANCE_25C_OHMS    100000 // Resistance at 25C
+  #define COOLER_BETA                     3950 // Beta value
 #endif
 
 #if TEMP_SENSOR_PROBE == 1000
-  #define PROBE_PULLUP_RESISTOR_OHMS   4700    // Pullup resistor
-  #define PROBE_RESISTANCE_25C_OHMS    100000  // Resistance at 25C
-  #define PROBE_BETA                   3950    // Beta value
+  #define PROBE_PULLUP_RESISTOR_OHMS      4700 // Pullup resistor
+  #define PROBE_RESISTANCE_25C_OHMS     100000 // Resistance at 25C
+  #define PROBE_BETA                      3950 // Beta value
 #endif
 
 #if TEMP_SENSOR_BOARD == 1000
-  #define BOARD_PULLUP_RESISTOR_OHMS   4700    // Pullup resistor
-  #define BOARD_RESISTANCE_25C_OHMS    100000  // Resistance at 25C
-  #define BOARD_BETA                   3950    // Beta value
+  #define BOARD_PULLUP_RESISTOR_OHMS      4700 // Pullup resistor
+  #define BOARD_RESISTANCE_25C_OHMS     100000 // Resistance at 25C
+  #define BOARD_BETA                      3950 // Beta value
 #endif
 
 #if TEMP_SENSOR_REDUNDANT == 1000
-  #define REDUNDANT_PULLUP_RESISTOR_OHMS   4700    // Pullup resistor
-  #define REDUNDANT_RESISTANCE_25C_OHMS    100000  // Resistance at 25C
-  #define REDUNDANT_BETA                   3950    // Beta value
+  #define REDUNDANT_PULLUP_RESISTOR_OHMS  4700 // Pullup resistor
+  #define REDUNDANT_RESISTANCE_25C_OHMS 100000 // Resistance at 25C
+  #define REDUNDANT_BETA                  3950 // Beta value
 #endif
 
 /**
@@ -4131,7 +4131,8 @@
   #define MAX7219_NUMBER_UNITS 3   // Number of Max7219 units in chain.
   #define MAX7219_ROTATE       0   // Rotate the display clockwise (in multiples of +/- 90°)
                                    // connector at:  right=0   bottom=-90  top=90  left=180
-  #define MAX7219_REVERSE_ORDER    // The individual LED matrix units may be in reversed order
+  #define MAX7219_REVERSE_ORDER    // The order of the LED matrix units may be reversed
+  //#define MAX7219_REVERSE_EACH   // The LEDs in each matrix unit row may be reversed
   //#define MAX7219_SIDE_BY_SIDE   // Big chip+matrix boards can be chained side-by-side
 
   /**

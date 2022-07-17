@@ -597,15 +597,15 @@
 // Above this temperature the heater will be switched off.
 // This can protect components from overheating, but NOT from shorts and failures.
 // (Use MINTEMP for thermistor short/failure protection.)
-#define HEATER_0_MAXTEMP 275
-#define HEATER_1_MAXTEMP 275
-#define HEATER_2_MAXTEMP 275
-#define HEATER_3_MAXTEMP 275
-#define HEATER_4_MAXTEMP 275
-#define HEATER_5_MAXTEMP 275
-#define HEATER_6_MAXTEMP 275
-#define HEATER_7_MAXTEMP 275
-#define BED_MAXTEMP      120
+#define HEATER_0_MAXTEMP 260
+#define HEATER_1_MAXTEMP 260
+#define HEATER_2_MAXTEMP 260
+#define HEATER_3_MAXTEMP 260
+#define HEATER_4_MAXTEMP 260
+#define HEATER_5_MAXTEMP 260
+#define HEATER_6_MAXTEMP 260
+#define HEATER_7_MAXTEMP 260
+#define BED_MAXTEMP      110
 #define CHAMBER_MAXTEMP  60
 
 /**
@@ -993,7 +993,6 @@
 // ends are controlled by parallel axes (Y, J). Joints are directly mapped to axes (no kinematics).
 //#define FOAMCUTTER_XYUV
 
-
 //===========================================================================
 //============================== Endstop Settings ===========================
 //===========================================================================
@@ -1071,7 +1070,6 @@
   #define Z_MIN_PROBE_ENDSTOP_INVERTING false // Set to true to invert the logic of the probe.
 #else
   #define Z_MIN_PROBE_ENDSTOP_INVERTING true // Set to true to invert the logic of the probe.
-#endif
 
 /**
  * Stepper Drivers
@@ -1108,6 +1106,7 @@
 //#define E5_DRIVER_TYPE A4988
 //#define E6_DRIVER_TYPE A4988
 //#define E7_DRIVER_TYPE A4988
+#endif
 
 // Enable this feature if all enabled endstop pins are interrupt-capable.
 // This will remove the need to poll the interrupt pins, saving many CPU cycles.
@@ -1200,9 +1199,9 @@
  *   M204 R    Retract Acceleration
  *   M204 T    Travel Acceleration
  */
-#define DEFAULT_ACCELERATION          1000    // X, Y, Z and E acceleration for printing moves
+#define DEFAULT_ACCELERATION          1000    // X, Y, Z ... and E acceleration for printing moves
 #define DEFAULT_RETRACT_ACCELERATION  1000    // E acceleration for retracts
-#define DEFAULT_TRAVEL_ACCELERATION   1000    // X, Y, Z acceleration for travel (non printing) moves
+#define DEFAULT_TRAVEL_ACCELERATION   1000    // X, Y, Z ... acceleration for travel (non printing) moves
 
 /**
  * Default Jerk limits (mm/s)

@@ -54,87 +54,87 @@
 // Custom Thermistor 1000 parameters
 //
 #if TEMP_SENSOR_0 == 1000
-  #define HOTEND0_PULLUP_RESISTOR_OHMS 4700    // Pullup resistor
-  #define HOTEND0_RESISTANCE_25C_OHMS  100000  // Resistance at 25C
-  #define HOTEND0_BETA                 3950    // Beta value
+  #define HOTEND0_PULLUP_RESISTOR_OHMS    4700 // Pullup resistor
+  #define HOTEND0_RESISTANCE_25C_OHMS   100000 // Resistance at 25C
+  #define HOTEND0_BETA                    3950 // Beta value
 #endif
 
 #if TEMP_SENSOR_1 == 1000
-  #define HOTEND1_PULLUP_RESISTOR_OHMS 4700    // Pullup resistor
-  #define HOTEND1_RESISTANCE_25C_OHMS  100000  // Resistance at 25C
-  #define HOTEND1_BETA                 3950    // Beta value
+  #define HOTEND1_PULLUP_RESISTOR_OHMS    4700 // Pullup resistor
+  #define HOTEND1_RESISTANCE_25C_OHMS   100000 // Resistance at 25C
+  #define HOTEND1_BETA                    3950 // Beta value
 #endif
 
 #if TEMP_SENSOR_2 == 1000
-  #define HOTEND2_PULLUP_RESISTOR_OHMS 4700    // Pullup resistor
-  #define HOTEND2_RESISTANCE_25C_OHMS  100000  // Resistance at 25C
-  #define HOTEND2_BETA                 3950    // Beta value
+  #define HOTEND2_PULLUP_RESISTOR_OHMS    4700 // Pullup resistor
+  #define HOTEND2_RESISTANCE_25C_OHMS   100000 // Resistance at 25C
+  #define HOTEND2_BETA                    3950 // Beta value
 #endif
 
 #if TEMP_SENSOR_3 == 1000
-  #define HOTEND3_PULLUP_RESISTOR_OHMS 4700    // Pullup resistor
-  #define HOTEND3_RESISTANCE_25C_OHMS  100000  // Resistance at 25C
-  #define HOTEND3_BETA                 3950    // Beta value
+  #define HOTEND3_PULLUP_RESISTOR_OHMS    4700 // Pullup resistor
+  #define HOTEND3_RESISTANCE_25C_OHMS   100000 // Resistance at 25C
+  #define HOTEND3_BETA                    3950 // Beta value
 #endif
 
 #if TEMP_SENSOR_4 == 1000
-  #define HOTEND4_PULLUP_RESISTOR_OHMS 4700    // Pullup resistor
-  #define HOTEND4_RESISTANCE_25C_OHMS  100000  // Resistance at 25C
-  #define HOTEND4_BETA                 3950    // Beta value
+  #define HOTEND4_PULLUP_RESISTOR_OHMS    4700 // Pullup resistor
+  #define HOTEND4_RESISTANCE_25C_OHMS   100000 // Resistance at 25C
+  #define HOTEND4_BETA                    3950 // Beta value
 #endif
 
 #if TEMP_SENSOR_5 == 1000
-  #define HOTEND5_PULLUP_RESISTOR_OHMS 4700    // Pullup resistor
-  #define HOTEND5_RESISTANCE_25C_OHMS  100000  // Resistance at 25C
-  #define HOTEND5_BETA                 3950    // Beta value
+  #define HOTEND5_PULLUP_RESISTOR_OHMS    4700 // Pullup resistor
+  #define HOTEND5_RESISTANCE_25C_OHMS   100000 // Resistance at 25C
+  #define HOTEND5_BETA                    3950 // Beta value
 #endif
 
 #if TEMP_SENSOR_6 == 1000
-  #define HOTEND6_PULLUP_RESISTOR_OHMS 4700    // Pullup resistor
-  #define HOTEND6_RESISTANCE_25C_OHMS  100000  // Resistance at 25C
-  #define HOTEND6_BETA                 3950    // Beta value
+  #define HOTEND6_PULLUP_RESISTOR_OHMS    4700 // Pullup resistor
+  #define HOTEND6_RESISTANCE_25C_OHMS   100000 // Resistance at 25C
+  #define HOTEND6_BETA                    3950 // Beta value
 #endif
 
 #if TEMP_SENSOR_7 == 1000
-  #define HOTEND7_PULLUP_RESISTOR_OHMS 4700    // Pullup resistor
-  #define HOTEND7_RESISTANCE_25C_OHMS  100000  // Resistance at 25C
-  #define HOTEND7_BETA                 3950    // Beta value
+  #define HOTEND7_PULLUP_RESISTOR_OHMS    4700 // Pullup resistor
+  #define HOTEND7_RESISTANCE_25C_OHMS   100000 // Resistance at 25C
+  #define HOTEND7_BETA                    3950 // Beta value
 #endif
 
 #if TEMP_SENSOR_BED == 1000
-  #define BED_PULLUP_RESISTOR_OHMS     4700    // Pullup resistor
-  #define BED_RESISTANCE_25C_OHMS      100000  // Resistance at 25C
-  #define BED_BETA                     3950    // Beta value
+  #define BED_PULLUP_RESISTOR_OHMS        4700 // Pullup resistor
+  #define BED_RESISTANCE_25C_OHMS       100000 // Resistance at 25C
+  #define BED_BETA                        3950 // Beta value
 #endif
 
 #if TEMP_SENSOR_CHAMBER == 1000
-  #define CHAMBER_PULLUP_RESISTOR_OHMS 4700    // Pullup resistor
-  #define CHAMBER_RESISTANCE_25C_OHMS  100000  // Resistance at 25C
-  #define CHAMBER_BETA                 3950    // Beta value
+  #define CHAMBER_PULLUP_RESISTOR_OHMS    4700 // Pullup resistor
+  #define CHAMBER_RESISTANCE_25C_OHMS   100000 // Resistance at 25C
+  #define CHAMBER_BETA                    3950 // Beta value
 #endif
 
 #if TEMP_SENSOR_COOLER == 1000
-  #define COOLER_PULLUP_RESISTOR_OHMS 4700    // Pullup resistor
-  #define COOLER_RESISTANCE_25C_OHMS  100000  // Resistance at 25C
-  #define COOLER_BETA                 3950    // Beta value
+  #define COOLER_PULLUP_RESISTOR_OHMS     4700 // Pullup resistor
+  #define COOLER_RESISTANCE_25C_OHMS    100000 // Resistance at 25C
+  #define COOLER_BETA                     3950 // Beta value
 #endif
 
 #if TEMP_SENSOR_PROBE == 1000
-  #define PROBE_PULLUP_RESISTOR_OHMS   4700    // Pullup resistor
-  #define PROBE_RESISTANCE_25C_OHMS    100000  // Resistance at 25C
-  #define PROBE_BETA                   3950    // Beta value
+  #define PROBE_PULLUP_RESISTOR_OHMS      4700 // Pullup resistor
+  #define PROBE_RESISTANCE_25C_OHMS     100000 // Resistance at 25C
+  #define PROBE_BETA                      3950 // Beta value
 #endif
 
 #if TEMP_SENSOR_BOARD == 1000
-  #define BOARD_PULLUP_RESISTOR_OHMS   4700    // Pullup resistor
-  #define BOARD_RESISTANCE_25C_OHMS    100000  // Resistance at 25C
-  #define BOARD_BETA                   3950    // Beta value
+  #define BOARD_PULLUP_RESISTOR_OHMS      4700 // Pullup resistor
+  #define BOARD_RESISTANCE_25C_OHMS     100000 // Resistance at 25C
+  #define BOARD_BETA                      3950 // Beta value
 #endif
 
 #if TEMP_SENSOR_REDUNDANT == 1000
-  #define REDUNDANT_PULLUP_RESISTOR_OHMS   4700    // Pullup resistor
-  #define REDUNDANT_RESISTANCE_25C_OHMS    100000  // Resistance at 25C
-  #define REDUNDANT_BETA                   3950    // Beta value
+  #define REDUNDANT_PULLUP_RESISTOR_OHMS  4700 // Pullup resistor
+  #define REDUNDANT_RESISTANCE_25C_OHMS 100000 // Resistance at 25C
+  #define REDUNDANT_BETA                  3950 // Beta value
 #endif
 
 /**
@@ -473,7 +473,7 @@
  * Hotend Idle Timeout
  * Prevent filament in the nozzle from charring and causing a critical jam.
  */
-//#define HOTEND_IDLE_TIMEOUT
+#define HOTEND_IDLE_TIMEOUT
 #if ENABLED(HOTEND_IDLE_TIMEOUT)
   #define HOTEND_IDLE_TIMEOUT_SEC (5*60)    // (seconds) Time without extruder movement to trigger protection
   #define HOTEND_IDLE_MIN_TRIGGER   180     // (°C) Minimum temperature to enable hotend protection
@@ -908,7 +908,7 @@
    *
    * Set the default state here, change with 'M401 S' or UI, use M500 to save, M502 to reset.
    */
-  #define BLTOUCH_HS_MODE true
+  #define BLTOUCH_HS_MODE false
 
   // Safety: Enable voltage mode settings in the LCD menu.
   //#define BLTOUCH_LCD_VOLTAGE_MENU
@@ -2316,7 +2316,7 @@
  * Currently handles M108, M112, M410, M876
  * NOTE: Not yet implemented for all platforms.
  */
-//#define EMERGENCY_PARSER
+#define EMERGENCY_PARSER
 
 /**
  * Realtime Reporting (requires EMERGENCY_PARSER)
@@ -2510,11 +2510,11 @@
 #define ADVANCED_PAUSE_FEATURE
 #if ENABLED(ADVANCED_PAUSE_FEATURE)
   #define PAUSE_PARK_RETRACT_FEEDRATE         60  // (mm/s) Initial retract feedrate.
-  #define PAUSE_PARK_RETRACT_LENGTH            2  // (mm) Initial retract.
+  #define PAUSE_PARK_RETRACT_LENGTH            5  // (mm) Initial retract.
                                                   // This short retract is done immediately, before parking the nozzle.
   #define FILAMENT_CHANGE_UNLOAD_FEEDRATE     10  // (mm/s) Unload filament feedrate. This can be pretty fast.
   #define FILAMENT_CHANGE_UNLOAD_ACCEL        25  // (mm/s^2) Lower acceleration may allow a faster feedrate.
-  #define FILAMENT_CHANGE_UNLOAD_LENGTH      100  // (mm) The length of filament for a complete unload.
+  #define FILAMENT_CHANGE_UNLOAD_LENGTH      700  // (mm) The length of filament for a complete unload.
                                                   //   For Bowden, the full length of the tube and nozzle.
                                                   //   For direct drive, the full length of the nozzle.
                                                   //   Set to 0 for manual unloading.
@@ -2523,7 +2523,7 @@
                                                   // 0 to disable start loading and skip to fast load only
   #define FILAMENT_CHANGE_FAST_LOAD_FEEDRATE   6  // (mm/s) Load filament feedrate. This can be pretty fast.
   #define FILAMENT_CHANGE_FAST_LOAD_ACCEL     25  // (mm/s^2) Lower acceleration may allow a faster feedrate.
-  #define FILAMENT_CHANGE_FAST_LOAD_LENGTH     0  // (mm) Load length of filament, from extruder gear to nozzle.
+  #define FILAMENT_CHANGE_FAST_LOAD_LENGTH   670  // (mm) Load length of filament, from extruder gear to nozzle.
                                                   //   For Bowden, the full length of the tube and nozzle.
                                                   //   For direct drive, the full length of the nozzle.
   //#define ADVANCED_PAUSE_CONTINUOUS_PURGE       // Purge continuously up to the purge length until interrupted.
@@ -2533,7 +2533,7 @@
                                                   //   Filament can be extruded repeatedly from the Filament Change menu
                                                   //   until extrusion is consistent, and to purge old filament.
   #define ADVANCED_PAUSE_RESUME_PRIME          0  // (mm) Extra distance to prime nozzle after returning from park.
-  //#define ADVANCED_PAUSE_FANS_PAUSE             // Turn off print-cooling fans while the machine is paused.
+  #define ADVANCED_PAUSE_FANS_PAUSE             // Turn off print-cooling fans while the machine is paused.
 
                                                   // Filament Unload does a Retract, Delay, and Purge first:
   #define FILAMENT_UNLOAD_PURGE_RETRACT       13  // (mm) Unload initial retract length.
@@ -2547,11 +2547,11 @@
   //#define FILAMENT_CHANGE_RESUME_ON_INSERT      // Automatically continue / load filament when runout sensor is triggered again.
   //#define PAUSE_REHEAT_FAST_RESUME              // Reduce number of waits by not prompting again post-timeout before continuing.
 
-  //#define PARK_HEAD_ON_PAUSE                    // Park the nozzle during pause and filament change.
+  #define PARK_HEAD_ON_PAUSE                    // Park the nozzle during pause and filament change.
   //#define HOME_BEFORE_FILAMENT_CHANGE           // If needed, home before parking for filament change
 
-  //#define FILAMENT_LOAD_UNLOAD_GCODES           // Add M701/M702 Load/Unload G-codes, plus Load/Unload in the LCD Prepare menu.
-  //#define FILAMENT_UNLOAD_ALL_EXTRUDERS         // Allow M702 to unload all extruders above a minimum target temp (as set by M302)
+  #define FILAMENT_LOAD_UNLOAD_GCODES           // Add M701/M702 Load/Unload G-codes, plus Load/Unload in the LCD Prepare menu.
+  #define FILAMENT_UNLOAD_ALL_EXTRUDERS         // Allow M702 to unload all extruders above a minimum target temp (as set by M302)
 #endif
 
 // @section tmc
@@ -3741,7 +3741,7 @@
 /**
  * Auto-report position with M154 S<seconds>
  */
-//#define AUTO_REPORT_POSITION
+#define AUTO_REPORT_POSITION
 
 /**
  * Include capabilities in M115 output
@@ -3796,11 +3796,11 @@
 //#define NO_WORKSPACE_OFFSETS
 
 // Extra options for the M114 "Current Position" report
-//#define M114_DETAIL         // Use 'M114` for details to check planner calculations
-//#define M114_REALTIME       // Real current position based on forward kinematics
+#define M114_DETAIL         // Use 'M114` for details to check planner calculations
+#define M114_REALTIME       // Real current position based on forward kinematics
 //#define M114_LEGACY         // M114 used to synchronize on every call. Enable if needed.
 
-//#define REPORT_FAN_CHANGE   // Report the new fan speed when changed by M106 (and others)
+#define REPORT_FAN_CHANGE   // Report the new fan speed when changed by M106 (and others)
 
 /**
  * Spend 28 bytes of SRAM to optimize the G-code parser
@@ -3963,12 +3963,12 @@
  * Host Prompt Support enables Marlin to use the host for user prompts so
  * filament runout and other processes can be managed from the host side.
  */
-//#define HOST_ACTION_COMMANDS
+#define HOST_ACTION_COMMANDS
 #if ENABLED(HOST_ACTION_COMMANDS)
-  //#define HOST_PAUSE_M76                // Tell the host to pause in response to M76
-  //#define HOST_PROMPT_SUPPORT           // Initiate host prompts to get user feedback
+  #define HOST_PAUSE_M76                // Tell the host to pause in response to M76
+  #define HOST_PROMPT_SUPPORT           // Initiate host prompts to get user feedback
   #if ENABLED(HOST_PROMPT_SUPPORT)
-    //#define HOST_STATUS_NOTIFICATIONS   // Send some status messages to the host as notifications
+    #define HOST_STATUS_NOTIFICATIONS   // Send some status messages to the host as notifications
   #endif
   //#define HOST_START_MENU_ITEM          // Add a menu item that tells the host to start
   //#define HOST_SHUTDOWN_MENU_ITEM       // Add a menu item that tells the host to shut down
@@ -3979,7 +3979,7 @@
  *
  * Implement M486 to allow Marlin to skip objects
  */
-//#define CANCEL_OBJECTS
+#define CANCEL_OBJECTS
 #if ENABLED(CANCEL_OBJECTS)
   #define CANCEL_OBJECTS_REPORTING // Emit the current object as a status message
 #endif

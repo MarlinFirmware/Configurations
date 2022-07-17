@@ -85,7 +85,7 @@
 // @section info
 
 // Author info of this build printed to the host during boot and M115
-#define STRING_CONFIG_H_AUTHOR "(K8200, @CONSULitAS, pau1ie)" // Who made the changes.
+#define STRING_CONFIG_H_AUTHOR "(K8200,  @CONSULitAS, pau1ie)" // Who made the changes.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
 /**
@@ -639,7 +639,7 @@
     #define DEFAULT_Ki   1.58
     #define DEFAULT_Kd  93.51
   #endif
-#endif // PIDTEMP
+#endif
 
 /**
  * Model Predictive Control for hotend
@@ -983,7 +983,6 @@
 // ends are controlled by parallel axes (Y, J). Joints are directly mapped to axes (no kinematics).
 //#define FOAMCUTTER_XYUV
 
-
 //===========================================================================
 //============================== Endstop Settings ===========================
 //===========================================================================
@@ -1010,18 +1009,18 @@
 #define ENDSTOPPULLUPS
 #if DISABLED(ENDSTOPPULLUPS)
   // Disable ENDSTOPPULLUPS to set pullups individually
-  #define ENDSTOPPULLUP_XMIN
-  #define ENDSTOPPULLUP_YMIN
-  #define ENDSTOPPULLUP_ZMIN
-  //#define ENDSTOPPULLUP_IMIN
-  //#define ENDSTOPPULLUP_JMIN
-  //#define ENDSTOPPULLUP_KMIN
   //#define ENDSTOPPULLUP_XMAX
   //#define ENDSTOPPULLUP_YMAX
   //#define ENDSTOPPULLUP_ZMAX
   //#define ENDSTOPPULLUP_IMAX
   //#define ENDSTOPPULLUP_JMAX
   //#define ENDSTOPPULLUP_KMAX
+  #define ENDSTOPPULLUP_XMIN
+  #define ENDSTOPPULLUP_YMIN
+  #define ENDSTOPPULLUP_ZMIN
+  //#define ENDSTOPPULLUP_IMIN
+  //#define ENDSTOPPULLUP_JMIN
+  //#define ENDSTOPPULLUP_KMIN
   //#define ENDSTOPPULLUP_ZMIN_PROBE
 #endif
 
@@ -1182,9 +1181,9 @@
  *   M204 R    Retract Acceleration
  *   M204 T    Travel Acceleration
  */
-#define DEFAULT_ACCELERATION          1000    // X, Y, Z and E acceleration for printing moves
+#define DEFAULT_ACCELERATION          1000    // X, Y, Z ... and E acceleration for printing moves
 #define DEFAULT_RETRACT_ACCELERATION  1000    // E acceleration for retracts
-#define DEFAULT_TRAVEL_ACCELERATION   1000    // X, Y, Z acceleration for travel (non printing) moves
+#define DEFAULT_TRAVEL_ACCELERATION   1000    // X, Y, Z ... acceleration for travel (non printing) moves
 
 /**
  * Default Jerk limits (mm/s)
@@ -2316,7 +2315,7 @@
 // @section lcd
 
 // K8200: for Display VM8201 with SD slot
-#if EITHER(K8200_VM8201, FULLGRAPHIC_CONTROLLER_LCD_SD)
+#if ANY(K8200_VM8201, FULLGRAPHIC_CONTROLLER_LCD_SD)
 
 /**
  * LCD LANGUAGE
@@ -2393,7 +2392,6 @@
 //
 #define ENCODER_PULSES_PER_STEP 4 // K8200_VM8201: four steps per encoder step
 // FULLGRAPHIC_CONTROLLER_LCD_SD: four steps per menu item
-
 //
 // Use this option to override the number of step signals required to
 // move between next/prev menu items.
@@ -2419,7 +2417,6 @@
 #if ENABLED(FULLGRAPHIC_CONTROLLER_LCD_SD)
   #define REVERSE_ENCODER_DIRECTION
 #endif
-
 //
 // This option reverses the encoder direction for navigating LCD menus.
 //
@@ -2429,7 +2426,6 @@
 #if ENABLED(K8200_VM8201)
   #define REVERSE_MENU_DIRECTION // K8200: for Display VM8201 encoder on right side
 #endif
-
 //
 // This option reverses the encoder direction for Select Screen.
 //
@@ -2497,7 +2493,6 @@
 #if ENABLED(K8200_VM8201)
   #define ULTIMAKERCONTROLLER // K8200: for Display VM8201
 #endif
-
 //
 // ULTIPANEL as seen on Thingiverse.
 //
@@ -2635,10 +2630,11 @@
 // RepRapDiscount FULL GRAPHIC Smart Controller
 // https://reprap.org/wiki/RepRapDiscount_Full_Graphic_Smart_Controller
 //
+
+
 #if ENABLED(FULLGRAPHIC_CONTROLLER_LCD_SD)
   #define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
 #endif
-
 //
 // K.3D Full Graphic Smart Controller
 //
@@ -2773,7 +2769,7 @@
 //
 //#define SILVER_GATE_GLCD_CONTROLLER
 
-#endif // K8200_VM8201 || FULLGRAPHIC_CONTROLLER_LCD_SD
+#endif // K8200_VM8201, FULLGRAPHIC_CONTROLLER_LCD_SD
 
 //=============================================================================
 //==============================  OLED Displays  ==============================
