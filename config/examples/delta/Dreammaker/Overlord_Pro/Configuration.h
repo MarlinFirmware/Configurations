@@ -184,9 +184,6 @@
 /**
  * Additional Axis Settings
  *
- * Define AXISn_ROTATES for all axes that rotate or pivot.
- * Rotational axis coordinates are expressed in degrees.
- *
  * AXISn_NAME defines the letter used to refer to the axis in (most) G-code commands.
  * By convention the names and roles are typically:
  *   'A' : Rotational axis parallel to X
@@ -196,7 +193,7 @@
  *   'V' : Secondary linear axis parallel to Y
  *   'W' : Secondary linear axis parallel to Z
  *
- * Regardless of these settings the axes are internally named I, J, K, U, V, W.
+ * Regardless of these settings the axes are internally named I, J, K.
  */
 #ifdef I_DRIVER_TYPE
   #define AXIS4_NAME 'A' // :['A', 'B', 'C', 'U', 'V', 'W']
