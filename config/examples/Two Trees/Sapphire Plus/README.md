@@ -1,6 +1,27 @@
 ## Two Trees Sapphire Configurations
 
-This folder contains default configurations for the Two Trees Sapphire Plus V2. The V2 has Dual Z Axis limit switches.
+This folder contains two default configurations for the Two Trees Sapphire Plus V2. The V2 has Dual Z Axis limit switches, and the V2.1 has a single Z limit switch, as well as a different board.
+
+## Supported Versions
+
+|Version|Board|Z-axis switches|
+|---|---|---|
+| V2|MKS Robin Nano V1.2|2|
+| V2.1| MKS Robin Nano V1.3|1|
+
+Make sure you always test the endstops/limit switches after using this configuration, as newer printers may have slight electrical and mechanical differences.
+
+#### Configuration differences on V2.1
+
+- Build with BOARD_MKS_ROBIN_NANO_V1_3_F4;
+- Disable ZMAX plug (Z increments lower the bed);
+- Enable INVERT_Z_DIR (Z increments lower the bed);
+- Disable PRINTCOUNTER (not supported with current settings);
+- Rotate TFT 180º;
+- Enable endstops always on;
+- Disable multiple Z endstops;
+
+## Available options
 
 By default the standard Marlin Touch UI will be used. Enable the `SAPPHIRE_PLUS_MKS_UI` option for the MKS UI.
 
