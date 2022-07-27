@@ -3271,7 +3271,6 @@
 
 #endif // HAS_TRINAMIC_CONFIG
 
-
 // @section i2cbus
 
 //
