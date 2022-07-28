@@ -51,10 +51,11 @@
  */
 
 // VM8201 Display unit
-// #define K8200_VM8201
-// Full Graphic Controller e.g.
-//    https://reprap.org/wiki/RepRapDiscount_Full_Graphic_Smart_Controller
-//    or from https://www.open-electronics.org/full-graphic-smart-controller-display-for-3drag-3dprinter/
+//#define K8200_VM8201
+
+// Full Graphic Controller
+//  https://reprap.org/wiki/RepRapDiscount_Full_Graphic_Smart_Controller
+//  or https://www.open-electronics.org/full-graphic-smart-controller-display-for-3drag-3dprinter/
 #define FULLGRAPHIC_CONTROLLER_LCD_SD
 
 // K8204 Z axis upgrade rod and coupler
