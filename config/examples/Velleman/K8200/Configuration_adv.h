@@ -44,7 +44,7 @@
 // @section develop
 
 /**
- * Configuration Export to JSON and INI format
+ * Configuration Export
  *
  * Export the configuration as part of the build. (See signature.py)
  * Output files are saved with the build (e.g., .pio/build/mega2560).
