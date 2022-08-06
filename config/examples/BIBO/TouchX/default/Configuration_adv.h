@@ -35,9 +35,9 @@
 // @section develop
 
 /**
- * Configuration Dump to JSON and INI format
+ * Configuration Export to JSON and INI format
  *
- * Dump the configuration as part of the build. (See signature.py)
+ * Export the configuration as part of the build. (See signature.py)
  * Output files are saved with the build (e.g., .pio/build/mega2560).
  *
  * See `build_all_examples --ini` as an example of config.ini archiving.
@@ -48,7 +48,7 @@
  *  3 = schema.json - The entire configuration schema. (13 = pattern groups)
  *  4 = schema.yml - The entire configuration schema.
  */
-//#define CONFIG_DUMP   // :[1:'JSON', 2:'config.ini', 3:'schema.json', 4:'schema.yml']
+//#define CONFIG_EXPORT   // :[1:'JSON', 2:'config.ini', 3:'schema.json', 4:'schema.yml']
 
 //===========================================================================
 //============================= Thermal Settings ============================
@@ -4312,6 +4312,9 @@
 // M43 - display pin status, toggle pins, watch pins, watch endstops & toggle LED, test servo probe
 //
 //#define PINS_DEBUGGING
+
+// Enable Tests that will run at startup and produce a report
+//#define MARLIN_TEST_BUILD
 
 // Enable Marlin dev mode which adds some special commands
 //#define MARLIN_DEV_MODE
