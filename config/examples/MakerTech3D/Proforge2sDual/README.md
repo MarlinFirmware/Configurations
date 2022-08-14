@@ -20,13 +20,14 @@ Below are possible Configurations tips:-
 
 
 ## Proforge 2s dual servo motor switch over getting hot
-// Only power servos during movement, otherwise leave off to prevent jitter
-Enable #define DEACTIVATE_SERVOS_AFTER_MOVE
+        // Only power servos during movement, otherwise leave off to prevent jitter
+        #define DEACTIVATE_SERVOS_AFTER_MOVE
 
 ## PID Turnig and problem with satble temp
-Enable EEPROM settings so that I can save PID turning.
-Enable PIDTEMPBED for the bed so that I can run PID turnung for the bed
-Enable  #define PID_DEBUG             // Print PID debug data to the serial port. Use 'M303 D' to toggle activation.
-Enable  #define PID_PARAMS_PER_HOTEND // Use separate PID parameters for each extruder (useful for mismatched extruders)
+        Enable EEPROM settings so that I can save PID turning.
+        Enable PIDTEMPBED for the bed so that I can run PID turnung for the bed
+        
+        #define PID_DEBUG             // Print PID debug data to the serial port. Use 'M303 D' to toggle activation.
+        #define PID_PARAMS_PER_HOTEND // Use separate PID parameters for each extruder (useful for mismatched extruders)
 
 
