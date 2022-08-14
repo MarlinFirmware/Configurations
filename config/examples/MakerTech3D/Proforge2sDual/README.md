@@ -23,11 +23,7 @@ Below are possible Configurations tips:-
         // Only power servos during movement, otherwise leave off to prevent jitter
         #define DEACTIVATE_SERVOS_AFTER_MOVE
 
-<<<<<<< HEAD
 ## PID Turnig and problem with stable temperature
-=======
-## PID Turnig and problem with stable temp
->>>>>>> 8fff7fe123d072b19df125a3b278fe9d217b20be
         Enable EEPROM settings so that I can save PID turning.
         Enable PIDTEMPBED for the bed so that I can run PID turnung for the bed
         
