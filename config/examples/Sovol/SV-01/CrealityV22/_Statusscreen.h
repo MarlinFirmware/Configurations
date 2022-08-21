@@ -21,6 +21,8 @@
  */
 #pragma once
 
+#define CONFIG_EXAMPLES_DIR "Sovol/SV-01/CrealityV22"
+
 /**
  * Custom Status Screen bitmap
  *

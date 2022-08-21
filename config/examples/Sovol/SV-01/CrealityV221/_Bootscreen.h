@@ -21,6 +21,8 @@
  */
 #pragma once
 
+#define CONFIG_EXAMPLES_DIR "Sovol/SV-01/CrealityV221"
+
 /**
  * Custom Boot Screen bitmap
  *
