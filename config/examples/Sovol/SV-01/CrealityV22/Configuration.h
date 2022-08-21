@@ -37,7 +37,9 @@
  *
  * Advanced settings can be found in Configuration_adv.h
  */
-#define CONFIGURATION_H_VERSION 02000902
+#define CONFIGURATION_H_VERSION 02010100
+
+//#define SV01_3DTOUCH // Uncomment SV01_3DTOUCH if you want a 3D TOUCH /BLTOUCH enabled
 
 //===========================================================================
 //============================= Getting Started =============================
@@ -1090,7 +1092,9 @@
 /**
  * The BLTouch probe uses a Hall effect sensor and emulates a servo.
  */
-//#define BLTOUCH
+#if ENABLED (SV01_3DTOUCH)
+#define BLTOUCH
+#endif
 
 /**
  * Touch-MI Probe by hotends.fr
@@ -1262,7 +1266,9 @@
 #define Z_PROBE_OFFSET_RANGE_MAX 20
 
 // Enable the M48 repeatability test to test probe accuracy
-//#define Z_MIN_PROBE_REPEATABILITY_TEST
+#if ENABLED(SV01_3DTOUCH)
+  #define Z_MIN_PROBE_REPEATABILITY_TEST
+#endif
 
 // Before deploy/stow pause for user confirmation
 //#define PAUSE_BEFORE_DEPLOY_STOW
@@ -1539,9 +1545,12 @@
  */
 //#define AUTO_BED_LEVELING_3POINT
 //#define AUTO_BED_LEVELING_LINEAR
-//#define AUTO_BED_LEVELING_BILINEAR
+#if ENABLED(SV01_3DTOUCH)
+  #define AUTO_BED_LEVELING_BILINEAR
+#else
+  #define MESH_BED_LEVELING
+#endif
 //#define AUTO_BED_LEVELING_UBL
-//#define MESH_BED_LEVELING
 
 /**
  * Normally G28 leaves leveling disabled on completion. Enable one of
@@ -1740,7 +1749,9 @@
  * - Allows Z homing only when XY positions are known and trusted.
  * - If stepper drivers sleep, XY homing may be required again before Z homing.
  */
-//#define Z_SAFE_HOMING
+#if ENABLED (SV01_3DTOUCH)
+#define Z_SAFE_HOMING
+#endif
 
 #if ENABLED(Z_SAFE_HOMING)
   #define Z_SAFE_HOMING_X_POINT X_CENTER  // X point for Z homing
