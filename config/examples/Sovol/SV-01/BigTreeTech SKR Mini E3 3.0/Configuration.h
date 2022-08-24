@@ -20,9 +20,6 @@
  *
  */
 #pragma once
-#error "Don't build with import-2.1.x configurations!"
-#error "Use the 'bugfix...' or 'release...' configurations matching your Marlin version."
-
 /**
  * Configuration.h
  *
@@ -1884,12 +1881,13 @@
  *   leveling in steps so you can manually adjust the Z height at each grid-point.
  *   With an LCD controller the process is guided step-by-step.
  */
-#if any(SOVOL_FIXED_PROBE,SV01_3DTOUCH)
+#if ANY(SOVOL_FIXED_PROBE,SV01_3DTOUCH)
   //#define AUTO_BED_LEVELING_3POINT
   //#define AUTO_BED_LEVELING_LINEAR
   //#define AUTO_BED_LEVELING_BILINEAR
-  #define AUTO_BED_LEVELING_UBL
-  //#define MESH_BED_LEVELING
+  #define AUTO_BED_LEVELING_ABL
+  #else
+  #define MESH_BED_LEVELING
 #endif
 
 /**
@@ -2101,7 +2099,7 @@
  * - Allows Z homing only when XY positions are known and trusted.
  * - If stepper drivers sleep, XY homing may be required again before Z homing.
  */
-#if any(SOVOL_FIXED_PROBE,SV01_3DTOUCH)
+#if ANY(SOVOL_FIXED_PROBE,SV01_3DTOUCH)
   #define Z_SAFE_HOMING
 #endif
 
