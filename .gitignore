@@ -36,3 +36,6 @@ applet/
 *.exe
 *.out
 *.app
+
+# Tools
+.vscode/
