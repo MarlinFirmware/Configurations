@@ -77,6 +77,7 @@
 
 // #define IS_BOARD_1_3               // uncomment if you have the 1.3 board
 // #define IS_2D                      // uncomment if you have a Neptune 2d (Dual extruder)
+// #define IS_BMG                     // uncomment if you installed BMG-like extruder
 // #define USB_MOD                    // uncomment if you done native USB modification
 #define FIRMWARE_BIN elegoo.bin    // Defines firmware output name
 
@@ -1202,11 +1203,21 @@
  * Override with M92
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#ifdef IS_2D
-  #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 95, 95 }
+
+#ifdef IS_BMG
+  #ifdef IS_2D
+    #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 415, 415 }
+  #else
+    #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 415 }
+  #endif
 #else
-  #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 95 }
+  #ifdef IS_2D
+    #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 95, 95 }
+  #else
+    #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 95 }
+  #endif
 #endif
+
 
 /**
  * Default Max Feed Rate (linear=mm/s, rotational=°/s)
@@ -1214,14 +1225,14 @@
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
 #ifdef IS_2D
-  #define DEFAULT_MAX_FEEDRATE          { 150, 150, 20, 70, 70 }
+  #define DEFAULT_MAX_FEEDRATE          { 150, 150, 40, 70, 70 }
 #else
-  #define DEFAULT_MAX_FEEDRATE          { 150, 150, 20, 70 }
+  #define DEFAULT_MAX_FEEDRATE          { 150, 150, 40, 70 }
 #endif
 
 //#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
-  #define MAX_FEEDRATE_EDIT_VALUES    { 600, 600, 40, 100 } // ...or, set your own edit limits
+  #define MAX_FEEDRATE_EDIT_VALUES    { 600, 600, 70, 100 } // ...or, set your own edit limits
 #endif
 
 /**
@@ -2301,7 +2312,7 @@
   #define NOZZLE_PARK_MOVE          0   // Park motion: 0 = XY Move, 1 = X Only, 2 = Y Only, 3 = X before Y, 4 = Y before X
   #define NOZZLE_PARK_Z_RAISE_MIN   2   // (mm) Always raise Z by at least this distance
   #define NOZZLE_PARK_XY_FEEDRATE 100   // (mm/s) X and Y axes feedrate (also used for delta Z axis)
-  #define NOZZLE_PARK_Z_FEEDRATE    5   // (mm/s) Z axis feedrate (not used for delta printers)
+  #define NOZZLE_PARK_Z_FEEDRATE   10   // (mm/s) Z axis feedrate (not used for delta printers)
 #endif
 
 /**
