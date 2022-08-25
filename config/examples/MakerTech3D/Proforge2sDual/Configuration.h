@@ -89,11 +89,11 @@
 #ifndef MOTHERBOARD
   #define MOTHERBOARD BOARD_MKS_GEN_L
   /**
-   * Pin allocation for the inductive sensor. 
+   * Pin allocation for the inductive sensor.
    * Thanks to  'ellensp' for the help in finding the correct pin.
-   * 
+   *
    */
-  #define Z_MIN_PIN 63  
+  #define Z_MIN_PIN 63
 #endif
 
 /**
