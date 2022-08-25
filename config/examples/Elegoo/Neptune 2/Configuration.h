@@ -41,6 +41,17 @@
  */
 #define CONFIGURATION_H_VERSION 02010100
 
+/**
+ * @section custom
+ * Custom switches (to avoid multiplying configurations).
+ * See README.md for details.
+ */
+//#define IS_BOARD_1_3            // Enable for board v1.3
+//#define IS_2D                   // Enable for the Neptune 2d (Dual extruder)
+//#define IS_BMG                  // Enable for installed BMG-like extruder
+//#define USB_MOD                 // Enable if you've applied the Native USB mods (see README.md)
+#define FIRMWARE_BIN elegoo.bin   // Override the firmware binary output filename
+
 //===========================================================================
 //============================= Getting Started =============================
 //===========================================================================
@@ -66,20 +77,6 @@
 // Author info of this build printed to the host during boot and M115
 #define STRING_CONFIG_H_AUTHOR "(just-trey, EvilGremlin)" // Who made the changes.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
-
-// @section custom
-/**
- * Consolidated list of overrides that are not required in this file. They either simplify
- * managing multiple configurations or override values specified in other files.
- */
-
-// MAIN CONFIGURATION SWITCHES FOR FEATURES - see README.md for more details.
-
-// #define IS_BOARD_1_3               // uncomment if you have the 1.3 board
-// #define IS_2D                      // uncomment if you have a Neptune 2d (Dual extruder)
-// #define IS_BMG                     // uncomment if you installed BMG-like extruder
-// #define USB_MOD                    // uncomment if you done native USB modification
-#define FIRMWARE_BIN elegoo.bin    // Defines firmware output name
 
 /**
  * *** VENDORS PLEASE READ ***
