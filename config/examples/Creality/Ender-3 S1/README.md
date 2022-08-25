@@ -12,7 +12,7 @@ Pay attention to the two versions of the motherboard for the S1, one is using a 
  - Ender 3 printers that come with a firmware version **3.x.x** have the **STM32F4** chip.
  - Check the version number on the STM32Fx chip itself to confirm you have the correct version.
  - Installing 1.x.x stock firmware or a compiled one to the target **STM32F1** on **STM32F4** mainboards **might brick** them! And _vice-versa_.
-    
+
 Where to put the firmware file on the SDCard:
 
  - STM32F1 board: Put the `*.bin` file into the root folder.
