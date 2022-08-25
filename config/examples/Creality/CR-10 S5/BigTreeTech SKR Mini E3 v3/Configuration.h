@@ -2214,7 +2214,7 @@
 // @section temperature
 
 //
-// Preheat Constants - Up to 6 are supported without changes
+// Preheat Constants - Up to 10 are supported without changes
 //
 #define PREHEAT_1_LABEL       "Bed Warmup"
 #define PREHEAT_1_TEMP_HOTEND 0
