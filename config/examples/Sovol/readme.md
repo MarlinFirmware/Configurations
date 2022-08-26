@@ -1,5 +1,4 @@
-Configurations Files for SOVOL SV01 Most Popular Boards (original and Third Parts)
+## Configurations for SOVOL SV01 Most Popular Boards (original and third-party)
 
-Uncomment #SV01_3D Touch if you want to use BLTOUCH/3D Touch Clone
-
-Uncomment #SOVOL_FIXED_PROBE if you Use FIXED_Probe (SKR Mini E3 V3 Only)
+- Enable `SV01_3D` to use the BLTouch / 3D Touch clone.
+- Enable `SOVOL_FIXED_PROBE` if you have the Fixed Probe (SKR Mini E3 V3 Only)
