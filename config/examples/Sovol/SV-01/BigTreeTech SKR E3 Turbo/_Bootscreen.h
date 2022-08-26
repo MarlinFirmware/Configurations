@@ -30,6 +30,7 @@
  * Use the Marlin Bitmap Converter to make your own:
  * https://marlinfw.org/tools/u8glib/converter.html
  */
+
 #define CUSTOM_BOOTSCREEN_BMPWIDTH  112
 
 const unsigned char custom_start_bmp[] PROGMEM = {

@@ -22,14 +22,12 @@
 #pragma once
 
 /**
- * Custom Boot Screen bitmap
- *
- * Place this file in the root with your configuration files
- * and enable SHOW_CUSTOM_BOOTSCREEN in Configuration.h.
- *
- * Use the Marlin Bitmap Converter to make your own:
+ * Made with Marlin Bitmap Converter
  * https://marlinfw.org/tools/u8glib/converter.html
+ *
+ * This bitmap from the file 'sovol.png'
  */
+
 #define CUSTOM_BOOTSCREEN_BMPWIDTH  112
 
 const unsigned char custom_start_bmp[] PROGMEM = {
