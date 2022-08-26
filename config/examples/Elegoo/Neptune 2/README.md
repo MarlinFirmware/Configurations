@@ -1,23 +1,21 @@
-# Elegoo Neptune 2/Neptune 2D/Neptune 2S Configuration
+## Elegoo Neptune 2/Neptune 2D/Neptune 2S Configuration
 
-*IMPORTANT:* Once compiled, be sure to rename `Robin_nano35.bin` to `elegoo.bin` before flashing.
+***IMPORTANT:*** The firmware binary file must be named `elegoo.bin` or it will not flash.
 
-Compiled binaries of configurations are available here: https://github.com/just-trey/Marlin/tree/elegoo-neptune-2/config/Elegoo/Neptune-2
+The provided configuration includes custom switches at the top of `Configuration.h` to simplify the build options. It supports both the ZNP Robin Nano 1.2 and 1.3 Boards with only minor configuration changes. By default, the configuration applies to the 1.3 board without BLTouch.
 
-The configuration provided has custom switches in the `Configuration.h` file `// @section custom` to simplify the build options. This configuration supports the ZNP Robin Nano 1.2 and 1.3 Boards with only minor changes in `// @section custom` and a `default_envs` change in the `platformio.ini` file. The configuration is currently set for the 1.3 board without BLTouch, which is the most common option.
+NOTE: The original Neptune 2 and 2S use the same configurations, but the 2S always uses the 1.3 version of the board.
 
-NOTE: The original Neptune 2 and 2S use the same configurations except the 2S is always a 1.3 version of the board.
+### ZNP Robin Nano 1.2 boards:
+- `Configuration.h`: Disable `IS_BOARD_1_3`.
+- `platformio.ini`: Set `default_envs` to `mks_robin_nano_v1_2`.
 
-## For ZNP Robin Nano 1.2 boards:
-  - In the `Configuration.h` file, ensure `#define IS_BOARD_1_3` is set to `false`.
-  - Update/Ensure `default_envs = mks_robin_nano35` in the `platformio.ini` file.
+### ZNP Robin Nano 1.3 boards:
+- `Configuration.h`: Enable `IS_BOARD_1_3`.
+- `platformio.ini`: Set `default_envs` to `mks_robin_nano_v1_3_f4`.
 
-## For ZNP Robin Nano 1.3 boards:
-  - In the `Configuration.h` file, ensure `#define IS_BOARD_1_3` is set to `true`.
-  - In the `platformio.ini` file update/ensure `default_envs = mks_robin_nano_v1_3_f4`.
+### BLTouch (all boards):
+- `Configuration.h`: Enable `HAS_BLTOUCH`.
 
-## To enable BlTouch (All boards):
-  - In the `Configuration.h` file, ensure `#define HAS_BLTOUCH` is set to `true`.
-
-## For the Neptune 2D (All boards):
-  - In the `Configuration.h` file, ensure `#define IS_2D` is set to `true`.
+### Neptune 2D (All boards):
+- `Configuration.h`: Enable `IS_2D`.
