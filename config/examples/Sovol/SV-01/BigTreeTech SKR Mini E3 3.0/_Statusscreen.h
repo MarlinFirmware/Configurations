@@ -16,9 +16,10 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  *
  */
+#pragma once
 
 /**
  * Custom Status Screen bitmap
@@ -29,8 +30,6 @@
  * Use the Marlin Bitmap Converter to make your own:
  * http://marlinfw.org/tools/u8glib/converter.html
  */
-
-#pragma once
 
 #define STATUS_LOGO_WIDTH 32
 
@@ -65,4 +64,3 @@ const unsigned char status_logo_bmp[] PROGMEM = {
   B00000000,B00011111,B11000000,B00000000,
   B00000000,B00000000,B00000000,B00000000
 };
-

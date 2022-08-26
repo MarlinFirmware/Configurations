@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "Sovol/SV-01/BigTreeTech SKR Mini E3 2.0"
-
 /**
  * Custom Status Screen bitmap
  *

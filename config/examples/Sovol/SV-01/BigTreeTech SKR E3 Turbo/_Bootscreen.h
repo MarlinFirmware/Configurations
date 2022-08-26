@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "Sovol/SV-01/BigTreeTech SKR E3 Turbo"
-
 /**
  * Custom Boot Screen bitmap
  *
@@ -32,6 +30,7 @@
  * Use the Marlin Bitmap Converter to make your own:
  * https://marlinfw.org/tools/u8glib/converter.html
  */
+
 #define CUSTOM_BOOTSCREEN_BMPWIDTH  112
 
 const unsigned char custom_start_bmp[] PROGMEM = {
