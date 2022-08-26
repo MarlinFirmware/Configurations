@@ -749,6 +749,7 @@
  * impact FET heating. This also works fine on a Fotek SSR-10DA Solid State Relay into a 250W
  * heater. If your configuration is significantly different than this and you don't understand
  * the issues involved, don't use bed PID until someone else verifies that your hardware works.
+ * @section bed temp
  */
 #if ANYCUBIC_KOSSEL_ENABLE_BED > 0
   #define PIDTEMPBED
@@ -2283,7 +2284,7 @@
 // @section temperature
 
 //
-// Preheat Constants - Up to 6 are supported without changes
+// Preheat Constants - Up to 10 are supported without changes
 //
 #define PREHEAT_1_LABEL       "PLA"
 #define PREHEAT_1_TEMP_HOTEND 190
