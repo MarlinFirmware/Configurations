@@ -729,6 +729,7 @@
  * impact FET heating. This also works fine on a Fotek SSR-10DA Solid State Relay into a 250W
  * heater. If your configuration is significantly different than this and you don't understand
  * the issues involved, don't use bed PID until someone else verifies that your hardware works.
+ * @section bed temp
  */
 //#define PIDTEMPBED - CR-10 S5 config
 
