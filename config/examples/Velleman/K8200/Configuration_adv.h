@@ -39,7 +39,7 @@
   *
   */
 
-#define CONFIGURATION_ADV_H_VERSION 02010100
+#define CONFIGURATION_ADV_H_VERSION 02010200
 
 // @section develop
 
