@@ -37,7 +37,7 @@
  *
  * Advanced settings can be found in Configuration_adv.h
  */
-#define CONFIGURATION_H_VERSION 02010100
+#define CONFIGURATION_H_VERSION 02010200
 
 //===========================================================================
 //============================= Getting Started =============================
@@ -660,13 +660,13 @@
   #if ENABLED(PID_PARAMS_PER_HOTEND)
     // Specify up to one value per hotend here, according to your setup.
     // If there are fewer values, the last one applies to the remaining hotends.
-    #define DEFAULT_Kp_LIST {  22.20,  22.20 }
-    #define DEFAULT_Ki_LIST {   1.08,   1.08 }
-    #define DEFAULT_Kd_LIST { 114.00, 114.00 }
+    #define DEFAULT_Kp_LIST { 31.30, 31.30 }
+    #define DEFAULT_Ki_LIST {  3.44,  3.44 }
+    #define DEFAULT_Kd_LIST { 71.20, 71.20 }
   #else
-    #define DEFAULT_Kp 31.3
-    #define DEFAULT_Ki 3.44
-    #define DEFAULT_Kd 71.2
+    #define DEFAULT_Kp 31.30
+    #define DEFAULT_Ki  3.44
+    #define DEFAULT_Kd 71.20
   #endif
 #endif
 
@@ -749,9 +749,9 @@
 
   // 120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   // from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
-  #define DEFAULT_bedKp 266.5
-  #define DEFAULT_bedKi 44.56
-  #define DEFAULT_bedKd 62.3
+  #define DEFAULT_bedKp 266.50
+  #define DEFAULT_bedKi  44.56
+  #define DEFAULT_bedKd  62.30
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #endif // PIDTEMPBED
@@ -1760,7 +1760,7 @@
 #endif
 
 #if EITHER(MIN_SOFTWARE_ENDSTOPS, MAX_SOFTWARE_ENDSTOPS)
-  #define SOFT_ENDSTOPS_MENU_ITEM  // Enable/Disable software endstops from the LCD
+  #define SOFT_ENDSTOPS_MENU_ITEM    // Enable/Disable software endstops from the LCD
 #endif
 
 /**
