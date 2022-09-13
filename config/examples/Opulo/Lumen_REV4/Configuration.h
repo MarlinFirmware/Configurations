@@ -20,8 +20,8 @@
  *
  */
 #pragma once
-
-#define CONFIG_EXAMPLES_DIR "Opulo/Lumen_REV4"
+#error "Don't build with import-2.1.x configurations!"
+#error "Use the 'bugfix...' or 'release...' configurations matching your Marlin version."
 
 /**
  * Configuration.h
@@ -891,7 +891,7 @@
   #define DELTA_SEGMENTS_PER_SECOND 200
 
   // After homing move down to a height where XY movement is unconstrained
-  //#define DELTA_HOME_TO_ONE
+  //#define DELTA_HOME_TO_SAFE_ZONE
 
   // Delta calibration menu
   // uncomment to add three points calibration menu option.
@@ -1101,8 +1101,8 @@
 #endif
 
 // Mechanical endstop with COM to ground and NC to Signal uses "false" here (most common setup).
-#define X_MIN_ENDSTOP_INVERTING false  // Set to true to invert the logic of the endstop.
-#define Y_MIN_ENDSTOP_INVERTING false  // Set to true to invert the logic of the endstop.
+#define X_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
+#define Y_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define Z_MIN_ENDSTOP_INVERTING true  // Set to true to invert the logic of the endstop.
 #define I_MIN_ENDSTOP_INVERTING true  // Set to true to invert the logic of the endstop.
 #define J_MIN_ENDSTOP_INVERTING true  // Set to true to invert the logic of the endstop.
@@ -2091,7 +2091,6 @@
  * - Allows Z homing only when XY positions are known and trusted.
  * - If stepper drivers sleep, XY homing may be required again before Z homing.
  */
-
 #define Z_SAFE_HOMING
 
 #if ENABLED(Z_SAFE_HOMING)
@@ -3271,16 +3270,19 @@
  * luminance values can be set from 0 to 255.
  * For NeoPixel LED an overall brightness parameter is also available.
  *
- * *** CAUTION ***
+ *  === CAUTION ===
  *  LED Strips require a MOSFET Chip between PWM lines and LEDs,
  *  as the Arduino cannot handle the current the LEDs will require.
  *  Failure to follow this precaution can destroy your Arduino!
+ *
  *  NOTE: A separate 5V power supply is required! The NeoPixel LED needs
  *  more current than the Arduino 5V linear regulator can produce.
- * *** CAUTION ***
  *
- * LED Type. Enable only one of the following two options.
+ *  Requires PWM frequency between 50 <> 100Hz (Check HAL or variant)
+ *  Use FAST_PWM_FAN, if possible, to reduce fan noise.
  */
+
+// LED Type. Enable only one of the following two options:
 //#define RGB_LED
 //#define RGBW_LED
 
@@ -3289,6 +3291,10 @@
   //#define RGB_LED_G_PIN 43
   //#define RGB_LED_B_PIN 35
   //#define RGB_LED_W_PIN -1
+  //#define RGB_STARTUP_TEST              // For PWM pins, fade between all colors
+  #if ENABLED(RGB_STARTUP_TEST)
+    #define RGB_STARTUP_TEST_INNER_MS 10  // (ms) Reduce or increase fading speed
+  #endif
 #endif
 
 // Support for Adafruit NeoPixel LED driver

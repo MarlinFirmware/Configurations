@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "Opulo/Lumen_REV4"
-
 /**
  * Configuration_adv.h
  *
@@ -483,18 +481,22 @@
 // before a min_temp_error is triggered. (Shouldn't be more than 10.)
 //#define MAX_CONSECUTIVE_LOW_TEMPERATURE_ERROR_ALLOWED 0
 
-// The number of milliseconds a hotend will preheat before starting to check
-// the temperature. This value should NOT be set to the time it takes the
-// hot end to reach the target temperature, but the time it takes to reach
-// the minimum temperature your thermistor can read. The lower the better/safer.
-// This shouldn't need to be more than 30 seconds (30000)
+/**
+ * The number of milliseconds a hotend will preheat before starting to check
+ * the temperature. This value should NOT be set to the time it takes the
+ * hot end to reach the target temperature, but the time it takes to reach
+ * the minimum temperature your thermistor can read. The lower the better/safer.
+ * This shouldn't need to be more than 30 seconds (30000)
+ */
 //#define MILLISECONDS_PREHEAT_TIME 0
 
 // @section extruder
 
-// Extruder runout prevention.
-// If the machine is idle and the temperature over MINTEMP
-// then extrude some filament every couple of SECONDS.
+/**
+ * Extruder runout prevention.
+ * If the machine is idle and the temperature over MINTEMP
+ * then extrude some filament every couple of SECONDS.
+ */
 //#define EXTRUDER_RUNOUT_PREVENT
 #if ENABLED(EXTRUDER_RUNOUT_PREVENT)
   #define EXTRUDER_RUNOUT_MINTEMP 190
@@ -2074,11 +2076,12 @@
  */
 //#define LIN_ADVANCE
 #if ENABLED(LIN_ADVANCE)
-  //#define EXTRA_LIN_ADVANCE_K // Enable for second linear advance constants
+  //#define EXTRA_LIN_ADVANCE_K // Add a second linear advance constant, configurable with M900.
   #define LIN_ADVANCE_K 0.22    // Unit: mm compression per 1mm/s extruder speed
-  //#define LA_DEBUG            // If enabled, this will generate debug information output over USB.
-  //#define EXPERIMENTAL_SCURVE // Enable this option to permit S-Curve Acceleration
+  //#define LA_DEBUG            // Print debug information to serial during operation. Disable for production use.
+  //#define EXPERIMENTAL_SCURVE // Allow S-Curve Acceleration to be used with LA.
   //#define ALLOW_LOW_EJERK     // Allow a DEFAULT_EJERK value of <10. Recommended for direct drive hotends.
+  //#define EXPERIMENTAL_I2S_LA // Allow I2S_STEPPER_STREAM to be used with LA. Performance degrades as the LA step rate reaches ~20kHz.
 #endif
 
 // @section leveling
@@ -2536,7 +2539,7 @@
     // Longer prime to clean out a SINGLENOZZLE
     #define TOOLCHANGE_FS_EXTRA_PRIME          0  // (mm) Extra priming length
     #define TOOLCHANGE_FS_PRIME_SPEED    (4.6*60) // (mm/min) Extra priming feedrate
-    #define TOOLCHANGE_FS_WIPE_RETRACT         0  // (mm) Retract before cooling for less stringing, better wipe, etc.
+    #define TOOLCHANGE_FS_WIPE_RETRACT         0  // (mm) Cutting retraction out of park, for less stringing, better wipe, etc. Adjust with LCD or M217 G.
 
     // Cool after prime to reduce stringing
     #define TOOLCHANGE_FS_FAN                 -1  // Fan index or -1 to skip
@@ -2815,7 +2818,7 @@
   #if AXIS_IS_TMC(X)
     #define X_CURRENT       800        // (mA) RMS current. Multiply by 1.414 for peak current.
     #define X_CURRENT_HOME  X_CURRENT  // (mA) RMS current for sensorless homing
-    #define X_MICROSTEPS      64      // 0..256
+    #define X_MICROSTEPS     64        // 0..256
     #define X_RSENSE          0.11
     #define X_CHAIN_POS      -1        // -1..0: Not chained. 1: MCU MOSI connected. 2: Next in chain, ...
     //#define X_INTERPOLATE  true      // Enable to override 'INTERPOLATE' for the X axis
@@ -2835,7 +2838,7 @@
   #if AXIS_IS_TMC(Y)
     #define Y_CURRENT       800
     #define Y_CURRENT_HOME  Y_CURRENT
-    #define Y_MICROSTEPS      64
+    #define Y_MICROSTEPS     64
     #define Y_RSENSE          0.11
     #define Y_CHAIN_POS      -1
     //#define Y_INTERPOLATE  true
@@ -3251,9 +3254,9 @@
 
   #if EITHER(SENSORLESS_HOMING, SENSORLESS_PROBING)
     // TMC2209: 0...255. TMC2130: -64...63
-    #define X_STALL_SENSITIVITY  60
+    #define X_STALL_SENSITIVITY 60
     #define X2_STALL_SENSITIVITY X_STALL_SENSITIVITY
-    #define Y_STALL_SENSITIVITY  50
+    #define Y_STALL_SENSITIVITY 50
     #define Y2_STALL_SENSITIVITY Y_STALL_SENSITIVITY
     //#define Z_STALL_SENSITIVITY  8
     //#define Z2_STALL_SENSITIVITY Z_STALL_SENSITIVITY
@@ -3545,7 +3548,6 @@
      * - Due to the limited power resolution this is only approximate.
      */
     //#define LASER_POWER_TRAP
-
 
     //
     // Laser I2C Ammeter (High precision INA226 low/high side module)
@@ -4168,7 +4170,7 @@
 /**
  * WiFi Support (Espressif ESP32 WiFi)
  */
-//#define WIFISUPPORT         // Marlin embedded WiFi managenent
+//#define WIFISUPPORT         // Marlin embedded WiFi management
 //#define ESP3D_WIFISUPPORT   // ESP3D Library WiFi management (https://github.com/luc-github/ESP3DLib)
 
 #if EITHER(WIFISUPPORT, ESP3D_WIFISUPPORT)
