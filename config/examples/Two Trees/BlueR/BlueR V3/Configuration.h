@@ -20,11 +20,10 @@
  *
  */
 #pragma once
-#error "Don't build with import-2.1.x configurations!"
-#error "Use the 'bugfix...' or 'release...' configurations matching your Marlin version."
 
 //#define BLUER_TMC2209 // Enable for the TMC2209 driver version
 //#define BLUER_BLTOUCH // Enable if you want to use BLTOUCH
+// #define MKS_13 //Enable if your board is MKS 1.3 with solders TMC2225
 
 /**
  * Configuration.h
@@ -92,8 +91,13 @@
 
 // Choose the name from boards.h that matches your setup
 #ifndef MOTHERBOARD
-  #define MOTHERBOARD BOARD_MKS_ROBIN_NANO
+  #if ENABLED(MKS_13)
+    #define MOTHERBOARD BOARD_MKS_ROBIN_NANO_V1_3_F4
+  #else
+    #define MOTHERBOARD BOARD_MKS_ROBIN_NANO
+  #endif
 #endif
+
 
 /**
  * Select the serial port on the board to use for communication with the host.
@@ -170,7 +174,11 @@
 #else
   #define X_DRIVER_TYPE TMC2208_STANDALONE
   #define Y_DRIVER_TYPE TMC2208_STANDALONE
-  #define Z_DRIVER_TYPE A4988
+  #if ENABLED(MKS_13)
+    #define Z_DRIVER_TYPE TMC2208_STANDALONE
+  #else
+    #define Z_DRIVER_TYPE A4988
+  #endif
 #endif
 //#define X2_DRIVER_TYPE A4988
 //#define Y2_DRIVER_TYPE A4988
@@ -186,7 +194,11 @@
 #if ENABLED(BLUER_TMC2209)
   #define E0_DRIVER_TYPE TMC2209_STANDALONE
 #else
-  #define E0_DRIVER_TYPE A4988
+  #if ENABLED(MKS_13)
+    #define E0_DRIVER_TYPE TMC2208_STANDALONE
+  #else
+    #define E0_DRIVER_TYPE A4988
+  #endif
 #endif
 //#define E1_DRIVER_TYPE A4988
 //#define E2_DRIVER_TYPE A4988
@@ -2404,9 +2416,11 @@
  *
  * View the current statistics with M78.
  */
-#define PRINTCOUNTER
-#if ENABLED(PRINTCOUNTER)
-  #define PRINTCOUNTER_SAVE_INTERVAL 60 // (minutes) EEPROM save interval during print. A value of 0 will save stats at end of print.
+#if DISABLED (MKS_13)
+  #define PRINTCOUNTER
+  #if ENABLED(PRINTCOUNTER)
+    #define PRINTCOUNTER_SAVE_INTERVAL 60 // (minutes) EEPROM save interval during print. A value of 0 will save stats at end of print.
+  #endif
 #endif
 
 // @section security
@@ -3037,7 +3051,6 @@
 //#define ANYCUBIC_LCD_CHIRON
 #if EITHER(ANYCUBIC_LCD_I3MEGA, ANYCUBIC_LCD_CHIRON)
   //#define ANYCUBIC_LCD_DEBUG
-  //#define ANYCUBIC_LCD_GCODE_EXT  // Add ".gcode" to menu entries for DGUS clone compatibility
 #endif
 
 //
@@ -3306,19 +3319,16 @@
  * luminance values can be set from 0 to 255.
  * For NeoPixel LED an overall brightness parameter is also available.
  *
- *  === CAUTION ===
+ * *** CAUTION ***
  *  LED Strips require a MOSFET Chip between PWM lines and LEDs,
  *  as the Arduino cannot handle the current the LEDs will require.
  *  Failure to follow this precaution can destroy your Arduino!
- *
  *  NOTE: A separate 5V power supply is required! The NeoPixel LED needs
  *  more current than the Arduino 5V linear regulator can produce.
+ * *** CAUTION ***
  *
- *  Requires PWM frequency between 50 <> 100Hz (Check HAL or variant)
- *  Use FAST_PWM_FAN, if possible, to reduce fan noise.
+ * LED Type. Enable only one of the following two options.
  */
-
-// LED Type. Enable only one of the following two options:
 //#define RGB_LED
 //#define RGBW_LED
 
@@ -3327,10 +3337,6 @@
   //#define RGB_LED_G_PIN 43
   //#define RGB_LED_B_PIN 35
   //#define RGB_LED_W_PIN -1
-  //#define RGB_STARTUP_TEST              // For PWM pins, fade between all colors
-  #if ENABLED(RGB_STARTUP_TEST)
-    #define RGB_STARTUP_TEST_INNER_MS 10  // (ms) Reduce or increase fading speed
-  #endif
 #endif
 
 // Support for Adafruit NeoPixel LED driver
