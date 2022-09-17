@@ -20,6 +20,8 @@
  *
  */
 #pragma once
+#error "Don't build with import-2.1.x configurations!"
+#error "Use the 'bugfix...' or 'release...' configurations matching your Marlin version."
 
 //#define BLUER_TMC2209 // Enable for the TMC2209 driver version
 //#define BLUER_BLTOUCH // Enable if you want to use BLTOUCH
