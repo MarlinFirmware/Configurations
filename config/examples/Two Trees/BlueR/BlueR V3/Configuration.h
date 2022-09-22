@@ -25,6 +25,7 @@
 
 //#define BLUER_TMC2209 // Enable for the TMC2209 driver version
 //#define BLUER_BLTOUCH // Enable if you want to use BLTOUCH
+//#define MKS_13        // Enable for MKS 1.3 board with soldered TMC2225 drivers
 
 /**
  * Configuration.h
@@ -92,7 +93,11 @@
 
 // Choose the name from boards.h that matches your setup
 #ifndef MOTHERBOARD
-  #define MOTHERBOARD BOARD_MKS_ROBIN_NANO
+  #if ENABLED(MKS_13)
+    #define MOTHERBOARD BOARD_MKS_ROBIN_NANO_V1_3_F4
+  #else
+    #define MOTHERBOARD BOARD_MKS_ROBIN_NANO
+  #endif
 #endif
 
 /**
@@ -164,12 +169,15 @@
  * :['A4988', 'A5984', 'DRV8825', 'LV8729', 'TB6560', 'TB6600', 'TMC2100', 'TMC2130', 'TMC2130_STANDALONE', 'TMC2160', 'TMC2160_STANDALONE', 'TMC2208', 'TMC2208_STANDALONE', 'TMC2209', 'TMC2209_STANDALONE', 'TMC26X', 'TMC26X_STANDALONE', 'TMC2660', 'TMC2660_STANDALONE', 'TMC5130', 'TMC5130_STANDALONE', 'TMC5160', 'TMC5160_STANDALONE']
  */
 #if ENABLED(BLUER_TMC2209)
-  #define X_DRIVER_TYPE TMC2209_STANDALONE
-  #define Y_DRIVER_TYPE TMC2209_STANDALONE
-  #define Z_DRIVER_TYPE TMC2209_STANDALONE
+  #define BASE_DRIVER_TYPE TMC2209_STANDALONE
 #else
-  #define X_DRIVER_TYPE TMC2208_STANDALONE
-  #define Y_DRIVER_TYPE TMC2208_STANDALONE
+  #define BASE_DRIVER_TYPE TMC2208_STANDALONE
+#endif
+#define X_DRIVER_TYPE BASE_DRIVER_TYPE
+#define Y_DRIVER_TYPE BASE_DRIVER_TYPE
+#if ENABLED(MKS_13)
+  #define Z_DRIVER_TYPE BASE_DRIVER_TYPE
+#else
   #define Z_DRIVER_TYPE A4988
 #endif
 //#define X2_DRIVER_TYPE A4988
@@ -183,8 +191,8 @@
 //#define U_DRIVER_TYPE  A4988
 //#define V_DRIVER_TYPE  A4988
 //#define W_DRIVER_TYPE  A4988
-#if ENABLED(BLUER_TMC2209)
-  #define E0_DRIVER_TYPE TMC2209_STANDALONE
+#if ENABLED(MKS_13)
+  #define E0_DRIVER_TYPE BASE_DRIVER_TYPE
 #else
   #define E0_DRIVER_TYPE A4988
 #endif
@@ -2039,7 +2047,7 @@
   //=================================== Mesh ==================================
   //===========================================================================
 
-  #define MESH_INSET 15         // Set Mesh bounds as an inset region of the bed
+  #define MESH_INSET 15          // Set Mesh bounds as an inset region of the bed
   #define GRID_MAX_POINTS_X 3    // Don't use more than 7 points per axis, implementation limited.
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
@@ -2056,7 +2064,7 @@
 #if ENABLED(LCD_BED_LEVELING)
   #define MESH_EDIT_Z_STEP  0.025 // (mm) Step size while manually probing Z axis.
   #define LCD_PROBE_Z_RANGE 4     // (mm) Z Range centered on Z_MIN_POS for LCD Z adjustment
-  #define MESH_EDIT_MENU        // Add a menu to edit mesh points
+  #define MESH_EDIT_MENU          // Add a menu to edit mesh points
 #endif
 
 // Add a menu item to move between bed corners for manual bed adjustment
@@ -2065,7 +2073,7 @@
 #if ENABLED(LCD_BED_TRAMMING)
   #define BED_TRAMMING_INSET_LFRB { 30, 30, 30, 30 } // (mm) Left, Front, Right, Back insets
   #define BED_TRAMMING_HEIGHT      0.0        // (mm) Z height of nozzle at leveling points
-  #define BED_TRAMMING_Z_HOP       10        // (mm) Z height of nozzle between leveling points
+  #define BED_TRAMMING_Z_HOP      10.0        // (mm) Z height of nozzle between leveling points
   #define BED_TRAMMING_INCLUDE_CENTER         // Move to the center after the last corner
   //#define BED_TRAMMING_USE_PROBE
   #if ENABLED(BED_TRAMMING_USE_PROBE)
@@ -2404,7 +2412,9 @@
  *
  * View the current statistics with M78.
  */
-#define PRINTCOUNTER
+#if DISABLED(MKS_13)
+  #define PRINTCOUNTER
+#endif
 #if ENABLED(PRINTCOUNTER)
   #define PRINTCOUNTER_SAVE_INTERVAL 60 // (minutes) EEPROM save interval during print. A value of 0 will save stats at end of print.
 #endif
