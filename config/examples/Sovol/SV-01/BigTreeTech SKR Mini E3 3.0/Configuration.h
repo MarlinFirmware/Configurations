@@ -39,7 +39,9 @@
  */
 #define CONFIGURATION_H_VERSION 02010200
 
+// @section custom
 //#define SOVOL_FIXED_PROBE
+//#define SV01_3DTOUCH // Enable for 3D Touch / BLTouch
 
 //===========================================================================
 //============================= Getting Started =============================
@@ -1341,7 +1343,9 @@
 /**
  * The BLTouch probe uses a Hall effect sensor and emulates a servo.
  */
-//#define BLTOUCH
+#if ENABLED(SV01_3DTOUCH)
+  #define BLTOUCH
+#endif
 
 /**
  * MagLev V4 probe by MDD
@@ -1582,7 +1586,9 @@
 #define Z_PROBE_OFFSET_RANGE_MAX 20
 
 // Enable the M48 repeatability test to test probe accuracy
-//#define Z_MIN_PROBE_REPEATABILITY_TEST
+#if ENABLED(SV01_3DTOUCH)
+  #define Z_MIN_PROBE_REPEATABILITY_TEST
+#endif
 
 // Before deploy/stow pause for user confirmation
 //#define PAUSE_BEFORE_DEPLOY_STOW
@@ -1881,13 +1887,14 @@
  *   leveling in steps so you can manually adjust the Z height at each grid-point.
  *   With an LCD controller the process is guided step-by-step.
  */
-#ifdef SOVOL_FIXED_PROBE
-  //#define AUTO_BED_LEVELING_3POINT
-  //#define AUTO_BED_LEVELING_LINEAR
-  //#define AUTO_BED_LEVELING_BILINEAR
+#if EITHER(SOVOL_FIXED_PROBE, SV01_3DTOUCH)
   #define AUTO_BED_LEVELING_UBL
-  //#define MESH_BED_LEVELING
+#else
+  #define MESH_BED_LEVELING
 #endif
+//#define AUTO_BED_LEVELING_3POINT
+//#define AUTO_BED_LEVELING_LINEAR
+//#define AUTO_BED_LEVELING_BILINEAR
 
 /**
  * Normally G28 leaves leveling disabled on completion. Enable one of
@@ -2098,7 +2105,7 @@
  * - Allows Z homing only when XY positions are known and trusted.
  * - If stepper drivers sleep, XY homing may be required again before Z homing.
  */
-#ifdef SOVOL_FIXED_PROBE
+#if EITHER(SOVOL_FIXED_PROBE, SV01_3DTOUCH)
   #define Z_SAFE_HOMING
 #endif
 
