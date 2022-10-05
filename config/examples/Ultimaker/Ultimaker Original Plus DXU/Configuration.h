@@ -20,6 +20,8 @@
  *
  */
 #pragma once
+#error "Don't build with import-2.1.x configurations!"
+#error "Use the 'bugfix...' or 'release...' configurations matching your Marlin version."
 
 /**
  * Configuration.h
@@ -260,9 +262,6 @@
  */
 //#define MMU_MODEL PRUSA_MMU2
 
-// Switch extruders by bumping toolhead, requires EVENT_GCODE_TOOLCHANGE_#
-//#define MECHANICAL_SWITCHING_EXTRUDER
-
 // A dual extruder that uses a single stepper motor
 //#define SWITCHING_EXTRUDER
 #if ENABLED(SWITCHING_EXTRUDER)
@@ -273,10 +272,7 @@
   #endif
 #endif
 
-// Switch nozzles by bumping toolhead, requires EVENT_GCODE_TOOLCHANGE_#
-#define MECHANICAL_SWITCHING_NOZZLE
-
-// A dual-nozzle that uses a servomotor to raise/lower one (or both) of the nozzles, can be combined with SWITCHING_EXTRUDER
+// A dual-nozzle that uses a servomotor to raise/lower one (or both) of the nozzles
 //#define SWITCHING_NOZZLE
 #if ENABLED(SWITCHING_NOZZLE)
   #define SWITCHING_NOZZLE_SERVO_NR 0
@@ -395,9 +391,9 @@
 // Offset of the extruders (uncomment if using more than one and relying on firmware to position when changing).
 // The offset has to be X=0, Y=0 for the extruder 0 hotend (default extruder).
 // For the other hotends it is their distance from the extruder 0 hotend.
-#define HOTEND_OFFSET_X { 0.0, 19.00 } // (mm) relative X-offset for each nozzle
+#define HOTEND_OFFSET_X { 0.0, 19.00 }   // (mm) relative X-offset for each nozzle
 //#define HOTEND_OFFSET_Y { 0.0, 0.00 }  // (mm) relative Y-offset for each nozzle
-#define HOTEND_OFFSET_Z { 0.0, -2 }  // (mm) relative Z-offset for each nozzle
+#define HOTEND_OFFSET_Z { 0.0, -2 }      // (mm) relative Z-offset for each nozzle
 
 // @section psu control
 
@@ -502,7 +498,7 @@
  *    30 : 100kΩ  Kis3d Silicone heating mat 200W/300W with 6mm precision cast plate (EN AW 5083) NTC100K - beta 3950
  *    60 : 100kΩ  Maker's Tool Works Kapton Bed Thermistor - beta 3950
  *    61 : 100kΩ  Formbot/Vivedino 350°C Thermistor - beta 3950
- *    66 : 4.7MΩ  Dyze Design High Temperature Thermistor
+ *    66 : 4.7MΩ  Dyze Design / Trianglelab T-D500 500°C High Temperature Thermistor
  *    67 : 500kΩ  SliceEngineering 450°C Thermistor
  *    68 : PT100 amplifier board from Dyze Design
  *    70 : 100kΩ  bq Hephestos 2
@@ -659,17 +655,17 @@
 
 #if ENABLED(PIDTEMP)
   //#define PID_DEBUG             // Print PID debug data to the serial port. Use 'M303 D' to toggle activation.
-  #define PID_PARAMS_PER_HOTEND // Use separate PID parameters for each extruder (useful for mismatched extruders)
+  #define PID_PARAMS_PER_HOTEND   // Use separate PID parameters for each extruder (useful for mismatched extruders)
                                   // Set/get with G-code: M301 E[extruder number, 0-2]
 
   #if ENABLED(PID_PARAMS_PER_HOTEND)
     // Specify up to one value per hotend here, according to your setup.
     // If there are fewer values, the last one applies to the remaining hotends.
-    #define DEFAULT_Kp_LIST {  13.2,  13.2 }
+    #define DEFAULT_Kp_LIST {  13.20,  13.20 }
     #define DEFAULT_Ki_LIST {   1.17,   1.17 }
     #define DEFAULT_Kd_LIST {  37.31,  37.31 }
   #else
-    #define DEFAULT_Kp  13.2
+    #define DEFAULT_Kp  13.20
     #define DEFAULT_Ki   1.17
     #define DEFAULT_Kd  37.31
   #endif
@@ -737,9 +733,9 @@
  * @section bed temp
  */
 #define PIDTEMPBED
-//Ultimainboard v2.1.1 appears to use mosfet for heated bed
-//https://github.com/Ultimaker/Ultimaker-Original-Plus/blob/master/1091_Main_board_v2.1.1_(x1)/Main%20Board%20V2.1.1.pdf
-//http://3dprintingforum.us/viewtopic.php?p=11752#p11757
+// Ultimainboard v2.1.1 appears to use MOSFET for heated bed
+// https://github.com/Ultimaker/Ultimaker-Original-Plus/blob/master/1091_Main_board_v2.1.1_(x1)/Main%20Board%20V2.1.1.pdf
+// http://3dprintingforum.us/viewtopic.php?p=11752#p11757
 
 //#define BED_LIMIT_SWITCHING
 
@@ -758,7 +754,7 @@
   // 120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   // from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
   #define DEFAULT_bedKp 124.55
-  #define DEFAULT_bedKi 23.46
+  #define DEFAULT_bedKi  23.46
   #define DEFAULT_bedKd 165.29
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
@@ -1240,7 +1236,7 @@
   //#define DEFAULT_VJERK  0.3
   //#define DEFAULT_WJERK  0.3
 
-  #define TRAVEL_EXTRA_XYJERK 10.0     // Additional jerk allowance for all travel moves
+  #define TRAVEL_EXTRA_XYJERK 10.0      // Additional jerk allowance for all travel moves
 
   #define LIMITED_JERK_EDITING          // Limit edit via M205 or LCD to DEFAULT_aJERK * 2
   #if ENABLED(LIMITED_JERK_EDITING)
@@ -1785,14 +1781,14 @@
  * For other boards you may need to define FIL_RUNOUT_PIN, FIL_RUNOUT2_PIN, etc.
  */
 //#define FILAMENT_RUNOUT_SENSOR
-#define FIL_RUNOUT_PIN 54 //ADC0
-#define FIL_RUNOUT2_PIN 55 //ADC1
 #if ENABLED(FILAMENT_RUNOUT_SENSOR)
   #define FIL_RUNOUT_ENABLED_DEFAULT true // Enable the sensor on startup. Override with M412 followed by M500.
   #define NUM_RUNOUT_SENSORS   2          // Number of sensors, up to one per extruder. Define a FIL_RUNOUT#_PIN for each.
+  #define FIL_RUNOUT_PIN  54 // ADC0
+  #define FIL_RUNOUT2_PIN 55 // ADC1
 
   #define FIL_RUNOUT_STATE     LOW        // Pin state indicating that filament is NOT present.
-  //#define FIL_RUNOUT_PULLUP               // Use internal pullup for filament runout pins.
+  //#define FIL_RUNOUT_PULLUP             // Use internal pullup for filament runout pins.
   //#define FIL_RUNOUT_PULLDOWN           // Use internal pulldown for filament runout pins.
   //#define WATCH_ALL_RUNOUT_SENSORS      // Execute runout script on any triggering sensor, not only for the active extruder.
                                           // This is automatically enabled for MIXING_EXTRUDERs.
@@ -2377,6 +2373,8 @@
  */
 #define PRINTJOB_TIMER_AUTOSTART
 
+// @section stats
+
 /**
  * Print Counter
  *
@@ -2393,6 +2391,8 @@
 #if ENABLED(PRINTCOUNTER)
   #define PRINTCOUNTER_SAVE_INTERVAL 60 // (minutes) EEPROM save interval during print. A value of 0 will save stats at end of print.
 #endif
+
+// @section security
 
 /**
  * Password
@@ -2429,7 +2429,7 @@
 //============================= LCD and SD support ============================
 //=============================================================================
 
-// @section lcd
+// @section interface
 
 /**
  * LCD LANGUAGE
@@ -2546,6 +2546,16 @@
 //#define REVERSE_SELECT_DIRECTION
 
 //
+// Encoder EMI Noise Filter
+//
+// This option increases encoder samples to filter out phantom encoder clicks caused by EMI noise.
+//
+//#define ENCODER_NOISE_FILTER
+#if ENABLED(ENCODER_NOISE_FILTER)
+  #define ENCODER_SAMPLES 10
+#endif
+
+//
 // Individual Axis Homing
 //
 // Add individual axis homing items (Home X, Home Y, and Home Z) to the LCD menu.
@@ -2575,6 +2585,7 @@
 //======================== LCD / Controller Selection =========================
 //========================   (Character-based LCDs)   =========================
 //=============================================================================
+// @section lcd
 
 //
 // RepRapDiscount Smart Controller.
@@ -2876,6 +2887,12 @@
 //
 //#define SILVER_GATE_GLCD_CONTROLLER
 
+//
+// eMotion Tech LCD with SD
+// https://www.reprap-france.com/produit/1234568748-ecran-graphique-128-x-64-points-2-1
+//
+//#define EMOTION_TECH_LCD
+
 //=============================================================================
 //==============================  OLED Displays  ==============================
 //=============================================================================
@@ -2981,6 +2998,11 @@
 #endif
 
 //
+// CR-6 OEM touch screen. A DWIN display with touch.
+//
+//#define DWIN_CREALITY_TOUCHLCD
+
+//
 // Touch-screen LCD for Malyan M200/M300 printers
 //
 //#define MALYAN_LCD
@@ -3005,6 +3027,12 @@
 // 320x240 Nextion 2.8" serial TFT Resistive Touch Screen NX3224T028
 //
 //#define NEXTION_TFT
+
+//
+// PanelDue touch controller by Escher3D
+// http://escher3d.com/pages/order/products/product2.php
+//
+//#define PANELDUE
 
 //
 // Third-party or vendor-customized controller interfaces.
@@ -3205,7 +3233,7 @@
 //=============================== Extra Features ==============================
 //=============================================================================
 
-// @section extras
+// @section fans
 
 // Set number of user-controlled fans. Disable to use all board-defined fans.
 // :[1,2,3,4,5,6,7,8]
@@ -3229,13 +3257,17 @@
 // duty cycle is attained.
 //#define SOFT_PWM_DITHER
 
+// @section extras
+
+// Support for the BariCUDA Paste Extruder
+//#define BARICUDA
+
+// @section lights
+
 // Temperature status LEDs that display the hotend and bed temperature.
 // If all hotends, bed temperature, and target temperature are under 54C
 // then the BLUE led is on. Otherwise the RED led is on. (1C hysteresis)
 //#define TEMP_STAT_LEDS
-
-// Support for the BariCUDA Paste Extruder
-//#define BARICUDA
 
 // Support for BlinkM/CyzRgb
 //#define BLINKM
@@ -3278,7 +3310,7 @@
   //#define RGB_LED_G_PIN 43
   //#define RGB_LED_B_PIN 35
   //#define RGB_LED_W_PIN -1
-  #define RGB_STARTUP_TEST              // For PWM pins, fade between all colors
+  #define RGB_STARTUP_TEST                // For PWM pins, fade between all colors
   #if ENABLED(RGB_STARTUP_TEST)
     #define RGB_STARTUP_TEST_INNER_MS 10  // (ms) Reduce or increase fading speed
   #endif
@@ -3328,6 +3360,8 @@
 #if ANY(BLINKM, RGB_LED, RGBW_LED, PCA9632, PCA9533, NEOPIXEL_LED)
   #define PRINTER_EVENT_LEDS
 #endif
+
+// @section servos
 
 /**
  * Number of servos
