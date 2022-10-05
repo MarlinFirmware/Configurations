@@ -1,6 +1,6 @@
 /**
  * Marlin 3D Printer Firmware
- * Copyright (c) 2020 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
+ * Copyright (c) 2022 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
  *
  * Based on Sprinter and grbl.
  * Copyright (c) 2011 Camiel Gubbels / Erik van der Zalm
@@ -23,8 +23,8 @@
 #error "Don't build with import-2.1.x configurations!"
 #error "Use the 'bugfix...' or 'release...' configurations matching your Marlin version."
 
-//#define I3MEGA_HAS_BLTOUCH //untested
-//#define I3MEGA_HAS_TMC2208 //untested
+//#define I3MEGA_HAS_BLTOUCH // untested
+//#define I3MEGA_HAS_TMC2208 // untested
 
 /**
  * Configuration.h
@@ -1893,8 +1893,7 @@
 //#define AUTO_BED_LEVELING_LINEAR
 #if ENABLED(I3MEGA_HAS_BLTOUCH)
   #define AUTO_BED_LEVELING_BILINEAR
-#endif
-#if DISABLED(I3MEGA_HAS_BLTOUCH)
+#else
   #define AUTO_BED_LEVELING_UBL
 #endif
 //#define MESH_BED_LEVELING

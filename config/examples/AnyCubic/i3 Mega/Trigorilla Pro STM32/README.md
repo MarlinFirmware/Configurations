@@ -17,9 +17,8 @@ Remove Jumper JP1 from the board to access the bootloader and flash firmware. Yo
 - Filament runout sensor
 - Babystepping for realtime first layer adjustments
 - Pre-tuned Linear Advance (high at 0.8, reduce to 0.6 if you see underextrusion)
-- Manual Bed Leveling with UBL
 - Power Loss Recovery
-- Support for BLTouch
+- Support for BLTouch (ABL) or manual leveling (UBL)
 - Support for TMC2208
 
 ## Potential Issues
