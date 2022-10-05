@@ -155,8 +155,6 @@
   #define MOTHERBOARD BOARD_TRIGORILLA_14
 #endif
 
-#define ANYCUBIC_I3MEGA
-
 // Name displayed in the LCD "Ready" message and Info menu
 #define CUSTOM_MACHINE_NAME "Anycubic i3"
 
@@ -1677,7 +1675,7 @@
 // Invert the stepper direction. Change (or reverse the motor connector) if an axis goes the wrong way.
 #define INVERT_X_DIR true // set to true for stock drivers or TMC2208 with reversed connectors
 #define INVERT_Y_DIR false // set to false for stock drivers or TMC2208 with reversed connectors
-#define INVERT_Z_DIR false // set to false for stock drivers or TMC2208 with reversed
+#define INVERT_Z_DIR false // set to false for stock drivers or TMC2208 with reversed connectors
 //#define INVERT_I_DIR false
 //#define INVERT_J_DIR false
 //#define INVERT_K_DIR false
