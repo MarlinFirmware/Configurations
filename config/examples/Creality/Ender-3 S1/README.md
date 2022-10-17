@@ -16,4 +16,4 @@ Pay attention to the two versions of the motherboard for the S1, one is using a 
 Where to put the firmware file on the SDCard:
 
  - STM32F1 board: Put the `*.bin` file into the root folder.
- - STM32F4 board: Pit the `*.bin` file into a folder named `STM32F4_UPDATE`.
+ - STM32F4 board: Put the `*.bin` file into a folder named `STM32F4_UPDATE`.
