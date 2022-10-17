@@ -90,17 +90,19 @@
 // Choose the name from boards.h that matches your setup
 #ifndef MOTHERBOARD
   #define MOTHERBOARD BOARD_BTT_OCTOPUS_V1_1
-  // add Z2 as E4 for auto allocation
-  #define E4_STEP_PIN                         PG4   // MOTOR 3
-  #define E4_DIR_PIN                          PC1
-  #define E4_ENABLE_PIN                       PA0
-  // add endstop pins 
-  #define I_MIN_PIN                           PG11  // Z2-STOP
-  #define J_MIN_PIN                           PG12  // E0DET
-  #define K_MIN_PIN                           PG13  // E1DET
-  #define U_MIN_PIN                           PG14  // E2DET
-  #define V_MIN_PIN                           PG15  // E3DET
 #endif
+
+// E4 for dual axis auto-assignment
+#define E4_STEP_PIN   PG4   // MOTOR 3
+#define E4_DIR_PIN    PC1
+#define E4_ENABLE_PIN PA0
+
+// Endstop pins
+#define I_MIN_PIN     PG11  // Z2-STOP
+#define J_MIN_PIN     PG12  // E0DET
+#define K_MIN_PIN     PG13  // E1DET
+#define U_MIN_PIN     PG14  // E2DET
+#define V_MIN_PIN     PG15  // E3DET
 
 /**
  * Select the serial port on the board to use for communication with the host.
@@ -1215,9 +1217,9 @@
  *   M204 I    Angular Acceleration
  *   M204 J    Angular Travel Acceleration
  */
-#define DEFAULT_ACCELERATION          3000    // X, Y, Z and E acceleration for printing moves
-#define DEFAULT_RETRACT_ACCELERATION  3000    // E acceleration for retracts
-#define DEFAULT_TRAVEL_ACCELERATION   3000    // X, Y, Z acceleration for travel (non printing) moves
+#define DEFAULT_ACCELERATION                  3000  // X, Y, Z ... and E acceleration for printing moves
+#define DEFAULT_RETRACT_ACCELERATION          3000  // E acceleration for retracts
+#define DEFAULT_TRAVEL_ACCELERATION           3000  // X, Y, Z ... acceleration for travel (non printing) moves
 #if ENABLED(AXIS4_ROTATES)
   #define DEFAULT_ANGULAR_ACCELERATION        3000  // I, J, K acceleration for rotational-only printing moves
   #define DEFAULT_ANGULAR_TRAVEL_ACCELERATION 3000  // I, J, K acceleration for rotational-only travel (non printing) moves
