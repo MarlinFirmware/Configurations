@@ -30,7 +30,25 @@
  *
  * Basic settings can be found in Configuration.h
  */
-#define CONFIGURATION_ADV_H_VERSION 02010000
+#define CONFIGURATION_ADV_H_VERSION 02010200
+
+// @section develop
+
+/**
+ * Configuration Export
+ *
+ * Export the configuration as part of the build. (See signature.py)
+ * Output files are saved with the build (e.g., .pio/build/mega2560).
+ *
+ * See `build_all_examples --ini` as an example of config.ini archiving.
+ *
+ *  1 = marlin_config.json - Dictionary containing the configuration.
+ *      This file is also generated for CONFIGURATION_EMBEDDING.
+ *  2 = config.ini - File format for PlatformIO preprocessing.
+ *  3 = schema.json - The entire configuration schema. (13 = pattern groups)
+ *  4 = schema.yml - The entire configuration schema.
+ */
+//#define CONFIG_EXPORT 2 // :[1:'JSON', 2:'config.ini', 3:'schema.json', 4:'schema.yml']
 
 //===========================================================================
 //============================= Thermal Settings ============================
@@ -534,10 +552,14 @@
   #endif
 #endif
 
-// When first starting the main fan, run it at full speed for the
-// given number of milliseconds.  This gets the fan spinning reliably
-// before setting a PWM value. (Does not work with software PWM for fan on Sanguinololu)
-//#define FAN_KICKSTART_TIME 100
+/**
+ * Fan Kickstart
+ * When part cooling or controller fans first start, run at a speed that
+ * gets it spinning reliably for a short time before setting the requested speed.
+ * (Does not work on Sanguinololu with FAN_SOFT_PWM.)
+ */
+//#define FAN_KICKSTART_TIME  100  // (ms)
+//#define FAN_KICKSTART_POWER 180  // 64-255
 
 // Some coolers may require a non-zero "off" state.
 //#define FAN_OFF_PWM  1
@@ -852,10 +874,10 @@
 
 //#define SENSORLESS_BACKOFF_MM  { 2, 2, 0 }  // (linear=mm, rotational=°) Backoff from endstops before sensorless homing
 
-#define HOMING_BUMP_MM      { 10, 10, 5 }       // (linear=mm, rotational=°) Backoff from endstops after first bump // CR-10 S5 config
+#define HOMING_BUMP_MM      { 10, 10, 5 }     // (linear=mm, rotational=°) Backoff from endstops after first bump // CR-10 S5 config
 #define HOMING_BUMP_DIVISOR { 2, 2, 4 }       // Re-Bump Speed Divisor (Divides the Homing Feedrate)
 
-#define HOMING_BACKOFF_POST_MM { 25, 25, 10 }  // (linear=mm, rotational=°) Backoff from endstops after homing // CR-10 S5 config
+#define HOMING_BACKOFF_POST_MM { 25, 25, 10 } // (linear=mm, rotational=°) Backoff from endstops after homing // CR-10 S5 config
 //#define XY_COUNTERPART_BACKOFF_MM 0         // (mm) Backoff X after homing Y, and vice-versa
 
 #define QUICK_HOME                            // If G28 contains XY do a diagonal move first
@@ -1006,7 +1028,7 @@
 #if ENABLED(ASSISTED_TRAMMING)
 
   // Define positions for probe points.
- #define TRAMMING_POINT_XY { {  85, 85 }, { 415, 85 }, { 415, 415 }, { 85, 415 } } // CR-10 S5 config
+  #define TRAMMING_POINT_XY { {  85, 85 }, { 415, 85 }, { 415, 415 }, { 85, 415 } } // CR-10 S5 config
 
   // Define position names for probe points. // CR-10 S5 config
   #define TRAMMING_POINT_NAME_1 "Front-Left"
@@ -1015,9 +1037,9 @@
   #define TRAMMING_POINT_NAME_4 "Front-Right"
 
   #define RESTORE_LEVELING_AFTER_G35    // Enable to restore leveling setup after operation
-  #define REPORT_TRAMMING_MM          // Report Z deviation (mm) for each point relative to the first // CR-10 S5 config
+  #define REPORT_TRAMMING_MM            // Report Z deviation (mm) for each point relative to the first
 
-  #define ASSISTED_TRAMMING_WIZARD    // Add a Tramming Wizard to the LCD menu // CR-10 S5 config
+  #define ASSISTED_TRAMMING_WIZARD      // Add a Tramming Wizard to the LCD menu
 
   //#define ASSISTED_TRAMMING_WAIT_POSITION { X_CENTER, Y_CENTER, 30 } // Move the nozzle out of the way for adjustment
 
@@ -1365,7 +1387,7 @@
 
 #endif // HAS_MARLINUI_MENU
 
-#if EITHER(HAS_DISPLAY, DWIN_LCD_PROUI)
+#if ANY(HAS_DISPLAY, DWIN_LCD_PROUI, DWIN_CREALITY_LCD_JYERSUI)
   //#define SOUND_MENU_ITEM   // Add a mute option to the LCD menu
   #define SOUND_ON_DEFAULT    // Buzzer/speaker default enabled state
 #endif
@@ -1488,7 +1510,7 @@
   //#define NO_SD_AUTOSTART                 // Remove auto#.g file support completely to save some Flash, SRAM
   //#define MENU_ADDAUTOSTART               // Add a menu option to run auto#.g files
 
-  #define BROWSE_MEDIA_ON_INSERT          // Open the file browser when media is inserted
+  #define BROWSE_MEDIA_ON_INSERT            // Open the file browser when media is inserted
 
   //#define MEDIA_MENU_AT_TOP               // Force the media menu to be listed on the top of the main menu
 
@@ -1699,7 +1721,7 @@
  * By default an onboard SD card reader may be shared as a USB mass-
  * storage device. This option hides the SD card from the host PC.
  */
-#define NO_SD_HOST_DRIVE   // Disable SD Card access over USB (for security).
+#define NO_SD_HOST_DRIVE     // Disable SD Card access over USB (for security).
 
 /**
  * By default the framework is responsible for the shared media I/O.
