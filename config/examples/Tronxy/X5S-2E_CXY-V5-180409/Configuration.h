@@ -1,6 +1,6 @@
 /**
  * Marlin 3D Printer Firmware
- * Copyright (c) 2020 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
+ * Copyright (c) 2022 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
  *
  * Based on Sprinter and grbl.
  * Copyright (c) 2011 Camiel Gubbels / Erik van der Zalm
@@ -20,6 +20,8 @@
  *
  */
 #pragma once
+#error "Don't build with import-2.1.x configurations!"
+#error "Use the 'bugfix...' or 'release...' configurations matching your Marlin version."
 
 /**
  * Configuration.h
@@ -83,12 +85,6 @@
 // Show the bitmap in Marlin/_Statusscreen.h on the status screen.
 //#define CUSTOM_STATUS_SCREEN_IMAGE
 
-// Name displayed in the LCD "Ready" message and Info menu
-#define CUSTOM_MACHINE_NAME "Tronxy X5S-2e"
-
-// Printer's unique ID, used by some programs to differentiate between machines.
-// Choose your own or use a service like https://www.uuidgenerator.net/version4
-//#define MACHINE_UUID "00000000-0000-0000-0000-000000000000"
 // @section machine
 
 // Choose the name from boards.h that matches your setup
@@ -139,6 +135,13 @@
 
 // Enable the Bluetooth serial interface on AT90USB devices
 //#define BLUETOOTH
+
+// Name displayed in the LCD "Ready" message and Info menu
+#define CUSTOM_MACHINE_NAME "Tronxy X5S-2E"
+
+// Printer's unique ID, used by some programs to differentiate between machines.
+// Choose your own or use a service like https://www.uuidgenerator.net/version4
+//#define MACHINE_UUID "00000000-0000-0000-0000-000000000000"
 
 // @section stepper drivers
 
@@ -753,7 +756,6 @@
   #define DEFAULT_bedKi 57.25
   #define DEFAULT_bedKd 379.5
 
-  // FIND YOUR OWN: "M303 E-1 C8 S60" to run autotune on the bed at 60 degreesC for 8 cycles.
 #endif // PIDTEMPBED
 
 //===========================================================================
@@ -1201,10 +1203,16 @@
  *   M204 P    Acceleration
  *   M204 R    Retract Acceleration
  *   M204 T    Travel Acceleration
+ *   M204 I    Angular Acceleration
+ *   M204 J    Angular Travel Acceleration
  */
 #define DEFAULT_ACCELERATION                  1000  // X, Y, Z ... and E acceleration for printing moves
 #define DEFAULT_RETRACT_ACCELERATION          1000  // E acceleration for retracts
 #define DEFAULT_TRAVEL_ACCELERATION           1000  // X, Y, Z ... acceleration for travel (non printing) moves
+#if ENABLED(AXIS4_ROTATES)
+  #define DEFAULT_ANGULAR_ACCELERATION        3000  // I, J, K acceleration for rotational-only printing moves
+  #define DEFAULT_ANGULAR_TRAVEL_ACCELERATION 3000  // I, J, K acceleration for rotational-only travel (non printing) moves
+#endif
 
 /**
  * Default Jerk limits (mm/s)
@@ -1673,10 +1681,10 @@
  */
 //#define Z_IDLE_HEIGHT Z_HOME_POS
 
-#define Z_HOMING_HEIGHT  10      // (mm) Minimal Z height before homing (G28) for Z clearance above the bed, clamps, ...
+#define Z_HOMING_HEIGHT   10      // (mm) Minimal Z height before homing (G28) for Z clearance above the bed, clamps, ...
                                   // Be sure to have this much clearance over your Z_MAX_POS to prevent grinding.
 
-#define Z_AFTER_HOMING  10      // (mm) Height to move to after homing Z
+#define Z_AFTER_HOMING    10      // (mm) Height to move to after homing Z
 
 // Direction of endstops when homing; 1=MAX, -1=MIN
 // :[-1,1]
@@ -1754,7 +1762,7 @@
 #endif
 
 #if EITHER(MIN_SOFTWARE_ENDSTOPS, MAX_SOFTWARE_ENDSTOPS)
-  #define SOFT_ENDSTOPS_MENU_ITEM  // Enable/Disable software endstops from the LCD
+  #define SOFT_ENDSTOPS_MENU_ITEM    // Enable/Disable software endstops from the LCD
 #endif
 
 /**
@@ -1984,7 +1992,7 @@
   #define GRID_MAX_POINTS_X 10      // Don't use more than 15 points per axis, implementation limited.
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
-  #define UBL_HILBERT_CURVE       // Use Hilbert distribution for less travel when probing multiple points
+  #define UBL_HILBERT_CURVE         // Use Hilbert distribution for less travel when probing multiple points
 
   #define UBL_MESH_EDIT_MOVES_Z     // Sophisticated users prefer no movement of nozzle
   #define UBL_SAVE_ACTIVE_ON_M500   // Save the currently active mesh in the current slot on M500
@@ -1992,7 +2000,7 @@
   //#define UBL_Z_RAISE_WHEN_OFF_MESH 2.5 // When the nozzle is off the mesh, this value is used
                                           // as the Z-Height correction value.
 
-  #define UBL_MESH_WIZARD         // Run several commands in a row to get a complete mesh
+  #define UBL_MESH_WIZARD           // Run several commands in a row to get a complete mesh
 
 #elif ENABLED(MESH_BED_LEVELING)
 
@@ -2017,7 +2025,7 @@
 #if ENABLED(LCD_BED_LEVELING)
   #define MESH_EDIT_Z_STEP  0.025 // (mm) Step size while manually probing Z axis.
   #define LCD_PROBE_Z_RANGE 4     // (mm) Z Range centered on Z_MIN_POS for LCD Z adjustment
-  #define MESH_EDIT_MENU        // Add a menu to edit mesh points
+  #define MESH_EDIT_MENU          // Add a menu to edit mesh points
 #endif
 
 // Add a menu item to move between bed corners for manual bed adjustment
@@ -2974,6 +2982,11 @@
 #endif
 
 //
+// CR-6 OEM touch screen. A DWIN display with touch.
+//
+//#define DWIN_CREALITY_TOUCHLCD
+
+//
 // Touch-screen LCD for Malyan M200/M300 printers
 //
 //#define MALYAN_LCD
@@ -2998,6 +3011,12 @@
 // 320x240 Nextion 2.8" serial TFT Resistive Touch Screen NX3224T028
 //
 //#define NEXTION_TFT
+
+//
+// PanelDue touch controller by Escher3D
+// http://escher3d.com/pages/order/products/product2.php
+//
+//#define PANELDUE
 
 //
 // Third-party or vendor-customized controller interfaces.

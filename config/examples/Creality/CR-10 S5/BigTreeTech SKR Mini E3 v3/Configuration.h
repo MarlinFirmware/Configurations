@@ -732,7 +732,7 @@
  * the issues involved, don't use bed PID until someone else verifies that your hardware works.
  * @section bed temp
  */
-//#define PIDTEMPBED - CR-10 S5 config
+//#define PIDTEMPBED // CR-10 S5 config
 
 //#define BED_LIMIT_SWITCHING
 
@@ -3093,7 +3093,7 @@
 //#define MKS_ROBIN_TFT_V1_1R
 
 //
-// 480x320, 3.5", FSMC Stock Display from TronxXY
+// 480x320, 3.5", FSMC Stock Display from Tronxy
 //
 //#define TFT_TRONXY_X5SA
 
@@ -3185,7 +3185,7 @@
 //#define DWIN_LCD_PROUI              // Pro UI by MRiscoC
 //#define DWIN_CREALITY_LCD_JYERSUI   // Jyers UI by Jacob Myers
 //#define DWIN_MARLINUI_PORTRAIT      // MarlinUI (portrait orientation)
-//#define DWIN_MARLINUI_LANDSCAPE       // MarlinUI (landscape orientation)
+//#define DWIN_MARLINUI_LANDSCAPE     // MarlinUI (landscape orientation)
 
 //
 // Touch Screen Settings

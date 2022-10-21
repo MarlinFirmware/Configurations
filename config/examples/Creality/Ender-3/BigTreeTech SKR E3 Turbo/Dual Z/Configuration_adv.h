@@ -552,10 +552,14 @@
   #endif
 #endif
 
-// When first starting the main fan, run it at full speed for the
-// given number of milliseconds.  This gets the fan spinning reliably
-// before setting a PWM value. (Does not work with software PWM for fan on Sanguinololu)
-#define FAN_KICKSTART_TIME 800
+/**
+ * Fan Kickstart
+ * When part cooling or controller fans first start, run at a speed that
+ * gets it spinning reliably for a short time before setting the requested speed.
+ * (Does not work on Sanguinololu with FAN_SOFT_PWM.)
+ */
+#define FAN_KICKSTART_TIME    800  // (ms)
+//#define FAN_KICKSTART_POWER 180  // 64-255
 
 // Some coolers may require a non-zero "off" state.
 //#define FAN_OFF_PWM  1
@@ -2868,10 +2872,10 @@
   #endif
 
   #if AXIS_IS_TMC(Z2)
-    #define Z2_CURRENT      800
-    #define Z2_CURRENT_HOME Z2_CURRENT
+    #define Z2_CURRENT       Z_CURRENT
+    #define Z2_CURRENT_HOME  Z_CURRENT_HOME
     #define Z2_MICROSTEPS    Z_MICROSTEPS
-    #define Z2_RSENSE         0.11
+    #define Z2_RSENSE        Z_RSENSE
     #define Z2_CHAIN_POS     -1
     //#define Z2_INTERPOLATE true
     //#define Z2_HOLD_MULTIPLIER 0.5
