@@ -43,6 +43,7 @@
 // Simulator currently supports these displays. Choose one!
 //
 #define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
+//#define REPRAP_DISCOUNT_SMART_CONTROLLER
 //#define LIGHTWEIGHT_UI
 //#define TFT_CLASSIC_UI
 //#define TFT_COLOR_UI
