@@ -155,6 +155,9 @@
   #define MOTHERBOARD BOARD_TRIGORILLA_14
 #endif
 
+// i3 Mega remaps some Trigorilla 1.4 pins
+#define TRIGORILLA_MAPPING_I3MEGA
+
 // Name displayed in the LCD "Ready" message and Info menu
 #define CUSTOM_MACHINE_NAME "Anycubic i3"
 
@@ -3037,7 +3040,6 @@
 #define ANYCUBIC_LCD_I3MEGA
 //#define ANYCUBIC_LCD_CHIRON
 #if EITHER(ANYCUBIC_LCD_I3MEGA, ANYCUBIC_LCD_CHIRON)
-  #define LCD_SERIAL_PORT 3
   #define ANYCUBIC_LCD_DEBUG
   //#define ANYCUBIC_LCD_GCODE_EXT  // Add ".gcode" to menu entries for DGUS clone compatibility
 #endif

@@ -92,6 +92,9 @@
   #define MOTHERBOARD BOARD_TRIGORILLA_14
 #endif
 
+// Chiron remaps some Trigorilla 1.4 pins
+#define TRIGORILLA_MAPPING_CHIRON
+
 /**
  * Select the serial port on the board to use for communication with the host.
  * This allows the connection of wireless adapters (for instance) to non-default port pins.
@@ -136,10 +139,6 @@
 // Enable the Bluetooth serial interface on AT90USB devices
 //#define BLUETOOTH
 
-
-// Anycubic Chiron custom pin defs for the Trigorilla board fastio_1280.h
-#define OUTAGECON_PIN   58  // p93 F4
-#define X_MAX_PIN       43
 // Name displayed in the LCD "Ready" message and Info menu
 #define CUSTOM_MACHINE_NAME "Anycubic Chiron"
 
@@ -1049,7 +1048,7 @@
 //#define USE_UMIN_PLUG
 //#define USE_VMIN_PLUG
 //#define USE_WMIN_PLUG
-#define USE_XMAX_PLUG
+//#define USE_XMAX_PLUG
 //#define USE_YMAX_PLUG
 //#define USE_ZMAX_PLUG
 //#define USE_IMAX_PLUG
@@ -1715,8 +1714,8 @@
 #define X_MIN_POS -10
 #define Y_MIN_POS 0
 #define Z_MIN_POS 0
-#define X_MAX_POS X_BED_SIZE +10
-#define Y_MAX_POS Y_BED_SIZE +10
+#define X_MAX_POS X_BED_SIZE + 10
+#define Y_MAX_POS Y_BED_SIZE + 10
 #define Z_MAX_POS 455
 //#define I_MIN_POS 0
 //#define I_MAX_POS 50
@@ -3010,7 +3009,6 @@
 //#define ANYCUBIC_LCD_I3MEGA
 #define ANYCUBIC_LCD_CHIRON
 #if EITHER(ANYCUBIC_LCD_I3MEGA, ANYCUBIC_LCD_CHIRON)
-  #define LCD_SERIAL_PORT 3
   //#define ANYCUBIC_LCD_DEBUG
   //#define ANYCUBIC_LCD_GCODE_EXT  // Add ".gcode" to menu entries for DGUS clone compatibility
 #endif
