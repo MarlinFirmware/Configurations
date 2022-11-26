@@ -43,6 +43,7 @@
 // Simulator currently supports these displays. Choose one!
 //
 #define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
+//#define REPRAP_DISCOUNT_SMART_CONTROLLER
 //#define LIGHTWEIGHT_UI
 //#define TFT_CLASSIC_UI
 //#define TFT_COLOR_UI
@@ -50,6 +51,7 @@
 // Enable parent LCD based on your selection above
 #if EITHER(TFT_CLASSIC_UI, TFT_COLOR_UI)
   #define TFT_GENERIC
+  #define TOUCH_SCREEN
 #elif ENABLED(LIGHTWEIGHT_UI)
   #define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
 #endif
