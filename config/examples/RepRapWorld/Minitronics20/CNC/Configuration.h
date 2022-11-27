@@ -2772,7 +2772,7 @@
 // MaKr3d Makr-Panel with graphic controller and SD support.
 // https://reprap.org/wiki/MaKr3d_MaKrPanel
 //
-//#define MAKRPANELEEPROM
+//#define MAKRPANEL
 
 //
 // Adafruit ST7565 Full Graphic Controller.
