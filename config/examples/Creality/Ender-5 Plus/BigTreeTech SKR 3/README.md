@@ -3,10 +3,10 @@
 
 ## Important
 
-The LCD will also need the cable modified to fit the SKR 3 mainboard.
+The LCD will need the cable modified to fit the SKR 3 motherboard.
 Four pins, tx2-pa9 rx2-pa10 gnd-g 5v-+5v, ( See the boards silkscreens for pin labels)
 
-## About 
+## About
 
 These are configuration files for the Ender 5 Plus to work with a BTT SKR 3 motherboard using the stock LCD with A4988 stepper drivers.
 
