@@ -158,6 +158,12 @@
 // i3 Mega remaps some Trigorilla 1.4 pins
 #define TRIGORILLA_MAPPING_I3MEGA
 
+/**
+ * Some Anycubic i3 mega may have been wired with Z1 and Z2 opposite
+ * If the printer fails to home Z correctly it may be because of this
+*/
+//#define SWAP_TRIGORILLA_Z_MOTOR_PINS
+
 // Name displayed in the LCD "Ready" message and Info menu
 #define CUSTOM_MACHINE_NAME "Anycubic i3"
 
@@ -1736,7 +1742,7 @@
 #define Y_BED_SIZE 210
 
 // Travel limits (linear=mm, rotational=°) after homing, corresponding to endstop positions.
-#define X_MIN_POS -5
+#define X_MIN_POS 0
 #define Y_MIN_POS 0
 #define Z_MIN_POS 0
 #define X_MAX_POS X_BED_SIZE
@@ -2459,6 +2465,16 @@
 //=============================================================================
 
 // @section interface
+
+/**
+ * LCD SERIAL PORT
+ *
+ * Select the serial port that the LCD is connected to. The value must be from 0 to 3.
+ *
+ *   Default for the the ANYCUBIC I3 Mega is 3 
+ *
+*/
+#define LCD_SERIAL_PORT 3
 
 /**
  * LCD LANGUAGE
