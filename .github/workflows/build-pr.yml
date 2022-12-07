@@ -1,0 +1,109 @@
+#
+# build-pr.yml
+# Build Marlin with the new / updated configs in the PR
+#
+
+name: PR Test Build
+
+on:
+  pull_request:
+    branches:
+    - import-2.1.x
+    paths-ignore:
+    - '**/*.md'
+
+jobs:
+  build:
+
+    name: Test Build
+    if: github.repository == 'MarlinFirmware/Configurations'
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out the PR
+      uses: actions/checkout@v3
+
+    # Get the list of directories containing changed config files:
+    - name: Get changed directories
+      run: |
+        # Get the base branch of the Pull Request
+        BASE_BRANCH=$(jq -r .pull_request.base.ref <$GITHUB_EVENT_PATH)
+
+        # Get origin for comparison
+        git fetch --depth=1 origin $BASE_BRANCH
+
+        # Use `git diff` to get a list of folders with altered .h files
+        # between the current commit and the base branch of the Pull Request
+        DIRS=$(git diff --name-only --diff-filter=AM origin/$BASE_BRANCH HEAD | grep -E ".+\.h" | while IFS= read -r f; do dirname "$f"; done | uniq)
+
+        # Exit if nothing testable changed
+        [[ -z $DIRS ]] && { echo "No Configuration changes detected."; exit 3 ; }
+
+        # Set DIRS in the persistent environment
+        echo -e "DIRS<<EOF\n$DIRS\nEOF" >>$GITHUB_ENV
+
+    - name: Cache pip
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+
+    - name: Cache PlatformIO
+      uses: actions/cache@v3
+      with:
+        path: ~/.platformio
+        key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
+
+    - name: Select Python 3.7
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.7' # Version range or exact version of a Python version to use, using semvers version range syntax.
+        architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
+
+    - name: Install PlatformIO
+      run: |
+        pip install -U platformio
+        pio upgrade --dev
+        pio pkg update --global
+
+    # Fetch the code from the other repo and compile it:
+    - name: Clone Marlin
+      run: |
+        git clone https://github.com/MarlinFirmware/Marlin.git
+
+    # For each directory containing a changed config file, copy the .h files and build the code:
+    - name: Test all changed config files
+      run: |
+        cd Marlin
+        IFS=$'\n'
+        for dir in $DIRS; do
+          # Copy all .h files from the directory into the Marlin subfolder
+          echo "Building Configurations in $dir ..."
+          cp ../"$dir"/*.h Marlin/
+
+          # Strip out #error lines so it can build
+          sed -i~ -e "20,30{/#error/d}" "Marlin/Configuration.h"
+          rm -f "Marlin/Configuration.h~"
+
+          # Build Marlin with PlatformIO
+          MB=$( grep -E "^\s*#define MOTHERBOARD" Marlin/Configuration.h | awk '{ print $3 }' | sed 's/BOARD_//;s/\r//' )
+          [[ -z $MB ]] && { echo "Error - Can't read MOTHERBOARD setting." ; exit 1 ; }
+
+          BLINE=$( grep -E "define\s+BOARD_$MB\b" Marlin/src/core/boards.h )
+          BNUM=$( sed -E 's/^.+BOARD_[^ ]+ +([0-9]+).+$/\1/' <<<"$BLINE" )
+          BDESC=$( sed -E 's/^.+\/\/ *(.+)$/\1/' <<<"$BLINE" )
+          [[ -z $BNUM ]] && { echo "Error - Can't find BOARD_$MB in core/boards.h." ; exit 1 ; }
+
+          ENVS=( $( grep -EA1 "MB\(.*\b$MB\b.*\)" Marlin/src/pins/pins.h | grep -E "#include.+//.+env:[^ ]+" | grep -oE "env:[^ ]+" | sed -E "s/env://" ) )
+          [[ -z $ENVS ]] && { echo "Error - Can't find target(s) for $MB ($BNUM)." ; exit 1 ; }
+          [[ ${#ENVS[*]} == 1 ]] && TARGET=$ENVS || TARGET="${ENVS[0]}"
+
+          echo "Building environment $TARGET for board $MB ($BNUM)..." ; echo
+          pio run -s -e $TARGET
+
+          # Reset the repo directory so the next iteration starts clean
+          git reset --hard HEAD
+        done
