@@ -90,8 +90,7 @@
 // Choose the name from boards.h that matches your setup
 #ifndef MOTHERBOARD
   #define MOTHERBOARD BOARD_LONGER3D_LKx_PRO
-  //These board get wired in several different ways
-  #define LONGER_LK5  // Activate wiring changes for this machine
+  #define LONGER_LK5  // Specify standard wiring for the LK5
 #endif
 
 /**
