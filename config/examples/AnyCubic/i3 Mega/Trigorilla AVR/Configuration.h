@@ -161,7 +161,7 @@
 /**
  * Some Anycubic i3 mega may have been wired with Z1 and Z2 opposite
  * If the printer fails to home Z correctly it may be because of this
-*/
+ */
 //#define SWAP_TRIGORILLA_Z_MOTOR_PINS
 
 // Name displayed in the LCD "Ready" message and Info menu
@@ -199,6 +199,9 @@
 //#define I_DRIVER_TYPE  ALL_DRIVERS_TYPE
 //#define J_DRIVER_TYPE  ALL_DRIVERS_TYPE
 //#define K_DRIVER_TYPE  ALL_DRIVERS_TYPE
+//#define U_DRIVER_TYPE  ALL_DRIVERS_TYPE
+//#define V_DRIVER_TYPE  ALL_DRIVERS_TYPE
+//#define W_DRIVER_TYPE  ALL_DRIVERS_TYPE
 //#define X2_DRIVER_TYPE ALL_DRIVERS_TYPE
 //#define Y2_DRIVER_TYPE ALL_DRIVERS_TYPE
 #define Z2_DRIVER_TYPE ALL_DRIVERS_TYPE
@@ -2467,16 +2470,6 @@
 // @section interface
 
 /**
- * LCD SERIAL PORT
- *
- * Select the serial port that the LCD is connected to. The value must be from 0 to 3.
- *
- *   Default for the the ANYCUBIC I3 Mega is 3 
- *
-*/
-#define LCD_SERIAL_PORT 3
-
-/**
  * LCD LANGUAGE
  *
  * Select the language to display on the LCD. These languages are available:
@@ -3064,6 +3057,7 @@
 #define ANYCUBIC_LCD_I3MEGA
 //#define ANYCUBIC_LCD_CHIRON
 #if EITHER(ANYCUBIC_LCD_I3MEGA, ANYCUBIC_LCD_CHIRON)
+  #define LCD_SERIAL_PORT 3
   #define ANYCUBIC_LCD_DEBUG
   //#define ANYCUBIC_LCD_GCODE_EXT  // Add ".gcode" to menu entries for DGUS clone compatibility
 #endif
