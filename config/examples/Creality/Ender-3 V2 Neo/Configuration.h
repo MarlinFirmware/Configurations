@@ -90,6 +90,7 @@
 // Choose the name from boards.h that matches your setup
 #ifndef MOTHERBOARD
   #define MOTHERBOARD BOARD_CREALITY_V4
+  #define NO_AUTO_ASSIGN_WARNING
 #endif
 
 /**
