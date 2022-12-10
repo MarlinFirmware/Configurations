@@ -35,7 +35,7 @@ jobs:
 
         # Use `git diff` to get a list of folders with altered .h files
         # between the current commit and the base branch of the Pull Request
-        DIRS=$(git diff --name-only --diff-filter=AM origin/$BASE_BRANCH HEAD | grep -E ".+\.h" | while IFS= read -r f; do dirname "$f"; done | uniq)
+        DIRS=$(git diff --name-only --diff-filter=AMR origin/$BASE_BRANCH HEAD | grep -E ".+\.h" | while IFS= read -r f; do dirname "$f"; done | uniq)
 
         # Exit if nothing testable changed
         [[ -z $DIRS ]] && { echo "No Configuration changes detected."; exit 3 ; }
@@ -90,15 +90,15 @@ jobs:
 
           # Build Marlin with PlatformIO
           MB=$( grep -E "^\s*#define MOTHERBOARD" Marlin/Configuration.h | awk '{ print $3 }' | sed 's/BOARD_//;s/\r//' )
-          [[ -z $MB ]] && { echo "Error - Can't read MOTHERBOARD setting." ; exit 1 ; }
+          [[ -z $MB ]] && { echo "::error::Can't read MOTHERBOARD setting." ; exit 3; }
 
           BLINE=$( grep -E "define\s+BOARD_$MB\b" Marlin/src/core/boards.h )
           BNUM=$( sed -E 's/^.+BOARD_[^ ]+ +([0-9]+).+$/\1/' <<<"$BLINE" )
           BDESC=$( sed -E 's/^.+\/\/ *(.+)$/\1/' <<<"$BLINE" )
-          [[ -z $BNUM ]] && { echo "Error - Can't find BOARD_$MB in core/boards.h." ; exit 1 ; }
+          [[ -z $BNUM ]] && { echo "::error::Can't find BOARD_$MB in core/boards.h." ; exit 3; }
 
           ENVS=( $( grep -EA1 "MB\(.*\b$MB\b.*\)" Marlin/src/pins/pins.h | grep -E "#include.+//.+env:[^ ]+" | grep -oE "env:[^ ]+" | sed -E "s/env://" ) )
-          [[ -z $ENVS ]] && { echo "Error - Can't find target(s) for $MB ($BNUM)." ; exit 1 ; }
+          [[ -z $ENVS ]] && { echo "::error::Can't find target(s) for $MB ($BNUM)." ; exit 3; }
           [[ ${#ENVS[*]} == 1 ]] && TARGET=$ENVS || TARGET="${ENVS[0]}"
 
           echo "Building environment $TARGET for board $MB ($BNUM)..." ; echo
