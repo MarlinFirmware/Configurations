@@ -158,6 +158,11 @@
 // i3 Mega remaps some Trigorilla 1.4 pins
 #define TRIGORILLA_MAPPING_I3MEGA
 
+/**
+ * Some Anycubic machines have Z1 and Z2 swapped to save on wiring.
+ */
+//#define SWAP_Z_MOTORS
+
 // Name displayed in the LCD "Ready" message and Info menu
 #define CUSTOM_MACHINE_NAME "Anycubic i3"
 
@@ -193,6 +198,9 @@
 //#define I_DRIVER_TYPE  ALL_DRIVERS_TYPE
 //#define J_DRIVER_TYPE  ALL_DRIVERS_TYPE
 //#define K_DRIVER_TYPE  ALL_DRIVERS_TYPE
+//#define U_DRIVER_TYPE  ALL_DRIVERS_TYPE
+//#define V_DRIVER_TYPE  ALL_DRIVERS_TYPE
+//#define W_DRIVER_TYPE  ALL_DRIVERS_TYPE
 //#define X2_DRIVER_TYPE ALL_DRIVERS_TYPE
 //#define Y2_DRIVER_TYPE ALL_DRIVERS_TYPE
 #define Z2_DRIVER_TYPE ALL_DRIVERS_TYPE
@@ -1736,7 +1744,7 @@
 #define Y_BED_SIZE 210
 
 // Travel limits (linear=mm, rotational=°) after homing, corresponding to endstop positions.
-#define X_MIN_POS -5
+#define X_MIN_POS 0
 #define Y_MIN_POS 0
 #define Z_MIN_POS 0
 #define X_MAX_POS X_BED_SIZE
@@ -3048,6 +3056,7 @@
 #define ANYCUBIC_LCD_I3MEGA
 //#define ANYCUBIC_LCD_CHIRON
 #if EITHER(ANYCUBIC_LCD_I3MEGA, ANYCUBIC_LCD_CHIRON)
+  #define LCD_SERIAL_PORT 3
   #define ANYCUBIC_LCD_DEBUG
   //#define ANYCUBIC_LCD_GCODE_EXT  // Add ".gcode" to menu entries for DGUS clone compatibility
 #endif
