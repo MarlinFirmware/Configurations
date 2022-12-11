@@ -159,10 +159,9 @@
 #define TRIGORILLA_MAPPING_I3MEGA
 
 /**
- * Some Anycubic i3 mega may have been wired with Z1 and Z2 opposite
- * If the printer fails to home Z correctly it may be because of this
+ * Some Anycubic machines have Z1 and Z2 swapped to save on wiring.
  */
-//#define SWAP_TRIGORILLA_Z_MOTOR_PINS
+//#define SWAP_Z_MOTORS
 
 // Name displayed in the LCD "Ready" message and Info menu
 #define CUSTOM_MACHINE_NAME "Anycubic i3"
