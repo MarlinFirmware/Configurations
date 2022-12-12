@@ -3169,6 +3169,10 @@
 #define TFT_COLOR_UI
 //#define TFT_LVGL_UI
 
+#if ENABLED(TFT_COLOR_UI)
+  //#define TFT_SHARED_SPI   // SPI is shared between TFT display and other devices. Disable async data transfer
+#endif
+
 /* ET4/ET5 Black Theme */
 
 #define COLOR_RED2              0xF003 // #F70019
