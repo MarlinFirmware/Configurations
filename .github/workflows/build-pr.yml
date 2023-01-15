@@ -38,7 +38,7 @@ jobs:
         DIRS=$(git diff --name-only --diff-filter=AMR origin/$BASE_BRANCH HEAD | grep -E ".+\.h" | while IFS= read -r f; do dirname "$f"; done | uniq)
 
         # Exit if nothing testable changed
-        [[ -z $DIRS ]] && { echo "No Configuration changes detected."; exit 3 ; }
+        [[ -z $DIRS ]] && { echo "No Configuration changes detected."; exit ; }
 
         # Set DIRS in the persistent environment
         echo -e "DIRS<<EOF\n$DIRS\nEOF" >>$GITHUB_ENV
