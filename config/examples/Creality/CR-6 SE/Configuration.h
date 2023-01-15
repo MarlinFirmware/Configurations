@@ -3033,22 +3033,19 @@
  *  - Download https://github.com/InsanityAutomation/Marlin/raw/CrealityDwin2.0_Bleeding/TM3D_Combined480272_Landscape_V7.7z
  *  - Copy the downloaded DWIN_SET folder to the SD card.
  *
+ * CREALITY_TOUCH
+ *  - CR-6 OEM touch screen. A DWIN display with touch.
+ *
  * Flash display with DGUS Displays for Marlin:
  *  - Format the SD card to FAT32 with an allocation size of 4kb.
  *  - Download files as specified for your type of display.
  *  - Plug the microSD card into the back of the display.
  *  - Boot the display and wait for the update to complete.
  */
-//#define DGUS_LCD_UI ORIGIN
+#define DGUS_LCD_UI CREALITY_TOUCH
 #if DGUS_UI_IS(MKS)
   #define USE_MKS_GREEN_UI
 #endif
-
-//
-// CR-6 OEM touch screen. A DWIN display with touch.
-//
-#define DWIN_CREALITY_TOUCHLCD
-#define LCD_SERIAL_PORT 3
 
 //
 // Touch-screen LCD for Malyan M200/M300 printers
