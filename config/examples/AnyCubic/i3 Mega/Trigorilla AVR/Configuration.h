@@ -25,6 +25,7 @@
 
 //#define I3MEGA_HAS_BLTOUCH
 //#define I3MEGA_HAS_TMC2208
+//#define I3MEGA_PRO_STOCK
 
 /**
  * Configuration.h
@@ -192,8 +193,15 @@
 #else
   #define ALL_DRIVERS_TYPE A4988
 #endif
-#define X_DRIVER_TYPE  ALL_DRIVERS_TYPE
-#define Y_DRIVER_TYPE  ALL_DRIVERS_TYPE
+#if ENABLED(I3MEGA_PRO_STOCK)
+  #define X_DRIVER_TYPE  TMC2208_STANDALONE
+  #define Y_DRIVER_TYPE  TMC2208_STANDALONE
+  #undef ALL_DRIVERS_TYPE
+  #define ALL_DRIVERS_TYPE A4988
+#else
+  #define X_DRIVER_TYPE  ALL_DRIVERS_TYPE
+  #define Y_DRIVER_TYPE  ALL_DRIVERS_TYPE
+#endif
 #define Z_DRIVER_TYPE  ALL_DRIVERS_TYPE
 //#define I_DRIVER_TYPE  ALL_DRIVERS_TYPE
 //#define J_DRIVER_TYPE  ALL_DRIVERS_TYPE
@@ -1255,7 +1263,13 @@
  * Override with M92
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 96.2 }
+#if ENABLED(I3MEGA_PRO_STOCK)
+  // Mega Pro has DDB geared extruder
+  // Anycubic stock firmware defaults E0 steps to 384, but this is WAY out
+  #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 410 }
+#else
+  #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 96.2 }
+#endif
 
 /**
  * Default Max Feed Rate (linear=mm/s, rotational=°/s)
@@ -1739,8 +1753,13 @@
 // @section motion
 
 // Invert the stepper direction. Change (or reverse the motor connector) if an axis goes the wrong way.
-#define INVERT_X_DIR true // set to true for stock drivers or TMC2208 with reversed connectors
-#define INVERT_Y_DIR false // set to false for stock drivers or TMC2208 with reversed connectors
+#if ENABLED(I3MEGA_PRO_STOCK)
+  #define INVERT_X_DIR false // Mega Pro stock configuration has TMC2208 on X/Y
+  #define INVERT_Y_DIR true  // with non-reversed connectors
+#else
+  #define INVERT_X_DIR true  // set to true for stock drivers or TMC2208 with reversed connectors
+  #define INVERT_Y_DIR false // set to false for stock drivers or TMC2208 with reversed connectors
+#endif
 #define INVERT_Z_DIR false // set to false for stock drivers or TMC2208 with reversed connectors
 //#define INVERT_I_DIR false
 //#define INVERT_J_DIR false
@@ -3113,7 +3132,11 @@
 #if EITHER(ANYCUBIC_LCD_I3MEGA, ANYCUBIC_LCD_CHIRON)
   #define LCD_SERIAL_PORT 3
   #define ANYCUBIC_LCD_DEBUG
+  #if ENABLED(I3MEGA_PRO_STOCK)
+    #define ANYCUBIC_LCD_GCODE_EXT  // Mega Pro contains a DGUS clone TFT that requires .gcode extension
+  #else
   //#define ANYCUBIC_LCD_GCODE_EXT  // Add ".gcode" to menu entries for DGUS clone compatibility
+  #endif
 #endif
 
 //
