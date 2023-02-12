@@ -4,7 +4,7 @@ This example configuration is for a Kossel XL with a printable bed diameter of 2
 ## Configuration
 You might need (or want) to edit at least the following settings in `Configuration.h`:
 * `MANUAL_Z_HOME_POS` - The available height of your printing space. Auto Bed Leveling makes it less important to have the exact value.
-* `DELTA_PRINTABLE_RADIUS` - The printable radius is how far from the center the nozzle can reach.
+* `PRINTABLE_RADIUS` - The printable radius is how far from the center the nozzle can reach.
 * `DEFAULT_AXIS_STEPS_PER_UNIT` - Steps-per-millimeter for the delta steppers, and for the extruder [to optimize the amount of filament flow](http://zennmaster.com/makingstuff/reprap-101-calibrating-your-extruder-part-1-e-steps).
 
 ### Fine tuning
