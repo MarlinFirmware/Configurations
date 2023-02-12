@@ -880,8 +880,9 @@
 // Enable for Polargraph Kinematics
 //#define POLARGRAPH
 #if ENABLED(POLARGRAPH)
-  #define POLARGRAPH_MAX_BELT_LEN 1035.0
-  #define DEFAULT_SEGMENTS_PER_SECOND 5
+  #define POLARGRAPH_MAX_BELT_LEN  1035.0 // (mm) Belt length at full extension. Override with M665 H.
+  #define DEFAULT_SEGMENTS_PER_SECOND 5   // Move segmentation based on duration
+  #define PEN_UP_DOWN_MENU                // Add "Pen Up" and "Pen Down" to the MarlinUI menu
 #endif
 
 // @section delta
@@ -1056,7 +1057,6 @@
 //#define POLAR
 #if ENABLED(POLAR)
   #define DEFAULT_SEGMENTS_PER_SECOND 180   // If movement is choppy try lowering this value
-
   #define PRINTABLE_RADIUS 82.0f            // (mm) Maximum travel of X axis
 
   // Movements fall inside POLAR_FAST_RADIUS are assigned the highest possible feedrate
