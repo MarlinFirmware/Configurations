@@ -1058,7 +1058,6 @@
 //#define POLAR
 #if ENABLED(POLAR)
   #define DEFAULT_SEGMENTS_PER_SECOND 180   // If movement is choppy try lowering this value
-
   #define PRINTABLE_RADIUS 82.0f            // (mm) Maximum travel of X axis
 
   // Movements fall inside POLAR_FAST_RADIUS are assigned the highest possible feedrate
