@@ -15,7 +15,7 @@ guide you through the configuration and compilation.
 6. Open the **Tools** > **Board** submenu, scroll all the way down, and select **3D Printer Boards**.
 7. From the **Tools** menu, select a board part number **Malyan M300**:
 8. From the **Tools** menu, choose **USB Support** > **CDC No Generic Serial**.
-9. Download the latest Marlin source (from the [bugfix-2.0.x](https://github.com/MarlinFirmware/Marlin/tree/bugfix-2.0.x) branch) and unzip it.
+9. Download the [latest Marlin source](https://marlinfw.org/meta/download/) and unzip it.
 10. Look in the `Marlin` subdirectory for the `Configuration.h` and `Configuration_adv.h` files. Replace these files with the configurations in the `config\examples\Malyan\M300` folder.
 11. Open the `Marlin/Marlin.ino` file in Arduino IDE.
 12. From the **Sketch** menu, select **File** > **Export Compiled Binary**.
