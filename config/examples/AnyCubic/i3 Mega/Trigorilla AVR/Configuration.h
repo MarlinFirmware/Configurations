@@ -23,6 +23,7 @@
 #error "Don't build with import-2.1.x configurations!"
 #error "Use the 'bugfix...' or 'release...' configurations matching your Marlin version."
 
+//#define I3MEGA_PRO_STOCK
 //#define I3MEGA_HAS_BLTOUCH
 //#define I3MEGA_HAS_TMC2208
 
@@ -187,33 +188,39 @@
  *          TMC5130, TMC5130_STANDALONE, TMC5160, TMC5160_STANDALONE
  * :['A4988', 'A5984', 'DRV8825', 'LV8729', 'TB6560', 'TB6600', 'TMC2100', 'TMC2130', 'TMC2130_STANDALONE', 'TMC2160', 'TMC2160_STANDALONE', 'TMC2208', 'TMC2208_STANDALONE', 'TMC2209', 'TMC2209_STANDALONE', 'TMC26X', 'TMC26X_STANDALONE', 'TMC2660', 'TMC2660_STANDALONE', 'TMC5130', 'TMC5130_STANDALONE', 'TMC5160', 'TMC5160_STANDALONE']
  */
-#if ENABLED(I3MEGA_HAS_TMC2208)
-  #define ALL_DRIVERS_TYPE TMC2208_STANDALONE
+#if ENABLED(I3MEGA_PRO_STOCK)
+  #define X_DRIVER_TYPE TMC2208_STANDALONE
+  #define Y_DRIVER_TYPE TMC2208_STANDALONE
+  #define ELSE_DRIVER_TYPE A4988
 #else
-  #define ALL_DRIVERS_TYPE A4988
+  #if ENABLED(I3MEGA_HAS_TMC2208)
+    #define ELSE_DRIVER_TYPE TMC2208_STANDALONE
+  #else
+    #define ELSE_DRIVER_TYPE A4988
+  #endif
+  #define X_DRIVER_TYPE ELSE_DRIVER_TYPE
+  #define Y_DRIVER_TYPE ELSE_DRIVER_TYPE
 #endif
-#define X_DRIVER_TYPE  ALL_DRIVERS_TYPE
-#define Y_DRIVER_TYPE  ALL_DRIVERS_TYPE
-#define Z_DRIVER_TYPE  ALL_DRIVERS_TYPE
-//#define I_DRIVER_TYPE  ALL_DRIVERS_TYPE
-//#define J_DRIVER_TYPE  ALL_DRIVERS_TYPE
-//#define K_DRIVER_TYPE  ALL_DRIVERS_TYPE
-//#define U_DRIVER_TYPE  ALL_DRIVERS_TYPE
-//#define V_DRIVER_TYPE  ALL_DRIVERS_TYPE
-//#define W_DRIVER_TYPE  ALL_DRIVERS_TYPE
-//#define X2_DRIVER_TYPE ALL_DRIVERS_TYPE
-//#define Y2_DRIVER_TYPE ALL_DRIVERS_TYPE
-#define Z2_DRIVER_TYPE ALL_DRIVERS_TYPE
-//#define Z3_DRIVER_TYPE ALL_DRIVERS_TYPE
-//#define Z4_DRIVER_TYPE ALL_DRIVERS_TYPE
-#define E0_DRIVER_TYPE ALL_DRIVERS_TYPE
-//#define E1_DRIVER_TYPE ALL_DRIVERS_TYPE
-//#define E2_DRIVER_TYPE ALL_DRIVERS_TYPE
-//#define E3_DRIVER_TYPE ALL_DRIVERS_TYPE
-//#define E4_DRIVER_TYPE ALL_DRIVERS_TYPE
-//#define E5_DRIVER_TYPE ALL_DRIVERS_TYPE
-//#define E6_DRIVER_TYPE ALL_DRIVERS_TYPE
-//#define E7_DRIVER_TYPE ALL_DRIVERS_TYPE
+#define Z_DRIVER_TYPE  ELSE_DRIVER_TYPE
+//#define I_DRIVER_TYPE  ELSE_DRIVER_TYPE
+//#define J_DRIVER_TYPE  ELSE_DRIVER_TYPE
+//#define K_DRIVER_TYPE  ELSE_DRIVER_TYPE
+//#define U_DRIVER_TYPE  ELSE_DRIVER_TYPE
+//#define V_DRIVER_TYPE  ELSE_DRIVER_TYPE
+//#define W_DRIVER_TYPE  ELSE_DRIVER_TYPE
+//#define X2_DRIVER_TYPE ELSE_DRIVER_TYPE
+//#define Y2_DRIVER_TYPE ELSE_DRIVER_TYPE
+#define Z2_DRIVER_TYPE ELSE_DRIVER_TYPE
+//#define Z3_DRIVER_TYPE ELSE_DRIVER_TYPE
+//#define Z4_DRIVER_TYPE ELSE_DRIVER_TYPE
+#define E0_DRIVER_TYPE ELSE_DRIVER_TYPE
+//#define E1_DRIVER_TYPE ELSE_DRIVER_TYPE
+//#define E2_DRIVER_TYPE ELSE_DRIVER_TYPE
+//#define E3_DRIVER_TYPE ELSE_DRIVER_TYPE
+//#define E4_DRIVER_TYPE ELSE_DRIVER_TYPE
+//#define E5_DRIVER_TYPE ELSE_DRIVER_TYPE
+//#define E6_DRIVER_TYPE ELSE_DRIVER_TYPE
+//#define E7_DRIVER_TYPE ELSE_DRIVER_TYPE
 
 /**
  * Additional Axis Settings
@@ -1256,7 +1263,13 @@
  * Override with M92
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 96.2 }
+#if ENABLED(I3MEGA_PRO_STOCK)
+  // Mega Pro has DDB geared extruder
+  // Anycubic stock firmware defaults E0 steps to 384, but this is WAY out
+  #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 410 }
+#else
+  #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 96.2 }
+#endif
 
 /**
  * Default Max Feed Rate (linear=mm/s, rotational=°/s)
@@ -1740,8 +1753,13 @@
 // @section motion
 
 // Invert the stepper direction. Change (or reverse the motor connector) if an axis goes the wrong way.
-#define INVERT_X_DIR true // set to true for stock drivers or TMC2208 with reversed connectors
-#define INVERT_Y_DIR false // set to false for stock drivers or TMC2208 with reversed connectors
+#if ENABLED(I3MEGA_PRO_STOCK)
+  #define INVERT_X_DIR false // Mega Pro stock configuration has TMC2208 on X/Y
+  #define INVERT_Y_DIR true  // with non-reversed connectors
+#else
+  #define INVERT_X_DIR true  // set to true for stock drivers or TMC2208 with reversed connectors
+  #define INVERT_Y_DIR false // set to false for stock drivers or TMC2208 with reversed connectors
+#endif
 #define INVERT_Z_DIR false // set to false for stock drivers or TMC2208 with reversed connectors
 //#define INVERT_I_DIR false
 //#define INVERT_J_DIR false
@@ -3114,7 +3132,9 @@
 #if EITHER(ANYCUBIC_LCD_I3MEGA, ANYCUBIC_LCD_CHIRON)
   #define LCD_SERIAL_PORT 3
   #define ANYCUBIC_LCD_DEBUG
-  //#define ANYCUBIC_LCD_GCODE_EXT  // Add ".gcode" to menu entries for DGUS clone compatibility
+  #if ENABLED(I3MEGA_PRO_STOCK)
+    #define ANYCUBIC_LCD_GCODE_EXT  // Mega Pro contains a DGUS clone TFT that requires .gcode extension
+  #endif
 #endif
 
 //
