@@ -23,8 +23,6 @@
 #error "Don't build with import-2.1.x configurations!"
 #error "Use the 'bugfix...' or 'release...' configurations matching your Marlin version."
 
-//#define ENDER_3_PRO_BLTOUCH
-
 /**
  * Configuration.h
  *
@@ -1341,9 +1339,7 @@
 //#define Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN
 
 // Force the use of the probe for Z-axis homing
-#if ENABLED(ENDER_3_PRO_BLTOUCH)
-  #define USE_PROBE_FOR_Z_HOMING
-#endif
+//#define USE_PROBE_FOR_Z_HOMING
 
 /**
  * Z_MIN_PROBE_PIN
@@ -1397,9 +1393,7 @@
 /**
  * The BLTouch probe uses a Hall effect sensor and emulates a servo.
  */
-#if ENABLED(ENDER_3_PRO_BLTOUCH)
-  #define BLTOUCH
-#endif
+//#define BLTOUCH
 
 /**
  * MagLev V4 probe by MDD
@@ -1942,9 +1936,7 @@
 //#define AUTO_BED_LEVELING_3POINT
 //#define AUTO_BED_LEVELING_LINEAR
 //#define AUTO_BED_LEVELING_BILINEAR
-#if ENABLED(ENDER_3_PRO_BLTOUCH)
-  #define AUTO_BED_LEVELING_UBL
-#endif
+//#define AUTO_BED_LEVELING_UBL
 //#define MESH_BED_LEVELING
 
 /**
