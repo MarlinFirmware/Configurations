@@ -1034,7 +1034,7 @@
 #define ASSISTED_TRAMMING
 #if ENABLED(ASSISTED_TRAMMING)
 
-  // Define positions for probe points.
+  // Define from 3 to 9 points to probe.
   #define TRAMMING_POINT_XY { {  85, 85 }, { 415, 85 }, { 415, 415 }, { 85, 415 } } // CR-10 S5 config
 
   // Define position names for probe points. // CR-10 S5 config

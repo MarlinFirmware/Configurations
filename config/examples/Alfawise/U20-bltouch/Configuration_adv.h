@@ -1034,7 +1034,7 @@
 //#define ASSISTED_TRAMMING
 #if ENABLED(ASSISTED_TRAMMING)
 
-  // Define positions for probe points.
+  // Define from 3 to 9 points to probe.
   #if defined(U20) || defined(LK1)
     #define MAX_THR_X 260 // X 265 may not be reachable by a probe on the left (U20)
     #define TRAMMING_POINT_XY { {  30, 30 }, { MAX_THR_X,  30 }, { MAX_THR_X, 275 }, { 30, 275 } }
