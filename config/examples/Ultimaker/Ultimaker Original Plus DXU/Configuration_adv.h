@@ -2573,10 +2573,18 @@
    * Extra G-code to run while executing tool-change commands. Can be used to use an additional
    * stepper motor (e.g., I axis in Configuration.h) to drive the tool-changer.
    */
-  #define EVENT_GCODE_TOOLCHANGE_T0 "G90\nG0 X210 F7200\nG0 Y165\nG0 X216\nG0 X216 Y183\nG0 X210" // Extra G-code to run while executing tool-change command T0
-  //#define EVENT_GCODE_TOOLCHANGE_T1 "G1 X210\nG1 Y199\nG1 X216\nG1 X216 Y182\nG1 X210" // Extra G-code to run while executing tool-change command T1
-  #define EVENT_GCODE_TOOLCHANGE_T1 "G0 X229 F7200\nG0 Y199\nG0 X235\nG0 X235 Y184\nG0 X229" // Extra G-code to run while executing tool-change command T1
-  //#define EVENT_GCODE_TOOLCHANGE_ALWAYS_RUN        // Always execute above G-code sequences. Use with caution!
+  #define EVENT_GCODE_TOOLCHANGE_T0 "G90\nG0 X210 F7200\nG0 Y165\nG0 X216\nG0 X216 Y183\nG0 X210"  // Extra G-code to run while executing tool-change command T0
+  //#define EVENT_GCODE_TOOLCHANGE_T1 "G1 X210\nG1 Y199\nG1 X216\nG1 X216 Y182\nG1 X210"  // Extra G-code to run while executing tool-change command T1
+  #define EVENT_GCODE_TOOLCHANGE_T1 "G0 X229 F7200\nG0 Y199\nG0 X235\nG0 X235 Y184\nG0 X229"  // Extra G-code to run while executing tool-change command T1
+  //#define EVENT_GCODE_TOOLCHANGE_ALWAYS_RUN         // Always execute above G-code sequences. Use with caution!
+
+  /**
+   * Consider coordinates for EVENT_GCODE_TOOLCHANGE_Tx as relative to T0
+   * so that moves in the specified axes are the same for all tools.
+   */
+  //#define TC_GCODE_USE_GLOBAL_X   // Use X position relative to Tool 0
+  //#define TC_GCODE_USE_GLOBAL_Y   // Use Y position relative to Tool 0
+  //#define TC_GCODE_USE_GLOBAL_Z   // Use Z position relative to Tool 0
 
   /**
    * Tool Sensors detect when tools have been picked up or dropped.
