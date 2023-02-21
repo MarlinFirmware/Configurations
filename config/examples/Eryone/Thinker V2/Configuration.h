@@ -141,11 +141,12 @@
 //#define BLUETOOTH
 
 // Name displayed in the LCD "Ready" message and Info menu
-#if ANY (THINKERV2_BL, THINKERV2_FL, THINKERV2_Direct)
-    #define CUSTOM_MACHINE_NAME "THINKER V2 MOD"
+#if ANY(THINKERV2_BL, THINKERV2_FL, THINKERV2_Direct)
+  #define CUSTOM_MACHINE_NAME "THINKER V2 MOD"
 #else
   #define CUSTOM_MACHINE_NAME "THINKER V2"
 #endif
+
 // Printer's unique ID, used by some programs to differentiate between machines.
 // Choose your own or use a service like https://www.uuidgenerator.net/version4
 //#define MACHINE_UUID "00000000-0000-0000-0000-000000000000"
@@ -1245,10 +1246,11 @@
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
 #ifdef THINKERV2_Direct
-  #define DEFAULT_MAX_FEEDRATE          { 200, 200, 35, 100 }
+  #define DEFAULT_MAX_FEEDRATE        { 200, 200, 35, 100 }
 #else
-  #define DEFAULT_MAX_FEEDRATE          { 300, 300, 35, 25 }
+  #define DEFAULT_MAX_FEEDRATE        { 300, 300, 35, 25 }
 #endif
+
 //#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
   #define MAX_FEEDRATE_EDIT_VALUES    { 600, 600, 10, 50 } // ...or, set your own edit limits
@@ -1261,9 +1263,9 @@
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
 #ifdef THINKERV2_Direct
-  #define DEFAULT_MAX_ACCELERATION      { 1000, 1000, 150, 3000 }
+  #define DEFAULT_MAX_ACCELERATION    { 1000, 1000, 150, 3000 }
 #else
-  #define DEFAULT_MAX_ACCELERATION      { 1500, 1500, 150, 1500 }
+  #define DEFAULT_MAX_ACCELERATION    { 1500, 1500, 150, 1500 }
 #endif
 
 //#define LIMITED_MAX_ACCEL_EDITING     // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
@@ -1282,13 +1284,17 @@
  *   M204 J    Angular Travel Acceleration
  */
 #ifdef THINKERV2_Direct
-  #define DEFAULT_ACCELERATION          700   // X, Y, Z and E acceleration for printing moves
-  #define DEFAULT_RETRACT_ACCELERATION  1250   // E acceleration for retracts
-  #define DEFAULT_TRAVEL_ACCELERATION   750   // X, Y, Z acceleration for travel (non printing) moves
+  #define DEFAULT_ACCELERATION                 700  // X, Y, Z and E acceleration for printing moves
+  #define DEFAULT_RETRACT_ACCELERATION        1250  // E acceleration for retracts
+  #define DEFAULT_TRAVEL_ACCELERATION          750  // X, Y, Z acceleration for travel (non printing) moves
 #else
-  #define DEFAULT_ACCELERATION          1250   // X, Y, Z and E acceleration for printing moves
-  #define DEFAULT_RETRACT_ACCELERATION  1250   // E acceleration for retracts
-  #define DEFAULT_TRAVEL_ACCELERATION   1500   // X, Y, Z acceleration for travel (non printing) moves
+  #define DEFAULT_ACCELERATION                1250  // X, Y, Z and E acceleration for printing moves
+  #define DEFAULT_RETRACT_ACCELERATION        1250  // E acceleration for retracts
+  #define DEFAULT_TRAVEL_ACCELERATION         1500  // X, Y, Z acceleration for travel (non printing) moves
+#endif
+#if ENABLED(AXIS4_ROTATES)
+  #define DEFAULT_ANGULAR_ACCELERATION        3000  // I, J, K acceleration for rotational-only printing moves
+  #define DEFAULT_ANGULAR_TRAVEL_ACCELERATION 3000  // I, J, K acceleration for rotational-only travel (non printing) moves
 #endif
 
 /**
@@ -1675,13 +1681,13 @@
  */
 //#define PROBING_HEATERS_OFF       // Turn heaters off when probing
 #if ENABLED(PROBING_HEATERS_OFF)
-  #define WAIT_FOR_BED_HEATER     // Wait for bed to heat back up between probes (to improve accuracy)
+  #define WAIT_FOR_BED_HEATER       // Wait for bed to heat back up between probes (to improve accuracy)
   //#define WAIT_FOR_HOTEND         // Wait for hotend to heat back up between probes (to improve accuracy & prevent cold extrude)
 #endif
-#define PROBING_FANS_OFF          // Turn fans off when probing
+#define PROBING_FANS_OFF            // Turn fans off when probing
 //#define PROBING_ESTEPPERS_OFF     // Turn all extruder steppers off when probing
 //#define PROBING_STEPPERS_OFF      // Turn all steppers off (unless needed to hold position) when probing (including extruders)
-#define DELAY_BEFORE_PROBING 200  // (ms) To prevent vibrations from triggering piezo sensors
+#define DELAY_BEFORE_PROBING 200    // (ms) To prevent vibrations from triggering piezo sensors
 
 // Require minimum nozzle and/or bed temperature for probing
 //#define PREHEAT_BEFORE_PROBING
@@ -1857,11 +1863,8 @@
  * RAMPS-based boards use SERVO3_PIN for the first runout sensor.
  * For other boards you may need to define FIL_RUNOUT_PIN, FIL_RUNOUT2_PIN, etc.
  */
-
 #ifdef THINKERV2_FL
   #define FILAMENT_RUNOUT_SENSOR
-#else
-  //#define FILAMENT_RUNOUT_SENSOR
 #endif
 #if ENABLED(FILAMENT_RUNOUT_SENSOR)
   #define FIL_RUNOUT_ENABLED_DEFAULT true // Enable the sensor on startup. Override with M412 followed by M500.

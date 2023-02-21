@@ -2245,7 +2245,7 @@
  * - Allows Z homing only when XY positions are known and trusted.
  * - If stepper drivers sleep, XY homing may be required again before Z homing.
  */
-#ifdef BLTOUCH
+#if ENABLED(BLTOUCH)
   #define Z_SAFE_HOMING
 #endif
 
