@@ -1103,17 +1103,17 @@
 // Add a Duplicate option for well-separated conjoined nozzles
 //#define MULTI_NOZZLE_DUPLICATION
 
-// By default pololu step drivers require an active high signal. However, some high power drivers require an active low signal as step.
-#define INVERT_X_STEP_PIN true
-#define INVERT_Y_STEP_PIN true
-#define INVERT_Z_STEP_PIN true
-#define INVERT_I_STEP_PIN false
-#define INVERT_J_STEP_PIN false
-#define INVERT_K_STEP_PIN false
-#define INVERT_U_STEP_PIN false
-#define INVERT_V_STEP_PIN false
-#define INVERT_W_STEP_PIN false
-#define INVERT_E_STEP_PIN true
+// By default stepper drivers require an active-HIGH signal but some high-power drivers require an active-LOW signal to step.
+#define STEP_STATE_X LOW
+#define STEP_STATE_Y LOW
+#define STEP_STATE_Z LOW
+#define STEP_STATE_I LOW
+#define STEP_STATE_J LOW
+#define STEP_STATE_K LOW
+#define STEP_STATE_U LOW
+#define STEP_STATE_V LOW
+#define STEP_STATE_W LOW
+#define STEP_STATE_E LOW
 
 /**
  * Idle Stepper Shutdown
