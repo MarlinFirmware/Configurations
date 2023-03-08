@@ -73,11 +73,7 @@
  * Set MOTHERBOARD to the appropriate board, once again at your own risk
  * 
  * IMPORTANT:
- * This current config does not use the default inductive sensor, I replaced mine with a BLTouch
- * Since I was unable to test it, I kept this current config.
- * To enable the inductive sensor, theoretically one must uncomment FIX_MOUNTED_PROBE and comment out BLTouch.
- * Search for "TODO" in this file to find these appropriate lines, it is up to you to test that this works however.
- * Please edit and publish these fixes this file once tested.
+ * The stock induction z level sensor remains untested. If you test it and it works please update this config. 
  * 
  * Possible issues that remain:
  * 
@@ -1416,7 +1412,7 @@
  * A Fix-Mounted Probe either doesn't deploy or needs manual deployment.
  *   (e.g., an inductive probe or a nozzle-based probe-switch.)
  */
-//#define FIX_MOUNTED_PROBE //TODO: Uncomment this for the standard inductive sensor
+#define FIX_MOUNTED_PROBE
 
 /**
  * Use the nozzle as the probe, as with a conductive
@@ -1433,7 +1429,7 @@
 /**
  * The BLTouch probe uses a Hall effect sensor and emulates a servo.
  */
-#define BLTOUCH //TODO: Comment this for the standard inductive sensor
+//#define BLTOUCH
 
 /**
  * MagLev V4 probe by MDD
