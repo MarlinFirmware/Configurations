@@ -2282,6 +2282,7 @@
   //#define Z_SAFE_HOMING_X_POINT 107    // X point for Z homing
   //#define Z_SAFE_HOMING_Y_POINT 107    // Y point for Z homing
 
+  //#define Z_SAFE_HOMING_POINT_ABSOLUTE  // Ignore home offsets (M206) for Z homing position
 #endif
 
 // Homing speeds (linear=mm/min, rotational=°/min)
