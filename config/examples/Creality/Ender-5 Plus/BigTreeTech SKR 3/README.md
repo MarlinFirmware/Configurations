@@ -1,4 +1,3 @@
-
 # Ender-5 Plus with BTT SKR 3 Configurations for Marlin Firmware
 
 ## Important
