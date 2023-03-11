@@ -1121,10 +1121,10 @@
  * Enable DISABLE_INACTIVE_* to shut down axis steppers after an idle period.
  * The Deactive Time can be overridden with M18 and M84. Set to 0 for No Timeout.
  */
-#define DEFAULT_STEPPER_DEACTIVE_TIME 900
-#define DISABLE_INACTIVE_X
-#define DISABLE_INACTIVE_Y
-//#define DISABLE_INACTIVE_Z  // Disable if the nozzle could fall onto your printed part!
+#define DEFAULT_STEPPER_DEACTIVE_TIME 120
+//#define DISABLE_INACTIVE_X
+//#define DISABLE_INACTIVE_Y
+#define DISABLE_INACTIVE_Z  // Disable if the nozzle could fall onto your printed part!
 //#define DISABLE_INACTIVE_I
 //#define DISABLE_INACTIVE_J
 //#define DISABLE_INACTIVE_K
