@@ -63,37 +63,37 @@
 
 /**
  * *** IMPORTANT INFO FOR THE TRONXY XY2-PRO PLEASE READ ***
- * 
+ *
  * This config is for the TronXY XY2-Pro Single Titan Extruder.
  * So far it has been tested on a single machine (mine).
  * It works on mine, may or may not work on yours, use at your own risk.
  * It similarly may or may not work on other XY2-Pro models.
- * 
+ *
  * IMPORTANT:
  * This config is for a Xy2-Pro with a V6 board.
  * Your XY2-Pro may not have a V6 board. Many V5s exist
  * Set MOTHERBOARD to the appropriate board, once again at your own risk
- * 
+ *
  * IMPORTANT:
- * The stock induction z level sensor remains untested. If you test it and it works please update this config. 
- * 
+ * The stock induction z level sensor remains untested. If you test it and it works please update this config.
+ *
  * Possible issues that remain:
- * 
+ *
  * The main fan on the titan extruder (seemingly the unnecessary one to "cool the hotend") is not currently supported
  * If you find out how to support it, add support in this file, but I've found this fan to be unnecessary.
- * 
+ *
  * DEFAULT_AXIS_STEPS_PER_UNIT may not be as accurate as required. The true extruder value may be about 5% lower than in reality
  * I can't tell if my extruder unit is messing up here however since these values were previously fine, so I'm leaving it as is.
  * X and Y steps may also be slightly low, Z seems fine however.
  * I personally run my printer with 10% to 20% extra flow.
- * 
+ *
  * I've attempted to add PID support to the bed header. For some reason getting the values has resulted in very slow heating,
  * and I'm not versed enough in control theory to manually mess with these. As such, I have disabled PID bed heating
  * I've found the printer works fine without PID bed heating however.
- * 
+ *
  * I've enabled BLTouch support largely following this guide: https://youtu.be/sxubnQ2Gpkc
  * This requires you to add line "#define SERVO0_PIN PB11" into Marlin/src/pins/stm32f1/pins_CHITU3d_V6.h
- * 
+ *
 */
 
 // Author info of this build printed to the host during boot and M115
@@ -3091,7 +3091,7 @@
  *  - Product: https://www.aliexpress.com/item/1005002008179262.html
  *
  * RELOADED (T5UID1)
- *  - Download https://github.com/Desuuuu/DGUS-reloaded/releases
+ *  - Download https://github.com/Neo2003/DGUS-reloaded/releases
  *  - Copy the downloaded DWIN_SET folder to the SD card.
  *
  * IA_CREALITY (T5UID1)
