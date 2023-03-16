@@ -2173,13 +2173,10 @@
  * Points to probe for all 3-point Leveling procedures.
  * Override if the automatically selected points are inadequate.
  */
-#if EITHER(AUTO_BED_LEVELING_3POINT, AUTO_BED_LEVELING_UBL)
-  #define PROBE_PT_1_X 35
-  #define PROBE_PT_1_Y 365
-  #define PROBE_PT_2_X 35
-  #define PROBE_PT_2_Y 35
-  #define PROBE_PT_3_X 365
-  #define PROBE_PT_3_Y 35
+#if NEEDS_THREE_PROBE_POINTS
+  #define PROBE_PT_1 {  35, 365 }   // (mm) { x, y }
+  #define PROBE_PT_2 {  35,  35 }
+  #define PROBE_PT_3 { 365,  35 }
 #endif
 
 /**
