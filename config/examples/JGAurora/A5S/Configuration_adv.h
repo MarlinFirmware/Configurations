@@ -203,7 +203,7 @@
 #define HEATER_BED_INVERTING true
 #define HEATER_0_INVERTING true
 //#define HEATER_1_INVERTING false
-#define FAN_ACTIVE_STATE LOW
+#define FAN_INVERTING 1
 
 //
 // Heated Bed Bang-Bang options
