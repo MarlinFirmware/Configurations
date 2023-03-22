@@ -3206,17 +3206,26 @@
 //#define TOUCH_UI_FTDI_EVE
 
 //
-// Touch-screen LCD for Anycubic printers
+// Touch-screen LCD for Anycubic Chiron
+//
+//#define ANYCUBIC_LCD_CHIRON
+
+//
+// Touch-screen LCD for Anycubic i3 Mega
 //
 #define ANYCUBIC_LCD_I3MEGA
-//#define ANYCUBIC_LCD_CHIRON
-#if EITHER(ANYCUBIC_LCD_I3MEGA, ANYCUBIC_LCD_CHIRON)
+#if ENABLED(ANYCUBIC_LCD_I3MEGA)
   #define LCD_SERIAL_PORT 3
   #define ANYCUBIC_LCD_DEBUG
   #if ENABLED(I3MEGA_PRO_STOCK)
     #define ANYCUBIC_LCD_GCODE_EXT  // Mega Pro contains a DGUS clone TFT that requires .gcode extension
   #endif
 #endif
+
+//
+// Touch-screen LCD for Anycubic Vyper
+//
+//#define ANYCUBIC_LCD_VYPER
 
 //
 // 320x240 Nextion 2.8" serial TFT Resistive Touch Screen NX3224T028
