@@ -1,12 +1,8 @@
 # Ender-5 Plus Configurations for Marlin Firmware
 
-## Important
-
-NOTE: The Ender-5 LCD stock firmware is only compatible with Creality firmware. The LCD standard UI will not function. This is expected. With the stock LCD firmware Marlin can only be controlled from a host over USB.
-
 ## Marlin DGUS UI "Reloaded" Instructions
 
-The Ender-5 stock LCD can optionally use a customized Marlin DGUS interface. To use `DGUS_LCD_UI RELOADED` the stock LCD must be flashed with custom firmware.
+To use `DGUS_LCD_UI RELOADED` the stock LCD must be flashed with custom firmware.
 
 ### Get the DWIN_SET
 
@@ -29,7 +25,3 @@ The Ender-5 stock LCD can optionally use a customized Marlin DGUS interface. To 
 - When the procedure ends the screen will display a blue background with an END message on the first line and a summary.
 - Turn off the printer. Remove the Micro-SD card from the touchscreen. Reassemble the printer if needed.
 - The touch-screen firmware is now up-to-date.
-
-## Restoring Factory Firmware
-
-The original firmware can be restored by downloading the [Ender 5 Plus firmware](https://www.creality.com/download) from Creality. You can follow the same LCD flashing procedure using the Creality-provided `DWIN_SET` folder.
