@@ -65,7 +65,7 @@
 #define STRING_CONFIG_H_AUTHOR "(thisiskeithb & codiac2600: BTT002 MK3S/TMC2209s)" // Who made the changes.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
-// Disable this for FAN_PIN PB9 and FAN1_PIN PB8
+// Disable this for FAN0_PIN PB9 and FAN1_PIN PB8
 #define MK3_FAN_PINS
 
 // Is printer equipped with a 3.5:1 gearbox on the extruder?

@@ -9,7 +9,7 @@
 
 Flags specific to this printer/configuration:
 
-- `MK3_FAN_PINS` - Disable this for `FAN_PIN PB9` and `FAN1_PIN PB8`
+- `MK3_FAN_PINS` - Disable this for `FAN0_PIN PB9` and `FAN1_PIN PB8`
 - `GEARBOX_BEAR` - Is printer equipped with a 3.5:1 gearbox on the extruder?
 - `TALLBEAR` - Tall Bear (320mm)?
 - `SUPERPINDA` - SuperPinda present?

@@ -65,7 +65,7 @@
 #define STRING_CONFIG_H_AUTHOR "(Prussia3D, Paul_GD MK3S)" // Who made the changes.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
-// Disable this for FAN_PIN 8 and FAN1_PIN 6
+// Disable this for FAN0_PIN 8 and FAN1_PIN 6
 #define MK3_FAN_PINS
 
 // Is printer equipped with a 3.5:1 gearbox on the extruder?

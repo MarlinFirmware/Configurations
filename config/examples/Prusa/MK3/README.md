@@ -8,7 +8,7 @@
 
 Flags specific to this printer/configuration:
 
-- `MK3_FAN_PINS` - Disable this for `FAN_PIN 8` and `FAN1_PIN 6`
+- `MK3_FAN_PINS` - Disable this for `FAN0_PIN 8` and `FAN1_PIN 6`
 - `GEARBOX_BEAR` - Is printer equipped with a 3.5:1 gearbox on the extruder?
 - `LOWBAUD` - Printer needs lower baudrate?
 - `TALLBEAR` - Tall Bear (320mm)?

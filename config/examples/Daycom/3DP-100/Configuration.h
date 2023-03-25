@@ -137,7 +137,7 @@
 //#define BLUETOOTH
 
 
-#define FAN_PIN -1
+#define FAN0_PIN -1
 
 // Name displayed in the LCD "Ready" message and Info menu
 #define CUSTOM_MACHINE_NAME "3DP-100"
