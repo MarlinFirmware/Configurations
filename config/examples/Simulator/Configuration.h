@@ -105,7 +105,7 @@
 
 // Choose the name from boards.h that matches your setup
 #ifndef MOTHERBOARD
-  #define MOTHERBOARD BOARD_LINUX_RAMPS
+  #define MOTHERBOARD BOARD_SIMULATED
 #endif
 
 /**
