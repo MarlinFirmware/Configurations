@@ -89,7 +89,7 @@
 
 // Choose the name from boards.h that matches your setup
 #ifndef MOTHERBOARD
-  #define MOTHERBOARD BOARD_MKS_ROBIN_MINI
+  #define MOTHERBOARD BOARD_MKS_TINY_BEE
 #endif
 
 /**
