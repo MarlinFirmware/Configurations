@@ -3138,6 +3138,8 @@
  *  - Download files as specified for your type of display.
  *  - Plug the microSD card into the back of the display.
  *  - Boot the display and wait for the update to complete.
+ *
+ * :[ 'ORIGIN', 'FYSETC', 'HYPRECY', 'MKS', 'RELOADED', 'IA_CREALITY' ]
  */
 // Flash display with DGUS Displays for Marlin:
 //  - Format the SD card to FAT32 with a allocation size of 4k.
@@ -3145,6 +3147,8 @@
 //  - Copy the downloaded DWIN_SET folder to the SD card.
 //  - Plug the microSD card into the back of the display.
 //  - Boot the display and wait for the update to complete.
+ *
+ * :[ 'ORIGIN', 'FYSETC', 'HYPRECY', 'MKS', 'RELOADED', 'IA_CREALITY' ]
 //
 #define DGUS_LCD_UI ORIGIN
 #if DGUS_UI_IS(MKS)
