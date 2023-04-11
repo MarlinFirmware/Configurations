@@ -23,7 +23,7 @@ With the option of wireless file upload to the SD card, the idea of updating the
 
 ## USB and SDCARD Firmware flashing for the ARDUINO ATMEGA 2560 and ADK
 
-The bootloader looks for byte in eeprom at address 0x3FF:
+The bootloader looks for byte in EEPROM at address 0x3FF:
 
 - If it is set to 0xF0 bootloader will look for a bin file on the sdcard named
    firmware.bin and use it to flash the firmware then reset the byte to 0xFF so it
