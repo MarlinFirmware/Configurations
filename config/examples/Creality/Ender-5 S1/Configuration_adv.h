@@ -992,7 +992,7 @@
   // Add a Z limit
   #define BLTOUCH_AND_Z_LIMIT
 
-  #if ENABLED(BLTOUCH_HS_MODE)
+  #ifdef BLTOUCH_HS_MODE
     // The probe Z offset (M851 Z) is the height at which the probe triggers.
     // This must be large enough to keep the probe pin off the bed and prevent
     // it from snagging on the bed clips.
