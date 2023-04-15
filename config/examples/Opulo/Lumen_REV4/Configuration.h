@@ -3568,6 +3568,6 @@
 #define SERVO_DETACH_GCODE
 
 // Support for RS485 control
-// #define RS485_ENABLED
-// #define RS485_BUS_BUFFER_SIZE 128
-// #define RS485_SERIAL_PORT 1
+#define RS485_ENABLED
+#define RS485_BUS_BUFFER_SIZE 128
+#define RS485_SERIAL_PORT 1
