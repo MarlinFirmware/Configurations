@@ -3157,6 +3157,7 @@
 // Touch-screen LCD for Anycubic Chiron
 //
 #define ANYCUBIC_LCD_CHIRON
+#define LCD_SERIAL_PORT 3
 
 //
 // Touch-screen LCD for Anycubic i3 Mega
