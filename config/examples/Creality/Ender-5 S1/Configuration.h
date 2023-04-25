@@ -140,6 +140,15 @@
 #define LCD_BAUDRATE 115200
 #define USB_HOST_SERIAL MYSERIAL2
 
+/**
+ * Select a serial port to communicate with RS485 protocol
+ * :[-1, 0, 1, 2, 3, 4, 5, 6, 7]
+ */
+//#define RS485_SERIAL_PORT 1
+#ifdef RS485_SERIAL_PORT
+  //#define RS485_BUS_BUFFER_SIZE 128
+#endif
+
 // Enable the Bluetooth serial interface on AT90USB devices
 //#define BLUETOOTH
 
