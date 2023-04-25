@@ -11,6 +11,7 @@ Pre-tested Configurations for Marlin Firmware. Links below…
   2.1.2|([Browse](//github.com/MarlinFirmware/Configurations/tree/release-2.1.2))|([Download ZIP](//github.com/MarlinFirmware/Configurations/archive/refs/heads/release-2.1.2.zip))
   2.1.1|([Browse](//github.com/MarlinFirmware/Configurations/tree/release-2.1.1))|([Download ZIP](//github.com/MarlinFirmware/Configurations/archive/refs/heads/release-2.1.1.zip))
   2.1|([Browse](//github.com/MarlinFirmware/Configurations/tree/release-2.1))|([Download ZIP](//github.com/MarlinFirmware/Configurations/archive/refs/heads/release-2.1.zip))
+  2.0.9.6|([Browse](//github.com/MarlinFirmware/Configurations/tree/release-2.0.9.6))|([Download ZIP](//github.com/MarlinFirmware/Configurations/archive/refs/heads/release-2.0.9.6.zip))
   2.0.9.5|([Browse](//github.com/MarlinFirmware/Configurations/tree/release-2.0.9.5))|([Download ZIP](//github.com/MarlinFirmware/Configurations/archive/refs/heads/release-2.0.9.5.zip))
   2.0.9.4|([Browse](//github.com/MarlinFirmware/Configurations/tree/release-2.0.9.4))|([Download ZIP](//github.com/MarlinFirmware/Configurations/archive/refs/heads/release-2.0.9.4.zip))
   2.0.9.3|([Browse](//github.com/MarlinFirmware/Configurations/tree/release-2.0.9.3))|([Download ZIP](//github.com/MarlinFirmware/Configurations/archive/refs/heads/release-2.0.9.3.zip))
