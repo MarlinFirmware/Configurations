@@ -1750,7 +1750,7 @@
                                     // Be sure to have this much clearance over your Z_MAX_POS to prevent grinding.
 
 #ifdef E6_USE_BLTOUCH
-  #define Z_AFTER_HOMING         10 // (mm) Height to move to after homing Z
+  #define Z_AFTER_HOMING         10 // (mm) Height to move to after homing (if Z was homed)
 #endif
 
 // Direction of endstops when homing; 1=MAX, -1=MIN

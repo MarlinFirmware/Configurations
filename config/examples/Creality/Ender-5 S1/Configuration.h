@@ -68,9 +68,7 @@
 #define STRING_CONFIG_H_AUTHOR "Creality" // Who made the changes.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
-#define MACVERSION        STRING_CONFIG_H_AUTHOR
-#define SOFTVERSION       SHORT_BUILD_VERSION
-#define MACHINE_TYPE      "Ender-5 S1"
+#define MACHINE_NAME      "Ender-5 S1"
 #if ENABLED(VERY_HIGH_SPEED)
   #define FIRMWARE_VERSION  "1.0.6T13"
 #else
@@ -1789,7 +1787,7 @@
 #define Z_CLEARANCE_FOR_HOMING    5 // (mm) Minimal Z height before homing (G28) for Z clearance above the bed, clamps, ...
                                     // Be sure to have this much clearance over your Z_MAX_POS to prevent grinding.
 
-//#define Z_AFTER_HOMING         10 // (mm) Height to move to after homing Z
+//#define Z_AFTER_HOMING         10 // (mm) Height to move to after homing (if Z was homed)
 
 // Direction of endstops when homing; 1=MAX, -1=MIN
 // :[-1,1]

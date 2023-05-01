@@ -815,7 +815,6 @@
   #define X1_MAX_POS X_BED_SIZE   // A max coordinate so the X1 carriage can't hit the parked X2 carriage
   #define X2_MIN_POS    80        // A min coordinate so the X2 carriage can't hit the parked X1 carriage
   #define X2_MAX_POS   353        // The max position of the X2 carriage, typically also the home position
-  #define X2_HOME_DIR    1        // Set to 1. The X2 carriage always homes to the max endstop position
   #define X2_HOME_POS X2_MAX_POS  // Default X2 home position. Set to X2_MAX_POS.
                                   // NOTE: For Dual X Carriage use M218 T1 Xn to override the X2_HOME_POS.
                                   // This allows recalibration of endstops distance without a rebuild.
@@ -923,7 +922,7 @@
 
 #define QUICK_HOME                            // If G28 contains XY do a diagonal move first
 //#define HOME_Y_BEFORE_X                     // If G28 contains XY home Y before X
-//#define HOME_Z_FIRST                        // Home Z first. Requires a Z-MIN endstop (not a probe).
+//#define HOME_Z_FIRST                        // Home Z first. Requires a real endstop (not a probe).
 //#define CODEPENDENT_XY_HOMING               // If X/Y can't home without homing Y/X first
 
 // @section bltouch
@@ -1540,21 +1539,22 @@
    * We encourage you to take advantage of this new feature and we also
    * respectfully request that you retain the unmodified Marlin boot screen.
    */
-  #if ANY(HAS_MARLINUI_U8GLIB, TOUCH_UI_FTDI_EVE, IS_DWIN_MARLINUI)
-    #define SHOW_BOOTSCREEN                 // Show the Marlin bootscreen on startup. ** ENABLE FOR PRODUCTION **
-    #if ENABLED(SHOW_BOOTSCREEN)
-      #define BOOTSCREEN_TIMEOUT 4000       // (ms) Total Duration to display the boot screen(s)
-      #if EITHER(HAS_MARLINUI_U8GLIB, TFT_COLOR_UI)
-        #define BOOT_MARLIN_LOGO_SMALL      // Show a smaller Marlin logo on the Boot Screen (saving lots of flash)
-      #endif
-      //#define SHOW_CUSTOM_BOOTSCREEN      // Show the bitmap in Marlin/_Bootscreen.h on startup.
+  #define SHOW_BOOTSCREEN                 // Show the Marlin bootscreen on startup. ** ENABLE FOR PRODUCTION **
+  #if ENABLED(SHOW_BOOTSCREEN)
+    #define BOOTSCREEN_TIMEOUT 4000       // (ms) Total Duration to display the boot screen(s)
+    #if EITHER(HAS_MARLINUI_U8GLIB, TFT_COLOR_UI)
+      #define BOOT_MARLIN_LOGO_SMALL      // Show a smaller Marlin logo on the Boot Screen (saving lots of flash)
     #endif
     #if HAS_MARLINUI_U8GLIB
-      #if ENABLED(SHOW_BOOTSCREEN)
-        //#define BOOT_MARLIN_LOGO_ANIMATED // Animated Marlin logo. Costs ~3260 (or ~940) bytes of flash.
-      #endif
-      //#define CUSTOM_STATUS_SCREEN_IMAGE  // Show the bitmap in Marlin/_Statusscreen.h on the status screen.
+      //#define BOOT_MARLIN_LOGO_ANIMATED // Animated Marlin logo. Costs ~3260 (or ~940) bytes of flash.
     #endif
+    #if EITHER(HAS_MARLINUI_U8GLIB, TOUCH_UI_FTDI_EVE)
+      //#define SHOW_CUSTOM_BOOTSCREEN    // Show the bitmap in Marlin/_Bootscreen.h on startup.
+    #endif
+  #endif
+
+  #if HAS_MARLINUI_U8GLIB
+    //#define CUSTOM_STATUS_SCREEN_IMAGE  // Show the bitmap in Marlin/_Statusscreen.h on the status screen.
   #endif
 
   //#define SOUND_MENU_ITEM   // Add a mute option to the LCD menu
@@ -2871,10 +2871,10 @@
   #endif
 
   #if AXIS_IS_TMC_CONFIG(X2)
-    #define X2_CURRENT      800
+    #define X2_CURRENT      X_CURRENT
     #define X2_CURRENT_HOME X2_CURRENT
-    #define X2_MICROSTEPS    X_MICROSTEPS
-    #define X2_RSENSE         0.11
+    #define X2_MICROSTEPS   X_MICROSTEPS
+    #define X2_RSENSE       X_RSENSE
     #define X2_CHAIN_POS     -1
     //#define X2_INTERPOLATE true
     //#define X2_HOLD_MULTIPLIER 0.5
@@ -2891,10 +2891,10 @@
   #endif
 
   #if AXIS_IS_TMC_CONFIG(Y2)
-    #define Y2_CURRENT      800
+    #define Y2_CURRENT      Y_CURRENT
     #define Y2_CURRENT_HOME Y2_CURRENT
-    #define Y2_MICROSTEPS    Y_MICROSTEPS
-    #define Y2_RSENSE         0.11
+    #define Y2_MICROSTEPS   Y_MICROSTEPS
+    #define Y2_RSENSE       Y_RSENSE
     #define Y2_CHAIN_POS     -1
     //#define Y2_INTERPOLATE true
     //#define Y2_HOLD_MULTIPLIER 0.5
@@ -2911,30 +2911,30 @@
   #endif
 
   #if AXIS_IS_TMC_CONFIG(Z2)
-    #define Z2_CURRENT      800
+    #define Z2_CURRENT      Z_CURRENT
     #define Z2_CURRENT_HOME Z2_CURRENT
-    #define Z2_MICROSTEPS    Z_MICROSTEPS
-    #define Z2_RSENSE         0.11
+    #define Z2_MICROSTEPS   Z_MICROSTEPS
+    #define Z2_RSENSE       Z_RSENSE
     #define Z2_CHAIN_POS     -1
     //#define Z2_INTERPOLATE true
     //#define Z2_HOLD_MULTIPLIER 0.5
   #endif
 
   #if AXIS_IS_TMC_CONFIG(Z3)
-    #define Z3_CURRENT      800
+    #define Z3_CURRENT      Z_CURRENT
     #define Z3_CURRENT_HOME Z3_CURRENT
-    #define Z3_MICROSTEPS    Z_MICROSTEPS
-    #define Z3_RSENSE         0.11
+    #define Z3_MICROSTEPS   Z_MICROSTEPS
+    #define Z3_RSENSE       Z_RSENSE
     #define Z3_CHAIN_POS     -1
     //#define Z3_INTERPOLATE true
     //#define Z3_HOLD_MULTIPLIER 0.5
   #endif
 
   #if AXIS_IS_TMC_CONFIG(Z4)
-    #define Z4_CURRENT      800
+    #define Z4_CURRENT      Z_CURRENT
     #define Z4_CURRENT_HOME Z4_CURRENT
-    #define Z4_MICROSTEPS    Z_MICROSTEPS
-    #define Z4_RSENSE         0.11
+    #define Z4_MICROSTEPS   Z_MICROSTEPS
+    #define Z4_RSENSE       Z_RSENSE
     #define Z4_CHAIN_POS     -1
     //#define Z4_INTERPOLATE true
     //#define Z4_HOLD_MULTIPLIER 0.5
@@ -3010,63 +3010,63 @@
   #endif
 
   #if AXIS_IS_TMC_CONFIG(E1)
-    #define E1_CURRENT      800
+    #define E1_CURRENT      E0_CURRENT
     #define E1_MICROSTEPS   E0_MICROSTEPS
-    #define E1_RSENSE         0.11
+    #define E1_RSENSE       E0_RSENSE
     #define E1_CHAIN_POS     -1
     //#define E1_INTERPOLATE true
     //#define E1_HOLD_MULTIPLIER 0.5
   #endif
 
   #if AXIS_IS_TMC_CONFIG(E2)
-    #define E2_CURRENT      800
+    #define E2_CURRENT      E0_CURRENT
     #define E2_MICROSTEPS   E0_MICROSTEPS
-    #define E2_RSENSE         0.11
+    #define E2_RSENSE       E0_RSENSE
     #define E2_CHAIN_POS     -1
     //#define E2_INTERPOLATE true
     //#define E2_HOLD_MULTIPLIER 0.5
   #endif
 
   #if AXIS_IS_TMC_CONFIG(E3)
-    #define E3_CURRENT      800
+    #define E3_CURRENT      E0_CURRENT
     #define E3_MICROSTEPS   E0_MICROSTEPS
-    #define E3_RSENSE         0.11
+    #define E3_RSENSE       E0_RSENSE
     #define E3_CHAIN_POS     -1
     //#define E3_INTERPOLATE true
     //#define E3_HOLD_MULTIPLIER 0.5
   #endif
 
   #if AXIS_IS_TMC_CONFIG(E4)
-    #define E4_CURRENT      800
+    #define E4_CURRENT      E0_CURRENT
     #define E4_MICROSTEPS   E0_MICROSTEPS
-    #define E4_RSENSE         0.11
+    #define E4_RSENSE       E0_RSENSE
     #define E4_CHAIN_POS     -1
     //#define E4_INTERPOLATE true
     //#define E4_HOLD_MULTIPLIER 0.5
   #endif
 
   #if AXIS_IS_TMC_CONFIG(E5)
-    #define E5_CURRENT      800
+    #define E5_CURRENT      E0_CURRENT
     #define E5_MICROSTEPS   E0_MICROSTEPS
-    #define E5_RSENSE         0.11
+    #define E5_RSENSE       E0_RSENSE
     #define E5_CHAIN_POS     -1
     //#define E5_INTERPOLATE true
     //#define E5_HOLD_MULTIPLIER 0.5
   #endif
 
   #if AXIS_IS_TMC_CONFIG(E6)
-    #define E6_CURRENT      800
+    #define E6_CURRENT      E0_CURRENT
     #define E6_MICROSTEPS   E0_MICROSTEPS
-    #define E6_RSENSE         0.11
+    #define E6_RSENSE       E0_RSENSE
     #define E6_CHAIN_POS     -1
     //#define E6_INTERPOLATE true
     //#define E6_HOLD_MULTIPLIER 0.5
   #endif
 
   #if AXIS_IS_TMC_CONFIG(E7)
-    #define E7_CURRENT      800
+    #define E7_CURRENT      E0_CURRENT
     #define E7_MICROSTEPS   E0_MICROSTEPS
-    #define E7_RSENSE         0.11
+    #define E7_RSENSE       E0_RSENSE
     #define E7_CHAIN_POS     -1
     //#define E7_INTERPOLATE true
     //#define E7_HOLD_MULTIPLIER 0.5

@@ -72,6 +72,30 @@
 // @section machine
 
 /**
+ * Select your version of the Trigorilla (RAMPS1.4) board here.
+ *
+ * 0 = Default Trigorilla
+ * 1 = Newer Trigorilla v1.1 (first seen late 2018)
+ *
+ * The only major difference is a slight change on the servo pin mapping.
+ * This setting only is relevant if you want to use BLtouch or similar
+ * mods to be used via servo pins.
+ * The new version is to be identified by a "TRIGORILLA1.1" lettering
+ * on the upper left of the PCB silkscreen.
+ */
+#define TRIGORILLA_VERSION 0
+
+// i3 Mega remaps some Trigorilla 1.4 pins
+#define TRIGORILLA_MAPPING_I3MEGA
+
+// Choose the name from boards.h that matches your setup
+#if TRIGORILLA_VERSION == 1
+  #define MOTHERBOARD BOARD_TRIGORILLA_14_11
+#else
+  #define MOTHERBOARD BOARD_TRIGORILLA_14
+#endif
+
+/**
  * Select the serial port on the board to use for communication with the host.
  * This allows the connection of wireless adapters (for instance) to non-default port pins.
  * Serial port -1 is the USB emulated serial port, if available.
@@ -123,30 +147,6 @@
 
 // Enable the Bluetooth serial interface on AT90USB devices
 //#define BLUETOOTH
-
-/**
- * Select your version of the Trigorilla (RAMPS1.4) board here.
- *
- * 0 = Default Trigorilla
- * 1 = Newer Trigorilla v1.1 (first seen late 2018)
- *
- * The only major difference is a slight change on the servo pin mapping.
- * This setting only is relevant if you want to use BLtouch or similar
- * mods to be used via servo pins.
- * The new version is to be identified by a "TRIGORILLA1.1" lettering
- * on the upper left of the PCB silkscreen.
- */
-#define TRIGORILLA_VERSION 0
-
-// Choose the name from boards.h that matches your setup
-#if TRIGORILLA_VERSION == 1
-  #define MOTHERBOARD BOARD_TRIGORILLA_14_11
-#else
-  #define MOTHERBOARD BOARD_TRIGORILLA_14
-#endif
-
-// i3 Mega remaps some Trigorilla 1.4 pins
-#define TRIGORILLA_MAPPING_I3MEGA
 
 /**
  * Some Anycubic machines have Z1 and Z2 swapped to save on wiring.
@@ -1798,7 +1798,7 @@
 //#define Z_CLEARANCE_FOR_HOMING  4 // (mm) Minimal Z height before homing (G28) for Z clearance above the bed, clamps, ...
                                     // Be sure to have this much clearance over your Z_MAX_POS to prevent grinding.
 
-//#define Z_AFTER_HOMING         10 // (mm) Height to move to after homing Z
+//#define Z_AFTER_HOMING         10 // (mm) Height to move to after homing (if Z was homed)
 
 // Direction of endstops when homing; 1=MAX, -1=MIN
 // :[-1,1]

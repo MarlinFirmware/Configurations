@@ -1742,12 +1742,8 @@
 // @section extruder
 
 // For direct drive extruder v9 set to true, for geared extruder set to false.
-#ifdef BLUER_INVERTED_E
-  #if ENABLED(BLUER_TMC2209)
-    #define INVERT_E0_DIR false
-  #else
-    #define INVERT_E0_DIR true
-  #endif
+#if BOTH(BLUER_INVERTED_E, BLUER_TMC2209)
+  #define INVERT_E0_DIR false
 #else
   #define INVERT_E0_DIR true
 #endif
@@ -1774,7 +1770,7 @@
 #define Z_CLEARANCE_FOR_HOMING  10  // (mm) Minimal Z height before homing (G28) for Z clearance above the bed, clamps, ...
                                     // Be sure to have this much clearance over your Z_MAX_POS to prevent grinding.
 
-//#define Z_AFTER_HOMING         10 // (mm) Height to move to after homing Z
+//#define Z_AFTER_HOMING         10 // (mm) Height to move to after homing (if Z was homed)
 
 // Direction of endstops when homing; 1=MAX, -1=MIN
 // :[-1,1]
