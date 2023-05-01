@@ -68,9 +68,7 @@
 #define STRING_CONFIG_H_AUTHOR "Creality" // Who made the changes.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
-#define MACVERSION        STRING_CONFIG_H_AUTHOR
-#define SOFTVERSION       SHORT_BUILD_VERSION
-#define MACHINE_TYPE      "Ender-5 S1"
+#define MACHINE_NAME      "Ender-5 S1"
 #if ENABLED(VERY_HIGH_SPEED)
   #define FIRMWARE_VERSION  "1.0.6T13"
 #else
