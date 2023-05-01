@@ -1739,12 +1739,8 @@
 // @section extruder
 
 // For direct drive extruder v9 set to true, for geared extruder set to false.
-#ifdef SPRO_INVERTED_E
-  #if ENABLED(SPRO_TMC2209)
-    #define INVERT_E0_DIR true
-  #else
-    #define INVERT_E0_DIR false
-  #endif
+#if ENABLED(SPRO_INVERTED_E) && DISABLED(SPRO_TMC2209)
+  #define INVERT_E0_DIR false
 #else
   #define INVERT_E0_DIR true
 #endif

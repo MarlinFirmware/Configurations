@@ -1742,12 +1742,8 @@
 // @section extruder
 
 // For direct drive extruder v9 set to true, for geared extruder set to false.
-#ifdef BLUER_INVERTED_E
-  #if ENABLED(BLUER_TMC2209)
-    #define INVERT_E0_DIR false
-  #else
-    #define INVERT_E0_DIR true
-  #endif
+#if BOTH(BLUER_INVERTED_E, BLUER_TMC2209)
+  #define INVERT_E0_DIR false
 #else
   #define INVERT_E0_DIR true
 #endif
