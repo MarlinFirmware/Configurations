@@ -1123,26 +1123,26 @@
   /**
    * Advanced configuration
    */
-  #define FTM_BATCH_SIZE 100                            // Batch size for trajectory generation;
+  #define FTM_BATCH_SIZE            100                 // Batch size for trajectory generation;
                                                         // half the window size for Ulendo FBS.
-  #define FTM_FS           1000                         // (Hz) Frequency for trajectory generation. (1 / FTM_TS)
-  #define FTM_TS              0.001f                    // (s) Time step for trajectory generation. (1 / FTM_FS)
-  #define FTM_STEPPER_FS  20000                         // (Hz) Frequency for stepper I/O update.
+  #define FTM_FS                   1000                 // (Hz) Frequency for trajectory generation. (1 / FTM_TS)
+  #define FTM_TS                      0.001f            // (s) Time step for trajectory generation. (1 / FTM_FS)
+  #define FTM_STEPPER_FS          20000                 // (Hz) Frequency for stepper I/O update.
   #define FTM_MIN_TICKS ((STEPPER_TIMER_RATE) / (FTM_STEPPER_FS)) // Minimum stepper ticks between steps.
-  #define FTM_MIN_SHAPE_FREQ 10                         // Minimum shaping frequency.
-  #define FTM_ZMAX          100                         // Maximum delays for shaping functions (even numbers only!).
+  #define FTM_MIN_SHAPE_FREQ         10                 // Minimum shaping frequency.
+  #define FTM_ZMAX                  100                 // Maximum delays for shaping functions (even numbers only!).
                                                         // Calculate as:
                                                         //    1/2 * (FTM_FS / FTM_MIN_SHAPE_FREQ) for ZV.
                                                         //    (FTM_FS / FTM_MIN_SHAPE_FREQ) for ZVD, MZV.
                                                         //    3/2 * (FTM_FS / FTM_MIN_SHAPE_FREQ) for 2HEI.
                                                         //    2 * (FTM_FS / FTM_MIN_SHAPE_FREQ) for 3HEI.
-  #define FTM_STEPS_PER_UNIT_TIME 20                    // Interpolated stepper commands per unit time.
+  #define FTM_STEPS_PER_UNIT_TIME    20                 // Interpolated stepper commands per unit time.
                                                         // Calculate as (FTM_STEPPER_FS / FTM_FS).
-  #define FTM_CTS_COMPARE_VAL 10                        // Comparison value used in interpolation algorithm.
+  #define FTM_CTS_COMPARE_VAL        10                 // Comparison value used in interpolation algorithm.
                                                         // Calculate as (FTM_STEPS_PER_UNIT_TIME / 2).
   // These values may be configured to adjust duration of loop().
-  #define FTM_STEPS_PER_LOOP 60                         // Number of stepper commands to generate each loop().
-  #define FTM_POINTS_PER_LOOP 100                       // Number of trajectory points to generate each loop().
+  #define FTM_STEPS_PER_LOOP         60                 // Number of stepper commands to generate each loop().
+  #define FTM_POINTS_PER_LOOP       100                 // Number of trajectory points to generate each loop().
 
   // This value may be configured to adjust duration to consume the command buffer.
   // Try increasing this value if stepper motion is not smooth.
