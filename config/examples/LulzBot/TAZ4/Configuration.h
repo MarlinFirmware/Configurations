@@ -661,14 +661,18 @@
 
 // @section hotend temp
 
-// Enable PIDTEMP for PID control or MPCTEMP for Predictive Model.
-// temperature control. Disable both for bang-bang heating.
-#define PIDTEMP          // See the PID Tuning Guide at https://reprap.org/wiki/PID_Tuning
-//#define MPCTEMP        // ** EXPERIMENTAL **
+/**
+ * Temperature Control
+ *
+ *  (NONE) : Bang-bang heating
+ * PIDTEMP : PID temperature control (~4.1K)
+ * MPCTEMP : Predictive Model temperature control. (~1.8K without auto-tune)
+ */
+#define PIDTEMP           // See the PID Tuning Guide at https://reprap.org/wiki/PID_Tuning
+//#define MPCTEMP         // ** EXPERIMENTAL ** See https://marlinfw.org/docs/features/model_predictive_control.html
 
-#define BANG_MAX 70      // Limits current to nozzle while in bang-bang mode; 255=full current
-#define PID_MAX  74      // Limits current to nozzle while PID is active (see PID_FUNCTIONAL_RANGE below); 255=full current
-#define PID_K1 0.95      // Smoothing factor within any PID loop
+#define PID_MAX   74      // Limit hotend current while PID is active (see PID_FUNCTIONAL_RANGE below); 255=full current
+#define PID_K1     0.95   // Smoothing factor within any PID loop
 
 #if ENABLED(PIDTEMP)
   //#define PID_DEBUG             // Print PID debug data to the serial port. Use 'M303 D' to toggle activation.
@@ -692,6 +696,8 @@
     //#define DEFAULT_Ki   1.01
     //#define DEFAULT_Kd 114.00
   #endif
+#else
+  #define BANG_MAX  70    // Limit hotend current while in bang-bang mode; 255=full current
 #endif
 
 /**
@@ -703,11 +709,11 @@
  * @section mpctemp
  */
 #if ENABLED(MPCTEMP)
-  //#define MPC_AUTOTUNE                              // Include a method to do MPC auto-tuning (~5664-5882 bytes of flash)
-  //#define MPC_EDIT_MENU                             // Add MPC editing to the "Advanced Settings" menu. (~1300 bytes of flash)
+  //#define MPC_AUTOTUNE                              // Include a method to do MPC auto-tuning (~6.3K bytes of flash)
+  //#define MPC_EDIT_MENU                             // Add MPC editing to the "Advanced Settings" menu. (~1.3K bytes of flash)
   //#define MPC_AUTOTUNE_MENU                         // Add MPC auto-tuning to the "Advanced Settings" menu. (~350 bytes of flash)
 
-  #define MPC_MAX BANG_MAX                            // (0..255) Current to nozzle while MPC is active.
+  #define MPC_MAX  70                                 // (0..255) Current to nozzle while MPC is active.
   #define MPC_HEATER_POWER { 40.0f }                  // (W) Heat cartridge powers.
 
   #define MPC_INCLUDE_FAN                             // Model the fan speed?
@@ -742,11 +748,18 @@
 //====================== PID > Bed Temperature Control ======================
 //===========================================================================
 
+// @section bed temp
+
+/**
+ * Max Bed Power
+ * Applies to all forms of bed control (PID, bang-bang, and bang-bang with hysteresis).
+ * When set to any value below 255, enables a form of PWM to the bed that acts like a divider
+ * so don't use it unless you are OK with PWM on your bed. (See the comment on enabling PIDTEMPBED)
+ */
+#define MAX_BED_POWER 255 // limits duty cycle to bed; 255=full current
+
 /**
  * PID Bed Heating
- *
- * If this option is enabled set PID constants below.
- * If this option is disabled, bang-bang will be used and BED_LIMIT_SWITCHING will enable hysteresis.
  *
  * The PID frequency will be the same as the extruder PWM.
  * If PID_dT is the default, and correct for the hardware/configuration, that means 7.689Hz,
@@ -754,11 +767,10 @@
  * impact FET heating. This also works fine on a Fotek SSR-10DA Solid State Relay into a 250W
  * heater. If your configuration is significantly different than this and you don't understand
  * the issues involved, don't use bed PID until someone else verifies that your hardware works.
- * @section bed temp
+ *
+ * With this option disabled, bang-bang will be used. BED_LIMIT_SWITCHING enables hysteresis.
  */
 #define PIDTEMPBED
-
-//#define BED_LIMIT_SWITCHING
 
 /**
  * Max Bed Power
@@ -784,7 +796,9 @@
   //#define DEFAULT_bedKd 1800
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
-#endif // PIDTEMPBED
+#else
+  //#define BED_LIMIT_SWITCHING   // Keep the bed temperature within BED_HYSTERESIS of the target
+#endif
 
 //===========================================================================
 //==================== PID > Chamber Temperature Control ====================
