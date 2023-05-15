@@ -20,7 +20,7 @@ The Biqu Hurakan ships with a BigTreeTech Manta M4P motherboard which includes a
 
 # Update Hurakan CB1 Image Defaults
 
-⚠️ Start with the latest `Hurakan_Debian11_Mainsail_kernel5.16_YYYYMMDD.img.xz` image from [bigtreetech/CB1/releases](https://github.com/bigtreetech/CB1/releases). ⚠️
+⚠️ Start with the latest `CB1_Debian11_Klipper_kernel*.img.xz` (full) image from [bigtreetech/CB1/releases](https://github.com/bigtreetech/CB1/releases). ⚠️
 
 ## SSH into to the CB1
 
