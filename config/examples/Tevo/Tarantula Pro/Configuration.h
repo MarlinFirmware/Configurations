@@ -23,6 +23,8 @@
 #error "Don't build with import-2.1.x configurations!"
 #error "Use the 'bugfix...' or 'release...' configurations matching your Marlin version."
 
+//#define MOTHERBOARD BOARD_MKS_SGEN_L  // Uncomment for the MKS SGEN-L board (32-bit), otherwise MKS GEN-L board (8-bit) is assumed
+
 /**
  * Configuration.h
  *
@@ -80,7 +82,11 @@
  *
  * :[-1, 0, 1, 2, 3, 4, 5, 6, 7]
  */
-#define SERIAL_PORT 0
+#if MB(MKS_GEN_L)
+  #define SERIAL_PORT 0
+#else
+  #define SERIAL_PORT -1
+#endif
 
 /**
  * Serial Port Baud Rate
@@ -2518,7 +2524,11 @@
  */
 #define PRINTCOUNTER
 #if ENABLED(PRINTCOUNTER)
-  #define PRINTCOUNTER_SAVE_INTERVAL 60 // (minutes) EEPROM save interval during print. A value of 0 will save stats at end of print.
+  #if MB(MKS_GEN_L)
+    #define PRINTCOUNTER_SAVE_INTERVAL 60 // (minutes) EEPROM save interval during print. A value of 0 will save stats at end of print.
+  #else
+    #define PRINTCOUNTER_SAVE_INTERVAL  0 // (minutes) EEPROM save interval during print. A value of 0 will save stats at end of print.
+  #endif
 #endif
 
 // @section security
