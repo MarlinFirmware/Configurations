@@ -3155,7 +3155,9 @@
 // Touch-screen LCD for Malyan M200/M300 printers
 //
 #define MALYAN_LCD
-#define LCD_SERIAL_PORT 1
+#if ENABLED(MALYAN_LCD)
+  #define LCD_SERIAL_PORT 1
+#endif
 
 //
 // Touch UI for FTDI EVE (FT800/FT810) displays
@@ -3379,7 +3381,7 @@
   //#define TOUCH_OFFSET_Y        257
   //#define TOUCH_ORIENTATION TOUCH_LANDSCAPE
 
-  #if ENABLED(TOUCH_SCREEN_CALIBRATION, EEPROM_SETTINGS)
+  #if ALL(TOUCH_SCREEN_CALIBRATION, EEPROM_SETTINGS)
     #define TOUCH_CALIBRATION_AUTO_SAVE // Auto save successful calibration values to EEPROM
   #endif
 

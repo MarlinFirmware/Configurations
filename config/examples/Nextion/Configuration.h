@@ -3178,7 +3178,9 @@
 // 320x240 Nextion 2.8" serial TFT Resistive Touch Screen NX3224T028
 //
 #define NEXTION_TFT
-#define LCD_SERIAL_PORT 1
+#if ENABLED(NEXTION_TFT)
+  #define LCD_SERIAL_PORT 2
+#endif
 
 //
 // PanelDue touch controller by Escher3D
@@ -3373,7 +3375,7 @@
   //#define TOUCH_OFFSET_Y        257
   //#define TOUCH_ORIENTATION TOUCH_LANDSCAPE
 
-  #if ENABLED(TOUCH_SCREEN_CALIBRATION, EEPROM_SETTINGS)
+  #if ALL(TOUCH_SCREEN_CALIBRATION, EEPROM_SETTINGS)
     #define TOUCH_CALIBRATION_AUTO_SAVE // Auto save successful calibration values to EEPROM
   #endif
 

@@ -3154,7 +3154,6 @@
   //#define LCD_SCREEN_ROTATE 90          // Portrait Mode or 800x480 displays
   //#define IA_CREALITY_BOOT_DELAY 1500   // (ms)
 #endif
-#define LCD_SERIAL_PORT 2
 
 //
 // Touch-screen LCD for Malyan M200/M300 printers
@@ -3383,7 +3382,7 @@
   //#define TOUCH_OFFSET_Y        257
   //#define TOUCH_ORIENTATION TOUCH_LANDSCAPE
 
-  #if ENABLED(TOUCH_SCREEN_CALIBRATION, EEPROM_SETTINGS)
+  #if ALL(TOUCH_SCREEN_CALIBRATION, EEPROM_SETTINGS)
     #define TOUCH_CALIBRATION_AUTO_SAVE // Auto save successful calibration values to EEPROM
   #endif
 
