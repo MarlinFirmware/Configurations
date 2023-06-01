@@ -1749,7 +1749,7 @@
 // @section extruder
 
 // For direct drive extruder v9 set to true, for geared extruder set to false.
-#if ENABLED(BLUER_INVERTED_E, BLUER_TMC2209)
+#if ALL(BLUER_INVERTED_E, BLUER_TMC2209)
   #define INVERT_E0_DIR false
 #else
   #define INVERT_E0_DIR true
@@ -3404,7 +3404,7 @@
   #define TOUCH_OFFSET_Y         349
   //#define TOUCH_ORIENTATION TOUCH_LANDSCAPE
 
-  #if ENABLED(TOUCH_SCREEN_CALIBRATION, EEPROM_SETTINGS)
+  #if ALL(TOUCH_SCREEN_CALIBRATION, EEPROM_SETTINGS)
     #define TOUCH_CALIBRATION_AUTO_SAVE // Auto save successful calibration values to EEPROM
   #endif
 

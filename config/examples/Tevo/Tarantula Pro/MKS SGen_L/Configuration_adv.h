@@ -1,6 +1,6 @@
 /**
  * Marlin 3D Printer Firmware
- * Copyright (c) 2020 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
+ * Copyright (c) 2023 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
  *
  * Based on Sprinter and grbl.
  * Copyright (c) 2011 Camiel Gubbels / Erik van der Zalm
@@ -681,7 +681,7 @@
  * Multiple extruders can be assigned to the same pin in which case
  * the fan will turn on when any selected extruder is above the threshold.
  */
-#define E0_AUTO_FAN_PIN 7
+#define E0_AUTO_FAN_PIN FAN1_PIN
 #define E1_AUTO_FAN_PIN -1
 #define E2_AUTO_FAN_PIN -1
 #define E3_AUTO_FAN_PIN -1
@@ -1619,7 +1619,7 @@
   //#define SET_REMAINING_TIME            // Add 'R' parameter to set remaining time
   //#define SET_INTERACTION_TIME          // Add 'C' parameter to set time until next filament change or other user interaction
   //#define M73_REPORT                    // Report M73 values to host
-  #if ENABLED(M73_REPORT, HAS_MEDIA)
+  #if ALL(M73_REPORT, HAS_MEDIA)
     #define M73_REPORT_SD_ONLY            // Report only when printing from SD
   #endif
 #endif
@@ -1746,7 +1746,7 @@
    *  - SDSORT_CACHE_NAMES will retain the sorted file listing in RAM. (Expensive!)
    *  - SDSORT_DYNAMIC_RAM only uses RAM when the SD menu is visible. (Use with caution!)
    */
-  #define SDCARD_SORT_ALPHA
+  //#define SDCARD_SORT_ALPHA
 
   // SD Card Sorting options
   #if ENABLED(SDCARD_SORT_ALPHA)
@@ -1765,11 +1765,11 @@
   // LCD's font must contain the characters. Check your selected LCD language.
   //#define UTF_FILENAME_SUPPORT
 
-  #define LONG_FILENAME_HOST_SUPPORT      // Get the long filename of a file/folder with 'M33 <dosname>' and list long filenames with 'M20 L'
+  //#define LONG_FILENAME_HOST_SUPPORT    // Get the long filename of a file/folder with 'M33 <dosname>' and list long filenames with 'M20 L'
   //#define LONG_FILENAME_WRITE_SUPPORT   // Create / delete files with long filenames via M28, M30, and Binary Transfer Protocol
   //#define M20_TIMESTAMP_SUPPORT         // Include timestamps by adding the 'T' flag to M20 commands
 
-  #define SCROLL_LONG_FILENAMES           // Scroll long filenames in the SD card menu
+  //#define SCROLL_LONG_FILENAMES         // Scroll long filenames in the SD card menu
 
   //#define SD_ABORT_NO_COOLDOWN          // Leave the heaters on after Stop Print (not recommended!)
 
@@ -1923,7 +1923,7 @@
 
   // A bigger font is available for edit items. Costs 3120 bytes of flash.
   // Western only. Not available for Cyrillic, Kana, Turkish, Greek, or Chinese.
-  #define USE_BIG_EDIT_FONT
+  //#define USE_BIG_EDIT_FONT
 
   // A smaller font may be used on the Info Screen. Costs 2434 bytes of flash.
   // Western only. Not available for Cyrillic, Kana, Turkish, Greek, or Chinese.
@@ -1980,7 +1980,7 @@
   //#define STATUS_ALT_BED_BITMAP     // Use the alternative bed bitmap
   //#define STATUS_ALT_FAN_BITMAP     // Use the alternative fan bitmap
   //#define STATUS_FAN_FRAMES 3       // :[0,1,2,3,4] Number of fan animation frames
-  #define STATUS_HEAT_PERCENT         // Show heating in a progress bar
+  //#define STATUS_HEAT_PERCENT       // Show heating in a progress bar
 
   // Frivolous Game Options
   //#define MARLIN_BRICKOUT
@@ -2201,7 +2201,7 @@
  *
  * Warning: Does not respect endstops!
  */
-#define BABYSTEPPING
+//#define BABYSTEPPING
 #if ENABLED(BABYSTEPPING)
   //#define INTEGRATED_BABYSTEPPING         // Integration of babystepping into the Stepper ISR
   //#define EP_BABYSTEPPING                 // M293/M294 babystepping with EMERGENCY_PARSER support
@@ -2213,7 +2213,7 @@
   #define BABYSTEP_MULTIPLICATOR_Z  1       // (steps or mm) Steps or millimeter distance for each Z babystep
   #define BABYSTEP_MULTIPLICATOR_XY 1       // (steps or mm) Steps or millimeter distance for each XY babystep
 
-  #define DOUBLECLICK_FOR_Z_BABYSTEPPING  // Double-click on the Status Screen for Z Babystepping.
+  //#define DOUBLECLICK_FOR_Z_BABYSTEPPING  // Double-click on the Status Screen for Z Babystepping.
   #if ENABLED(DOUBLECLICK_FOR_Z_BABYSTEPPING)
     #define DOUBLECLICK_MAX_INTERVAL 1250   // Maximum interval between clicks, in milliseconds.
                                             // Note: Extra time may be added to mitigate controller latency.
@@ -2327,7 +2327,7 @@
   //#define MESH_MAX_Y Y_BED_SIZE - (MESH_INSET)
 #endif
 
-#if ENABLED(AUTO_BED_LEVELING_UBL, EEPROM_SETTINGS)
+#if ALL(AUTO_BED_LEVELING_UBL, EEPROM_SETTINGS)
   //#define OPTIMIZED_MESH_STORAGE  // Store mesh with less precision to save EEPROM space
 #endif
 
@@ -2397,7 +2397,7 @@
   #endif
 
   // G76 options
-  #if ENABLED(PTC_PROBE, PTC_BED)
+  #if ALL(PTC_PROBE, PTC_BED)
     // Park position to wait for probe cooldown
     #define PTC_PARK_POS   { 0, 0, 100 }
 
@@ -2425,7 +2425,7 @@
 //
 // G2/G3 Arc Support
 //
-//#define ARC_SUPPORT                 // Requires ~3226 bytes
+#define ARC_SUPPORT                   // Requires ~3226 bytes
 #if ENABLED(ARC_SUPPORT)
   #define MIN_ARC_SEGMENT_MM      0.1 // (mm) Minimum length of each arc segment
   #define MAX_ARC_SEGMENT_MM      1.0 // (mm) Maximum length of each arc segment
@@ -2525,7 +2525,7 @@
 
 // The number of linear moves that can be in the planner at once.
 // The value of BLOCK_BUFFER_SIZE must be a power of 2 (e.g., 8, 16, 32)
-#if ENABLED(HAS_MEDIA, DIRECT_STEPPING)
+#if ALL(HAS_MEDIA, DIRECT_STEPPING)
   #define BLOCK_BUFFER_SIZE  8
 #elif HAS_MEDIA
   #define BLOCK_BUFFER_SIZE 16
@@ -2785,7 +2785,7 @@
  *
  * Enable PARK_HEAD_ON_PAUSE to add the G-code M125 Pause and Park.
  */
-#define ADVANCED_PAUSE_FEATURE
+//#define ADVANCED_PAUSE_FEATURE
 #if ENABLED(ADVANCED_PAUSE_FEATURE)
   #define PAUSE_PARK_RETRACT_FEEDRATE         60  // (mm/s) Initial retract feedrate.
   #define PAUSE_PARK_RETRACT_LENGTH            2  // (mm) Initial retract.
