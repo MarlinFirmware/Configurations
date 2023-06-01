@@ -3155,7 +3155,6 @@
   //#define LCD_SCREEN_ROTATE 90          // Portrait Mode or 800x480 displays
   //#define IA_CREALITY_BOOT_DELAY 1500   // (ms)
 #endif
-#define LCD_SERIAL_PORT 3
 
 //
 // Touch-screen LCD for Malyan M200/M300 printers
