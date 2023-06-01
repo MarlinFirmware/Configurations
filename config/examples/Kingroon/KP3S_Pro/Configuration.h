@@ -50,7 +50,7 @@
 //#define USE_BLTOUCH
 
 /**
- * after the BL-Touch is installed the offset between the probe and nozzle 
+ * after the BL-Touch is installed the offset between the probe and nozzle
  * should be measured, actual values will vary from printer to printer and
  * probe mount used, Z_PROBE_OFFSET is intentionally high to prevent the
  * nozzle from crashing into the build surface. These values can be changed
@@ -3408,7 +3408,7 @@
   #define TOUCH_OFFSET_Y        -16
   #define TOUCH_ORIENTATION TOUCH_LANDSCAPE
 
-  #if ENABLED(TOUCH_SCREEN_CALIBRATION, EEPROM_SETTINGS)
+  #if ALL(TOUCH_SCREEN_CALIBRATION, EEPROM_SETTINGS)
     #define TOUCH_CALIBRATION_AUTO_SAVE // Auto save successful calibration values to EEPROM
   #endif
 

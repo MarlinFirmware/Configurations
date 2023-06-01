@@ -1619,7 +1619,7 @@
   //#define SET_REMAINING_TIME            // Add 'R' parameter to set remaining time
   //#define SET_INTERACTION_TIME          // Add 'C' parameter to set time until next filament change or other user interaction
   //#define M73_REPORT                    // Report M73 values to host
-  #if ENABLED(M73_REPORT, HAS_MEDIA)
+  #if ALL(M73_REPORT, HAS_MEDIA)
     #define M73_REPORT_SD_ONLY            // Report only when printing from SD
   #endif
 #endif
@@ -2328,7 +2328,7 @@
   //#define MESH_MAX_Y Y_BED_SIZE - (MESH_INSET)
 #endif
 
-#if ENABLED(AUTO_BED_LEVELING_UBL, EEPROM_SETTINGS)
+#if ALL(AUTO_BED_LEVELING_UBL, EEPROM_SETTINGS)
   //#define OPTIMIZED_MESH_STORAGE  // Store mesh with less precision to save EEPROM space
 #endif
 
@@ -2398,7 +2398,7 @@
   #endif
 
   // G76 options
-  #if ENABLED(PTC_PROBE, PTC_BED)
+  #if ALL(PTC_PROBE, PTC_BED)
     // Park position to wait for probe cooldown
     #define PTC_PARK_POS   { 0, 0, 100 }
 
@@ -2526,7 +2526,7 @@
 
 // The number of linear moves that can be in the planner at once.
 // The value of BLOCK_BUFFER_SIZE must be a power of 2 (e.g., 8, 16, 32)
-#if ENABLED(HAS_MEDIA, DIRECT_STEPPING)
+#if ALL(HAS_MEDIA, DIRECT_STEPPING)
   #define BLOCK_BUFFER_SIZE  8
 #elif HAS_MEDIA
   #define BLOCK_BUFFER_SIZE 32
