@@ -963,7 +963,6 @@
   // Delta radius and diagonal rod adjustments (mm)
   //#define DELTA_RADIUS_TRIM_TOWER { 0.0, 0.0, 0.0 }
   #define DELTA_DIAGONAL_ROD_TRIM_TOWER { 0.0, 0.0, 0.0 }
-
 #endif
 
 // @section scara
@@ -1227,7 +1226,6 @@
  * Override with M92
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-
 #define DEFAULT_AXIS_STEPS_PER_UNIT   { 114.28, 114.28, 114.28, 97.0 }
 
 /**
@@ -1562,7 +1560,7 @@
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
-#define PROBING_MARGIN 55.0
+#define PROBING_MARGIN 5.0
 
 // X and Y axis travel speed (mm/min) between probes
 #define XY_PROBE_FEEDRATE (66*60)
@@ -3378,7 +3376,7 @@
   //#define TOUCH_OFFSET_Y        257
   //#define TOUCH_ORIENTATION TOUCH_LANDSCAPE
 
-  #if ENABLED(TOUCH_SCREEN_CALIBRATION, EEPROM_SETTINGS)
+  #if ALL(TOUCH_SCREEN_CALIBRATION, EEPROM_SETTINGS)
     #define TOUCH_CALIBRATION_AUTO_SAVE // Auto save successful calibration values to EEPROM
   #endif
 
