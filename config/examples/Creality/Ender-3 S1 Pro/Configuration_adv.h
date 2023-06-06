@@ -1,6 +1,6 @@
 /**
  * Marlin 3D Printer Firmware
- * Copyright (c) 2022 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
+ * Copyright (c) 2023 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
  *
  * Based on Sprinter and grbl.
  * Copyright (c) 2011 Camiel Gubbels / Erik van der Zalm
@@ -20,8 +20,6 @@
  *
  */
 #pragma once
-
-#define CONFIG_EXAMPLES_DIR "Creality/Ender-3 S1 Pro"
 
 /**
  * Configuration_adv.h
@@ -2030,31 +2028,22 @@
       #define DGUS_UI_WAITING_STATUS 10
       #define DGUS_UI_WAITING_STATUS_PERIOD 8 // Increase to slower waiting status looping
     #endif
-  #endif
 
-  #if DGUS_UI_IS(E3S1PRO)
+  #elif DGUS_UI_IS(E3S1PRO)
     /**
-     * The stock DWIN touch screen firmware of Ender 3 S1 Pro/Plus
-     * truncates strings (e.g. file names) to 16~20 characters, and
-     * restrict the SD file listing to 4 pages of 5 files at the
-     * SD card root.
-     * 
-     * Software autoscroll is mainly relevant for status messages,
-     * SD card file names, and the "About" page.
-     * 
-     * Note: the advanced sdcard option is limited by the static
-     * display of pages in the stock touchscreen firmware, hence
-     * pages above 4 will show "4/4" on the screen.
+     * The stock Ender-3 S1 Pro/Plus display firmware has rather poor SD file handling.
+     *
+     * The autoscroll is mainly useful for status messages, filenames, and the "About" page.
+     *
+     * NOTE: The Advanced SD Card option is affected by the stock touchscreen firmware, so
+     *       pages 5 and up will display "4/4". This may get fixed in a screen firmware update.
      */
     #define DGUS_SOFTWARE_AUTOSCROLL        // Enable long text software auto-scroll
-    #define DGUS_AUTOSCROLL_START_CYCLES 1  // refresh cycles without scrolling at the beginning of text strings
+    #define DGUS_AUTOSCROLL_START_CYCLES 1  // Refresh cycles without scrolling at the beginning of text strings
     #define DGUS_AUTOSCROLL_END_CYCLES 1    // ... at the end of text strings
 
-    #define DGUS_ADVANCED_SDCARD            // Allow more than 20 files and directory traversing
-    #define DGUS_USERCONFIRM                // Use the SD card page to show various messages
-
-    //#define DGUS_E3S1PRO_LANGUAGE en      // if LCD_LANGUAGE is unsupported, override the default touch-screen language
-                                            // with this one
+    #define DGUS_ADVANCED_SDCARD            // Allow more than 20 files and navigating directories
+    #define DGUS_USERCONFIRM                // Reuse the SD Card page to show various messages
   #endif
 #endif // HAS_DGUS_LCD
 
