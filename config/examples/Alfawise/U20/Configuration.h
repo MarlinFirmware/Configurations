@@ -3408,6 +3408,8 @@
   #define TFT_FONT  NOTOSANS
 
   //#define TFT_SHARED_IO   // I/O is shared between TFT display and other devices. Disable async data transfer.
+
+  #define COMPACT_MARLIN_BOOT_LOGO  // Use compressed data to save Flash space.
 #endif
 
 #if ENABLED(TFT_LVGL_UI)
