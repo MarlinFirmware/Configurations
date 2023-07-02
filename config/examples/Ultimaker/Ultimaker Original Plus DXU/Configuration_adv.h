@@ -1123,7 +1123,7 @@
    * Advanced configuration
    */
   #define FTM_BATCH_SIZE            100                 // Batch size for trajectory generation;
-                                                        // half the window size for Ulendo FBS.
+  #define FTM_WINDOW_SIZE           200                 // Window size for trajectory generation.
   #define FTM_FS                   1000                 // (Hz) Frequency for trajectory generation. (1 / FTM_TS)
   #define FTM_TS                      0.001f            // (s) Time step for trajectory generation. (1 / FTM_FS)
   #define FTM_STEPPER_FS          20000                 // (Hz) Frequency for stepper I/O update.
@@ -2707,7 +2707,7 @@
    * stepper motor (e.g., I axis in Configuration.h) to drive the tool-changer.
    */
   #define EVENT_GCODE_TOOLCHANGE_T0 "G90\nG0 X211 F7200\nG0 Y167\nG0 X217\nG0 Y182\nG0 X211\nG0 Y166" // Extra G-code to run while executing tool-change command T0
-  #define EVENT_GCODE_TOOLCHANGE_T1 "G90\nG0 X211 F7200\nG0 Y198\nG0 X217\nG0 Y181\nG0 X211\nG0 Y166" // Extra G-code to run while executing tool-change command T1  
+  #define EVENT_GCODE_TOOLCHANGE_T1 "G90\nG0 X211 F7200\nG0 Y198\nG0 X217\nG0 Y181\nG0 X211\nG0 Y166" // Extra G-code to run while executing tool-change command T1
   //#define EVENT_GCODE_TOOLCHANGE_ALWAYS_RUN        // Always execute above G-code sequences. Use with caution!
 
   /**
