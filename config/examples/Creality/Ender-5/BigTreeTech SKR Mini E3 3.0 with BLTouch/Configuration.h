@@ -1304,6 +1304,7 @@
   #endif
 #endif
 
+#define ALLOW_LOW_EJERK
 #define DEFAULT_EJERK    5.0  // May be used by Linear Advance
 
 /**
