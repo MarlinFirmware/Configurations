@@ -3344,15 +3344,15 @@
    *
    * BLUE_MARLIN  - Default theme with 'midnight blue' background
    * BLACK_MARLIN - Theme with 'black' background
+   * ANET_BLACK   - Theme used for Anet ET4/5
    */
   #define TFT_THEME BLACK_MARLIN
+  #define COLOR_BACKGROUND COLOR_DARK
 
   //#define TFT_SHARED_IO   // I/O is shared between TFT display and other devices. Disable async data transfer.
 
   #define COMPACT_MARLIN_BOOT_LOGO  // Use compressed data to save Flash space.
 #endif
-
-#define COLOR_BACKGROUND    COLOR_DARK
 
 #if ENABLED(TFT_LVGL_UI)
   //#define MKS_WIFI_MODULE // MKS WiFi module
