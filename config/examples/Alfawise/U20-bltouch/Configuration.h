@@ -1837,7 +1837,22 @@
 //#define V_HOME_DIR -1
 //#define W_HOME_DIR -1
 
-// @section machine
+/**
+ * Safety Stops
+ * If an axis has endstops on both ends the one specified above is used for
+ * homing, while the other can be used for things like SD_ABORT_ON_ENDSTOP_HIT.
+ */
+//#define X_SAFETY_STOP
+//#define Y_SAFETY_STOP
+//#define Z_SAFETY_STOP
+//#define I_SAFETY_STOP
+//#define J_SAFETY_STOP
+//#define K_SAFETY_STOP
+//#define U_SAFETY_STOP
+//#define V_SAFETY_STOP
+//#define W_SAFETY_STOP
+
+// @section geometry
 
 #if ANY(U30, LK2, LK4)
   #define X_BED_SIZE    220
