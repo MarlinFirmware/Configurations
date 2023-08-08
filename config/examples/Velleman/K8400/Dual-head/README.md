@@ -6,7 +6,8 @@ Like its predecessor, (K8200), the K8400 is a 3Drag clone. There are some minor 
 
 Single and dual head configurations provided. Copy the correct Configuration.h and Configuration_adv.h to the /src/config directory.
 
-**NOTE: This configuration includes the community sourced feed rate fix. Use 100% feed rate in Repetier!**
+> [!NOTE]
+> This configuration includes the community sourced feed rate fix. Use 100% feed rate in Repetier!
 
 For implementation and updated K8400 firmware, see https://github.com/birkett/Velleman-K8400-Firmware
 

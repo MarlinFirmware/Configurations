@@ -3,7 +3,8 @@
 - TINA2 WIFI: TINA2 standard version with ESP32 WIFI module installed. Support remote control, send files via wifi, and online 3d model library.
 - TINA2 BASIC: TINA2 lite version, without WIFI module and protective shell.
 
-Please note the monorpice cadet printer is a rebranded version of these printers and the provided configuration should work.
+> [!NOTE]
+> The Monorprice cadet printer is a rebranded version of these printers and the provided configuration should work.
 
 ## Hardware version
 

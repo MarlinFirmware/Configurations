@@ -2,7 +2,8 @@
 Based on the original configuration file shipped with the heavily modified Marlin fork by BQ.
 The forked firmware and configuration files can be found at the [BQ Github repository](https://github.com/bq/Marlin).
 
-NOTE: The look and feel of the LCD menu will change dramatically when using the original Marlin firmware.
+> [!NOTE]
+> The look and feel of the LCD menu will change dramatically when using the original Marlin firmware.
 
 ## Changelog
  * 2018/05/30 - Configuration updated to the latest Marlin version (43a55a9af).

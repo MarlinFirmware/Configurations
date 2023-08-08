@@ -1,6 +1,7 @@
 # Biqu Hurakan Configuration
 
-*Note:* Early Hurakan printers have a raised bed power switch, so enable (uncomment) `#define PROBING_MARGIN_BACK` in `Configuration_adv.h` to prevent the hotend from potentially colliding with the switch assembly while probing.
+> [!NOTE]
+> Early Hurakan printers have a raised bed power switch, so enable (uncomment) `#define PROBING_MARGIN_BACK` in `Configuration_adv.h` to prevent the hotend from potentially colliding with the switch assembly while probing.
 
 The Biqu Hurakan ships with a BigTreeTech Manta M4P motherboard which includes an integrated BigTreeTech CB1 single board computer running Klipper. See below for instructions on how to update the CB1 to run OctoPrint.
 
@@ -31,7 +32,8 @@ Password: `biqu`
 
 ## Update Timezone
 
-*See [Wikipedia - List of tz database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) or run `timedatectl list-timezones` for list of valid time zone names. `America/Los_Angeles` is used as an example below:*
+> [!NOTE]
+> See [Wikipedia - List of tz database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) or run `timedatectl list-timezones` for list of valid time zone names. `America/Los_Angeles` is used in the example below.
 
 ```shell
 sudo timedatectl set-timezone America/Los_Angeles
@@ -86,7 +88,8 @@ git clone https://github.com/th33xitus/kiauh.git
 ./kiauh/kiauh.sh
 ```
 
-*Note: Klipper, Moonraker, Mainsail, and KlipperScreen come preinstalled on the Hurakan image.*
+> [!NOTE]
+> Klipper, Moonraker, Mainsail, and KlipperScreen come preinstalled on the Hurakan image.
 
 Type 1 to install an app:
 

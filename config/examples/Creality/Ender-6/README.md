@@ -8,15 +8,18 @@ The Ender-6 doesn't have an accessible USB port, so it's a good idea to connect 
 
 To use an installed BLTouch probe, enable the custom option `E6_USE_BLTOUCH` at the top of `Configuration.h` to get all the settings needed to support the probe. Creality isn't shipping printers with a BLTouch option at this time, but the existence of factory mounts, wiring, and OEM firmware supporting it suggests this may change in the future.
 
-NOTE: Due to slight manufacturing differences, you will still need to tune your probe's `NOZZLE_TO_PROBE_OFFSET` values, at least for Z. For best results use the Probe Offset Wizard.
+> [!NOTE]
+> Due to slight manufacturing differences, you will still need to tune your probe's `NOZZLE_TO_PROBE_OFFSET` values, at least for Z. For best results use the Probe Offset Wizard.
 
 ## Flashing Instructions
 
-NOTE: The bootloader on this printer remembers the name of the most recent firmware file that was flashed from SD, so you must give the firmware file a unique name or it will be ignored.
+> [!NOTE]
+> The bootloader on this printer remembers the name of the most recent firmware file that was flashed from SD, so you must give the firmware file a unique name or it will be ignored.
 
 Copy the compiled "`firmware.bin`" file to an SD card, giving it a distinct name. Turn off the printer, insert the SD card, and turn the printer on. The update will take a few seconds.
 
-NOTE: The factory LCD firmware is only compatible with Creality's firmware. The LCD will not show the progress bar increment and the standard UI will not function. This is expected.
+> [!NOTE]
+> The factory LCD firmware is only compatible with Creality's firmware. The LCD will not show the progress bar increment and the standard UI will not function. This is expected.
 
 ## Marlin DGUS UI Instructions
 
