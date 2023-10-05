@@ -30,7 +30,8 @@ The firmware here is for the stock Velleman K8800, without any modifications. Fo
 
 ## WARNINGS
 
-**NOTE: UBL REQUIRES CHANGES TO THE CURA CONFIGURATION (SEE BELOW)**
+> [!IMPORTANT]
+> UBL REQUIRES CHANGES TO THE CURA CONFIGURATION (SEE BELOW)
 
 I use this configuration of the Marlin firmware now on an almost daily basis for both small and large prints, but you will no doubt encounter use cases I do not, and may therefore find bugs I have missed. The K8800 is particularly unforgiving of your supposed mistakes and I make no warranty of any kind that this firmware will work correctly for you. Start small and work up, use slower settings on Cura, especially for larger prints.
 
