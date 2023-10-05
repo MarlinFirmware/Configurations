@@ -13,4 +13,5 @@ The following similar models are not supported by this configuration out of the 
   * Wanhao Duplicator i3 Plus Mk 2
   * Aldi Balco 3D Printer
 
-Note that the touchscreen LCD is not currently supported by Marlin; you must either replace the LCD with another supported display, or operate the printer entirely through G-code.
+> [!NOTE]
+> The touchscreen LCD is not currently supported by Marlin; you must either replace the LCD with another supported display, or operate the printer entirely through G-code.

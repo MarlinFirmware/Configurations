@@ -1,6 +1,7 @@
 # Marlin for Labists ET4
 
-_Note: The Labists ET4 is OEM'd by Anet, so the update process is very similar._
+> [!NOTE]
+> The Labists ET4 is OEM'd by Anet, so the update process is very similar.
 
 A debugging/programming probe (_e.g._, ST-Link, J-Link, or Black Magic Probe) is required to flash the the [OpenBLT bootloader for Anet ET4/ET5 series printers](https://github.com/davidtgbe/openblt/releases) due to incompatibility with the stock bootloader. Once OpenBLT is flashed, Marlin can be updated by SD card just like the original firmware.
 

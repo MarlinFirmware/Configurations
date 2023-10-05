@@ -70,7 +70,7 @@
 
 // Choose the name from boards.h that matches your setup
 #ifndef MOTHERBOARD
-  #define MOTHERBOARD BOARD_BTT_MANTA_M4P_V1_0
+  #define MOTHERBOARD BOARD_BTT_MANTA_M4P_V2_1
 #endif
 
 /**
