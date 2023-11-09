@@ -1,8 +1,7 @@
 # Ender-5 Plus Configurations for Marlin Firmware
 
-## Important
-
-NOTE: The Ender-5 LCD stock firmware is only compatible with Creality firmware. The LCD standard UI will not function. This is expected.
+> [!IMPORTANT]
+> The Ender-5 LCD stock firmware is only compatible with Creality firmware. The LCD standard UI will not function. This is expected.
 
 ## Marlin DGUS UI Instructions
 

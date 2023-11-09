@@ -56,7 +56,10 @@ Bilinear Leveling uses the same approach as the original firmware, with the adva
 
 ## Unified Bed Leveling and Cura
 
-Unified Bed Leveling is more accurate due to the addition of manual probing, but requires changes to the Cura settings. **AT THIS TIME OF WRITING, THE AS-SHIPPED CURA PROFILE INCLUDES G-CODE COMMANDS THAT ARE INCOMPATIBLE WITH UBL AND IN ONE CASE MAY FORCE A HEAD CRASH DURING PREFLIGHT.**
+Unified Bed Leveling is more accurate due to the addition of manual probing, but requires changes to the Cura settings.
+
+> [!IMPORTANT]
+> AT THIS TIME OF WRITING, THE AS-SHIPPED CURA PROFILE INCLUDES G-CODE COMMANDS THAT ARE INCOMPATIBLE WITH UBL AND IN ONE CASE MAY FORCE A HEAD CRASH DURING PREFLIGHT.
 
 Here is my amended version of the Start G-Code from Cura. To use this in Cura, go to:
 
@@ -64,7 +67,7 @@ Here is my amended version of the Start G-Code from Cura. To use this in Cura, g
 
 And paste in the following:
 
-```
+```gcode
 ; Vertex Delta Start Gcode
 M400
 G28 ; Home extruder

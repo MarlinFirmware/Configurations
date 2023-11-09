@@ -1,9 +1,14 @@
 # Ender-5 Plus with BTT SKR 3 Configurations for Marlin Firmware
 
-## Important
-
-The LCD will need the cable modified to fit the SKR 3 motherboard.
-Four pins, tx2-pa10 rx2-pa9 gnd-g 5v-+5v, ( See the boards silkscreens for pin labels)
+> [!IMPORTANT]
+> LCD cable will need to be modified to fit the SKR 3 motherboard (See board silkscreens for pin labels):
+>
+> |  LCD -> SKR 3   |
+> |-----------------|
+> | `TX2` -> `PA10` |
+> | `RX2` -> `PA9`  |
+> | `GND` -> `G`    |
+> | `5V` -> `+5V`   |
 
 ## About
 

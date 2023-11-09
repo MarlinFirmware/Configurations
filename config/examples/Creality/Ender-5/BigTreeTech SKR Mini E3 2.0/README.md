@@ -1,19 +1,5 @@
 # Ender-5 with BigTreeTech SKR Mini E3 v2.0
 
-## Build with "Auto Build Marlin"
-
-For the best experience building with PlatformIO in VSCode, open up the "Extensions" panel and install the "Auto Build Marlin" extension. After installation, open up the Auto Build Marlin view and click the "Build" button for the "512K" environment.
-
-## Build with PlatformIO
-
-For direct PlatformIO build, locate the `env:STM32F103RC_btt_512K` group the PlatformIO panel and click the "Build" item in that group to start the build.
-
-To make the main "Build" button apply to this board's environment, edit the `platformio.ini` section `[platformio]` and change `default_envs` to
-
-```ini
-default_envs = STM32F103RC_btt_512K
-```
-
 ## Older Leadscrew
 
 > [!NOTE]

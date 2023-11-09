@@ -10,7 +10,7 @@ Bringing silky smooth prints to Felix.
     - [Stable version](https://github.com/MarlinFirmware/Marlin/tree/Development)
   - In both cases use the "Download Zip" button on the right.
 
-```
+```shell
 cd Marlin/src
 cp config/examples/Felix/Configuration_adv.h .
 ```

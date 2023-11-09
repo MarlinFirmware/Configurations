@@ -2,7 +2,7 @@
 
 ## Usage
 Use these configurations like any other configs. Set `default_envs = trigorilla_pro` in `platformio.ini` for a simplified build. Flashing with PlatformIO may be broken. If so you can use OctoPrint firmware flasher plugin or the `stm32flash` tool in the terminal, like so:
-```sh
+```shell
 stm32flash -w firmware.bin -v -g 0x0 -b 115200 <YOUR COM/SERIAL PORT HERE>
 ```
 

@@ -10,10 +10,10 @@ All axes in this example use the same steps/mm, acceleration, etc.
 In this example Marlin automatically maps extra axes to the unused E0, E1, E2, E3 and E4 (Z2) stepper ports.
 Endstop pins must be assigned manually, so this example assigns endstops as follows:
 
-```
-I_MIN_PIN PG11  // Z2-STOP
-J_MIN_PIN PG12  // E0DET
-K_MIN_PIN PG13  // E1DET
-U_MIN_PIN PG14  // E2DET
-V_MIN_PIN PG15  // E3DET
+```cpp
+#define I_MIN_PIN PG11  // Z2-STOP
+#define J_MIN_PIN PG12  // E0DET
+#define K_MIN_PIN PG13  // E1DET
+#define U_MIN_PIN PG14  // E2DET
+#define V_MIN_PIN PG15  // E3DET
 ```
