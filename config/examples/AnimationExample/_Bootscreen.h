@@ -62,6 +62,7 @@ const unsigned char custom_start_bmp[] PROGMEM = {
   B00011111,B11111111,B11111111,B11111111,B11111111,B11111111,B11111000
 };
 
+#ifdef CUSTOM_BOOTSCREEN_ANIMATED
 
 const unsigned char custom_start_bmp1[] PROGMEM = {
   B00011111,B11111111,B11111111,B11111111,B11111111,B11111111,B11111111,
@@ -218,3 +219,5 @@ const unsigned char custom_start_bmp6[] PROGMEM = {
   };
 
 #endif
+
+#endif // CUSTOM_BOOTSCREEN_ANIMATED
