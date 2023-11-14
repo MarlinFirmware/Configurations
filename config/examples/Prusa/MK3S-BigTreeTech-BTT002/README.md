@@ -15,13 +15,15 @@ Flags specific to this printer/configuration:
 - `SUPERPINDA` - SuperPinda present?
 
 ## Upgrade Notes
-* ⚠️ Cut or desolder the Z & E driver DIAG pins or they will interfere with PINDA & filament runout detection. ⚠️
-* Set the jumpers under your drivers to "TMC2208-UART MODE":
-
-  <img src="https://user-images.githubusercontent.com/13375512/74117621-24415000-4b6d-11ea-8811-f867e187ea0c.png" width="50%">
+> [!IMPORTANT]
+> * Cut or desolder the Z & E driver DIAG pins or they will interfere with PINDA & filament runout detection.
+> * Set the jumpers under your drivers to "TMC2208-UART MODE":
+>
+>   <img src="https://user-images.githubusercontent.com/13375512/74117621-24415000-4b6d-11ea-8811-f867e187ea0c.png" width="50%">
 
 ## Changes to Start G-code
-The `W` in Průša's `G28 W ; home all without mesh bed level` default G-code does not exist in Marlin and [`G80 ; mesh bed leveling`](https://marlinfw.org/docs/gcode/G080.html) cancels the current motion mode, so no bed leveling will take place.
+> [!IMPORTANT]
+> The `W` in Průša's `G28 W ; home all without mesh bed level` default G-code does not exist in Marlin and [`G80 ; mesh bed leveling`](https://marlinfw.org/docs/gcode/G080.html) cancels the current motion mode, so no bed leveling will take place.
 
 Below are some example start G-code scripts from popular slicers to get you started.
 

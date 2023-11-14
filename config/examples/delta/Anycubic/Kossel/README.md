@@ -6,7 +6,8 @@ These configurations activate many of the new advanced features of the Marlin fi
  * Auto Bed Leveling
  * Pause & Filament Change
 
-**Important**: Before doing anything else after updating the firmware, go to `Configuration > Advanced Settings > Initialize EEPROM` to get rid of old configurations.
+> [!IMPORTANT]
+> Before doing anything else after updating the firmware, go to `Configuration > Advanced Settings > Initialize EEPROM` to get rid of old configurations.
 
 Then you should execute `Configuration > Delta Calibration > Set Delta Height` and also run `Configuration > Delta Configuration > Probe Z-offset` to verify the Probe offset.
 
@@ -19,7 +20,8 @@ Please do a manual paper test (moving the nozzle slowly down to Z0 and checking 
 
 # Select the Configuration
 
-**Please select the correct values at the start of the Configuration.h file**
+> [!IMPORTANT]
+> Please select the correct values at the start of the Configuration.h file
 
 The Kossel comes in 3 versions:
 
@@ -39,7 +41,8 @@ Typically the probes for the Anycubic Delta Kossel printers come in two differen
 
     ![Version 2 Probe](images/Version2Probe.jpg)
 
-If you select the `ANYCUBIC_PROBE_VERSION 0`: It's very important to follow the correct procedure to set it up after flashing the firmware, otherwise you might damage the printer by ramming the nozzle into the buildplate:
+> [!IMPORTANT]
+> If you select the `ANYCUBIC_PROBE_VERSION 0`, it's very important to follow the correct procedure to set it up after flashing the firmware, otherwise you might damage the printer by ramming the nozzle into the buildplate:
 
 * `Configuration > Advanced Settings > Initialize EEPROM`
 * `Motion > Move Axis > Soft Endstops` : `Off`

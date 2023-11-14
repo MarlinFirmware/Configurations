@@ -10,7 +10,7 @@ Bringing silky smooth prints to Felix.
     - [Stable version](https://github.com/MarlinFirmware/Marlin/tree/Development)
   - In both cases use the "Download Zip" button on the right.
 
-```
+```shell
 cd Marlin/src
 cp config/examples/Felix/Configuration_adv.h .
 ```
@@ -19,11 +19,15 @@ The next step depends on your setup:
 
 ### Single Extruder Configuration
 
-    cp config/examples/Felix/Configuration.h .
+```shell
+cp config/examples/Felix/Configuration.h .
+```
 
 ### Dual Extruder Configuration
 
-    cp config/examples/Felix/DUAL/Configuration.h Configuration.h
+```shell
+cp config/examples/Felix/DUAL/Configuration.h Configuration.h
+```
 
 ### Compile Firmware
 
@@ -43,17 +47,23 @@ The next step depends on your setup:
 
 Find the latest Arduino build:
 
-    ls -altr /tmp/
-    drwxr-xr-x 5 chrono users 12288 Mar 3 21:41 build6072035599686630843.tmp
+```shell
+ls -altr /tmp/
+drwxr-xr-x 5 chrono users 12288 Mar 3 21:41 build6072035599686630843.tmp
+```
 
 Copy the firmware to your printer host:
 
-    scp /tmp/build6072035599686630843.tmp/Marlin.cpp.hex a.b.c.d:/tmp/
+```shell
+scp /tmp/build6072035599686630843.tmp/Marlin.cpp.hex a.b.c.d:/tmp/
+```
 
 Connect to your printer host via ssh, stop Octoprint or any other service that may block your USB device and make sure you have avrdude installed, then run:
 
-    avrdude -C/etc/avrdude.conf -v -v -v -patmega2560 -cwiring -P/dev/ttyUSB0 \
-    -b115200 -D -Uflash:w:/tmp/Marlin.cpp.hex:i
+```shell
+avrdude -C/etc/avrdude.conf -v -v -v -patmega2560 -cwiring -P/dev/ttyUSB0 \
+-b115200 -D -Uflash:w:/tmp/Marlin.cpp.hex:i
+```
 
 ## Acknowledgements
 

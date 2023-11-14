@@ -19,17 +19,17 @@ use the original version.
 If you have a VM8204 upgraded Z axis and coupler, ensure the following line
 is uncommented. Otherwise comment it out:
 
-```
+```cpp
 #define K8200_K8204
 ```
 If you have the VM8201 display unit, uncomment the following line
-```
+```cpp
 //#define K8200_VM8201
 ```
 
 If you have the *3D Printer Full Graphic Smart Controller with 3Drag adapter* (or other screen based on the [RepRap Discount Full Graphic Smart Controller](https://reprap.org/wiki/RepRapDiscount_Full_Graphic_Smart_Controller)), ensure
 the following is uncommented, otherwise comment it out
-```
+```cpp
 #define FULLGRAPHIC_CONTROLLER_LCD_SD
 ```
 

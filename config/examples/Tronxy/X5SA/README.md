@@ -16,7 +16,7 @@
 You can (OR MUST) dump the current settings of your printer. It may help you to figure out some configs, like steps/mm of your extruder.
 
 1. Create a file named `savesettings.gcode` with the following content:
-```
+```gcode
 M6046 ; sdcard access
 M8512 "currentconfig.gcode" ; save settings to file
 ```
