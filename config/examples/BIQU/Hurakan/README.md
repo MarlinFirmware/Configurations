@@ -2,6 +2,8 @@
 
 > [!NOTE]
 > Early Hurakan printers have a raised bed power switch, so enable (uncomment) `#define PROBING_MARGIN_BACK` in `Configuration_adv.h` to prevent the hotend from potentially colliding with the switch assembly while probing.
+>
+> Enable (uncomment) `#define BIQU_MICROPROBE_V1` in `Configuration.h` for Biqu MicroProbe V1, otherwise V2 is assumed.
 
 The Biqu Hurakan ships with a BigTreeTech Manta M4P motherboard which includes an integrated BigTreeTech CB1 single board computer running Klipper. See below for instructions on how to update the CB1 to run OctoPrint.
 
