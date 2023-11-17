@@ -977,9 +977,9 @@
   // measured in degrees anticlockwise looking from above the printer
   #define DELTA_TOWER_ANGLE_TRIM { 0.69, 0.0, -0.70 }             // Update these values using G33 auto calibrate
 
-  // Delta radius and diagonal rod adjustments (mm)
-  #define DELTA_RADIUS_TRIM_TOWER { 0.0, 0.0, 0.0 }
-  #define DELTA_DIAGONAL_ROD_TRIM_TOWER { 0.0, 0.0, 0.0 }
+  // Delta radius and diagonal rod adjustments
+  #define DELTA_RADIUS_TRIM_TOWER       { 0.0, 0.0, 0.0 } // (mm)
+  #define DELTA_DIAGONAL_ROD_TRIM_TOWER { 0.0, 0.0, 0.0 } // (mm)
 
 #endif
 
