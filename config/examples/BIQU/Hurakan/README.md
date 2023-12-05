@@ -86,7 +86,7 @@ sudo apt upgrade
 ```shell
 cd ~
 
-git clone https://github.com/th33xitus/kiauh.git
+git clone https://github.com/dw-0/kiauh.git
 
 ./kiauh/kiauh.sh
 ```
