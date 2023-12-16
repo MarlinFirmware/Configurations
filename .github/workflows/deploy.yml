@@ -90,7 +90,7 @@ jobs:
           find . -name "Conf*.h" -print0 | while read -d $'\0' fn ; do
             fldr=$(dirname "$fn" | sed "s/^\.\///")
             blank_line=$(awk '/^\s*$/ {print NR; exit}' "$fn")
-            sed -i~ "${blank_line}i\\\n#define CONFIG_EXAMPLES_DIR \"$fldr\"\\ " "$fn"
+            sed -i~ "${blank_line}i\\\n#define CONFIG_EXAMPLES_DIR \"$fldr\"" "$fn"
             rm -f "$fn~"
           done
           cd -
