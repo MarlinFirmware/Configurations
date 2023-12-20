@@ -46,7 +46,7 @@ Use the following pictures to identify your type of display unit:
 
     Appears to emulate the DWIN protocol but without an unknown subset of features that make it currently crash with custom firmware.
 
-    TJC tools are readily available, but there are currently no custom display firmwares for this unit. More research is required, but it appears custom firmware should be possible.
+    TJC tools are readily available. More research is required, but it appears custom firmware should be possible.
 
 ## **Display compatibility**
 
@@ -54,29 +54,29 @@ The differences between the types of displays units shown above make them more c
 
 * **DWIN**
     * ✅ Creality UI
-    * ✅ MRiscoC Pro UI
+    * ✅ MRiscoC ProUI
     * ✅ JyersUI
     * ✅ MarlinUI Portrait
     * ✅ MarlinUI Landscape
 * **DACAI**
     * ✅ Creality UI
-    * ✅ MRiscoC Pro UI
+    * ✅ MRiscoC ProUI
     * ✅ JyersUI
     * ✅ MarlinUI Portrait
     * ❌ MarlinUI Landscape
         * Lack of support for display rotation
 * **SYNWIT / VIEWE**
     * ✅ Creality UI
-    * ⚠️ MRiscoC Pro UI
-        * STL preview not working
+    * ⚠️ MRiscoC ProUI
+        * STL preview may work with update
     * ❔ JyersUI
     * ⚠️ MarlinUI Portrait
         * Lack of custom graphics assets compilation means no icons are visible
     * ❔ MarlinUI Landscape
 * **TJC**
     * ✅ Creality UI
-    * ❌ MRiscoC Pro UI
-        * As reported by author; incompatibility causes currently unknown
+    * ⚠️ MRiscoC ProUI
+        * Must be enabled seperately in firmware; may still have compatibiliy issues
     * ❔ JyersUI
     * ⚠️ MarlinUI Portrait
         * Lack of custom graphics assets compilation means no icons are visible
@@ -84,9 +84,9 @@ The differences between the types of displays units shown above make them more c
 
 ## **If you've got a currently undocumented display**
 
-In the case of **SYNWIT / VIEWE** and **TJC** displays, currently only the Creality UI interface option (`DWIN_CREALITY_LCD`) is fully compatible.
+In the case of **SYNWIT / VIEWE** displays, currently only the Creality UI interface option (`DWIN_CREALITY_LCD`) is fully compatible.
 
-If you have a **DWIN** or **DACAI** display, please follow the procedure below to upgrade the firmware with the custom graphics assets required for MRiscoC Pro UI, JyersUI and MarlinUI.
+If you have a **DWIN**, **DACAI**, or **TJC**  display, please follow the procedure below to upgrade the firmware with the custom graphics assets required for MRiscoC ProUI, JyersUI and MarlinUI.
 
 (It is worth noting that MarlinUI _will_ work on undocumented LCDs, but no icons will be displayed).
 
@@ -101,10 +101,18 @@ If you have a **DWIN** or **DACAI** display, please follow the procedure below t
     - Power on to confirm a successful flash
 * ### `DACAI` units
     - Format a microSD card using the FAT32 filesystem with 4K cluster size
-    - Copy the `private` folder to the SD card and insert the card into the slot on the back of the display unit.
+    - Copy `firmware.zlib` and the `private` folder to the SD card and insert the card into the slot on the back of the display unit.
+    - Power on the machine and wait for the installation screen to finish
+    - Power off the machine
+    - Remove the SD card from the back of the display
+    - Power on to confirm a successful flash
+* ### `TJC` units
+    - Use `#define TJC_DISPLAY` in Marlin/Configuration.h to enable
+    - Format a microSD card using the FAT32 filesystem with 4K cluster size
+    - Copy `TJC_SET` folder to the SD card and insert the card into the slot on the back of the display unit.
     - Power on the machine and wait for the installation screen to finish
     - Power off the machine
     - Remove the SD card from the back of the display
     - Power on to confirm a successful flash
 
-If you're experiencing screen glitches, please ensure both the printer and the display unit have been flashed correctly.
+If you're experiencing screen glitches, please ensure both the printer and the display unit have been flashed correctly. For more information, see [How to update the display](https://github.com/mriscoc/Ender3V2S1/wiki/How-to-update-the-display) wiki.
