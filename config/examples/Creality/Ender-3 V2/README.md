@@ -102,6 +102,7 @@ If you have a **DWIN**, **DACAI**, or **TJC**  display, please follow the proced
     - Power on to confirm a successful flash
 * ### `DACAI` units
     - Format a microSD card using the FAT32 filesystem with 4K cluster size
+    - Decompress `private.tar.gz` which contains a `private` folder.
     - Copy `firmware.zlib` and the `private` folder to the SD card and insert the card into the slot on the back of the display unit.
     - Power on the machine and wait for the installation screen to finish
     - Power off the machine
