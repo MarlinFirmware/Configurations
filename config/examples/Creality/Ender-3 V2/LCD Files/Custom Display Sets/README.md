@@ -59,7 +59,6 @@ If icons are missing after the update, you may need to rename the `.ICO` file. I
 
 - Copy one of the `DWIN_SET`s from [Voxelab/DWIN Sets](Voxelab/DWIN%20Sets) to a Micro SD card. Remove the identifier so the folder is just named `DWIN_SET`.  
 (i.e. `DWIN_SET (Custom)` => `DWIN_SET`)
-- [Direct Download](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/MarlinFirmware/Configurations/tree/HEAD/config/examples/Creality/Ender-3%20V2/LCD%20Files/Custom%20Display%20Sets/Voxelab/DWIN%20Sets) to just the Voxelab DWIN Sets folder.
 - Follow the instructions on [How to install](https://github.com/MarlinFirmware/Configurations/tree/HEAD/config/examples/Creality/Ender-3%20V2/LCD%20Files/Custom%20Display%20Sets/README.md#how-to-install).
 
 ---
@@ -80,8 +79,6 @@ If icons are missing after the update, you may need to rename the `.ICO` file. I
 - - Copy the `DWIN_SET` folder to a Micro SD card.
 - For DACAI Display
 - - Copy `firmware.zlib` and `private` folder to a Micro SD card.
-- [Creality Direct Download](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/MarlinFirmware/Configurations/tree/HEAD/config/examples/Creality/Ender-3%20V2/LCD%20Files/Custom%20Display%20Sets/Creality/DWIN_SET) to just the `DWIN_SET` folder.
-- [Giadej Direct Download](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/MarlinFirmware/Configurations/tree/HEAD/config/examples/Creality/Ender-3%20V2/LCD%20Files/Custom%20Display%20Sets/Giadej/DWIN_SET) to just the `DWIN_SET` folder.
 - Follow the instructions on [How to install](https://github.com/MarlinFirmware/Configurations/tree/HEAD/config/examples/Creality/Ender-3%20V2/LCD%20Files/Custom%20Display%20Sets/README.md#how-to-install).
 
 
@@ -103,6 +100,8 @@ If icons are missing after the update, you may need to rename the `.ICO` file. I
 |                      |T5UIC1.CFG                  | E1C573639BFA2B3A06C2FA7AD3CAB483653DD3DC383217FF653FAB3145458095
 |                      |T5UIC1_V20_4??_191022.BIN   | F8F9A3075AE5516328044ACB79CA522753133B66F1ECBD108E7B5DB2F3FF2FE5
 |                      |0T5UIC1.HZK                 | 27F3AE70117DC031E6EA542654CA03B89BB9A0592B23AA9B7E452C35583C0108
+|Creality              |9.ICO                       | 2F00B9355034C9DF2819DB56CA5F46C5015071DB5D380AABA3BB10FE3F1A63D2
+|Giadej                |9.ICO                       | 47939E140DE3E55F7BEDFBDC70068C228A8BDE0E72BE673635ED216311A6E5C5
 |Custom                |9.ICO                       | 6BF0CFF10D61DE64D98BF286B0B60EE91FA88B0CA7FC7AF777CB6C9C71F15F1C
 |Gotcha                |9.ICO                       | D90B25EE7675E61FFA8E8CD1B4E9435DFD4A51FADC767D291B50064C005AA8B4
 |Original              |9.ICO                       | B19C67B762B6A29DC1D7BE5E2A5EDCD58E31EC40BC28125A2F361986BE019000
