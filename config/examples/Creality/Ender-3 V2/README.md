@@ -94,22 +94,24 @@ If you have a **DWIN**, **DACAI**, or **TJC**  display, please follow the proced
 
 * ### `DWIN` units
     - Format a microSD card using the FAT32 filesystem with 4K cluster size
-    - Copy the `DWIN_SET` folder to the SD card and insert the card into the slot on the back of the display unit.
+    - Decompress `DWIN_SET.tar.gz` which contains a `DWIN_SET` folder
+    - Copy the `DWIN_SET` folder to the SD card and insert the card into the slot on the back of the display unit
     - Power on the machine and wait for the screen to change from blue to orange
     - Power off the machine
     - Remove the SD card from the back of the display
     - Power on to confirm a successful flash
 * ### `DACAI` units
     - Format a microSD card using the FAT32 filesystem with 4K cluster size
-    - Copy `firmware.zlib` and the `private` folder to the SD card and insert the card into the slot on the back of the display unit.
+    - Decompress `private.tar.gz` which contains a `private` folder
+    - Copy `firmware.zlib` and the `private` folder to the SD card and insert the card into the slot on the back of the display unit
     - Power on the machine and wait for the installation screen to finish
     - Power off the machine
     - Remove the SD card from the back of the display
     - Power on to confirm a successful flash
 * ### `TJC` units
-    - Use `#define TJC_DISPLAY` in Marlin/Configuration.h to enable
+    - Add `#define TJC_DISPLAY` in `Marlin/Configuration.h` to enable TCJ display support
     - Format a microSD card using the FAT32 filesystem with 4K cluster size
-    - Copy `TJC_SET` folder to the SD card and insert the card into the slot on the back of the display unit.
+    - Copy `TJC_SET` folder to the SD card and insert the card into the slot on the back of the display unit
     - Power on the machine and wait for the installation screen to finish
     - Power off the machine
     - Remove the SD card from the back of the display
