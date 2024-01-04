@@ -1250,11 +1250,16 @@
 
 /**
  * Default Axis Steps Per Unit (linear=steps/mm, rotational=steps/°)
- * Override with M92
+ * Override with M92 (when enabled below)
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
 // E steps example: steps per revolution s=200, microstepping m=16, effective gear diameter d=10.95: sm/(πd) = 93.02
 #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 800, 93.02 }
+
+/**
+ * Enable support for M92. Disable to save ~530 bytes of flash (1400 more if using a display)
+ */
+#define EDITABLE_STEPS_PER_UNIT
 
 /**
  * Default Max Feed Rate (linear=mm/s, rotational=°/s)

@@ -1243,7 +1243,7 @@
 
 /**
  * Default Axis Steps Per Unit (linear=steps/mm, rotational=steps/°)
- * Override with M92
+ * Override with M92 (when enabled below)
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
 #define DEFAULT_AXIS_STEPS_PER_UNIT   { 71.1, 71.1, 2560, 600 } // David TVRR
@@ -1251,6 +1251,11 @@
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   { 79.87, 79.87, 2566, 563.78 } // Al's TVRR
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   { 81.26, 80.01, 2561, 599.14 } // Michel TVRR old
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   { 71.1, 71.1, 2560, 739.65 } // Michel TVRR
+
+/**
+ * Enable support for M92. Disable to save ~530 bytes of flash (1400 more if using a display)
+ */
+#define EDITABLE_STEPS_PER_UNIT
 
 /**
  * Default Max Feed Rate (linear=mm/s, rotational=°/s)

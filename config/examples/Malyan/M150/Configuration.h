@@ -1255,7 +1255,7 @@
 
 /**
  * Default Axis Steps Per Unit (linear=steps/mm, rotational=steps/°)
- * Override with M92
+ * Override with M92 (when enabled below)
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
                                       // Standard M150 17T MXL on X and Y
@@ -1266,6 +1266,11 @@
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   { 3200/32.512, 3200/32.512, 1600, 103.00 }
 // 16T GT2 on X and Y
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   { 100, 100, 1600, 103.00 }
+
+/**
+ * Enable support for M92. Disable to save ~530 bytes of flash (1400 more if using a display)
+ */
+#define EDITABLE_STEPS_PER_UNIT
 
 /**
  * Default Max Feed Rate (linear=mm/s, rotational=°/s)

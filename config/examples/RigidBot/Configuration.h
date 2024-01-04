@@ -1254,12 +1254,17 @@
 
 /**
  * Default Axis Steps Per Unit (linear=steps/mm, rotational=steps/°)
- * Override with M92
+ * Override with M92 (when enabled below)
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
  // default steps per unit for RigidBot with standard hardware
 #define DEFAULT_AXIS_STEPS_PER_UNIT   { 44.3090, 22.1545, 1600, 53.5 }
 // default steps for 16-tooth pulleys { 100.06, 50.06, 1600, 76 } // HPX2-MAX E=504, RigidBot E=53.5, Peter Stoneham's=76
+
+/**
+ * Enable support for M92. Disable to save ~530 bytes of flash (1400 more if using a display)
+ */
+#define EDITABLE_STEPS_PER_UNIT
 
 /**
  * Default Max Feed Rate (linear=mm/s, rotational=°/s)
