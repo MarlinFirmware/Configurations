@@ -684,9 +684,7 @@
  * Multiple extruders can be assigned to the same pin in which case
  * the fan will turn on when any selected extruder is above the threshold.
  */
-//视新板子是用哪个管脚来接风扇，比如为PAx，则在Configuration_adv.h中定义#define E0_AUTO_FAN_PIN PAx即可。
-//按新硬件原理图，假设用PC0接喉管风扇，改为#define E0_AUTO_FAN_PIN PC0，当喉管温度大于EXTRUDER_AUTO_FAN_TEMPERATURE时喉管风扇开启 --zy
-#define E0_AUTO_FAN_PIN PC0
+#define E0_AUTO_FAN_PIN PC0 // According to the new hardware schematic diagram PC0 is connected to the heatsink fan
 #define E1_AUTO_FAN_PIN -1
 #define E2_AUTO_FAN_PIN -1
 #define E3_AUTO_FAN_PIN -1
@@ -1554,7 +1552,6 @@
    * Axis moves <= 1/2 the axis length and Extruder moves <= EXTRUDE_MAXLENGTH
    * will be shown in the move submenus.
    */
-
   #define MANUAL_MOVE_DISTANCE_MM                    10, 1.0, 0.1  // (mm)
   //#define MANUAL_MOVE_DISTANCE_MM         100, 50, 10, 1.0, 0.1  // (mm)
   //#define MANUAL_MOVE_DISTANCE_MM    500, 100, 50, 10, 1.0, 0.1  // (mm)
@@ -2731,6 +2728,7 @@
 //#define SERIAL_DMA
 
 /**
+ * Set the number of proportional font spaces required to fill up a typical character space.
  * This can help to better align the output of commands like `G29 O` Mesh Output.
  *
  * For clients that use a fixed-width font (like OctoPrint), leave this set to 1.0.
