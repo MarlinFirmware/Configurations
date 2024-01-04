@@ -2729,6 +2729,7 @@
 //#define SERIAL_DMA
 
 /**
+ * Set the number of proportional font spaces required to fill up a typical character space.
  * This can help to better align the output of commands like `G29 O` Mesh Output.
  *
  * For clients that use a fixed-width font (like OctoPrint), leave this set to 1.0.
