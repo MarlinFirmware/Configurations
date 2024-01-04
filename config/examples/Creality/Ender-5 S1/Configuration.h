@@ -1616,11 +1616,11 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
- //#define NOZZLE_TO_PROBE_OFFSET { -2, 44.45, 0 }//前后安装bltouch
-//#define NOZZLE_TO_PROBE_OFFSET { 38, -9, 0 }//右边安装
-//#define NOZZLE_TO_PROBE_OFFSET { 0, -19, 0 }//前后安装bltouch
-//#define NOZZLE_TO_PROBE_OFFSET { -29.5, -11.3, 0 }//左边安装
-#define NOZZLE_TO_PROBE_OFFSET { -12.5, 26.5, 0 } //
+//#define NOZZLE_TO_PROBE_OFFSET { -2, 44.45, 0 }     // Install BLTouch behind
+//#define NOZZLE_TO_PROBE_OFFSET { 38, -9, 0 }        // Installation on the right
+//#define NOZZLE_TO_PROBE_OFFSET { 0, -19, 0 }        // Install BLTouch in front
+//#define NOZZLE_TO_PROBE_OFFSET { -29.5, -11.3, 0 }  // Installation on the left
+#define NOZZLE_TO_PROBE_OFFSET { -12.5, 26.5, 0 }
 
 // Enable and set to use a specific tool for probing. Disable to allow any tool.
 #define PROBING_TOOL 0
