@@ -152,7 +152,7 @@ Normal non-TMC:
 ```cpp
 /**
  * Default Axis Steps Per Unit (steps/mm)
- * Override with M92
+ * Override with M92 (when enabled below)
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
 #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 92.6 }
@@ -161,7 +161,7 @@ Titan Non-PRO:
 ```cpp
 /**
  * Default Axis Steps Per Unit (steps/mm)
- * Override with M92
+ * Override with M92 (when enabled below)
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
 #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 420 }
@@ -173,7 +173,7 @@ Titan PRO (tmc):
 ```cpp
 /**
  * Default Axis Steps Per Unit (steps/mm)
- * Override with M92
+ * Override with M92 (when enabled below)
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
 #define DEFAULT_AXIS_STEPS_PER_UNIT   { 160, 160, 800, 764 }
