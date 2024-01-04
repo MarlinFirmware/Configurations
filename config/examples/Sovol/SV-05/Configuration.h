@@ -3060,7 +3060,10 @@
 //
 // Connect to EXP1 on RAMPS and compatible boards.
 //
-//#define CR10_STOCKDISPLAY
+#define CR10_STOCKDISPLAY
+#if ENABLED(CR10_STOCKDISPLAY)
+  #define RET6_12864_LCD  // Specific to the SoC (can either be RET / VET)
+#endif
 
 //
 // Ender-2 OEM display, a variant of the MKS_MINI_12864
