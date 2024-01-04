@@ -1352,7 +1352,7 @@
   #define CALIBRATION_NOZZLE_TIP_HEIGHT          1.0  // mm
   #define CALIBRATION_NOZZLE_OUTER_DIAMETER      2.0  // mm
 
-  // Uncomment to enable reporting (required for "G425 V", but consumes PROGMEM).
+  // Uncomment to enable reporting (required for "G425 V", but consumes flash).
   //#define CALIBRATION_REPORTING
 
   // The true location and dimension the cube/bolt/washer on the bed.
@@ -2730,6 +2730,7 @@
 //#define SERIAL_DMA
 
 /**
+ * Set the number of proportional font spaces required to fill up a typical character space.
  * This can help to better align the output of commands like `G29 O` Mesh Output.
  *
  * For clients that use a fixed-width font (like OctoPrint), leave this set to 1.0.
@@ -2957,6 +2958,7 @@
 
   #define FILAMENT_LOAD_UNLOAD_GCODES             // Add M701/M702 Load/Unload G-codes, plus Load/Unload in the LCD Prepare menu.
   #define FILAMENT_UNLOAD_ALL_EXTRUDERS           // Allow M702 to unload all extruders above a minimum target temp (as set by M302)
+  #define CONFIGURE_FILAMENT_CHANGE               // Add M603 G-code and menu items. Requires ~1.3K bytes of flash.
 #endif
 
 // @section tmc_smart
@@ -3971,6 +3973,18 @@
 //#define GCODE_CASE_INSENSITIVE  // Accept G-code sent to the firmware in lowercase
 
 //#define REPETIER_GCODE_M360     // Add commands originally from Repetier FW
+
+/**
+ * Enable M111 debug flags 1=ECHO, 2=INFO, 4=ERRORS (unimplemented).
+ * Disable to save some flash. Some hosts (Repetier Host) may rely on this feature.
+ */
+#define DEBUG_FLAGS_GCODE
+
+/**
+ * M115 - Report capabilites. Disable to save ~1150 bytes of flash.
+ *        Some hosts (and serial TFT displays) rely on this feature.
+ */
+#define REPORT_CAPABILITIES_GCODE
 
 /**
  * Enable this option for a leaner build of Marlin that removes

@@ -1242,10 +1242,15 @@
 
 /**
  * Default Axis Steps Per Unit (linear=steps/mm, rotational=steps/°)
- * Override with M92
+ * Override with M92 (when enabled below)
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
 #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 800, 93.02 }
+
+/**
+ * Enable support for M92. Disable to save ~530 bytes of flash (1400 more if using a display)
+ */
+#define EDITABLE_STEPS_PER_UNIT
 
 /**
  * Default Max Feed Rate (linear=mm/s, rotational=°/s)
@@ -2071,7 +2076,7 @@
 /**
  * Enable detailed logging of G28, G29, M48, etc.
  * Turn on with the command 'M111 S32'.
- * NOTE: Requires a lot of PROGMEM!
+ * NOTE: Requires a lot of flash!
  */
 //#define DEBUG_LEVELING_FEATURE
 
@@ -2366,7 +2371,7 @@
  */
 #define EEPROM_SETTINGS       // Persistent storage with M500 and M501
 //#define DISABLE_M503        // Saves ~2700 bytes of flash. Disable for release!
-#define EEPROM_CHITCHAT       // Give feedback on EEPROM commands. Disable to save PROGMEM.
+#define EEPROM_CHITCHAT       // Give feedback on EEPROM commands. Disable to save flash.
 #define EEPROM_BOOT_SILENT    // Keep M503 quiet and only give errors during first load
 #if ENABLED(EEPROM_SETTINGS)
   //#define EEPROM_AUTO_INIT  // Init EEPROM automatically on any errors.
@@ -3039,6 +3044,11 @@
 //#define BTT_MINI_12864
 
 //
+// BEEZ MINI 12864 is an alias for FYSETC_MINI_12864_2_1. Type A/B. NeoPixel RGB Backlight.
+//
+//#define BEEZ_MINI_12864
+
+//
 // Factory display for Creality CR-10 / CR-7 / Ender-3
 // https://www.aliexpress.com/item/32833148327.html
 //
@@ -3052,14 +3062,14 @@
 //#define ENDER2_STOCKDISPLAY
 
 //
-// ANET and Tronxy Graphical Controller
-//
-// Anet 128x64 full graphics lcd with rotary encoder as used on Anet A6
-// A clone of the RepRapDiscount full graphics display but with
-// different pins/wiring (see pins_ANET_10.h). Enable one of these.
+// ANET and Tronxy 128×64 Full Graphics Controller as used on Anet A6
 //
 //#define ANET_FULL_GRAPHICS_LCD
-//#define ANET_FULL_GRAPHICS_LCD_ALT_WIRING
+
+//
+// GUCOCO CTC 128×64 Full Graphics Controller as used on GUCOCO CTC A10S
+//
+//#define CTC_A10S_A13
 
 //
 // AZSMZ 12864 LCD with SD

@@ -471,79 +471,70 @@
 // @section temperature
 
 /**
- * --NORMAL IS 4.7kΩ PULLUP!-- 1kΩ pullup can be used on hotend sensor, using correct resistor and table
+ * Temperature Sensors:
  *
- * Temperature sensors available:
+ * NORMAL IS 4.7kΩ PULLUP! Hotend sensors can use 1kΩ pullup with correct resistor and table.
  *
- *  SPI RTD/Thermocouple Boards - IMPORTANT: Read the NOTE below!
- *  -------
- *    -5 : MAX31865 with Pt100/Pt1000, 2, 3, or 4-wire  (only for sensors 0-2 and bed)
- *                  NOTE: You must uncomment/set the MAX31865_*_OHMS_n defines below.
- *    -3 : MAX31855 with Thermocouple, -200°C to +700°C (only for sensors 0-2 and bed)
- *    -2 : MAX6675  with Thermocouple, 0°C to +700°C    (only for sensors 0-2 and bed)
- *
- *  NOTE: Ensure TEMP_n_CS_PIN is set in your pins file for each TEMP_SENSOR_n using an SPI Thermocouple. By default,
- *        Hardware SPI on the default serial bus is used. If you have also set TEMP_n_SCK_PIN and TEMP_n_MISO_PIN,
- *        Software SPI will be used on those ports instead. You can force Hardware SPI on the default bus in the
- *        Configuration_adv.h file. At this time, separate Hardware SPI buses for sensors are not supported.
- *
- *  Analog Themocouple Boards
- *  -------
- *    -4 : AD8495 with Thermocouple
- *    -1 : AD595  with Thermocouple
- *
+ * ================================================================
  *  Analog Thermistors - 4.7kΩ pullup - Normal
- *  -------
- *     1 : 100kΩ  EPCOS - Best choice for EPCOS thermistors
- *   331 : 100kΩ  Same as #1, but 3.3V scaled for MEGA
- *   332 : 100kΩ  Same as #1, but 3.3V scaled for DUE
- *     2 : 200kΩ  ATC Semitec 204GT-2
- *   202 : 200kΩ  Copymaster 3D
- *     3 : ???Ω   Mendel-parts thermistor
- *     4 : 10kΩ   Generic Thermistor !! DO NOT use for a hotend - it gives bad resolution at high temp. !!
- *     5 : 100kΩ  ATC Semitec 104GT-2/104NT-4-R025H42G - Used in ParCan, J-Head, and E3D, SliceEngineering 300°C
- *   501 : 100kΩ  Zonestar - Tronxy X3A
- *   502 : 100kΩ  Zonestar - used by hot bed in Zonestar Průša P802M
- *   503 : 100kΩ  Zonestar (Z8XM2) Heated Bed thermistor
- *   504 : 100kΩ  Zonestar P802QR2 (Part# QWG-104F-B3950) Hotend Thermistor
- *   505 : 100kΩ  Zonestar P802QR2 (Part# QWG-104F-3950) Bed Thermistor
- *   512 : 100kΩ  RPW-Ultra hotend
- *     6 : 100kΩ  EPCOS - Not as accurate as table #1 (created using a fluke thermocouple)
- *     7 : 100kΩ  Honeywell 135-104LAG-J01
- *    71 : 100kΩ  Honeywell 135-104LAF-J01
- *     8 : 100kΩ  Vishay 0603 SMD NTCS0603E3104FXT
- *     9 : 100kΩ  GE Sensing AL03006-58.2K-97-G1
- *    10 : 100kΩ  RS PRO 198-961
- *    11 : 100kΩ  Keenovo AC silicone mats, most Wanhao i3 machines - beta 3950, 1%
- *    12 : 100kΩ  Vishay 0603 SMD NTCS0603E3104FXT (#8) - calibrated for Makibox hot bed
- *    13 : 100kΩ  Hisens up to 300°C - for "Simple ONE" & "All In ONE" hotend - beta 3950, 1%
+ * ================================================================
+ *     1 : 100kΩ EPCOS - Best choice for EPCOS thermistors
+ *   331 : 100kΩ Same as #1, but 3.3V scaled for MEGA
+ *   332 : 100kΩ Same as #1, but 3.3V scaled for DUE
+ *     2 : 200kΩ ATC Semitec 204GT-2
+ *   202 : 200kΩ Copymaster 3D
+ *     3 : ???Ω  Mendel-parts thermistor
+ *     4 : 10kΩ  Generic Thermistor !! DO NOT use for a hotend - it gives bad resolution at high temp. !!
+ *     5 : 100kΩ ATC Semitec 104GT-2/104NT-4-R025H42G - Used in ParCan, J-Head, and E3D, SliceEngineering 300°C
+ *   501 : 100kΩ Zonestar - Tronxy X3A
+ *   502 : 100kΩ Zonestar - used by hot bed in Zonestar Průša P802M
+ *   503 : 100kΩ Zonestar (Z8XM2) Heated Bed thermistor
+ *   504 : 100kΩ Zonestar P802QR2 (Part# QWG-104F-B3950) Hotend Thermistor
+ *   505 : 100kΩ Zonestar P802QR2 (Part# QWG-104F-3950) Bed Thermistor
+ *   512 : 100kΩ RPW-Ultra hotend
+ *     6 : 100kΩ EPCOS - Not as accurate as table #1 (created using a fluke thermocouple)
+ *     7 : 100kΩ Honeywell 135-104LAG-J01
+ *    71 : 100kΩ Honeywell 135-104LAF-J01
+ *     8 : 100kΩ Vishay 0603 SMD NTCS0603E3104FXT
+ *     9 : 100kΩ GE Sensing AL03006-58.2K-97-G1
+ *    10 : 100kΩ RS PRO 198-961
+ *    11 : 100kΩ Keenovo AC silicone mats, most Wanhao i3 machines - beta 3950, 1%
+ *    12 : 100kΩ Vishay 0603 SMD NTCS0603E3104FXT (#8) - calibrated for Makibox hot bed
+ *    13 : 100kΩ Hisens up to 300°C - for "Simple ONE" & "All In ONE" hotend - beta 3950, 1%
  *    14 : 100kΩ  (R25), 4092K (beta25), 4.7kΩ pull-up, bed thermistor as used in Ender-5 S1
- *    15 : 100kΩ  Calibrated for JGAurora A5 hotend
- *    18 : 200kΩ  ATC Semitec 204GT-2 Dagoma.Fr - MKS_Base_DKU001327
- *    22 : 100kΩ  GTM32 Pro vB - hotend - 4.7kΩ pullup to 3.3V and 220Ω to analog input
- *    23 : 100kΩ  GTM32 Pro vB - bed - 4.7kΩ pullup to 3.3v and 220Ω to analog input
- *    30 : 100kΩ  Kis3d Silicone heating mat 200W/300W with 6mm precision cast plate (EN AW 5083) NTC100K - beta 3950
- *    60 : 100kΩ  Maker's Tool Works Kapton Bed Thermistor - beta 3950
- *    61 : 100kΩ  Formbot/Vivedino 350°C Thermistor - beta 3950
- *    66 : 4.7MΩ  Dyze Design / Trianglelab T-D500 500°C High Temperature Thermistor
- *    67 : 500kΩ  SliceEngineering 450°C Thermistor
- *    68 : PT100 amplifier board from Dyze Design
- *    70 : 100kΩ  bq Hephestos 2
- *    75 : 100kΩ  Generic Silicon Heat Pad with NTC100K MGB18-104F39050L32
- *  2000 : 100kΩ  Ultimachine Rambo TDK NTCG104LH104KT1 NTC100K motherboard Thermistor
+ *    15 : 100kΩ Calibrated for JGAurora A5 hotend
+ *    17 : 100kΩ Dagoma NTC white thermistor
+ *    18 : 200kΩ ATC Semitec 204GT-2 Dagoma.Fr - MKS_Base_DKU001327
+ *    22 : 100kΩ GTM32 Pro vB - hotend - 4.7kΩ pullup to 3.3V and 220Ω to analog input
+ *    23 : 100kΩ GTM32 Pro vB - bed - 4.7kΩ pullup to 3.3v and 220Ω to analog input
+ *    30 : 100kΩ Kis3d Silicone heating mat 200W/300W with 6mm precision cast plate (EN AW 5083) NTC100K - beta 3950
+ *    60 : 100kΩ Maker's Tool Works Kapton Bed Thermistor - beta 3950
+ *    61 : 100kΩ Formbot/Vivedino 350°C Thermistor - beta 3950
+ *    66 : 4.7MΩ Dyze Design / Trianglelab T-D500 500°C High Temperature Thermistor
+ *    67 : 500kΩ SliceEngineering 450°C Thermistor
+ *    68 : PT100 Smplifier board from Dyze Design
+ *    70 : 100kΩ bq Hephestos 2
+ *    75 : 100kΩ Generic Silicon Heat Pad with NTC100K MGB18-104F39050L32
+ *   666 : 200kΩ Einstart S custom thermistor with 10k pullup.
+ *  2000 : 100kΩ Ultimachine Rambo TDK NTCG104LH104KT1 NTC100K motherboard Thermistor
  *
- *  Analog Thermistors - 1kΩ pullup - Atypical, and requires changing out the 4.7kΩ pullup for 1kΩ.
- *  -------                           (but gives greater accuracy and more stable PID)
- *    51 : 100kΩ  EPCOS (1kΩ pullup)
- *    52 : 200kΩ  ATC Semitec 204GT-2 (1kΩ pullup)
- *    55 : 100kΩ  ATC Semitec 104GT-2 - Used in ParCan & J-Head (1kΩ pullup)
+ * ================================================================
+ *  Analog Thermistors - 1kΩ pullup
+ *   Atypical, and requires changing out the 4.7kΩ pullup for 1kΩ.
+ *   (but gives greater accuracy and more stable PID)
+ * ================================================================
+ *    51 : 100kΩ EPCOS (1kΩ pullup)
+ *    52 : 200kΩ ATC Semitec 204GT-2 (1kΩ pullup)
+ *    55 : 100kΩ ATC Semitec 104GT-2 - Used in ParCan & J-Head (1kΩ pullup)
  *
+ * ================================================================
  *  Analog Thermistors - 10kΩ pullup - Atypical
- *  -------
- *    99 : 100kΩ  Found on some Wanhao i3 machines with a 10kΩ pull-up resistor
+ * ================================================================
+ *    99 : 100kΩ Found on some Wanhao i3 machines with a 10kΩ pull-up resistor
  *
+ * ================================================================
  *  Analog RTDs (Pt100/Pt1000)
- *  -------
+ * ================================================================
  *   110 : Pt100  with 1kΩ pullup (atypical)
  *   147 : Pt100  with 4.7kΩ pullup
  *  1010 : Pt1000 with 1kΩ pullup (atypical)
@@ -555,20 +546,39 @@
  *                NOTE: ADC pins are not 5V tolerant. Not recommended because it's possible to damage the CPU by going over 500°C.
  *   201 : Pt100  with circuit in Overlord, similar to Ultimainboard V2.x
  *
+ * ================================================================
+ *  SPI RTD/Thermocouple Boards
+ * ================================================================
+ *    -5 : MAX31865 with Pt100/Pt1000, 2, 3, or 4-wire  (only for sensors 0-2 and bed)
+ *                  NOTE: You must uncomment/set the MAX31865_*_OHMS_n defines below.
+ *    -3 : MAX31855 with Thermocouple, -200°C to +700°C (only for sensors 0-2 and bed)
+ *    -2 : MAX6675  with Thermocouple, 0°C to +700°C    (only for sensors 0-2 and bed)
+ *
+ *  NOTE: Ensure TEMP_n_CS_PIN is set in your pins file for each TEMP_SENSOR_n using an SPI Thermocouple. By default,
+ *        Hardware SPI on the default serial bus is used. If you have also set TEMP_n_SCK_PIN and TEMP_n_MISO_PIN,
+ *        Software SPI will be used on those ports instead. You can force Hardware SPI on the default bus in the
+ *        Configuration_adv.h file. At this time, separate Hardware SPI buses for sensors are not supported.
+ *
+ * ================================================================
+ *  Analog Thermocouple Boards
+ * ================================================================
+ *    -4 : AD8495 with Thermocouple
+ *    -1 : AD595  with Thermocouple
+ *
+ * ================================================================
  *  SoC internal sensor
  * ================================================================
  *   100 : SoC internal sensor
  *
  * ================================================================
  *  Custom/Dummy/Other Thermal Sensors
- *  ------
+ * ================================================================
  *     0 : not used
  *  1000 : Custom - Specify parameters in Configuration_adv.h
  *
  *   !!! Use these for Testing or Development purposes. NEVER for production machine. !!!
  *   998 : Dummy Table that ALWAYS reads 25°C or the temperature defined below.
  *   999 : Dummy Table that ALWAYS reads 100°C or the temperature defined below.
- *
  */
 #define TEMP_SENSOR_0 1
 #define TEMP_SENSOR_1 0
@@ -796,8 +806,8 @@
 
   // 120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   // from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
-  #define DEFAULT_bedKp  10.00
-  #define DEFAULT_bedKi   0.023
+  #define DEFAULT_bedKp 10.00
+  #define DEFAULT_bedKi .023
   #define DEFAULT_bedKd 305.4
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
@@ -856,7 +866,7 @@
 #if ANY(PIDTEMP, PIDTEMPBED, PIDTEMPCHAMBER)
   //#define PID_OPENLOOP          // Puts PID in open loop. M104/M140 sets the output power from 0 to PID_MAX
   //#define SLOW_PWM_HEATERS      // PWM with very low frequency (roughly 0.125Hz=8s) and minimum state time of approximately 1s useful for heaters driven by a relay
- //当前温度和目标温度相差多少度  才开始PID算法控制温度。 Rock_20220916
+  // The current temperature and target temperature differences start to control the temperature of the PID algorithm. Rock_20220916
   #define PID_FUNCTIONAL_RANGE 10 // If the temperature difference between the target temperature and the actual temperature
                                   // is more than PID_FUNCTIONAL_RANGE then the PID will be shut off and the heater will be set to min/max.
 
@@ -1258,10 +1268,15 @@
 
 /**
  * Default Axis Steps Per Unit (linear=steps/mm, rotational=steps/°)
- * Override with M92
+ * Override with M92 (when enabled below)
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
 #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 409.50 }
+
+/**
+ * Enable support for M92. Disable to save ~530 bytes of flash (1400 more if using a display)
+ */
+#define EDITABLE_STEPS_PER_UNIT
 
 /**
  * Default Max Feed Rate (linear=mm/s, rotational=°/s)
@@ -1270,7 +1285,7 @@
  */
 #define DEFAULT_MAX_FEEDRATE          { 500, 500, 20, 25 }
 
-#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
+#define LIMITED_MAX_FR_EDITING          // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
   #define MAX_FEEDRATE_EDIT_VALUES    { 600, 600, 20, 50 } // ...or, set your own edit limits
 #endif
@@ -1611,11 +1626,11 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
- //#define NOZZLE_TO_PROBE_OFFSET { -2, 44.45, 0 }//前后安装bltouch
-//#define NOZZLE_TO_PROBE_OFFSET { 38, -9, 0 }//右边安装
-//#define NOZZLE_TO_PROBE_OFFSET { 0, -19, 0 }//前后安装bltouch
-//#define NOZZLE_TO_PROBE_OFFSET { -29.5, -11.3, 0 }//左边安装
-#define NOZZLE_TO_PROBE_OFFSET { -12.5, 26.5, 0 } //
+//#define NOZZLE_TO_PROBE_OFFSET { -2, 44.45, 0 }     // Install BLTouch behind
+//#define NOZZLE_TO_PROBE_OFFSET { 38, -9, 0 }        // Installation on the right
+//#define NOZZLE_TO_PROBE_OFFSET { 0, -19, 0 }        // Install BLTouch in front
+//#define NOZZLE_TO_PROBE_OFFSET { -29.5, -11.3, 0 }  // Installation on the left
+#define NOZZLE_TO_PROBE_OFFSET { -12.5, 26.5, 0 }
 
 // Enable and set to use a specific tool for probing. Disable to allow any tool.
 #define PROBING_TOOL 0
@@ -1705,7 +1720,6 @@
 #define Z_PROBE_ERROR_TOLERANCE     3 // (mm) Tolerance for early trigger (<= -probe.offset.z + ZPET)
 //#define Z_AFTER_PROBING           5 // (mm) Z position after probing is done
 
-// (Changed from -2 to -5)
 #define Z_PROBE_LOW_POINT          -5 // (mm) Farthest distance below the trigger-point to go before stopping
 
 // For M851 provide ranges for adjusting the X, Y, and Z probe offsets
@@ -2113,7 +2127,7 @@
 /**
  * Enable detailed logging of G28, G29, M48, etc.
  * Turn on with the command 'M111 S32'.
- * NOTE: Requires a lot of PROGMEM!
+ * NOTE: Requires a lot of flash!
  */
 //#define DEBUG_LEVELING_FEATURE
 
@@ -2408,7 +2422,7 @@
  */
 #define EEPROM_SETTINGS       // Persistent storage with M500 and M501
 //#define DISABLE_M503        // Saves ~2700 bytes of flash. Disable for release!
-#define EEPROM_CHITCHAT       // Give feedback on EEPROM commands. Disable to save PROGMEM.
+#define EEPROM_CHITCHAT       // Give feedback on EEPROM commands. Disable to save flash.
 #define EEPROM_BOOT_SILENT    // Keep M503 quiet and only give errors during first load
 #if ENABLED(EEPROM_SETTINGS)
   #define EEPROM_AUTO_INIT    // Init EEPROM automatically on any errors.
@@ -3082,6 +3096,11 @@
 //#define BTT_MINI_12864
 
 //
+// BEEZ MINI 12864 is an alias for FYSETC_MINI_12864_2_1. Type A/B. NeoPixel RGB Backlight.
+//
+//#define BEEZ_MINI_12864
+
+//
 // Factory display for Creality CR-10 / CR-7 / Ender-3
 // https://www.aliexpress.com/item/32833148327.html
 //
@@ -3099,24 +3118,19 @@
 #define OTA_FIRMWARE_UPDATE
 
 //
-// Creality V4.2.5 display. Creality board but retain the display.
-//
-#define RET6_12864_LCD
-
-//
 // Ender-2 OEM display, a variant of the MKS_MINI_12864
 //
 //#define ENDER2_STOCKDISPLAY
 
 //
-// ANET and Tronxy Graphical Controller
-//
-// Anet 128x64 full graphics lcd with rotary encoder as used on Anet A6
-// A clone of the RepRapDiscount full graphics display but with
-// different pins/wiring (see pins_ANET_10.h). Enable one of these.
+// ANET and Tronxy 128×64 Full Graphics Controller as used on Anet A6
 //
 //#define ANET_FULL_GRAPHICS_LCD
-//#define ANET_FULL_GRAPHICS_LCD_ALT_WIRING
+
+//
+// GUCOCO CTC 128×64 Full Graphics Controller as used on GUCOCO CTC A10S
+//
+//#define CTC_A10S_A13
 
 //
 // AZSMZ 12864 LCD with SD
