@@ -2088,7 +2088,7 @@
  * Commands to execute at the end of G29 probing.
  * Useful to retract or move the Z probe out of the way.
  */
-//#define Z_PROBE_END_SCRIPT "G1 Z10 F12000\nG1 X20 Y280"
+//#define EVENT_GCODE_AFTER_G29 "G1 Z10 F12000\nG1 X20 Y280"
 
 /**
  * Normally G28 leaves leveling disabled on completion. Enable one of
