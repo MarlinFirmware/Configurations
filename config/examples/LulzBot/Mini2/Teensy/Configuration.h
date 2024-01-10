@@ -1267,7 +1267,7 @@
 #define DEFAULT_AXIS_STEPS_PER_UNIT   { 200, 200, 200, 420 }
 
 /**
- * Enable support for M92. Disable to save ~530 bytes of flash (1400 more if using a display)
+ * Enable support for M92. Disable to save at least ~530 bytes of flash.
  */
 #define EDITABLE_STEPS_PER_UNIT
 
