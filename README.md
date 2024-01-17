@@ -41,7 +41,9 @@ Pre-tested Configurations for Marlin Firmware. Links below…
   1.1.9|([Browse](//github.com/MarlinFirmware/Configurations/tree/release-1.1.9))|([Download ZIP](//github.com/MarlinFirmware/Configurations/archive/release-1.1.9.zip))
 
 - **Development** branches are also maintained here.
-  - [bugfix-2.1.x](//github.com/MarlinFirmware/Configurations/tree/bugfix-2.1.x) contains unpublished features under development.
-  - [bugfix-2.0.x](//github.com/MarlinFirmware/Configurations/tree/bugfix-2.0.x) contains upcoming patches for Marlin 2.0.x.
-  - [import-2.1.x](//github.com/MarlinFirmware/Configurations/tree/import-2.1.x) is for new contributions. Submitted pull requests must be based on this branch.
-  - [import-2.0.x](//github.com/MarlinFirmware/Configurations/tree/import-2.0.x) is for patches to Marlin 2.0.x configurations.
+  Version|File Tree|Download|Notes
+  ---|---|---|---
+  bugfix-2.1.x|([Browse](//github.com/MarlinFirmware/Configurations/tree/bugfix-2.1.x))|([Download ZIP](//github.com/MarlinFirmware/Configurations/archive/bugfix-2.1.x.zip))|Contains unpublished features under development.
+  bugfix-2.0.x|([Browse](//github.com/MarlinFirmware/Configurations/tree/bugfix-2.0.x))|([Download ZIP](//github.com/MarlinFirmware/Configurations/archive/bugfix-2.0.x.zip))|Contains upcoming patches for Marlin 2.0.x.
+  import-2.1.x|([Browse](//github.com/MarlinFirmware/Configurations/tree/import-2.1.x))|([Download ZIP](//github.com/MarlinFirmware/Configurations/archive/import-2.1.x.zip))|New contributions. Submitted pull requests must be based on this branch.
+  import-2.0.x|([Browse](//github.com/MarlinFirmware/Configurations/tree/import-2.0.x))|([Download ZIP](//github.com/MarlinFirmware/Configurations/archive/import-2.0.x.zip))|Patches to Marlin 2.0.x configurations.
