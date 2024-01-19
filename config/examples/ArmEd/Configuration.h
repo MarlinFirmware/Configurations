@@ -1309,6 +1309,7 @@
   #define DEFAULT_XJERK  8.0
   #define DEFAULT_YJERK  8.0
   #define DEFAULT_ZJERK  0.4
+  #define DEFAULT_EJERK  1.5
   //#define DEFAULT_IJERK  0.3
   //#define DEFAULT_JJERK  0.3
   //#define DEFAULT_KJERK  0.3
@@ -1323,8 +1324,6 @@
     #define MAX_JERK_EDIT_VALUES { 20, 20, 0.6, 10 } // ...or, set your own edit limits
   #endif
 #endif
-
-#define DEFAULT_EJERK    1.5  // May be used by Linear Advance
 
 /**
  * Junction Deviation Factor
