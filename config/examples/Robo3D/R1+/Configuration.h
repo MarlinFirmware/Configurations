@@ -563,7 +563,7 @@
 #define TEMP_SENSOR_5 0
 #define TEMP_SENSOR_6 0
 #define TEMP_SENSOR_7 0
-#define TEMP_SENSOR_BED 1 // ncrmro
+#define TEMP_SENSOR_BED 1
 #define TEMP_SENSOR_PROBE 0
 #define TEMP_SENSOR_CHAMBER 0
 #define TEMP_SENSOR_COOLER 0
@@ -1245,7 +1245,7 @@
  * Override with M92 (when enabled below)
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 2560, 723.38 } // ncrmro
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 2560, 723.38 }
 
 /**
  * Enable support for M92. Disable to save at least ~530 bytes of flash.
@@ -1734,7 +1734,7 @@
 // WARNING: When motors turn off there is a chance of losing position accuracy!
 //#define DISABLE_X
 //#define DISABLE_Y
-#define DISABLE_Z // ncrmro
+#define DISABLE_Z
 //#define DISABLE_I
 //#define DISABLE_J
 //#define DISABLE_K
@@ -1753,9 +1753,9 @@
 // @section motion
 
 // Invert the stepper direction. Change (or reverse the motor connector) if an axis goes the wrong way.
-#define INVERT_X_DIR true // ncrmro
-#define INVERT_Y_DIR false // ncrmro
-#define INVERT_Z_DIR true // ncrmro
+#define INVERT_X_DIR true
+#define INVERT_Y_DIR false
+#define INVERT_Z_DIR true
 //#define INVERT_I_DIR false
 //#define INVERT_J_DIR false
 //#define INVERT_K_DIR false
@@ -1825,8 +1825,8 @@
 // @section geometry
 
 // The size of the printable area
-#define X_BED_SIZE 240 // ncrmro
-#define Y_BED_SIZE 254 // ncrmro
+#define X_BED_SIZE 240
+#define Y_BED_SIZE 254
 
 // Travel limits (linear=mm, rotational=°) after homing, corresponding to endstop positions.
 #define X_MIN_POS 0
@@ -1834,7 +1834,7 @@
 #define Z_MIN_POS 0
 #define X_MAX_POS X_BED_SIZE
 #define Y_MAX_POS Y_BED_SIZE
-#define Z_MAX_POS 240 // ncrmro
+#define Z_MAX_POS 240
 //#define I_MIN_POS 0
 //#define I_MAX_POS 50
 //#define J_MIN_POS 0
@@ -1858,7 +1858,7 @@
  */
 
 // Min software endstops constrain movement within minimum coordinate bounds
-#define MIN_SOFTWARE_ENDSTOPS false // ncrmro
+#define MIN_SOFTWARE_ENDSTOPS
 #if ENABLED(MIN_SOFTWARE_ENDSTOPS)
   #define MIN_SOFTWARE_ENDSTOP_X
   #define MIN_SOFTWARE_ENDSTOP_Y
@@ -1872,7 +1872,7 @@
 #endif
 
 // Max software endstops constrain movement within maximum coordinate bounds
-#define MAX_SOFTWARE_ENDSTOPS true // ncrmro
+#define MAX_SOFTWARE_ENDSTOPS
 #if ENABLED(MAX_SOFTWARE_ENDSTOPS)
   #define MAX_SOFTWARE_ENDSTOP_X
   #define MAX_SOFTWARE_ENDSTOP_Y
