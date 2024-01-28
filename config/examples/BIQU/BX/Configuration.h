@@ -3469,7 +3469,7 @@
 
   //#define DISABLE_ENCODER         // Disable the click encoder, if any
 
-  #define TOUCH_SCREEN_CALIBRATION
+  //#define TOUCH_SCREEN_CALIBRATION
 
   //#define TOUCH_CALIBRATION_X 12316
   //#define TOUCH_CALIBRATION_Y -8981
