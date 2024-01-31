@@ -886,7 +886,7 @@
     #define Z_MULTI_ENDSTOPS          // Other Z axes have their own endstops
   #endif
   #if ENABLED(Z_MULTI_ENDSTOPS)
-    #define Z2_STOP_PIN X_MAX_PIN     // Z2 endstop pin override
+    #define Z2_STOP_PIN Z_MAX_PIN     // Z2 endstop pin override
     #define Z2_ENDSTOP_ADJUSTMENT 0   // Z2 offset relative to Z endstop
   #endif
   #ifdef Z3_DRIVER_TYPE

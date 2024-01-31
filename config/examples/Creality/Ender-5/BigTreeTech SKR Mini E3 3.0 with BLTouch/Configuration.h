@@ -1318,7 +1318,6 @@
   #endif
 #endif
 
-#define ALLOW_LOW_EJERK
 /**
  * Junction Deviation Factor
  *
