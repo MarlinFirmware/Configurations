@@ -33,7 +33,6 @@
 
 
 #define STATUS_LOGO_X         0
-#define STATUS_LOGO_Y         8
 #define STATUS_LOGO_WIDTH     38
 
 const unsigned char status_logo_bmp[] PROGMEM = {
