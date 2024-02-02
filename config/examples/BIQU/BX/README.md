@@ -1,4 +1,4 @@
-# Biqu BX Configuration
+# BIQU BX Configuration
 
 In `Configuration.h` enable the `MOTHERBOARD BOARD_BTT_SKR_SE_BX_V3` option at the top to specify the BTT SKR SE BX V3.0 motherboard, otherwise the V2.0 board will be applied (slightly farther down).
 
