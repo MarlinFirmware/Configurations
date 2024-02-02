@@ -1684,7 +1684,7 @@
 //#define PROBE_OFFSET_XMIN -50   // (mm)
 //#define PROBE_OFFSET_XMAX  50   // (mm)
 //#define PROBE_OFFSET_YMIN -50   // (mm)
-//#define PROBE_OFFSET_YMAX  50   // (mm)
+#define PROBE_OFFSET_YMAX    60   // (mm)
 //#define PROBE_OFFSET_ZMIN -20   // (mm)
 //#define PROBE_OFFSET_ZMAX  20   // (mm)
 

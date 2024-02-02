@@ -2052,7 +2052,7 @@
 //#define AUTO_BED_LEVELING_LINEAR
 //#define AUTO_BED_LEVELING_BILINEAR
 //#define AUTO_BED_LEVELING_UBL   //TronxyX5S-2e enable with BLTOUCH
-//#define MESH_BED_LEVELING
+#define MESH_BED_LEVELING
 
 /**
  * Commands to execute at the end of G29 probing.
