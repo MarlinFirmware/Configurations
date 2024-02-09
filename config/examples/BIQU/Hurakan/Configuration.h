@@ -1838,11 +1838,11 @@
 // @section geometry
 
 // The size of the printable area
-#define X_BED_SIZE 233
+#define X_BED_SIZE 231 // 235
 #define Y_BED_SIZE 235
 
 // Travel limits (linear=mm, rotational=°) after homing, corresponding to endstop positions.
-#define X_MIN_POS 2
+#define X_MIN_POS 0
 #define Y_MIN_POS -2
 #define Z_MIN_POS 0
 #define X_MAX_POS 245
