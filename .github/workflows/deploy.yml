@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Check out
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     # For each directory containing a changed config file, copy the .h files and build the code:
     - name: Deploy bugfix-2.1.x
