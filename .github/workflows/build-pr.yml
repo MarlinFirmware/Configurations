@@ -22,7 +22,7 @@ jobs:
 
     steps:
     - name: Check out the PR
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     # Get the list of directories containing changed config files:
     - name: Get changed directories
@@ -44,7 +44,7 @@ jobs:
         echo -e "DIRS<<EOF\n$DIRS\nEOF" >>$GITHUB_ENV
 
     - name: Cache pip
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pip
         key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
@@ -52,15 +52,15 @@ jobs:
           ${{ runner.os }}-pip-
 
     - name: Cache PlatformIO
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: ~/.platformio
         key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
 
-    - name: Select Python 3.7
-      uses: actions/setup-python@v3
+    - name: Select Python 3.9
+      uses: actions/setup-python@v5
       with:
-        python-version: '3.7' # Version range or exact version of a Python version to use, using semvers version range syntax.
+        python-version: '3.9' # Version range or exact version of a Python version to use, using semvers version range syntax.
         architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
 
     - name: Install PlatformIO
