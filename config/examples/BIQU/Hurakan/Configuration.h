@@ -1838,11 +1838,11 @@
 // @section geometry
 
 // The size of the printable area
-#define X_BED_SIZE 233
+#define X_BED_SIZE 231 // 235
 #define Y_BED_SIZE 235
 
 // Travel limits (linear=mm, rotational=°) after homing, corresponding to endstop positions.
-#define X_MIN_POS 2
+#define X_MIN_POS 0
 #define Y_MIN_POS -2
 #define Z_MIN_POS 0
 #define X_MAX_POS 245
@@ -3589,14 +3589,14 @@
   #define NEOPIXEL2_TYPE          NEO_GRB
   #define NEOPIXEL2_PIN               PD0
   #define NEOPIXEL_PIXELS               3 // Number of LEDs in the strip. (Longest strip when NEOPIXEL2_SEPARATE is disabled.)
-  #define NEOPIXEL_IS_SEQUENTIAL          // Sequential display for temperature change - LED by LED. Disable to change all LEDs at once.
+  //#define NEOPIXEL_IS_SEQUENTIAL        // Sequential display for temperature change - LED by LED. Disable to change all LEDs at once.
   #define NEOPIXEL_BRIGHTNESS         255 // Initial brightness (0-255)
   #define NEOPIXEL_STARTUP_TEST           // Cycle through colors at startup
 
   // Support for second Adafruit NeoPixel LED driver controlled with M150 S1 ...
   #define NEOPIXEL2_SEPARATE
   #if ENABLED(NEOPIXEL2_SEPARATE)
-    #define NEOPIXEL2_PIXELS           10 // Number of LEDs in the second strip
+    #define NEOPIXEL2_PIXELS            2 // Number of LEDs in the second strip
     #define NEOPIXEL2_BRIGHTNESS      255 // Initial brightness (0-255)
     #define NEOPIXEL2_STARTUP_TEST        // Cycle through colors at startup
     #define NEOPIXEL_M150_DEFAULT      -1 // Default strip for M150 without 'S'. Use -1 to set all by default.
