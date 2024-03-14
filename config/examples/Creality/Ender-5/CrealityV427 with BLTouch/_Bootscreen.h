@@ -1,6 +1,6 @@
 /**
  * Marlin 3D Printer Firmware
- * Copyright (c) 2020 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
+ * Copyright (c) 2024 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
  *
  * Based on Sprinter and grbl.
  * Copyright (c) 2011 Camiel Gubbels / Erik van der Zalm
@@ -24,7 +24,7 @@
  * Custom Boot Screen bitmap
  *
  * Place this file in the root with your configuration files
- * and enable SHOW_CUSTOM_BOOTSCREEN in Configuration.h.
+ * and enable SHOW_CUSTOM_BOOTSCREEN in Configuration_adv.h.
  *
  * Use the Marlin Bitmap Converter to make your own:
  * https://marlinfw.org/tools/u8glib/converter.html
