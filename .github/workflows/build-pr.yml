@@ -83,6 +83,8 @@ jobs:
           # Copy all .h files from the directory into the Marlin subfolder
           echo "Building Configurations in $dir ..."
           cp ../"$dir"/*.h Marlin/
+          # Suppress fatal warnings
+          echo -e "\n#define NO_CONTROLLER_CUSTOM_WIRING_WARNING" >> Marlin/Configuration.h
 
           # Strip out #error lines so it can build
           sed -i~ -e "20,30{/#error/d}" "Marlin/Configuration.h"
