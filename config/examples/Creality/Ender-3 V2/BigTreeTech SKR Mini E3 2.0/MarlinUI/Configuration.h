@@ -71,6 +71,7 @@
 // Choose the name from boards.h that matches your setup
 #ifndef MOTHERBOARD
   #define MOTHERBOARD BOARD_BTT_SKR_MINI_E3_V2_0
+  //#define NO_CONTROLLER_CUSTOM_WIRING_WARNING
 #endif
 
 /**
