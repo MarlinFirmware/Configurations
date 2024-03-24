@@ -71,7 +71,7 @@
 // Choose the name from boards.h that matches your setup
 #ifndef MOTHERBOARD
   #define MOTHERBOARD BOARD_MINIRAMBO
-  #define MINIRAMBO_CNC // Flag for CNC-specific features
+  #define BOARD_INFO_NAME "Mini RAMBo CNC"
 #endif
 
 /**
