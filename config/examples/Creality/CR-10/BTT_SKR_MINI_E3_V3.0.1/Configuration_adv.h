@@ -3439,7 +3439,7 @@
   // EDITED: If sensorless homing is disabled AND motherboard diag jumpers (on X, Y, Z) are 
   // removed then enable the definition below to disable warning message on needing
   // to remove motherboard diag jumpers.
-  #define DIAG_JUMPERS_REMOVED
+  //#define DIAG_JUMPERS_REMOVED
 
   #if ANY(SENSORLESS_HOMING, SENSORLESS_PROBING)
     // TMC2209: 0...255. TMC2130: -64...63
