@@ -21,7 +21,7 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "Creality/CR-10/BTT_SKR_MINI_E3_V3.0.1/"
+#define CONFIG_EXAMPLES_DIR "Creality/CR-10/BTT_SKR_MINI_E3_V3.0.1"
 
 /**
  * Configuration_adv.h
@@ -549,10 +549,10 @@
  * Hotend Idle Timeout
  * Prevent filament in the nozzle from charring and causing a critical jam.
  */
-#define HOTEND_IDLE_TIMEOUT // EDITED: enabled
+#define HOTEND_IDLE_TIMEOUT                 // EDITED: enabled
 #if ENABLED(HOTEND_IDLE_TIMEOUT)
-  #define HOTEND_IDLE_TIMEOUT_SEC (5*60)    // (seconds) Time without extruder movement to trigger protection
-  #define HOTEND_IDLE_MIN_TRIGGER   180     // (°C) Minimum temperature to enable hotend protection
+  #define HOTEND_IDLE_TIMEOUT_SEC (10*60)   // EDITED: set to 10 mins, default: 5; (seconds) Time without extruder movement to trigger protection
+  #define HOTEND_IDLE_MIN_TRIGGER   (EXTRUDE_MINTEMP - 10)     // EDITED: set to mintemp-10, default: 180; (°C) Minimum temperature to enable hotend protection
   #define HOTEND_IDLE_NOZZLE_TARGET   0     // (°C) Safe temperature for the nozzle after timeout
   #define HOTEND_IDLE_BED_TARGET      0     // (°C) Safe temperature for the bed after timeout
 #endif
@@ -575,7 +575,7 @@
  * The fan turns on automatically whenever any driver is enabled and turns
  * off (or reduces to idle speed) shortly after drivers are turned off.
  */
-#define USE_CONTROLLER_FAN // EDITED: enabled
+#define USE_CONTROLLER_FAN                  // EDITED: enabled
 #if ENABLED(USE_CONTROLLER_FAN)
   #define CONTROLLER_FAN_PIN FAN2_PIN       // EDITED: FAN2_PIN is used by the BTT board for controller fans, stock CR10 default: -1; Set a custom pin for the controller fan
   //#define CONTROLLER_FAN2_PIN -1          // Set a custom pin for second controller fan
@@ -958,7 +958,7 @@
 
   // Safety: The probe needs time to recognize the command.
   //         Minimum command delay (ms). Enable and increase if needed.
-  #define BLTOUCH_DELAY 300 // EDITED: enabled and set to 300, default: 500
+  //#define BLTOUCH_DELAY 300 // EDITED: enabled and set to 300, default: 500
 
   /**
    * Settings for BLTOUCH Classic 1.2, 1.3 or BLTouch Smart 1.0, 2.0, 2.2, 3.0, 3.1, and most clones:
@@ -984,10 +984,10 @@
    * differs, a mode set EEPROM write will be completed at initialization.
    * Use the option below to force an EEPROM write to a V3.1 probe regardless.
    */
-  //#define BLTOUCH_SET_5V_MODE // EDITED: disabled
+  //#define BLTOUCH_SET_5V_MODE     // EDITED: disabled
 
   // Safety: Enable voltage mode settings in the LCD menu.
-  #define BLTOUCH_LCD_VOLTAGE_MENU // EDITED: enabled
+  #define BLTOUCH_LCD_VOLTAGE_MENU  // EDITED: enabled
 
   /**
    * Safety: Activate if connecting a probe with an unknown voltage mode.
@@ -1005,13 +1005,13 @@
    *
    * Set the default state here, change with 'M401 S' or UI, use M500 to save, M502 to reset.
    */
-  #define BLTOUCH_HS_MODE true // EDITED: enabled, disable if probe often fails in high speed mode or if you dont care about probing the bed faster.
+  #define BLTOUCH_HS_MODE true    // EDITED: enabled, disable if probe often fails in high speed mode or if you dont care about probing the bed faster.
 
   #ifdef BLTOUCH_HS_MODE
     // The probe Z offset (M851 Z) is the height at which the probe triggers.
     // This must be large enough to keep the probe pin off the bed and prevent
     // it from snagging on the bed clips.
-    #define BLTOUCH_HS_EXTRA_CLEARANCE    4 // EDITED: since probe doesnt stow in HS mode you need to account for extra clearance to clear any bed clips, default is: 7. Extra Z Clearance
+    #define BLTOUCH_HS_EXTRA_CLEARANCE    4 // EDITED: since probe doesnt stow in HS mode you need to account for extra clearance to clear any bed clips, default is: 7; Extra Z Clearance
   #endif
 
 #endif // BLTOUCH
@@ -1084,7 +1084,7 @@
 //
 // Add the G35 command to read bed corners to help adjust screws. Requires a bed probe.
 //
-#define ASSISTED_TRAMMING // EDITED: enable if you use a probe and want to use it to adjust bed screws
+//#define ASSISTED_TRAMMING // EDITED: enable if you use a probe and want to use it to adjust bed screws
 #if ENABLED(ASSISTED_TRAMMING)
 
   // Define from 3 to 9 points to probe.
@@ -1400,7 +1400,7 @@
  * vibration and surface artifacts. The algorithm adapts to provide the best possible step smoothing at the
  * lowest stepping frequencies.
  */
-#define ADAPTIVE_STEP_SMOOTHING // EDITED: enabled
+//#define ADAPTIVE_STEP_SMOOTHING // EDITED: disabled, workaround to fix interrupt handling;
 
 /**
  * Custom Microstepping
@@ -1487,8 +1487,8 @@
 // Change values more rapidly when the encoder is rotated faster
 #define ENCODER_RATE_MULTIPLIER
 #if ENABLED(ENCODER_RATE_MULTIPLIER)
-  #define ENCODER_10X_STEPS_PER_SEC   30  // (steps/s) Encoder rate for 10x speed
-  #define ENCODER_100X_STEPS_PER_SEC  80  // (steps/s) Encoder rate for 100x speed
+  #define ENCODER_10X_STEPS_PER_SEC   80  // (steps/s) Encoder rate for 10x speed
+  #define ENCODER_100X_STEPS_PER_SEC  130  // (steps/s) Encoder rate for 100x speed
 #endif
 
 // Play a beep when the feedrate is changed from the Status Screen
@@ -1563,7 +1563,7 @@
   //#define TURBO_BACK_MENU_ITEM
 
   // Insert a menu for preheating at the top level to allow for quick access
-  //#define PREHEAT_SHORTCUT_MENU_ITEM
+  #define PREHEAT_SHORTCUT_MENU_ITEM // EDITED: enabled
 
   // Add Configuration > Debug Menu > Endstop Test for endstop/probe/runout testing
   #define LCD_ENDSTOP_TEST // EDITED: enabled, to test endstops.
@@ -1596,7 +1596,7 @@
   #endif
 
   #if HAS_MARLINUI_U8GLIB
-    //#define CUSTOM_STATUS_SCREEN_IMAGE    // EDITED: disabled, enable if you want to show the custom screen; Show the bitmap in Marlin/_Statusscreen.h on the status screen.
+    //#define CUSTOM_STATUS_SCREEN_IMAGE    // EDITED: disabled, clutter; Show the bitmap in Marlin/_Statusscreen.h on the status screen.
   #endif
 
   #define SOUND_MENU_ITEM     // EDITED: enabled, allows you to mute the screen; Add a mute option to the LCD menu
@@ -1610,16 +1610,16 @@
   //#define LCD_TIMEOUT_TO_STATUS 15000   // (ms)
 
   // Scroll a longer status message into view
-  #define STATUS_MESSAGE_SCROLLING
+  #define STATUS_MESSAGE_SCROLLING // EDITED: enabled
 
   // Apply a timeout to low-priority status messages
-  //#define STATUS_MESSAGE_TIMEOUT_SEC 30 // (seconds)
+  #define STATUS_MESSAGE_TIMEOUT_SEC 30 // EDITED: enabled; (seconds) 
 
   // On the Info Screen, display XY with one decimal place when possible
   //#define LCD_DECIMAL_SMALL_XY
 
   // Show the E position (filament used) during printing
-  //#define LCD_SHOW_E_TOTAL
+  #define LCD_SHOW_E_TOTAL // EDITED: enabled;
 
   // Display a negative temperature instead of "err"
   //#define SHOW_TEMPERATURE_BELOW_ZERO
@@ -1662,12 +1662,12 @@
 #endif
 
 // Add 'M73' to set print job progress, overrides Marlin's built-in estimate
-#define SET_PROGRESS_MANUALLY // EDITED: enabled, requirement for TFT35.
+#define SET_PROGRESS_MANUALLY             // EDITED: enabled, for TFT35/octopi.
 #if ENABLED(SET_PROGRESS_MANUALLY)
   #define SET_PROGRESS_PERCENT            // Add 'P' parameter to set percentage done
   #define SET_REMAINING_TIME              // Add 'R' parameter to set remaining time
   //#define SET_INTERACTION_TIME          // Add 'C' parameter to set time until next filament change or other user interaction
-  #define M73_REPORT                      // EDITED: enabled, requirement for TFT35; Report M73 values to host
+  #define M73_REPORT                      // EDITED: enabled, for TFT35/octopi; Report M73 values to host
   #if ALL(M73_REPORT, HAS_MEDIA)
     #define M73_REPORT_SD_ONLY            // Report only when printing from SD
   #endif
@@ -1819,13 +1819,13 @@
 
   // Allow international symbols in long filenames. To display correctly, the
   // LCD's font must contain the characters. Check your selected LCD language.
-  #define UTF_FILENAME_SUPPORT            // EDITED: enabled, for TFT35;
+  #define UTF_FILENAME_SUPPORT            // EDITED: enabled;
 
-  #define LONG_FILENAME_HOST_SUPPORT      // EDITED: enabled, for TFT35; Get the long filename of a file/folder with 'M33 <dosname>' and list long filenames with 'M20 L'
+  #define LONG_FILENAME_HOST_SUPPORT      // EDITED: enabled; Get the long filename of a file/folder with 'M33 <dosname>' and list long filenames with 'M20 L'
   //#define LONG_FILENAME_WRITE_SUPPORT   // Create / delete files with long filenames via M28, M30, and Binary Transfer Protocol
   //#define M20_TIMESTAMP_SUPPORT         // Include timestamps by adding the 'T' flag to M20 commands
 
-  #define SCROLL_LONG_FILENAMES           // EDITED: enabled, for TFT35; Scroll long filenames in the SD card menu
+  #define SCROLL_LONG_FILENAMES           // EDITED: enabled; Scroll long filenames in the SD card menu
 
   //#define SD_ABORT_NO_COOLDOWN          // Leave the heaters on after Stop Print (not recommended!)
 
@@ -1834,14 +1834,14 @@
    * This feature is enabled with 'M540 S1' or from the LCD menu.
    * Endstops must be activated for this option to work.
    */
-  //#define SD_ABORT_ON_ENDSTOP_HIT
+  #define SD_ABORT_ON_ENDSTOP_HIT
   #if ENABLED(SD_ABORT_ON_ENDSTOP_HIT)
-    //#define SD_ABORT_ON_ENDSTOP_HIT_GCODE "G28XY" // G-code to run on endstop hit (e.g., "G28XY" or "G27")
+    #define SD_ABORT_ON_ENDSTOP_HIT_GCODE "G27" // EDITED: enabled and set to G27; G-code to run on endstop hit (e.g., "G28XY" or "G27")
   #endif
 
   //#define SD_REPRINT_LAST_SELECTED_FILE // On print completion open the LCD Menu and select the same file
 
-  #define AUTO_REPORT_SD_STATUS           // EDITED: enabled, for TFT35; Auto-report media status with 'M27 S<seconds>'
+  #define AUTO_REPORT_SD_STATUS           // EDITED: enabled, for TFT35/octopi; Auto-report media status with 'M27 S<seconds>'
 
   /**
    * Support for USB thumb drives using an Arduino USB Host Shield or
@@ -1926,7 +1926,7 @@
    *
    * :[ 'LCD', 'ONBOARD', 'CUSTOM_CABLE' ]
    */
-  #define SDCARD_CONNECTION ONBOARD //  EDITED: enabled and set to ONBOARD for TFT35
+  #define SDCARD_CONNECTION ONBOARD // EDITED: enabled
 
   // Enable if SD detect is rendered useless (e.g., by using an SD extender)
   //#define NO_SD_DETECT
@@ -2021,13 +2021,13 @@
   #define STATUS_CHAMBER_ANIM         // Use a second bitmap to indicate chamber heating
   //#define STATUS_CUTTER_ANIM        // Use a second bitmap to indicate spindle / laser active
   //#define STATUS_COOLER_ANIM        // Use a second bitmap to indicate laser cooling
-  //#define STATUS_FLOWMETER_ANIM     // Use multiple bitmaps to indicate coolant flow
+  #define STATUS_FLOWMETER_ANIM       // EDITED: enabled; Use multiple bitmaps to indicate coolant flow
   //#define STATUS_ALT_BED_BITMAP     // Use the alternative bed bitmap
   //#define STATUS_ALT_FAN_BITMAP     // Use the alternative fan bitmap
-  //#define STATUS_FAN_FRAMES 3       // :[0,1,2,3,4] Number of fan animation frames
+  #define STATUS_FAN_FRAMES 4         // EDITED: enabled; :[0,1,2,3,4] Number of fan animation frames
 
   // Only one STATUS_HEAT_* option can be enabled
-  //#define STATUS_HEAT_PERCENT       // Show heating in a progress bar
+  #define STATUS_HEAT_PERCENT         // EDITED: enabled; Show heating in a progress bar
   //#define STATUS_HEAT_POWER         // Show heater output power as a vertical bar
 
   // Frivolous Game Options
@@ -2337,7 +2337,7 @@
   #if ENABLED(DISTINCT_E_FACTORS)
     #define ADVANCE_K { 0.0 }     // (mm) Compression length per 1mm/s extruder speed, per extruder
   #else
-    #define ADVANCE_K 0.39         // EDITED: my value, use default on first run: 0.22; (mm) Compression length applying to all extruders
+    #define ADVANCE_K 0.39         // EDITED: my value, use default on first run: 0.0; (mm) Compression length applying to all extruders
   #endif
   //#define ADVANCE_K_EXTRA       // Add a second linear advance constant, configurable with M900 L.
   //#define LA_DEBUG              // Print debug information to serial during operation. Disable for production use.
@@ -2421,7 +2421,7 @@
  * Repeatedly attempt G29 leveling until it succeeds.
  * Stop after G29_MAX_RETRIES attempts.
  */
-//#define G29_RETRY_AND_RECOVER
+//#define G29_RETRY_AND_RECOVER // EDITED: disabled for UBL;
 #if ENABLED(G29_RETRY_AND_RECOVER)
   #define G29_MAX_RETRIES 3
   #define G29_HALT_ON_FAILURE
@@ -2539,7 +2539,7 @@
  * less step aliasing by calculating all motions in advance.
  * Preparing your G-code: https://github.com/colinrgodsey/step-daemon
  */
-#define DIRECT_STEPPING // EDITED: enabled, check the github above for usage. Disable if you print directly from SD because you cant use it.
+//#define DIRECT_STEPPING // EDITED: choose between LIN_ADVANCED and this. check the github above for usage. Disable if you print directly from SD because you cant use it.
 
 /**
  * G38 Probe Target
@@ -2557,7 +2557,7 @@
 // @section motion
 
 // Moves (or segments) with fewer steps than this will be joined with the next move
-#define MIN_STEPS_PER_SEGMENT 6
+#define MIN_STEPS_PER_SEGMENT 4 // EDITED: set to 4, increase little movements accuracy, default: 6;
 
 /**
  * Minimum delay before and after setting the stepper DIR (in ns)
@@ -2626,7 +2626,7 @@
 
 // The ASCII buffer for serial input
 #define MAX_CMD_SIZE 96
-#define BUFSIZE 4
+#define BUFSIZE 16 // EDITED: increase buffer for octoprint, default: 4;
 
 // Transmission to Host Buffer Size
 // To save 386 bytes of flash (and TX_BUFFER_SIZE+3 bytes of RAM) set to 0.
@@ -2635,7 +2635,7 @@
 // For debug-echo: 128 bytes for the optimal speed.
 // Other output doesn't need to be that speedy.
 // :[0, 2, 4, 8, 16, 32, 64, 128, 256]
-#define TX_BUFFER_SIZE 0
+#define TX_BUFFER_SIZE 64 // EDITED: increase buffer for octoprint, default: 0;
 
 // Host Receive Buffer Size
 // Without XON/XOFF flow control (see SERIAL_XON_XOFF below) 32 bytes should be enough.
@@ -2663,7 +2663,7 @@
 // Dump an error to the serial port if the serial receive buffer overflows.
 // If you see these errors, increase the RX_BUFFER_SIZE value.
 // Not supported on all platforms.
-//#define RX_BUFFER_MONITOR
+//#define RX_BUFFER_MONITOR // EDITED: disabled
 
 /**
  * Emergency Command Parser
@@ -2673,7 +2673,7 @@
  * Currently handles M108, M112, M410, M876
  * NOTE: Not yet implemented for all platforms.
  */
-#define EMERGENCY_PARSER // EDITED: enabled for TFT35
+#define EMERGENCY_PARSER // EDITED: enabled
 
 /**
  * Realtime Reporting (requires EMERGENCY_PARSER)
@@ -2704,14 +2704,14 @@
 //#define NO_TIMEOUTS 1000 // (ms)
 
 // Some clients will have this feature soon. This could make the NO_TIMEOUTS unnecessary.
-#define ADVANCED_OK // EDITED: enabled for TFT35
+#define ADVANCED_OK // EDITED: enabled for TFT35/octopi
 
 // Printrun may have trouble receiving long strings all at once.
 // This option inserts short delays between lines of serial output.
 #define SERIAL_OVERRUN_PROTECTION
 
 // For serial echo, the number of digits after the decimal point
-#define SERIAL_FLOAT_PRECISION 4 // EDITED: enabled for TFT35
+#define SERIAL_FLOAT_PRECISION 4 // EDITED: enabled for TFT35/octopi
 
 /**
  * This feature is EXPERIMENTAL so use with caution and test thoroughly.
@@ -2758,20 +2758,20 @@
  *
  * Note that M207 / M208 / M209 settings are saved to EEPROM.
  */
-//#define FWRETRACT
+//#define FWRETRACT // EDITED: enabled
 #if ENABLED(FWRETRACT)
-  #define FWRETRACT_AUTORETRACT             // Override slicer retractions
+  //#define FWRETRACT_AUTORETRACT             // EDITED: disabled, use slicer retract; Override slicer retractions
   #if ENABLED(FWRETRACT_AUTORETRACT)
     #define MIN_AUTORETRACT             0.1 // (mm) Don't convert E moves under this length
     #define MAX_AUTORETRACT            10.0 // (mm) Don't convert E moves over this length
   #endif
-  #define RETRACT_LENGTH                3   // (mm) Default retract length (positive value)
+  #define RETRACT_LENGTH              3.5   // EDITED: default: 3; (mm) Default retract length (positive value)
   #define RETRACT_LENGTH_SWAP          13   // (mm) Default swap retract length (positive value)
-  #define RETRACT_FEEDRATE             45   // (mm/s) Default feedrate for retracting
-  #define RETRACT_ZRAISE                0   // (mm) Default retract Z-raise
+  #define RETRACT_FEEDRATE             80   // EDITED: default: 45;(mm/s) Default feedrate for retracting
+  #define RETRACT_ZRAISE              0.2   // EDITED: default: 0; (mm) Default retract Z-raise
   #define RETRACT_RECOVER_LENGTH        0   // (mm) Default additional recover length (added to retract length on recover)
   #define RETRACT_RECOVER_LENGTH_SWAP   0   // (mm) Default additional swap recover length (added to retract length on recover from toolchange)
-  #define RETRACT_RECOVER_FEEDRATE      8   // (mm/s) Default feedrate for recovering from retraction
+  #define RETRACT_RECOVER_FEEDRATE     80   // EDITED: default: 8; (mm/s) Default feedrate for recovering from retraction
   #define RETRACT_RECOVER_FEEDRATE_SWAP 8   // (mm/s) Default feedrate for recovering from swap retraction
   #if ENABLED(MIXING_EXTRUDER)
     //#define RETRACT_SYNC_MIXING           // Retract and restore all mixing steppers simultaneously
@@ -2906,7 +2906,7 @@
  *
  * Enable PARK_HEAD_ON_PAUSE to add the G-code M125 Pause and Park.
  */
-#define ADVANCED_PAUSE_FEATURE
+#define ADVANCED_PAUSE_FEATURE // EDITED: enabled
 #if ENABLED(ADVANCED_PAUSE_FEATURE)
   #define PAUSE_PARK_RETRACT_FEEDRATE         60  // (mm/s) Initial retract feedrate.
   #define PAUSE_PARK_RETRACT_LENGTH            4  // (mm) Initial retract.
@@ -3032,7 +3032,7 @@
 
   #if AXIS_IS_TMC_CONFIG(Z)
     #define Z_CURRENT       580 // EDITED
-    #define Z_CURRENT_HOME  (Y_CURRENT/2) // EDITED
+    #define Z_CURRENT_HOME  Z_CURRENT
     #define Z_MICROSTEPS     16
     #define Z_RSENSE          0.11
     #define Z_CHAIN_POS      -1
@@ -3131,7 +3131,7 @@
   #endif
 
   #if AXIS_IS_TMC_CONFIG(E0)
-    #define E0_CURRENT      650 // EDITED
+    #define E0_CURRENT      700 // EDITED
     #define E0_MICROSTEPS    16
     #define E0_RSENSE         0.11
     #define E0_CHAIN_POS     -1
@@ -3366,7 +3366,7 @@
    * M912 - Clear stepper driver overtemperature pre-warn condition flag.
    * M122 - Report driver parameters (Requires TMC_DEBUG)
    */
-  //#define MONITOR_DRIVER_STATUS
+  //#define MONITOR_DRIVER_STATUS // EDITED: disabled;
 
   #if ENABLED(MONITOR_DRIVER_STATUS)
     #define CURRENT_STEP_DOWN     50  // [mA]
@@ -3383,7 +3383,7 @@
    * STEALTHCHOP_(XY|Z|E) must be enabled to use HYBRID_THRESHOLD.
    * M913 X/Y/Z/E to live tune the setting
    */
-  #define HYBRID_THRESHOLD // EDITED: enabled hybrid threshold, this will make the stepper driver switch to spreadCycle when stepper speed is over HYBRID_THRESHOLD, which in turn will make the printer louder during movements. If you experience any weird noises while printing it is probably due to this feature being enabled. Disable if you want the printer to always run quiet.
+  //#define HYBRID_THRESHOLD // EDITED: disabled
 
   #define X_HYBRID_THRESHOLD     165  // EDITED: default: 100; [mm/s]
   #define X2_HYBRID_THRESHOLD    165  // EDITED: default: 100; 
@@ -3439,7 +3439,13 @@
   // EDITED: If sensorless homing is disabled AND motherboard diag jumpers (on X, Y, Z) are 
   // removed then enable the definition below to disable warning message on needing
   // to remove motherboard diag jumpers.
-  //#define DIAG_JUMPERS_REMOVED
+  #define DIAG_JUMPERS_REMOVED
+
+  #if ENABLED(DIAG_JUMPERS_REMOVED)
+    #if ANY(SENSORLESS_HOMING, SENSORLESS_PROBING)
+      #error "You can't use both SENSORLESS_HOMING/SENSORLESS_PROBING and DIAG_JUMPERS_REMOVED!"
+    #endif
+  #endif
 
   #if ANY(SENSORLESS_HOMING, SENSORLESS_PROBING)
     // TMC2209: 0...255. TMC2130: -64...63
@@ -3484,7 +3490,7 @@
    * Enable M122 debugging command for TMC stepper drivers.
    * M122 S0/1 will enable continuous reporting.
    */
-  #define TMC_DEBUG // EDITED: enabled;
+  //#define TMC_DEBUG // EDITED: disabled;
 
   /**
    * You can set your own advanced settings by filling in predefined functions.
@@ -3926,7 +3932,7 @@
 /**
  * Extra options for the M114 "Current Position" report
  */
-#define M114_DETAIL           // EDITED: enabled for TFT35; Use 'M114` for details to check planner calculations
+#define M114_DETAIL           // EDITED: enabled for TFT35/octopi; Use 'M114` for details to check planner calculations
 //#define M114_REALTIME       // Real current position based on forward kinematics
 //#define M114_LEGACY         // M114 used to synchronize on every call. Enable if needed.
 
@@ -3936,7 +3942,7 @@
  */
 //#define AUTO_REPORT_FANS
 
-#define REPORT_FAN_CHANGE     // EDITED: enabled for TFT35; Report the new fan speed when changed by M106 (and others)
+#define REPORT_FAN_CHANGE     // EDITED: enabled for TFT35/octopi; Report the new fan speed when changed by M106 (and others)
 
 /**
  * Auto-report temperatures with M155 S<seconds>
@@ -3949,7 +3955,7 @@
 /**
  * Auto-report position with M154 S<seconds>
  */
-#define AUTO_REPORT_POSITION // EDITED: enabled for TFT35;
+#define AUTO_REPORT_POSITION // EDITED: enabled for TFT35/octopi;
 #if ENABLED(AUTO_REPORT_POSITION)
   //#define AUTO_REPORT_REAL_POSITION // Auto-report the real position
 #endif
@@ -3963,7 +3969,7 @@
   // Include capabilities in M115 output
   #define EXTENDED_CAPABILITIES_REPORT
   #if ENABLED(EXTENDED_CAPABILITIES_REPORT)
-    #define M115_GEOMETRY_REPORT // EDITED: enabled for TFT35;
+    #define M115_GEOMETRY_REPORT // EDITED: enabled for TFT35/octopi;
   #endif
 #endif
 
@@ -4008,12 +4014,12 @@
  * workspace offsets to slightly optimize performance.
  * G92 will revert to its behavior from Marlin 1.0.
  */
-//#define NO_WORKSPACE_OFFSETS // EDITED: disabled;
+#define NO_WORKSPACE_OFFSETS // EDITED: enabled;
 
 /**
  * Disable M206 and M428 if you don't need home offsets.
  */
-//#define NO_HOME_OFFSETS
+#define NO_HOME_OFFSETS // EDITED: enabled, dont need home offsets because we're homing in the middle of the bed;
 
 /**
  * CNC G-code options
@@ -4168,12 +4174,12 @@
  * Host Prompt Support enables Marlin to use the host for user prompts so
  * filament runout and other processes can be managed from the host side.
  */
-#define HOST_ACTION_COMMANDS // EDITED: enabled for TFT35;
+#define HOST_ACTION_COMMANDS // EDITED: enabled for TFT35/octopi;
 #if ENABLED(HOST_ACTION_COMMANDS)
   //#define HOST_PAUSE_M76                // Tell the host to pause in response to M76
-  #define HOST_PROMPT_SUPPORT             // EDITED: enabled for TFT35; Initiate host prompts to get user feedback
+  #define HOST_PROMPT_SUPPORT             // EDITED: enabled for TFT35/octopi; Initiate host prompts to get user feedback
   #if ENABLED(HOST_PROMPT_SUPPORT)
-    #define HOST_STATUS_NOTIFICATIONS     // EDITED: enabled for TFT35; Send some status messages to the host as notifications
+    #define HOST_STATUS_NOTIFICATIONS     // EDITED: enabled for TFT35/octopi; Send some status messages to the host as notifications
   #endif
   //#define HOST_START_MENU_ITEM          // Add a menu item that tells the host to start
   //#define HOST_SHUTDOWN_MENU_ITEM       // Add a menu item that tells the host to shut down
@@ -4186,7 +4192,7 @@
  *
  * Implement M486 to allow Marlin to skip objects
  */
-//#define CANCEL_OBJECTS
+#define CANCEL_OBJECTS // EDITED: enabled
 #if ENABLED(CANCEL_OBJECTS)
   #define CANCEL_OBJECTS_REPORTING // Emit the current object as a status message
 #endif
@@ -4301,15 +4307,15 @@
  * Implemented as G34 because M915 is deprecated.
  * @section calibrate
  */
-#define MECHANICAL_GANTRY_CALIBRATION // EDITED: enable if you want to use;
+//#define MECHANICAL_GANTRY_CALIBRATION // EDITED: enable if you want to use;
 #if ENABLED(MECHANICAL_GANTRY_CALIBRATION)
   #define GANTRY_CALIBRATION_CURRENT          600     // Default calibration current in ma
   #define GANTRY_CALIBRATION_EXTRA_HEIGHT      15     // Extra distance in mm past Z_###_POS to move
   #define GANTRY_CALIBRATION_FEEDRATE         500     // Feedrate for correction move
   //#define GANTRY_CALIBRATION_TO_MIN                 // Enable to calibrate Z in the MIN direction
 
-  #define GANTRY_CALIBRATION_SAFE_POSITION XY_CENTER // EDITED: enable if you want to use; Safe position for nozzle
-  #define GANTRY_CALIBRATION_XY_PARK_FEEDRATE 3000  // EDITED: enable if you want to use; XY Park Feedrate - MMM
+  #define GANTRY_CALIBRATION_SAFE_POSITION XY_CENTER // EDITED: enabled, needed for MECHANICAL_GANTRY_CALIBRATION; Safe position for nozzle
+  #define GANTRY_CALIBRATION_XY_PARK_FEEDRATE 3000  // EDITED: enabled, needed for MECHANICAL_GANTRY_CALIBRATION; XY Park Feedrate - MMM
   //#define GANTRY_CALIBRATION_COMMANDS_PRE   ""
   #define GANTRY_CALIBRATION_COMMANDS_POST  "G28"     // G28 highly recommended to ensure an accurate position
 #endif
@@ -4549,7 +4555,7 @@
 //
 // M43 - display pin status, toggle pins, watch pins, watch endstops & toggle LED, test servo probe
 //
-//#define PINS_DEBUGGING
+//#define PINS_DEBUGGING // EDITED: disabled;
 
 // Enable Tests that will run at startup and produce a report
 //#define MARLIN_TEST_BUILD
