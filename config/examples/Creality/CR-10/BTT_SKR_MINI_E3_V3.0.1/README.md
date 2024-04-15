@@ -10,7 +10,13 @@ If you have diag jumpers removed on X Y Z axis, meaning you are not using SENSOR
 
 Uncomment in Configuration.h:
 
-+Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN
++ Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN
+
+Assumed physical setup for this build to work out of the box:
+
++ CR-10 v1 (12v)
++ BLTOUCH (connected to the dedicated 5-pin BLTOUCH header)
++ Z MIN endstop repurposed as a filament runout sensor (connected to E0-stop as per BTT manual; if you are not using this at all then uncomment "#define FILAMENT_RUNOUT_SENSOR" in Configuration.h)
 
 # Major changes made compared to stock Configuration.h:
 
