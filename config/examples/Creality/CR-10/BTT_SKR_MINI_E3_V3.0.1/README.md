@@ -6,6 +6,12 @@
 
 If you have diag jumpers removed on X Y Z axis, meaning you are not using SENSORLESS_HOMING then go ahead and uncomment DIAG_JUMPERS_REMOVED in Configuration_adv.h.
 
+### NOTE: Assumed BLTOUCH configuration is that it's using the 5 pin connector that is connected to the dedicated BLTOUCH header pins, as per the official BTT SKR MINI E3 V3 instruction manual. IF you for example can not use the dedicated port and will use the Z min endstop pin for BLTOUCH then you need to make the following change:
+
+Uncomment in Configuration.h:
+
++Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN;
+
 # Major changes made compared to stock Configuration.h:
 
 Drivers set to TMC2209;
