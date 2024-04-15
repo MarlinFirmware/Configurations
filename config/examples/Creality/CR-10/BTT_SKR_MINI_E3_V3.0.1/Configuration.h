@@ -23,7 +23,7 @@
 #error "Don't build with import-2.1.x configurations!"
 #error "Use the 'bugfix...' or 'release...' configurations matching your Marlin version."
 
-#define CONFIG_EXAMPLES_DIR "Creality/CR-10/BTT_SKR_MINI_E3_V3.0.1/"
+#define CONFIG_EXAMPLES_DIR "Creality/CR-10/BTT_SKR_MINI_E3_V3.0.1"
 
 /**
  * Configuration.h
@@ -86,7 +86,7 @@
  *
  * :[-1, 0, 1, 2, 3, 4, 5, 6, 7]
  */
-#define SERIAL_PORT 2// EDITED, serial port for SKR MINI E3 V3
+#define SERIAL_PORT 2 // EDITED, serial port for SKR MINI E3 V3
 
 /**
  * Serial Port Baud Rate
@@ -101,7 +101,7 @@
  */
 #define BAUDRATE 115200
 
-//#define BAUD_RATE_GCODE     // Enable G-code M575 to set the baud rate
+#define BAUD_RATE_GCODE     // Enable G-code M575 to set the baud rate
 
 /**
  * Select a secondary serial port on the board to use for communication with the host.
@@ -732,9 +732,9 @@
 
   #define MPC_INCLUDE_FAN                             // Model the fan speed?
 
-  // Measured physical constants from M306              // EDITED: IF you enable MPC then use the defaults from below.
+  // Measured physical constants from M306             // EDITED: IF you enable MPC then use the defaults from below.
   #define MPC_BLOCK_HEAT_CAPACITY { 16.20f }           // EDITED: my settings, default: 16.7f; (J/K) Heat block heat capacities.
-  #define MPC_SENSOR_RESPONSIVENESS { 0.1554f }         // EDITED: my settings, default: 0.22f; (K/s per ∆K) Rate of change of sensor temperature from heat block.
+  #define MPC_SENSOR_RESPONSIVENESS { 0.1554f }        // EDITED: my settings, default: 0.22f; (K/s per ∆K) Rate of change of sensor temperature from heat block.
   #define MPC_AMBIENT_XFER_COEFF { 0.1158f }           // EDITED: my settings, default: 0.068f; (W/K) Heat transfer coefficients from heat block to room air with fan off.
   #if ENABLED(MPC_INCLUDE_FAN)
     #define MPC_AMBIENT_XFER_COEFF_FAN255 { 0.1664f }  // EDITED: my settings, default: 0.097f; (W/K) Heat transfer coefficients from heat block to room air with fan on full.
@@ -758,7 +758,7 @@
   #define MPC_MIN_AMBIENT_CHANGE 1.0f                 // (K/s) Modeled ambient temperature rate of change, when correcting model inaccuracies.
   #define MPC_STEADYSTATE 0.5f                        // (K/s) Temperature change rate for steady state logic to be enforced.
 
-  #define MPC_TUNING_POS { X_CENTER, Y_CENTER, 0.0f } // EDITED: Z position for me, use your own, default: 1.0f; (mm) M306 Autotuning position, ideally bed center at first layer height.
+  #define MPC_TUNING_POS { X_CENTER, Y_CENTER, 0.2f } // EDITED: Z position for me, use your own, default: 1.0f; (mm) M306 Autotuning position, ideally bed center at first layer height.
   #define MPC_TUNING_END_Z 10.0f                      // (mm) M306 Autotuning final Z position.
 #endif
 
@@ -788,7 +788,7 @@
  *
  * With this option disabled, bang-bang will be used. BED_LIMIT_SWITCHING enables hysteresis.
  */
-#define PIDTEMPBED
+#define PIDTEMPBED // EDITED: enabled
 
 #if ENABLED(PIDTEMPBED)
   //#define MIN_BED_POWER 0
@@ -874,7 +874,7 @@
  * *** IT IS HIGHLY RECOMMENDED TO LEAVE THIS OPTION ENABLED! ***
  */
 #define PREVENT_COLD_EXTRUSION
-#define EXTRUDE_MINTEMP 170
+#define EXTRUDE_MINTEMP 190 // EDITED: raised, default is 170
 
 /**
  * Prevent a single extrusion longer than EXTRUDE_MAXLENGTH.
@@ -902,8 +902,8 @@
 
 #define THERMAL_PROTECTION_HOTENDS // Enable thermal protection for all extruders
 #define THERMAL_PROTECTION_BED     // Enable thermal protection for the heated bed
-#define THERMAL_PROTECTION_CHAMBER // Enable thermal protection for the heated chamber
-#define THERMAL_PROTECTION_COOLER  // Enable thermal protection for the laser cooling
+//#define THERMAL_PROTECTION_CHAMBER // Enable thermal protection for the heated chamber
+//#define THERMAL_PROTECTION_COOLER  // Enable thermal protection for the laser cooling
 
 //===========================================================================
 //============================= Mechanical Settings =========================
@@ -1210,7 +1210,7 @@
 
 // Enable this feature if all enabled endstop pins are interrupt-capable.
 // This will remove the need to poll the interrupt pins, saving many CPU cycles.
-//#define ENDSTOP_INTERRUPTS_FEATURE
+#define ENDSTOP_INTERRUPTS_FEATURE // EDITED: enabled;
 
 /**
  * Endstop Noise Threshold
@@ -1266,7 +1266,7 @@
  * Override with M203
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_FEEDRATE          { 500, 500, 10, 25 } // EDITED: my preferred settings, CR10 DEFAULT: { 2500, 2500, 100, 25 }
+#define DEFAULT_MAX_FEEDRATE          { 500, 500, 10, 45 } // EDITED: my preferred settings, CR10 DEFAULT: { 2500, 2500, 100, 25 }
 
 //#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
@@ -1279,7 +1279,7 @@
  * Override with M201
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_ACCELERATION      { 500, 500, 100, 5000 }
+#define DEFAULT_MAX_ACCELERATION      { 500, 500, 100, 1000 } // EDITED: default: { 500, 500, 100, 5000 }
 
 //#define LIMITED_MAX_ACCEL_EDITING     // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
 #if ENABLED(LIMITED_MAX_ACCEL_EDITING)
@@ -1296,9 +1296,9 @@
  *   M204 I    Angular Acceleration
  *   M204 J    Angular Travel Acceleration
  */
-#define DEFAULT_ACCELERATION           600    // X, Y, Z and E acceleration for printing moves
-#define DEFAULT_RETRACT_ACCELERATION   1000   // E acceleration for retracts
-#define DEFAULT_TRAVEL_ACCELERATION    800    // X, Y, Z acceleration for travel (non printing) moves
+#define DEFAULT_ACCELERATION           500    // EDITED: default: 600; X, Y, Z and E acceleration for printing moves
+#define DEFAULT_RETRACT_ACCELERATION   800   // EDITED: default: 1000; E acceleration for retracts
+#define DEFAULT_TRAVEL_ACCELERATION    1000    // EDITED: default: 800; X, Y, Z acceleration for travel (non printing) moves
 #if ENABLED(AXIS4_ROTATES)
   #define DEFAULT_ANGULAR_ACCELERATION        3000  // I, J, K acceleration for rotational-only printing moves
   #define DEFAULT_ANGULAR_TRAVEL_ACCELERATION 3000  // I, J, K acceleration for rotational-only travel (non printing) moves
@@ -1354,7 +1354,7 @@
  *
  * See https://github.com/synthetos/TinyG/wiki/Jerk-Controlled-Motion-Explained
  */
-#define S_CURVE_ACCELERATION // EDITED: enabled S curve acceleration
+#define S_CURVE_ACCELERATION // EDITED: enabled
 
 //===========================================================================
 //============================= Z Probe Options =============================
@@ -1370,10 +1370,10 @@
  * The probe replaces the Z-MIN endstop and is used for Z homing.
  * (Automatically enables USE_PROBE_FOR_Z_HOMING.)
  */
-//#define Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN // EDITED: I don't use Z min endstop for Z homing, I use dedicated bltouch probe pin. IF you use Z pin then enable this.
+//#define Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN // EDITED: probe connected to dedicated BLTOUCH pins
 
 // Force the use of the probe for Z-axis homing
-#define USE_PROBE_FOR_Z_HOMING // EDITED: I use probe for Z homing instead of Z min pin, IF you dont have a prove OR use Z pin for probe then DONT enable this
+#define USE_PROBE_FOR_Z_HOMING // EDITED: enabled;
 
 /**
  * Z_MIN_PROBE_PIN
@@ -1430,7 +1430,7 @@
 /**
  * The BLTouch probe uses a Hall effect sensor and emulates a servo.
  */
-#define BLTOUCH // EDITED: I use BLTOUCH as my probe.
+#define BLTOUCH // EDITED: enabled, disable if you dont have BLTOUCH;
 
 /**
  * MagLev V4 probe by MDD
@@ -1605,7 +1605,7 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
-#define NOZZLE_TO_PROBE_OFFSET { -39.5, -6.7, -4.3 } // EDITED: these are my offsets using Hero Me Gen7.4
+#define NOZZLE_TO_PROBE_OFFSET { -39.5, -6.7, -4.3 } // EDITED: these are my offsets using Hero Me Gen7.4, default: { 10, 10, 0 }
 
 // Enable and set to use a specific tool for probing. Disable to allow any tool.
 #define PROBING_TOOL 0
@@ -1615,13 +1615,13 @@
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
-#define PROBING_MARGIN 18 // EDITED: probing margins to account for bed clips, default is 10
+#define PROBING_MARGIN 15 // EDITED: probing margins to account for bed clips, default is 10
 
 // X and Y axis travel speed (mm/min) between probes
-#define XY_PROBE_FEEDRATE (90*60) // EDITED: modified, default is 133*60
+#define XY_PROBE_FEEDRATE (200*60) // EDITED: modified to be faster, default is 133*60
 
 // Feedrate (mm/min) for the first approach when double-probing (MULTIPLE_PROBING == 2)
-#define Z_PROBE_FEEDRATE_FAST (10*60) // EDITED: modified, default is 4*60
+#define Z_PROBE_FEEDRATE_FAST (16*60) // EDITED: modified to be faster, default is 4*60
 
 // Feedrate (mm/min) for the "accurate" probe of each point
 #define Z_PROBE_FEEDRATE_SLOW (Z_PROBE_FEEDRATE_FAST / 2)
@@ -1725,10 +1725,10 @@
   //#define WAIT_FOR_BED_HEATER     // Wait for bed to heat back up between probes (to improve accuracy)
   //#define WAIT_FOR_HOTEND         // Wait for hotend to heat back up between probes (to improve accuracy & prevent cold extrude)
 #endif
-//#define PROBING_FANS_OFF          // Turn fans off when probing
+#define PROBING_FANS_OFF            // EDITED: enabled, turn off fans to avoid interference and vibrations; Turn fans off when probing
 //#define PROBING_ESTEPPERS_OFF     // Turn all extruder steppers off when probing
 //#define PROBING_STEPPERS_OFF      // Turn all steppers off (unless needed to hold position) when probing (including extruders)
-//#define DELAY_BEFORE_PROBING 200  // (ms) To prevent vibrations from triggering piezo sensors
+#define DELAY_BEFORE_PROBING 200    // EDITED: enabled; (ms) To prevent vibrations from triggering piezo sensors
 
 // Require minimum nozzle and/or bed temperature for probing
 //#define PREHEAT_BEFORE_PROBING
@@ -1798,7 +1798,7 @@
 // @section homing
 
 //#define NO_MOTION_BEFORE_HOMING // Inhibit movement until all axes have been homed. Also enable HOME_AFTER_DEACTIVATE for extra safety.
-//#define HOME_AFTER_DEACTIVATE   // Require rehoming after steppers are deactivated. Also enable NO_MOTION_BEFORE_HOMING for extra safety.
+#define HOME_AFTER_DEACTIVATE     // EDITED: enabled; Require rehoming after steppers are deactivated. Also enable NO_MOTION_BEFORE_HOMING for extra safety.
 
 /**
  * Set Z_IDLE_HEIGHT if the Z-Axis moves on its own when steppers are disabled.
@@ -1852,7 +1852,7 @@
 #define X_MIN_POS 0
 #define Y_MIN_POS 0
 #define Z_MIN_POS 0
-#define X_MAX_POS X_BED_SIZE + 20
+#define X_MAX_POS X_BED_SIZE + 20 // EDITED: +20 is the default value for CR10, dont remove the +20
 #define Y_MAX_POS Y_BED_SIZE
 #define Z_MAX_POS 400
 //#define I_MIN_POS 0
@@ -1922,7 +1922,7 @@
  * RAMPS-based boards use SERVO3_PIN for the first runout sensor.
  * For other boards you may need to define FIL_RUNOUT_PIN, FIL_RUNOUT2_PIN, etc.
  */
-#define FILAMENT_RUNOUT_SENSOR // EDITED: Because I use a probe I have leftover endstop (from Z) which I use as a filament runout sensor. If you dont have an endstop or a dedicated filament runout sensor then disable this.
+#define FILAMENT_RUNOUT_SENSOR            // EDITED: Because I use a probe I have leftover endstop (from Z) which I use as a filament runout sensor. If you dont have an endstop or a dedicated filament runout sensor then disable this.
 #if ENABLED(FILAMENT_RUNOUT_SENSOR)
   #define FIL_RUNOUT_ENABLED_DEFAULT true // Enable the sensor on startup. Override with M412 followed by M500.
   #define NUM_RUNOUT_SENSORS   1          // Number of sensors, up to one per extruder. Define a FIL_RUNOUT#_PIN for each.
@@ -2080,16 +2080,16 @@
  * these options to restore the prior leveling state or to always enable
  * leveling immediately after G28.
  */
-#define RESTORE_LEVELING_AFTER_G28 // EDITED: I restore leveling after G28.
+//#define RESTORE_LEVELING_AFTER_G28 // EDITED: enable if you like
 //#define ENABLE_LEVELING_AFTER_G28
 
 /**
  * Auto-leveling needs preheating
  */
-#define PREHEAT_BEFORE_LEVELING // EDITED: I preheat before levelling to ensure any warping that might occur gets accounted for when levelling.
+#define PREHEAT_BEFORE_LEVELING       // EDITED: I preheat before levelling to ensure any warping that might occur gets accounted for when levelling.
 #if ENABLED(PREHEAT_BEFORE_LEVELING)
-  #define LEVELING_NOZZLE_TEMP  140   // EDITED: set your preferred nozzle temp if preheating before levelling, default: 120; (°C) Only applies to E0 at this time
-  #define LEVELING_BED_TEMP     55 // EDITED: set your preferred bed temp (what you usually print with) if preheating before levelling, default: 50 (°C)
+  #define LEVELING_NOZZLE_TEMP  0     // EDITED: set to 0, not required for BLTOUCH; (°C) Only applies to E0 at this time
+  #define LEVELING_BED_TEMP     55    // EDITED: set your preferred bed temp (what you usually print with) if preheating before levelling, default: 50 (°C)
 #endif
 
 /**
@@ -2132,11 +2132,11 @@
   /**
    * Enable the G26 Mesh Validation Pattern tool.
    */
-  #define G26_MESH_VALIDATION // EDITED: enabled, allows you to print a mesh validation pattern using the G26 command.
+  #define G26_MESH_VALIDATION             // EDITED: enabled, allows you to print a mesh validation pattern using the G26 command.
   #if ENABLED(G26_MESH_VALIDATION)
     #define MESH_TEST_NOZZLE_SIZE    0.4  // (mm) Diameter of primary nozzle.
     #define MESH_TEST_LAYER_HEIGHT   0.2  // (mm) Default layer height for G26.
-    #define MESH_TEST_HOTEND_TEMP  200    // EDITED: nozzle temp for the pattern print, default: 205; (°C) Default nozzle temperature for G26.
+    #define MESH_TEST_HOTEND_TEMP  215    // EDITED: nozzle temp for the pattern print, default: 205; (°C) Default nozzle temperature for G26.
     #define MESH_TEST_BED_TEMP      55    // EDITED: bed temp for the pattern print, default: 60; (°C) Default bed temperature for G26.
     #define G26_XY_FEEDRATE         20    // (mm/s) Feedrate for G26 XY moves.
     #define G26_XY_FEEDRATE_TRAVEL 100    // (mm/s) Feedrate for G26 XY travel moves.
@@ -2181,10 +2181,10 @@
   //#define MESH_EDIT_GFX_OVERLAY   // Display a graphics overlay while editing the mesh
 
   #define MESH_INSET 1              // Set Mesh bounds as an inset region of the bed
-  #define GRID_MAX_POINTS_X 15      // EDITED: how many points you want to probe on X and Y; Don't use more than 15 points per axis, implementation limited.
+  #define GRID_MAX_POINTS_X 13      // EDITED: how many points you want to probe on X and Y; Don't use more than 15 points per axis, implementation limited.
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
-  //#define UBL_HILBERT_CURVE       // Use Hilbert distribution for less travel when probing multiple points
+  #define UBL_HILBERT_CURVE         // EDITED: enabled; Use Hilbert distribution for less travel when probing multiple points
 
   //#define UBL_TILT_ON_MESH_POINTS         // Use nearest mesh points with G29 J for better Z reference
   //#define UBL_TILT_ON_MESH_POINTS_3POINT  // Use nearest mesh points with G29 J0 (3-point)
@@ -2249,10 +2249,10 @@
   #define BED_TRAMMING_INSET_LFRB { 30, 30, 30, 30 } // (mm) Left, Front, Right, Back insets
   #define BED_TRAMMING_HEIGHT      0.0        // (mm) Z height of nozzle at tramming points
   #define BED_TRAMMING_Z_HOP       6.0        // EDITED: default is 4.0; (mm) Z height of nozzle between tramming points
-  #define BED_TRAMMING_INCLUDE_CENTER       // EDITED: enabled; Move to the center after the last corner
-  #define BED_TRAMMING_USE_PROBE            // EDITED: enabled, because I use BLTOUCH. Disable if you dont have probe to use nozzle.
+  #define BED_TRAMMING_INCLUDE_CENTER         // EDITED: enabled; Move to the center after the last corner
+  #define BED_TRAMMING_USE_PROBE              // EDITED: enabled, because I use BLTOUCH. Disable if you dont have probe, to use nozzle.
   #if ENABLED(BED_TRAMMING_USE_PROBE)
-    #define BED_TRAMMING_PROBE_TOLERANCE 0.1  // (mm)
+    #define BED_TRAMMING_PROBE_TOLERANCE 0.05 // EDITED: lowered tolerance, default: 0.1; (mm)
     #define BED_TRAMMING_VERIFY_RAISED        // After adjustment triggers the probe, re-probe to verify
     //#define BED_TRAMMING_AUDIO_FEEDBACK
   #endif
@@ -2301,7 +2301,7 @@
  * - Allows Z homing only when XY positions are known and trusted.
  * - If stepper drivers sleep, XY homing may be required again before Z homing.
  */
-#define Z_SAFE_HOMING // EDITED: enabled, to use with BLTOUCH.
+#define Z_SAFE_HOMING // EDITED: enabled, home Z at center.
 
 #if ENABLED(Z_SAFE_HOMING)
   #define Z_SAFE_HOMING_X_POINT X_CENTER  // (mm) X point for Z homing
@@ -2349,9 +2349,9 @@
 
 #if ENABLED(SKEW_CORRECTION)
   // Input all length measurements here:
-  #define XY_DIAG_AC 141.412 // EDITED: my settings, default: 282.8427124746;
-  #define XY_DIAG_BD 141.431 // EDITED: my settings, default: 282.8427124746
-  #define XY_SIDE_AD 99.82 // EDITED: my settings, default: 200
+  #define XY_DIAG_AC 141.412  // EDITED: my settings, default: 282.8427124746;
+  #define XY_DIAG_BD 141.431  // EDITED: my settings, default: 282.8427124746
+  #define XY_SIDE_AD 99.82    // EDITED: my settings, default: 200
 
   // Or, set the XY skew factor directly:
   //#define XY_SKEW_FACTOR 0.0
@@ -2362,7 +2362,7 @@
     #define XZ_DIAG_BD 141.417 // EDITED: my settings, default: 282.8427124746
     #define YZ_DIAG_AC 141.516 // EDITED: my settings, default: 282.8427124746
     #define YZ_DIAG_BD 141.327 // EDITED: my settings, default: 282.8427124746
-    #define YZ_SIDE_AD 99.69 // EDITED: my settings, default: 200
+    #define YZ_SIDE_AD 99.69   // EDITED: my settings, default: 200
 
     // Or, set the Z skew factors directly:
     //#define XZ_SKEW_FACTOR 0.0
@@ -2393,8 +2393,8 @@
 #define EEPROM_CHITCHAT       // Give feedback on EEPROM commands. Disable to save flash.
 #define EEPROM_BOOT_SILENT    // Keep M503 quiet and only give errors during first load
 #if ENABLED(EEPROM_SETTINGS)
-  //#define EEPROM_AUTO_INIT  // Init EEPROM automatically on any errors.
-  #define EEPROM_INIT_NOW     // EDITED: enabled because I like to INIT the EEPROM on new builds, disable to keep old settings of your printer on builds; Init EEPROM on first boot after a new build.
+  #define EEPROM_AUTO_INIT    // EDITED: enabled; Init EEPROM automatically on any errors.
+  #define EEPROM_INIT_NOW     // EDITED: enabled, sometimes causes unknown crashes after builds; Init EEPROM on first boot after a new build.
 #endif
 
 // @section host
@@ -2442,7 +2442,7 @@
 
 #define PREHEAT_3_LABEL       "ABS"
 #define PREHEAT_3_TEMP_HOTEND  200
-#define PREHEAT_3_TEMP_BED     100
+#define PREHEAT_3_TEMP_BED     80
 #define PREHEAT_3_TEMP_CHAMBER 35
 #define PREHEAT_3_FAN_SPEED    0 // Value from 0 to 255
 
@@ -2722,13 +2722,13 @@
 // This option overrides the default number of encoder pulses needed to
 // produce one step. Should be increased for high-resolution encoders.
 //
-//#define ENCODER_PULSES_PER_STEP 4
+#define ENCODER_PULSES_PER_STEP 4 // EDITED: enabled;
 
 //
 // Use this option to override the number of step signals required to
 // move between next/prev menu items.
 //
-//#define ENCODER_STEPS_PER_MENU_ITEM 1
+#define ENCODER_STEPS_PER_MENU_ITEM 1 // EDITED: enabled;
 
 /**
  * Encoder Direction Options
@@ -2778,8 +2778,8 @@
 //
 // Add individual axis homing items (Home X, Home Y, and Home Z) to the LCD menu.
 //
-#define INDIVIDUAL_AXIS_HOMING_MENU // EDITED: enabled
-#define INDIVIDUAL_AXIS_HOMING_SUBMENU // EDITED: enabled
+#define INDIVIDUAL_AXIS_HOMING_MENU     // EDITED: enabled
+#define INDIVIDUAL_AXIS_HOMING_SUBMENU  // EDITED: enabled
 
 //
 // SPEAKER/BUZZER
@@ -2796,8 +2796,8 @@
 // Note: Test audio output with the G-Code:
 //  M300 S<frequency Hz> P<duration ms>
 //
-//#define LCD_FEEDBACK_FREQUENCY_DURATION_MS 2
-//#define LCD_FEEDBACK_FREQUENCY_HZ 5000
+#define LCD_FEEDBACK_FREQUENCY_DURATION_MS 50 // EDITED: enabled, default: 2
+#define LCD_FEEDBACK_FREQUENCY_HZ 800         // EDITED: enabled, default: 5000
 
 //
 // Tone queue size, used to keep beeps from blocking execution.
@@ -3518,7 +3518,7 @@
 // Use software PWM to drive the fan, as for the heaters. This uses a very low frequency
 // which is not as annoying as with the hardware PWM. On the other hand, if this frequency
 // is too low, you should also increment SOFT_PWM_SCALE.
-//#define FAN_SOFT_PWM
+#define FAN_SOFT_PWM // EDITED: enabled;
 
 // Incrementing this by 1 will double the software PWM frequency,
 // affecting heaters, and the fan if FAN_SOFT_PWM is enabled.
