@@ -10,53 +10,54 @@ If you have diag jumpers removed on X Y Z axis, meaning you are not using SENSOR
 
 Uncomment in Configuration.h:
 
-+Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN;
++Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN
 
 # Major changes made compared to stock Configuration.h:
 
-Drivers set to TMC2209;
+Drivers set to TMC2209
 
-Serial port settings;
+Serial port settings
 
-Adjusted probing feedrates;
+Adjusted probing feedrates
 
 Added:
-+ MPCTEMP;
-+ S_CURVE_ACCELERATION;
-+ BLTOUCH, using dedicated BLTOUCH port;
-+ USE_PROBE_FOR_Z_HOMING;
-+ Z_MIN_PROBE_REPEATABILITY_TEST;
-+ FILAMENT_RUNOUT_SENSOR;
-+ AUTO_BED_LEVELING_UBL;
-+ LCD_BED_LEVELING;
-+ Z_SAFE_HOMING;
-+ SKEW_CORRECTION;
++ MPCTEMP
++ S_CURVE_ACCELERATION
++ BLTOUCH, using dedicated BLTOUCH port
++ USE_PROBE_FOR_Z_HOMING
++ Z_MIN_PROBE_REPEATABILITY_TEST
++ FILAMENT_RUNOUT_SENSOR
++ AUTO_BED_LEVELING_UBL
++ LCD_BED_LEVELING
++ Z_SAFE_HOMING
++ SKEW_CORRECTION
++ PIDTEMPBED
   
 Removed:
-- Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN;
-- PIDTEMP(hotend);
+- Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN
+- PIDTEMP(hotend)
 
 # Major changes made compared to stock Configuration_adv.h:
 
-Adjusted manual feedrates;
+Adjusted manual feedrates
 
-Adjusted TMC driver currents;
+Adjusted TMC driver currents
 
-Configurable DIAG_JUMPERS_REMOVED;
+Configurable DIAG_JUMPERS_REMOVED
 
 Added:
-+ HOTEND_IDLE_TIMEOUT;
-+ USE_CONTROLLER_FAN;
-+ BLTOUCH_HS_MODE;
-+ ASSISTED_TRAMMING;
-+ INPUT_SHAPING on X and Y;
-+ ADAPTIVE_STEP_SMOOTHING;
-+ LIN_ADVANCE;
-+ ARC_SUPPORT;
-+ DIRECT_STEPPING;
-+ HYBRID_THRESHOLD;
-+ EDGE_STEPPING;
-+ MECHANICAL_GANTRY_CALIBRATION;
++ HOTEND_IDLE_TIMEOUT
++ USE_CONTROLLER_FAN
++ BLTOUCH_HS_MODE
++ ASSISTED_TRAMMING
++ INPUT_SHAPING on X and Y
++ ADAPTIVE_STEP_SMOOTHING
++ LIN_ADVANCE
++ ARC_SUPPORT
++ DIRECT_STEPPING
++ HYBRID_THRESHOLD
++ EDGE_STEPPING
++ MECHANICAL_GANTRY_CALIBRATION
 
 Removed:
-- NO_WORKSPACE_OFFSETS;
+- NO_WORKSPACE_OFFSETS
