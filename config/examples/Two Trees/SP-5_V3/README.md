@@ -1,6 +1,6 @@
 ## Two Trees SP-5 V3 Configurations
 
-This folder contains default configurations for the Sapphire Pro.
+This folder contains default configurations for the SP-5 V3.
 
 
 Changes from default Two Trees SP-5 V3 supplied configuration:
