@@ -9,9 +9,11 @@ Single and dual head configurations provided. Copy the correct Configuration.h a
 > [!NOTE]
 > This configuration includes the community sourced feed rate fix. Use 100% feed rate in Repetier!
 
-For implementation and updated K8400 firmware, see https://github.com/birkett/Vertex-K8400-Firmware
-
 ### Original Sources
+Upstreamed from:
+
+https://github.com/birkett/Vertex-K8400-Firmware
+
 Credit to Velleman for the original 1.0.x based code:
 
 https://cdn.velleman.eu/downloads/files/vertex/firmware/vertex-m1-v1.4-h1.zip
