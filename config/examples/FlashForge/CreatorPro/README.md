@@ -2,21 +2,21 @@
 
 The firmware for the Atmel chip used for USB on the Mighty Board is the same as the Arduino Mega's, but it doesn't do an automatic reset. If you want the printer to reset on DTR you will need to flash it with the firmware for the Arduino Mega.
 
-### Use with all nozzle settings
+## Use with all nozzle settings
 
 - Build plate shape: Rectangular
 - Origin at center
 - Heated bed
 - G-code flavor: Marlin
 
-### Right Nozzle
+## Right Nozzle
 
 - Number of Extruders: 1
 - X (Width) 227
 - Y (Depth) 148
 - Z (Heigth) 150
 
-## Extruder 1
+### Extruder 1
 - Nozzle size: 0.4
 - Compatible material diameter: 1.75
 - Nozzle offset X: 0
@@ -51,17 +51,18 @@ M18 ; disable stepper
 ```
 
 ## Left Nozzle
-Number of Extruders: 1
-X (Width) 227
-Y (Depth) 148
-Z (Heigth) 150
 
-Extruder 1 -
-    Nozzle size: 0.4
-    Compatible material diameter: 1.75
-    Nozzle offset X: -34
-    Nozzle offset Y: 0
-    Cooling Fan Number:0
+- Number of Extruders: 1
+- X (Width) 227
+- Y (Depth) 148
+- Z (Heigth) 150
+
+### Extruder 1
+- Nozzle size: 0.4
+- Compatible material diameter: 1.75
+- Nozzle offset X: -34
+- Nozzle offset Y: 0
+- Cooling Fan Number: 0
 
 ```gcode
 ;START G-CODE;
@@ -93,30 +94,40 @@ M18 ; disable stepper
 ```
 
 ## Both Nozzles
-Number of Extruders: 2
-X (Width) 295 <---- bed width + 2 x nozzle offset
-Y (Depth) 148
-Z (Heigth) 150
 
-Extruder 1 -
-    Nozzle size: 0.4
-    Compatible material diameter: 1.75
-    Nozzle offset X: 0
-    Nozzle offset Y: 0
-    Cooling Fan Number:0
-    ;Extruder End G-code;
-    G1 X150 Y70 F9000;move away from print in case extrusion cool down speed modifier too low
-    ;Extruder End G-code;
+- Number of Extruders: 2
+- X (Width): 295 <---- bed width + 2 x nozzle offset
+- Y (Depth): 148
+- Z (Heigth): 150
 
-Extruder 2 -
-    Nozzle size: 0.4
-    Compatible material diameter: 1.75
-    Nozzle offset X: -34
-    Nozzle offset Y: 0
-    Cooling Fan Number:0
-    ;Extruder End G-code;
-    G1 X150 Y70 F9000;move away from print in case extrusion cool down speed modifier too low
-    ;Extruder End G-code;
+### Extruder 1 (Right)
+
+- Nozzle size: 0.4
+- Compatible material diameter: 1.75
+- Nozzle offset X: 0
+- Nozzle offset Y: 0
+- Cooling Fan Number: 0
+
+```gcode
+;Extruder End G-code;
+G1 X150 Y70 F9000; move away from print in case extrusion cool down speed modifier too low
+;Extruder End G-code;
+```
+
+### Extruder 2 (Left)
+- Nozzle size: 0.4
+- Compatible material diameter: 1.75
+- Nozzle offset X: -34
+- Nozzle offset Y: 0
+- Cooling Fan Number:0
+
+```gcode
+;Extruder End G-code;
+G1 X150 Y70 F9000; move away from print in case extrusion cool down speed modifier too low
+;Extruder End G-code;
+```
+
+### GCode
 
 ```gcode
 ;START G-CODE;
