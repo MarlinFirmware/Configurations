@@ -83,3 +83,14 @@ M18 ; disable stepper
 ```gcode
 G1 X150 Y70 F9000; move away from print in case extrusion cool down speed modifier too low
 ```
+
+## Tips
+
+### My nozzles are not offset in firmware!
+
+It's possible that you may have different offsets saved in your printer's EEPROM.  To fix this, you can either update your offset settings in the printer's configuration panel, or you can run the following GCode:
+
+```gcode
+M218 T1 X-34 ; Set the offset
+M500 ; Save settings to EEPROM
+```
