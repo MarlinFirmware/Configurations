@@ -5,11 +5,11 @@ The firmware for the Atmel chip used for USB on the Mighty Board is the same as 
 ## Machine Settings
 
 - Build plate shape: Rectangular
-- Origin at center
-- Heated bed
+- Origin at center: No
+- Heated bed: Yes
 - G-code flavor: Marlin
 - Number of Extruders: 2
-- X (Width) 295 (227mm bed width + 2 x |-34mm nozzle offset|)
+- X (Width) 227
 - Y (Depth) 148
 - Z (Heigth) 150
 
@@ -24,7 +24,7 @@ The firmware for the Atmel chip used for USB on the Mighty Board is the same as 
 ### Extruder 2 (Left)
 - Nozzle size: 0.4
 - Compatible material diameter: 1.75
-- Nozzle offset X: -34mm
+- Nozzle offset X: 0 (-34mm offset handled via firmware)
 - Nozzle offset Y: 0
 - Cooling Fan Number: 0
 
