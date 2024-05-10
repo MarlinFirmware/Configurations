@@ -145,6 +145,13 @@ G0 Z-1
 G90
 ```
 
+## PlateLeveling.gcode
+
+Included in this folder is a GCode script for plate leveling that is loosely based on the FlashForge's original plate leveling script. Place this file on your printer's SD card and run the code directly from the printer's interface to perform plate leveling.
+
+> [!NOTE]
+> Because this script uses the `M0` command, it cannot be run from OctoPrint.
+
 ## Tips
 
 ### My nozzles are not offset in firmware!
