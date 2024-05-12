@@ -12,7 +12,7 @@
 
 ## About
 
-These are configuration files for the Ender 5 Plus to work with a BTT SKR 3 motherboard using the stock LCD with A4988 stepper drivers.
+These are configuration files for the Ender-5 Plus to work with a BTT SKR 3 motherboard using the stock LCD with A4988 stepper drivers.
 
 ## Marlin DGUS UI "Reloaded" Instructions
 

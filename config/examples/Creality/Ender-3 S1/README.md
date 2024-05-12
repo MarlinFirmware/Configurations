@@ -1,4 +1,4 @@
-# Ender 3 S1
+# Ender-3 S1
 
 ## Flashing Mainboard Firmware
 
@@ -8,8 +8,8 @@ Therefore, to flash the compiled firmware binary onto the board you must give th
 
 Pay attention to the two versions of the motherboard for the S1, one is using a SoC STM32F1 and the other using a STM32F4:
 
- - Ender 3 printers that come with a firmware version **1.x.x** have the **STM32F1** chip.
- - Ender 3 printers that come with a firmware version **3.x.x** have the **STM32F4** chip.
+ - Ender-3 printers that come with a firmware version **1.x.x** have the **STM32F1** chip.
+ - Ender-3 printers that come with a firmware version **3.x.x** have the **STM32F4** chip.
  - Check the version number on the STM32Fx chip itself to confirm you have the correct version.
  - Installing 1.x.x stock firmware or a compiled one to the target **STM32F1** on **STM32F4** mainboards **might brick** them! And _vice-versa_.
 
