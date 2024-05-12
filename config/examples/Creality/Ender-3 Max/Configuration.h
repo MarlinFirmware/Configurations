@@ -700,7 +700,7 @@
     #define DEFAULT_Ki_LIST {   1.08,   1.08 }
     #define DEFAULT_Kd_LIST { 114.00, 114.00 }
   #else
-    // Creality Stock - Ender 3 Max tuned
+    // Creality Stock - Ender-3 Max tuned
     #define DEFAULT_Kp  21.39
     #define DEFAULT_Ki   1.56
     #define DEFAULT_Kd  73.30
@@ -791,7 +791,7 @@
 
   // 120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   // from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
-  // Creality Stock - Ender 3 Max
+  // Creality Stock - Ender-3 Max
   #define DEFAULT_bedKp 162.06
   #define DEFAULT_bedKi 17.89
   #define DEFAULT_bedKd 978.75
