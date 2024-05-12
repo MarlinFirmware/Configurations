@@ -69,6 +69,13 @@ jobs:
         pio upgrade --dev
         pio pkg update --global
 
+    - name: Install Simulator dependencies
+      run: |
+        sudo apt-get install build-essential
+        sudo apt-get install libsdl2-dev
+        sudo apt-get install libsdl2-net-dev
+        sudo apt-get install libglm-dev
+
     # Fetch the code from the other repo and compile it:
     - name: Clone Marlin
       run: |
@@ -83,6 +90,8 @@ jobs:
           # Copy all .h files from the directory into the Marlin subfolder
           echo "Building Configurations in $dir ..."
           cp ../"$dir"/*.h Marlin/
+          # Suppress fatal warnings
+          echo -e "\n#define NO_CONTROLLER_CUSTOM_WIRING_WARNING" >> Marlin/Configuration.h
 
           # Strip out #error lines so it can build
           sed -i~ -e "20,30{/#error/d}" "Marlin/Configuration.h"
@@ -93,11 +102,15 @@ jobs:
           [[ -z $MB ]] && { echo "::error::Can't read MOTHERBOARD setting." ; exit 3; }
 
           BLINE=$( grep -E "define\s+BOARD_$MB\b" Marlin/src/core/boards.h )
-          BNUM=$( sed -E 's/^.+BOARD_[^ ]+ +([0-9]+).+$/\1/' <<<"$BLINE" )
+          BNUM=$( sed -E 's/^.+BOARD_[^ ]+ +([0-9]+)(.|$)+$/\1/' <<<"$BLINE" )
           BDESC=$( sed -E 's/^.+\/\/ *(.+)$/\1/' <<<"$BLINE" )
           [[ -z $BNUM ]] && { echo "::error::Can't find BOARD_$MB in core/boards.h." ; exit 3; }
-
-          ENVS=( $( grep -EA1 "MB\(.*\b$MB\b.*\)" Marlin/src/pins/pins.h | grep -E "#include.+//.+env:[^ ]+" | grep -oE "env:[^ ]+" | sed -E "s/env://" ) )
+          if [ "$MB" == "SIMULATED" ]
+          then
+            ENVS=$"simulator_linux_release"
+          else
+            ENVS=( $( grep -EA1 "MB\(.*\b$MB\b.*\)" Marlin/src/pins/pins.h | grep -E "#include.+//.+env:[^ ]+" | grep -oE "env:[^ ]+" | sed -E "s/env://" ) )
+          fi
           [[ -z $ENVS ]] && { echo "::error::Can't find target(s) for $MB ($BNUM)." ; exit 3; }
           [[ ${#ENVS[*]} == 1 ]] && TARGET=$ENVS || TARGET="${ENVS[0]}"
 
