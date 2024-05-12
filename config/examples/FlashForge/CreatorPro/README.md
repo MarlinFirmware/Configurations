@@ -2,9 +2,9 @@
 
 > [!IMPORTANT]
 > **NOTE ON FLASHING THE FIRMWARE:**
-> The firmware for the Atmel chip used for USB on the Mighty Board is the same as the Arduino Mega's, but it doesn't do an automatic reset. If you want the printer to reset on DTR you will need to flash it with the firmware for the Arduino Mega.
+> The Mightyboard uses an Arduino Mega bootloader but it doesn't do an automatic reset on DTR. To make the printer reset on DTR you'll need to flash it with a standard (or other) Arduino Mega bootloader.
 >
-> See [this guide](https://github.com/felipeksw/CreatorPro-Marlin-Cura/tree/main/Bootloader) for insructions on how to flash the bootloader.
+> See [this guide](https://github.com/felipeksw/CreatorPro-Marlin-Cura/tree/main/Bootloader) for instructions on how to flash the bootloader.
 
 ## Machine Settings
 
@@ -15,7 +15,7 @@
 - Number of Extruders: 2
 - X (Width) 227
 - Y (Depth) 148
-- Z (Heigth) 150
+- Z (Height) 150
 
 ### Extruder 1 (Right)
 
@@ -32,9 +32,9 @@
 - Nozzle offset Y: 0
 - Cooling Fan Number: 0
 
-## GCode
+## G-code
 
-Add this GCode to your slicer (ex. Ultimaker Cura) or print server (ex. OctoPrint).
+Add this G-code to your slicer (ex. Ultimaker Cura) or print server (ex. OctoPrint).
 
 ### Before Print Job Starts
 
@@ -153,7 +153,7 @@ G90
 
 ### My nozzles are not offset in firmware!
 
-It's possible that you may have different offsets saved in your printer's EEPROM.  To fix this, you can either update your offset settings in the printer's configuration panel, or you can run the following GCode:
+It's possible that you may have different offsets saved in your printer's EEPROM. To fix this, you can either update your offset settings in the printer's configuration panel, or you can run the following G-code:
 
 ```gcode
 M218 T1 X-34 ; Set the offset
