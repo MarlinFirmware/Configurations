@@ -46,13 +46,12 @@
 //#define REPRAP_DISCOUNT_SMART_CONTROLLER
 //#define TFT_CLASSIC_UI
 //#define TFT_COLOR_UI
+//#define TFT_LVGL_UI
 
 // Enable parent LCD based on your selection above
-#if ANY(TFT_CLASSIC_UI, TFT_COLOR_UI)
+#if ANY(TFT_CLASSIC_UI, TFT_COLOR_UI, TFT_LVGL_UI)
   #define TFT_GENERIC
   #define TOUCH_SCREEN
-#elif ENABLED(LIGHTWEIGHT_UI)
-  #define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
 #endif
 
 //===========================================================================
@@ -2258,7 +2257,7 @@
 #if ENABLED(LCD_BED_TRAMMING)
   #define BED_TRAMMING_INSET_LFRB { 30, 30, 30, 30 } // (mm) Left, Front, Right, Back insets
   #define BED_TRAMMING_HEIGHT      0.0        // (mm) Z height of nozzle at tramming points
-  #define BED_TRAMMING_Z_HOP       4.0        // (mm) Z height of nozzle between tramming points
+  #define BED_TRAMMING_Z_HOP       4.0        // (mm) Z raise between tramming points
   //#define BED_TRAMMING_INCLUDE_CENTER       // Move to the center after the last corner
   //#define BED_TRAMMING_USE_PROBE
   #if ENABLED(BED_TRAMMING_USE_PROBE)
