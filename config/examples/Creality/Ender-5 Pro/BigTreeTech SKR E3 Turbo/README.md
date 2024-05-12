@@ -1,10 +1,10 @@
-# Ender 5 Pro with BigTreeTech SKR E3 Turbo
+# Ender-5 Pro with BigTreeTech SKR E3 Turbo
 
-This folder contains configuration files for Ender 5 Pro using Marlin 2.0.x.
+This folder contains configuration files for Ender-5 Pro using Marlin 2.0.x.
 
 To compile, just use these config files and set `default_envs = LPC1769` in `platformio.ini` file.
 
-BigTreeTech SKR E3 Turbo is larger than other SKR Mini E3 and Creality boards and interferes with the power supply in the Ender 5 Pro electronics case.
+BigTreeTech SKR E3 Turbo is larger than other SKR Mini E3 and Creality boards and interferes with the power supply in the Ender-5 Pro electronics case.
 
 I (lpla) did a simple adapter for the power supply that can use short M8 screws and bolts (glued to this adapter): https://www.thingiverse.com/thing:4676935
 

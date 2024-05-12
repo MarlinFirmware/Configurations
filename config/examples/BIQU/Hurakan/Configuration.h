@@ -23,6 +23,8 @@
 #error "Don't build with import-2.1.x configurations!"
 #error "Use the 'bugfix...' or 'release...' configurations matching your Marlin version."
 
+#define NO_MICROPROBE_WARNING // Suppress MicroProbe V2 pull-up warning
+
 /**
  * Configuration.h
  *

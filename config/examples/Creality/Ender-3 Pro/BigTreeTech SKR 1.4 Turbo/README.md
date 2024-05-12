@@ -1,6 +1,6 @@
-# Ender 3 Pro with SKR 1.4 Turbo + TMC2209
+# Ender-3 Pro with SKR 1.4 Turbo + TMC2209
 
-Configurations for Ender 3 Pro with the following options enabled:
+Configurations for Ender-3 Pro with the following options enabled:
 
   - Motherboard: BigTreeTech SKR 1.4 Turbo
   - Drivers: TMC2209 (sensorless homing enabled)

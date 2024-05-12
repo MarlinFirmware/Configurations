@@ -17,7 +17,7 @@ The Ender-5 stock LCD can optionally use a [customized Marlin DGUS interface](ht
 
 ## Restoring Factory Firmware
 
-The original firmware can be restored by downloading the [Ender 5 Plus firmware](https://www.creality.com/download) from Creality. You can follow the same LCD flashing procedure using the Creality-provided `DWIN_SET` folder.
+The original firmware can be restored by downloading the [Ender-5 Plus firmware](https://www.creality.com/download) from Creality. You can follow the same LCD flashing procedure using the Creality-provided `DWIN_SET` folder.
 
 ## Marlin DGUS UI Limitations
 
