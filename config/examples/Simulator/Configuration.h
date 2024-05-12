@@ -46,13 +46,12 @@
 //#define REPRAP_DISCOUNT_SMART_CONTROLLER
 //#define TFT_CLASSIC_UI
 //#define TFT_COLOR_UI
+//#define TFT_LVGL_UI
 
 // Enable parent LCD based on your selection above
-#if ANY(TFT_CLASSIC_UI, TFT_COLOR_UI)
+#if ANY(TFT_CLASSIC_UI, TFT_COLOR_UI, TFT_LVGL_UI)
   #define TFT_GENERIC
   #define TOUCH_SCREEN
-#elif ENABLED(LIGHTWEIGHT_UI)
-  #define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
 #endif
 
 //===========================================================================
