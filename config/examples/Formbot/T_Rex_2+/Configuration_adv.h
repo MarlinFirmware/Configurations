@@ -820,7 +820,7 @@
   #define X1_MIN_POS X_MIN_POS    // Set to X_MIN_POS
   #define X1_MAX_POS (X_BED_SIZE) // A max coordinate so the X1 carriage can't hit the parked X2 carriage
   #define X2_MIN_POS     0        // A min coordinate so the X2 carriage can't hit the parked X1 carriage
-  #define X2_MAX_POS   434.6      // The max position of the X2 carriage, typically also the home position
+  #define X2_MAX_POS   434        // The max position of the X2 carriage, typically also the home position
   #define X2_HOME_POS X2_MAX_POS  // Default X2 home position. Set to X2_MAX_POS.
                                   // NOTE: For Dual X Carriage use M218 T1 Xn to override the X2_HOME_POS.
                                   // This allows recalibration of endstops distance without a rebuild.
