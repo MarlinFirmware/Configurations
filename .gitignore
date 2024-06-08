@@ -2,7 +2,8 @@
 # OS
 #
 applet/
-*.DS_Store
+.DS_Store
+*.sublime-workspace
 
 # Prerequisites
 *.d
