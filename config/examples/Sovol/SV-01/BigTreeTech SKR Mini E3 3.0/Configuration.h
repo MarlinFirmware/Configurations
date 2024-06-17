@@ -37,7 +37,7 @@
  *
  * Advanced settings can be found in Configuration_adv.h
  */
-#define CONFIGURATION_H_VERSION 02010203
+#define CONFIGURATION_H_VERSION 02010204
 
 // @section custom
 //#define SOVOL_FIXED_PROBE

@@ -37,7 +37,7 @@
  *
  * Advanced settings can be found in Configuration_adv.h
  */
-#define CONFIGURATION_H_VERSION 02010203
+#define CONFIGURATION_H_VERSION 02010204
 
 // @section custom
 //#define SV02_3DTOUCH // Uncomment SV02_3DTOUCH if you want a 3D TOUCH/ CRTOUCH /BLTOUCH enabled
