@@ -1,6 +1,6 @@
 #
 # check-pr.yml
-# Close PRs directed at `bugfix-2.0.x`
+# Close PRs directed at `bugfix-2.x.x`
 #
 
 name: PR Bad Target
