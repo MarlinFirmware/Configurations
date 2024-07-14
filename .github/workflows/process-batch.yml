@@ -1,0 +1,110 @@
+#
+# process-batch.yml
+# Build new / updated configs in the PR using matrix strategy
+#
+
+name: Process Batch of Changed Directories
+
+on:
+  workflow_dispatch:
+    inputs:
+      batch:
+        description: 'A JSON array of directories to process'
+        required: true
+        default: '[]'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        dir: ${{ fromJson(github.event.inputs.batch) }}
+    steps:
+      - name: Check out the PR
+        uses: actions/checkout@v4
+
+      - name: Debug - List changed directories
+        run: |
+          echo "Changed directory: '${{ matrix.dir }}'"
+          ls -la "${{ matrix.dir }}"
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Cache PlatformIO
+        uses: actions/cache@v4
+        with:
+          path: ~/.platformio
+          key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
+
+      - name: Select Python 3.9
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.9' # Version range or exact version of a Python version to use, using semvers version range syntax.
+          architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
+
+      - name: Install PlatformIO
+        run: |
+          pip install -U platformio
+          pio upgrade --dev
+          pio pkg update --global
+
+      # Fetch the code from the other repo and compile it:
+      - name: Clone Marlin
+        run: git clone https://github.com/MarlinFirmware/Marlin.git
+
+      # For each directory containing a changed config file, copy the .h files and build the code:
+      - name: Test changed config files
+        run: |
+          cd Marlin
+          dir="${{ matrix.dir }}"
+          # Copy all .h files from the directory into the Marlin subfolder
+          echo "Building Configurations in '$dir'..."
+          if [ ! -d "../$dir" ]; then
+            echo "::error::Directory '../$dir' does not exist."
+            exit 1
+          fi
+          if [ -z "$(ls -A "../$dir"/*.h 2>/dev/null)" ]; then
+            echo "::error::No .h files found in '../$dir'."
+            exit 1
+          fi
+          cp "../$dir"/*.h Marlin/
+          # Suppress fatal warnings
+          echo -e "\n#define NO_CONTROLLER_CUSTOM_WIRING_WARNING" >> Marlin/Configuration.h
+          # Strip out #error lines so it can build
+          sed -i~ -e "20,30{/#error/d}" "Marlin/Configuration.h"
+          rm -f "Marlin/Configuration.h~"
+
+          # Build Marlin with PlatformIO
+          MB=$(grep -E "^\s*#define MOTHERBOARD" Marlin/Configuration.h | awk '{ print $3 }' | sed 's/BOARD_//;s/\r//')
+          [[ -z $MB ]] && { echo "::error::Can't read MOTHERBOARD setting." ; exit 3; }
+
+          BLINE=$(grep -E "define\s+BOARD_$MB\b" Marlin/src/core/boards.h)
+          BNUM=$(sed -E 's/^.+BOARD_[^ ]+ +([0-9]+)(.|$)+$/\1/' <<<"$BLINE")
+          BDESC=$(sed -E 's/^.+\/\/ *(.+)$/\1/' <<<"$BLINE")
+          [[ -z $BNUM ]] && { echo "::error::Can't find BOARD_$MB in core/boards.h." ; exit 3; }
+
+          if [ "$MB" == "SIMULATED" ]; then
+            ENVS=$"simulator_linux_release"
+
+            # Install Simulator dependencies
+            sudo apt-get install build-essential
+            sudo apt-get install libsdl2-dev
+            sudo apt-get install libsdl2-net-dev
+            sudo apt-get install libglm-dev
+
+          else
+            ENVS=( $(grep -EA1 "MB\(.*\b$MB\b.*\)" Marlin/src/pins/pins.h | grep -E "#include.+//.+env:[^ ]+" | grep -oE "env:[^ ]+" | sed -E "s/env://") )
+          fi
+          [[ -z $ENVS ]] && { echo "::error::Can't find target(s) for $MB ($BNUM)." ; exit 3; }
+          [[ ${#ENVS[*]} == 1 ]] && TARGET=$ENVS || TARGET="${ENVS[0]}"
+
+          echo "Building environment $TARGET for board $MB ($BNUM)..." ; echo
+          pio run -s -e $TARGET
+

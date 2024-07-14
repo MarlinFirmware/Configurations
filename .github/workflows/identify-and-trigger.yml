@@ -1,0 +1,54 @@
+#
+# identify-and-trigger.yml
+# Identify new / updated configs in the PR
+#
+
+name: Identify Changed Directories
+
+on:
+  pull_request:
+    branches:
+      #- import-2.1.x
+    paths-ignore:
+      - '**/*.md'
+
+jobs:
+  identify-dirs:
+
+    name: Identify Changed Directories
+    #if: github.repository == 'MarlinFirmware/Configurations'
+
+    runs-on: ubuntu-latest
+    outputs:
+      dir_batches: ${{ steps.create-batches.outputs.batches }}
+    steps:
+      - name: Check out the PR
+        uses: actions/checkout@v4
+
+      - name: Get changed directories
+        id: get-dirs
+        run: |
+          # Get the base branch of the Pull Request
+          BASE_BRANCH=$(jq -r .pull_request.base.ref <$GITHUB_EVENT_PATH)
+
+          # Get origin for comparison
+          git fetch --depth=1 origin $BASE_BRANCH
+
+          # Use `git diff` to get a list of folders with altered .h files
+          # between the current commit and the base branch of the Pull Request
+          DIRS=$(git diff --name-only --diff-filter=AMR origin/$BASE_BRANCH HEAD | grep -E ".+\.h" | while IFS= read -r f; do dirname "$f"; done | uniq)
+
+          # Exit if nothing testable changed
+          [[ -z $DIRS ]] && { echo "No Configuration changes detected."; exit ; }
+
+          # Set DIRS in the persistent environment
+          echo "$DIRS" > changed_dirs.txt
+
+      - name: Create batches
+        id: create-batches
+        run: |
+          # Must be <256 jobs per workflow
+          BATCH_SIZE=100
+          DIRS=$(cat changed_dirs.txt)
+          BATCHES=$(echo "$DIRS" | xargs -n$BATCH_SIZE | jq -R -s -c 'split("\n") | map(select(length > 0))')
+          echo "::set-output name=batches::$BATCHES"
