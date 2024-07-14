@@ -38,6 +38,7 @@
  * Advanced settings can be found in Configuration_adv.h
  */
 #define CONFIGURATION_H_VERSION 02010300
+#define ENTER_THE_MATRIX
 
 // @section custom
 //#define SV01_DUAL_Z_ENABLE
