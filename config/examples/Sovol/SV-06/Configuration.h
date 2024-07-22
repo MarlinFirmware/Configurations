@@ -38,7 +38,6 @@
  * Advanced settings can be found in Configuration_adv.h
  */
 #define CONFIGURATION_H_VERSION 02010300
-#define RET6_12864_LCD                 // Added by config.ini 2024-07-22 07:00:01
 
 //===========================================================================
 //============================= Getting Started =============================
@@ -658,7 +657,7 @@
 #define HEATER_5_MAXTEMP 275
 #define HEATER_6_MAXTEMP 275
 #define HEATER_7_MAXTEMP 275
-#define BED_MAXTEMP 110     
+#define BED_MAXTEMP      110
 #define CHAMBER_MAXTEMP  60
 
 /**
@@ -698,13 +697,13 @@
   #if ENABLED(PID_PARAMS_PER_HOTEND)
     // Specify up to one value per hotend here, according to your setup.
     // If there are fewer values, the last one applies to the remaining hotends.
-    #define DEFAULT_Kp_LIST {  22.20,  22.20 }
-    #define DEFAULT_Ki_LIST {   1.08,   1.08 }
-    #define DEFAULT_Kd_LIST { 114.00, 114.00 }
+    #define DEFAULT_Kp_LIST { 15.95, 15.95 }
+    #define DEFAULT_Ki_LIST {  1.30,  1.30 }
+    #define DEFAULT_Kd_LIST { 48.96, 48.96 }
   #else
-    #define DEFAULT_Kp 15.95 
-    #define DEFAULT_Ki 1.30  
-    #define DEFAULT_Kd 48.96
+    #define DEFAULT_Kp  15.95
+    #define DEFAULT_Ki   1.30
+    #define DEFAULT_Kd  48.96
   #endif
 #else
   #define BANG_MAX 255    // Limit hotend current while in bang-bang mode; 255=full current
@@ -793,7 +792,7 @@
   // 120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   // from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
   #define DEFAULT_bedKp 110.38
-  #define DEFAULT_bedKi 6.12
+  #define DEFAULT_bedKi   6.12
   #define DEFAULT_bedKd 497.3
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
@@ -855,8 +854,8 @@
   #define PID_FUNCTIONAL_RANGE 10 // If the temperature difference between the target temperature and the actual temperature
                                   // is more than PID_FUNCTIONAL_RANGE then the PID will be shut off and the heater will be set to min/max.
 
-  #define PID_EDIT_MENU         // Add PID editing to the "Advanced Settings" menu. (~700 bytes of flash)
-  #define PID_AUTOTUNE_MENU     // Add PID auto-tuning to the "Advanced Settings" menu. (~250 bytes of flash)
+  #define PID_EDIT_MENU           // Add PID editing to the "Advanced Settings" menu. (~700 bytes of flash)
+  #define PID_AUTOTUNE_MENU       // Add PID auto-tuning to the "Advanced Settings" menu. (~250 bytes of flash)
 #endif
 
 // @section safety
@@ -1249,7 +1248,7 @@
  * Override with M92 (when enabled below)
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT { 80, 80, 800, 691.5 }  
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 800, 691.5 }
 
 /**
  * Enable support for M92. Disable to save at least ~530 bytes of flash.
@@ -1261,7 +1260,7 @@
  * Override with M203
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_FEEDRATE { 500, 500, 10, 30 }         
+#define DEFAULT_MAX_FEEDRATE          { 500, 500, 10, 30 }
 
 //#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
@@ -1274,7 +1273,7 @@
  * Override with M201
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_ACCELERATION { 500, 500, 100, 5000 }     
+#define DEFAULT_MAX_ACCELERATION      { 500, 500, 100, 5000 }
 
 //#define LIMITED_MAX_ACCEL_EDITING     // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
 #if ENABLED(LIMITED_MAX_ACCEL_EDITING)
@@ -1288,10 +1287,16 @@
  *   M204 P    Acceleration
  *   M204 R    Retract Acceleration
  *   M204 T    Travel Acceleration
+ *   M204 I    Angular Acceleration
+ *   M204 J    Angular Travel Acceleration
  */
-#define DEFAULT_ACCELERATION 500             // X, Y, Z and E acceleration for printing moves
-#define DEFAULT_RETRACT_ACCELERATION 500     // E acceleration for retracts
-#define DEFAULT_TRAVEL_ACCELERATION 1000      // X, Y, Z acceleration for travel (non printing) moves
+#define DEFAULT_ACCELERATION                   500  // X, Y, Z ... and E acceleration for printing moves
+#define DEFAULT_RETRACT_ACCELERATION           500  // E acceleration for retracts
+#define DEFAULT_TRAVEL_ACCELERATION           1000  // X, Y, Z ... acceleration for travel (non printing) moves
+#if ENABLED(AXIS4_ROTATES)
+  #define DEFAULT_ANGULAR_ACCELERATION        3000  // I, J, K acceleration for rotational-only printing moves
+  #define DEFAULT_ANGULAR_TRAVEL_ACCELERATION 3000  // I, J, K acceleration for rotational-only travel (non printing) moves
+#endif
 
 /**
  * Default Jerk limits (mm/s)
@@ -1303,10 +1308,10 @@
  */
 #define CLASSIC_JERK
 #if ENABLED(CLASSIC_JERK)
-  #define DEFAULT_XJERK 8.0
-  #define DEFAULT_YJERK 8.0
-  #define DEFAULT_ZJERK 0.4 
-  #define DEFAULT_EJERK 5.0 
+  #define DEFAULT_XJERK  8.0
+  #define DEFAULT_YJERK  8.0
+  #define DEFAULT_ZJERK  0.4
+  #define DEFAULT_EJERK  5.0
   //#define DEFAULT_IJERK  0.3
   //#define DEFAULT_JJERK  0.3
   //#define DEFAULT_KJERK  0.3
@@ -1677,21 +1682,21 @@
  * Example: `M851 Z-5` with a CLEARANCE of 4  =>  9mm from bed to nozzle.
  *     But: `M851 Z+1` with a CLEARANCE of 2  =>  2mm from bed to nozzle.
  */
-#define Z_CLEARANCE_DEPLOY_PROBE 5   // (mm) Z Clearance for Deploy/Stow
-#define Z_CLEARANCE_BETWEEN_PROBES 5  // (mm) Z Clearance between probe points
-#define Z_CLEARANCE_MULTI_PROBE 5     // (mm) Z Clearance between multiple probes
+#define Z_CLEARANCE_DEPLOY_PROBE    5 // (mm) Z Clearance for Deploy/Stow
+#define Z_CLEARANCE_BETWEEN_PROBES  5 // (mm) Z Clearance between probe points
+#define Z_CLEARANCE_MULTI_PROBE     5 // (mm) Z Clearance between multiple probes
 #define Z_PROBE_ERROR_TOLERANCE     3 // (mm) Tolerance for early trigger (<= -probe.offset.z + ZPET)
 //#define Z_AFTER_PROBING           5 // (mm) Z position after probing is done
 
-#define Z_PROBE_LOW_POINT -3          // (mm) Farthest distance below the trigger-point to go before stopping
+#define Z_PROBE_LOW_POINT          -3 // (mm) Farthest distance below the trigger-point to go before stopping
 
 // For M851 provide ranges for adjusting the X, Y, and Z probe offsets
 //#define PROBE_OFFSET_XMIN -50   // (mm)
 //#define PROBE_OFFSET_XMAX  50   // (mm)
 //#define PROBE_OFFSET_YMIN -50   // (mm)
 //#define PROBE_OFFSET_YMAX  50   // (mm)
-//#define PROBE_OFFSET_ZMIN -20   // (mm)
-//#define PROBE_OFFSET_ZMAX  20   // (mm)
+#define PROBE_OFFSET_ZMIN   -20   // (mm)
+#define PROBE_OFFSET_ZMAX    20   // (mm)
 
 // Enable the M48 repeatability test to test probe accuracy
 #define Z_MIN_PROBE_REPEATABILITY_TEST
@@ -1796,10 +1801,10 @@
  */
 //#define Z_IDLE_HEIGHT Z_HOME_POS
 
-#define Z_CLEARANCE_FOR_HOMING 10    // (mm) Minimal Z height before homing (G28) for Z clearance above the bed, clamps, ...
+#define Z_CLEARANCE_FOR_HOMING   10   // (mm) Minimal Z height before homing (G28) for Z clearance above the bed, clamps, ...
                                       // You'll need this much clearance above Z_MAX_POS to avoid grinding.
 
-#define Z_AFTER_HOMING 10           // (mm) Height to move to after homing (if Z was homed)
+//#define Z_AFTER_HOMING         10   // (mm) Height to move to after homing (if Z was homed)
 //#define XY_AFTER_HOMING { 10, 10 }  // (mm) Move to an XY position after homing (and raising Z)
 
 //#define EVENT_GCODE_AFTER_HOMING "M300 P440 S200"  // Commands to run after G28 (and move to XY_AFTER_HOMING)
@@ -1916,7 +1921,7 @@
   #define FIL_RUNOUT_ENABLED_DEFAULT true // Enable the sensor on startup. Override with M412 followed by M500.
   #define NUM_RUNOUT_SENSORS   1          // Number of sensors, up to one per extruder. Define a FIL_RUNOUT#_PIN for each.
 
-  #define FIL_RUNOUT_STATE HIGH            // Pin state indicating that filament is NOT present.
+  #define FIL_RUNOUT_STATE     HIGH       // Pin state indicating that filament is NOT present.
   #define FIL_RUNOUT_PULLUP               // Use internal pullup for filament runout pins.
   //#define FIL_RUNOUT_PULLDOWN           // Use internal pulldown for filament runout pins.
   //#define WATCH_ALL_RUNOUT_SENSORS      // Execute runout script on any triggering sensor, not only for the active extruder.
@@ -2078,7 +2083,7 @@
 #define PREHEAT_BEFORE_LEVELING
 #if ENABLED(PREHEAT_BEFORE_LEVELING)
   #define LEVELING_NOZZLE_TEMP 120   // (°C) Only applies to E0 at this time
-  #define LEVELING_BED_TEMP 60    
+  #define LEVELING_BED_TEMP     60
 #endif
 
 /**
@@ -2103,6 +2108,12 @@
   #if ENABLED(ENABLE_LEVELING_FADE_HEIGHT)
     #define DEFAULT_LEVELING_FADE_HEIGHT 10.0 // (mm) Default fade height.
   #endif
+
+  /**
+   * Add Z offset (M424 Z) that applies to all moves at the planner level.
+   * This Z offset will be automatically set to the middle value with G29.
+   */
+  //#define GLOBAL_MESH_Z_OFFSET
 
   /**
    * For Cartesian machines, instead of dividing moves on mesh boundaries,
@@ -2164,7 +2175,7 @@
   //#define MESH_EDIT_GFX_OVERLAY   // Display a graphics overlay while editing the mesh
 
   #define MESH_INSET 1              // Set Mesh bounds as an inset region of the bed
-  #define GRID_MAX_POINTS_X 5      // Don't use more than 15 points per axis, implementation limited.
+  #define GRID_MAX_POINTS_X  5      // Don't use more than 15 points per axis, implementation limited.
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
   //#define UBL_HILBERT_CURVE       // Use Hilbert distribution for less travel when probing multiple points
@@ -2220,7 +2231,7 @@
 #define LCD_BED_LEVELING
 
 #if ENABLED(LCD_BED_LEVELING)
-  #define MESH_EDIT_Z_STEP 0.01  // (mm) Step size while manually probing Z axis.
+  #define MESH_EDIT_Z_STEP  0.01  // (mm) Step size while manually probing Z axis.
   #define LCD_PROBE_Z_RANGE 8     // (mm) Z Range centered on Z_MIN_POS for LCD Z adjustment
   //#define MESH_EDIT_MENU        // Add a menu to edit mesh points
 #endif
@@ -2371,7 +2382,7 @@
  *   M501 - Read settings from EEPROM. (i.e., Throw away unsaved changes)
  *   M502 - Revert settings to "factory" defaults. (Follow with M500 to init the EEPROM.)
  */
-#define EEPROM_SETTINGS     // Persistent storage with M500 and M501
+#define EEPROM_SETTINGS       // Persistent storage with M500 and M501
 //#define DISABLE_M503        // Saves ~2700 bytes of flash. Disable for release!
 #define EEPROM_CHITCHAT       // Give feedback on EEPROM commands. Disable to save flash.
 #define EEPROM_BOOT_SILENT    // Keep M503 quiet and only give errors during first load
@@ -2409,17 +2420,17 @@
 //
 // Preheat Constants - Up to 10 are supported without changes
 //
-#define PREHEAT_1_LABEL "PLA"      
+#define PREHEAT_1_LABEL       "PLA"
 #define PREHEAT_1_TEMP_HOTEND 185
-#define PREHEAT_1_TEMP_BED 60    
+#define PREHEAT_1_TEMP_BED     60
 #define PREHEAT_1_TEMP_CHAMBER 35
-#define PREHEAT_1_FAN_SPEED 255     // Value from 0 to 255
+#define PREHEAT_1_FAN_SPEED   255 // Value from 0 to 255
 
-#define PREHEAT_2_LABEL "ABS"      
+#define PREHEAT_2_LABEL       "ABS"
 #define PREHEAT_2_TEMP_HOTEND 240
-#define PREHEAT_2_TEMP_BED 80   
+#define PREHEAT_2_TEMP_BED     80
 #define PREHEAT_2_TEMP_CHAMBER 35
-#define PREHEAT_2_FAN_SPEED 255     // Value from 0 to 255
+#define PREHEAT_2_FAN_SPEED     0 // Value from 0 to 255
 
 // @section motion
 
@@ -3057,6 +3068,7 @@
 // Connect to EXP1 on RAMPS and compatible boards.
 //
 #define CR10_STOCKDISPLAY
+#define RET6_12864_LCD
 
 //
 // Ender-2 OEM display, a variant of the MKS_MINI_12864
@@ -3188,13 +3200,16 @@
  *  - Download https://github.com/CrealityOfficial/Ender-3S1/archive/3S1_Plus_Screen.zip
  *  - Copy the downloaded DWIN_SET folder to the SD card.
  *
+ * CREALITY_TOUCH
+ *  - CR-6 OEM touch screen. A DWIN display with touch.
+ *
  * Flash display with DGUS Displays for Marlin:
  *  - Format the SD card to FAT32 with an allocation size of 4kb.
  *  - Download files as specified for your type of display.
  *  - Plug the microSD card into the back of the display.
  *  - Boot the display and wait for the update to complete.
  *
- * :[ 'ORIGIN', 'FYSETC', 'HYPRECY', 'MKS', 'RELOADED', 'IA_CREALITY', 'E3S1PRO' ]
+ * :[ 'ORIGIN', 'FYSETC', 'HYPRECY', 'MKS', 'RELOADED', 'IA_CREALITY', 'E3S1PRO', 'CREALITY_TOUCH' ]
  */
 //#define DGUS_LCD_UI ORIGIN
 #if DGUS_UI_IS(MKS)
@@ -3237,6 +3252,12 @@
 // 320x240 Nextion 2.8" serial TFT Resistive Touch Screen NX3224T028
 //
 //#define NEXTION_TFT
+
+//
+// PanelDue touch controller by Escher3D
+// http://escher3d.com/pages/order/products/product2.php
+//
+//#define PANELDUE
 
 //
 // Third-party or vendor-customized controller interfaces.
