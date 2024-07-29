@@ -69,13 +69,6 @@ jobs:
         pio upgrade --dev
         pio pkg update --global
 
-    - name: Install Simulator dependencies
-      run: |
-        sudo apt-get install build-essential
-        sudo apt-get install libsdl2-dev
-        sudo apt-get install libsdl2-net-dev
-        sudo apt-get install libglm-dev
-
     # Fetch the code from the other repo and compile it:
     - name: Clone Marlin
       run: |
@@ -108,6 +101,12 @@ jobs:
           if [ "$MB" == "SIMULATED" ]
           then
             ENVS=$"simulator_linux_release"
+
+            # Install Simulator dependencies
+            sudo apt-get install build-essential
+            sudo apt-get install libsdl2-dev
+            sudo apt-get install libsdl2-net-dev
+            sudo apt-get install libglm-dev
           else
             ENVS=( $( grep -EA1 "MB\(.*\b$MB\b.*\)" Marlin/src/pins/pins.h | grep -E "#include.+//.+env:[^ ]+" | grep -oE "env:[^ ]+" | sed -E "s/env://" ) )
           fi
