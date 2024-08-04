@@ -8,7 +8,7 @@ BTT SKR mini E3 V3.0
 LCD DWIN knob screen
 
 #Notes
-
+* Based of `config/examples/Creality/Ender-3\ V2/BigTreeTech\ SKR\ Mini\ E3\ 3.0/MarlinUI/`
 
 # References
 * https://www.smith3d.com/skr-mini-e3-v2-v3-on-ender-3-v2-ender-3-s1-lcd-dwin-knob-screen/
