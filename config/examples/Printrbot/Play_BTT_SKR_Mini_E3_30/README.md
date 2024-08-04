@@ -1,0 +1,17 @@
+# Instructions
+
+* A modified cable is needed for the Knob display, connections in [link](https://www.smith3d.com/skr-mini-e3-v2-v3-on-ender-3-v2-ender-3-s1-lcd-dwin-knob-screen/)
+* How to flash [display](https://3dprinting.stackexchange.com/questions/21729/how-to-successfully-flash-a-dacai-lcd-screen-of-a-creality-ender-3-v2)
+
+## Bill of materials
+BTT SKR mini E3 V3.0
+LCD DWIN knob screen
+
+#Notes
+
+
+# References
+* https://www.smith3d.com/skr-mini-e3-v2-v3-on-ender-3-v2-ender-3-s1-lcd-dwin-knob-screen/
+* https://github.com/bigtreetech/BIGTREETECH-SKR-mini-E3/blob/master/hardware/BTT%20SKR%20MINI%20E3%20V3.0/Hardware/BTT%20SKR%20MINI%20E3%20V3.0%20user%20manual.pdf
+* https://github.com/bigtreetech/BIGTREETECH-SKR-mini-E3/tree/master/hardware/BTT%20SKR%20MINI%20E3%20V3.0
+
