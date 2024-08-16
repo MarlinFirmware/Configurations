@@ -47,8 +47,9 @@
  *  2 = config.ini - File format for PlatformIO preprocessing.
  *  3 = schema.json - The entire configuration schema. (13 = pattern groups)
  *  4 = schema.yml - The entire configuration schema.
+ *  5 = Config.h - Minimal configuration by popular demand.
  */
-//#define CONFIG_EXPORT 2 // :[1:'JSON', 2:'config.ini', 3:'schema.json', 4:'schema.yml']
+//#define CONFIG_EXPORT 105 // :[1:'JSON', 2:'config.ini', 3:'schema.json', 4:'schema.yml', 5:'Config.h']
 
 //===========================================================================
 //============================= Thermal Settings ============================
@@ -303,7 +304,7 @@
  * If you get false positives for "Thermal Runaway", increase
  * THERMAL_PROTECTION_HYSTERESIS and/or THERMAL_PROTECTION_PERIOD
  */
-#if ENABLED(THERMAL_PROTECTION_HOTENDS)
+#if ALL(HAS_HOTEND, THERMAL_PROTECTION_HOTENDS)
   #define THERMAL_PROTECTION_PERIOD 40        // (seconds)
   #define THERMAL_PROTECTION_HYSTERESIS 4     // (°C)
 
@@ -334,7 +335,7 @@
 /**
  * Thermal Protection parameters for the bed are just as above for hotends.
  */
-#if ENABLED(THERMAL_PROTECTION_BED)
+#if TEMP_SENSOR_BED && ENABLED(THERMAL_PROTECTION_BED)
   #define THERMAL_PROTECTION_BED_PERIOD        20 // (seconds)
   #define THERMAL_PROTECTION_BED_HYSTERESIS     2 // (°C)
 
@@ -348,7 +349,7 @@
 /**
  * Thermal Protection parameters for the heated chamber.
  */
-#if ENABLED(THERMAL_PROTECTION_CHAMBER)
+#if TEMP_SENSOR_CHAMBER && ENABLED(THERMAL_PROTECTION_CHAMBER)
   #define THERMAL_PROTECTION_CHAMBER_PERIOD    20 // (seconds)
   #define THERMAL_PROTECTION_CHAMBER_HYSTERESIS 2 // (°C)
 
@@ -362,7 +363,7 @@
 /**
  * Thermal Protection parameters for the laser cooler.
  */
-#if ENABLED(THERMAL_PROTECTION_COOLER)
+#if TEMP_SENSOR_COOLER && ENABLED(THERMAL_PROTECTION_COOLER)
   #define THERMAL_PROTECTION_COOLER_PERIOD     10 // (seconds)
   #define THERMAL_PROTECTION_COOLER_HYSTERESIS  3 // (°C)
 
@@ -1242,7 +1243,7 @@
 #define DEFAULT_STEPPER_TIMEOUT_SEC 120
 #define DISABLE_IDLE_X
 #define DISABLE_IDLE_Y
-//#define DISABLE_IDLE_Z    // Disable if the nozzle could fall onto your printed part!
+//#define DISABLE_IDLE_Z  // Disable if the nozzle could fall onto your printed part!
 //#define DISABLE_IDLE_I
 //#define DISABLE_IDLE_J
 //#define DISABLE_IDLE_K
@@ -2253,7 +2254,7 @@
  * NOTE: This method is less reliable as it can only catch hangups while
  * interrupts are enabled.
  */
-//#define USE_WATCHDOG
+#define USE_WATCHDOG
 #if ENABLED(USE_WATCHDOG)
   //#define WATCHDOG_RESET_MANUAL
 #endif
@@ -2977,7 +2978,7 @@
 
   #if AXIS_IS_TMC_CONFIG(X)
     #define X_CURRENT       860        // (mA) RMS current. Multiply by 1.414 for peak current.
-    #define X_CURRENT_HOME  X_CURRENT  // (mA) RMS current for homing. (Typically lower than *_CURRENT.)
+    #define X_CURRENT_HOME  (X_CURRENT - 20) // (mA) RMS current for homing. (Typically lower than *_CURRENT.)
     #define X_MICROSTEPS     16        // 0..256
     #define X_RSENSE          0.15
     #define X_CHAIN_POS      -1        // -1..0: Not chained. 1: MCU MOSI connected. 2: Next in chain, ...
@@ -2997,7 +2998,7 @@
 
   #if AXIS_IS_TMC_CONFIG(Y)
     #define Y_CURRENT       900
-    #define Y_CURRENT_HOME  Y_CURRENT
+    #define Y_CURRENT_HOME  (Y_CURRENT - 20)
     #define Y_MICROSTEPS     16
     #define Y_RSENSE          0.15
     #define Y_CHAIN_POS      -1
@@ -3017,11 +3018,11 @@
 
   #if AXIS_IS_TMC_CONFIG(Z)
     #define Z_CURRENT       800
-    #define Z_CURRENT_HOME  Z_CURRENT
+    #define Z_CURRENT_HOME  (Z_CURRENT - 20)
     #define Z_MICROSTEPS     16
     #define Z_RSENSE          0.15
     #define Z_CHAIN_POS      -1
-    #define Z_INTERPOLATE false 
+    #define Z_INTERPOLATE false
     //#define Z_HOLD_MULTIPLIER 0.5
   #endif
 
