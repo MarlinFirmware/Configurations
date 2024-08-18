@@ -2978,8 +2978,8 @@
   #define INTERPOLATE      true
 
   #if AXIS_IS_TMC_CONFIG(X)
-    #define X_CURRENT       1050       // (mA) RMS current. Multiply by 1.414 for peak current.
-    #define X_CURRENT_HOME   350       // (mA) RMS current for homing. (Typically lower than *_CURRENT.)
+    #define X_CURRENT      1050        // (mA) RMS current. Multiply by 1.414 for peak current.
+    #define X_CURRENT_HOME  350        // (mA) RMS current for homing. (Typically lower than *_CURRENT.)
     #define X_MICROSTEPS     16        // 0..256
     #define X_RSENSE          0.15
     #define X_CHAIN_POS      -1        // -1..0: Not chained. 1: MCU MOSI connected. 2: Next in chain, ...
@@ -2998,7 +2998,7 @@
   #endif
 
   #if AXIS_IS_TMC_CONFIG(Y)
-    #define Y_CURRENT       1150
+    #define Y_CURRENT      1150
     #define Y_CURRENT_HOME  350
     #define Y_MICROSTEPS     16
     #define Y_RSENSE          0.15
@@ -3018,7 +3018,7 @@
   #endif
 
   #if AXIS_IS_TMC_CONFIG(Z)
-    #define Z_CURRENT       1050
+    #define Z_CURRENT      1050
     #define Z_CURRENT_HOME  Z_CURRENT
     #define Z_MICROSTEPS     16
     #define Z_RSENSE          0.15
@@ -3031,7 +3031,7 @@
     #define Z2_CURRENT      Z_CURRENT
     #define Z2_CURRENT_HOME Z_CURRENT_HOME
     #define Z2_MICROSTEPS   Z_MICROSTEPS
-    #define Z2_RSENSE         0.15
+    #define Z2_RSENSE       Z_RSENSE
     #define Z2_CHAIN_POS     -1
     //#define Z2_INTERPOLATE true
     //#define Z2_HOLD_MULTIPLIER 0.5
