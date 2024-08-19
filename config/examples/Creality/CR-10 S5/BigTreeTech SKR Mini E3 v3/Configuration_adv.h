@@ -1559,6 +1559,9 @@
   // BACK menu items keep the highlight at the top
   #define TURBO_BACK_MENU_ITEM // CR-10 S5 config
 
+  // BACK menu items show "Back" instead of the previous menu name
+  //#define GENERIC_BACK_MENU_ITEM
+
   // Insert a menu for preheating at the top level to allow for quick access
   //#define PREHEAT_SHORTCUT_MENU_ITEM
 
