@@ -1261,7 +1261,7 @@
 /**
  * Enable support for M92. Disable to save at least ~530 bytes of flash.
  */
-#define EDITABLE_STEPS_PER_UNIT
+//#define EDITABLE_STEPS_PER_UNIT
 
 /**
  * Default Max Feed Rate (linear=mm/s, rotational=°/s)
