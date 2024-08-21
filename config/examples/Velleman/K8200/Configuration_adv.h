@@ -315,8 +315,8 @@
  */
 #if ALL(HAS_HOTEND, THERMAL_PROTECTION_HOTENDS)
   // K8200 has weak heaters/power supply by default, so you have to relax!
-  #define THERMAL_PROTECTION_PERIOD 60        // (seconds)
-  #define THERMAL_PROTECTION_HYSTERESIS 8     // (°C)
+  #define THERMAL_PROTECTION_PERIOD        60 // (seconds)
+  #define THERMAL_PROTECTION_HYSTERESIS     8 // (°C)
 
   //#define ADAPTIVE_FAN_SLOWING              // Slow down the part-cooling fan if the temperature drops
   #if ENABLED(ADAPTIVE_FAN_SLOWING)
