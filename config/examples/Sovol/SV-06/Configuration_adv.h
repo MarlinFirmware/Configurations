@@ -4290,7 +4290,7 @@
   //#define GANTRY_CALIBRATION_TO_MIN                 // Enable to calibrate Z in the MIN direction
 
   #define GANTRY_CALIBRATION_SAFE_POSITION { X_CENTER + 3, Y_CENTER } // Safe position for nozzle
-  #define GANTRY_CALIBRATION_XY_PARK_FEEDRATE 3000  // XY Park Feedrate - MMM
+  #define GANTRY_CALIBRATION_XY_PARK_FEEDRATE 3000    // XY Park Feedrate - MMM
   //#define GANTRY_CALIBRATION_COMMANDS_PRE   ""
   #define GANTRY_CALIBRATION_COMMANDS_POST  "G28 Z"   // G28 highly recommended to ensure an accurate position
 #endif
