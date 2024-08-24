@@ -387,14 +387,15 @@
  *   PRUSA_MMU1           : Průša MMU1 (The "multiplexer" version)
  *   PRUSA_MMU2           : Průša MMU2
  *   PRUSA_MMU2S          : Průša MMU2S (Requires MK3S extruder with motion sensor, EXTRUDERS = 5)
+ *   PRUSA_MMU3           : Průša MMU3  (Requires MK3S extruder with motion sensor and MMU firmware version 3.x.x, EXTRUDERS = 5)
  *   EXTENDABLE_EMU_MMU2  : MMU with configurable number of filaments (ERCF, SMuFF or similar with Průša MMU2 compatible firmware)
  *   EXTENDABLE_EMU_MMU2S : MMUS with configurable number of filaments (ERCF, SMuFF or similar with Průša MMU2 compatible firmware)
  *
  * Requires NOZZLE_PARK_FEATURE to park print head in case MMU unit fails.
  * See additional options in Configuration_adv.h.
- * :["PRUSA_MMU1", "PRUSA_MMU2", "PRUSA_MMU2S", "EXTENDABLE_EMU_MMU2", "EXTENDABLE_EMU_MMU2S"]
+ * :["PRUSA_MMU1", "PRUSA_MMU2", "PRUSA_MMU2S", "PRUSA_MMU3", "EXTENDABLE_EMU_MMU2", "EXTENDABLE_EMU_MMU2S"]
  */
-//#define MMU_MODEL PRUSA_MMU2
+//#define MMU_MODEL PRUSA_MMU3
 
 // @section psu control
 
@@ -1508,7 +1509,8 @@
  * A lightweight, solenoid-driven probe.
  * For information about this sensor https://github.com/bigtreetech/MicroProbe
  *
- * Also requires: PROBE_ENABLE_DISABLE
+ * Also requires PROBE_ENABLE_DISABLE
+ * With FT_MOTION requires ENDSTOP_INTERRUPTS_FEATURE
  */
 //#define BIQU_MICROPROBE_V1  // Triggers HIGH
 //#define BIQU_MICROPROBE_V2  // Triggers LOW
@@ -1678,6 +1680,7 @@
   #define PROBE_TARE_DELAY 200    // (ms) Delay after tare before
   #define PROBE_TARE_STATE HIGH   // State to write pin for tare
   //#define PROBE_TARE_PIN PA5    // Override default pin
+  //#define PROBE_TARE_MENU       // Display a menu item to tare the probe
   #if ENABLED(PROBE_ACTIVATION_SWITCH)
     //#define PROBE_TARE_ONLY_WHILE_INACTIVE  // Fail to tare/probe if PROBE_ACTIVATION_SWITCH is active
   #endif
