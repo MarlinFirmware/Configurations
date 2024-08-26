@@ -1647,8 +1647,9 @@
 #if ENABLED(PROBE_TARE)
   #define PROBE_TARE_TIME  300    // (ms) Time to hold tare pin
   #define PROBE_TARE_DELAY 100    // (ms) Delay after tare before
-  #define PROBE_TARE_STATE LOW   // State to write pin for tare
+  #define PROBE_TARE_STATE LOW    // State to write pin for tare
   #define PROBE_TARE_PIN AUTO_LEVEL_TX_PIN // Override default pin
+  //#define PROBE_TARE_MENU       // Display a menu item to tare the probe
   #if ENABLED(PROBE_ACTIVATION_SWITCH)
     //#define PROBE_TARE_ONLY_WHILE_INACTIVE  // Fail to tare/probe if PROBE_ACTIVATION_SWITCH is active
   #endif

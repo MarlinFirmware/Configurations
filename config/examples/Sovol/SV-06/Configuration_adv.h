@@ -1127,8 +1127,8 @@
   #define FTM_DEFAULT_DYNFREQ_MODE dynFreqMode_DISABLED // Default mode of dynamic frequency calculation. (DISABLED, Z_BASED, MASS_BASED)
   #define FTM_DEFAULT_SHAPER_X      ftMotionShaper_NONE // Default shaper mode on X axis (NONE, ZV, ZVD, ZVDD, ZVDDD, EI, 2HEI, 3HEI, MZV)
   #define FTM_DEFAULT_SHAPER_Y      ftMotionShaper_NONE // Default shaper mode on Y axis
-  #define FTM_SHAPING_DEFAULT_X_FREQ   37.0f      // (Hz) Default peak frequency used by input shapers
-  #define FTM_SHAPING_DEFAULT_Y_FREQ   37.0f      // (Hz) Default peak frequency used by input shapers
+  #define FTM_SHAPING_DEFAULT_FREQ_X   37.0f      // (Hz) Default peak frequency used by input shapers
+  #define FTM_SHAPING_DEFAULT_FREQ_Y   37.0f      // (Hz) Default peak frequency used by input shapers
   #define FTM_LINEAR_ADV_DEFAULT_ENA   false      // Default linear advance enable (true) or disable (false)
   #define FTM_LINEAR_ADV_DEFAULT_K      0         // Default linear advance gain, integer value. (Acceleration-based scaling factor.)
   #define FTM_SHAPING_ZETA_X            0.1f      // Zeta used by input shapers for X axis
@@ -1195,8 +1195,8 @@
  *
  * Tune with M593 D<factor> F<frequency>
  */
-//#define INPUT_SHAPING_X
-//#define INPUT_SHAPING_Y
+#define INPUT_SHAPING_X
+#define INPUT_SHAPING_Y
 //#define INPUT_SHAPING_Z
 #if ANY(INPUT_SHAPING_X, INPUT_SHAPING_Y, INPUT_SHAPING_Z)
   #if ENABLED(INPUT_SHAPING_X)
@@ -1213,7 +1213,7 @@
   #endif
   //#define SHAPING_MIN_FREQ  20.0      // (Hz) By default the minimum of the shaping frequencies. Override to affect SRAM usage.
   //#define SHAPING_MAX_STEPRATE 10000  // By default the maximum total step rate of the shaped axes. Override to affect SRAM usage.
-  //#define SHAPING_MENU                // Add a menu to the LCD to set shaping parameters.
+  #define SHAPING_MENU                  // Add a menu to the LCD to set shaping parameters.
 #endif
 
 // @section motion
@@ -2005,10 +2005,10 @@
    */
   //#define STATUS_COMBINE_HEATERS    // Use combined heater images instead of separate ones
   //#define STATUS_HOTEND_NUMBERLESS  // Use plain hotend icons instead of numbered ones (with 2+ hotends)
-  #define STATUS_HOTEND_INVERTED      // Show solid nozzle bitmaps when heating (Requires STATUS_HOTEND_ANIM for numbered hotends)
-  #define STATUS_HOTEND_ANIM          // Use a second bitmap to indicate hotend heating
-  #define STATUS_BED_ANIM             // Use a second bitmap to indicate bed heating
-  #define STATUS_CHAMBER_ANIM         // Use a second bitmap to indicate chamber heating
+  //#define STATUS_HOTEND_INVERTED    // Show solid nozzle bitmaps when heating (Requires STATUS_HOTEND_ANIM for numbered hotends)
+  //#define STATUS_HOTEND_ANIM        // Use a second bitmap to indicate hotend heating
+  //#define STATUS_BED_ANIM           // Use a second bitmap to indicate bed heating
+  //#define STATUS_CHAMBER_ANIM       // Use a second bitmap to indicate chamber heating
   //#define STATUS_CUTTER_ANIM        // Use a second bitmap to indicate spindle / laser active
   //#define STATUS_COOLER_ANIM        // Use a second bitmap to indicate laser cooling
   //#define STATUS_FLOWMETER_ANIM     // Use multiple bitmaps to indicate coolant flow
@@ -3025,7 +3025,7 @@
     #define Z_MICROSTEPS     16
     #define Z_RSENSE          0.15
     #define Z_CHAIN_POS      -1
-    #define Z_INTERPOLATE false
+    //#define Z_INTERPOLATE true
     //#define Z_HOLD_MULTIPLIER 0.5
   #endif
 
@@ -4289,8 +4289,8 @@
   #define GANTRY_CALIBRATION_FEEDRATE         240     // Feedrate for correction move
   //#define GANTRY_CALIBRATION_TO_MIN                 // Enable to calibrate Z in the MIN direction
 
-  //#define GANTRY_CALIBRATION_SAFE_POSITION XY_CENTER // Safe position for nozzle
-  //#define GANTRY_CALIBRATION_XY_PARK_FEEDRATE 3000  // XY Park Feedrate - MMM
+  #define GANTRY_CALIBRATION_SAFE_POSITION { X_CENTER + 3, Y_CENTER } // Safe position for nozzle
+  #define GANTRY_CALIBRATION_XY_PARK_FEEDRATE 3000    // XY Park Feedrate - MMM
   //#define GANTRY_CALIBRATION_COMMANDS_PRE   ""
   #define GANTRY_CALIBRATION_COMMANDS_POST  "G28 Z"   // G28 highly recommended to ensure an accurate position
 #endif
