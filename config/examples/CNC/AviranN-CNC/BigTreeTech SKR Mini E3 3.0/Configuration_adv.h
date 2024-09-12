@@ -871,7 +871,7 @@
 #endif
 
 #if HAS_Y2_STEPPER
-  #define INVERT_Y2_VS_Y_DIR        // Y2 direction signal is the opposite of Y
+  #define INVERT_Y2_VS_Y_DIR          // Y2 direction signal is the opposite of Y
   //#define Y_DUAL_ENDSTOPS           // Y2 has its own endstop
   #if ENABLED(Y_DUAL_ENDSTOPS)
     //#define Y2_STOP_PIN Y_MAX_PIN   // Y2 endstop pin override
@@ -3443,10 +3443,10 @@
 
   #if ANY(SENSORLESS_HOMING, SENSORLESS_PROBING)
     // TMC2209: 0...255. TMC2130: -64...63
-    // #define X_STALL_SENSITIVITY  75
-    // #define X2_STALL_SENSITIVITY X_STALL_SENSITIVITY
-    // #define Y_STALL_SENSITIVITY  75
-    // #define Y2_STALL_SENSITIVITY Y_STALL_SENSITIVITY
+    //#define X_STALL_SENSITIVITY 75
+    //#define X2_STALL_SENSITIVITY X_STALL_SENSITIVITY
+    //#define Y_STALL_SENSITIVITY 75
+    //#define Y2_STALL_SENSITIVITY Y_STALL_SENSITIVITY
     //#define Z_STALL_SENSITIVITY  8
     //#define Z2_STALL_SENSITIVITY Z_STALL_SENSITIVITY
     //#define Z3_STALL_SENSITIVITY Z_STALL_SENSITIVITY
@@ -4060,7 +4060,7 @@
   #define CUSTOM_MENU_MAIN_TITLE "Postion Options"
   #define CUSTOM_MENU_MAIN_SCRIPT_DONE "User Script Done"
   //#define CUSTOM_MENU_MAIN_SCRIPT_AUDIBLE_FEEDBACK
-  #define CUSTOM_MENU_MAIN_SCRIPT_RETURN   // Return to status screen after a script
+  #define CUSTOM_MENU_MAIN_SCRIPT_RETURN     // Return to status screen after a script
   #define CUSTOM_MENU_MAIN_ONLY_IDLE         // Only show custom menu when the machine is idle
 
   #define MAIN_MENU_ITEM_1_DESC "Define Origin"
