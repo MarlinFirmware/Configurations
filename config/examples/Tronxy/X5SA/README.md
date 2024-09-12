@@ -237,7 +237,7 @@ OBSOLETE! JUST USE THE FIRST METHOD.
 
 Some random V5 boards have a problem with the PIN that the Z-MIN Probe is connected to, causing the probe to appear triggered all the time. Due to this issue the probe always fails.
 
-If you have this issue, edit the file: `Marlin/buildroot/share/PlatformIO/variants/CHITU_F103/wirish/boards_setup.cpp`
+If you have this issue, edit the file: `buildroot/share/PlatformIO/variants/CHITU_F103/wirish/boards_setup.cpp`
 
 Change these lines:
 ```cpp

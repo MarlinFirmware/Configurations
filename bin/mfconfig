@@ -1,0 +1,250 @@
+#!/usr/bin/env python3
+#
+# mfconfig [manual|init|repath] [source] [dest] [repo-path]
+#
+# Operate on the MarlinFirmware/Configurations repository.
+#
+# The MarlinFirmware/Configurations layout could be broken up into branches,
+# but this makes management more complicated and requires more commits to
+# perform the same operation, so this uses a single branch with subfolders.
+#
+# init - Initialize the repo with a base commit and changes:
+#   - Source will be an 'import' branch containing all current configs.
+#   - Create an empty 'WORK' branch from 'init-repo'.
+#   - Add Marlin config files, but reset all to defaults.
+#   - Commit this so changes will be clear in following commits.
+#   - Add changed Marlin config files and commit.
+#
+# manual - Import changes from a local Marlin folder, then init.
+#   - Replace 'default' configs with your local Marlin configs.
+#   - Wait for manual propagation to the rest of the configs.
+#   - Run init with the given 'source' and 'dest'
+#
+# repath - Add path labels to all config files, if needed
+#  - Add a #define CONFIG_EXAMPLES_DIR to each Configuration*.h file.
+#
+# CI - Run in CI mode, using the current folder as the repo.
+#    - For GitHub Actions to update the Configurations repo.
+#
+import os, sys, subprocess, shutil, datetime, tempfile
+from pathlib import Path
+
+# Set to 1 for extra debug commits (no deployment)
+DEBUG = 0
+
+# Get the shell arguments into ACTION, IMPORT, and EXPORT
+ACTION = sys.argv[1] if len(sys.argv) > 1 else 'manual'
+IMPORT = sys.argv[2] if len(sys.argv) > 2 else 'import-2.1.x'
+EXPORT = sys.argv[3] if len(sys.argv) > 3 else 'bugfix-2.1.x'
+
+# Get repo paths
+CI = False
+if ACTION == 'CI':
+    _REPOS = "."
+    REPOS = Path(_REPOS)
+    CONFIGREPO = REPOS
+    ACTION = 'init'
+    CI = True
+else:
+    _REPOS = sys.argv[4] if len(sys.argv) > 4 else '~/Projects/Maker/Firmware'
+    REPOS = Path(_REPOS).expanduser()
+    CONFIGREPO = REPOS / "Configurations"
+
+def usage():
+    print(f"Usage: {os.path.basename(sys.argv[0])} [manual|init|repath] [source] [dest] [repo-path]")
+
+if ACTION not in ('manual','init','repath'):
+    print(f"Unknown action '{ACTION}'")
+    usage()
+    sys.exit(1)
+
+CONFIGCON = CONFIGREPO / "config"
+CONFIGDEF = CONFIGCON / "default"
+CONFIGEXA = CONFIGCON / "examples"
+
+# Configurations repo folder must exist
+if not CONFIGREPO.exists():
+    print(f"Can't find Configurations repo at {_REPOS}")
+    sys.exit(1)
+
+# Run git within CONFIGREPO
+GITSTDERR = None if DEBUG else subprocess.DEVNULL
+def git(etc):
+    if DEBUG:
+        print(f"> git {' '.join(etc)}")
+        if etc[0] == "push":
+            info("*** DRY RUN ***")
+            return subprocess.run(["echo"])
+    return subprocess.run(["git"] + etc, cwd=CONFIGREPO, stdout=subprocess.PIPE, stderr=GITSTDERR)
+
+# Get the current branch name
+def branch(): return git(["rev-parse", "--abbrev-ref", "HEAD"])
+
+# git add . ; git commit -m ...
+def commit(msg, who="."): git(["add", who]) ; return git(["commit", "-m", msg])
+
+# git checkout ...
+def checkout(etc): return git(["checkout"] + ([etc] if isinstance(etc, str) else etc))
+
+# git branch -D ...
+def gitbd(name): return git(["branch", "-D", name]).stdout
+
+# git status --porcelain : to check for changes
+def changes(): return git(["status", "--porcelain"]).stdout.decode().strip()
+
+# Configure git user
+git(["config", "user.email", "thinkyhead@users.noreply.github.com"])
+git(["config", "user.name", "Scott Lahteine"])
+
+# Stash uncommitted changes at the destination?
+if changes():
+    print(f"There are uncommitted Configurations repo changes.")
+    STASH_YES = input("Stash changes? [Y/n] ") ; print()
+    if STASH_YES not in ('Y','y',''): print("Can't continue") ; sys.exit()
+    git(["stash", "-m", f"!!GitHub_Desktop<{branch()}>"])
+    if changes(): print(f"Can't stash changes!") ; sys.exit(1)
+
+def info(msg):
+  infotag = "[INFO] " if CI else ""
+  print(f"- {infotag}{msg}")
+
+def add_path_labels():
+    info("Adding path labels to all configs...")
+    for fn in CONFIGEXA.glob("**/Configuration*.h"):
+        fldr = str(fn.parent.relative_to(CONFIGCON)).replace("examples/", "")
+        with open(fn, 'r') as f:
+            lines = f.readlines()
+            emptyline = -1
+            for i, line in enumerate(lines):
+                issp = line.isspace()
+                if emptyline < 0:
+                    if issp: emptyline = i
+                elif not issp:
+                    if not "CONFIG_EXAMPLES_DIR" in line:
+                        lines.insert(emptyline, f"\n#define CONFIG_EXAMPLES_DIR \"{fldr}\"\n")
+                        with open(fn, 'w') as f: f.writelines(lines)
+                        break
+
+if ACTION == "repath":
+    add_path_labels()
+
+elif ACTION == "manual":
+
+    MARLINREPO = Path(REPOS / "MarlinFirmware")
+    if not MARLINREPO.exists():
+        print("Can't find MarlinFirmware at {_REPOS}!")
+        sys.exit(1)
+
+    info(f"Updating '{IMPORT}' from Marlin...")
+
+    checkout(IMPORT)
+
+    # Replace examples/default with our local copies
+    shutil.copy(MARLINREPO / "Marlin" / "Configuration*.h", CONFIGDEF)
+
+    #git add . && git commit -m "Changes from Marlin ($(date '+%Y-%m-%d %H:%M'))."
+    #commit(f"Changes from Marlin ({datetime.datetime.now()}).")
+
+    print(f"Prepare the import branch and continue when ready.")
+    INIT_YES = input("Ready to init? [y/N] ") ; print()
+    if INIT_YES not in ('Y','y'): print("Done.") ; sys.exit()
+
+    ACTION = 'init'
+
+if ACTION == "init":
+    print(f"Building branch '{EXPORT}'...")
+    info("Init WORK branch...")
+
+    info(f"Copy {IMPORT} to temporary location...")
+
+    # Use the import branch as the source
+    result = checkout(IMPORT)
+    if result.returncode != 0:
+        print(f"Can't find branch '{IMPORT}'!") ; sys.exit()
+
+    # Copy to a temporary location
+    TEMP = Path(tempfile.mkdtemp())
+    TEMPCON = TEMP / "config"
+    shutil.copytree(CONFIGCON, TEMPCON)
+
+    # Strip #error lines from Configuration.h
+    for fn in TEMPCON.glob("**/Configuration.h"):
+        with open(fn, 'r') as f:
+            lines = f.readlines()
+            outlines = []
+            for line in lines:
+                if not line.startswith("#error"):
+                    outlines.append(line)
+            with open(fn, 'w') as f:
+                f.writelines(outlines)
+
+    # Create a fresh 'WORK' as a copy of 'init-repo' (README, LICENSE, etc.)
+    gitbd("WORK")
+    if CI: git(["fetch", "origin", "init-repo"])
+    checkout(["init-repo", "-b", "WORK"])
+
+    # Copy default configurations into the repo
+    info("Create configs in default state...")
+    for fn in TEMPCON.glob("**/*"):
+        if fn.is_dir(): continue
+        relpath = fn.relative_to(TEMPCON)
+        os.makedirs(CONFIGCON / os.path.dirname(relpath), exist_ok=True)
+        if fn.name.startswith("Configuration"):
+            shutil.copy(TEMPCON / "default" / fn.name, CONFIGCON / relpath)
+
+    # DEBUG: Commit the reset for review
+    if DEBUG: commit("[DEBUG] Create defaults")
+
+    def replace_in_file(fn, search, replace):
+        with open(fn, 'r') as f: lines = f.read()
+        with open(fn, 'w') as f: f.write(lines.replace(search, replace))
+
+    # Update the %VERSION% in the README.md file
+    replace_in_file(CONFIGREPO / "README.md", "%VERSION%", EXPORT.replace("release-", ""))
+
+    # Commit all changes up to now; amend if not debugging
+    if DEBUG:
+        commit("[DEBUG] Update README.md version", "README.md")
+    else:
+        git(["add", "."])
+        git(["commit", "--amend", "--no-edit"])
+
+    # Copy configured Configuration*.h to the working copy
+    info("Copy examples into place...")
+    for fn in TEMPCON.glob("examples/**/Configuration*.h"):
+        shutil.copy(fn, CONFIGCON / fn.relative_to(TEMPCON))
+
+    # Put #define CONFIG_EXAMPLES_DIR .. before the first blank line
+    add_path_labels()
+
+    info("Commit config changes...")
+    commit("Examples Customizations")
+
+    # Copy over all files not matching Configuration*.h to the working copy
+    info("Copy extras into place...")
+    for fn in TEMPCON.glob("examples/**/*"):
+        if fn.is_dir(): continue
+        if fn.name.startswith("Configuration"): continue
+        shutil.copy(fn, CONFIGCON / fn.relative_to(TEMPCON))
+
+    info("Commit extras...")
+    commit("Examples Extras")
+
+    # Delete the temporary folder
+    shutil.rmtree(TEMP)
+
+    # Push to the remote (if desired)
+    if CI:
+        PUSH_YES = 'Y'
+    else:
+        print()
+        PUSH_YES = input(f"Push to upstream/{EXPORT}? [y/N] ")
+        print()
+
+    REMOTE = "origin" if CI else "upstream"
+
+    if PUSH_YES in ('Y','y'):
+        info("Push to remote...")
+        git(["push", "-f", REMOTE, f"WORK:{EXPORT}"])
+
+    info("Done.")
