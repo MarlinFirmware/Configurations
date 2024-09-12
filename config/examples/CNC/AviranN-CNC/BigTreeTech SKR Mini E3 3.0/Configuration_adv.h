@@ -4057,7 +4057,7 @@
 // Custom Menu: Main Menu
 #define CUSTOM_MENU_MAIN
 #if ENABLED(CUSTOM_MENU_MAIN)
-  #define CUSTOM_MENU_MAIN_TITLE "Postion Options"
+  #define CUSTOM_MENU_MAIN_TITLE "Position Options"
   #define CUSTOM_MENU_MAIN_SCRIPT_DONE "User Script Done"
   //#define CUSTOM_MENU_MAIN_SCRIPT_AUDIBLE_FEEDBACK
   #define CUSTOM_MENU_MAIN_SCRIPT_RETURN     // Return to status screen after a script
@@ -4086,22 +4086,6 @@
   #define MAIN_MENU_ITEM_6_DESC "Set Y Zero"
   #define MAIN_MENU_ITEM_6_GCODE "G92 Y0"
   #define MAIN_MENU_ITEM_6_CONFIRM          // Show a confirmation dialog before this action
-
-  // #define MAIN_MENU_ITEM_2_DESC "Preheat for " PREHEAT_1_LABEL
-  // #define MAIN_MENU_ITEM_2_GCODE "M140 S" STRINGIFY(PREHEAT_1_TEMP_BED) "\nM104 S" STRINGIFY(PREHEAT_1_TEMP_HOTEND)
-  //#define MAIN_MENU_ITEM_2_CONFIRM
-
-  //#define MAIN_MENU_ITEM_3_DESC "Preheat for " PREHEAT_2_LABEL
-  //#define MAIN_MENU_ITEM_3_GCODE "M140 S" STRINGIFY(PREHEAT_2_TEMP_BED) "\nM104 S" STRINGIFY(PREHEAT_2_TEMP_HOTEND)
-  //#define MAIN_MENU_ITEM_3_CONFIRM
-
-  //#define MAIN_MENU_ITEM_4_DESC "Heat Bed/Home/Level"
-  //#define MAIN_MENU_ITEM_4_GCODE "M140 S" STRINGIFY(PREHEAT_2_TEMP_BED) "\nG28\nG29"
-  //#define MAIN_MENU_ITEM_4_CONFIRM
-
-  //#define MAIN_MENU_ITEM_5_DESC "Home & Info"
-  //#define MAIN_MENU_ITEM_5_GCODE "G28\nM503"
-  //#define MAIN_MENU_ITEM_5_CONFIRM
 #endif
 
 // @section custom config menu
