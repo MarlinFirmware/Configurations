@@ -10,6 +10,9 @@ on:
   push:
     branches:
     - import-2.1.x
+    paths:
+      - 'config/**'
+      - 'bin/mfconfig'
 
 jobs:
   deploy:
@@ -19,101 +22,6 @@ jobs:
     - name: Check out
       uses: actions/checkout@v4
 
-    # For each directory containing a changed config file, copy the .h files and build the code:
+    # Run the mfconfig script with CI action
     - name: Deploy bugfix-2.1.x
-      run: |
-        IMPORT=import-2.1.x
-        EXPORT=bugfix-2.1.x
-        CEXA=config/examples
-        CDEF=config/default
-        BC=Configuration.h
-        AC=Configuration_adv.h
-
-        git config user.email "thinkyhead@users.noreply.github.com"
-        git config user.name "Scott Lahteine"
-
-        echo "- Initializing BASE branch..."
-
-        # Copy to a temporary location
-        TEMP=$( mktemp -d ) ; cp -R config $TEMP
-
-        # Strip all #error lines
-        IFS=$'\n'; set -f
-        for fn in $( find $TEMP/config -type f -name "Configuration.h" ); do
-          sed -i~ -e "20,30{/#error/d}" "$fn"
-          rm "$fn~"
-        done
-        unset IFS; set +f
-
-        # Create 'BASE' as a copy of 'init-repo' (README, LICENSE, etc.)
-        git fetch origin init-repo >/dev/null
-        git checkout origin/init-repo -b BASE >/dev/null || exit
-
-        # Copy all config files into place
-        echo "- Copying configs from fresh $IMPORT..."
-        cp -R "$TEMP/config" . >/dev/null
-
-        echo "- Deleting extras"
-
-        # Delete anything that's not a Configuration file
-        find config -type f \! -name "Conf*.h" -exec rm "{}" \;
-
-        # Init Cartesian/SCARA/TPARA configurations to default
-        echo "- Initializing configs to default state..."
-
-        find "$CEXA" -name $BC -print0 \
-          | while read -d $'\0' F ; do cp "$CDEF/$BC" "$F" >/dev/null ; done
-        find "$CEXA" -name $AC -print0 \
-          | while read -d $'\0' F ; do cp "$CDEF/$AC" "$F" >/dev/null ; done
-
-        # Update the %VERSION% in the README.md file
-        VERS=$( echo $EXPORT | sed 's/release-//' )
-        eval "sed -E -i~ -e 's/%VERSION%/$VERS/g' README.md"
-        rm -f README.md~
-
-        # Commit the 'BASE', ready for customizations
-        git add . >/dev/null && git commit --amend --no-edit >/dev/null
-
-        # Create a new branch from 'BASE' for the final result
-        echo "- Creating 'built-temp' branch..."
-        git checkout -b built-temp >/dev/null || exit
-
-        # Delete temporary branch
-        git branch -D BASE 2>/dev/null
-
-        echo "- Applying customizations..."
-        cp -R "$TEMP/config" .
-        find config -type f \! -name "Configuration*" -exec rm "{}" \;
-
-        addpathlabels() {
-          cd $CEXA
-          find . -name "Conf*.h" -print0 | while read -d $'\0' fn ; do
-            fldr=$(dirname "$fn" | sed "s/^\.\///")
-            blank_line=$(awk '/^\s*$/ {print NR; exit}' "$fn")
-            sed -i~ "${blank_line}i\\\n#define CONFIG_EXAMPLES_DIR \"$fldr\"" "$fn"
-            rm -f "$fn~"
-          done
-          cd -
-        }
-
-        echo "- Applying path labels..."
-        addpathlabels >/dev/null 2>&1
-
-        git add . >/dev/null && git commit -m "Examples Customizations" >/dev/null
-
-        echo "- Adding all the extras..."
-        cp -R "$TEMP/config" .
-
-        echo "- Applying path labels..."
-        addpathlabels >/dev/null 2>&1
-
-        git add . >/dev/null && git commit -m "Examples Extras" >/dev/null
-
-        echo "- Replace $EXPORT branch"
-        git fetch origin $EXPORT >/dev/null
-        git checkout >/dev/null $EXPORT
-        git reset --hard built-temp
-        git push -f
-        git branch -D built-temp
-
-        rm -rf $TEMP
+      run: bin/mfconfig CI

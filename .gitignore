@@ -40,3 +40,4 @@ applet/
 
 # Tools
 .vscode/
+.zed/
