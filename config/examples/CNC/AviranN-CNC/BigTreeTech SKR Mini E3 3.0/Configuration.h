@@ -174,6 +174,9 @@
 //#define E6_DRIVER_TYPE A4988
 //#define E7_DRIVER_TYPE A4988
 
+// Map E0 stepper driver to act as Y2 driver, fully synchronized with Y-axis movement.
+#define USE_E0_AS_Y2
+
 /**
  * Additional Axis Settings
  *

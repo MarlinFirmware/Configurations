@@ -103,9 +103,15 @@
 #define Z_STEP_PIN                          PB0
 #define Z_DIR_PIN                           PC5
 
-#define Y2_ENABLE_PIN                       PD1
-#define Y2_STEP_PIN                         PB3
-#define Y2_DIR_PIN                          PB4
+#ifndef USE_E0_AS_Y2
+  #define E0_ENABLE_PIN                       PD1
+  #define E0_STEP_PIN                         PB3
+  #define E0_DIR_PIN                          PB4
+#else
+  #define Y2_ENABLE_PIN                       PD1
+  #define Y2_STEP_PIN                         PB3
+  #define Y2_DIR_PIN                          PB4
+#endif
 
 #if HAS_TMC_UART
   /**
