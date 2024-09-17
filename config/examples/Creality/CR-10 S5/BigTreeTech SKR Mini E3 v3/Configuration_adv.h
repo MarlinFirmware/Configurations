@@ -1114,6 +1114,7 @@
    *   M5_CW = M3 Clockwise, M5_CCW = M5 Counter-Clockwise
    *
    * :{'M3_CW':'M3 Clockwise','M3_CCW':'M3 Counter-Clockwise','M4_CW':'M4 Clockwise','M4_CCW':'M4 Counter-Clockwise','M5_CW':'M5 Clockwise','M5_CCW':'M5 Counter-Clockwise'}
+   */
   #define TRAMMING_SCREW_THREAD M4_CW // CR-10 S5 config
 
 #endif
