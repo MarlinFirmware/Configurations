@@ -144,7 +144,7 @@
         #define E0_SLAVE_ADDRESS                   3
       #endif
   #else
-       ifndef Y2_SLAVE_ADDRESS
+       #ifndef Y2_SLAVE_ADDRESS
         #define Y2_SLAVE_ADDRESS                   3
       #endif
   #endif
@@ -491,3 +491,4 @@
 #define UART2_RX_PIN                        PA3   // default usage TFT connector
 #define UART4_TX_PIN                        PC10  // default usage TMC UART
 #define UART4_RX_PIN                        PC11  // default usage TMC UART
+
