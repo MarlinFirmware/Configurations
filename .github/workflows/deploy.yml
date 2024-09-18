@@ -21,7 +21,20 @@ jobs:
     steps:
     - name: Check out
       uses: actions/checkout@v4
+      with:
+        fetch-depth: 0  # Fetch all history for all branches and tags
+        token: ${{ secrets.GITHUB_TOKEN }}  # Use the built-in token for authentication
 
-    # Run the mfconfig script with CI action
-    - name: Deploy bugfix-2.1.x
+    - name: Fetch all branches
+      run: git fetch --all
+
+    - name: Set up Git identity
+      run: |
+        git config --global user.email "github-actions@github.com"
+        git config --global user.name "GitHub Actions"
+
+    - name: Build bugfix-2.1.x
       run: bin/mfconfig CI
+
+    - name: Push bugfix-2.1.x
+      run: git push -f origin WORK:bugfix-2.1.x

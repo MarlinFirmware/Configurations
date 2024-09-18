@@ -38,7 +38,7 @@ IMPORT = sys.argv[2] if len(sys.argv) > 2 else 'import-2.1.x'
 EXPORT = sys.argv[3] if len(sys.argv) > 3 else 'bugfix-2.1.x'
 
 # Get repo paths
-CI = False
+CI = os.environ.get('GITHUB_ACTIONS') == 'true'
 if ACTION == 'CI':
     _REPOS = "."
     REPOS = Path(_REPOS)
@@ -68,20 +68,23 @@ if not CONFIGREPO.exists():
     sys.exit(1)
 
 # Run git within CONFIGREPO
-GITSTDERR = None if DEBUG else subprocess.DEVNULL
+GITSTDERR = subprocess.PIPE if DEBUG else subprocess.DEVNULL
 def git(etc):
-    if DEBUG:
-        print(f"> git {' '.join(etc)}")
-        if etc[0] == "push":
-            info("*** DRY RUN ***")
-            return subprocess.run(["echo"])
-    return subprocess.run(["git"] + etc, cwd=CONFIGREPO, stdout=subprocess.PIPE, stderr=GITSTDERR)
+    if DEBUG: print(f"> git {' '.join(etc)}")
+
+    result = subprocess.run(["git"] + etc, cwd=CONFIGREPO, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+
+    if result.returncode != 0:
+        print(f"Git command failed: git {' '.join(etc)}")
+        print(f"Error output: {result.stderr}")
+
+    return result
 
 # Get the current branch name
 def branch(): return git(["rev-parse", "--abbrev-ref", "HEAD"])
 
 # git add . ; git commit -m ...
-def commit(msg, who="."): git(["add", who]) ; return git(["commit", "-m", msg])
+def commit(msg, who="."): git(["add", who]) ; return git(["commit", "-m", f'"{msg}"'])
 
 # git checkout ...
 def checkout(etc): return git(["checkout"] + ([etc] if isinstance(etc, str) else etc))
@@ -90,11 +93,7 @@ def checkout(etc): return git(["checkout"] + ([etc] if isinstance(etc, str) else
 def gitbd(name): return git(["branch", "-D", name]).stdout
 
 # git status --porcelain : to check for changes
-def changes(): return git(["status", "--porcelain"]).stdout.decode().strip()
-
-# Configure git user
-git(["config", "user.email", "thinkyhead@users.noreply.github.com"])
-git(["config", "user.name", "Scott Lahteine"])
+def changes(): return git(["status", "--porcelain"]).stdout != ""
 
 # Stash uncommitted changes at the destination?
 if changes():
@@ -179,9 +178,9 @@ if ACTION == "init":
                 f.writelines(outlines)
 
     # Create a fresh 'WORK' as a copy of 'init-repo' (README, LICENSE, etc.)
-    gitbd("WORK")
-    if CI: git(["fetch", "origin", "init-repo"])
-    checkout(["init-repo", "-b", "WORK"])
+    if not CI: gitbd("WORK")
+    REMOTE = "origin" if CI else "upstream"
+    checkout([f"{REMOTE}/init-repo", "-b", "WORK"])
 
     # Copy default configurations into the repo
     info("Create configs in default state...")
@@ -193,7 +192,7 @@ if ACTION == "init":
             shutil.copy(TEMPCON / "default" / fn.name, CONFIGCON / relpath)
 
     # DEBUG: Commit the reset for review
-    if DEBUG: commit("[DEBUG] Create defaults")
+    if DEBUG > 1: commit("[DEBUG] Create defaults")
 
     def replace_in_file(fn, search, replace):
         with open(fn, 'r') as f: lines = f.read()
@@ -203,7 +202,7 @@ if ACTION == "init":
     replace_in_file(CONFIGREPO / "README.md", "%VERSION%", EXPORT.replace("release-", ""))
 
     # Commit all changes up to now; amend if not debugging
-    if DEBUG:
+    if DEBUG > 1:
         commit("[DEBUG] Update README.md version", "README.md")
     else:
         git(["add", "."])
@@ -234,16 +233,15 @@ if ACTION == "init":
     shutil.rmtree(TEMP)
 
     # Push to the remote (if desired)
-    if CI:
-        PUSH_YES = 'Y'
-    else:
+    PUSH_YES = 'N'
+    if not CI:
         print()
         PUSH_YES = input(f"Push to upstream/{EXPORT}? [y/N] ")
         print()
 
     REMOTE = "origin" if CI else "upstream"
 
-    if PUSH_YES in ('Y','y'):
+    if PUSH_YES.upper() in ('Y','YES'):
         info("Push to remote...")
         git(["push", "-f", REMOTE, f"WORK:{EXPORT}"])
 
