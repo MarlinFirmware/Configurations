@@ -139,7 +139,8 @@ elif ACTION == "manual":
     checkout(IMPORT)
 
     # Replace examples/default with our local copies
-    shutil.copy(MARLINREPO / "Marlin" / "Configuration*.h", CONFIGDEF)
+    for fn in MARLINREPO.glob("Marlin/**/Configuration*.h"):
+        shutil.copy(fn, CONFIGDEF)
 
     #git add . && git commit -m "Changes from Marlin ($(date '+%Y-%m-%d %H:%M'))."
     #commit(f"Changes from Marlin ({datetime.datetime.now()}).")
