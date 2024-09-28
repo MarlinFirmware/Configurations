@@ -3271,6 +3271,11 @@
 //#define NEXTION_TFT
 
 //
+// Sovol SV-06 Resistive Touch Screen
+//
+//#define SOVOL_SV06_RTS
+
+//
 // PanelDue touch controller by Escher3D
 // http://escher3d.com/pages/order/products/product2.php
 //
