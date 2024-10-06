@@ -70,7 +70,7 @@
 
 // Choose the name from boards.h that matches your setup
 #ifndef MOTHERBOARD
-  #define MOTHERBOARD BOARD_RAMPS_14_EFB
+  #define MOTHERBOARD BOARD_MKSROBIN_NANO
 #endif
 
 /**
@@ -94,7 +94,7 @@
  *
  * :[2400, 9600, 19200, 38400, 57600, 115200, 250000, 500000, 1000000]
  */
-#define BAUDRATE 250000
+#define BAUDRATE 115200
 
 //#define BAUD_RATE_GCODE     // Enable G-code M575 to set the baud rate
 
@@ -566,21 +566,7 @@
  *   998 : Dummy Table that ALWAYS reads 25°C or the temperature defined below.
  *   999 : Dummy Table that ALWAYS reads 100°C or the temperature defined below.
  */
-#define TEMP_SENSOR_0 1
-#define TEMP_SENSOR_1 0
-#define TEMP_SENSOR_2 0
-#define TEMP_SENSOR_3 0
-#define TEMP_SENSOR_4 0
-#define TEMP_SENSOR_5 0
-#define TEMP_SENSOR_6 0
-#define TEMP_SENSOR_7 0
-#define TEMP_SENSOR_BED 1
-#define TEMP_SENSOR_PROBE 0
-#define TEMP_SENSOR_CHAMBER 0
-#define TEMP_SENSOR_COOLER 0
-#define TEMP_SENSOR_BOARD 0
-#define TEMP_SENSOR_SOC 0
-#define TEMP_SENSOR_REDUNDANT 0
+#define TEMP_SENSOR_0 5
 
 // Dummy thermistor constant temperature readings, for use with 998 and 999
 #define DUMMY_THERMISTOR_998_VALUE  25
@@ -1254,7 +1240,7 @@
  * Override with M92 (when enabled below)
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 500 }
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 420 }
 
 /**
  * Enable support for M92. Disable to save at least ~530 bytes of flash.
