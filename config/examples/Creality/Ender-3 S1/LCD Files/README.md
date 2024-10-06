@@ -1,7 +1,5 @@
 # Ender-3 S1 display update guide
 
-Starting with Ender-3 V2, the Ender-3 series **knob**-based (_not_ touch screens) color LCD screens share the same update procedure, with the only difference being the files that need to be copied to a microSD card, based on the type of display unit mainboard.
+Starting with the Ender-3 V2, Creality introduced a series of color LCDs that use a **click-wheel** (but _not_ a touch screen). These displays can connect to any board with an EXP adapter and they all share the same basic update procedure. Different mainboards will require different files to be copied to the microSD card, but after that you just insert it into the display for flashing.
 
-Please refer to the `README` document for the complete procedure and display variant compatibility list, available here:
-
-`../config/examples/Creality/Ender-3 V2/LCD Files`
+See the `Creality/Ender-3 V2/README.md` file for the complete update procedure and information on display compatibility.
