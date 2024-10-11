@@ -63,7 +63,7 @@
 // @section info
 
 // Author info of this build printed to the host during boot and M115
-#define STRING_CONFIG_H_AUTHOR "(ccrobot-online, MEEB_3DP)" // Who made the changes.
+#define STRING_CONFIG_H_AUTHOR "(ccrobot-online, MEEB_3DP)" // Original author or contributor.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
 // @section machine

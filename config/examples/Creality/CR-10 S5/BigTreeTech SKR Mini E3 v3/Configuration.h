@@ -63,7 +63,7 @@
 // @section info
 
 // Author info of this build printed to the host during boot and M115
-#define STRING_CONFIG_H_AUTHOR "(tiagofreire-pt, CR-10 S5 SKR E3 mini V3 ABL)" // Who made the changes.
+#define STRING_CONFIG_H_AUTHOR "(tiagofreire-pt, CR-10 S5 SKR E3 mini V3 ABL)" // Original author or contributor.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
 // @section machine

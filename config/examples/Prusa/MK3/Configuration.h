@@ -63,7 +63,7 @@
 // @section info
 
 // Author info of this build printed to the host during boot and M115
-#define STRING_CONFIG_H_AUTHOR "(Prussia3D, Paul_GD MK3S)" // Who made the changes.
+#define STRING_CONFIG_H_AUTHOR "(Prussia3D, Paul_GD MK3S)" // Original author or contributor.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
 // Disable this for FAN0_PIN 8 and FAN1_PIN 6

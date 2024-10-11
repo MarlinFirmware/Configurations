@@ -63,7 +63,7 @@
 // @section info
 
 // Author info of this build printed to the host during boot and M115
-#define STRING_CONFIG_H_AUTHOR "(R. de Weerd, I3 Pro X)" // Who made the changes.
+#define STRING_CONFIG_H_AUTHOR "(R. de Weerd, I3 Pro X)" // Original author or contributor.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
 // @section machine
