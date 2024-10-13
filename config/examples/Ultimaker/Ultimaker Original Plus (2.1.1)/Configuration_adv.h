@@ -203,7 +203,7 @@
 //
 #if DISABLED(PIDTEMPBED)
   #define BED_CHECK_INTERVAL 5000   // (ms) Interval between checks in bang-bang control
-  #if ENABLED(BED_LIMIT_SWITCHING)
+  #if ANY(BED_LIMIT_SWITCHING, PELTIER_BED)
     #define BED_HYSTERESIS 2        // (°C) Only set the relevant heater state when ABS(T-target) > BED_HYSTERESIS
   #endif
 #endif
@@ -591,7 +591,7 @@
   // Use TEMP_SENSOR_SOC as a trigger for enabling the controller fan
   //#define CONTROLLER_FAN_MIN_SOC_TEMP 40  // (°C) Turn on the fan if the SoC reaches this temperature
 
-  #define CONTROLLER_FAN_BED_HEATING        // Turn on the fan when heating the bed 
+  #define CONTROLLER_FAN_BED_HEATING        // Turn on the fan when heating the bed
 
   //#define CONTROLLER_FAN_EDITABLE         // Enable M710 configurable settings
   #if ENABLED(CONTROLLER_FAN_EDITABLE)
