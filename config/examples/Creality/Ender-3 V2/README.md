@@ -40,7 +40,7 @@ Use the following pictures to identify your type of display unit:
 
     There is currently no information regarding how to compile a firmware for this type of display, nor does it look like there are any official firmwares to attempt a decompilation effort.
 
-* **TJC display** **`Currently undocumented`**, **`Currently incompatible with custom UIs`**
+* **TJC display** **`Undocumented & mostly unsupported due to missing graphics`**
 
     ![Ender3V2S1-TJC](https://user-images.githubusercontent.com/2745567/206931166-24185525-e377-472e-9bed-37a39aab24fb.jpg)
 
@@ -74,17 +74,17 @@ The differences between the types of displays units shown above make them more c
         * Lack of custom graphics assets compilation means no icons are visible
     * ❔ MarlinUI Landscape
 * **TJC**
-    * ✅ Creality UI
+    * ❌ Creality UI
     * ❌ MRiscoC Pro UI
         * As reported by author; incompatibility causes currently unknown
-    * ❔ JyersUI
+    * ❌ JyersUI
     * ⚠️ MarlinUI Portrait
         * Lack of custom graphics assets compilation means no icons are visible
-    * ❔ MarlinUI Landscape
+    * ⚠️ MarlinUI Landscape
 
 ## **If you've got a currently undocumented display**
 
-In the case of **SYNWIT / VIEWE** and **TJC** displays, currently only the Creality UI interface option (`DWIN_CREALITY_LCD`) is fully compatible.
+In the case of **SYNWIT / VIEWE** displays, currently only the Creality UI interface option (`DWIN_CREALITY_LCD`) is fully compatible.
 
 If you have a **DWIN** or **DACAI** display, please follow the procedure below to upgrade the firmware with the custom graphics assets required for MRiscoC Pro UI, JyersUI and MarlinUI.
 

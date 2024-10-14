@@ -1,4 +1,4 @@
-# Ender-3 S1 display update guide
+# Ender-3 V2 Neo display update guide
 
 Starting with the Ender-3 V2, Creality introduced a series of color LCDs that use a **click-wheel** (but _not_ a touch screen). These displays can connect to any board with an EXP adapter and they all share the same basic update procedure. Different mainboards will require different files to be copied to the microSD card, but after that you just insert it into the display for flashing.
 
