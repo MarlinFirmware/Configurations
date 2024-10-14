@@ -21,6 +21,8 @@
  */
 #pragma once
 
+#define CONFIG_EXAMPLES_DIR "Micromake/C1/enhanced"
+
 /**
  * Configuration_adv.h
  *
@@ -1076,7 +1078,7 @@
 
   // On a 300mm bed a 5% grade would give a misalignment of ~1.5cm
   #define G34_MAX_GRADE              5    // (%) Maximum incline that G34 will handle
-  #define Z_STEPPER_ALIGN_ITERATIONS 5    // Number of iterations to apply during alignment
+  #define Z_STEPPER_ALIGN_ITERATIONS 3    // Number of iterations to apply during alignment
   #define Z_STEPPER_ALIGN_ACC        0.02 // Stop iterating early if the accuracy is better than this
   #define RESTORE_LEVELING_AFTER_G34      // Restore leveling after G34 is done?
   // After G34, re-home Z (G28 Z) or just calculate it from the last probe heights?
@@ -1260,8 +1262,8 @@
 #define DISABLE_IDLE_E    // Shut down all idle extruders
 
 // Default Minimum Feedrates for printing and travel moves
-#define DEFAULT_MINIMUMFEEDRATE       0.0     // (mm/s. °/s for rotational-only moves) Minimum feedrate. Set with M205 S.
-#define DEFAULT_MINTRAVELFEEDRATE     0.0     // (mm/s. °/s for rotational-only moves) Minimum travel feedrate. Set with M205 T.
+#define DEFAULT_MINIMUMFEEDRATE       0.0     // (mm/s) Minimum feedrate. Set with M205 S.
+#define DEFAULT_MINTRAVELFEEDRATE     0.0     // (mm/s) Minimum travel feedrate. Set with M205 T.
 
 // Minimum time that a segment needs to take as the buffer gets emptied
 #define DEFAULT_MINSEGMENTTIME        20000   // (µs) Set with M205 B.
@@ -1688,8 +1690,8 @@
 
 // LCD Print Progress options. Multiple times may be displayed in turn.
 #if HAS_DISPLAY && ANY(HAS_MEDIA, SET_PROGRESS_MANUALLY)
-  #define SHOW_PROGRESS_PERCENT           // Show print progress percentage (doesn't affect progress bar)
-  #define SHOW_ELAPSED_TIME               // Display elapsed printing time (prefix 'E')
+  //#define SHOW_PROGRESS_PERCENT         // Show print progress percentage (doesn't affect progress bar)
+  //#define SHOW_ELAPSED_TIME             // Display elapsed printing time (prefix 'E')
   //#define SHOW_REMAINING_TIME           // Display estimated time to completion (prefix 'R')
   #if ENABLED(SET_INTERACTION_TIME)
     #define SHOW_INTERACTION_TIME         // Display time until next user interaction ('C' = filament change)
@@ -1748,7 +1750,7 @@
 
   //#define MEDIA_MENU_AT_TOP               // Force the media menu to be listed on the top of the main menu
 
-  #define EVENT_GCODE_SD_ABORT "G28XY"      // G-code to run on SD Abort Print (e.g., "G28XY" or "G27")
+  #define EVENT_GCODE_SD_ABORT "G27"        // G-code to run on SD Abort Print (e.g., "G28XY" or "G27")
 
   #if ENABLED(PRINTER_EVENT_LEDS)
     #define PE_LEDS_COMPLETED_TIME  (30*60) // (seconds) Time to keep the LED "done" color before restoring normal illumination
@@ -2582,7 +2584,7 @@
 
 /**
  * Minimum stepper driver pulse width (in ns)
- * If undefined, these defaults (from Conditionals-4-adv.h) apply:
+ * If undefined, these defaults (from Conditionals_adv.h) apply:
  *     100 : Minimum for TMC2xxx stepper drivers
  *     500 : Minimum for LV8729
  *    1000 : Minimum for A4988 and A5984 stepper drivers
@@ -2596,7 +2598,7 @@
 
 /**
  * Maximum stepping rate (in Hz) the stepper driver allows
- * If undefined, these defaults (from Conditionals-4-adv.h) apply:
+ * If undefined, these defaults (from Conditionals_adv.h) apply:
  *  5000000 : Maximum for TMC2xxx stepper drivers
  *  1000000 : Maximum for LV8729 stepper driver
  *   500000 : Maximum for A4988 stepper driver

@@ -21,6 +21,8 @@
  */
 #pragma once
 
+#define CONFIG_EXAMPLES_DIR "BIBO/TouchX/default"
+
 /**
  * Configuration_adv.h
  *
@@ -305,8 +307,8 @@
  * THERMAL_PROTECTION_HYSTERESIS and/or THERMAL_PROTECTION_PERIOD
  */
 #if ALL(HAS_HOTEND, THERMAL_PROTECTION_HOTENDS)
-  #define THERMAL_PROTECTION_PERIOD        40 // (seconds)
-  #define THERMAL_PROTECTION_HYSTERESIS     4 // (°C)
+  #define THERMAL_PROTECTION_PERIOD        60 // (seconds)
+  #define THERMAL_PROTECTION_HYSTERESIS     2 // (°C)
 
   //#define ADAPTIVE_FAN_SLOWING              // Slow down the part-cooling fan if the temperature drops
   #if ENABLED(ADAPTIVE_FAN_SLOWING)
@@ -328,7 +330,7 @@
    * and/or decrease WATCH_TEMP_INCREASE. WATCH_TEMP_INCREASE should not be set
    * below 2.
    */
-  #define WATCH_TEMP_PERIOD  40               // (seconds)
+  #define WATCH_TEMP_PERIOD  45               // (seconds)
   #define WATCH_TEMP_INCREASE 2               // (°C)
 #endif
 
@@ -336,7 +338,7 @@
  * Thermal Protection parameters for the bed are just as above for hotends.
  */
 #if TEMP_SENSOR_BED && ENABLED(THERMAL_PROTECTION_BED)
-  #define THERMAL_PROTECTION_BED_PERIOD        20 // (seconds)
+  #define THERMAL_PROTECTION_BED_PERIOD        40 // (seconds)
   #define THERMAL_PROTECTION_BED_HYSTERESIS     2 // (°C)
 
   /**
@@ -1076,7 +1078,7 @@
 
   // On a 300mm bed a 5% grade would give a misalignment of ~1.5cm
   #define G34_MAX_GRADE              5    // (%) Maximum incline that G34 will handle
-  #define Z_STEPPER_ALIGN_ITERATIONS 5    // Number of iterations to apply during alignment
+  #define Z_STEPPER_ALIGN_ITERATIONS 3    // Number of iterations to apply during alignment
   #define Z_STEPPER_ALIGN_ACC        0.02 // Stop iterating early if the accuracy is better than this
   #define RESTORE_LEVELING_AFTER_G34      // Restore leveling after G34 is done?
   // After G34, re-home Z (G28 Z) or just calculate it from the last probe heights?
@@ -1228,7 +1230,7 @@
 #define AXIS_RELATIVE_MODES { false, false, false, false }
 
 // Add a Duplicate option for well-separated conjoined nozzles
-//#define MULTI_NOZZLE_DUPLICATION
+#define MULTI_NOZZLE_DUPLICATION
 
 // By default stepper drivers require an active-HIGH signal but some high-power drivers require an active-LOW signal to step.
 #define STEP_STATE_X HIGH
@@ -1260,8 +1262,8 @@
 #define DISABLE_IDLE_E    // Shut down all idle extruders
 
 // Default Minimum Feedrates for printing and travel moves
-#define DEFAULT_MINIMUMFEEDRATE       0.0     // (mm/s. °/s for rotational-only moves) Minimum feedrate. Set with M205 S.
-#define DEFAULT_MINTRAVELFEEDRATE     0.0     // (mm/s. °/s for rotational-only moves) Minimum travel feedrate. Set with M205 T.
+#define DEFAULT_MINIMUMFEEDRATE       0.0     // (mm/s) Minimum feedrate. Set with M205 S.
+#define DEFAULT_MINTRAVELFEEDRATE     0.0     // (mm/s) Minimum travel feedrate. Set with M205 T.
 
 // Minimum time that a segment needs to take as the buffer gets emptied
 #define DEFAULT_MINSEGMENTTIME        20000   // (µs) Set with M205 B.
@@ -1633,9 +1635,6 @@
 
   // Show the E position (filament used) during printing
   //#define LCD_SHOW_E_TOTAL
-
-  // Display a negative temperature instead of "err"
-  //#define SHOW_TEMPERATURE_BELOW_ZERO
 
   /**
    * LED Control Menu

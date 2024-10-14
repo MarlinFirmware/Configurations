@@ -21,6 +21,8 @@
  */
 #pragma once
 
+#define CONFIG_EXAMPLES_DIR "Mks/Robin_Lite3"
+
 /**
  * Configuration.h
  *
@@ -61,14 +63,14 @@
 // @section info
 
 // Author info of this build printed to the host during boot and M115
-#define STRING_CONFIG_H_AUTHOR "(MarlinFirmware)" // Original author or contributor.
+#define STRING_CONFIG_H_AUTHOR "(@MS1987)" // Original author or contributor.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
 // @section machine
 
 // Choose the name from boards.h that matches your setup
 #ifndef MOTHERBOARD
-  #define MOTHERBOARD BOARD_RAMPS_14_EFB
+  #define MOTHERBOARD BOARD_MKS_ROBIN_LITE3
 #endif
 
 /**
@@ -79,7 +81,7 @@
  *
  * :[-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
  */
-#define SERIAL_PORT 0
+#define SERIAL_PORT 1
 
 /**
  * Serial Port Baud Rate
@@ -100,8 +102,16 @@
  * Select a secondary serial port on the board to use for communication with the host.
  * Currently Ethernet (-2) is only supported on Teensy 4.1 boards.
  * :[-2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+ *
+ *   1 : MKS Robin Lite3 AUX-1 and USB  UART1 (PA9-TX, PA10-RX)
+ *   3 : MKS Robin Pro USB              UART3 (PB10-TX, PB11-RX)
+ *   1 : MKS RUMBA32 AUX-1              UART1 (PA9-TX, PA10-RX)
+ *   0 : MKS SBASE AUX-1                UART0 (P0.2-TXD0, P0.3-RXD0)
+ *   0 : MKS SGEN AUX-1                 UART0 (P0.2-TXD0, P0.3-RXD0)
+ *   0 : MKS SGEN_L AUX-1               UART0 (P0.2-TXD0, P0.3-RXD0)
+ *   3 : MKS Robin Nano USB             UART3 (PB10-TX, PB11-RX)
  */
-//#define SERIAL_PORT_2 -1
+//#define SERIAL_PORT_2       // Choose from the list above
 //#define BAUDRATE_2 250000   // :[2400, 9600, 19200, 38400, 57600, 115200, 250000, 500000, 1000000] Enable to override BAUDRATE
 
 /**
@@ -572,7 +582,7 @@
 #define TEMP_SENSOR_5 0
 #define TEMP_SENSOR_6 0
 #define TEMP_SENSOR_7 0
-#define TEMP_SENSOR_BED 1
+#define TEMP_SENSOR_BED 0
 #define TEMP_SENSOR_PROBE 0
 #define TEMP_SENSOR_CHAMBER 0
 #define TEMP_SENSOR_COOLER 0
@@ -1286,7 +1296,7 @@
  * Override with M92 (when enabled below)
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 500 }
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 4000, 500 }
 
 /**
  * Enable support for M92. Disable to save at least ~530 bytes of flash.
@@ -2669,7 +2679,7 @@
  * SD Card support is disabled by default. If your controller has an SD slot,
  * you must uncomment the following option or it won't work.
  */
-//#define SDSUPPORT
+#define SDSUPPORT
 
 /**
  * SD CARD: ENABLE CRC
