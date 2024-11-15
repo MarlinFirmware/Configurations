@@ -10,6 +10,15 @@ LCD DWIN knob screen
 #Notes
 * Based of `config/examples/Creality/Ender-3\ V2/BigTreeTech\ SKR\ Mini\ E3\ 3.0/MarlinUI/`
 
+# Communication with the printer using USB
+```
+minicom -D /dev/ttyACM0 -b 115200
+```
+ctrl-A Z
+local Echo on/off..E
+Add Carriage Ret...U           
+
+
 # References
 * https://www.smith3d.com/skr-mini-e3-v2-v3-on-ender-3-v2-ender-3-s1-lcd-dwin-knob-screen/
 * https://github.com/bigtreetech/BIGTREETECH-SKR-mini-E3/blob/master/hardware/BTT%20SKR%20MINI%20E3%20V3.0/Hardware/BTT%20SKR%20MINI%20E3%20V3.0%20user%20manual.pdf
