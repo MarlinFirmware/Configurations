@@ -19,7 +19,13 @@ How to get nicer output in minicom
 ctrl-A Z
 local Echo on/off..E
 Add Carriage Ret...U
-```  
+```
+
+## Gcode reference
+`M43` debug pin, needs to enable in firmware.
+`M43 P0 S` Servo probe test
+`M280 P0 S120` CR-touch self test.
+
 
 
 # References
