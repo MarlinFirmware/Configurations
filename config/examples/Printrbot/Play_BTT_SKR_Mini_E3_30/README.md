@@ -27,4 +27,6 @@ Add Carriage Ret...U
 * https://github.com/bigtreetech/BIGTREETECH-SKR-mini-E3/blob/master/hardware/BTT%20SKR%20MINI%20E3%20V3.0/Hardware/BTT%20SKR%20MINI%20E3%20V3.0%20user%20manual.pdf
 * https://github.com/bigtreetech/BIGTREETECH-SKR-mini-E3/tree/master/hardware/BTT%20SKR%20MINI%20E3%20V3.0
 * https://github.com/MarlinFirmware/Marlin/issues/27124
+* https://www.reddit.com/r/ender3v2/comments/1cguk2b/cr_touch_z_axis_not_homing_marlin_firmware/
+* https://www.reddit.com/r/BIGTREETECH/comments/rnsopr/skr_mini_e3_v30_crtouch_zhoming_issue
 
