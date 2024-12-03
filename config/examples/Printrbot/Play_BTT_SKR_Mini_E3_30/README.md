@@ -14,13 +14,17 @@ LCD DWIN knob screen
 ```
 minicom -D /dev/ttyACM0 -b 115200
 ```
+How to get nicer output in minicom
+```
 ctrl-A Z
 local Echo on/off..E
-Add Carriage Ret...U           
+Add Carriage Ret...U
+```  
 
 
 # References
 * https://www.smith3d.com/skr-mini-e3-v2-v3-on-ender-3-v2-ender-3-s1-lcd-dwin-knob-screen/
 * https://github.com/bigtreetech/BIGTREETECH-SKR-mini-E3/blob/master/hardware/BTT%20SKR%20MINI%20E3%20V3.0/Hardware/BTT%20SKR%20MINI%20E3%20V3.0%20user%20manual.pdf
 * https://github.com/bigtreetech/BIGTREETECH-SKR-mini-E3/tree/master/hardware/BTT%20SKR%20MINI%20E3%20V3.0
+* https://github.com/MarlinFirmware/Marlin/issues/27124
 
