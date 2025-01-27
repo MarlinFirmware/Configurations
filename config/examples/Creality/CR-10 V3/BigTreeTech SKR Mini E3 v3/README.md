@@ -1,4 +1,4 @@
-# CR-10 V3 with BTT SKR E3 mini v3.0:
+# CR-10 V3 with BigTreeTech SKR Mini E3 v3:
 
 ## Information
 
