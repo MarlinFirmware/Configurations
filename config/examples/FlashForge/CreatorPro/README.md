@@ -78,6 +78,7 @@ G1 E22 F3600
 G0 X48 Y0 Z0.5 F1200 ; lift
 G0 Y-10 ; Move nozzle off of build plate
 G92 E0
+M106 ; Start turbo fan
 ```
 
 ### After Print Job Completes
@@ -91,14 +92,14 @@ M300 S1300 P200
 M300 S880 P500
 
 G10 ; Retract
-G0 X270 Y150 Z150 F1500 ; send Z axis to bottom of machine
+G0 X270 Y150 Z150 F1500 ; Send Z axis to bottom of machine
 
-;disable all heaters
+; Disable all heaters
 {% snippet 'disable_hotends' %}
 {% snippet 'disable_bed' %}
 
-M127 ; stop blower fan
-M18 ; disable stepper
+M107 ; Stop turbo fan
+M18 ; Disable stepper
 G11
 ```
 
@@ -112,14 +113,14 @@ M300 S660 P200
 M300 S440 P200
 
 G10 ; Retract
-G0 X270 Y150 Z150 F1500 ; send Z axis to bottom of machine
+G0 X270 Y150 Z150 F1500 ; Send Z axis to bottom of machine
 
-;disable all heaters
+; Disable all heaters
 {% snippet 'disable_hotends' %}
 {% snippet 'disable_bed' %}
 
-M127 ; stop blower fan
-M18 ; disable stepper
+M127 ; Stop turbo fan
+M18 ; Disable stepper
 G11
 ```
 
