@@ -1301,9 +1301,9 @@
 //#define DISTINCT_E_FACTORS
 
 /**
- * Default Axis Steps Per Unit (steps/mm)
+ * Default Axis Steps Per Unit (linear=steps/mm, rotational=steps/°)
  * Override with M92 (when enabled below)
- *                                      X, Y, Z [, I [, J [, K]]], E0 [, E1[, E2...]]
+ *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  * Updated E Steps to 382.14 for CR-10 V3 Direct Drive
  */
 #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80.00, 80.00, 400.00, 407 }

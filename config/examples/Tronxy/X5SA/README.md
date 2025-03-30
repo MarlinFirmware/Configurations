@@ -151,35 +151,21 @@ Check your values!
 Normal non-TMC:
 ```cpp
 /**
- * Default Axis Steps Per Unit (steps/mm)
+ * Default Axis Steps Per Unit (linear=steps/mm, rotational=steps/°)
  * Override with M92 (when enabled below)
- *                                      X, Y, Z, E0 [, E1[, E2...]]
+ *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
 #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 92.6 }
 ```
 Titan Non-PRO:
 ```cpp
-/**
- * Default Axis Steps Per Unit (steps/mm)
- * Override with M92 (when enabled below)
- *                                      X, Y, Z, E0 [, E1[, E2...]]
- */
 #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 420 }
-
-// Extruder seems inverted on titan!
-#define INVERT_E0_DIR true
+#define INVERT_E0_DIR true // Extruder seems inverted on Titan!
 ```
 Titan PRO (tmc):
 ```cpp
-/**
- * Default Axis Steps Per Unit (steps/mm)
- * Override with M92 (when enabled below)
- *                                      X, Y, Z, E0 [, E1[, E2...]]
- */
 #define DEFAULT_AXIS_STEPS_PER_UNIT   { 160, 160, 800, 764 }
-
-// Extruder seems inverted on titan!
-#define INVERT_E0_DIR true
+#define INVERT_E0_DIR true // Extruder seems inverted on Titan!
 ```
 
 ## 5. Other Marlin Config
