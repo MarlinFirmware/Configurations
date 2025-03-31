@@ -9,6 +9,7 @@ Pre-tested Configurations for Marlin Firmware. Links below…
 
 Version|File Tree|Download
 ---|---|---
+2.1.2.5|([Browse](//github.com/MarlinFirmware/Configurations/tree/release-2.1.2.5))|([Download ZIP](//github.com/MarlinFirmware/Configurations/archive/release-2.1.2.5.zip))
 2.1.2.4|([Browse](//github.com/MarlinFirmware/Configurations/tree/release-2.1.2.4))|([Download ZIP](//github.com/MarlinFirmware/Configurations/archive/release-2.1.2.4.zip))
 2.1.2.3|([Browse](//github.com/MarlinFirmware/Configurations/tree/release-2.1.2.3))|([Download ZIP](//github.com/MarlinFirmware/Configurations/archive/release-2.1.2.3.zip))
 2.1.2.2|([Browse](//github.com/MarlinFirmware/Configurations/tree/release-2.1.2.2))|([Download ZIP](//github.com/MarlinFirmware/Configurations/archive/release-2.1.2.2.zip))

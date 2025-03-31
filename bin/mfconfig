@@ -84,7 +84,7 @@ def git(etc):
 def branch(): return git(["rev-parse", "--abbrev-ref", "HEAD"])
 
 # git add . ; git commit -m ...
-def commit(msg, who="."): git(["add", who]) ; return git(["commit", "-m", f'"{msg}"'])
+def commit(msg, who="."): git(["add", who]) ; return git(["commit", "-m", msg])
 
 # git checkout ...
 def checkout(etc): return git(["checkout"] + ([etc] if isinstance(etc, str) else etc))
@@ -181,7 +181,7 @@ if ACTION == "init":
     # Create a fresh 'WORK' as a copy of 'init-repo' (README, LICENSE, etc.)
     if not CI: gitbd("WORK")
     REMOTE = "origin" if CI else "upstream"
-    checkout([f"{REMOTE}/init-repo", "-b", "WORK"])
+    checkout(["--no-track", f"{REMOTE}/init-repo", "-b", "WORK"])
 
     # Copy default configurations into the repo
     info("Create configs in default state...")
