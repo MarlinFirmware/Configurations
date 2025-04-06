@@ -1,4 +1,5 @@
-#Important User Note: 
+# Important User Note:
+
 Users with factory MKS TFT28 screens will need to modify the screen baudrate to 115200. 
 The factory baudrate of 250000 causes problems with gcode items that report back information like M114. 
 Using 115200 on both the mainboard and the screen resolves this issue.
@@ -7,7 +8,7 @@ Change the mks_config.txt configuration file for BLTouch and correct the baud ra
 Link to MKS TFT28 screen firmware
 https://github.com/makerbase-mks/MKS-TFT/tree/master/MKS-TFT2.8-3.2
 
-Important mks_config.txt configuration changes
+### Important mks_config.txt configuration changes
 - set baudrate to 115200
   - cfg_baud_rate:3
 
