@@ -12,6 +12,6 @@
 - Enable `PIDTEMPBED` to enable PID tuning for the bed.
 
 ```cpp
-#define PID_DEBUG             // Print PID debug data to the serial port. Use 'M303 D' to toggle activation.
+#define PID_DEBUG             // Print PID debug data to the serial port. Use 'M303 D' to enable/disable.
 #define PID_PARAMS_PER_HOTEND // Use separate PID parameters for each extruder (useful for mismatched extruders)
 ```
