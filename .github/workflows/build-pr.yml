@@ -54,8 +54,12 @@ jobs:
     - name: Cache PlatformIO
       uses: actions/cache@v4
       with:
-        path: ~/.platformio
-        key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
+        path: |
+          ~/.platformio
+          .pio/libdeps
+        key: ${{ runner.os }}-pio-v1
+        restore-keys: |
+          ${{ runner.os }}-pio-
 
     - name: Select Python 3.9
       uses: actions/setup-python@v5
