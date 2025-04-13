@@ -3297,7 +3297,7 @@
 #endif
 
 //
-// Touch-screen LCD for Malyan M200/M300 printers
+// LCD for Malyan M200/M300 printers
 //
 #define MALYAN_LCD
 #if ENABLED(MALYAN_LCD)
