@@ -4,7 +4,7 @@ If you get premature Y axis endstop triggers or even halts this is a known probl
 # Microstepping
 The Y axis should be jumpered to 8 microsteps with the stock geared setup with 0.9 degree stepper. 16 microsteps even at low speeds would overrun the RUMBA. 1.8 degree steppers can run 16 microsteps and there would be no change to the steps per mm in this configuration.
 
-#Probe
+# Probe
 The configuration is for the original IR probe which has problems with the glass bed. A popular modification was to move this to the bed for Z homing. I switched to a capacitive probe which can be run to the original wiring if you separate the 5v line and move it to a 12v source on the board. Endstop hit state needs to be changed to LOW for this.
 
 # Octoprint
