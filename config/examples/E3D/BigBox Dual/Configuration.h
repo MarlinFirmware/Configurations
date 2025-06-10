@@ -1,6 +1,6 @@
 /**
  * Marlin 3D Printer Firmware
- * Copyright (c) 2020 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
+ * Copyright (c) 2025 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
  *
  * Based on Sprinter and grbl.
  * Copyright (c) 2011 Camiel Gubbels / Erik van der Zalm
@@ -661,15 +661,15 @@
 // Above this temperature the heater will be switched off.
 // This can protect components from overheating, but NOT from shorts and failures.
 // (Use MINTEMP for thermistor short/failure protection.)
-#define HEATER_0_MAXTEMP 300 //Brass Nozzle Max, PT100
-#define HEATER_1_MAXTEMP 300 //Brass Nozzle Max, PT100
+#define HEATER_0_MAXTEMP 300 // Brass Nozzle Max, PT100
+#define HEATER_1_MAXTEMP 300 // Brass Nozzle Max, PT100
 #define HEATER_2_MAXTEMP 275
 #define HEATER_3_MAXTEMP 275
 #define HEATER_4_MAXTEMP 275
 #define HEATER_5_MAXTEMP 275
 #define HEATER_6_MAXTEMP 275
 #define HEATER_7_MAXTEMP 275
-#define BED_MAXTEMP      120 //Varipower Bed Max
+#define BED_MAXTEMP      120 // Varipower Bed Max
 #define CHAMBER_MAXTEMP  60
 
 /**
@@ -809,7 +809,7 @@
                               // Get the power from the temperature report ('M105' => B@:nnn) and try P*2-20 to P*2-10.
   //#define PID_BED_DEBUG     // Print Bed PID debug data to the serial port. Use 'M303 D' to enable/disable.
 
-  //E3D BigBox Variable Power Density Heated Bed (24V)
+  // E3D BigBox Variable Power Density Heated Bed (24V)
   #define DEFAULT_bedKp 336
   #define DEFAULT_bedKi 61
   #define DEFAULT_bedKd 462.4
@@ -909,8 +909,8 @@
   #define PID_FUNCTIONAL_RANGE 20 // If the temperature difference between the target temperature and the actual temperature
                                   // is more than PID_FUNCTIONAL_RANGE then the PID will be shut off and the heater will be set to min/max.
 
-  #define PID_EDIT_MENU         // Add PID editing to the "Advanced Settings" menu. (~700 bytes of flash)
-  #define PID_AUTOTUNE_MENU     // Add PID auto-tuning to the "Advanced Settings" menu. (~250 bytes of flash)
+  #define PID_EDIT_MENU           // Add PID editing to the "Advanced Settings" menu. (~700 bytes of flash)
+  #define PID_AUTOTUNE_MENU       // Add PID auto-tuning to the "Advanced Settings" menu. (~250 bytes of flash)
 #endif
 
 // @section safety
@@ -1300,7 +1300,7 @@
  * Override with M92 (when enabled below)
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 160, 180, 1600, 304 } //BigBox Defaults 0.9 Steppers, 16,8,16,16,16 Microsteps
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 160, 180, 1600, 304 } // BigBox Defaults 0.9 Steppers, 16,8,16,16,16 Microsteps
 
 /**
  * Enable support for M92. Disable to save at least ~530 bytes of flash.
@@ -1312,7 +1312,7 @@
  * Override with M203
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_FEEDRATE          { 150, 150, 6, 50 } //BigBox Defaults
+#define DEFAULT_MAX_FEEDRATE          { 150, 150, 6, 50 } // BigBox Defaults
 
 //#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
@@ -1325,7 +1325,7 @@
  * Override with M201
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_ACCELERATION      { 1000, 1000, 100, 10000 } //BigBox Defaults
+#define DEFAULT_MAX_ACCELERATION      { 1000, 1000, 100, 10000 } // BigBox Defaults
 
 //#define LIMITED_MAX_ACCEL_EDITING     // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
 #if ENABLED(LIMITED_MAX_ACCEL_EDITING)
@@ -1659,7 +1659,7 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
-#define NOZZLE_TO_PROBE_OFFSET { 0, 35, 0 } //BigBox IR Probe
+#define NOZZLE_TO_PROBE_OFFSET { 0, 35, 0 } // BigBox IR Probe
 
 // Enable and set to use a specific tool for probing. Disable to allow any tool.
 #define PROBING_TOOL 0
@@ -1903,7 +1903,7 @@
 // @section geometry
 
 // The size of the printable area
-#define X_BED_SIZE 260 //BigBox Dual, 300 for others
+#define X_BED_SIZE 260 // BigBox Dual, 300 for others
 #define Y_BED_SIZE 200
 
 // Travel limits (linear=mm, rotational=°) after homing, corresponding to endstop positions.
@@ -1911,7 +1911,7 @@
 #define Y_MIN_POS 0
 #define Z_MIN_POS 0
 #define X_MAX_POS X_BED_SIZE
-#define Y_MAX_POS Y_BED_SIZE //Change to 235 to reach purge bucket
+#define Y_MAX_POS Y_BED_SIZE // Change to 235 to reach purge bucket
 #define Z_MAX_POS 300
 //#define I_MIN_POS 0
 //#define I_MAX_POS 50
@@ -2460,7 +2460,7 @@
  *   M501 - Read settings from EEPROM. (i.e., Throw away unsaved changes)
  *   M502 - Revert settings to "factory" defaults. (Follow with M500 to init the EEPROM.)
  */
-#define EEPROM_SETTINGS     // Persistent storage with M500 and M501
+#define EEPROM_SETTINGS       // Persistent storage with M500 and M501
 //#define DISABLE_M503        // Saves ~2700 bytes of flash. Disable for release!
 #define EEPROM_CHITCHAT       // Give feedback on EEPROM commands. Disable to save flash.
 #define EEPROM_BOOT_SILENT    // Keep M503 quiet and only give errors during first load
@@ -2499,7 +2499,7 @@
 // Preheat Constants - Up to 10 are supported without changes
 //
 #define PREHEAT_1_LABEL       "PLA"
-#define PREHEAT_1_TEMP_HOTEND 215 //BigBox Default Config was 220
+#define PREHEAT_1_TEMP_HOTEND 215 // BigBox Default Config was 220
 #define PREHEAT_1_TEMP_BED     70
 #define PREHEAT_1_TEMP_CHAMBER 35
 #define PREHEAT_1_FAN_SPEED     0 // Value from 0 to 255
@@ -2527,7 +2527,7 @@
 
 #if ENABLED(NOZZLE_PARK_FEATURE)
   // Specify a park position as { X, Y, Z_raise }
-  #define NOZZLE_PARK_POINT { (70 ), 200, 20 } //Purge Bucket is at 235 but T0/T1 offset make it difficult to park there
+  #define NOZZLE_PARK_POINT { 70, 200, 20 } // Purge Bucket at Y=235 but T0/T1 offset make it difficult to park there
   #define NOZZLE_PARK_MOVE          0   // Park motion: 0 = XY Move, 1 = X Only, 2 = Y Only, 3 = X before Y, 4 = Y before X
   #define NOZZLE_PARK_Z_RAISE_MIN   2   // (mm) Always raise Z by at least this distance
   #define NOZZLE_PARK_XY_FEEDRATE 100   // (mm/s) X and Y axes feedrate (also used for delta Z axis)
@@ -2590,7 +2590,7 @@
 
   // Specify positions for each tool as { { X, Y, Z }, { X, Y, Z } }
   // Dual hotend system may use { {  -20, (Y_BED_SIZE / 2), (Z_MIN_POS + 1) },  {  420, (Y_BED_SIZE / 2), (Z_MIN_POS + 1) }}
-  #define NOZZLE_CLEAN_START_POINT { {  70, 235, (Z_MIN_POS + 1) }, {  71, 235, (Z_MIN_POS + 1) } }
+  #define NOZZLE_CLEAN_START_POINT { { 70, 235, (Z_MIN_POS + 1) }, {  71, 235, (Z_MIN_POS + 1) } }
   #define NOZZLE_CLEAN_END_POINT   { { 70, 220, (Z_MIN_POS + 1) }, {  71, 220, (Z_MIN_POS + 1) } }
 
   #if ENABLED(NOZZLE_CLEAN_PATTERN_CIRCLE)
