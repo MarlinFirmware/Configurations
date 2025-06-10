@@ -1585,7 +1585,7 @@
   // Add Configuration > Debug Menu > Endstop Test for endstop/probe/runout testing
   //#define LCD_ENDSTOP_TEST
 
-#endif // HAS_LCD_MENU
+#endif // HAS_MARLINUI_MENU
 
 #if HAS_DISPLAY
   /**
@@ -3195,7 +3195,7 @@
   #if AXIS_IS_TMC_CONFIG(E1)
     #define E1_CURRENT      E0_CURRENT
     #define E1_MICROSTEPS   E0_MICROSTEPS
-    #define E1_RSENSE         0.062
+    #define E1_RSENSE       E0_RSENSE
     #define E1_CHAIN_POS     -1
     //#define E1_INTERPOLATE true
     //#define E1_HOLD_MULTIPLIER 0.5
@@ -3204,7 +3204,7 @@
   #if AXIS_IS_TMC_CONFIG(E2)
     #define E2_CURRENT      E0_CURRENT
     #define E2_MICROSTEPS   E0_MICROSTEPS
-    #define E2_RSENSE         0.062
+    #define E2_RSENSE       E0_RSENSE
     #define E2_CHAIN_POS     -1
     //#define E2_INTERPOLATE true
     //#define E2_HOLD_MULTIPLIER 0.5
