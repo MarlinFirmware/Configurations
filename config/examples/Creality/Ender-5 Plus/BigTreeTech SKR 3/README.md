@@ -3,14 +3,14 @@
 > [!IMPORTANT]
 > LCD cable will need to be modified to fit the SKR 3 motherboard (See board silkscreens for pin labels):
 >
-> |  LCD -> SKR 3   |
-> |-----------------|
-> | `+5V` -> `+5V`  |
-> | `RX4` -> ``     |
-> | `RX2` -> `PA9`  |
-> | `TX2` -> `PA10` |
-> | `TX4` -> ``     |
-> | `GND` -> `G`    |
+> |  LCD -> SKR 3            |
+> |--------------------------|
+> | `+5V` -> `+5V`           |
+> | `RX4` -> `NOT CONNECTED` |
+> | `RX2` -> `PA9`           |
+> | `TX2` -> `PA10`          |
+> | `TX4` -> `NOT CONNECTED` |
+> | `GND` -> `G`             |
 
 ## About
 
