@@ -1,6 +1,7 @@
 # Space Issues
 ## Version Differences
-The single extruder build fits more than the dual such as `S_CURVE_ACCELERATION`. 2.1.3 is slightly bigger than 2.1.2.5 which affects fitting `HOTEND_IDLE_TIMEOUT`, on 2.1.3 Dual Extruder builds you can disable `CAPABILITIES_REPORT` to fit this. I didn't do it in the example to prevent minor future changes to the firmware from causing the build to be too large. `CONFIGURE_FILAMENT_CHANGE` which did not exist on 2.1.2 is disabled in the dual build to fit the filament loading menu.
+ - The single extruder build enables the `S_CURVE_ACCELERATION` feature due to extra available space.
+ - The dual extruder build enables `MARLIN_SMALL_BUILD` to match feature parity with the single extruder build with exception to `S_CURVE_ACCELERATION`.
 
 ## Features disabled/enabled to save space.
 ```
@@ -11,6 +12,9 @@ ARC_SUPPORT
 NO_VOLUMETRICS
 NO_WORKSPACE_OFFSETS
 ```
+
+## Fitting S_CURVE_ACCELERATION in the dual build.
+Removing `BABYSTEPPING` entirely will allow `S_CURVE_ACCELERATION` to fit on dual extruder builds. However commenting out `DOUBLECLICK_FOR_Z_BABYSTEPPING`, `BABYSTEP_DISPLAY_TOTAL`, and `CONFIGURE_FILAMENT_CHANGE` will fit `S_CURVE_ACCELERATION` without entirely losing `BABYSTEPPING`.
 
 # Flashing
 ## USB Flashing
@@ -25,7 +29,7 @@ I find it much easier to flash over the ICSP header using an Arduino and AVR Dud
 The right nozzle is Extruder 1 (E0) on this printer which will often be confusing as it will be the left temperature on the screen. There are a couple of ways to change this, you can pin swap the pins file. Don’t forget to invert the motor direction. It is possible but not as easy to edit the display order instead.
 
 ## Motor Current
-The FlashForge Creator Pro example sets current a little higher at .84 for most and .4 for Z. I have matched the MakerBot values from beta.ivc.no of .81 except for Z rounding from .278 to .28. The Z motor will whine way more at higher current.
+The FlashForge Creator Pro example sets current a little higher at .84 for XY&E and .4 for Z. I have matched the MakerBot values from beta.ivc.no of .81 except for Z rounding from .278 to .28. The Z motor will whine more at higher current.
 
 # Modifications
 
@@ -35,4 +39,3 @@ If you have added a part cooling fan to the extra mosfet you need to uncomment #
 
 You will also need to set the pin definition. This can actually be inserted right below the line you just uncommented.\
 `#define FAN0_PIN                  MOSFET_F_PIN`
-
