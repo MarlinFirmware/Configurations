@@ -70,7 +70,8 @@
 
 // Choose the name from boards.h that matches your setup
 #ifndef MOTHERBOARD
-  #define MOTHERBOARD BOARD_RAMPS_14_EFB
+  #define MOTHERBOARD BOARD_RAMPS_14_EFB // Micromake 1.3 (RAMPS clone with MKS-Gen style)
+  #define BOARD_INFO_NAME "Micromake 1.3"
 #endif
 
 // @section serial
