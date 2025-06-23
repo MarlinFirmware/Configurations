@@ -1025,7 +1025,7 @@
   // Delta calibration menu
   // Add three-point calibration to the MarlinUI menu.
   // See http://minow.blogspot.com/index.html#4918805519571907051
-  //#define DELTA_CALIBRATION_MENU
+  #define DELTA_CALIBRATION_MENU
 
   // G33 Delta Auto-Calibration. Enable EEPROM_SETTINGS to store results.
   #define DELTA_AUTO_CALIBRATION
@@ -1363,9 +1363,9 @@
  */
 #define CLASSIC_JERK
 #if ENABLED(CLASSIC_JERK)
-  #define DEFAULT_XJERK  5.0
-  #define DEFAULT_YJERK  DEFAULT_XJERK
-  #define DEFAULT_ZJERK  DEFAULT_XJERK // Must be same as XY for delta
+  #define DEFAULT_XJERK DEFAULT_ZJERK
+  #define DEFAULT_YJERK DEFAULT_ZJERK
+  #define DEFAULT_ZJERK  5.0
   #define DEFAULT_EJERK  5.0
   //#define DEFAULT_IJERK  0.3
   //#define DEFAULT_JJERK  0.3
@@ -2315,7 +2315,7 @@
 //#define LCD_BED_LEVELING
 
 #if ENABLED(LCD_BED_LEVELING)
-  #define MESH_EDIT_Z_STEP  0.05  // (mm) Step size while manually probing Z axis.
+  #define MESH_EDIT_Z_STEP  0.025 // (mm) Step size while manually probing Z axis.
   #define LCD_PROBE_Z_RANGE 4     // (mm) Z Range centered on Z_MIN_POS for LCD Z adjustment
   //#define MESH_EDIT_MENU        // Add a menu to edit mesh points
 #endif
@@ -2536,7 +2536,7 @@
 
 #if ENABLED(NOZZLE_PARK_FEATURE)
   // Specify a park position as { X, Y, Z_raise }
-  #define NOZZLE_PARK_POINT { 0, 0, 20 }
+  #define NOZZLE_PARK_POINT { 0, Y_MIN_POS, 10 }
   #define NOZZLE_PARK_MOVE          0   // Park motion: 0 = XY Move, 1 = X Only, 2 = Y Only, 3 = X before Y, 4 = Y before X
   #define NOZZLE_PARK_Z_RAISE_MIN   2   // (mm) Always raise Z by at least this distance
   #define NOZZLE_PARK_XY_FEEDRATE 100   // (mm/s) X and Y axes feedrate (also used for delta Z axis)
