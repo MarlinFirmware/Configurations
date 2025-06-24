@@ -24,7 +24,7 @@ If the bed is left all the way up. Take care when doing things like loading fila
 ### Steps Per MM Changes
  - Revision G and H use 16 tooth pulley specifed as 80.1
  - Prior Revisions use 18 tooth pulley specified as 88.88 or 88.89
- - Silver Z Motors T8x8 specified at 400
+ - Silver Z Motors are T8x8 specified at 400
  - Black Z Motors are Imperial 1/8" specified at 1007.7 
 
 # Hotends
