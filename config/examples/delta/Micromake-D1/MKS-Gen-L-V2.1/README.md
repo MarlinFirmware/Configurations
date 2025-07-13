@@ -10,17 +10,12 @@
 - `Configuration.h` & `Configuration_adv.h` already tuned for Micromake D1 geometry.  
 - English 20×4 LCD presets.  
 - Safe temperature limits (270°C hot‑end / 120°C bed).  
-- Smart auto‑fan on MOSFET D.  
-- Updated motion limits for faster homing (100mm/s).  
+- Smart auto‑fan on MOSFET D.
 - EEPROM, SD‑card, auto‑delta‑calibration G33 ready.
 
-### 2. Compare to Anycubic Kossel config
+### 2. Pin correspondence (old board → new)
 
-See `config/examples/delta/Anycubic/Kossel`
-
-### 3. Pin correspondence (old board → new)
-
-| Function           | Makeboard Mini 2.1.2 | MKS Gen L V2.1           |
+| Function           | [Makeboard Mini 2.1.2](assets/makeboard_mini_2.1.2.webp) | [MKS Gen L V2.1](assets/mks_gen_l_v2.1.webp)           |
 |--------------------|----------------------|--------------------------|
 | X‑STEP / DIR / EN  | 54 / 55 / 38         | X.STEP / X.DIR / X.EN    |
 | Y‑STEP / DIR / EN  | 60 / 61 / 56         | Y.STEP / Y.DIR / Y.EN    |
@@ -36,3 +31,12 @@ See `config/examples/delta/Anycubic/Kossel`
 | Fan 0 (model)      | D9                   | FAN screw                |
 | Fan 1 (hot‑end)    | D7                   | MOSFETD                  |
 | VIN                | XT‑30                | 2‑pin 12–24V in          |
+
+### 3 · After flashing:
+```gcode
+M502  ; load defaults
+M500  ; save
+G28   ; home
+G33   ; auto‑calibrate
+M303 E0 S200 C8 ; PID calibration
+```
