@@ -1206,7 +1206,7 @@
                                                   //   ZVD, MZV : FTM_RATIO
                                                   //   2HEI     : FTM_RATIO * 3 / 2
                                                   //   3HEI     : FTM_RATIO * 2
-#endif
+#endif // FT_MOTION
 
 /**
  * Input Shaping

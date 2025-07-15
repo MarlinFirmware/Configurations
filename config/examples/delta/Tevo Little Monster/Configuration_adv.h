@@ -1203,7 +1203,7 @@
                                                   //   ZVD, MZV : FTM_RATIO
                                                   //   2HEI     : FTM_RATIO * 3 / 2
                                                   //   3HEI     : FTM_RATIO * 2
-#endif
+#endif // FT_MOTION
 
 /**
  * Input Shaping
@@ -1467,7 +1467,7 @@
 
   // Actual motor currents in Amps. The number of entries must match DIGIPOT_I2C_NUM_CHANNELS.
   // These correspond to the physical drivers, so be mindful if the order is changed.
-  #define DIGIPOT_I2C_MOTOR_CURRENTS { 1.000, 1.000, 1.000, 1.000, 1.000  } // MKS_SBASE
+  #define DIGIPOT_I2C_MOTOR_CURRENTS { 1.0f, 1.0f, 1.0f, 1.0f, 1.0f } // MKS_SBASE
 
   //#define DIGIPOT_USE_RAW_VALUES    // Use DIGIPOT_MOTOR_CURRENT raw wiper values (instead of A4988 motor currents)
 
