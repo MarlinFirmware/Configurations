@@ -38,7 +38,7 @@
 #define CUSTOM_BOOTSCREEN_FRAME_TIME 100        // (ms) Same time for all frames
 //#define CUSTOM_BOOTSCREEN_ANIMATED_FRAME_TIME // Each frame also has a duration
 
-#define CUSTOM_BOOTSCREEN_BMPWIDTH   120
+#define CUSTOM_BOOTSCREEN_BMPWIDTH   56
 
 const unsigned char custom_start_bmp[] PROGMEM = {
   B00011111,B11111111,B11111111,B11111111,B11111111,B11111111,B11111111,
