@@ -1112,7 +1112,7 @@
 // Enable for TPARA kinematics and configure below
 #define AXEL_TPARA
 #if ENABLED(AXEL_TPARA)
-  #define DEBUG_TPARA_KINEMATICS
+  #define DEBUG_TPARA
   #define DEFAULT_SEGMENTS_PER_SECOND 200
 
   // Length of inner and outer support arms. Measure arm lengths precisely.
