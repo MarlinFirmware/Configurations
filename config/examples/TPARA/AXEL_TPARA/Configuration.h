@@ -1122,7 +1122,7 @@
   // Height of the Shoulder axis (pivot) relative to the tower floor
   #define TPARA_SHOULDER_AXIS_HEIGHT 135.0     // (mm)
 
-  // This is the position of the last linkage relative to the robot arm origin 
+  // This is the position of the last linkage relative to the robot arm origin
   // (intersection of the base axis and floor) when in the home position (endstops triggered), aka machine home position
   #define TPARA_ARM_X_HOME_POS  28.75  // Measured from shoulder axis to tool holder axis in home position
   #define TPARA_ARM_Y_HOME_POS   0
@@ -1131,14 +1131,14 @@
 
   // TPARA Workspace offset relative to the tower (position of workspace origin relative to robot Tower origin )
   // This needs to be reasonably accurate as it defines the printbed position in the TPARA space.
-  #define TPARA_OFFSET_X    127.0     // (mm)  Thus it coincides with the minimum radius MIDDLE_DEAD_ZONE_R, and W(0,0,0) is reachable 
-  #define TPARA_OFFSET_Y      0.0     // (mm)  
+  #define TPARA_OFFSET_X    127.0     // (mm)  Thus it coincides with the minimum radius MIDDLE_DEAD_ZONE_R, and W(0,0,0) is reachable
+  #define TPARA_OFFSET_Y      0.0     // (mm)
   #define TPARA_OFFSET_Z      0.0     // (mm)
 
-  // TPARA tool connection point offset, relative to the tool moving frame origin which is in the last linkage axis, 
-  // (TCP: tool center/conection point) of the robot, 
-  // the plane of measured offset must be alligned with home position plane 
-  #define TPARA_TCP_OFFSET_X    27.0     // (mm) Tool flange: 27 (distance from pivot to bolt holes), extruder tool: 50.0, 
+  // TPARA tool connection point offset, relative to the tool moving frame origin which is in the last linkage axis,
+  // (TCP: tool center/connection point) of the robot,
+  // the plane of measured offset must be alligned with home position plane
+  #define TPARA_TCP_OFFSET_X    27.0     // (mm) Tool flange: 27 (distance from pivot to bolt holes), extruder tool: 50.0,
   #define TPARA_TCP_OFFSET_Y     0.0     // (mm)
   #define TPARA_TCP_OFFSET_Z   -65.0     // (mm) Tool flange (bottom): -6 (caution as Z 0 posiion will crash second linkage to the floor, -35 is safe for testing with no tool), extruder tool (depends on extruder): -65.0
 
@@ -1148,12 +1148,12 @@
   #define HOME_Z_FIRST
   #define HOME_Y_BEFORE_X
 
-  // Radius around the center where the arm cannot reach, for now we use a hardcoded uniform limit, although it should be calculated, or fix a limit for each axis angle 
+  // Radius around the center where the arm cannot reach, for now we use a hardcoded uniform limit, although it should be calculated, or fix a limit for each axis angle
   #define MIDDLE_DEAD_ZONE_R   100  // (mm)
 
   // (degrees) Max angle between L1 and L2
-  #define TPARA_MAX_L1L2_ANGLE 140.0f      
-#endif // AXEL_TPARA parameters
+  #define TPARA_MAX_L1L2_ANGLE 140.0f
+#endif // AXEL_TPARA
 
 // @section polar
 
@@ -1333,7 +1333,7 @@
  * Default Axis Steps Per Unit (linear=steps/mm, rotational=steps/°)
  * Override with M92 (when enabled below)
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
- * 
+ *
  * TPARA only uses angles, units are (steps/degree)
  * 200 steps per 360 deg rev * [32 (DRV8825) or 16 (A4988) microsteps] * 32:9 gear ratio
  * 200/360*32*32/9 = 63.2098765 ~ 63.21
@@ -2397,9 +2397,9 @@
 
 /**
  * Manually set the home position. Leave these undefined for automatic settings.
- * 
+ *
  * For DELTA this is the top-center of the Cartesian print volume.
- * 
+ *
  * For TPARA this is the position of the tool holder relative to the arm origin (intersection of the base axis and floor) when in the home position (endstops triggered), aka machine home position.
  * Tool and Workspace home should be calculated with their respective offset
  */
