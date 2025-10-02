@@ -1,7 +1,7 @@
-# Micromake D1 → MKS Gen L V2.1
+# Micromake D1 with MKS Gen L V2.1
 ## Configuration & wiring guide
 
-- **Board**: [Makerbase MKS Gen L V2.1](https://github.com/makerbase-mks/MKS-GEN_L/wiki/MKS_GEN_L_V2)  
+- **Board**: [Makerbase MKS Gen L V2.1](//github.com/makerbase-mks/MKS-GEN_L/wiki/MKS_GEN_L_V2)
 - **Display**: RepRapDiscount Smart Controller (LCD 2004, 20×4)
 - **Drivers**: TMC2209 @ 1⁄16 µ‑step (UART mode)
 - **Features**: Single Extruder, Heated bed, Fixed Z‑probe, Dual Fans
@@ -15,7 +15,7 @@
 
 ### 2. Pin correspondence (old board → new)
 
-| Function           | [Makeboard Mini 2.1.2](assets/makeboard_mini_2.1.2.webp) | [MKS Gen L V2.1](assets/mks_gen_l_v2.1.webp)           |
+| Function           | [Makeboard Mini 2.1.2](assets/makeboard_mini_2.1.2.webp) | [MKS Gen L V2.1](assets/mks_gen_l_v2.1.webp) |
 |--------------------|----------------------|--------------------------|
 | X‑STEP / DIR / EN  | 54 / 55 / 38         | X.STEP / X.DIR / X.EN    |
 | Y‑STEP / DIR / EN  | 60 / 61 / 56         | Y.STEP / Y.DIR / Y.EN    |
@@ -32,7 +32,7 @@
 | Fan 1 (hot‑end)    | D7                   | MOSFETD                  |
 | VIN                | XT‑30                | 2‑pin 12–24V in          |
 
-### 3 · After flashing:
+### 3. After flashing:
 ```gcode
 M502  ; load defaults
 M500  ; save
