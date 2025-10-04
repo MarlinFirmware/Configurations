@@ -23,7 +23,7 @@ Copy the compiled "`firmware.bin`" file to an SD card, giving it a distinct name
 
 ## Marlin DGUS UI Instructions
 
-The Ender-6 stock LCD can optionally use a [customized Marlin DGUS interface](https://github.com/coldtobi/Marlin_DGUS_Resources). With the stock LCD firmware Marlin can only be controlled from a host over USB (see first section).
+The Ender-6 stock LCD can optionally use a [customized Marlin DGUS interface](//github.com/coldtobi/Marlin_DGUS_Resources). With the stock LCD firmware Marlin can only be controlled from a host over USB (see first section).
 
 - Copy the `DWIN_SET` folder to a microSD card. The microSD card must be smaller than 8 GB and formatted with a 4K cluster size.
 - Power off the printer and disassemble the front panel to get access to the LCD board.
@@ -34,4 +34,4 @@ The Ender-6 stock LCD can optionally use a [customized Marlin DGUS interface](ht
 
 ## Restoring Factory Firmware
 
-The Creality firmware can be restored by downloading the [Ender-6 V1.0.1 firmware](https://www.creality.com/download) and following the flashing procedure above with the Creality-provided `DWIN_SET` folder.
+The Creality firmware can be restored by downloading the [Ender-6 V1.0.1 firmware](//www.creality.com/download) and following the flashing procedure above with the Creality-provided `DWIN_SET` folder.

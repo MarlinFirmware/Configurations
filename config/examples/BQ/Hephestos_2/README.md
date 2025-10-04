@@ -1,6 +1,6 @@
-# Example Configuration for BQ [Hephestos 2](http://www.bq.com/uk/hephestos-2)
+# Example Configuration for BQ [Hephestos 2](//www.bq.com/uk/hephestos-2)
 Based on the original configuration file shipped with the heavily modified Marlin fork by BQ.
-The forked firmware and configuration files can be found at the [BQ Github repository](https://github.com/bq/Marlin).
+The forked firmware and configuration files can be found at the [BQ Github repository](//github.com/bq/Marlin).
 
 > [!NOTE]
 > The look and feel of the LCD menu will change dramatically when using the original Marlin firmware.
@@ -27,4 +27,4 @@ The forked firmware and configuration files can be found at the [BQ Github repos
 
 ## Support
 This configuration should work easily with the stock Hephestos 2, nevertheless if you encounter any
-issues you may contact me on [Github](https://github.com/jbrazio), [Twitter](https://twitter.com/jbrazio) or by mail.
+issues you may contact me on [Github](//github.com/jbrazio), [Twitter](//twitter.com/jbrazio) or by mail.

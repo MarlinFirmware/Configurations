@@ -4,7 +4,7 @@ Config without automatic bed level sensor, or in other words, "as stock"
 
 ## To install:
 
-1. Install [Arduino](https://www.arduino.cc/en/Main/Software)
+1. Install [Arduino](//www.arduino.cc/en/Main/Software)
 
 1. Install U8glib
     * `Sketch` -> `Include Library` -> `Manage Libraries...`
