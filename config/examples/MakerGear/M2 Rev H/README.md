@@ -1,5 +1,5 @@
 # Overview
-This configuration is built and tested for the MakerGear M2 Revision H. I will try to note obvious differences in the other revisions to help support them. Some of the original firmwares notes are incorrect but many of the details are available here - https://makergear.zendesk.com/hc/en-us/articles/360022528292
+This configuration is built and tested for the MakerGear M2 Revision H. I will try to note obvious differences in the other revisions to help support them. Some of the original firmware's notes are incorrect but [many of the details are available here](//makergear.zendesk.com/hc/en-us/articles/360022528292).
 
 # Z Max Homing on Rev F, G, H
 Revision E moved the Z endstop switch to the bottom/max. For all other revisions set `Z_HOME_DIR` to -1 for Z Min Homing. This is not a common configuration and certain unexpected behaviours may occur. The primary solution has been to move off the endstop by 5mm with `HOMING_BACKOFF_POST_MM`. This mitigates the current Bed Tramming routine moving down by `BED_TRAMMING_Z_HOP` which defaults to 4 and does not respect Z_MAX_POS. 
