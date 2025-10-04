@@ -1,14 +1,14 @@
 # AnyCubic Predator Notes
 - At this time, this version is not supported by the stock bootloader as an SD card update.
-- Special thanks to Korbinian Heel [[@inib](https://github.com/inib)].
-- Special thanks to Slava Novgorodov [[@Slava N](https://www.youtube.com/channel/UC617QlzItK-dOeTTttKZq3A)] for sharing and making the video of the direct installation method.
-- Special thanks to Sebastian Hernandez [[@SXHXC](https://github.com/SXHXC)] for his [fork](https://github.com/SXHXC/Marlin-Anycubic-Predator-Trigorilla-PRO) and doing all the work.
+- Special thanks to Korbinian Heel [[@inib](//github.com/inib)].
+- Special thanks to Slava Novgorodov [[@Slava N](//www.youtube.com/channel/UC617QlzItK-dOeTTttKZq3A)] for sharing and making the video of the direct installation method.
+- Special thanks to Sebastian Hernandez [[@SXHXC](//github.com/SXHXC)] for his [fork](//github.com/SXHXC/Marlin-Anycubic-Predator-Trigorilla-PRO) and doing all the work.
 
 ## Backing Up the Firmware
 
 Watch the video below for detailed instructions on the whole process. It is recommended to take the time to make a backup of the firmware currently installed on the board, in case you decide you want to go back to the factory-installed version.
 
-[![Trigorilla Pro reflash to Marlin 2.0.x](https://img.youtube.com/vi/g2cAJXle6t0/0.jpg)](https://www.youtube.com/watch?v=g2cAJXle6t0 "ANYCUBIC Predator original board Trigorilla Pro reflash to Marlin 2.0.x")
+[![Trigorilla Pro reflash to Marlin 2.0.x](//img.youtube.com/vi/g2cAJXle6t0/0.jpg)](//www.youtube.com/watch?v=g2cAJXle6t0 "ANYCUBIC Predator original board Trigorilla Pro reflash to Marlin 2.0.x")
 
 ## Flashing the Firmware
 
@@ -26,7 +26,7 @@ Use these example config files (adjusted to your needs) and build Marlin as usua
 
 ### 3. Get STM32 Flasher
 
-Download the _STM32 Flasher_ software at the ST Micro [download page](https://www.st.com/en/development-tools/flasher-stm32.html#get-software). Use _STM32 Flasher_ to flash your Marlin binary file to the board following the procedure shown in the video.
+Download the _STM32 Flasher_ software at the ST Micro [download page](//www.st.com/en/development-tools/flasher-stm32.html#get-software). Use _STM32 Flasher_ to flash your Marlin binary file to the board following the procedure shown in the video.
 
 ### 4. Final Steps
 

@@ -6,8 +6,8 @@ Bringing silky smooth prints to Felix.
 
   - Install the latest non-beta Arduino software IDE/toolset: http://www.arduino.cc/en/Main/Software
   - Download the Marlin firmware
-    - [Latest developement version](https://github.com/MarlinFirmware/Marlin/tree/Development)
-    - [Stable version](https://github.com/MarlinFirmware/Marlin/tree/Development)
+    - [Latest developement version](//github.com/MarlinFirmware/Marlin/tree/Development)
+    - [Stable version](//github.com/MarlinFirmware/Marlin/tree/Development)
   - In both cases use the "Download Zip" button on the right.
 
 ```shell

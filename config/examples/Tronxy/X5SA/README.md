@@ -25,7 +25,7 @@ M8512 "currentconfig.gcode" ; save settings to file
 4. The printer won't do anything. Just wait a few seconds and stop the print.
 5. Your current printer settings are stored in the file: `currentconfig.gcode`
 
-You can read more about it in [this guide](https://www.facebook.com/notes/tronxy-turnigy-x5s-x5sa-x3s-3d-printer-drucker-users/tronxy-firmware-configuration-guide-by-keith-varin-addermk264bit-tuning/649799805579765/).
+You can read more about it in [this guide](//www.facebook.com/notes/tronxy-turnigy-x5s-x5sa-x3s-3d-printer-drucker-users/tronxy-firmware-configuration-guide-by-keith-varin-addermk264bit-tuning/649799805579765/).
 
 Thanks to KEITH VARIN.
 
@@ -178,7 +178,7 @@ You can customize for your own setup. TFT, Baby Steps and a lot of cool stuff ar
 2. Open your board case
 3. Remove the "boot" jumper (1) as the image.
 4. Change the "v source" jumper (2) from 5V to USB.
-5. Open [STM Cube Programmer](https://www.st.com/en/development-tools/stm32cubeprog.html) (linux, mac, windows) or [FLASHER-STM32](https://www.st.com/en/development-tools/flasher-stm32.html) (only windows)
+5. Open [STM Cube Programmer](//www.st.com/en/development-tools/stm32cubeprog.html) (linux, mac, windows) or [FLASHER-STM32](//www.st.com/en/development-tools/flasher-stm32.html) (only windows)
 6. The size must be **512kb -> 0x80000**
 7. Save the file. It must have exactly 524288 bytes (512kb)
 8. Disconnect
@@ -212,7 +212,7 @@ OBSOLETE! JUST USE THE FIRST METHOD.
 2. Open the board case
 3. Remove the "boot" jumper (1) as the image.
 4. Change the V source jumper (2) from 5V to USB.
-5. Open [STM Cube Programmer](https://www.st.com/en/development-tools/stm32cubeprog.html) (linux, mac, windows) or [FLASHER-STM32](https://www.st.com/en/development-tools/flasher-stm32.html) (only windows)
+5. Open [STM Cube Programmer](//www.st.com/en/development-tools/stm32cubeprog.html) (linux, mac, windows) or [FLASHER-STM32](//www.st.com/en/development-tools/flasher-stm32.html) (only windows)
 6. Flash the YOUR-MARLIN-DIR/.pio/build/chitu_f103/firmware.bin at 0x08000000
 7. After the Flash is done, put the back the boot jumper (1) and the V source jumper to 5V.
 8. Turn on the printer

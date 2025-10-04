@@ -1,7 +1,7 @@
 Configuration for the Wanhao Duplicator i3 v2.1
 
-[Made by Bot-In-a-Box Educational Robotics](https://botinabox.ca)
-[See original configuration repo](https://github.com/BotInABoxER/marlin2-for-wanhao-i3)
+[Made by Bot-In-a-Box Educational Robotics](//botinabox.ca)
+[See original configuration repo](//github.com/BotInABoxER/marlin2-for-wanhao-i3)
 
 > [!NOTE]
 > - The smaller Marlin logo is used to save memory
@@ -15,4 +15,4 @@ Inspirations:
 
 Instructions:
 - Copy the `Configuration.h`, `_Bootscreen.h` (or `Chippy_Bootscreen.h`; rename it `_Bootscreen.h`), and `Configuration_adv.h` to the `Marlin/ directory`
-- Flash the firmware onto your Melzi (https://www.fission3d.com/guides/flash-bootloader-and-install-firmware-with-raspberry-pi might help)
+- Flash the firmware onto your Melzi (//www.fission3d.com/guides/flash-bootloader-and-install-firmware-with-raspberry-pi might help)

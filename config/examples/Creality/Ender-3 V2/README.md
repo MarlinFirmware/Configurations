@@ -14,11 +14,11 @@ Use the following pictures to identify your type of display unit:
 
 * **DWIN display**, originally shipped with Ender-3 V2
 
-    ![Ender3v2-DWIN](https://user-images.githubusercontent.com/2745567/156829365-a58a3afc-77e3-40b9-9e16-5edfe3073de8.jpg)
+    ![Ender3v2-DWIN](//user-images.githubusercontent.com/2745567/156829365-a58a3afc-77e3-40b9-9e16-5edfe3073de8.jpg)
 
 * **DACAI display**, a DWIN clone
 
-    ![Ender3S1-DACAI](https://user-images.githubusercontent.com/2745567/156829472-2c38a4ab-bdde-4c21-b78f-a30692c96500.jpg)
+    ![Ender3S1-DACAI](//user-images.githubusercontent.com/2745567/156829472-2c38a4ab-bdde-4c21-b78f-a30692c96500.jpg)
 
     Emulates the DWIN protocol but without:
     * Proper brightness control
@@ -32,7 +32,7 @@ Use the following pictures to identify your type of display unit:
 
 * **SYNWIT / VIEWE display** **`Currently undocumented`**, **`Reduced custom UI compatibility`**
 
-    ![Ender3V2S1-SYNWIT-VIEWE](https://user-images.githubusercontent.com/2745567/209407402-25053f01-6a5d-4c76-90c8-da5aec43100c.png)
+    ![Ender3V2S1-SYNWIT-VIEWE](//user-images.githubusercontent.com/2745567/209407402-25053f01-6a5d-4c76-90c8-da5aec43100c.png)
 
     Emulates the DWIN protocol, but without:
     * Direct pixel blitting
@@ -42,7 +42,7 @@ Use the following pictures to identify your type of display unit:
 
 * **TJC display** **`Currently undocumented`**, **`Currently incompatible with custom UIs`**
 
-    ![Ender3V2S1-TJC](https://user-images.githubusercontent.com/2745567/206931166-24185525-e377-472e-9bed-37a39aab24fb.jpg)
+    ![Ender3V2S1-TJC](//user-images.githubusercontent.com/2745567/206931166-24185525-e377-472e-9bed-37a39aab24fb.jpg)
 
     Appears to emulate the DWIN protocol but without an unknown subset of features that make it currently crash with custom firmware.
 

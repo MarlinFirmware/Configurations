@@ -4,7 +4,7 @@
 > **NOTE ON FLASHING THE FIRMWARE:**
 > The Mightyboard uses an Arduino Mega bootloader but it doesn't do an automatic reset on DTR. To make the printer reset on DTR you'll need to flash it with a standard (or other) Arduino Mega bootloader.
 >
-> See [this guide](https://github.com/felipeksw/CreatorPro-Marlin-Cura/tree/main/Bootloader) for instructions on how to flash the bootloader.
+> See [this guide](//github.com/felipeksw/CreatorPro-Marlin-Cura/tree/main/Bootloader) for instructions on how to flash the bootloader.
 
 ## Machine Settings
 
