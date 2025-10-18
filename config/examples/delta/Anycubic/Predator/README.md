@@ -8,7 +8,7 @@
 
 Watch the video below for detailed instructions on the whole process. It is recommended to take the time to make a backup of the firmware currently installed on the board, in case you decide you want to go back to the factory-installed version.
 
-[![Trigorilla Pro reflash to Marlin 2.0.x](//img.youtube.com/vi/g2cAJXle6t0/0.jpg)](//www.youtube.com/watch?v=g2cAJXle6t0 "ANYCUBIC Predator original board Trigorilla Pro reflash to Marlin 2.0.x")
+[![Trigorilla Pro reflash to Marlin 2.0.x](https://img.youtube.com/vi/g2cAJXle6t0/0.jpg)](//www.youtube.com/watch?v=g2cAJXle6t0 "ANYCUBIC Predator original board Trigorilla Pro reflash to Marlin 2.0.x")
 
 ## Flashing the Firmware
 
