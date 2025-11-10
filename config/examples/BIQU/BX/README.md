@@ -4,7 +4,7 @@ In `Configuration.h` enable the `MOTHERBOARD BOARD_BTT_SKR_SE_BX_V3` option at t
 
 Enable the `BX_ALL_METAL_HOTEND` option to permit higher printing temperatures for the newer H2 extruder with an all-metal heatbreak.
 
-Enable the `BX_SWAP_ZM_E1M` option to swap Z and E1 motors if they swapped from the factory. This will fix potential issues with [`G34 - Z Steppers Auto-Alignment`](https://marlinfw.org/docs/gcode/G034-zsaa.html) not working correctly.
+Enable the `BX_SWAP_ZM_E1M` option to swap Z and E1 motors if they swapped from the factory. This will fix potential issues with [`G34 - Z Steppers Auto-Alignment`](//marlinfw.org/docs/gcode/G034-zsaa.html) not working correctly.
 
 ## Homing with a Probe
 

@@ -7,7 +7,7 @@ This configuration is for a P905H with **a single extruder and inductive Z-senso
 
 ## Build Instructions
   - Get Visual Studio Code and install the "Auto Build Marlin" extension.
-  - Download the [Marlin source code](https://marlinfw.org/meta/download/).
+  - Download the [Marlin source code](//marlinfw.org/meta/download/).
   - Copy the two Configuration files from this folder into the 'Marlin' folder (replacing the existing files).
   - Open the 'MarlinFirmware' project folder in Visual Studio Code.
   - Click the "Auto Build Marlin" button and then the Upload button.

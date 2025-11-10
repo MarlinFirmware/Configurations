@@ -4,7 +4,7 @@ The later versions of the PowerWASP controller board have power loss detection o
 
 The retract position on finishing the print has been set at Z190 X0 Y0
 
-There are provisions made here to use ESP3D wireless printer control from [luc-github/ESP3D](https://github.com/luc-github/ESP3D)
+There are provisions made here to use ESP3D wireless printer control from [luc-github/ESP3D](//github.com/luc-github/ESP3D)
 
 The original PowerWASP board has available a internal serial port connection with Arduino Serial3.
 The connections are as follows:
@@ -19,7 +19,7 @@ The connections are as follows:
 `------------´---------------------´
 ```
 
-With the option of wireless file upload to the SD card, the idea of updating the Firmware from the SD can also be useful. This option has been selected, but requires a modified boot loader from [rainerumrobotics/MicroBridge-Arduino-ATMega2560](https://github.com/rainerumrobotics/MicroBridge-Arduino-ATMega2560)
+With the option of wireless file upload to the SD card, the idea of updating the Firmware from the SD can also be useful. This option has been selected, but requires a modified boot loader from [rainerumrobotics/MicroBridge-Arduino-ATMega2560](//github.com/rainerumrobotics/MicroBridge-Arduino-ATMega2560)
 
 ## USB and SDCARD Firmware flashing for the ARDUINO ATMEGA 2560 and ADK
 

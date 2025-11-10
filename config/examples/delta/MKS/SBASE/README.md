@@ -19,7 +19,7 @@ From|To
 
 If using pins other than the J8 pins listed above the `spi_pins.h` file will need to be modified.
 
-An octopus cable like the [Adafruit 1199](https://www.adafruit.com/product/1199) 10-pin IDC Socket Rainbow Breakout Cable can simplify the construction of the custom cable. Just plug the Adafruit 1199 into one of the cables that came with the LCD and the individual pins into J8 and EXP2 as needed.
+An octopus cable like the [Adafruit 1199](//www.adafruit.com/product/1199) 10-pin IDC Socket Rainbow Breakout Cable can simplify the construction of the custom cable. Just plug the Adafruit 1199 into one of the cables that came with the LCD and the individual pins into J8 and EXP2 as needed.
 
 ---
 

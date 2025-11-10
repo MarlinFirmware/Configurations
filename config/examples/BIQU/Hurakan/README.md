@@ -24,7 +24,7 @@ The BIQU Hurakan ships with a BigTreeTech Manta M4P motherboard which includes a
 # Update Hurakan CB1 Image Defaults
 
 > [!IMPORTANT]
-> Start with the latest `CB1_Debian11_Klipper_kernel*.img.xz` (full) image from [bigtreetech/CB1/releases](https://github.com/bigtreetech/CB1/releases).
+> Start with the latest `CB1_Debian11_Klipper_kernel*.img.xz` (full) image from [bigtreetech/CB1/releases](//github.com/bigtreetech/CB1/releases).
 
 ## SSH into to the CB1
 
@@ -36,7 +36,7 @@ Password: `biqu`
 ## Update Timezone
 
 > [!NOTE]
-> See [Wikipedia - List of tz database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) or run `timedatectl list-timezones` for list of valid time zone names. `America/Los_Angeles` is used in the example below.
+> See [Wikipedia - List of tz database time zones](//en.wikipedia.org/wiki/List_of_tz_database_time_zones) or run `timedatectl list-timezones` for list of valid time zone names. `America/Los_Angeles` is used in the example below.
 
 ```shell
 sudo timedatectl set-timezone America/Los_Angeles

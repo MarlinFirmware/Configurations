@@ -1,6 +1,6 @@
 # Rolohaun Rook MK1 by LDO Motors
 
-The [Rook MK1 by Rolohaun](https://www.printables.com/model/387431-rook-mk1-3d-printer) is meant to be built out of parts you have laying around, but vendors like LDO Motors have put a kit together to simplify the build process. This config is meant for the following hardware:
+The [Rook MK1 by Rolohaun](//www.printables.com/model/387431-rook-mk1-3d-printer) is meant to be built out of parts you have laying around, but vendors like LDO Motors have put a kit together to simplify the build process. This config is meant for the following hardware:
 
 ## Motherboard
 

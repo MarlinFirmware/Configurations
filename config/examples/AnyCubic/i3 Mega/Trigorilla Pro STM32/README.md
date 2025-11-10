@@ -28,9 +28,9 @@ The Trigorilla Pro board has many issues and anomalies that have not been acknow
 - A Ground Loop with the case severely increases Vref noise.
 
 Fixes:
-- Use [plastic mounting](https://www.printables.com/model/188956-m3-nuts-washer-and-bolts) to isolate the board from the case.
+- Use [plastic mounting](//www.printables.com/model/188956-m3-nuts-washer-and-bolts) to isolate the board from the case.
 - Print over Serial instead of SD Card.
 - Ground the frame to earth or neutral.
 
 ## Credits
-This project would not have been possible without the Marlin Discord and their many helpful members. I would like to thank especially The-EG, EvilGremlin, tombrazier, Dust, and Nuck-TH. Additionally [this](https://www.thingiverse.com/thing:5159397/comments) unfinished firmware from Thingiverse user Thr333DDD is what I formerly based these configs on. [This analysis and reverse engineering](https://github.com/napyk/trigorilla-pro) of the Trigorilla Pro board by Github user napyk was also very helpful in figuring out issues.
+This project would not have been possible without the Marlin Discord and their many helpful members. I would like to thank especially The-EG, EvilGremlin, tombrazier, Dust, and Nuck-TH. Additionally [this](//www.thingiverse.com/thing:5159397/comments) unfinished firmware from Thingiverse user Thr333DDD is what I formerly based these configs on. [This analysis and reverse engineering](//github.com/napyk/trigorilla-pro) of the Trigorilla Pro board by Github user napyk was also very helpful in figuring out issues.

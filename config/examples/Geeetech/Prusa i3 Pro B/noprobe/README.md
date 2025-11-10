@@ -1,7 +1,7 @@
-These are example configurations for the low-cost [Acrylic Průša I3 pro B 3D Printer DIY kit](http://www.geeetech.com/acrylic-geeetech-prusa-i3-pro-b-3d-printer-diy-kit-p-917.html) and the [3DTouch auto bed leveling sensor](http://www.geeetech.com/geeetech-3dtouch-auto-bed-leveling-sensor-for-3d-printer-p-1010.html) based on:
+These are example configurations for the low-cost [Acrylic Průša I3 pro B 3D Printer DIY kit](//www.geeetech.com/acrylic-geeetech-prusa-i3-pro-b-3d-printer-diy-kit-p-917.html) and the [3DTouch auto bed leveling sensor](//www.geeetech.com/geeetech-3dtouch-auto-bed-leveling-sensor-for-3d-printer-p-1010.html) based on:
 
 - `../GT2560/`
-- [Marlin 1.1.4 With 3DTouch / BLTouch for i3 Pro B](https://www.geeetech.com/forum/viewtopic.php?t=19846)
+- [Marlin 1.1.4 With 3DTouch / BLTouch for i3 Pro B](//www.geeetech.com/forum/viewtopic.php?t=19846)
 
 The main characteristics of these configurations are:
 
@@ -27,16 +27,16 @@ The main characteristics of these configurations are:
 The skew factor must be adjusted for each printer:
 
 - First, uncomment `#define XY_SKEW_FACTOR 0.0`, compile and upload the firmware.
-- Then, print [YACS (Yet Another Calibration Square)](https://www.thingiverse.com/thing:2563185). Hint, scale it considering a margin for brim (if used). The larger, the better to make error measurements.
+- Then, print [YACS (Yet Another Calibration Square)](//www.thingiverse.com/thing:2563185). Hint, scale it considering a margin for brim (if used). The larger, the better to make error measurements.
 - Measure the printed part according to the comments in the example configuration file, and set `XY_DIAG_AC`, `XY_DIAG_BD` and `Y_SIDE_AD`.
 - Last, comment `#define XY_SKEW_FACTOR 0.0` again, compile and upload.
 
 ## 3DTouch auto leveling sensor
 
 - Print a suitable mount to attach the sensor to the printer. The example configuration file is adjusted to http://www.geeetech.com/wiki/images/6/61/3DTouch_auto_leveling_sensor-1.zip
-- Unlike suggested in [geeetech.com/wiki/index.php/3DTouch_Auto_Leveling_Sensor](https://www.geeetech.com/wiki/index.php/3DTouch_Auto_Leveling_Sensor), the existing end stop switch is expected to be kept connected to Z_MIN. So, the sensor is to be connected to Z_MAX, according to Marlin's default settings. Furthermore, GT2560-A+ provides a connector for the servo next to thermistor connectors (see [GT2560](https://www.geeetech.com/wiki/images/thumb/4/45/GT2560_wiring.jpg/700px-GT2560_wiring.jpg) and [GT2560-A+](http://i.imgur.com/E0t34VU.png)).
+- Unlike suggested in [geeetech.com/wiki/index.php/3DTouch_Auto_Leveling_Sensor](//www.geeetech.com/wiki/index.php/3DTouch_Auto_Leveling_Sensor), the existing end stop switch is expected to be kept connected to Z_MIN. So, the sensor is to be connected to Z_MAX, according to Marlin's default settings. Furthermore, GT2560-A+ provides a connector for the servo next to thermistor connectors (see [GT2560](//www.geeetech.com/wiki/images/thumb/4/45/GT2560_wiring.jpg/700px-GT2560_wiring.jpg) and [GT2560-A+](//i.imgur.com/E0t34VU.png)).
 - Be careful to respect the polarity of the sensor when connecting it to the GT2560-A+. Unlike end stops, reversing the connection will prevent the sensor from working properly.
-- [Test](http://www.geeetech.com/wiki/index.php/3DTouch_Auto_Leveling_Sensor#Testing) and [calibrate](https://www.geeetech.com/wiki/index.php/3DTouch_Auto_Leveling_Sensor#Calibration) the sensor.
+- [Test](//www.geeetech.com/wiki/index.php/3DTouch_Auto_Leveling_Sensor#Testing) and [calibrate](//www.geeetech.com/wiki/index.php/3DTouch_Auto_Leveling_Sensor#Calibration) the sensor.
 - If using the GT2560-A+ and with the sensor connected to Z_MAX and an endstop connected to Z_MIN use the following calibration routine instead.
 
 ## 3DTouch Calibration with Z_MAX

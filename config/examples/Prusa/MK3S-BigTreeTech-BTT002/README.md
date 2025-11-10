@@ -1,7 +1,7 @@
 # BigTreeTech BTT002/TMC2209 Config for Průša MK3S
 
 ## Requirements
-- [Průša MK3S, MK3S+, or MK3 with MK3S/MK3S+ upgrade](https://www.prusa3d.com/original-prusa-i3-mk3/) is required for filament runout to work properly.
+- [Průša MK3S, MK3S+, or MK3 with MK3S/MK3S+ upgrade](//www.prusa3d.com/original-prusa-i3-mk3/) is required for filament runout to work properly.
 - BigTreeTech BTT002 motherboard
 - 4 x BigTreeTech TMC2209s (DIAG pin location differs from Watterott's & similar designs)
 
@@ -23,13 +23,13 @@ Flags specific to this printer/configuration:
 
 ## Changes to Start G-code
 > [!IMPORTANT]
-> The `W` in Průša's `G28 W ; home all without mesh bed level` default G-code does not exist in Marlin and [`G80 ; mesh bed leveling`](https://marlinfw.org/docs/gcode/G080.html) cancels the current motion mode, so no bed leveling will take place.
+> The `W` in Průša's `G28 W ; home all without mesh bed level` default G-code does not exist in Marlin and [`G80 ; mesh bed leveling`](//marlinfw.org/docs/gcode/G080.html) cancels the current motion mode, so no bed leveling will take place.
 
 Below are some example start G-code scripts from popular slicers to get you started.
 
 ### PrusaSlicer
 - Set your G-code flavor to "Marlin 2" under "Printer Settings" -> "General" -> "Firmware" -> "G-code flavor".
-- Use the "Custom G-code" section under "Filament Settings" to add the [Linear Advance](https://marlinfw.org/docs/features/lin_advance.html) (`M900 K0.0`) value since it can be saved on a per-filament basis.
+- Use the "Custom G-code" section under "Filament Settings" to add the [Linear Advance](//marlinfw.org/docs/features/lin_advance.html) (`M900 K0.0`) value since it can be saved on a per-filament basis.
 - Paste the start G-code block below in the "Custom G-code" section under "Printer Settings".
 
 ```gcode
@@ -50,7 +50,7 @@ G92 E0.0
 ```
 
 ### Cura
-Paste the start G-code block below in the "Start G-code" section. Add your [Linear Advance](https://marlinfw.org/docs/features/lin_advance.html) (`M900 K0.0`) value in the start G-code block below:
+Paste the start G-code block below in the "Start G-code" section. Add your [Linear Advance](//marlinfw.org/docs/features/lin_advance.html) (`M900 K0.0`) value in the start G-code block below:
 ```gcode
 G90 ; use absolute coordinates
 M83 ; extruder relative mode
@@ -70,7 +70,7 @@ G92 E0.0
 ```
 
 ### IdeaMaker
-Paste the start G-code block below in the filament's "Start G-code" section. Add your [Linear Advance](https://marlinfw.org/docs/features/lin_advance.html) (`M900 K0.0`) value in the start G-code block below:
+Paste the start G-code block below in the filament's "Start G-code" section. Add your [Linear Advance](//marlinfw.org/docs/features/lin_advance.html) (`M900 K0.0`) value in the start G-code block below:
 ```gcode
 G90 ; use absolute coordinates
 M83 ; extruder relative mode
@@ -90,7 +90,7 @@ G92 E0.0
 ```
 
 ### Simplify3D
-Paste the start G-code block below in the "Starting Script" section. Add your [Linear Advance](https://marlinfw.org/docs/features/lin_advance.html) (`M900 K0.0`) value in the start G-code block below:
+Paste the start G-code block below in the "Starting Script" section. Add your [Linear Advance](//marlinfw.org/docs/features/lin_advance.html) (`M900 K0.0`) value in the start G-code block below:
 ```gcode
 G90 ; use absolute coordinates
 M83 ; extruder relative mode

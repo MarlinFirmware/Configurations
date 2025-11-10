@@ -1,6 +1,6 @@
 # MKS Robin Pro
 
-The [MKS Robin Pro](https://www.aliexpress.com/item/4000444286159.html) is a powerful 32-bit 3D printer control board with:
+The [MKS Robin Pro](//www.aliexpress.com/item/4000444286159.html) is a powerful 32-bit 3D printer control board with:
 - STM32F103ZET6 processor
 - 6 AXIS interface
 - BLTOUCH interface

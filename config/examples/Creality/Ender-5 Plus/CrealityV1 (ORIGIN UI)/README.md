@@ -5,7 +5,7 @@
 
 ## Marlin DGUS UI Instructions
 
-The Ender-5 stock LCD can optionally use a [customized Marlin DGUS interface](https://github.com/coldtobi/Marlin_DGUS_Resources). With the stock LCD firmware Marlin can only be controlled from a host over USB.
+The Ender-5 stock LCD can optionally use a [customized Marlin DGUS interface](//github.com/coldtobi/Marlin_DGUS_Resources). With the stock LCD firmware Marlin can only be controlled from a host over USB.
 
 - Format an SD card using the FAT32 filesystem with 4K cluster size.
 - Copy the `DWIN_SET` folder to the SD card.
@@ -17,7 +17,7 @@ The Ender-5 stock LCD can optionally use a [customized Marlin DGUS interface](ht
 
 ## Restoring Factory Firmware
 
-The original firmware can be restored by downloading the [Ender-5 Plus firmware](https://www.creality.com/download) from Creality. You can follow the same LCD flashing procedure using the Creality-provided `DWIN_SET` folder.
+The original firmware can be restored by downloading the [Ender-5 Plus firmware](//www.creality.com/download) from Creality. You can follow the same LCD flashing procedure using the Creality-provided `DWIN_SET` folder.
 
 ## Marlin DGUS UI Limitations
 

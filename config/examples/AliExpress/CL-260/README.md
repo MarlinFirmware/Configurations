@@ -1,6 +1,6 @@
 # AliExpress CL-260
 
-Example configuration for the [AliExpress CL-260](https://www.aliexpress.com/item/32812528331.html) Ultimaker 2 clone.
+Example configuration for the [AliExpress CL-260](//www.aliexpress.com/item/32812528331.html) Ultimaker 2 clone.
 
 > [!NOTE]
 > Change `Z_MAX_POS` to 300 for the CL-260MAX.
