@@ -1123,16 +1123,15 @@
   // Height of the Shoulder axis (pivot) relative to the tower floor
   #define TPARA_SHOULDER_AXIS_HEIGHT 135.0     // (mm)
 
-  // This is the position of the last linkage relative to the robot arm origin
-  // (intersection of the base axis and floor) when in the home position (endstops triggered), aka machine home position
-  #define TPARA_ARM_X_HOME_POS  28.75  // Measured from shoulder axis to tool holder axis in home position
-  #define TPARA_ARM_Y_HOME_POS   0
-  #define TPARA_ARM_Z_HOME_POS 250.00  // Measured from tool holder axis to the floor
-
+  // The position of the last linkage relative to the robot arm origin
+  // (intersection of the base axis and floor) when at the home position
+  #define TPARA_ARM_X_HOME_POS  28.75  // (mm) Measured from shoulder axis to tool holder axis in home position
+  #define TPARA_ARM_Y_HOME_POS   0     // (mm)
+  #define TPARA_ARM_Z_HOME_POS 250.00  // (mm) Measured from tool holder axis to the floor
 
   // TPARA Workspace offset relative to the tower (position of workspace origin relative to robot Tower origin )
   // This needs to be reasonably accurate as it defines the printbed position in the TPARA space.
-  #define TPARA_OFFSET_X    127.0     // (mm)  Thus it coincides with the minimum radius MIDDLE_DEAD_ZONE_R, and W(0,0,0) is reachable
+  #define TPARA_OFFSET_X    127.0     // (mm) to coincide with minimum radius MIDDLE_DEAD_ZONE_R, and W(0,0,0) is reachable
   #define TPARA_OFFSET_Y      0.0     // (mm)
   #define TPARA_OFFSET_Z      0.0     // (mm)
 
@@ -1149,11 +1148,12 @@
   #define HOME_Z_FIRST
   #define HOME_Y_BEFORE_X
 
-  // Radius around the center where the arm cannot reach, for now we use a hardcoded uniform limit, although it should be calculated, or fix a limit for each axis angle
-  #define MIDDLE_DEAD_ZONE_R   100  // (mm)
+  // Radius around the center where the arm cannot reach
+  // For now use a hardcoded uniform limit, although it should be calculated, or fix a limit for each axis angle
+  #define MIDDLE_DEAD_ZONE_R   100    // (mm)
 
-  // (degrees) Max angle between L1 and L2
-  #define TPARA_MAX_L1L2_ANGLE 140.0f
+  // Max angle between L1 and L2
+  #define TPARA_MAX_L1L2_ANGLE 140.0f // (degrees)
 #endif // AXEL_TPARA
 
 // @section polar
