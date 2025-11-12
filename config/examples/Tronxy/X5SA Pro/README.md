@@ -25,22 +25,24 @@ For general information about the X5SA printer and its predecessor, see the
 
 ## Back Up Your Working Printer Firmware
 
-### Save Printer Settings (Optional, but Recommended)
+# Save Printer Settings (Optional, but recommended)
 
-Dumping your current settings can help you determine values such as steps/mm for the extruder.
+You can (OR MUST) dump the current settings of your printer. It may help you to figure out some configs, like steps/mm of your extruder.
 
-1. Create a file named `savesettings.gcode` on your SD card with the following contents:
+1. Send `M503` to see a report of the current settings in your host.
+2. Create a file named `savesettings.gcode` with the following contents:
+```gcode
+M6046 ; sdcard access
+M8512 "currentconfig.gcode" ; save settings to file
+```
+3. Save it on the printer's SD card
+4. Put the card in the printer and "print" this file
+5. The printer won't do anything. Just wait a few seconds and stop the print.
+6. Your current printer settings are stored in the file: `currentconfig.gcode`
 
-   ```gcode
-   M6046 ; SD card access
-   M8512 "currentconfig.gcode" ; save settings to file
-   ```
+You can read more about it in [this guide](//www.facebook.com/notes/tronxy-turnigy-x5s-x5sa-x3s-3d-printer-drucker-users/tronxy-firmware-configuration-guide-by-keith-varin-addermk264bit-tuning/649799805579765/).
 
-2. Insert the SD card into the printer and “print” this file.
-3. The printer will do nothing—just wait a few seconds and then stop the print.
-4. Your settings will be stored in `currentconfig.gcode`.
-
-For more information, see [this guide](//www.facebook.com/notes/tronxy-turnigy-x5s-x5sa-x3s-3d-printer-drucker-users/tronxy-firmware-configuration-guide-by-keith-varin-addermk264bit-tuning/649799805579765/).
+Thanks to KEITH VARIN.
 
 ### Backup Your Chitu Firmware (Optional, but Strongly Recommended)
 
