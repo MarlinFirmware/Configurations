@@ -15,15 +15,16 @@
 
 You can (OR MUST) dump the current settings of your printer. It may help you to figure out some configs, like steps/mm of your extruder.
 
-1. Create a file named `savesettings.gcode` with the following content:
+1. Send `M503` to see a report of the current settings in your host.
+2. Create a file named `savesettings.gcode` with the following contents:
 ```gcode
 M6046 ; sdcard access
 M8512 "currentconfig.gcode" ; save settings to file
 ```
-2. Save it on the printer's SD card
-3. Put the card in the printer and "print" this file
-4. The printer won't do anything. Just wait a few seconds and stop the print.
-5. Your current printer settings are stored in the file: `currentconfig.gcode`
+3. Save it on the printer's SD card
+4. Put the card in the printer and "print" this file
+5. The printer won't do anything. Just wait a few seconds and stop the print.
+6. Your current printer settings are stored in the file: `currentconfig.gcode`
 
 You can read more about it in [this guide](//www.facebook.com/notes/tronxy-turnigy-x5s-x5sa-x3s-3d-printer-drucker-users/tronxy-firmware-configuration-guide-by-keith-varin-addermk264bit-tuning/649799805579765/).
 
