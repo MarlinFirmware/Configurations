@@ -73,9 +73,6 @@
   #define MOTHERBOARD BOARD_CREALITY_V422
 #endif
 
-#define X_MAX_PIN  3 // Creality connects X_MAX to X_MIN(_PIN) motherboard connector
-#define Y_MAX_PIN 14 // Creality connects Y_MAX to Y_MIN(_PIN) motherboard connector
-
 // @section serial
 
 /**
@@ -2814,7 +2811,7 @@
  * Disable all menus and only display the Status Screen, or
  * just remove some extraneous menu items to recover space.
  */
-#define NO_LCD_MENUS
+//#define NO_LCD_MENUS
 //#define SLIM_LCD_MENUS
 
 //
