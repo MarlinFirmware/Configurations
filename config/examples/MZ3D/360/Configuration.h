@@ -1330,11 +1330,10 @@
  * Override with M92 (when enabled below)
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define PULL_TEETH 16 // 16, 18 or 20
-#define SCREW_STEP 2 //lenght of Z motor lead screw step in mm, 2 or 3
-#define EXTRUDERSTEP 16  // Extruder Driver steps, 16 or 32
-
-#define DEFAULT_AXIS_STEPS_PER_UNIT   {1600.0/PULL_TEETH,1600.0/PULL_TEETH, 3200.0/SCREW_STEP, 6.25*EXTRUDERSTEP}
+#define PULLEY_TEETH 16   // 16, 18 or 20
+#define SCREW_STEP    2   // (mm) Length of Z motor leadscrew step in mm (2 or 3)
+#define ESTEPS       16   // E-stepper micro-steps (16 or 32)
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 1600.0 / PULLEY_TEETH, 1600.0 / PULLEY_TEETH, 3200.0 / SCREW_STEP, 6.25 * ESTEPS }
 
 /**
  * Enable support for M92. Disable to save at least ~530 bytes of flash.
@@ -1374,9 +1373,9 @@
  *   M204 R    Retract Acceleration
  *   M204 T    Travel Acceleration
  */
-#define DEFAULT_ACCELERATION           1000    // X, Y, Z and E acceleration for printing moves
-#define DEFAULT_RETRACT_ACCELERATION  10000    // E acceleration for retracts
-#define DEFAULT_TRAVEL_ACCELERATION    3000    // X, Y, Z acceleration for travel (non printing) moves
+#define DEFAULT_ACCELERATION          1000    // X, Y, Z and E acceleration for printing moves
+#define DEFAULT_RETRACT_ACCELERATION 10000    // E acceleration for retracts
+#define DEFAULT_TRAVEL_ACCELERATION   3000    // X, Y, Z acceleration for travel (non printing) moves
 
 /**
  * Default Jerk limits (mm/s)
@@ -1714,7 +1713,7 @@
 
 // X and Y axis travel speed between probes.
 // Leave undefined to use the average of the current XY homing feedrate.
-#define XY_PROBE_FEEDRATE    8000 // (mm/min)
+#define XY_PROBE_FEEDRATE        8000 // (mm/min)
 
 // Feedrate for the first approach when double-probing (MULTIPLE_PROBING == 2)
 #define Z_PROBE_FEEDRATE_FAST  (10*60) // (mm/min)
