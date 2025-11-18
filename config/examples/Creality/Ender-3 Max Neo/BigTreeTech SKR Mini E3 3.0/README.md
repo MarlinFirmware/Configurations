@@ -16,6 +16,8 @@ Remove these jumpers:
 > DWIN_CREALITY_LCD requires wiring modification! See `pins_BTT_SKR_MINI_E3_V3_0.h` for details (replicated below). Requires a custom cable.
 
 ```
+As layed out on the physical boards
+
         ------                ------
    ENT | 1  2 | BEEP      5V | 1  2 | GND
    TX1 | 3  4 |            A | 3  4 | B
@@ -25,8 +27,6 @@ Remove these jumpers:
         ------                ------
   Motherboard EXP1        Screen connector
 ```
-As layed out on the physical boards
-
 
 Connect the following pins:
 
