@@ -8,7 +8,7 @@
 > Motherboard DIAG jumpers must be removed when using endstops.
 
 Remove these jumpers:
-![DIAG Jumpers](README images/DIAG jumpers.png)
+![DIAG Jumpers](<README images/DIAG jumpers.png>)
 
 ## DWIN_CREALITY_LCD Wiring Modification
 
