@@ -1,6 +1,6 @@
 /**
  * Marlin 3D Printer Firmware
- * Copyright (c) 2023 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
+ * Copyright (c) 2025 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
  *
  * Based on Sprinter and grbl.
  * Copyright (c) 2011 Camiel Gubbels / Erik van der Zalm
@@ -60,6 +60,10 @@
  *                      https://www.thingiverse.com/thing:1278865
  */
 
+#define NO_AUTO_ASSIGN_WARNING
+#define NO_CONTROLLER_CUSTOM_WIRING_WARNING
+#define DIAG_JUMPERS_REMOVED
+
 // @section info
 
 // Author info of this build printed to the host during boot and M115
@@ -71,9 +75,6 @@
 // Choose the name from boards.h that matches your setup
 #ifndef MOTHERBOARD
   #define MOTHERBOARD BOARD_BTT_SKR_MINI_E3_V3_0
-  #define NO_AUTO_ASSIGN_WARNING
-  #define NO_CONTROLLER_CUSTOM_WIRING_WARNING
-  #define DIAG_JUMPERS_REMOVED
 #endif
 
 // @section serial
