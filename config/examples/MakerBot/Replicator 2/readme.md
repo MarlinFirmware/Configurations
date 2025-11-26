@@ -9,5 +9,8 @@ Features:
 - RGB LED
 
 Board: Mightyboard 2, also known as Mightyboard revision G/H
+- micro: Atmega1280
 - ADS1118 and thermocouples
 - Digitpots
+
+- Flashing: USB or ISP
