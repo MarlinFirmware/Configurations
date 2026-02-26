@@ -3518,7 +3518,7 @@
    */
   #define TFT_THEME BLACK_MARLIN
 
-  //#define TFT_SHARED_IO   // I/O is shared between TFT display and other devices. Disable async data transfer.
+  #define TFT_SHARED_IO   // I/O is shared between TFT display and other devices. Disable async data transfer.
 
   #define COMPACT_MARLIN_BOOT_LOGO  // Use compressed data to save Flash space
 #endif
