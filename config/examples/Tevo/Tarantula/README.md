@@ -1,3 +1,3 @@
 Stock config files for Tevo Tarantula
 
-Based on MARLIN 1.1.9-NOAUTOLEVEL in 'Marlin Firmware 119 Tevo Tarantula.zip' from https://sourceforge.net/projects/my3dprinter-tevo-tarantula/files/Marlin%20Firmware/119/
+Based on https://web.archive.org/web/20230117134505/https://github.com/JimBrown/MarlinTarantula/
