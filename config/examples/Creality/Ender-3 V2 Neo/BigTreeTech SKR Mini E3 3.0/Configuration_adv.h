@@ -4368,8 +4368,8 @@
   #if ENABLED(HOST_PROMPT_SUPPORT)
     #define HOST_STATUS_NOTIFICATIONS     // Send some status messages to the host as notifications
   #endif
-  //#define HOST_START_MENU_ITEM          // Add a menu item that tells the host to start
-  //#define HOST_SHUTDOWN_MENU_ITEM       // Add a menu item that tells the host to shut down
+  #define HOST_START_MENU_ITEM            // Add a menu item that tells the host to start
+  #define HOST_SHUTDOWN_MENU_ITEM         // Add a menu item that tells the host to shut down
 #endif
 
 // @section extras
