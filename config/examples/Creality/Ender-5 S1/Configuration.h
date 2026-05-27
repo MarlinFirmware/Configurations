@@ -3287,9 +3287,6 @@
 #define LCD_BAUDRATE 115200
 #define USB_HOST_SERIAL MYSERIAL2
 
-// Creality Cloud-based Printing
-#define CREALITY_CLOUD
-
 // Over-the-air Firmware Update with M936
 #define OTA_FIRMWARE_UPDATE
 
