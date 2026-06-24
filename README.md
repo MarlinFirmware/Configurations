@@ -1,5 +1,5 @@
 # Configurations
-Pre-tested Configurations for Marlin Firmware 2.1.2.7
+Pre-tested Configurations for Marlin Firmware 2.1.2.8
 
 Marlin Firmware is configured using two files:
 
