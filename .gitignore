@@ -4,6 +4,7 @@
 applet/
 .DS_Store
 *.sublime-workspace
+*.pyc
 
 # Prerequisites
 *.d
