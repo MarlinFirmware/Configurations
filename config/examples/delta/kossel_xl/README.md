@@ -12,9 +12,9 @@ You might need (or want) to edit at least the following settings in `Configurati
 * Increase `DELTA_DIAGONAL_ROD` if the model comes out larger than expected
 
 ### [https://reprap.org/wiki/PID_Tuning](PID Tuning)
-* `DEFAULT_Kp` - The proportional term
-* `DEFAULT_Ki` - The integral term
-* `DEFAULT_Kd` - The derivative term
+* `DEFAULT_KP` - The proportional term
+* `DEFAULT_KI` - The integral term
+* `DEFAULT_KD` - The derivative term
 
 ### PSU Options
 * The power supply is configured to 2 (to use a relay to switch 12V on and off)

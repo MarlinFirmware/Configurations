@@ -33,4 +33,4 @@ Fixes:
 - Ground the frame to earth or neutral.
 
 ## Credits
-This project would not have been possible without the Marlin Discord and their many helpful members. I would like to thank especially The-EG, EvilGremlin, tombrazier, Dust, and Nuck-TH. Additionally [this](//www.thingiverse.com/thing:5159397/comments) unfinished firmware from Thingiverse user Thr333DDD is what I formerly based these configs on. [This analysis and reverse engineering](//github.com/napyk/trigorilla-pro) of the Trigorilla Pro board by Github user napyk was also very helpful in figuring out issues.
+This project would not have been possible without the Marlin Discord and their many helpful members. I would like to thank especially The-EG, EvilGremlin, tombrazier, Dust, and Nuck-TH. Additionally [this](//www.thingiverse.com/thing:5159397/comments) unfinished firmware from Thingiverse user Thr333DDD is what I formerly based these configs on. [This analysis and reverse engineering](//github.com/napyk/trigorilla-pro) of the Trigorilla Pro board by GitHub user napyk was also very helpful in figuring out issues.

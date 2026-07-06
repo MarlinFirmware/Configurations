@@ -17,7 +17,7 @@ This configuration uses only the probe for Z homing. The Z-stop switch is NOT en
 Plug the BLTouch Black/White connector into the top two pins of the 5-pin Z-PROBE port with the white whire "up". Do not plug the connector in to the Z-MIN port where the limit switch was plugged in.
 
 ```cpp
-#define NOZZLE_TO_PROBE_OFFSET { -38, -8, 0 }
+#define NOZZLE_TO_PROBE_OFFSET { -38, -8, 0 } // (mm) X, Y, Z distance from Nozzle tip to Probe trigger-point
 ```
 These are the offsets for a left-side mounted BL Touch on a Bullseye fan duct base. Change them as required for your particular BL Touch mount.
 
