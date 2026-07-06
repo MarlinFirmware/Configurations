@@ -486,6 +486,11 @@
       #define PID_FAN_SCALING_MIN_SPEED 10               // Minimum fan speed at which to enable PID_FAN_SCALING
     #endif
   #endif
+  #if ENABLED(PID_PARAMS_PER_HOTEND)
+    // Specify up to one value per hotend here, according to your setup.
+    // If there are fewer values, the last one applies to the remaining hotends.
+    #define DEFAULT_KF_LIST { DEFAULT_KF, DEFAULT_KF }
+  #endif
 #endif
 
 /**
