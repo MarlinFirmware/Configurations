@@ -70,11 +70,14 @@
 
 // Choose the name from boards.h that matches your setup
 #ifndef MOTHERBOARD
-  #define MOTHERBOARD BOARD_MKS_GEN_13        // Original controller board with built in stepper drivers. Works with MKS BASE 1.3, 1.4
-  //#define MOTHERBOARD BOARD_MKS_BASE_15       // MKS v1.5 with Allegro A4982 stepper drivers
-  //#define MOTHERBOARD BOARD_MKS_BASE_HEROIC   // MKS BASE 1.0 with Heroic HR4982 stepper drivers
-  //#define MOTHERBOARD BOARD_MKS_GEN_L         // Newer controller board with replacable stepper drivers
-  //#define MOTHERBOARD BOARD_MKS_GEN_L_V2
+  // Tarantula MKS-Gen boards:
+  // - BOARD_MKS_GEN_13         Original controller board with built in stepper drivers. Works with MKS BASE 1.3, 1.4
+  // - BOARD_MKS_BASE_15        MKS v1.5 with Allegro A4982 stepper drivers
+  // - BOARD_MKS_BASE_HEROIC    MKS BASE 1.0 with Heroic HR4982 stepper drivers
+  // - BOARD_MKS_GEN_L          Newer controller board with replacable stepper drivers
+  // - BOARD_MKS_GEN_L_V2
+  // :['BOARD_MKS_GEN_13', 'BOARD_MKS_BASE_15', 'BOARD_MKS_BASE_HEROIC', 'BOARD_MKS_GEN_L', 'BOARD_MKS_GEN_L_V2']
+  #define MOTHERBOARD BOARD_MKS_GEN_13
   #define MAX_OVERSHOOT_PID_AUTOTUNE 20
 #endif
 
