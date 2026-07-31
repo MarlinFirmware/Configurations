@@ -727,7 +727,7 @@
   //#define PID_PARAMS_PER_HOTEND // Use separate PID parameters for each extruder (useful for mismatched extruders)
                                   // Set/get with G-code: M301 E[extruder number, 0-2]
 
-  // P905
+  // P905H
   #if ENABLED(PID_PARAMS_PER_HOTEND)
     // Specify up to one value per hotend here, according to your setup.
     // If there are fewer values, the last one applies to the remaining hotends.
@@ -3393,7 +3393,7 @@
 #endif
 
 //
-// Touch-screen LCD for Malyan M200 printers
+// LCD for Malyan M200/M300 printers
 //
 //#define MALYAN_LCD
 
