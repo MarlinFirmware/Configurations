@@ -1382,7 +1382,7 @@
  * Override with M203
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_FEEDRATE          { 6250, 6250, 15, 15000 }
+#define DEFAULT_MAX_FEEDRATE          { 6250, 6250, 15, 5000 }
 
 //#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
@@ -1504,6 +1504,13 @@
  *    - Normally-open (NO) also connect to 5V.
  */
 //#define Z_MIN_PROBE_PIN -1
+
+/**
+ * Use Pin 27 adapter (on the EXP port) for probe (and BEEPER).
+ * Also enable USE_PROBE_FOR_Z_HOMING for older BLTouch/3DTouch
+ * connected to Z_MIN_PIN.
+ */
+//#define USE_PIN_27_BOARD
 
 /**
  * Probe Type
@@ -2111,7 +2118,7 @@
 
   #ifdef FILAMENT_RUNOUT_DISTANCE_MM
     // Enable this option to use an encoder disc that toggles the runout pin
-    // as the filament moves. (Be sure to set FILAMENT_RUNOUT_DISTANCE_MM
+    // as the filament moves. (Be sure to set FILAMENT_MOTION_DISTANCE_MM
     // large enough to avoid false positives.)
     //#define FILAMENT_MOTION_SENSOR
 
@@ -2297,6 +2304,11 @@
   //#define PROBE_Y_FIRST
 
   #if ENABLED(AUTO_BED_LEVELING_BILINEAR)
+
+    #if DISABLED(USE_PROBE_FOR_Z_HOMING) && ALL(FIX_MOUNTED_PROBE, Z_SAFE_HOMING)
+      // If your Z Home (M206) is well-calibrated enable this to establish Probe Z0 before every G29
+      //#define PROBE_Z0_BEFORE_G29
+    #endif
 
     // Beyond the probed grid, continue the implied tilt?
     // Default is to maintain the height of the nearest edge.

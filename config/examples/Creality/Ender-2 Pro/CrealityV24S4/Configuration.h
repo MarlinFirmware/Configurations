@@ -1497,6 +1497,13 @@
 //#define Z_MIN_PROBE_PIN -1
 
 /**
+ * Use Pin 27 adapter (on the EXP port) for probe (and BEEPER).
+ * Also enable USE_PROBE_FOR_Z_HOMING for older BLTouch/3DTouch
+ * connected to Z_MIN_PIN.
+ */
+//#define USE_PIN_27_BOARD
+
+/**
  * Probe Type
  *
  * Allen Key Probes, Servo Probes, Z-Sled Probes, FIX_MOUNTED_PROBE, etc.
@@ -2101,7 +2108,7 @@
 
   #ifdef FILAMENT_RUNOUT_DISTANCE_MM
     // Enable this option to use an encoder disc that toggles the runout pin
-    // as the filament moves. (Be sure to set FILAMENT_RUNOUT_DISTANCE_MM
+    // as the filament moves. (Be sure to set FILAMENT_MOTION_DISTANCE_MM
     // large enough to avoid false positives.)
     //#define FILAMENT_MOTION_SENSOR
 
@@ -2288,6 +2295,11 @@
 
   #if ENABLED(AUTO_BED_LEVELING_BILINEAR)
 
+    #if DISABLED(USE_PROBE_FOR_Z_HOMING) && ALL(FIX_MOUNTED_PROBE, Z_SAFE_HOMING)
+      // If your Z Home (M206) is well-calibrated enable this to establish Probe Z0 before every G29
+      //#define PROBE_Z0_BEFORE_G29
+    #endif
+
     // Beyond the probed grid, continue the implied tilt?
     // Default is to maintain the height of the nearest edge.
     //#define EXTRAPOLATE_BEYOND_GRID
@@ -2378,7 +2390,7 @@
 //#define LCD_BED_TRAMMING
 
 #if ENABLED(LCD_BED_TRAMMING)
-  #define BED_TRAMMING_INSET_LFRB { 30, 30, 30, 30 } // (mm) Left, Front, Right, Back insets
+  #define BED_TRAMMING_INSET_LFRB { 27, 37, 28, 34 } // (mm) Left, Front, Right, Back insets
   #define BED_TRAMMING_HEIGHT      0.0        // (mm) Z height of nozzle at tramming points
   #define BED_TRAMMING_Z_HOP       4.0        // (mm) Z raise between tramming points
   //#define BED_TRAMMING_INCLUDE_CENTER       // Move to the center after the last corner
