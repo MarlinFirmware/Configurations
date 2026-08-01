@@ -4,7 +4,7 @@ This is a surprise upgrade to the Ender-3 Pro that some customers began to recei
 
 This configuration is very similar to the Ender-3 V2 config except that the CR-10 stock display is enabled.
 
-The GD32 Version is specifically for printers that have a v4.2.2 with a GD32F303RE. Please check your board to see if you have it before flashing.
+The GD32 Version is specifically for printers that have a v4.2.2 with a GD32F303RE. Please check your board for this chip before flashing.
 
 ## Flashing Firmware
 
