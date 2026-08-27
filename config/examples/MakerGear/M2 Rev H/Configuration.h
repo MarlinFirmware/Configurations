@@ -843,7 +843,7 @@
   #define DEFAULT_BED_KI    1.19
   #define DEFAULT_BED_KD 1428.96
 #else
-  //#define BED_LIMIT_SWITCHING   // Keep the bed temperature within BED_HYSTERESIS of the target
+  //#define BED_LIMIT_SWITCHING   // Keep the bed temperature within BED_LIMIT_HYSTERESIS of the target
 #endif
 
 /**
