@@ -4077,14 +4077,6 @@
  */
 //#define CNC_COORDINATE_SYSTEMS
 
-/**
- * CNC Drilling Cycle - UNDER DEVELOPMENT
- *
- * Enables G81 to perform a drilling cycle.
- * Currently only supports a single cycle, no G-code chaining.
- */
-//#define CNC_DRILLING_CYCLE
-
 // @section security
 
 /**
@@ -4180,15 +4172,6 @@
 #if ENABLED(FASTER_GCODE_PARSER)
   //#define GCODE_QUOTED_STRINGS  // Support for quoted string parameters
 #endif
-
-/**
- * Variables
- *
- * Define a variable from 100-115 with G-code like '#101=19.6'.
- * A variable can then be used in a G-code expression like 'G0 X[#101+3]'.
- * See https://gcodetutor.com/cnc-macro-programming/cnc-variables.html
- */
-//#define GCODE_VARIABLES
 
 /**
  * Support for MeatPack G-code compression (https://github.com/scottmudge/OctoPrint-MeatPack)
