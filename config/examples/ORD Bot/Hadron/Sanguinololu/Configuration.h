@@ -21,6 +21,8 @@
  */
 #pragma once
 
+#define CONFIG_EXAMPLES_DIR "ORD Bot/Hadron/Sanguinololu"
+
 /**
  * Configuration.h
  *
@@ -61,14 +63,14 @@
 // @section info
 
 // Author info of this build printed to the host during boot and M115
-#define STRING_CONFIG_H_AUTHOR "(MarlinFirmware)" // Original author or contributor.
+#define STRING_CONFIG_H_AUTHOR "(thinkyhead, Sanguinololu)" // Original author or contributor.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
 // @section machine
 
 // Choose the name from boards.h that matches your setup
 #ifndef MOTHERBOARD
-  #define MOTHERBOARD BOARD_RAMPS_14_EFB
+  #define MOTHERBOARD BOARD_SANGUINOLOLU_12
 #endif
 
 // @section serial
@@ -94,7 +96,7 @@
  *
  * :[2400, 9600, 19200, 38400, 57600, 115200, 250000, 500000, 1000000]
  */
-#define BAUDRATE 250000
+#define BAUDRATE 115200
 
 //#define BAUD_RATE_GCODE     // Enable G-code M575 to set the baud rate
 
@@ -128,7 +130,7 @@
 //#define BLUETOOTH
 
 // Name displayed in the LCD "Ready" message and Info menu
-//#define CUSTOM_MACHINE_NAME "3D Printer"
+#define CUSTOM_MACHINE_NAME "ORD Bot Hadron"
 //#define CONFIGURABLE_MACHINE_NAME // Add G-code M550 to set/report the machine name
 
 // Printer's unique ID, used by some programs to differentiate between machines.
@@ -1340,6 +1342,37 @@
  * Note that if EEPROM is enabled, saved values will override these.
  */
 
+//
+// Standard NEMA 17 with T2 belt and 20 tooth pulley
+//
+#define NEMA17_FULL_STEPS 200.0
+#define TEMP_XY_MICROSTEPS 16.0
+#define TEMP_E_MICROSTEPS 16.0
+#define TEMP_Z_MICROSTEPS 16.0
+
+#define XY_PULLEY_PITCH 2.0
+#define XY_PULLEY_TEETH 20.0
+
+//
+// Standard NEMA 17 with fancy 2mm lead screws
+//
+#define Z_RODS_PITCH 0.5
+
+#define XY_MOTOR_STEPS (NEMA17_FULL_STEPS * TEMP_XY_MICROSTEPS)
+#define Z_MOTOR_STEPS (NEMA17_FULL_STEPS * TEMP_Z_MICROSTEPS)
+#define E_MOTOR_STEPS (NEMA17_FULL_STEPS * TEMP_E_MICROSTEPS)
+
+//
+// MK7 Direct Drive
+//
+#define MK7_GEAR_DIAM 10.56
+#define MK7_GEAR_CIRC (M_PI * MK7_GEAR_DIAM)
+#define E_STEPS (E_MOTOR_STEPS / MK7_GEAR_CIRC)
+
+// Get steps/mm from selected results above
+#define XY_STEPS (XY_MOTOR_STEPS / (XY_PULLEY_PITCH * XY_PULLEY_TEETH))
+#define Z_STEPS (Z_MOTOR_STEPS / Z_RODS_PITCH)
+
 /**
  * With this option each E stepper can have its own factors for the
  * following movement settings. If fewer factors are given than the
@@ -1352,7 +1385,7 @@
  * Override with M92 (when enabled below)
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 500 }
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { XY_STEPS, XY_STEPS, Z_STEPS, E_STEPS }
 
 /**
  * Enable support for M92. Disable to save at least ~530 bytes of flash.
@@ -1364,7 +1397,7 @@
  * Override with M203
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_FEEDRATE          { 300, 300, 5, 25 }
+#define DEFAULT_MAX_FEEDRATE          { 500, 500, 8, 45 }
 
 //#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
@@ -1742,7 +1775,7 @@
 #define XY_PROBE_FEEDRATE    (133*60) // (mm/min)
 
 // Feedrate for the first approach when double-probing (MULTIPLE_PROBING == 2)
-#define Z_PROBE_FEEDRATE_FAST  (4*60) // (mm/min)
+#define Z_PROBE_FEEDRATE_FAST  (6*60) // (mm/min)
 
 // Feedrate for the "accurate" probe of each point
 #define Z_PROBE_FEEDRATE_SLOW (Z_PROBE_FEEDRATE_FAST / 2) // (mm/min)
@@ -1895,7 +1928,7 @@
 
 // Invert the stepper direction. Change (or reverse the motor connector) if an axis goes the wrong way.
 #define INVERT_X_DIR false
-#define INVERT_Y_DIR true
+#define INVERT_Y_DIR false
 #define INVERT_Z_DIR false
 //#define INVERT_I_DIR false
 //#define INVERT_J_DIR false
@@ -1973,7 +2006,7 @@
 #define Z_MIN_POS 0
 #define X_MAX_POS X_BED_SIZE
 #define Y_MAX_POS Y_BED_SIZE
-#define Z_MAX_POS 200
+#define Z_MAX_POS 170
 //#define I_MIN_POS 0
 //#define I_MAX_POS 50
 //#define J_MIN_POS 0
@@ -2441,7 +2474,7 @@
 #endif
 
 // Homing speeds (linear=mm/min, rotational=°/min)
-#define HOMING_FEEDRATE_MM_M { (50*60), (50*60), (4*60) }
+#define HOMING_FEEDRATE_MM_M { (50*60), (50*60), (6*60) }
 
 // Edit homing feedrates with M210 and MarlinUI menu items
 //#define EDITABLE_HOMING_FEEDRATE
@@ -2522,7 +2555,7 @@
  *   M501 - Read settings from EEPROM. (i.e., Throw away unsaved changes)
  *   M502 - Revert settings to "factory" defaults. (Follow with M500 to init the EEPROM.)
  */
-//#define EEPROM_SETTINGS     // Persistent storage with M500 and M501
+#define EEPROM_SETTINGS       // Persistent storage with M500 and M501
 //#define DISABLE_M503        // Saves ~2700 bytes of flash. Disable for release!
 #define EEPROM_CHITCHAT       // Give feedback on EEPROM commands. Disable to save flash.
 #define EEPROM_BOOT_SILENT    // Keep M503 quiet and only give errors during first load
@@ -3723,14 +3756,14 @@
  */
 
 // LED Type. Enable only one of the following two options:
-//#define RGB_LED
+#define RGB_LED
 //#define RGBW_LED
 
 #if ANY(RGB_LED, RGBW_LED)
-  //#define RGB_LED_R_PIN 34
-  //#define RGB_LED_G_PIN 43
-  //#define RGB_LED_B_PIN 35
-  //#define RGB_LED_W_PIN -1
+  #define RGB_LED_R_PIN 11
+  #define RGB_LED_G_PIN 10
+  #define RGB_LED_B_PIN 17
+  #define RGB_LED_W_PIN -1
 #endif
 
 #if ANY(RGB_LED, RGBW_LED, PCA9632)
