@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
     - name: Check out
-      uses: actions/checkout@v5
+      uses: actions/checkout@v7
       with:
         fetch-depth: 0  # Fetch all history for all branches and tags
         token: ${{ secrets.GITHUB_TOKEN }}  # Use the built-in token for authentication

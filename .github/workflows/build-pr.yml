@@ -22,7 +22,7 @@ jobs:
 
     steps:
     - name: Check out the PR
-      uses: actions/checkout@v5
+      uses: actions/checkout@v7
 
     # Get the list of directories containing changed config files:
     - name: Get changed directories
@@ -62,7 +62,7 @@ jobs:
           ${{ runner.os }}-pio-
 
     - name: Select Python 3.9
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v7
       with:
         python-version: '3.9' # Version range or exact version of a Python version to use, using semvers version range syntax.
         architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
