@@ -1,0 +1,14 @@
+{
+  "permute": {
+    "IS_BOARD_1_3": { "0":"Board <= 1.2", "1":"Board 1.3" },
+    "IS_2D": { "0":"Single Extruder", "1":"Neptune 2D" },
+    "IS_BMG": { "0":"Standard Extruder", "1":"BMG Extruder" },
+    "USB_MOD": { "0":"No USB Mods", "1":"Native USB Mods" },
+  },
+  "default": {
+  	"IS_BOARD_1_3": 0,
+  	"IS_2D": 0,
+  	"IS_BMG": 0,
+  	"USB_MOD": 0
+  }
+}
