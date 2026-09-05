@@ -76,7 +76,12 @@ jobs:
     # Fetch the code from the other repo and compile it:
     - name: Clone Marlin
       run: |
-        git clone https://github.com/MarlinFirmware/Marlin.git
+        MARLIN_BRANCH="bugfix-2.1.x"
+        if [[ "$GITHUB_HEAD_REF" =~ ^pr-([0-9]+)$ ]]; then
+          MARLIN_BRANCH="pr/${BASH_REMATCH[1]}"
+        fi
+        echo "Using Marlin branch $MARLIN_BRANCH"
+        git clone --branch "$MARLIN_BRANCH" https://github.com/MarlinFirmware/Marlin.git
 
     # For each directory containing a changed config file, copy the .h files and build the code:
     - name: Test all changed config files
