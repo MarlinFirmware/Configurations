@@ -1,0 +1,11 @@
+{
+  "groups": [{
+    "type": "exclusive",
+    "required": 1,
+    "options": [ "K8800_UBL", "K8800_BILINEAR" ],
+  }],
+  "default": {
+    "K8800_UBL": 1,
+    "K8800_BILINEAR": 0
+  }
+}
