@@ -21,6 +21,8 @@
  */
 #pragma once
 
+#define CONFIG_EXAMPLES_DIR "Kingroon/KP3S"
+
 /**
  * Configuration_adv.h
  *
