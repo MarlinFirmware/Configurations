@@ -1898,9 +1898,9 @@
     //#define PLR_HEAT_BED_EXTRA          0 // (°C) Relative increase of bed temperature for better adhesion (limited by max temp).
     //#define PLR_BED_THRESHOLD BED_MAXTEMP // (°C) Skip user confirmation at or above this bed temperature (0 to disable)
 
-    //#define POWER_LOSS_PIN             44 // Pin to detect power-loss. Set to -1 to disable default pin on boards without module, or comment to use board default.
+    #define POWER_LOSS_PIN             -1 // Pin to detect power-loss. Set to -1 to disable default pin on boards without module, or comment to use board default.
     //#define POWER_LOSS_STATE         HIGH // State of pin indicating power-loss
-    #define POWER_LOSS_PULLUP               // Set pullup / pulldown as appropriate for your sensor
+    //#define POWER_LOSS_PULLUP             // Set pullup / pulldown as appropriate for your sensor
     //#define POWER_LOSS_PULLDOWN
 
     //#define POWER_LOSS_ZRAISE        2    // (mm) Z axis raise on resume (on power-loss with UPS)
