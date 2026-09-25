@@ -1,0 +1,15 @@
+{
+  "groups": [{
+    "type": "exclusive",
+    "required": 1,
+    "options": [ "TB2_L10", "TB2_L16" ],
+  }],
+  "permute": {
+    "TB2_HEATBED_MOD": { "0":"Standard Bed", "1":"TB2 Heatbed Mod" }
+  },
+  "default": {
+    "TB2_L10": 1,
+    "TB2_L16": 0,
+    "TB2_HEATBED_MOD": 1
+  }
+}
