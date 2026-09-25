@@ -1,6 +1,6 @@
 /**
  * Marlin 3D Printer Firmware
- * Copyright (c) 2020 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
+ * Copyright (c) 2024 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
  *
  * Based on Sprinter and grbl.
  * Copyright (c) 2011 Camiel Gubbels / Erik van der Zalm
@@ -20,6 +20,8 @@
  *
  */
 #pragma once
+
+#define CONFIG_EXAMPLES_DIR "Creality/CR-10S/CrealityV1 - BLTouch"
 
 /**
  * Configuration.h
@@ -61,7 +63,7 @@
 // @section info
 
 // Author info of this build printed to the host during boot and M115
-#define STRING_CONFIG_H_AUTHOR "(MarlinFirmware)" // Original author or contributor.
+#define STRING_CONFIG_H_AUTHOR "(Anes Belfodil)" // Original author or contributor.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
 // @section machine

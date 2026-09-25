@@ -1,6 +1,6 @@
 /**
  * Marlin 3D Printer Firmware
- * Copyright (c) 2020 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
+ * Copyright (c) 2024 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
  *
  * Based on Sprinter and grbl.
  * Copyright (c) 2011 Camiel Gubbels / Erik van der Zalm
@@ -20,6 +20,8 @@
  *
  */
 #pragma once
+
+#define CONFIG_EXAMPLES_DIR "Printrbot/Simple_Metal_RevF6"
 
 /**
  * Configuration_adv.h
@@ -3673,7 +3675,7 @@
   /**
    * Step on both rising and falling edge signals (as with a square wave).
    */
-  #define EDGE_STEPPING
+  //#define EDGE_STEPPING
 
   /**
    * Enable M122 debugging command for TMC stepper drivers.
@@ -4360,7 +4362,7 @@
  * Host Prompt Support enables Marlin to use the host for user prompts so
  * filament runout and other processes can be managed from the host side.
  */
-//#define HOST_ACTION_COMMANDS
+#define HOST_ACTION_COMMANDS
 #if ENABLED(HOST_ACTION_COMMANDS)
   //#define HOST_PAUSE_M76                // Tell the host to pause in response to M76
   //#define HOST_PROMPT_SUPPORT           // Initiate host prompts to get user feedback

@@ -21,6 +21,8 @@
  */
 #pragma once
 
+#define CONFIG_EXAMPLES_DIR "VORONDesign"
+
 /**
  * Configuration_adv.h
  *
@@ -718,8 +720,8 @@
  * Multiple extruders can be assigned to the same pin in which case
  * the fan will turn on when any selected extruder is above the threshold.
  */
-#define E0_AUTO_FAN_PIN -1
-#define E1_AUTO_FAN_PIN -1
+//#define E0_AUTO_FAN_PIN -1
+//#define E1_AUTO_FAN_PIN -1
 #define E2_AUTO_FAN_PIN -1
 #define E3_AUTO_FAN_PIN -1
 #define E4_AUTO_FAN_PIN -1
@@ -1108,7 +1110,7 @@
 
   // On a 300mm bed a 5% grade would give a misalignment of ~1.5cm
   #define G34_MAX_GRADE              5    // (%) Maximum incline that G34 will handle
-  #define Z_STEPPER_ALIGN_ITERATIONS 5    // Number of iterations to apply during alignment
+  #define Z_STEPPER_ALIGN_ITERATIONS 3    // Number of iterations to apply during alignment
   #define Z_STEPPER_ALIGN_ACC        0.02 // Stop iterating early if the accuracy is better than this
 
   #define RESTORE_LEVELING_AFTER_G34      // Restore leveling after G34 is done?
@@ -1714,7 +1716,7 @@
       //#define BOOT_MARLIN_LOGO_ANIMATED // Animated Marlin logo. Costs ~3260 (or ~940) bytes of flash.
     #endif
     #if ANY(HAS_MARLINUI_U8GLIB, TOUCH_UI_FTDI_EVE, HAS_MARLINUI_HD44780, HAS_GRAPHICAL_TFT)
-      //#define SHOW_CUSTOM_BOOTSCREEN    // Show the bitmap in Marlin/_Bootscreen.h on startup.
+      #define SHOW_CUSTOM_BOOTSCREEN      // Show the bitmap in Marlin/_Bootscreen.h on startup.
     #endif
   #endif
 

@@ -21,6 +21,8 @@
  */
 #pragma once
 
+#define CONFIG_EXAMPLES_DIR "Robo3D/R1+"
+
 /**
  * Configuration.h
  *
@@ -61,7 +63,7 @@
 // @section info
 
 // Author info of this build printed to the host during boot and M115
-#define STRING_CONFIG_H_AUTHOR "(MarlinFirmware)" // Original author or contributor.
+#define STRING_CONFIG_H_AUTHOR "(Nicholas Romero, Robo3D R1+)" // Original author or contributor.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
 // @section machine
@@ -128,7 +130,7 @@
 //#define BLUETOOTH
 
 // Name displayed in the LCD "Ready" message and Info menu
-//#define CUSTOM_MACHINE_NAME "3D Printer"
+#define CUSTOM_MACHINE_NAME "R1+"
 //#define CONFIGURABLE_MACHINE_NAME // Add G-code M550 to set/report the machine name
 
 // Printer's unique ID, used by some programs to differentiate between machines.
@@ -1352,7 +1354,7 @@
  * Override with M92 (when enabled below)
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 500 }
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 2560, 723.38 }
 
 /**
  * Enable support for M92. Disable to save at least ~530 bytes of flash.
@@ -1878,7 +1880,7 @@
 // WARNING: When motors turn off there is a chance of losing position accuracy!
 //#define DISABLE_X
 //#define DISABLE_Y
-//#define DISABLE_Z
+#define DISABLE_Z
 //#define DISABLE_I
 //#define DISABLE_J
 //#define DISABLE_K
@@ -1894,9 +1896,9 @@
 // @section stepper drivers
 
 // Invert the stepper direction. Change (or reverse the motor connector) if an axis goes the wrong way.
-#define INVERT_X_DIR false
-#define INVERT_Y_DIR true
-#define INVERT_Z_DIR false
+#define INVERT_X_DIR true
+#define INVERT_Y_DIR false
+#define INVERT_Z_DIR true
 //#define INVERT_I_DIR false
 //#define INVERT_J_DIR false
 //#define INVERT_K_DIR false
@@ -1964,8 +1966,8 @@
 // @section geometry
 
 // The size of the printable area
-#define X_BED_SIZE 200
-#define Y_BED_SIZE 200
+#define X_BED_SIZE 240
+#define Y_BED_SIZE 254
 
 // Travel limits (linear=mm, rotational=°) after homing, corresponding to endstop positions.
 #define X_MIN_POS 0
@@ -1973,7 +1975,7 @@
 #define Z_MIN_POS 0
 #define X_MAX_POS X_BED_SIZE
 #define Y_MAX_POS Y_BED_SIZE
-#define Z_MAX_POS 200
+#define Z_MAX_POS 240
 //#define I_MIN_POS 0
 //#define I_MAX_POS 50
 //#define J_MIN_POS 0
