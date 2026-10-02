@@ -4,6 +4,7 @@
 applet/
 .DS_Store
 *.sublime-workspace
+*.pyc
 
 # Prerequisites
 *.d
@@ -41,3 +42,4 @@ applet/
 # Tools
 .vscode/
 .zed/
+*mcp*.db

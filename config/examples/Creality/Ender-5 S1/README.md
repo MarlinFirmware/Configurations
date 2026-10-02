@@ -1,4 +1,5 @@
-# Creality Ender-5 S1
+# Creality Ender-5 S1   
+## (Work in progress, waiting on https://github.com/MarlinFirmware/Marlin/pull/25382 to support the screen) 
 
 The bootloader on the stock board has special requirements and requires a flag to be set in the EEPROM before it will install the firmware.
 

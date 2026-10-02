@@ -26,8 +26,21 @@
 # CI - Run in CI mode, using the current folder as the repo.
 #    - For GitHub Actions to update the Configurations repo.
 #
-import os, sys, subprocess, shutil, datetime, tempfile
+import os
+import sys
+import subprocess
+import shutil
+import tempfile
 from pathlib import Path
+
+# Import configuration helpers for parsing config files
+try:
+    from config_helpers import ConfigParser, parse_configuration_file, compare_configurations
+except ImportError:
+    # Fallback if config_helpers is not available
+    ConfigParser = None
+    parse_configuration_file = None
+    compare_configurations = None
 
 # Set to 1 for extra debug commits (no deployment)
 DEBUG = 0
@@ -70,7 +83,8 @@ if not CONFIGREPO.exists():
 # Run git within CONFIGREPO
 GITSTDERR = subprocess.PIPE if DEBUG else subprocess.DEVNULL
 def git(etc):
-    if DEBUG: print(f"> git {' '.join(etc)}")
+    if DEBUG:
+        print(f"> git {' '.join(etc)}")
 
     result = subprocess.run(["git"] + etc, cwd=CONFIGREPO, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
 
@@ -107,28 +121,138 @@ def info(msg):
   infotag = "[INFO] " if CI else ""
   print(f"- {infotag}{msg}")
 
-def add_path_labels():
-    info("Adding path labels to all configs...")
-    for fn in CONFIGEXA.glob("**/Configuration*.h"):
-        fldr = str(fn.parent.relative_to(CONFIGCON)).replace("examples/", "")
+def replace_in_file(fn, search, replace):
+    """Replace all occurrences of search text with replace text in a file."""
+    with open(fn, 'r') as f:
+        lines = f.read()
+    with open(fn, 'w') as f:
+        f.write(lines.replace(search, replace))
+
+
+def strip_error_directives(filepath):
+    """Remove all #error directive lines from a file.
+
+    Args:
+        filepath: Path to the file to process.
+    """
+    with open(filepath, 'r') as f:
+        lines = f.readlines()
+        outlines = [line for line in lines if not line.startswith("#error")]
+    with open(filepath, 'w') as f:
+        f.writelines(outlines)
+
+
+def find_first_blank_line(lines):
+    """Find the index of the first blank line in a list of lines.
+
+    Args:
+        lines: List of strings (lines from a file).
+
+    Returns:
+        Index of first blank line, or -1 if none found.
+    """
+    for i, line in enumerate(lines):
+        if line.isspace():
+            return i
+    return -1
+
+
+def insert_define_before_blank_line(lines, define_text):
+    """Insert a #define directive before the first blank line.
+
+    If no blank line exists, the define is not inserted.
+    If the define already exists in the file, no insertion is made.
+
+    Args:
+        lines: List of strings (lines from a file).
+        define_text: The #define line to insert (e.g., '#define CONFIG_EXAMPLES_DIR "path"').
+
+    Returns:
+        True if the define was inserted, False otherwise.
+    """
+    # Check if define already exists
+    for line in lines:
+        if define_text.strip() in line:
+            return False
+
+    emptyline = find_first_blank_line(lines)
+    if emptyline >= 0:
+        lines.insert(emptyline, f"\n{define_text}\n")
+        return True
+    return False
+
+
+def add_path_label_to_config_file(fn, fldr, use_config_parser=True):
+    """Add CONFIG_EXAMPLES_DIR define to a configuration file.
+
+    This function attempts to use ConfigParser for robust parsing if available.
+    Falls back to simple text parsing if ConfigParser is not available or fails.
+
+    Args:
+        fn: Path to the configuration file.
+        fldr: The folder path to set as CONFIG_EXAMPLES_DIR value.
+        use_config_parser: Whether to attempt using ConfigParser (default True).
+
+    Returns:
+        True if the define was added or already exists, False otherwise.
+    """
+    define_text = f"#define CONFIG_EXAMPLES_DIR \"{fldr}\""
+
+    # Try using ConfigParser for robust parsing
+    if use_config_parser and ConfigParser:
+        try:
+            parser = ConfigParser(fn)
+            lines = parser._read_lines()
+
+            # Check if CONFIG_EXAMPLES_DIR already exists
+            defines = parser.get_defines()
+            if 'CONFIG_EXAMPLES_DIR' in defines:
+                return True
+
+            # Insert the define
+            if insert_define_before_blank_line(lines, define_text):
+                with open(fn, 'w') as f:
+                    f.writelines(lines)
+                return True
+            return False
+        except Exception as e:
+            # Fall through to simple method
+            info(f"Warning: Could not parse {fn} with ConfigParser: {e}")
+
+    # Fallback: Simple text parsing
+    try:
         with open(fn, 'r') as f:
             lines = f.readlines()
-            emptyline = -1
-            for i, line in enumerate(lines):
-                issp = line.isspace()
-                if emptyline < 0:
-                    if issp: emptyline = i
-                elif not issp:
-                    if not "CONFIG_EXAMPLES_DIR" in line:
-                        lines.insert(emptyline, f"\n#define CONFIG_EXAMPLES_DIR \"{fldr}\"\n")
-                        with open(fn, 'w') as f: f.writelines(lines)
-                        break
+
+        # Check if define already exists
+        for line in lines:
+            if define_text.strip() in line:
+                return True
+
+        # Insert the define
+        if insert_define_before_blank_line(lines, define_text):
+            with open(fn, 'w') as f:
+                f.writelines(lines)
+            return True
+        return False
+    except Exception as e:
+        info(f"Warning: Could not process {fn}: {e}")
+        return False
+
+
+def add_path_labels():
+    """Add CONFIG_EXAMPLES_DIR path labels to all configuration files."""
+    info("Adding path labels to all configs...")
+
+    for fn in CONFIGEXA.glob("**/Configuration*.h"):
+        fldr = str(fn.parent.relative_to(CONFIGCON)).replace("examples/", "")
+        add_path_label_to_config_file(fn, fldr)
+
 
 if ACTION == "repath":
     add_path_labels()
 
 elif ACTION == "manual":
-
     MARLINREPO = Path(REPOS / "MarlinFirmware")
     if not MARLINREPO.exists():
         print("Can't find MarlinFirmware at {_REPOS}!")
@@ -152,6 +276,7 @@ elif ACTION == "manual":
     ACTION = 'init'
 
 if ACTION == "init":
+
     print(f"Building branch '{EXPORT}'...")
     info("Init WORK branch...")
 
@@ -169,14 +294,7 @@ if ACTION == "init":
 
     # Strip #error lines from Configuration.h
     for fn in TEMPCON.glob("**/Configuration.h"):
-        with open(fn, 'r') as f:
-            lines = f.readlines()
-            outlines = []
-            for line in lines:
-                if not line.startswith("#error"):
-                    outlines.append(line)
-            with open(fn, 'w') as f:
-                f.writelines(outlines)
+        strip_error_directives(fn)
 
     # Create a fresh 'WORK' as a copy of 'init-repo' (README, LICENSE, etc.)
     if not CI: gitbd("WORK")
@@ -194,10 +312,6 @@ if ACTION == "init":
 
     # DEBUG: Commit the reset for review
     if DEBUG > 1: commit("[DEBUG] Create defaults")
-
-    def replace_in_file(fn, search, replace):
-        with open(fn, 'r') as f: lines = f.read()
-        with open(fn, 'w') as f: f.write(lines.replace(search, replace))
 
     # Update the %VERSION% in the README.md file
     replace_in_file(CONFIGREPO / "README.md", "%VERSION%", EXPORT.replace("release-", ""))
