@@ -1409,9 +1409,9 @@
  *   M204 T    Travel Acceleration
  */
 #ifdef THINKERV2_Direct
-  #define DEFAULT_ACCELERATION            700    // X, Y, Z and E acceleration for printing moves
-  #define DEFAULT_RETRACT_ACCELERATION   1250    // E acceleration for retracts
-  #define DEFAULT_TRAVEL_ACCELERATION     750    // X, Y, Z acceleration for travel (non printing) moves
+  #define DEFAULT_ACCELERATION            700 // X, Y, Z and E acceleration for printing moves
+  #define DEFAULT_RETRACT_ACCELERATION   1250 // E acceleration for retracts
+  #define DEFAULT_TRAVEL_ACCELERATION     750 // X, Y, Z acceleration for travel (non printing) moves
 #else
   #define DEFAULT_ACCELERATION           1250    // X, Y, Z and E acceleration for printing moves
   #define DEFAULT_RETRACT_ACCELERATION   1250    // E acceleration for retracts
@@ -1748,7 +1748,7 @@
  *     O-- FRONT --+
  */
 // this is for the BLTouch mount designed by Eryone: https://www.thingiverse.com/thing:4585251
-#define NOZZLE_TO_PROBE_OFFSET { 30, 0, 0 } // (mm) X, Y, Z distance from Nozzle tip to Probe trigger-point
+#define NOZZLE_TO_PROBE_OFFSET { 30, 0, 0 }  // (mm) X, Y, Z distance from Nozzle tip to Probe trigger-point
 
 // Enable and set to use a specific tool for probing. Disable to allow any tool.
 #define PROBING_TOOL 0
@@ -2134,7 +2134,7 @@
       //#define FILAMENT_SWITCH_AND_MOTION      // Define separate pins below to sense motion
       #if ENABLED(FILAMENT_SWITCH_AND_MOTION)
 
-        #define FILAMENT_MOTION_DISTANCE_MM 3.0 // (mm) Missing distance required to trigger runout
+        #define FILAMENT_MOTION_DISTANCE_MM 3.0 // (mm) Missing distance required to trigger runout (0 = no jam detection)
 
         #define NUM_MOTION_SENSORS   1          // Number of sensors, up to one per extruder. Define a FIL_MOTION#_PIN for each.
         //#define FIL_MOTION1_PIN    -1
@@ -3556,6 +3556,11 @@
 //#define BTT_TFT35_SPI_V1_0
 
 //
+// 240x320, 2.8", SPI Stock Display with Rotary Encoder from Prusa MINI
+//
+//#define PRUSA_MINI_LCD
+
+//
 // Generic TFT with detailed options
 //
 //#define TFT_GENERIC
@@ -3843,7 +3848,7 @@
  * Set this manually if there are extra servos needing manual control.
  * Set to 0 to turn off servo support.
  */
-#define NUM_SERVOS 1 // Note: Servo index starts with 0 for M280-M282 commands
+#define NUM_SERVOS 1   // Note: Servo index starts with 0 for M280-M282 commands
 
 // (ms) Delay before the next move will start, to give the servo time to reach its target angle.
 // 300ms is a good value but you can try less delay.

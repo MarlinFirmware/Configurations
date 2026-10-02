@@ -1555,7 +1555,7 @@
 
   // Actual motor currents in Amps. The number of entries must match DIGIPOT_I2C_NUM_CHANNELS.
   // These correspond to the physical drivers, so be mindful if the order is changed.
-  #define DIGIPOT_I2C_MOTOR_CURRENTS { 0.22, 0.22, 0.39, 0.42, 0.42 }  // MIGHTYBOARD_REVE
+  #define DIGIPOT_I2C_MOTOR_CURRENTS { 0.22, 0.22, 0.39, 0.42, 0.42 }           // MIGHTYBOARD_REVE
 
   //#define DIGIPOT_USE_RAW_VALUES    // Use DIGIPOT_MOTOR_CURRENT raw wiper values (instead of A4988 motor currents)
 

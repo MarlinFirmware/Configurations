@@ -1108,7 +1108,7 @@
     #define DELTA_SMOOTH_ROD_OFFSET 186   // (mm) Horizontal offset from middle of printer to smooth rod center.
     #define DELTA_EFFECTOR_OFFSET    31   // (mm) Horizontal offset of the universal joints on the end effector.
     #define DELTA_CARRIAGE_OFFSET    20.6 // (mm) Horizontal offset of the universal joints on the carriages.
-    #define DELTA_RADIUS (DELTA_SMOOTH_ROD_OFFSET-(DELTA_EFFECTOR_OFFSET)-(DELTA_CARRIAGE_OFFSET))          // (mm) Get this value from G33 auto calibrate
+    #define DELTA_RADIUS (DELTA_SMOOTH_ROD_OFFSET-(DELTA_EFFECTOR_OFFSET)-(DELTA_CARRIAGE_OFFSET)) // (mm) Get this value from G33 auto calibrate
   #else
     #define DELTA_RADIUS 97.0             // (mm) Get this value from G33 auto calibrate
   #endif
@@ -2182,7 +2182,7 @@
       //#define FILAMENT_SWITCH_AND_MOTION      // Define separate pins below to sense motion
       #if ENABLED(FILAMENT_SWITCH_AND_MOTION)
 
-        #define FILAMENT_MOTION_DISTANCE_MM 3.0 // (mm) Missing distance required to trigger runout
+        #define FILAMENT_MOTION_DISTANCE_MM 3.0 // (mm) Missing distance required to trigger runout (0 = no jam detection)
 
         #define NUM_MOTION_SENSORS   1          // Number of sensors, up to one per extruder. Define a FIL_MOTION#_PIN for each.
         //#define FIL_MOTION1_PIN    -1
@@ -3595,6 +3595,11 @@
 // https://github.com/bigtreetech/TFT35-SPI/tree/master/v1
 //
 //#define BTT_TFT35_SPI_V1_0
+
+//
+// 240x320, 2.8", SPI Stock Display with Rotary Encoder from Prusa MINI
+//
+//#define PRUSA_MINI_LCD
 
 //
 // Generic TFT with detailed options
