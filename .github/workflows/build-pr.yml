@@ -57,7 +57,7 @@ jobs:
     - name: Explain the failure
       if: failure()
       run: |
-        echo "::error::End-of-line comments are not aligned with config/default. Run \`bin/mfformat\` on the changed files and push the result. A bot will also comment on the PR with a ready-made fix."
+        echo "::error::End-of-line comments are not aligned with config/default. Run \`bin/mfformat --changed\` and push the result. A bot will also comment on the PR with a ready-made fix."
 
   build:
 
