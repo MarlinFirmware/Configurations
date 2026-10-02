@@ -63,7 +63,7 @@
 // @section info
 
 // Author info of this build printed to the host during boot and M115
-#define STRING_CONFIG_H_AUTHOR "(Stephen Hawes)" // Original author or contributor.
+#define STRING_CONFIG_H_AUTHOR "(Stephen Hawes)"  // Original author or contributor.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
 // @section machine
@@ -2109,7 +2109,7 @@
       //#define FILAMENT_SWITCH_AND_MOTION      // Define separate pins below to sense motion
       #if ENABLED(FILAMENT_SWITCH_AND_MOTION)
 
-        #define FILAMENT_MOTION_DISTANCE_MM 3.0 // (mm) Missing distance required to trigger runout
+        #define FILAMENT_MOTION_DISTANCE_MM 3.0 // (mm) Missing distance required to trigger runout (0 = no jam detection)
 
         #define NUM_MOTION_SENSORS   1          // Number of sensors, up to one per extruder. Define a FIL_MOTION#_PIN for each.
         //#define FIL_MOTION1_PIN    -1
@@ -2436,8 +2436,8 @@
 #define Z_SAFE_HOMING
 
 #if ENABLED(Z_SAFE_HOMING)
-  #define Z_SAFE_HOMING_X_POINT 0  // (mm) X point for Z homing
-  #define Z_SAFE_HOMING_Y_POINT 0  // (mm) Y point for Z homing
+  #define Z_SAFE_HOMING_X_POINT 0         // (mm) X point for Z homing
+  #define Z_SAFE_HOMING_Y_POINT 0         // (mm) Y point for Z homing
   //#define Z_SAFE_HOMING_POINT_ABSOLUTE  // Ignore home offsets (M206) for Z homing position
 #endif
 
@@ -3412,6 +3412,12 @@
 //#define NEXTION_TFT
 
 //
+// Elegoo Neptune 3 Pro / Plus / Max TJC Touch Screen
+// Requires a 6x6 (Pro), 7x7 (Plus), or 7x9 (Max) bilinear leveling grid.
+//
+//#define ELEGOO_NEPTUNE_3_TFT
+
+//
 // Third-party or vendor-customized controller interfaces.
 // Sources should be installed in 'src/lcd/extui'.
 //
@@ -3436,6 +3442,11 @@
 // https://github.com/makerbase-mks/MKS-TFT-Hardware/tree/master/MKS%20TS35
 //
 //#define MKS_TS35_V2_0
+
+//
+// MKS TS24-R V2.1 (2.4" 320x240 ST7789V) as shipped with the MKS DLC32
+//
+//#define MKS_TS24_R_V2_1
 
 //
 // 320x240, 2.4", FSMC Display From MKS
@@ -3508,6 +3519,11 @@
 // https://github.com/bigtreetech/TFT35-SPI/tree/master/v1
 //
 //#define BTT_TFT35_SPI_V1_0
+
+//
+// 240x320, 2.8", SPI Stock Display with Rotary Encoder from Prusa MINI
+//
+//#define PRUSA_MINI_LCD
 
 //
 // Generic TFT with detailed options
@@ -3797,7 +3813,7 @@
  * Set this manually if there are extra servos needing manual control.
  * Set to 0 to turn off servo support.
  */
-#define NUM_SERVOS 2 // Note: Servo index starts with 0 for M280-M282 commands
+#define NUM_SERVOS 2   // Note: Servo index starts with 0 for M280-M282 commands
 
 // (ms) Delay before the next move will start, to give the servo time to reach its target angle.
 // 300ms is a good value but you can try less delay.
