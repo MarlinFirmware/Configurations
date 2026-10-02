@@ -3,9 +3,11 @@
 # When "PR Test Build" fails the comment-alignment check, offer the
 # contributor a ready-made fix and comment on the PR.
 #
-# This runs with a privileged token, so it NEVER executes code from the PR.
-# The formatter and defaults come from the base branch; the PR's files are
-# only read and rewritten as text.
+# This runs with a privileged token, so it NEVER checks out or executes
+# anything from the PR. The formatter and defaults come from a trusted
+# checkout of the base branch. The PR's config files are downloaded as
+# blobs through the API, reformatted as plain text, and committed back
+# through the git data API (no fork worktree, no unsafe PR checkout).
 #
 # Optional secret FORMAT_BOT_TOKEN: a token (public_repo) that can open
 # pull requests on contributors' forks. Without it, the comment gives
@@ -57,43 +59,59 @@ jobs:
         ref: import-2.1.x
         path: trusted
 
-    - name: Check out the PR files (data only)
-      uses: actions/checkout@v7
-      with:
-        repository: ${{ github.event.workflow_run.head_repository.full_name }}
-        ref: ${{ github.event.workflow_run.head_sha }}
-        path: pr
-        persist-credentials: false
-
-    - name: Format the changed configs
+    - name: Format the changed configs and commit the fix to a branch here
+      id: branch
       env:
         GH_TOKEN: ${{ github.token }}
         PR: ${{ steps.pr.outputs.number }}
+        HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
       run: |
-        gh api "repos/$GITHUB_REPOSITORY/pulls/$PR/files" --paginate \\
-          --jq '.[] | select(.status != "removed") | .filename' \\
-          | grep -E '(^|/)Configuration(_adv)?\\.h$' | tr '\\n' '\\0' >changed.txt || true
-        [[ -s changed.txt ]] || { echo "Nothing to format."; exit 0; }
+        API="repos/$GITHUB_REPOSITORY"
+        mkdir work && cd work
 
-        cd pr
-        xargs -0 python3 ../trusted/bin/mfformat -D ../trusted/config/default -q <../changed.txt
+        # Changed config files in the PR: "path<TAB>blob-sha"
+        gh api "$API/pulls/$PR/files" --paginate --jq '
+          .[] | select(.status != "removed")
+              | select(.filename | test("(^|/)Configuration(_adv)?\\.h$"))
+              | [.filename, .sha] | @tsv' >../changed.tsv
+        [[ -s ../changed.tsv ]] || { echo "Nothing to format."; exit 0; }
 
-    - name: Commit the fix to a branch here
-      id: branch
-      env:
-        PR: ${{ steps.pr.outputs.number }}
-      run: |
-        cd pr
-        if git diff --quiet; then
-          echo "Already aligned."
-          exit 0
-        fi
+        # Download each file as text into work/ (never executed)
+        : >../files.txt
+        while IFS=$'\t' read -r f sha; do
+          [[ $f == /* || $f == ../* || $f == */../* ]] && { echo "::warning::Skipping odd path $f" >&2; continue; }
+          mkdir -p "$(dirname "$f")"
+          gh api "$API/git/blobs/$sha" --jq .content | base64 -d >"$f"
+          printf '%s\0' "$f" >>../files.txt
+          printf '%s\t%s\n' "$f" "$(git hash-object "$f")" >>../before.tsv
+        done <../changed.tsv
+
+        xargs -0 python3 ../trusted/bin/mfformat -D ../trusted/config/default -q <../files.txt
+
+        # Blob and tree entries for the files that changed
+        : >../entries.tsv
+        while IFS=$'\t' read -r f old; do
+          new=$(git hash-object "$f")
+          [[ $new == "$old" ]] && continue
+          blob=$(gh api "$API/git/blobs" -f encoding=base64 -f content="$(base64 <"$f" | tr -d '\n')" --jq .sha)
+          printf '%s\t%s\n' "$f" "$blob" >>../entries.tsv
+        done <../before.tsv
+        [[ -s ../entries.tsv ]] || { echo "Already aligned."; exit 0; }
+
+        # A tree on top of the PR's head, then a commit, then the branch
+        jq -Rn --arg base "$HEAD_SHA" '{
+          base_tree: $base,
+          tree: [inputs | split("\t") | {path: .[0], mode: "100644", type: "blob", sha: .[1]}]
+        }' <../entries.tsv >../tree-req.json
+        TREE=$(gh api "$API/git/trees" --input ../tree-req.json --jq .sha)
+
+        jq -n --arg tree "$TREE" --arg parent "$HEAD_SHA" \
+          '{message: "🎨 Align comments (mfformat)", tree: $tree, parents: [$parent]}' >../commit-req.json
+        COMMIT=$(gh api "$API/git/commits" --input ../commit-req.json --jq .sha)
+
         BRANCH="mfformat/pr-$PR"
-        git config user.name "github-actions[bot]"
-        git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-        git switch -c "$BRANCH"
-        git commit -qam "🎨 Align comments (mfformat)"
-        git push --force "https://x-access-token:${{ github.token }}@github.com/$GITHUB_REPOSITORY.git" "$BRANCH"
+        gh api -X POST "$API/git/refs" -f ref="refs/heads/$BRANCH" -f sha="$COMMIT" \
+          || gh api -X PATCH "$API/git/refs/heads/$BRANCH" -f sha="$COMMIT" -F force=true
         echo "name=$BRANCH" >>$GITHUB_OUTPUT
 
     # Open a PR on the contributor's fork, if the token allows it
@@ -111,8 +129,8 @@ jobs:
         OWNER=${GITHUB_REPOSITORY%%/*}
         URL=$(gh pr list --repo "$FORK" --base "$TARGET" --head "$OWNER:$BRANCH" --state open --json url --jq '.[0].url // empty' || true)
         if [[ -z $URL ]]; then
-          URL=$(gh pr create --repo "$FORK" --base "$TARGET" --head "$OWNER:$BRANCH" \\
-            --title "🎨 Align comments (mfformat)" \\
+          URL=$(gh pr create --repo "$FORK" --base "$TARGET" --head "$OWNER:$BRANCH" \
+            --title "🎨 Align comments (mfformat)" \
             --body "Aligns end-of-line comments with config/default, as required by MarlinFirmware/Configurations#$PR. Merge this to fix the failing check." || true)
         fi
         echo "url=$URL" >>$GITHUB_OUTPUT
@@ -128,17 +146,17 @@ jobs:
         {
           echo "### 🎨 Comment alignment needed"
           echo
-          echo "The end-of-line comments in the changed configs don't line up with \\`config/default\\`, so the **Check Comment Alignment** test failed."
+          echo "The end-of-line comments in the changed configs don't line up with \`config/default\`, so the **Check Comment Alignment** test failed."
           echo
           if [[ -n $FORKPR ]]; then
             echo "**Merge this pull request into your branch to fix it:** $FORKPR"
           else
-            echo "A fix is on this branch: \\`$BRANCH\\`. Merge it into yours:"
+            echo "A fix is on this branch: \`$BRANCH\`. Merge it into yours:"
             echo '```sh'
             echo "git pull https://github.com/$GITHUB_REPOSITORY.git $BRANCH"
             echo '```'
           fi
           echo
-          echo "Or fix it yourself and push: \\`bin/mfformat <changed Configuration files>\\`."
+          echo "Or fix it yourself and push: \`bin/mfformat <changed Configuration files>\`."
         } >comment.md
         gh pr comment "$PR" --repo "$GITHUB_REPOSITORY" --body-file comment.md --edit-last --create-if-none
