@@ -1356,14 +1356,14 @@
 #define DEFAULT_STEPPER_TIMEOUT_SEC 120
 //#define DISABLE_IDLE_X
 //#define DISABLE_IDLE_Y
-//#define DISABLE_IDLE_Z    // Disable if the nozzle could fall onto your printed part!
+//#define DISABLE_IDLE_Z  // Disable if the nozzle could fall onto your printed part!
 //#define DISABLE_IDLE_I
 //#define DISABLE_IDLE_J
 //#define DISABLE_IDLE_K
 //#define DISABLE_IDLE_U
 //#define DISABLE_IDLE_V
 //#define DISABLE_IDLE_W
-//#define DISABLE_IDLE_E    // Shut down all idle extruders
+//#define DISABLE_IDLE_E  // Shut down all idle extruders
 
 // Default Minimum Feedrates for printing and travel moves
 #define DEFAULT_MINIMUMFEEDRATE       0.0     // (mm/s) Minimum feedrate. Set with M205 S.
