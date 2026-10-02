@@ -1075,11 +1075,11 @@
   // Trim adjustments for individual towers
   // tower angle corrections for X and Y tower / rotate XYZ so Z tower angle = 0
   // measured in degrees anticlockwise looking from above the printer
-  #define DELTA_TOWER_ANGLE_TRIM { 0.69, 0.0, -0.70 }             // Update these values using G33 auto calibrate
+  #define DELTA_TOWER_ANGLE_TRIM { 0.69, 0.0, -0.70 } // Update these values using G33 auto calibrate
 
   // Delta radius and diagonal rod adjustments
-  #define DELTA_RADIUS_TRIM_TOWER       { 0.0, 0.0, 0.0 } // (mm)
-  #define DELTA_DIAGONAL_ROD_TRIM_TOWER { 0.0, 0.0, 0.0 } // (mm)
+  #define DELTA_RADIUS_TRIM_TOWER       { 0.0, 0.0, 0.0 }   // (mm)
+  #define DELTA_DIAGONAL_ROD_TRIM_TOWER { 0.0, 0.0, 0.0 }   // (mm)
 
 
 #endif // DELTA

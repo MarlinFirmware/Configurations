@@ -1406,7 +1406,7 @@
 
   // Set BACKLASH_SMOOTHING_MM to spread backlash correction over multiple segments
   // to reduce print artifacts. (Enabling this is costly in memory and computation!)
-  #define BACKLASH_SMOOTHING_MM 10 // (mm)
+  #define BACKLASH_SMOOTHING_MM 10  // (mm)
 
   // Add runtime configuration and tuning of backlash values (M425)
   #define BACKLASH_GCODE
@@ -2170,10 +2170,10 @@
    */
   //#define STATUS_COMBINE_HEATERS    // Use combined heater images instead of separate ones
   //#define STATUS_HOTEND_NUMBERLESS  // Use plain hotend icons instead of numbered ones (with 2+ hotends)
-  //#define STATUS_HOTEND_INVERTED      // Show solid nozzle bitmaps when heating (Requires STATUS_HOTEND_ANIM for numbered hotends)
-  //#define STATUS_HOTEND_ANIM          // Use a second bitmap to indicate hotend heating
-  //#define STATUS_BED_ANIM             // Use a second bitmap to indicate bed heating
-  //#define STATUS_CHAMBER_ANIM         // Use a second bitmap to indicate chamber heating
+  //#define STATUS_HOTEND_INVERTED    // Show solid nozzle bitmaps when heating (Requires STATUS_HOTEND_ANIM for numbered hotends)
+  //#define STATUS_HOTEND_ANIM        // Use a second bitmap to indicate hotend heating
+  //#define STATUS_BED_ANIM           // Use a second bitmap to indicate bed heating
+  //#define STATUS_CHAMBER_ANIM       // Use a second bitmap to indicate chamber heating
   //#define STATUS_CUTTER_ANIM        // Use a second bitmap to indicate spindle / laser active
   //#define STATUS_COOLER_ANIM        // Use a second bitmap to indicate laser cooling
   //#define STATUS_FLOWMETER_ANIM     // Use multiple bitmaps to indicate coolant flow
@@ -2553,7 +2553,7 @@
  * Override if the automatically selected points are inadequate.
  */
 #if NEEDS_THREE_PROBE_POINTS
-  #define PROBE_PT_1 {  15, 180 }   // (mm) { x, y }
+  #define PROBE_PT_1 {  15, 180 }     // (mm) { x, y }
   #define PROBE_PT_2 {  15,  20 }
   #define PROBE_PT_3 { 170,  20 }
 #endif
@@ -4250,7 +4250,7 @@
   #define CUSTOM_MENU_MAIN_TITLE "Lin Adv Presets"
   #define CUSTOM_MENU_MAIN_SCRIPT_DONE "M117 Set & Saved"
   #define CUSTOM_MENU_MAIN_SCRIPT_AUDIBLE_FEEDBACK
-  #define CUSTOM_MENU_MAIN_SCRIPT_RETURN    // Return to status screen after a script
+  #define CUSTOM_MENU_MAIN_SCRIPT_RETURN     // Return to status screen after a script
   #define CUSTOM_MENU_MAIN_ONLY_IDLE         // Only show custom menu when the machine is idle
 
   #define MAIN_MENU_ITEM_1_DESC "K0 Off"

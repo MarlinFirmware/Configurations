@@ -390,7 +390,7 @@
 // Offset of the extruders (uncomment if using more than one and relying on firmware to position when changing).
 // The offset has to be X=0, Y=0 for the extruder 0 hotend (default extruder).
 // For the other hotends it is their distance from the extruder 0 hotend.
-#define HOTEND_OFFSET_X { 0.0, -33.00 } // (mm) relative X-offset for each nozzle
+#define HOTEND_OFFSET_X { 0.0, -33.00 }  // (mm) relative X-offset for each nozzle
 //#define HOTEND_OFFSET_Y { 0.0, 5.00 }  // (mm) relative Y-offset for each nozzle
 //#define HOTEND_OFFSET_Z { 0.0, 0.00 }  // (mm) relative Z-offset for each nozzle
 
@@ -2245,7 +2245,7 @@
    */
   #define ENABLE_LEVELING_FADE_HEIGHT
   #if ENABLED(ENABLE_LEVELING_FADE_HEIGHT)
-    #define DEFAULT_LEVELING_FADE_HEIGHT 5.0 // (mm) Default fade height.
+    #define DEFAULT_LEVELING_FADE_HEIGHT 5.0  // (mm) Default fade height.
   #endif
 
   /**
@@ -2644,7 +2644,7 @@
   // Default pattern to use when 'P' is not provided to G12. One of the enabled options above.
   #define NOZZLE_CLEAN_DEFAULT_PATTERN 0
 
-  #define NOZZLE_CLEAN_STROKES     4   // Default number of pattern repetitions
+  #define NOZZLE_CLEAN_STROKES     4    // Default number of pattern repetitions
 
   #if ENABLED(NOZZLE_CLEAN_PATTERN_ZIGZAG)
     #define NOZZLE_CLEAN_TRIANGLES  3   // Default number of triangles

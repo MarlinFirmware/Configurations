@@ -354,13 +354,13 @@
  */
 #if TEMP_SENSOR_CHAMBER && ENABLED(THERMAL_PROTECTION_CHAMBER)
   #define THERMAL_PROTECTION_CHAMBER_PERIOD     900 // (seconds)
-  #define THERMAL_PROTECTION_CHAMBER_HYSTERESIS 2   // (°C)
+  #define THERMAL_PROTECTION_CHAMBER_HYSTERESIS 2 // (°C)
 
   /**
    * Heated chamber watch settings (M141/M191).
    */
   #define WATCH_CHAMBER_TEMP_PERIOD              900 // (seconds)
-  #define WATCH_CHAMBER_TEMP_INCREASE            2   // (°C)
+  #define WATCH_CHAMBER_TEMP_INCREASE            2 // (°C)
 #endif
 
 /**
@@ -730,7 +730,7 @@
 #define COOLER_AUTO_FAN_PIN -1
 
 #define EXTRUDER_AUTO_FAN_TEMPERATURE  35
-#define EXTRUDER_AUTO_FAN_SPEED       255   // 255 == full speed
+#define EXTRUDER_AUTO_FAN_SPEED       255 // 255 == full speed
 #define CHAMBER_AUTO_FAN_TEMPERATURE   28
 #define CHAMBER_AUTO_FAN_SPEED        255
 #define COOLER_AUTO_FAN_TEMPERATURE    18
@@ -4867,11 +4867,11 @@
   #define SERVICE_WARNING_BUZZES  3
   // Activate up to 3 service interval watchdogs
   #define SERVICE_NAME_1      "Lubricate axis"
-  #define SERVICE_INTERVAL_1  100 // print hours
+  #define SERVICE_INTERVAL_1  100   // print hours
   #define SERVICE_NAME_2      "Change X an Y belt"
-  #define SERVICE_INTERVAL_2  300 // print hours
+  #define SERVICE_INTERVAL_2  300   // print hours
   #define SERVICE_NAME_3      "Change Z belt"
-  #define SERVICE_INTERVAL_3  1000 // print hours
+  #define SERVICE_INTERVAL_3  1000  // print hours
 #endif
 
 // @section develop

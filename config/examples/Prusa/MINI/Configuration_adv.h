@@ -339,8 +339,8 @@
  * Thermal Protection parameters for the bed are just as above for hotends.
  */
 #if TEMP_SENSOR_BED && ENABLED(THERMAL_PROTECTION_BED)
-  #define THERMAL_PROTECTION_BED_PERIOD        45  // (seconds)
-  #define THERMAL_PROTECTION_BED_HYSTERESIS    25  // (°C)
+  #define THERMAL_PROTECTION_BED_PERIOD        45 // (seconds)
+  #define THERMAL_PROTECTION_BED_HYSTERESIS    25 // (°C)
 
   /**
    * As described above, except for the bed (M140/M190/M303).
@@ -1309,7 +1309,7 @@
 //#define INPUT_SHAPING_Z
 #if ANY(INPUT_SHAPING_X, INPUT_SHAPING_Y, INPUT_SHAPING_Z)
   #if ENABLED(INPUT_SHAPING_X)
-    #define SHAPING_FREQ_X 118.2         // (Hz) The default dominant resonant frequency on the X axis.
+    #define SHAPING_FREQ_X 118.2        // (Hz) The default dominant resonant frequency on the X axis.
     #define SHAPING_ZETA_X   0.15       // Damping ratio of the X axis (range: 0.0 = no damping to 1.0 = critical damping).
   #endif
   #if ENABLED(INPUT_SHAPING_Y)

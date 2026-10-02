@@ -1108,7 +1108,7 @@
     #define DELTA_SMOOTH_ROD_OFFSET 186   // (mm) Horizontal offset from middle of printer to smooth rod center.
     #define DELTA_EFFECTOR_OFFSET    31   // (mm) Horizontal offset of the universal joints on the end effector.
     #define DELTA_CARRIAGE_OFFSET    20.6 // (mm) Horizontal offset of the universal joints on the carriages.
-    #define DELTA_RADIUS (DELTA_SMOOTH_ROD_OFFSET-(DELTA_EFFECTOR_OFFSET)-(DELTA_CARRIAGE_OFFSET))          // (mm) Get this value from G33 auto calibrate
+    #define DELTA_RADIUS (DELTA_SMOOTH_ROD_OFFSET-(DELTA_EFFECTOR_OFFSET)-(DELTA_CARRIAGE_OFFSET)) // (mm) Get this value from G33 auto calibrate
   #else
     #define DELTA_RADIUS 97.0             // (mm) Get this value from G33 auto calibrate
   #endif

@@ -1371,7 +1371,7 @@
  */
 #define DEFAULT_MAX_FEEDRATE          { 300, 300, 40, 45, 45 }
 
-#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
+#define LIMITED_MAX_FR_EDITING          // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
   #define MAX_FEEDRATE_EDIT_VALUES    { 600, 600, 10, 50 } // ...or, set your own edit limits
 #endif
@@ -1384,7 +1384,7 @@
  */
 #define DEFAULT_MAX_ACCELERATION      { 9000, 9000, 100, 10000 }
 
-#define LIMITED_MAX_ACCEL_EDITING     // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
+#define LIMITED_MAX_ACCEL_EDITING       // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
 #if ENABLED(LIMITED_MAX_ACCEL_EDITING)
   #define MAX_ACCEL_EDIT_VALUES       { 9000, 9000, 200, 20000 } // ...or, set your own edit limits
 #endif
@@ -1745,7 +1745,7 @@
 
 // X and Y axis travel speed between probes.
 // Leave undefined to use the average of the current XY homing feedrate.
-#define XY_PROBE_FEEDRATE    (150*60)  // (mm/min)
+#define XY_PROBE_FEEDRATE    (150*60) // (mm/min)
 
 // Feedrate for the first approach when double-probing (MULTIPLE_PROBING == 2)
 #define Z_PROBE_FEEDRATE_FAST (10*60) // (mm/min)
@@ -2248,7 +2248,7 @@
    */
   #define ENABLE_LEVELING_FADE_HEIGHT
   #if ENABLED(ENABLE_LEVELING_FADE_HEIGHT)
-    #define DEFAULT_LEVELING_FADE_HEIGHT 0.6 // (mm) Default fade height.
+    #define DEFAULT_LEVELING_FADE_HEIGHT 0.6  // (mm) Default fade height.
   #endif
 
   /**

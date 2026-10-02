@@ -1751,7 +1751,7 @@
 //#define NOZZLE_TO_PROBE_OFFSET { -1, 3, 0 }
 
 // ANET A6 with BLTouch/3D-Touch mounted right to the nozzle
-#define NOZZLE_TO_PROBE_OFFSET { 39, 0, 0 } // (mm) X, Y, Z distance from Nozzle tip to Probe trigger-point
+#define NOZZLE_TO_PROBE_OFFSET { 39, 0, 0 }  // (mm) X, Y, Z distance from Nozzle tip to Probe trigger-point
 
 // ANET A6 with BLTouch/3D-Touch betwen Fan and Belt
 // (mount: https://github.com/ralf-e/ANET_A6_modifications/tree/master/A6_X-Axis)
@@ -1881,7 +1881,7 @@
  * These options are most useful for the BLTouch probe, but may also improve
  * readings with inductive probes and piezo sensors.
  */
-#define PROBING_HEATERS_OFF       // Turn heaters off when probing
+#define PROBING_HEATERS_OFF         // Turn heaters off when probing
 #if ENABLED(PROBING_HEATERS_OFF)
   //#define WAIT_FOR_BED_HEATER     // Wait for bed to heat back up between probes (to improve accuracy)
   //#define WAIT_FOR_HOTEND         // Wait for hotend to heat back up between probes (to improve accuracy & prevent cold extrude)

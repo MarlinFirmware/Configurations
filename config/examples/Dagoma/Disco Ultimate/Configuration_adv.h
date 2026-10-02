@@ -965,7 +965,7 @@
 #define HOMING_BUMP_MM      { 5, 5, 2 }       // (linear=mm, rotational=°) Backoff from endstops after first bump
 #define HOMING_BUMP_DIVISOR { 2, 2, 4 }       // Re-Bump Speed Divisor (Divides the Homing Feedrate)
 
-#define HOMING_BACKOFF_POST_MM { 2, 2, 2 }  // (linear=mm, rotational=°) Backoff from endstops after homing
+#define HOMING_BACKOFF_POST_MM { 2, 2, 2 }    // (linear=mm, rotational=°) Backoff from endstops after homing
 //#define XY_COUNTERPART_BACKOFF_MM 0         // (mm) Backoff X after homing Y, and vice-versa
 
 //#define QUICK_HOME                          // If G28 contains XY do a diagonal move first
@@ -2893,7 +2893,7 @@
  * Some other clients start sending commands while receiving a 'wait'.
  * This "wait" is only sent when the buffer is empty. 1 second is a good value here.
  */
-#define NO_TIMEOUTS 1000 // (ms)
+#define NO_TIMEOUTS 1000   // (ms)
 
 // Some clients will have this feature soon. This could make the NO_TIMEOUTS unnecessary.
 #define ADVANCED_OK

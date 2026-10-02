@@ -101,7 +101,7 @@
 // @section info
 
 // Author info of this build printed to the host during boot and M115
-#define STRING_CONFIG_H_AUTHOR "(Hobi, tpruvot)" // Original author or contributor.
+#define STRING_CONFIG_H_AUTHOR "(Hobi, tpruvot)"  // Original author or contributor.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
 // @section machine
@@ -1438,7 +1438,7 @@
  */
 #define DEFAULT_MAX_FEEDRATE          { 200, 200, 100, 25 }
 
-#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
+#define LIMITED_MAX_FR_EDITING          // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
   #define MAX_FEEDRATE_EDIT_VALUES    { 250, 250, 200, 50 } // ...or, set your own edit limits
 #endif
@@ -1451,9 +1451,9 @@
  */
 #define DEFAULT_MAX_ACCELERATION      { 200, 200, 100, 3000 }
 
-#define LIMITED_MAX_ACCEL_EDITING     // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
+#define LIMITED_MAX_ACCEL_EDITING       // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
 #if ENABLED(LIMITED_MAX_ACCEL_EDITING)
-  #define MAX_ACCEL_EDIT_VALUES       { 600, 600, 400, 6000 } // ...or, set your own edit limits
+  #define MAX_ACCEL_EDIT_VALUES       { 600, 600, 400, 6000 }    // ...or, set your own edit limits
 #endif
 
 /**

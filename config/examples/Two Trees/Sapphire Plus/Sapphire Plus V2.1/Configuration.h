@@ -1768,7 +1768,7 @@
 
 // X and Y axis travel speed between probes.
 // Leave undefined to use the average of the current XY homing feedrate.
-#define XY_PROBE_FEEDRATE    (150*60)  // (mm/min)
+#define XY_PROBE_FEEDRATE    (150*60) // (mm/min)
 
 // Feedrate for the first approach when double-probing (MULTIPLE_PROBING == 2)
 #define Z_PROBE_FEEDRATE_FAST  (8*60) // (mm/min)

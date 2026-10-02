@@ -3669,7 +3669,7 @@
 //
 #define REPRAPWORLD_KEYPAD
 #if ENABLED(REPRAPWORLD_KEYPAD)
-  #define REPRAPWORLD_KEYPAD_MOVE_STEP 10.0 // (mm) Distance to move per key-press
+  #define REPRAPWORLD_KEYPAD_MOVE_STEP 10.0   // (mm) Distance to move per key-press
 #endif
 
 //

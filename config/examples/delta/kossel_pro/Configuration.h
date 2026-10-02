@@ -1701,7 +1701,7 @@
   #define Z_PROBE_ALLEN_KEY_STOW_2 { 36.00, -125.00, 0.0 } // move down to retract probe
   #define Z_PROBE_ALLEN_KEY_STOW_2_FEEDRATE (XY_PROBE_FEEDRATE)/2
 
-  #define Z_PROBE_ALLEN_KEY_STOW_3 { 0.0, 0.0, 100.0 } // return to 0,0,100
+  #define Z_PROBE_ALLEN_KEY_STOW_3 { 0.0, 0.0, 100.0 }   // return to 0,0,100
   #define Z_PROBE_ALLEN_KEY_STOW_3_FEEDRATE XY_PROBE_FEEDRATE
 
   #define Z_PROBE_ALLEN_KEY_STOW_4 { 0.0, 0.0, 100.0 }

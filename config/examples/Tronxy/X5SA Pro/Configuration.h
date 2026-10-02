@@ -63,7 +63,7 @@
 // @section info
 
 // Author info of this build printed to the host during boot and M115
-#define STRING_CONFIG_H_AUTHOR "BeowulfNode42" // Original author or contributor.
+#define STRING_CONFIG_H_AUTHOR "BeowulfNode42"    // Original author or contributor.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
 // @section machine
@@ -1145,14 +1145,14 @@
 
   // TPARA tower offset (position of Tower relative to bed zero position)
   // This needs to be reasonably accurate as it defines the printbed position in the TPARA space.
-  #define TPARA_OFFSET_X    0     // (mm)
-  #define TPARA_OFFSET_Y    0     // (mm)
-  #define TPARA_OFFSET_Z    0     // (mm)
+  #define TPARA_OFFSET_X    0         // (mm)
+  #define TPARA_OFFSET_Y    0         // (mm)
+  #define TPARA_OFFSET_Z    0         // (mm)
 
   #define FEEDRATE_SCALING        // Convert XY feedrate from mm/s to degrees/s on the fly
 
   // Radius around the center where the arm cannot reach
-  #define MIDDLE_DEAD_ZONE_R   0    // (mm)
+  #define MIDDLE_DEAD_ZONE_R   0      // (mm)
 #endif
 
 // @section polar
@@ -1370,7 +1370,7 @@
 
 #define LIMITED_MAX_ACCEL_EDITING       // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
 #if ENABLED(LIMITED_MAX_ACCEL_EDITING)
-  #define MAX_ACCEL_EDIT_VALUES       { 2000, 2000, 200, 4000 } // ...or, set your own edit limits
+  #define MAX_ACCEL_EDIT_VALUES       { 2000, 2000, 200, 4000 }  // ...or, set your own edit limits
 #endif
 
 /**

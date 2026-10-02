@@ -1861,7 +1861,7 @@
 //#define PROBING_FANS_OFF          // Turn fans off when probing
 //#define PROBING_ESTEPPERS_OFF     // Turn all extruder steppers off when probing
 //#define PROBING_STEPPERS_OFF      // Turn all steppers off (unless needed to hold position) when probing (including extruders)
-#define DELAY_BEFORE_PROBING 375  // (ms) To prevent vibrations from triggering piezo sensors
+#define DELAY_BEFORE_PROBING 375    // (ms) To prevent vibrations from triggering piezo sensors
 
 // Require minimum nozzle and/or bed temperature for probing
 //#define PREHEAT_BEFORE_PROBING
@@ -2323,7 +2323,7 @@
   //#define MESH_EDIT_GFX_OVERLAY   // Display a graphics overlay while editing the mesh
 
   #define MESH_INSET 0              // (mm) Set Mesh bounds as an inset region of the bed
-  #define GRID_MAX_POINTS_X 5      // Don't use more than 15 points per axis, implementation limited.
+  #define GRID_MAX_POINTS_X 5       // Don't use more than 15 points per axis, implementation limited.
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
   //#define UBL_HILBERT_CURVE       // Use Hilbert distribution for less travel when probing multiple points
@@ -2334,7 +2334,7 @@
   #define UBL_MESH_EDIT_MOVES_Z     // Sophisticated users prefer no movement of nozzle
   #define UBL_SAVE_ACTIVE_ON_M500   // Save the currently active mesh in the current slot on M500
 
-  #define UBL_Z_RAISE_WHEN_OFF_MESH 0 // (mm) Use for Z-Height correction when the nozzle is off the mesh
+  #define UBL_Z_RAISE_WHEN_OFF_MESH 0     // (mm) Use for Z-Height correction when the nozzle is off the mesh
 
   //#define UBL_MESH_WIZARD         // Run several commands in a row to get a complete mesh
 
@@ -2363,7 +2363,7 @@
   //=================================== Mesh ==================================
   //===========================================================================
 
-  #define MESH_INSET 5          // (mm) Set Mesh bounds as an inset region of the bed
+  #define MESH_INSET 5           // (mm) Set Mesh bounds as an inset region of the bed
   #define GRID_MAX_POINTS_X 3
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
@@ -3823,7 +3823,7 @@
  * Set this manually if there are extra servos needing manual control.
  * Set to 0 to turn off servo support.
  */
-#define NUM_SERVOS 1 // Note: Servo index starts with 0 for M280-M282 commands
+#define NUM_SERVOS 1   // Note: Servo index starts with 0 for M280-M282 commands
 
 // (ms) Delay before the next move will start, to give the servo time to reach its target angle.
 // 300ms is a good value but you can try less delay.

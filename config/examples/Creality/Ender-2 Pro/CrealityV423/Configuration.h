@@ -1383,7 +1383,7 @@
 
 //#define LIMITED_MAX_ACCEL_EDITING     // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
 #if ENABLED(LIMITED_MAX_ACCEL_EDITING)
-  #define MAX_ACCEL_EDIT_VALUES       { 300, 300, 100, 1000 } // ...or, set your own edit limits
+  #define MAX_ACCEL_EDIT_VALUES       { 300, 300, 100, 1000 }    // ...or, set your own edit limits
 #endif
 
 /**
@@ -2436,8 +2436,8 @@
 //#define Z_SAFE_HOMING
 
 #if ENABLED(Z_SAFE_HOMING)
-  #define Z_SAFE_HOMING_X_POINT ((X_BED_SIZE - 10) / 2)    // (mm) X point for Z homing
-  #define Z_SAFE_HOMING_Y_POINT ((Y_BED_SIZE - 10) / 2)    // (mm) Y point for Z homing
+  #define Z_SAFE_HOMING_X_POINT ((X_BED_SIZE - 10) / 2) // (mm) X point for Z homing
+  #define Z_SAFE_HOMING_Y_POINT ((Y_BED_SIZE - 10) / 2) // (mm) Y point for Z homing
   //#define Z_SAFE_HOMING_POINT_ABSOLUTE  // Ignore home offsets (M206) for Z homing position
 #endif
 

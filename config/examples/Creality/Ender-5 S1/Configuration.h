@@ -66,7 +66,7 @@
 // @section info
 
 // Author info of this build printed to the host during boot and M115
-#define STRING_CONFIG_H_AUTHOR "(Creality)" // Original author or contributor.
+#define STRING_CONFIG_H_AUTHOR "(Creality)"       // Original author or contributor.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
 #define MACHINE_NAME      "Ender-5 S1"
@@ -1756,7 +1756,7 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
-//#define NOZZLE_TO_PROBE_OFFSET { -2, 44.45, 0 }     // Install BLTouch behind
+//#define NOZZLE_TO_PROBE_OFFSET { -2, 44.45, 0 } // Install BLTouch behind
 //#define NOZZLE_TO_PROBE_OFFSET { 38, -9, 0 }        // Installation on the right
 //#define NOZZLE_TO_PROBE_OFFSET { 0, -19, 0 }        // Install BLTouch in front
 //#define NOZZLE_TO_PROBE_OFFSET { -29.5, -11.3, 0 }  // Installation on the left
@@ -1777,7 +1777,7 @@
 // X and Y axis travel speed between probes.
 // Leave undefined to use the average of the current XY homing feedrate.
 //探头之间的X、Y轴移动速度(mm/min)
-#define XY_PROBE_FEEDRATE    (400*60)  // (mm/min)
+#define XY_PROBE_FEEDRATE    (400*60) // (mm/min)
 
 // Feedrate for the first approach when double-probing (MULTIPLE_PROBING == 2)
 #define Z_PROBE_FEEDRATE_FAST  (4*60) // (mm/min)
