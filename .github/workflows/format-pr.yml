@@ -1,0 +1,144 @@
+#
+# format-pr.yml
+# When "PR Test Build" fails the comment-alignment check, offer the
+# contributor a ready-made fix and comment on the PR.
+#
+# This runs with a privileged token, so it NEVER executes code from the PR.
+# The formatter and defaults come from the base branch; the PR's files are
+# only read and rewritten as text.
+#
+# Optional secret FORMAT_BOT_TOKEN: a token (public_repo) that can open
+# pull requests on contributors' forks. Without it, the comment gives
+# instructions for pulling the fix branch instead.
+#
+
+name: Suggest Formatting
+
+on:
+  workflow_run:
+    workflows: ["PR Test Build"]
+    types: [completed]
+
+permissions:
+  actions: read
+  contents: write
+  pull-requests: write
+
+jobs:
+  suggest:
+
+    name: Suggest Formatting
+    if: >
+      github.repository == 'MarlinFirmware/Configurations' &&
+      github.event.workflow_run.event == 'pull_request' &&
+      github.event.workflow_run.conclusion == 'failure'
+
+    runs-on: ubuntu-22.04
+
+    steps:
+    - name: Get the PR number
+      uses: actions/download-artifact@v4
+      with:
+        name: format-needed
+        run-id: ${{ github.event.workflow_run.id }}
+        github-token: ${{ github.token }}
+
+    - name: Validate the PR number
+      id: pr
+      run: |
+        # The artifact comes from the PR, so treat it as untrusted
+        N=$(head -c 12 pr-number.txt | tr -d '[:space:]')
+        [[ $N =~ ^[0-9]+$ ]] || { echo "::error::Bad PR number."; exit 1; }
+        echo "number=$N" >>$GITHUB_OUTPUT
+
+    - name: Check out the trusted formatter
+      uses: actions/checkout@v7
+      with:
+        ref: import-2.1.x
+        path: trusted
+
+    - name: Check out the PR files (data only)
+      uses: actions/checkout@v7
+      with:
+        repository: ${{ github.event.workflow_run.head_repository.full_name }}
+        ref: ${{ github.event.workflow_run.head_sha }}
+        path: pr
+        persist-credentials: false
+
+    - name: Format the changed configs
+      env:
+        GH_TOKEN: ${{ github.token }}
+        PR: ${{ steps.pr.outputs.number }}
+      run: |
+        gh api "repos/$GITHUB_REPOSITORY/pulls/$PR/files" --paginate \\
+          --jq '.[] | select(.status != "removed") | .filename' \\
+          | grep -E '(^|/)Configuration(_adv)?\\.h$' | tr '\\n' '\\0' >changed.txt || true
+        [[ -s changed.txt ]] || { echo "Nothing to format."; exit 0; }
+
+        cd pr
+        xargs -0 python3 ../trusted/bin/mfformat -D ../trusted/config/default -q <../changed.txt
+
+    - name: Commit the fix to a branch here
+      id: branch
+      env:
+        PR: ${{ steps.pr.outputs.number }}
+      run: |
+        cd pr
+        if git diff --quiet; then
+          echo "Already aligned."
+          exit 0
+        fi
+        BRANCH="mfformat/pr-$PR"
+        git config user.name "github-actions[bot]"
+        git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git switch -c "$BRANCH"
+        git commit -qam "🎨 Align comments (mfformat)"
+        git push --force "https://x-access-token:${{ github.token }}@github.com/$GITHUB_REPOSITORY.git" "$BRANCH"
+        echo "name=$BRANCH" >>$GITHUB_OUTPUT
+
+    # Open a PR on the contributor's fork, if the token allows it
+    - name: Open a PR on the source fork
+      id: forkpr
+      if: steps.branch.outputs.name
+      env:
+        GH_TOKEN: ${{ secrets.FORMAT_BOT_TOKEN }}
+        FORK: ${{ github.event.workflow_run.head_repository.full_name }}
+        TARGET: ${{ github.event.workflow_run.head_branch }}
+        BRANCH: ${{ steps.branch.outputs.name }}
+        PR: ${{ steps.pr.outputs.number }}
+      run: |
+        [[ -n $GH_TOKEN ]] || { echo "No FORMAT_BOT_TOKEN; skipping."; exit 0; }
+        OWNER=${GITHUB_REPOSITORY%%/*}
+        URL=$(gh pr list --repo "$FORK" --base "$TARGET" --head "$OWNER:$BRANCH" --state open --json url --jq '.[0].url // empty' || true)
+        if [[ -z $URL ]]; then
+          URL=$(gh pr create --repo "$FORK" --base "$TARGET" --head "$OWNER:$BRANCH" \\
+            --title "🎨 Align comments (mfformat)" \\
+            --body "Aligns end-of-line comments with config/default, as required by MarlinFirmware/Configurations#$PR. Merge this to fix the failing check." || true)
+        fi
+        echo "url=$URL" >>$GITHUB_OUTPUT
+
+    - name: Comment on the PR
+      if: steps.branch.outputs.name
+      env:
+        GH_TOKEN: ${{ github.token }}
+        PR: ${{ steps.pr.outputs.number }}
+        BRANCH: ${{ steps.branch.outputs.name }}
+        FORKPR: ${{ steps.forkpr.outputs.url }}
+      run: |
+        {
+          echo "### 🎨 Comment alignment needed"
+          echo
+          echo "The end-of-line comments in the changed configs don't line up with \\`config/default\\`, so the **Check Comment Alignment** test failed."
+          echo
+          if [[ -n $FORKPR ]]; then
+            echo "**Merge this pull request into your branch to fix it:** $FORKPR"
+          else
+            echo "A fix is on this branch: \\`$BRANCH\\`. Merge it into yours:"
+            echo '```sh'
+            echo "git pull https://github.com/$GITHUB_REPOSITORY.git $BRANCH"
+            echo '```'
+          fi
+          echo
+          echo "Or fix it yourself and push: \\`bin/mfformat <changed Configuration files>\\`."
+        } >comment.md
+        gh pr comment "$PR" --repo "$GITHUB_REPOSITORY" --body-file comment.md --edit-last --create-if-none

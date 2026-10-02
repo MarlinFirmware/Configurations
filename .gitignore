@@ -42,3 +42,4 @@ applet/
 # Tools
 .vscode/
 .zed/
+*mcp*.db
