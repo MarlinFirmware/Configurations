@@ -1,0 +1,50 @@
+#
+# cleanup-format-pr.yml
+# Delete the `mfformat/pr-N` branch (and close its PR on the contributor's
+# fork) when PR #N is closed or merged. See format-pr.yml.
+#
+# Nothing from the PR is checked out or executed here.
+#
+
+name: Cleanup Formatting
+
+on:
+  pull_request_target:
+    types: [closed]
+    branches:
+    - import-2.1.x
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+
+    name: Delete Formatting Branch
+    if: github.repository == 'MarlinFirmware/Configurations'
+
+    runs-on: ubuntu-22.04
+
+    env:
+      PR: ${{ github.event.pull_request.number }}
+      FORK: ${{ github.event.pull_request.head.repo.full_name }}
+      TARGET: ${{ github.event.pull_request.head.ref }}
+
+    steps:
+    # Close the fix PR on the fork (if we opened one) so it isn't left dangling
+    - name: Close the PR on the source fork
+      env:
+        GH_TOKEN: ${{ secrets.FORMAT_BOT_TOKEN }}
+      run: |
+        [[ -n $GH_TOKEN && $FORK != "$GITHUB_REPOSITORY" ]] || exit 0
+        OWNER=${GITHUB_REPOSITORY%%/*}
+        gh pr close --repo "$FORK" "$OWNER:mfformat/pr-$PR" \
+          --comment "Closing: MarlinFirmware/Configurations#$PR is closed." || true
+
+    - name: Delete the branch
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: |
+        gh api -X DELETE "repos/$GITHUB_REPOSITORY/git/refs/heads/mfformat/pr-$PR" \
+          && echo "Deleted mfformat/pr-$PR" \
+          || echo "No mfformat/pr-$PR branch to delete."
