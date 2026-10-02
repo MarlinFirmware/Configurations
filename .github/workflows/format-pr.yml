@@ -160,6 +160,6 @@ jobs:
             echo '```'
           fi
           echo
-          echo "Or fix it yourself and push: \`bin/mfformat <changed Configuration files>\`."
+          echo "Or fix it yourself and push: \`bin/mfformat --changed\` (after merging the latest \`import-2.1.x\` into your branch)."
         } >comment.md
         gh pr comment "$PR" --repo "$GITHUB_REPOSITORY" --body-file comment.md --edit-last --create-if-none
