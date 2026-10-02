@@ -93,7 +93,10 @@ jobs:
         while IFS=$'\t' read -r f old; do
           new=$(git hash-object "$f")
           [[ $new == "$old" ]] && continue
-          blob=$(gh api "$API/git/blobs" -f encoding=base64 -f content="$(base64 <"$f" | tr -d '\n')" --jq .sha)
+          # Send the body as a file (one argument can't exceed ~128 KB)
+          base64 <"$f" | tr -d '\n' >../b64.txt
+          jq -n --rawfile c ../b64.txt '{encoding: "base64", content: $c}' >../blob-req.json
+          blob=$(gh api "$API/git/blobs" --input ../blob-req.json --jq .sha)
           printf '%s\t%s\n' "$f" "$blob" >>../entries.tsv
         done <../before.tsv
         [[ -s ../entries.tsv ]] || { echo "Already aligned."; exit 0; }
@@ -157,6 +160,6 @@ jobs:
             echo '```'
           fi
           echo
-          echo "Or fix it yourself and push: \`bin/mfformat <changed Configuration files>\`."
+          echo "Or fix it yourself and push: \`bin/mfformat --changed\` (after merging the latest \`import-2.1.x\` into your branch)."
         } >comment.md
         gh pr comment "$PR" --repo "$GITHUB_REPOSITORY" --body-file comment.md --edit-last --create-if-none
