@@ -1541,9 +1541,9 @@
  *   M908 - BQ_ZUM_MEGA_3D, RAMBO, PRINTRBOARD_REVF, RIGIDBOARD_V2 & SCOOVO_X9H
  *   M909, M910 & LCD - only PRINTRBOARD_REVF & RIGIDBOARD_V2
  */
-//#define PWM_MOTOR_CURRENT { 1300, 1300, 1250 }            // Values in milliamps
+//#define PWM_MOTOR_CURRENT { 1300, 1300, 1250 }          // Values in milliamps
 
-#define DIGIPOT_MOTOR_CURRENT { 170, 170, 180, 190, 180 }   // Values 0-255
+#define DIGIPOT_MOTOR_CURRENT { 170, 170, 180, 190, 180 } // Values 0-255
                                                             //
                                                             // bq ZUM Mega 3D defaults:
                                                             //  X  = 150 [~1.17A]
@@ -1551,7 +1551,7 @@
                                                             //  Z  = 180 [~1.41A]
                                                             //  E0 = 190 [~1.49A]
 
-//#define DAC_MOTOR_CURRENT_DEFAULT { 70, 80, 90, 80 }      // Default drive percent - X, Y, Z, E axis
+//#define DAC_MOTOR_CURRENT_DEFAULT { 70, 80, 90, 80 }    // Default drive percent - X, Y, Z, E axis
 
 /**
  * I2C-based DIGIPOTs (e.g., Azteeg X3 Pro)
@@ -1595,7 +1595,7 @@
   #define FINE_MANUAL_MOVE 0.025    // (mm) Smallest manual move (< 0.1mm) applying to Z on most machines
   #if IS_ULTIPANEL
     #define MANUAL_E_MOVES_RELATIVE // Display extruder move distance rather than "position"
-    //#define ULTIPANEL_FEEDMULTIPLY  // Encoder sets the feedrate multiplier on the Status Screen
+    //#define ULTIPANEL_FEEDMULTIPLY // Encoder sets the feedrate multiplier on the Status Screen
     //#define ULTIPANEL_FLOWPERCENT // Encoder sets the flow percentage on the Status Screen
   #endif
 #endif
@@ -1868,7 +1868,7 @@
 
   #define SD_PROCEDURE_DEPTH 1              // Increase if you need more nested M32 calls
 
-  #define SD_FINISHED_STEPPERRELEASE false    // Disable steppers when SD Print is finished
+  #define SD_FINISHED_STEPPERRELEASE false  // Disable steppers when SD Print is finished
   #define SD_FINISHED_RELEASECOMMAND "G27 P0" // Use "M84XYE" to keep Z enabled so your bed stays in place
 
   // Reverse SD sort to show "more recent" files first, according to the card's FAT.
@@ -2901,7 +2901,7 @@
  * Some other clients start sending commands while receiving a 'wait'.
  * This "wait" is only sent when the buffer is empty. 1 second is a good value here.
  */
-#define NO_TIMEOUTS 1000 // (ms)
+#define NO_TIMEOUTS 1000   // (ms)
 
 // Some clients will have this feature soon. This could make the NO_TIMEOUTS unnecessary.
 #define ADVANCED_OK

@@ -63,7 +63,7 @@
 // @section info
 
 // Author info of this build printed to the host during boot and M115
-#define STRING_CONFIG_H_AUTHOR "(@Vertabreak)" // Original author or contributor.
+#define STRING_CONFIG_H_AUTHOR "(@Vertabreak)"    // Original author or contributor.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
 // @section machine
@@ -2313,7 +2313,7 @@
   //#define MESH_EDIT_GFX_OVERLAY   // Display a graphics overlay while editing the mesh
 
   #define MESH_INSET 0              // (mm) Set Mesh bounds as an inset region of the bed
-  #define GRID_MAX_POINTS_X 5      // Don't use more than 15 points per axis, implementation limited.
+  #define GRID_MAX_POINTS_X 5       // Don't use more than 15 points per axis, implementation limited.
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
   //#define UBL_HILBERT_CURVE       // Use Hilbert distribution for less travel when probing multiple points
@@ -2324,7 +2324,7 @@
   #define UBL_MESH_EDIT_MOVES_Z     // Sophisticated users prefer no movement of nozzle
   #define UBL_SAVE_ACTIVE_ON_M500   // Save the currently active mesh in the current slot on M500
 
-  #define UBL_Z_RAISE_WHEN_OFF_MESH 0 // (mm) Use for Z-Height correction when the nozzle is off the mesh
+  #define UBL_Z_RAISE_WHEN_OFF_MESH 0     // (mm) Use for Z-Height correction when the nozzle is off the mesh
 
   //#define UBL_MESH_WIZARD         // Run several commands in a row to get a complete mesh
 
@@ -2353,7 +2353,7 @@
   //=================================== Mesh ==================================
   //===========================================================================
 
-  #define MESH_INSET 0          // (mm) Set Mesh bounds as an inset region of the bed
+  #define MESH_INSET 0           // (mm) Set Mesh bounds as an inset region of the bed
   #define GRID_MAX_POINTS_X 3
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 

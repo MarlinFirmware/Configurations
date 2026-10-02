@@ -63,7 +63,7 @@
 // @section info
 
 // Author info of this build printed to the host during boot and M115
-#define STRING_CONFIG_H_AUTHOR "(SaddFox)" // Original author or contributor.
+#define STRING_CONFIG_H_AUTHOR "(SaddFox)"        // Original author or contributor.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 #define MACVERSION      MACHINE_NAME
 #define SOFTVERSION     SHORT_BUILD_VERSION
@@ -2237,7 +2237,7 @@
 
 #if ANY(MESH_BED_LEVELING, AUTO_BED_LEVELING_UBL, PROBE_MANUALLY)
   // Set a height for the start of manual adjustment
-  #define MANUAL_PROBE_START_Z   0.2  // (mm) Comment out to use the last-measured height
+  #define MANUAL_PROBE_START_Z   0.2 // (mm) Comment out to use the last-measured height
 #endif
 
 #if ANY(MESH_BED_LEVELING, AUTO_BED_LEVELING_BILINEAR, AUTO_BED_LEVELING_UBL)

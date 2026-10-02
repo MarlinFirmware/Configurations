@@ -2437,8 +2437,8 @@
 #define Z_SAFE_HOMING
 
 #if ENABLED(Z_SAFE_HOMING)
-  #define Z_SAFE_HOMING_X_POINT (X_CENTER) - 5  // (mm) X point for Z homing
-  #define Z_SAFE_HOMING_Y_POINT (Y_CENTER) - 5  // (mm) Y point for Z homing
+  #define Z_SAFE_HOMING_X_POINT (X_CENTER) - 5 // (mm) X point for Z homing
+  #define Z_SAFE_HOMING_Y_POINT (Y_CENTER) - 5 // (mm) Y point for Z homing
   //#define Z_SAFE_HOMING_POINT_ABSOLUTE  // Ignore home offsets (M206) for Z homing position
 #endif
 

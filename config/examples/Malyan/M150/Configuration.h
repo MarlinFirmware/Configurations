@@ -68,7 +68,7 @@
 // @section info
 
 // Author info of this build printed to the host during boot and M115
-#define STRING_CONFIG_H_AUTHOR "(Gunther)" // Original author or contributor.
+#define STRING_CONFIG_H_AUTHOR "(Gunther)"        // Original author or contributor.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
 // @section machine
@@ -1768,7 +1768,7 @@
 //#define XY_PROBE_FEEDRATE (133*60)  // (mm/min)
 
 // Feedrate for the first approach when double-probing (MULTIPLE_PROBING == 2)
-//#define Z_PROBE_FEEDRATE_FAST  (4*60)  // (mm/min)
+//#define Z_PROBE_FEEDRATE_FAST  (4*60) // (mm/min)
 
 // Feedrate for the "accurate" probe of each point
 //#define Z_PROBE_FEEDRATE_SLOW (Z_PROBE_FEEDRATE_FAST / 2) // (mm/min)

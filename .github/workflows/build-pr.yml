@@ -1,6 +1,7 @@
 #
 # build-pr.yml
-# Build Marlin with the new / updated configs in the PR
+# Format the new / updated configs in the PR (bin/mfformat), then
+# build Marlin with them.
 #
 
 name: PR Test Build
@@ -12,10 +13,14 @@ on:
     paths-ignore:
     - '**/*.md'
 
-jobs:
-  build:
+concurrency:
+  group: pr-build-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
 
-    name: Test Build
+jobs:
+  format:
+
+    name: Check Comment Alignment
     if: github.repository == 'MarlinFirmware/Configurations'
 
     runs-on: ubuntu-22.04
@@ -23,6 +28,51 @@ jobs:
     steps:
     - name: Check out the PR
       uses: actions/checkout@v7
+
+    - name: Record the PR number
+      run: echo "${{ github.event.pull_request.number }}" >pr-number.txt
+
+    # Fails if any changed config has end-of-line comments that
+    # aren't aligned with config/default (see bin/mfformat).
+    # The "Suggest Formatting" workflow then offers a fix to the contributor.
+    - name: Check end-of-line comment alignment
+      run: |
+        BASE_BRANCH=${{ github.event.pull_request.base.ref }}
+        git fetch --depth=1 origin $BASE_BRANCH
+
+        # Changed config files only (null-delimited for paths with spaces)
+        git diff -z --name-only --diff-filter=AMR origin/$BASE_BRANCH HEAD -- \
+          '*Configuration.h' '*Configuration_adv.h' >$RUNNER_TEMP/changed.txt
+        [[ -s $RUNNER_TEMP/changed.txt ]] || { echo "No Configuration changes detected."; exit 0; }
+
+        xargs -0 python3 bin/mfformat --check --diff <$RUNNER_TEMP/changed.txt
+
+    - name: Save the PR number for the follow-up workflow
+      if: failure()
+      uses: actions/upload-artifact@v4
+      with:
+        name: format-needed
+        path: pr-number.txt
+
+    - name: Explain the failure
+      if: failure()
+      run: |
+        echo "::error::End-of-line comments are not aligned with config/default. Run \`bin/mfformat --changed\` and push the result. A bot will also comment on the PR with a ready-made fix."
+
+  build:
+
+    name: Test Build
+    needs: format
+    if: github.repository == 'MarlinFirmware/Configurations'
+
+    runs-on: ubuntu-22.04
+
+    steps:
+    - name: Check out the PR (with any formatting commit)
+      uses: actions/checkout@v7
+      with:
+        ref: ${{ github.event.pull_request.head.ref }}
+        repository: ${{ github.event.pull_request.head.repo.full_name }}
 
     # Get the list of directories containing changed config files:
     - name: Get changed directories

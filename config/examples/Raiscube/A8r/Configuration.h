@@ -1752,7 +1752,7 @@
 //#define NOZZLE_TO_PROBE_OFFSET { -1, 3, 0 }
 
 // ANET A6 with BLTouch/3D-Touch mounted right to the nozzle
-#define NOZZLE_TO_PROBE_OFFSET { 39, 0, 0 } // (mm) X, Y, Z distance from Nozzle tip to Probe trigger-point
+#define NOZZLE_TO_PROBE_OFFSET { 39, 0, 0 }  // (mm) X, Y, Z distance from Nozzle tip to Probe trigger-point
 
 // ANET A6 with BLTouch/3D-Touch betwen Fan and Belt
 // (mount: https://github.com/ralf-e/ANET_A6_modifications/tree/master/A6_X-Axis)

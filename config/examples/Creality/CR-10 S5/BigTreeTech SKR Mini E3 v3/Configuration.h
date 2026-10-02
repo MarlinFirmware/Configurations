@@ -2438,8 +2438,8 @@
 #define Z_SAFE_HOMING
 
 #if ENABLED(Z_SAFE_HOMING)
-  #define Z_SAFE_HOMING_X_POINT ((X_BED_SIZE - 45) / 2)    // (mm) X point for Z homing
-  #define Z_SAFE_HOMING_Y_POINT ((Y_BED_SIZE - 45) / 2)    // (mm) Y point for Z homing
+  #define Z_SAFE_HOMING_X_POINT ((X_BED_SIZE - 45) / 2) // (mm) X point for Z homing
+  #define Z_SAFE_HOMING_Y_POINT ((Y_BED_SIZE - 45) / 2) // (mm) Y point for Z homing
   //#define Z_SAFE_HOMING_POINT_ABSOLUTE  // Ignore home offsets (M206) for Z homing position
 #endif
 
@@ -2566,7 +2566,7 @@
 #define PREHEAT_1_LABEL       "Bed Warmup"
 #define PREHEAT_1_TEMP_HOTEND 0
 #define PREHEAT_1_TEMP_BED    45
-#define PREHEAT_1_FAN_SPEED   0 // Value from 0 to 255
+#define PREHEAT_1_FAN_SPEED   0   // Value from 0 to 255
 
 #define PREHEAT_2_LABEL       "PLA"
 #define PREHEAT_2_TEMP_HOTEND 200

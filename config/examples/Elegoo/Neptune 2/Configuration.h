@@ -2109,7 +2109,7 @@
     #define FIL_RUNOUT_ENABLED_DEFAULT true
   #endif
   #ifdef IS_2D
-    #define NUM_RUNOUT_SENSORS   2          // Number of sensors, up to one per extruder. Define a FIL_RUNOUT#_PIN for each.
+    #define NUM_RUNOUT_SENSORS   2        // Number of sensors, up to one per extruder. Define a FIL_RUNOUT#_PIN for each.
   #else
     #define NUM_RUNOUT_SENSORS   1          // Number of sensors, up to one per extruder. Define a FIL_RUNOUT#_PIN for each.
   #endif
