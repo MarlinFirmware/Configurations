@@ -1411,9 +1411,9 @@
  *   M204 T    Travel Acceleration
  */
 #ifdef THINKERV2_Direct
-  #define DEFAULT_ACCELERATION            700    // X, Y, Z and E acceleration for printing moves
-  #define DEFAULT_RETRACT_ACCELERATION   1250    // E acceleration for retracts
-  #define DEFAULT_TRAVEL_ACCELERATION     750    // X, Y, Z acceleration for travel (non printing) moves
+  #define DEFAULT_ACCELERATION            700 // X, Y, Z and E acceleration for printing moves
+  #define DEFAULT_RETRACT_ACCELERATION   1250 // E acceleration for retracts
+  #define DEFAULT_TRAVEL_ACCELERATION     750 // X, Y, Z acceleration for travel (non printing) moves
 #else
   #define DEFAULT_ACCELERATION           1250    // X, Y, Z and E acceleration for printing moves
   #define DEFAULT_RETRACT_ACCELERATION   1250    // E acceleration for retracts

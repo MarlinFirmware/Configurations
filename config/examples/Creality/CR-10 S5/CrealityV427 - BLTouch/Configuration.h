@@ -63,7 +63,7 @@
 // @section info
 
 // Author info of this build printed to the host during boot and M115
-#define STRING_CONFIG_H_AUTHOR "(JPT)" // Original author or contributor.
+#define STRING_CONFIG_H_AUTHOR "(JPT)"            // Original author or contributor.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
 // @section machine
@@ -2224,7 +2224,7 @@
  */
 //#define PREHEAT_BEFORE_LEVELING
 #if ENABLED(PREHEAT_BEFORE_LEVELING)
-  #define LEVELING_NOZZLE_TEMP 0   // (°C) Only applies to E0 at this time
+  #define LEVELING_NOZZLE_TEMP 0     // (°C) Only applies to E0 at this time
   #define LEVELING_BED_TEMP    40
 #endif
 

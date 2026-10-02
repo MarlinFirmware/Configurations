@@ -420,7 +420,7 @@
     #if ENABLED(PID_PARAMS_PER_HOTEND)
       // Specify up to one value per hotend here, according to your setup.
       // If there are fewer values, the last one applies to the remaining hotends.
-      #define DEFAULT_KC_LIST { 1, 1 }      // heating power = Kc * e_speed
+      #define DEFAULT_KC_LIST { 1, 1 }                    // heating power = Kc * e_speed
     #endif
   #endif
 
@@ -3639,7 +3639,7 @@
    * Comment *_STALL_SENSITIVITY to disable sensorless homing for that axis.
    * @section tmc/stallguard
    */
-  #define SENSORLESS_HOMING // StallGuard capable drivers only
+  #define SENSORLESS_HOMING   // StallGuard capable drivers only
 
   #if ANY(SENSORLESS_HOMING, SENSORLESS_PROBING)
     // TMC2209: 0...255. TMC2130: -64...63
@@ -4254,8 +4254,8 @@
   #define CUSTOM_MENU_MAIN_TITLE "Preheat"
   #define CUSTOM_MENU_MAIN_SCRIPT_DONE "Preheating..."
   #define CUSTOM_MENU_MAIN_SCRIPT_AUDIBLE_FEEDBACK
-  #define CUSTOM_MENU_MAIN_SCRIPT_RETURN      // Return to status screen after a script
-  #define CUSTOM_MENU_MAIN_ONLY_IDLE          // Only show custom menu when the machine is idle
+  #define CUSTOM_MENU_MAIN_SCRIPT_RETURN     // Return to status screen after a script
+  #define CUSTOM_MENU_MAIN_ONLY_IDLE         // Only show custom menu when the machine is idle
 
   #define MAIN_MENU_ITEM_1_DESC "PLA - 215/70"
   #define MAIN_MENU_ITEM_1_GCODE "M140 S70\nM104 S215"

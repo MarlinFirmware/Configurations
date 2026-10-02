@@ -63,7 +63,7 @@
 // @section info
 
 // Author info of this build printed to the host during boot and M115
-#define STRING_CONFIG_H_AUTHOR "(Stephen Hawes)" // Original author or contributor.
+#define STRING_CONFIG_H_AUTHOR "(Stephen Hawes)"  // Original author or contributor.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
 // @section machine
@@ -2436,8 +2436,8 @@
 #define Z_SAFE_HOMING
 
 #if ENABLED(Z_SAFE_HOMING)
-  #define Z_SAFE_HOMING_X_POINT 0  // (mm) X point for Z homing
-  #define Z_SAFE_HOMING_Y_POINT 0  // (mm) Y point for Z homing
+  #define Z_SAFE_HOMING_X_POINT 0         // (mm) X point for Z homing
+  #define Z_SAFE_HOMING_Y_POINT 0         // (mm) Y point for Z homing
   //#define Z_SAFE_HOMING_POINT_ABSOLUTE  // Ignore home offsets (M206) for Z homing position
 #endif
 
@@ -3813,7 +3813,7 @@
  * Set this manually if there are extra servos needing manual control.
  * Set to 0 to turn off servo support.
  */
-#define NUM_SERVOS 2 // Note: Servo index starts with 0 for M280-M282 commands
+#define NUM_SERVOS 2   // Note: Servo index starts with 0 for M280-M282 commands
 
 // (ms) Delay before the next move will start, to give the servo time to reach its target angle.
 // 300ms is a good value but you can try less delay.
