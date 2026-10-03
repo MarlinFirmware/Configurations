@@ -17,6 +17,10 @@ concurrency:
   group: pr-build-${{ github.event.pull_request.number }}
   cancel-in-progress: true
 
+permissions:
+  contents: read
+  pull-requests: read
+
 jobs:
   format:
 
@@ -24,10 +28,11 @@ jobs:
     if: github.repository == 'MarlinFirmware/Configurations'
 
     runs-on: ubuntu-22.04
+    timeout-minutes: 10
 
     steps:
     - name: Check out the PR
-      uses: actions/checkout@v7
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
     - name: Record the PR number
       run: echo "${{ github.event.pull_request.number }}" >pr-number.txt
@@ -49,7 +54,7 @@ jobs:
 
     - name: Save the PR number for the follow-up workflow
       if: failure()
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
       with:
         name: format-needed
         path: pr-number.txt
@@ -66,10 +71,11 @@ jobs:
     if: github.repository == 'MarlinFirmware/Configurations'
 
     runs-on: ubuntu-22.04
+    timeout-minutes: 60
 
     steps:
     - name: Check out the PR (with any formatting commit)
-      uses: actions/checkout@v7
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       with:
         ref: ${{ github.event.pull_request.head.ref }}
         repository: ${{ github.event.pull_request.head.repo.full_name }}
@@ -95,7 +101,7 @@ jobs:
 
     - name: Select Python 3.9
       if: env.DIRS != ''
-      uses: actions/setup-python@v7
+      uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
       with:
         python-version: '3.9' # Version range or exact version of a Python version to use, using semvers version range syntax.
         architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
@@ -121,7 +127,7 @@ jobs:
     # The PR branch may predate the CI scripts, so get them from the base branch
     - name: Check out the CI scripts
       if: env.DIRS != ''
-      uses: actions/checkout@v7
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       with:
         ref: ${{ github.event.pull_request.base.ref }}
         path: ci
@@ -149,7 +155,7 @@ jobs:
     # since a cache saved by a PR run can't be used by any other PR.
     - name: Restore PlatformIO cache
       if: env.DIRS != ''
-      uses: actions/cache/restore@v5
+      uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
       with:
         path: ~/.platformio
         key: ${{ runner.os }}-pio-v2-${{ steps.targets.outputs.group }}

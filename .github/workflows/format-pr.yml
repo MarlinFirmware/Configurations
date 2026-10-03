@@ -36,10 +36,11 @@ jobs:
       github.event.workflow_run.conclusion == 'failure'
 
     runs-on: ubuntu-22.04
+    timeout-minutes: 15
 
     steps:
     - name: Get the PR number
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
       with:
         name: format-needed
         run-id: ${{ github.event.workflow_run.id }}
@@ -54,7 +55,7 @@ jobs:
         echo "number=$N" >>$GITHUB_OUTPUT
 
     - name: Check out the trusted formatter
-      uses: actions/checkout@v7
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       with:
         ref: import-2.1.x
         path: trusted

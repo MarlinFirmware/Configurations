@@ -12,15 +12,19 @@ on:
     - bugfix-2.0.x
     - bugfix-2.1.x
 
+permissions:
+  pull-requests: write
+
 jobs:
   bad_target:
     name: PR Bad Target
     if: github.repository == 'MarlinFirmware/Configurations'
 
     runs-on: ubuntu-22.04
+    timeout-minutes: 10
 
     steps:
-    - uses: superbrothers/close-pull-request@v3
+    - uses: superbrothers/close-pull-request@9c18513d320d7b2c7185fb93396d0c664d5d8448 # v3
       with:
         comment: >
           Thanks for your contribution! Unfortunately we can't accept PRs directed at the `bugfix-2.x.x` branch. We make patches to `import-2.x.x` and then generate `bugfix-2.x.x` and `release-x.x.x` from that.

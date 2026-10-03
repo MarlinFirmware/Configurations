@@ -25,6 +25,9 @@ concurrency:
   group: cache-pio
   cancel-in-progress: true
 
+permissions:
+  contents: read
+
 jobs:
   groups:
 
@@ -32,16 +35,17 @@ jobs:
     if: github.repository == 'MarlinFirmware/Configurations'
 
     runs-on: ubuntu-22.04
+    timeout-minutes: 10
 
     outputs:
       matrix: ${{ steps.groups.outputs.matrix }}
 
     steps:
     - name: Check out
-      uses: actions/checkout@v7
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
     - name: Select Python 3.9
-      uses: actions/setup-python@v7
+      uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
       with:
         python-version: '3.9'
         architecture: 'x64'
@@ -78,6 +82,7 @@ jobs:
     needs: groups
 
     runs-on: ubuntu-22.04
+    timeout-minutes: 30
 
     strategy:
       fail-fast: false
@@ -88,7 +93,7 @@ jobs:
     # The key changes with the toolchain, so an existing cache is still current
     - name: Check for an existing cache
       id: pio-cache
-      uses: actions/cache/restore@v5
+      uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
       with:
         path: ~/.platformio
         key: ${{ runner.os }}-pio-v2-${{ matrix.group }}
@@ -96,7 +101,7 @@ jobs:
 
     - name: Select Python 3.9
       if: steps.pio-cache.outputs.cache-hit != 'true'
-      uses: actions/setup-python@v7
+      uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
       with:
         python-version: '3.9'
         architecture: 'x64'
@@ -113,7 +118,7 @@ jobs:
 
     - name: Save PlatformIO cache
       if: steps.pio-cache.outputs.cache-hit != 'true'
-      uses: actions/cache/save@v5
+      uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
       with:
         path: ~/.platformio
         key: ${{ steps.pio-cache.outputs.cache-primary-key }}
