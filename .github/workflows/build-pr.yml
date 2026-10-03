@@ -76,16 +76,16 @@ jobs:
 
     # Get the list of directories containing changed config files:
     - name: Get changed directories
+      env:
+        GH_TOKEN: ${{ github.token }}
+        PR: ${{ github.event.pull_request.number }}
       run: |
-        # Get the base branch of the Pull Request
-        BASE_BRANCH=$(jq -r .pull_request.base.ref <$GITHUB_EVENT_PATH)
-
-        # Get origin for comparison
-        git fetch --depth=1 origin $BASE_BRANCH
-
-        # Use `git diff` to get a list of folders with altered .h files
-        # between the current commit and the base branch of the Pull Request
-        DIRS=$(git diff --name-only --diff-filter=AMR origin/$BASE_BRANCH HEAD | grep -E ".+\.h" | while IFS= read -r f; do dirname "$f"; done | uniq)
+        # Ask the API for the files changed by the PR. The checkout above
+        # comes from the contributor's fork, so "origin" is the fork and its
+        # (possibly stale) base branch can't be used for a `git diff`.
+        DIRS=$(gh api "repos/$GITHUB_REPOSITORY/pulls/$PR/files" --paginate \
+                 --jq '.[] | select(.status != "removed") | .filename' \
+               | grep -E '\.h$' | while IFS= read -r f; do dirname "$f"; done | sort -u)
 
         # Exit if nothing testable changed
         [[ -z $DIRS ]] && { echo "No Configuration changes detected."; exit ; }
