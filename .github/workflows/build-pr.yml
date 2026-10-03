@@ -93,15 +93,6 @@ jobs:
         # Set DIRS in the persistent environment
         echo -e "DIRS<<EOF\n$DIRS\nEOF" >>$GITHUB_ENV
 
-    - name: Cache PlatformIO
-      if: env.DIRS != ''
-      uses: actions/cache@v5
-      with:
-        path: ~/.platformio
-        key: ${{ runner.os }}-pio-v1
-        restore-keys: |
-          ${{ runner.os }}-pio-
-
     - name: Select Python 3.9
       if: env.DIRS != ''
       uses: actions/setup-python@v7
@@ -113,7 +104,6 @@ jobs:
       if: env.DIRS != ''
       run: |
         pip install -U platformio
-        pio pkg update --global
 
     # Fetch the code from the other repo and compile it:
     - name: Clone Marlin
@@ -128,14 +118,59 @@ jobs:
           git clone --branch bugfix-2.1.x https://github.com/MarlinFirmware/Marlin.git
         fi
 
+    # The PR branch may predate the CI scripts, so get them from the base branch
+    - name: Check out the CI scripts
+      if: env.DIRS != ''
+      uses: actions/checkout@v7
+      with:
+        ref: ${{ github.event.pull_request.base.ref }}
+        path: ci
+        sparse-checkout: .github/scripts
+
+    # Get the PlatformIO env for each changed config, and the toolchain cache group
+    - name: Resolve build targets
+      id: targets
+      if: env.DIRS != ''
+      run: |
+        mapfile -t dirs <<<"$DIRS"
+        ci/.github/scripts/config-targets Marlin "${dirs[@]}" >"$RUNNER_TEMP/targets.tsv"
+        cat "$RUNNER_TEMP/targets.tsv"
+
+        # Envs sharing a toolchain share a cache. Use the first config's group.
+        ENV1=$(head -n1 "$RUNNER_TEMP/targets.tsv" | cut -f2)
+        GROUP=$(pio project config -d Marlin --json-output | ci/.github/scripts/toolchain-group "$ENV1" | cut -f2)
+        echo "group=$GROUP" >>"$GITHUB_OUTPUT"
+
+        if cut -f2 "$RUNNER_TEMP/targets.tsv" | grep -qx simulator_linux_release; then
+          echo "simulator=true" >>"$GITHUB_OUTPUT"
+        fi
+
+    # PR runs only restore. Caches are saved on import-2.1.x by cache-pio.yml,
+    # since a cache saved by a PR run can't be used by any other PR.
+    - name: Restore PlatformIO cache
+      if: env.DIRS != ''
+      uses: actions/cache/restore@v5
+      with:
+        path: ~/.platformio
+        key: ${{ runner.os }}-pio-v2-${{ steps.targets.outputs.group }}
+
+    - name: Update PlatformIO packages
+      if: env.DIRS != ''
+      run: |
+        pio pkg update --global
+
+    - name: Install Simulator dependencies
+      if: steps.targets.outputs.simulator == 'true'
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential libsdl2-dev libsdl2-net-dev libglm-dev
+
     # For each directory containing a changed config file, copy the .h files and build the code:
     - name: Test all changed config files
       if: env.DIRS != ''
       run: |
         cd Marlin
-        IFS=$'\n'
-        SIM_DEPS=
-        for dir in $DIRS; do
+        while IFS=$'\t' read -r dir TARGET BOARD; do
           # Copy all .h files from the directory into the Marlin subfolder
           echo "Building Configurations in $dir ..."
           cp ../"$dir"/*.h Marlin/
@@ -147,32 +182,9 @@ jobs:
           rm -f "Marlin/Configuration.h~"
 
           # Build Marlin with PlatformIO
-          MB=$( grep -E "^\s*#define MOTHERBOARD" Marlin/Configuration.h | awk '{ print $3 }' | sed 's/BOARD_//;s/\r//' )
-          [[ -z $MB ]] && { echo "::error::Can't read MOTHERBOARD setting." ; exit 3; }
-
-          BLINE=$( grep -E "define\s+BOARD_$MB\b" Marlin/src/core/boards.h )
-          BNUM=$( sed -E 's/^.+BOARD_[^ ]+ +([0-9]+)(.|$)+$/\1/' <<<"$BLINE" )
-          BDESC=$( sed -E 's/^.+\/\/ *(.+)$/\1/' <<<"$BLINE" )
-          [[ -z $BNUM ]] && { echo "::error::Can't find BOARD_$MB in core/boards.h." ; exit 3; }
-          if [ "$MB" == "SIMULATED" ]
-          then
-            ENVS=$"simulator_linux_release"
-
-            # Install Simulator dependencies (once)
-            if [[ -z $SIM_DEPS ]]; then
-              sudo apt-get update
-              sudo apt-get install -y build-essential libsdl2-dev libsdl2-net-dev libglm-dev
-              SIM_DEPS=1
-            fi
-          else
-            ENVS=( $( grep -EA1 "MB\(.*\b$MB\b.*\)" Marlin/src/pins/pins.h | grep -E "#include.+//.+env:[^ ]+" | grep -oE "env:[^ ]+" | sed -E "s/env://" ) )
-          fi
-          [[ -z $ENVS ]] && { echo "::error::Can't find target(s) for $MB ($BNUM)." ; exit 3; }
-          [[ ${#ENVS[*]} == 1 ]] && TARGET=$ENVS || TARGET="${ENVS[0]}"
-
-          echo "Building environment $TARGET for board $MB ($BNUM)..." ; echo
-          pio run -s -e $TARGET
+          echo "Building environment $TARGET for board $BOARD..." ; echo
+          pio run -s -e "$TARGET" </dev/null
 
           # Reset the repo directory so the next iteration starts clean
           git reset --hard HEAD
-        done
+        done <"$RUNNER_TEMP/targets.tsv"

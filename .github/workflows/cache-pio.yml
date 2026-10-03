@@ -1,0 +1,119 @@
+#
+# cache-pio.yml
+# Save PlatformIO toolchain caches on import-2.1.x for "PR Test Build".
+#
+# A cache saved by a PR run can only be used by that same PR, so PR runs
+# only restore. This workflow saves one cache per toolchain group (envs with
+# the same platform + platform_packages) used by any config in the repo.
+#
+
+name: Cache PlatformIO
+
+on:
+  push:
+    branches:
+    - import-2.1.x
+    paths:
+    - 'config/**'
+    - '.github/scripts/**'
+    - '.github/workflows/cache-pio.yml'
+  schedule:
+  - cron: '17 5 * * 1'  # Weekly, to re-create caches evicted after 7 days unused
+  workflow_dispatch:
+
+concurrency:
+  group: cache-pio
+  cancel-in-progress: true
+
+jobs:
+  groups:
+
+    name: Find Toolchain Groups
+    if: github.repository == 'MarlinFirmware/Configurations'
+
+    runs-on: ubuntu-22.04
+
+    outputs:
+      matrix: ${{ steps.groups.outputs.matrix }}
+
+    steps:
+    - name: Check out
+      uses: actions/checkout@v7
+
+    - name: Select Python 3.9
+      uses: actions/setup-python@v7
+      with:
+        python-version: '3.9'
+        architecture: 'x64'
+
+    - name: Install PlatformIO
+      run: |
+        pip install -U platformio
+
+    - name: Clone Marlin
+      run: |
+        git clone --depth=1 --branch bugfix-2.1.x https://github.com/MarlinFirmware/Marlin.git
+
+    # One env per toolchain group, as a JSON matrix: [{"env":…,"group":…}, …]
+    - name: Get toolchain groups
+      id: groups
+      run: |
+        mapfile -t dirs < <(find config -name Configuration.h -exec dirname {} \; | sort -u)
+
+        # Configs for boards not yet in bugfix-2.1.x are reported but skipped
+        .github/scripts/config-targets Marlin "${dirs[@]}" >"$RUNNER_TEMP/targets.tsv" || true
+
+        mapfile -t envs < <(cut -f2 "$RUNNER_TEMP/targets.tsv" | sort -u)
+        pio project config -d Marlin --json-output \
+          | .github/scripts/toolchain-group "${envs[@]}" >"$RUNNER_TEMP/groups.tsv"
+
+        MATRIX=$(sort -t$'\t' -k2,2 -u "$RUNNER_TEMP/groups.tsv" \
+                 | jq -Rnc '[inputs | split("\t") | {env: .[0], group: .[1]}]')
+        echo "$MATRIX" | jq .
+        echo "matrix=$MATRIX" >>"$GITHUB_OUTPUT"
+
+  cache:
+
+    name: Cache ${{ matrix.env }}
+    needs: groups
+
+    runs-on: ubuntu-22.04
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include: ${{ fromJSON(needs.groups.outputs.matrix) }}
+
+    steps:
+    # The key changes with the toolchain, so an existing cache is still current
+    - name: Check for an existing cache
+      id: pio-cache
+      uses: actions/cache/restore@v5
+      with:
+        path: ~/.platformio
+        key: ${{ runner.os }}-pio-v2-${{ matrix.group }}
+        lookup-only: true
+
+    - name: Select Python 3.9
+      if: steps.pio-cache.outputs.cache-hit != 'true'
+      uses: actions/setup-python@v7
+      with:
+        python-version: '3.9'
+        architecture: 'x64'
+
+    - name: Install the toolchain for ${{ matrix.env }}
+      if: steps.pio-cache.outputs.cache-hit != 'true'
+      env:
+        ENV: ${{ matrix.env }}
+      run: |
+        pip install -U platformio
+        git clone --depth=1 --branch bugfix-2.1.x https://github.com/MarlinFirmware/Marlin.git
+        cd Marlin
+        pio pkg install -e "$ENV"
+
+    - name: Save PlatformIO cache
+      if: steps.pio-cache.outputs.cache-hit != 'true'
+      uses: actions/cache/save@v5
+      with:
+        path: ~/.platformio
+        key: ${{ steps.pio-cache.outputs.cache-primary-key }}
