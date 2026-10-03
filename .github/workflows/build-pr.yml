@@ -93,38 +93,31 @@ jobs:
         # Set DIRS in the persistent environment
         echo -e "DIRS<<EOF\n$DIRS\nEOF" >>$GITHUB_ENV
 
-    - name: Cache pip
-      uses: actions/cache@v5
-      with:
-        path: ~/.cache/pip
-        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-        restore-keys: |
-          ${{ runner.os }}-pip-
-
     - name: Cache PlatformIO
+      if: env.DIRS != ''
       uses: actions/cache@v5
       with:
-        path: |
-          ~/.platformio
-          .pio/libdeps
+        path: ~/.platformio
         key: ${{ runner.os }}-pio-v1
         restore-keys: |
           ${{ runner.os }}-pio-
 
     - name: Select Python 3.9
+      if: env.DIRS != ''
       uses: actions/setup-python@v7
       with:
         python-version: '3.9' # Version range or exact version of a Python version to use, using semvers version range syntax.
         architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
 
     - name: Install PlatformIO
+      if: env.DIRS != ''
       run: |
         pip install -U platformio
-        pio upgrade --dev
         pio pkg update --global
 
     # Fetch the code from the other repo and compile it:
     - name: Clone Marlin
+      if: env.DIRS != ''
       run: |
         if [[ "$GITHUB_HEAD_REF" =~ ^pr-([0-9]+)$ ]]; then
           MARLIN_PR="${BASH_REMATCH[1]}"
@@ -137,9 +130,11 @@ jobs:
 
     # For each directory containing a changed config file, copy the .h files and build the code:
     - name: Test all changed config files
+      if: env.DIRS != ''
       run: |
         cd Marlin
         IFS=$'\n'
+        SIM_DEPS=
         for dir in $DIRS; do
           # Copy all .h files from the directory into the Marlin subfolder
           echo "Building Configurations in $dir ..."
@@ -163,11 +158,12 @@ jobs:
           then
             ENVS=$"simulator_linux_release"
 
-            # Install Simulator dependencies
-            sudo apt-get install build-essential
-            sudo apt-get install libsdl2-dev
-            sudo apt-get install libsdl2-net-dev
-            sudo apt-get install libglm-dev
+            # Install Simulator dependencies (once)
+            if [[ -z $SIM_DEPS ]]; then
+              sudo apt-get update
+              sudo apt-get install -y build-essential libsdl2-dev libsdl2-net-dev libglm-dev
+              SIM_DEPS=1
+            fi
           else
             ENVS=( $( grep -EA1 "MB\(.*\b$MB\b.*\)" Marlin/src/pins/pins.h | grep -E "#include.+//.+env:[^ ]+" | grep -oE "env:[^ ]+" | sed -E "s/env://" ) )
           fi
