@@ -1,6 +1,6 @@
 /**
  * Marlin 3D Printer Firmware
- * Copyright (c) 2020 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
+ * Copyright (c) 2024 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
  *
  * Based on Sprinter and grbl.
  * Copyright (c) 2011 Camiel Gubbels / Erik van der Zalm
@@ -20,6 +20,8 @@
  *
  */
 #pragma once
+
+#define CONFIG_EXAMPLES_DIR "Creality/CR-10S/CrealityV1 - BLTouch"
 
 /**
  * Configuration_adv.h
@@ -1657,7 +1659,6 @@
       #define XATC_Y_POSITION Y_CENTER      // (mm) Y position to probe
     #endif
   #endif
-
 #endif // HAS_BED_PROBE
 
 #if HAS_MARLINUI_MENU
