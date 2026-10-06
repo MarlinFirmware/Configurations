@@ -1,0 +1,266 @@
+#!/usr/bin/env python3
+#
+# mfformat [options] [paths...]
+#
+# Align the end-of-line comments of Configuration.h and Configuration_adv.h
+# to the same column as the matching lines in config/default.
+#
+# - Paths may be files or folders. Folders are searched recursively for
+#   Configuration.h and Configuration_adv.h. With no paths, config/examples
+#   is used. Files under config/default are never modified.
+# - Lines that are identical to the default are skipped, so a diff of the
+#   file against its default narrows the scan to the changed regions.
+# - Within each changed region, lines are matched in sequence with the
+#   default lines by the option they define (e.g., "define FOO"), ignoring
+#   the value and any leading "//" (enabled or disabled).
+#   Anything that can't be matched (added lines, added comments, changed
+#   code) is left alone and the scan moves on to the next line that can.
+# - With --changed (or --base REF) only the config files changed since the
+#   merge-base with the PR's base branch are scanned (committed, uncommitted,
+#   and new files), which is much faster than scanning all of config/examples.
+# - Only the whitespace before a trailing "//" comment is changed. Code
+#   and comment text are preserved. If the code runs past the default
+#   comment column, a single space is used.
+#
+# Examples:
+#   bin/mfformat                          # Format everything in config/examples
+#   bin/mfformat -n "config/examples/Creality"   # Report what would change
+#   bin/mfformat -d path/to/Configuration.h      # Show a diff and write it
+#   bin/mfformat --check                  # Exit 1 if anything needs formatting
+#   bin/mfformat -C                       # Format only what this branch changed
+#   bin/mfformat -C --check               # Quick pre-PR check
+#   bin/mfformat -b origin/import-2.1.x -n   # Compare against a specific base
+#
+import re
+import sys
+import argparse
+import difflib
+import subprocess
+from pathlib import Path
+
+NAMES = ('Configuration.h', 'Configuration_adv.h')
+
+# Code that may be commented out with a leading "//": "//#define FOO"
+_DISABLED = re.compile(r'^(\s*)//(?=\s?#\s*(?:define|undef|if|ifdef|ifndef|elif|else|endif|include|error)\b)')
+_DEFINE = re.compile(r'^\s*#\s*(define|undef)\s+([A-Za-z_]\w*)')
+
+
+def split_line(line, state):
+    '''
+    Split a line (without its line ending) into (code, comment).
+    'code' includes any leading whitespace and the "//" of disabled code.
+    'comment' starts with the trailing "//", or is None.
+    state is a one-item list tracking whether we're inside a /* block */.
+    Lines that are comment-only or inside block comments return (None, None).
+    '''
+    if state[0]:
+        if '*/' in line: state[0] = False
+        return None, None
+
+    # Treat a leading "//" before a directive as part of the code
+    start = 0
+    m = _DISABLED.match(line)
+    if m: start = m.end()
+
+    in_str = False
+    i = start
+    n = len(line)
+    while i < n:
+        c = line[i]
+        if in_str:
+            if c == '\\': i += 1
+            elif c == in_str: in_str = False
+        elif c in '"\'': in_str = c
+        elif c == '/' and i + 1 < n:
+            d = line[i + 1]
+            if d == '/':
+                code = line[:i]
+                return (code, line[i:]) if code.strip() else (None, None)
+            if d == '*':
+                if '*/' not in line[i + 2:]: state[0] = True
+                return None, None
+        i += 1
+    return (line, None) if line.strip() else (None, None)
+
+
+def line_key(code):
+    '''A key for matching lines between files. Defines match by name.'''
+    m = _DEFINE.match(_DISABLED.sub(r'\1', code))
+    if m: return m.group(1) + ' ' + m.group(2)
+    return ' '.join(_DISABLED.sub(r'\1', code).split())
+
+
+def analyze(lines):
+    '''Per line: (code, comment, key) or None for lines that have no trailing comment.'''
+    state = [False]
+    out = []
+    for line in lines:
+        code, comment = split_line(line.rstrip('\r\n'), state)
+        if code is None: out.append(None)
+        else: out.append((code, comment, line_key(code)))
+    return out
+
+
+def comment_text(c):
+    return c.rstrip() if c else ''
+
+
+def match_block(dinfo, einfo, d1, d2, e1, e2):
+    '''
+    Match example lines to default lines in order, skipping what can't be
+    matched. Only lines with a trailing comment on both sides matter.
+    Returns a list of (default_index, example_index).
+    '''
+    pairs = []
+    dp = d1
+    for ei in range(e1, e2):
+        e = einfo[ei]
+        if e is None or e[1] is None: continue
+        for di in range(dp, d2):
+            d = dinfo[di]
+            if d is None or d[1] is None: continue
+            same_key = d[2] == e[2]
+            # Non-define lines (e.g., table rows) can also match on identical comments
+            same_comment = not _DEFINE.match(_DISABLED.sub(r'\1', e[0])) and comment_text(d[1]) == comment_text(e[1])
+            if same_key or same_comment:
+                pairs.append((di, ei))
+                dp = di + 1
+                break
+    return pairs
+
+
+def format_lines(default_lines, example_lines):
+    '''Return (new_lines, changed_count)'''
+    if default_lines == example_lines: return example_lines, 0
+
+    dinfo = analyze(default_lines)
+    einfo = analyze(example_lines)
+
+    new = list(example_lines)
+    changed = 0
+
+    sm = difflib.SequenceMatcher(None, default_lines, example_lines, autojunk=False)
+    for tag, d1, d2, e1, e2 in sm.get_opcodes():
+        if tag != 'replace': continue   # Equal lines are skipped, inserts and deletes can't match
+        for di, ei in match_block(dinfo, einfo, d1, d2, e1, e2):
+            dcode, dcomment, _ = dinfo[di]
+            ecode, ecomment, _ = einfo[ei]
+            column = len(dcode)   # Default comment column
+            code = ecode.rstrip()
+            pad = max(1, column - len(code))
+            eol = example_lines[ei][len(example_lines[ei].rstrip('\r\n')):]
+            line = code + ' ' * pad + ecomment + eol
+            if line != example_lines[ei]:
+                new[ei] = line
+                changed += 1
+    return new, changed
+
+
+def read_lines(path):
+    with open(path, 'r', encoding='utf-8', newline='') as f:
+        return f.read().splitlines(keepends=True)
+
+
+def find_files(paths, default_dir):
+    files = []
+    for p in paths:
+        p = Path(p)
+        if p.is_dir():
+            for name in NAMES:
+                files += sorted(p.rglob(name))
+        elif p.name in NAMES:
+            files.append(p)
+        else:
+            print(f"Skipping {p}: not Configuration.h or Configuration_adv.h", file=sys.stderr)
+    default_dir = default_dir.resolve()
+    return [f for f in files if default_dir not in f.resolve().parents]
+
+
+BASE_CANDIDATES = ('upstream/import-2.1.x', 'origin/import-2.1.x', 'import-2.1.x')
+
+
+def git(root, *args):
+    r = subprocess.run(('git',) + args, cwd=root, capture_output=True, text=True)
+    return r.stdout if r.returncode == 0 else None
+
+
+def changed_files(root, base=None):
+    '''
+    Config files changed since the merge-base of HEAD and the base ref,
+    including uncommitted and untracked ones. Returns (files, base_ref)
+    or (None, message) on failure.
+    '''
+    ref = None
+    for cand in ([base] if base else BASE_CANDIDATES):
+        if git(root, 'rev-parse', '--verify', '--quiet', cand + '^{commit}'):
+            ref = cand
+            break
+    if not ref:
+        return None, f"Can't find base branch {base or ' / '.join(BASE_CANDIDATES)}. Use --base REF."
+    mb = (git(root, 'merge-base', ref, 'HEAD') or '').strip()
+    if not mb:
+        return None, f"No merge-base between {ref} and HEAD."
+    out = git(root, 'diff', '-z', '--name-only', '--diff-filter=AMR', mb) or ''
+    out += git(root, 'ls-files', '-z', '--others', '--exclude-standard') or ''
+    names = sorted({n for n in out.split('\0') if n and Path(n).name in NAMES})
+    top = (git(root, 'rev-parse', '--show-toplevel') or str(root)).strip()
+    return [Path(top) / n for n in names if (Path(top) / n).is_file()], ref
+
+
+def main():
+    here = Path(__file__).resolve().parent
+    root = here.parent
+    ap = argparse.ArgumentParser(description="Align end-of-line comments with config/default")
+    ap.add_argument('paths', nargs='*', help="files or folders (default: config/examples)")
+    ap.add_argument('-D', '--default-dir', default=str(root / 'config' / 'default'), help="folder with the default configs")
+    ap.add_argument('-n', '--dry-run', action='store_true', help="report what would change without writing")
+    ap.add_argument('-d', '--diff', action='store_true', help="show a diff of each change")
+    ap.add_argument('-c', '--check', action='store_true', help="exit with status 1 if any file needs formatting (implies --dry-run)")
+    ap.add_argument('-C', '--changed', action='store_true', help="only scan files changed since the merge-base with the PR's base branch (auto-detects upstream/import-2.1.x)")
+    ap.add_argument('-b', '--base', metavar='REF', help="base ref for --changed (implies --changed)")
+    ap.add_argument('-q', '--quiet', action='store_true', help="only print a summary")
+    args = ap.parse_args()
+
+    default_dir = Path(args.default_dir)
+    defaults = {}
+    for name in NAMES:
+        p = default_dir / name
+        if not p.is_file():
+            print(f"Error: missing default {p}", file=sys.stderr)
+            return 2
+        defaults[name] = read_lines(p)
+
+    if args.changed or args.base:
+        files, ref = changed_files(root, args.base)
+        if files is None:
+            print(f"Error: {ref}", file=sys.stderr)
+            return 2
+        if args.paths:
+            scopes = [Path(p).resolve() for p in args.paths]
+            files = [f for f in files if any(f.resolve() == sc or sc in f.resolve().parents for sc in scopes)]
+        default_resolved = default_dir.resolve()
+        files = [f for f in files if default_resolved not in f.resolve().parents]
+        if not args.quiet: print(f"{len(files)} changed config file{'s' if len(files) != 1 else ''} since {ref}")
+    else:
+        files = find_files(args.paths or [str(root / 'config' / 'examples')], default_dir)
+    dry = args.dry_run or args.check
+    nfiles = nlines = 0
+    for f in files:
+        old = read_lines(f)
+        new, count = format_lines(defaults[f.name], old)
+        if not count: continue
+        nfiles += 1
+        nlines += count
+        if not args.quiet: print(f"{f}: {count} line{'s' if count != 1 else ''}{' (dry run)' if dry else ''}")
+        if args.diff:
+            sys.stdout.writelines(difflib.unified_diff(old, new, str(f), str(f), n=0))
+        if not dry:
+            with open(f, 'w', encoding='utf-8', newline='') as out:
+                out.writelines(new)
+
+    print(f"{len(files)} files scanned, {nfiles} {'need' if dry else 'had'} changes, {nlines} lines {'to align' if dry else 'aligned'}.")
+    return 1 if args.check and nfiles else 0
+
+
+if __name__ == '__main__':
+    sys.exit(main())

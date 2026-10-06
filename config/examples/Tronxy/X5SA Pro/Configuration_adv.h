@@ -2398,12 +2398,12 @@
   // Some colors are predefined or use 16bit color (e.g. 0x0000 = black, 0xFFE0 = yellow)
   // See: u8g_dev_tft_upscale_from_128x64.cpp and
   // https://ee-programming-notepad.blogspot.com/2016/10/16-bit-color-generator-picker.html
-  #define TFT_MARLINUI_COLOR COLOR_WHITE  // main foreground color
-  #define TFT_MARLINBG_COLOR COLOR_BLACK  // background color
-  //#define TFT_DISABLED_COLOR 0x0003     // Almost black
-  #define TFT_BTCANCEL_COLOR COLOR_RED    // cancel button
-  #define TFT_BTARROWS_COLOR COLOR_WHITE  // arrows up/down
-  #define TFT_BTOKMENU_COLOR COLOR_GREEN  // enter button
+  #define TFT_MARLINUI_COLOR COLOR_WHITE // main foreground color
+  #define TFT_MARLINBG_COLOR COLOR_BLACK // background color
+  //#define TFT_DISABLED_COLOR 0x0003 // Almost black
+  #define TFT_BTCANCEL_COLOR COLOR_RED // cancel button
+  #define TFT_BTARROWS_COLOR COLOR_WHITE // arrows up/down
+  #define TFT_BTOKMENU_COLOR COLOR_GREEN // enter button
 #endif
 
 /**

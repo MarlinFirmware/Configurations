@@ -1,0 +1,19 @@
+#!/usr/bin/env python3
+#
+# toolchain-group
+# Map PlatformIO envs to a short hash of their platform + platform_packages.
+# Envs with the same hash share a toolchain, so they can share a cache.
+# (Same grouping as the Marlin repo's ci-build-tests.yml.)
+#
+# Usage: pio project config --json-output | toolchain-group <env> ...
+#
+# Output is one line per env:  <env><TAB><group>
+#
+
+import hashlib, json, sys
+
+config = dict(json.load(sys.stdin))
+for name in sys.argv[1:]:
+    env = dict(config.get("env:" + name, []))
+    toolchain = json.dumps([env.get("platform"), env.get("platform_packages")])
+    print(name + "\t" + hashlib.sha1(toolchain.encode()).hexdigest()[:12])

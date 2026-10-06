@@ -553,8 +553,8 @@
 #if ENABLED(EXTRUDER_RUNOUT_PREVENT)
   #define EXTRUDER_RUNOUT_MINTEMP 190
   #define EXTRUDER_RUNOUT_SECONDS 30
-  #define EXTRUDER_RUNOUT_SPEED 180  // (mm/min)
-  #define EXTRUDER_RUNOUT_EXTRUDE 5  // (mm)
+  #define EXTRUDER_RUNOUT_SPEED 180   // (mm/min)
+  #define EXTRUDER_RUNOUT_EXTRUDE 5   // (mm)
 #endif
 
 /**

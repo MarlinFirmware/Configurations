@@ -1861,7 +1861,7 @@
 
   #define SD_PROCEDURE_DEPTH 1              // Increase if you need more nested M32 calls
 
-  #define SD_FINISHED_STEPPERRELEASE true          // Disable steppers when SD Print is finished
+  #define SD_FINISHED_STEPPERRELEASE true   // Disable steppers when SD Print is finished
   #define SD_FINISHED_RELEASECOMMAND "M84 X Y Z E" // You might want to keep the Z enabled so your bed stays in place.
 
   // Reverse SD sort to show "more recent" files first, according to the card's FAT.
@@ -2554,7 +2554,7 @@
  * Override if the automatically selected points are inadequate.
  */
 #if NEEDS_THREE_PROBE_POINTS
-  #define PROBE_PT_1 { -43,  -25 }   // (mm) { x, y }
+  #define PROBE_PT_1 { -43,  -25 }    // (mm) { x, y }
   #define PROBE_PT_2 {  43,  -25 }
   #define PROBE_PT_3 {   0,   50 }
 #endif

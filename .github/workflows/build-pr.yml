@@ -1,6 +1,7 @@
 #
 # build-pr.yml
-# Build Marlin with the new / updated configs in the PR
+# Format the new / updated configs in the PR (bin/mfformat), then
+# build Marlin with them.
 #
 
 name: PR Test Build
@@ -12,30 +13,85 @@ on:
     paths-ignore:
     - '**/*.md'
 
-jobs:
-  build:
+concurrency:
+  group: pr-build-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
 
-    name: Test Build
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  format:
+
+    name: Check Comment Alignment
     if: github.repository == 'MarlinFirmware/Configurations'
 
     runs-on: ubuntu-22.04
+    timeout-minutes: 10
 
     steps:
     - name: Check out the PR
-      uses: actions/checkout@v7
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+    - name: Record the PR number
+      run: echo "${{ github.event.pull_request.number }}" >pr-number.txt
+
+    # Fails if any changed config has end-of-line comments that
+    # aren't aligned with config/default (see bin/mfformat).
+    # The "Suggest Formatting" workflow then offers a fix to the contributor.
+    - name: Check end-of-line comment alignment
+      run: |
+        BASE_BRANCH=${{ github.event.pull_request.base.ref }}
+        git fetch --depth=1 origin $BASE_BRANCH
+
+        # Changed config files only (null-delimited for paths with spaces)
+        git diff -z --name-only --diff-filter=AMR origin/$BASE_BRANCH HEAD -- \
+          '*Configuration.h' '*Configuration_adv.h' >$RUNNER_TEMP/changed.txt
+        [[ -s $RUNNER_TEMP/changed.txt ]] || { echo "No Configuration changes detected."; exit 0; }
+
+        xargs -0 python3 bin/mfformat --check --diff <$RUNNER_TEMP/changed.txt
+
+    - name: Save the PR number for the follow-up workflow
+      if: failure()
+      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+      with:
+        name: format-needed
+        path: pr-number.txt
+
+    - name: Explain the failure
+      if: failure()
+      run: |
+        echo "::error::End-of-line comments are not aligned with config/default. Run \`bin/mfformat --changed\` and push the result. A bot will also comment on the PR with a ready-made fix."
+
+  build:
+
+    name: Test Build
+    needs: format
+    if: github.repository == 'MarlinFirmware/Configurations'
+
+    runs-on: ubuntu-22.04
+    timeout-minutes: 60
+
+    steps:
+    - name: Check out the PR (with any formatting commit)
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      with:
+        ref: ${{ github.event.pull_request.head.ref }}
+        repository: ${{ github.event.pull_request.head.repo.full_name }}
 
     # Get the list of directories containing changed config files:
     - name: Get changed directories
+      env:
+        GH_TOKEN: ${{ github.token }}
+        PR: ${{ github.event.pull_request.number }}
       run: |
-        # Get the base branch of the Pull Request
-        BASE_BRANCH=$(jq -r .pull_request.base.ref <$GITHUB_EVENT_PATH)
-
-        # Get origin for comparison
-        git fetch --depth=1 origin $BASE_BRANCH
-
-        # Use `git diff` to get a list of folders with altered .h files
-        # between the current commit and the base branch of the Pull Request
-        DIRS=$(git diff --name-only --diff-filter=AMR origin/$BASE_BRANCH HEAD | grep -E ".+\.h" | while IFS= read -r f; do dirname "$f"; done | uniq)
+        # Ask the API for the files changed by the PR. The checkout above
+        # comes from the contributor's fork, so "origin" is the fork and its
+        # (possibly stale) base branch can't be used for a `git diff`.
+        DIRS=$(gh api "repos/$GITHUB_REPOSITORY/pulls/$PR/files" --paginate \
+                 --jq '.[] | select(.status != "removed") | .filename' \
+               | grep -E '\.h$' | while IFS= read -r f; do dirname "$f"; done | sort -u)
 
         # Exit if nothing testable changed
         [[ -z $DIRS ]] && { echo "No Configuration changes detected."; exit ; }
@@ -43,38 +99,21 @@ jobs:
         # Set DIRS in the persistent environment
         echo -e "DIRS<<EOF\n$DIRS\nEOF" >>$GITHUB_ENV
 
-    - name: Cache pip
-      uses: actions/cache@v5
-      with:
-        path: ~/.cache/pip
-        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-        restore-keys: |
-          ${{ runner.os }}-pip-
-
-    - name: Cache PlatformIO
-      uses: actions/cache@v5
-      with:
-        path: |
-          ~/.platformio
-          .pio/libdeps
-        key: ${{ runner.os }}-pio-v1
-        restore-keys: |
-          ${{ runner.os }}-pio-
-
     - name: Select Python 3.9
-      uses: actions/setup-python@v7
+      if: env.DIRS != ''
+      uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
       with:
         python-version: '3.9' # Version range or exact version of a Python version to use, using semvers version range syntax.
         architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
 
     - name: Install PlatformIO
+      if: env.DIRS != ''
       run: |
         pip install -U platformio
-        pio upgrade --dev
-        pio pkg update --global
 
     # Fetch the code from the other repo and compile it:
     - name: Clone Marlin
+      if: env.DIRS != ''
       run: |
         if [[ "$GITHUB_HEAD_REF" =~ ^pr-([0-9]+)$ ]]; then
           MARLIN_PR="${BASH_REMATCH[1]}"
@@ -85,12 +124,59 @@ jobs:
           git clone --branch bugfix-2.1.x https://github.com/MarlinFirmware/Marlin.git
         fi
 
+    # The PR branch may predate the CI scripts, so get them from the base branch
+    - name: Check out the CI scripts
+      if: env.DIRS != ''
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      with:
+        ref: ${{ github.event.pull_request.base.ref }}
+        path: ci
+        sparse-checkout: .github/scripts
+
+    # Get the PlatformIO env for each changed config, and the toolchain cache group
+    - name: Resolve build targets
+      id: targets
+      if: env.DIRS != ''
+      run: |
+        mapfile -t dirs <<<"$DIRS"
+        ci/.github/scripts/config-targets Marlin "${dirs[@]}" >"$RUNNER_TEMP/targets.tsv"
+        cat "$RUNNER_TEMP/targets.tsv"
+
+        # Envs sharing a toolchain share a cache. Use the first config's group.
+        ENV1=$(head -n1 "$RUNNER_TEMP/targets.tsv" | cut -f2)
+        GROUP=$(pio project config -d Marlin --json-output | ci/.github/scripts/toolchain-group "$ENV1" | cut -f2)
+        echo "group=$GROUP" >>"$GITHUB_OUTPUT"
+
+        if cut -f2 "$RUNNER_TEMP/targets.tsv" | grep -qx simulator_linux_release; then
+          echo "simulator=true" >>"$GITHUB_OUTPUT"
+        fi
+
+    # PR runs only restore. Caches are saved on import-2.1.x by cache-pio.yml,
+    # since a cache saved by a PR run can't be used by any other PR.
+    - name: Restore PlatformIO cache
+      if: env.DIRS != ''
+      uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
+      with:
+        path: ~/.platformio
+        key: ${{ runner.os }}-pio-v2-${{ steps.targets.outputs.group }}
+
+    - name: Update PlatformIO packages
+      if: env.DIRS != ''
+      run: |
+        pio pkg update --global
+
+    - name: Install Simulator dependencies
+      if: steps.targets.outputs.simulator == 'true'
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential libsdl2-dev libsdl2-net-dev libglm-dev
+
     # For each directory containing a changed config file, copy the .h files and build the code:
     - name: Test all changed config files
+      if: env.DIRS != ''
       run: |
         cd Marlin
-        IFS=$'\n'
-        for dir in $DIRS; do
+        while IFS=$'\t' read -r dir TARGET BOARD; do
           # Copy all .h files from the directory into the Marlin subfolder
           echo "Building Configurations in $dir ..."
           cp ../"$dir"/*.h Marlin/
@@ -102,31 +188,9 @@ jobs:
           rm -f "Marlin/Configuration.h~"
 
           # Build Marlin with PlatformIO
-          MB=$( grep -E "^\s*#define MOTHERBOARD" Marlin/Configuration.h | awk '{ print $3 }' | sed 's/BOARD_//;s/\r//' )
-          [[ -z $MB ]] && { echo "::error::Can't read MOTHERBOARD setting." ; exit 3; }
-
-          BLINE=$( grep -E "define\s+BOARD_$MB\b" Marlin/src/core/boards.h )
-          BNUM=$( sed -E 's/^.+BOARD_[^ ]+ +([0-9]+)(.|$)+$/\1/' <<<"$BLINE" )
-          BDESC=$( sed -E 's/^.+\/\/ *(.+)$/\1/' <<<"$BLINE" )
-          [[ -z $BNUM ]] && { echo "::error::Can't find BOARD_$MB in core/boards.h." ; exit 3; }
-          if [ "$MB" == "SIMULATED" ]
-          then
-            ENVS=$"simulator_linux_release"
-
-            # Install Simulator dependencies
-            sudo apt-get install build-essential
-            sudo apt-get install libsdl2-dev
-            sudo apt-get install libsdl2-net-dev
-            sudo apt-get install libglm-dev
-          else
-            ENVS=( $( grep -EA1 "MB\(.*\b$MB\b.*\)" Marlin/src/pins/pins.h | grep -E "#include.+//.+env:[^ ]+" | grep -oE "env:[^ ]+" | sed -E "s/env://" ) )
-          fi
-          [[ -z $ENVS ]] && { echo "::error::Can't find target(s) for $MB ($BNUM)." ; exit 3; }
-          [[ ${#ENVS[*]} == 1 ]] && TARGET=$ENVS || TARGET="${ENVS[0]}"
-
-          echo "Building environment $TARGET for board $MB ($BNUM)..." ; echo
-          pio run -s -e $TARGET
+          echo "Building environment $TARGET for board $BOARD..." ; echo
+          pio run -s -e "$TARGET" </dev/null
 
           # Reset the repo directory so the next iteration starts clean
           git reset --hard HEAD
-        done
+        done <"$RUNNER_TEMP/targets.tsv"

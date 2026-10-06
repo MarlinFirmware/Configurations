@@ -2553,7 +2553,7 @@
  * Override if the automatically selected points are inadequate.
  */
 #if NEEDS_THREE_PROBE_POINTS
-  #define PROBE_PT_1 { 30, 25 }   // (mm) { x, y }
+  #define PROBE_PT_1 { 30, 25 }       // (mm) { x, y }
   #define PROBE_PT_2 { 85, 25 }
   #define PROBE_PT_3 { 30, 95 }
 #endif
