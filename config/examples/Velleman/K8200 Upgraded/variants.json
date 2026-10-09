@@ -1,0 +1,15 @@
+{
+  "groups": [{
+    "type": "exclusive",
+    "required": 1,
+    "options": [ "K8200_VM8201", "REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER" ],
+  }],
+  //"permute": {
+  //  "K8200_VM8204": { "0":"Standard Z Axis", "1":"K8204 Z Axis Upgrade" }
+  //},
+  "default": {
+    "K8200_VM8204": 1,
+    "K8200_VM8201": 0,
+    "REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER": 1
+  }
+}
