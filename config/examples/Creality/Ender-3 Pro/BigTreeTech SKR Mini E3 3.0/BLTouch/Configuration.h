@@ -2219,8 +2219,9 @@
  */
 //#define PREHEAT_BEFORE_LEVELING
 #if ENABLED(PREHEAT_BEFORE_LEVELING)
-  #define LEVELING_NOZZLE_TEMP   0   // (°C) Only applies to E0 at this time
-  #define LEVELING_BED_TEMP     40
+  #define LEVELING_NOZZLE_TEMP       0   // (°C) Only applies to E0 at this time
+  #define LEVELING_BED_TEMP         40
+  //#define LEVELING_HEAT_SOAK_TIME 60   // (s) Time to wait for heat soak after heaters reach temperature
 #endif
 
 /**
