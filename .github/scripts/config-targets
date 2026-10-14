@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+#
+# config-targets
+# Print the PlatformIO build environment for each config folder.
+#
+# Usage: config-targets <marlin-dir> <config-dir> ...
+#
+# Output is one line per config folder:  <config-dir><TAB><env><TAB><board>
+# The env is the first one listed for the folder's MOTHERBOARD in pins.h.
+#
+
+MARLIN=${1:?Usage: config-targets <marlin-dir> <config-dir> ...}
+shift
+
+BOARDS="$MARLIN/Marlin/src/core/boards.h"
+PINS="$MARLIN/Marlin/src/pins/pins.h"
+
+ERR=0
+for dir in "$@"; do
+  CFG="$dir/Configuration.h"
+  [[ -f $CFG ]] || { echo "::error::No Configuration.h in $dir." >&2 ; ERR=3 ; continue ; }
+
+  MB=$( grep -E "^\s*#define MOTHERBOARD" "$CFG" | awk '{ print $3 }' | head -n1 | sed 's/BOARD_//;s/\r//' )
+  [[ -z $MB ]] && { echo "::error::Can't read MOTHERBOARD setting in $dir." >&2 ; ERR=3 ; continue ; }
+
+  BLINE=$( grep -E "define\s+BOARD_$MB\b" "$BOARDS" | head -n1 )
+  BNUM=$( sed -E 's/^.+BOARD_[^ ]+ +([0-9]+)(.|$)+$/\1/' <<<"$BLINE" )
+  [[ -z $BNUM ]] && { echo "::error::Can't find BOARD_$MB in core/boards.h ($dir)." >&2 ; ERR=3 ; continue ; }
+
+  if [[ $MB == "SIMULATED" ]]; then
+    ENV=simulator_linux_release
+  else
+    ENV=$( grep -EA1 "MB\(.*\b$MB\b.*\)" "$PINS" | grep -E "#include.+//.+env:[^ ]+" | grep -oE "env:[^ ]+" | sed -E "s/env://" | head -n1 )
+  fi
+  [[ -z $ENV ]] && { echo "::error::Can't find target(s) for $MB ($BNUM) in $dir." >&2 ; ERR=3 ; continue ; }
+
+  printf '%s\t%s\t%s\n' "$dir" "$ENV" "$MB ($BNUM)"
+done
+
+exit $ERR
