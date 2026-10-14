@@ -1652,6 +1652,7 @@
       #define XATC_Y_POSITION Y_CENTER      // (mm) Y position to probe
     #endif
   #endif
+
 #endif // HAS_BED_PROBE
 
 #if HAS_MARLINUI_MENU
