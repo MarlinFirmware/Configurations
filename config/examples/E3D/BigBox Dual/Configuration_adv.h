@@ -720,6 +720,7 @@
  */
 #define E0_AUTO_FAN_PIN 8 // Stock Wiring, Both Hotend fans wired to FAN1
 #define E1_AUTO_FAN_PIN 8 // Stock Wiring, Both Hotend fans wired to FAN1
+#define PART_COOLING_FAN1_PIN -1 // FAN1 is the hotend fans, so it is not a part cooling fan
 #define E2_AUTO_FAN_PIN -1
 #define E3_AUTO_FAN_PIN -1
 #define E4_AUTO_FAN_PIN -1
