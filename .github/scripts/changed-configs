@@ -1,0 +1,71 @@
+#!/usr/bin/env python3
+#
+# changed-configs
+# Print the config folders whose build result could differ from the base.
+#
+# Usage: changed-configs <base-ref> <config-dir> ...
+#
+# A folder is printed if any of its .h files was added or removed, or if it
+# differs from <base-ref> after stripping comments and whitespace. A folder
+# whose only changes are comments or alignment can't change the firmware, so
+# there's nothing to build. When in doubt (e.g. the base can't be read) the
+# folder is printed, so a failure here only costs build time.
+#
+# Also: changed-configs --strip <file>   prints the normalized text, for debugging.
+#
+
+import subprocess, sys, os, glob
+
+def strip(text):
+    """Remove // and /* */ comments (respecting string and char literals),
+    trim every line, and drop blank lines."""
+    out, i, n = [], 0, len(text)
+    while i < n:
+        c = text[i]
+        if c in '"\'':                      # string or char literal
+            j = i + 1
+            while j < n and text[j] != c and text[j] != '\n':
+                j += 2 if text[j] == '\\' else 1
+            out.append(text[i:j + 1]); i = j + 1
+        elif text.startswith('//', i):      # line comment
+            j = text.find('\n', i)
+            i = n if j < 0 else j
+        elif text.startswith('/*', i):      # block comment acts as one space
+            j = text.find('*/', i + 2)
+            out.append(' ' + '\n' * text.count('\n', i, n if j < 0 else j))
+            i = n if j < 0 else j + 2
+        else:
+            out.append(c); i += 1
+    lines = (ln.strip() for ln in ''.join(out).replace('\r', '').split('\n'))
+    return '\n'.join(ln for ln in lines if ln)
+
+def base_text(ref, path):
+    r = subprocess.run(['git', 'show', f'{ref}:{path}'], capture_output=True, text=True, errors='replace')
+    return r.stdout if r.returncode == 0 else None
+
+def base_files(ref, d):
+    r = subprocess.run(['git', 'ls-tree', '--name-only', f'{ref}:{d}'], capture_output=True, text=True)
+    return set() if r.returncode else {f for f in r.stdout.split('\n') if f.endswith('.h')}
+
+def changed(ref, d):
+    now = {os.path.basename(p) for p in glob.glob(os.path.join(d, '*.h'))}
+    if now != base_files(ref, d):
+        return True                         # added, removed, or new folder
+    for name in sorted(now):
+        old = base_text(ref, f'{d}/{name}')
+        if old is None:
+            return True
+        with open(os.path.join(d, name), errors='replace') as f:
+            if strip(f.read()) != strip(old):
+                return True
+    return False
+
+if __name__ == '__main__':
+    if len(sys.argv) == 3 and sys.argv[1] == '--strip':
+        print(strip(open(sys.argv[2], errors='replace').read())); sys.exit(0)
+    if len(sys.argv) < 3:
+        sys.exit(__doc__)
+    ref = sys.argv[1]
+    for d in sys.argv[2:]:
+        if changed(ref, d):
+            print(d)

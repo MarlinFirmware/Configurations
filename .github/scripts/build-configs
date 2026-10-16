@@ -1,0 +1,81 @@
+#!/usr/bin/env bash
+#
+# build-configs
+# Build Marlin with each config folder and report every result.
+#
+# Usage: build-configs <marlin-dir> <results.tsv> < targets.tsv
+#
+# Input (stdin) is the output of config-targets:  <dir><TAB><env><TAB><board>
+# Unlike a plain `set -e` loop, a failing build doesn't stop the run, so one
+# CI run shows all the broken configs instead of just the first one.
+#
+# <results.tsv> gets one line per config:
+#   <dir><TAB><env><TAB>OK|FAIL<TAB><flash used><TAB><flash max><TAB><first error>
+#
+# When $GITHUB_STEP_SUMMARY is set, a Markdown table is appended to it.
+# The exit status is 1 if any build failed.
+#
+
+MARLIN=${1:?Usage: build-configs <marlin-dir> <results.tsv> < targets.tsv}
+RESULTS=${2:?Missing results file}
+RESULTS=$(cd "$(dirname "$RESULTS")" && pwd)/$(basename "$RESULTS")
+ROOT=$PWD
+: >"$RESULTS"
+LOG=$(mktemp)
+
+FAILED=0
+while IFS=$'\t' read -r dir ENV BOARD; do
+  [[ -z $dir ]] && continue
+  echo "::group::Building $dir ($ENV, $BOARD)"
+
+  # Copy all .h files from the directory into the Marlin subfolder
+  cp "$ROOT/$dir"/*.h "$MARLIN/Marlin/"
+  # Suppress fatal warnings
+  echo -e "\n#define NO_CONTROLLER_CUSTOM_WIRING_WARNING" >>"$MARLIN/Marlin/Configuration.h"
+  # Strip out #error lines so it can build
+  sed -e "20,30{/#error/d;}" "$MARLIN/Marlin/Configuration.h" >"$LOG" && mv "$LOG" "$MARLIN/Marlin/Configuration.h"
+
+  ( cd "$MARLIN" && pio run -e "$ENV" </dev/null ) >"$LOG" 2>&1
+  STATUS=$?
+  tail -n 40 "$LOG"
+  echo "::endgroup::"
+
+  USED= MAX= ERR=
+  # e.g. "Flash: [=====     ]  52.1% (used 132728 bytes from 253952 bytes)"
+  read -r USED MAX < <(sed -nE 's/^Flash:.*used ([0-9]+) bytes from ([0-9]+) bytes.*/\1 \2/p' "$LOG" | tail -n1)
+  if ((STATUS)); then
+    FAILED=$((FAILED + 1))
+    ERR=$(grep -m1 -E "program size \([0-9]+ bytes\) is greater|overflowed by|error:|Error [0-9]+" "$LOG" | sed -E 's/^.*(Marlin\/src\/)//' | cut -c1-160)
+    # Size errors name the sizes but don't print the usual Flash: line
+    if [[ -z $USED && $ERR =~ \(([0-9]+)\ bytes\).*\(([0-9]+)\ bytes\) ]]; then
+      USED=${BASH_REMATCH[1]} MAX=${BASH_REMATCH[2]}
+    fi
+    echo "::error title=Build failed in $dir::${ERR:-See the build log.}"
+  fi
+  printf '%s\t%s\t%s\t%s\t%s\t%s\n' "$dir" "$ENV" "$( ((STATUS)) && echo FAIL || echo OK )" "$USED" "$MAX" "$ERR" >>"$RESULTS"
+
+  # Reset the repo directory so the next iteration starts clean
+  git -C "$MARLIN" reset -q --hard HEAD
+  git -C "$MARLIN" clean -fdq Marlin
+done
+
+TOTAL=$(wc -l <"$RESULTS" | tr -d ' ')
+{
+  echo "### Test Build: $((TOTAL - FAILED)) of $TOTAL passed"
+  if ((FAILED)); then
+    echo
+    echo "| Config | Env | Flash used | Error |"
+    echo "|---|---|---|---|"
+    awk -F'\t' '$3 == "FAIL" {
+      f = ($4 != "" && $5 != "") ? sprintf("%d / %d (%+d)", $4, $5, $4 - $5) : "-"
+      gsub(/\|/, "\\|", $6)
+      printf "| `%s` | %s | %s | %s |\n", $1, $2, f, $6
+    }' "$RESULTS"
+  fi
+  # Closest passes: configs that are almost out of flash
+  awk -F'\t' '$3 == "OK" && $4 != "" && $5 != "" && $5 - $4 < 2048 { n++; l[n] = sprintf("| `%s` | %s | %d bytes |", $1, $2, $5 - $4) }
+    END { if (n) { print "\n<details><summary>Within 2 KB of the flash limit</summary>\n\n| Config | Env | Headroom |\n|---|---|---|"; for (i = 1; i <= n; i++) print l[i]; print "\n</details>" } }' "$RESULTS"
+} | { [[ -n $GITHUB_STEP_SUMMARY ]] && tee -a "$GITHUB_STEP_SUMMARY" || cat; }
+
+rm -f "$LOG"
+((FAILED == 0))

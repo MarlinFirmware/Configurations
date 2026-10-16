@@ -20,7 +20,12 @@ for dir in "$@"; do
   CFG="$dir/Configuration.h"
   [[ -f $CFG ]] || { echo "::error::No Configuration.h in $dir." >&2 ; ERR=3 ; continue ; }
 
-  MB=$( grep -E "^\s*#define MOTHERBOARD" "$CFG" | awk '{ print $3 }' | head -n1 | sed 's/BOARD_//;s/\r//' )
+  # Let the preprocessor pick MOTHERBOARD, as some configs choose between boards with #if / #else.
+  # (The #error lines near the top are removed, as in the build.) Fall back to the first #define.
+  MB=$( { echo '#include "src/core/macros.h"'; sed -e '20,30{/#error/d;}' "$CFG"; echo '__MB__ MOTHERBOARD'; } \
+          | gcc -E -P -x c -I"$MARLIN/Marlin" -I"$MARLIN/Marlin/src/core" - 2>/dev/null \
+          | sed -nE 's/^__MB__ BOARD_([A-Za-z0-9_]+).*/\1/p' | head -n1 )
+  [[ -z $MB ]] && MB=$( grep -E "^\s*#define MOTHERBOARD" "$CFG" | awk '{ print $3 }' | head -n1 | sed 's/BOARD_//;s/\r//' )
   [[ -z $MB ]] && { echo "::error::Can't read MOTHERBOARD setting in $dir." >&2 ; ERR=3 ; continue ; }
 
   BLINE=$( grep -E "define\s+BOARD_$MB\b" "$BOARDS" | head -n1 )

@@ -99,6 +99,35 @@ jobs:
         # Set DIRS in the persistent environment
         echo -e "DIRS<<EOF\n$DIRS\nEOF" >>$GITHUB_ENV
 
+    # The PR branch may predate the CI scripts, so get them from the base branch
+    - name: Check out the CI scripts
+      if: env.DIRS != ''
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      with:
+        ref: ${{ github.event.pull_request.base.ref }}
+        path: ci
+        sparse-checkout: .github/scripts
+
+    # Comments and spacing can't change the firmware, so a folder whose .h files
+    # only differ from the base in those needs no build. Mass-edits of comments
+    # (new docs for an option, realignment) then cost seconds instead of an hour.
+    - name: Skip configs with comment-only changes
+      if: env.DIRS != ''
+      env:
+        BASE_SHA: ${{ github.event.pull_request.base.sha }}
+      run: |
+        git fetch --depth=1 "https://github.com/$GITHUB_REPOSITORY" "$BASE_SHA"
+        mapfile -t dirs <<<"$DIRS"
+        KEEP=$(ci/.github/scripts/changed-configs FETCH_HEAD "${dirs[@]}")
+
+        {
+          echo "### Test Build"
+          echo "${#dirs[@]} config folders changed; $(grep -c . <<<"$KEEP") differ from the base beyond comments and spacing."
+        } >>"$GITHUB_STEP_SUMMARY"
+
+        # Rewrite DIRS for the remaining steps (empty means nothing to build)
+        echo -e "DIRS<<EOF\n$KEEP\nEOF" >>"$GITHUB_ENV"
+
     - name: Select Python 3.9
       if: env.DIRS != ''
       uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
@@ -123,15 +152,6 @@ jobs:
         else
           git clone --branch bugfix-2.1.x https://github.com/MarlinFirmware/Marlin.git
         fi
-
-    # The PR branch may predate the CI scripts, so get them from the base branch
-    - name: Check out the CI scripts
-      if: env.DIRS != ''
-      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-      with:
-        ref: ${{ github.event.pull_request.base.ref }}
-        path: ci
-        sparse-checkout: .github/scripts
 
     # Get the PlatformIO env for each changed config, and the toolchain cache group
     - name: Resolve build targets
@@ -171,26 +191,8 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y build-essential libsdl2-dev libsdl2-net-dev libglm-dev
 
-    # For each directory containing a changed config file, copy the .h files and build the code:
+    # Build every changed config, reporting all the results at the end, not just the first failure.
+    # See .github/scripts/build-configs. Results are also in the job summary.
     - name: Test all changed config files
       if: env.DIRS != ''
-      run: |
-        cd Marlin
-        while IFS=$'\t' read -r dir TARGET BOARD; do
-          # Copy all .h files from the directory into the Marlin subfolder
-          echo "Building Configurations in $dir ..."
-          cp ../"$dir"/*.h Marlin/
-          # Suppress fatal warnings
-          echo -e "\n#define NO_CONTROLLER_CUSTOM_WIRING_WARNING" >> Marlin/Configuration.h
-
-          # Strip out #error lines so it can build
-          sed -i~ -e "20,30{/#error/d}" "Marlin/Configuration.h"
-          rm -f "Marlin/Configuration.h~"
-
-          # Build Marlin with PlatformIO
-          echo "Building environment $TARGET for board $BOARD..." ; echo
-          pio run -s -e "$TARGET" </dev/null
-
-          # Reset the repo directory so the next iteration starts clean
-          git reset --hard HEAD
-        done <"$RUNNER_TEMP/targets.tsv"
+      run: ci/.github/scripts/build-configs Marlin "$RUNNER_TEMP/results.tsv" <"$RUNNER_TEMP/targets.tsv"
