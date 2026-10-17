@@ -1101,7 +1101,7 @@
  *   https://www.thingiverse.com/thing:1241491
  */
 
-//#define SCARA
+#define SCARA
 #if ENABLED(SCARA)
   // If movement is choppy try lowering this value
   #define DEFAULT_SEGMENTS_PER_SECOND 200
