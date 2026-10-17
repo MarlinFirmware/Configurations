@@ -1500,7 +1500,7 @@
  *    - Normally-closed (NC) also connect to GND.
  *    - Normally-open (NO) also connect to 5V.
  */
-//#define Z_MIN_PROBE_PIN -1
+#define Z_MIN_PROBE_PIN AUTO_LEVEL_RX_PIN // Strain gauge signal (PB6). PROBE_TARE_PIN is AUTO_LEVEL_TX_PIN (PB7).
 
 /**
  * Use Pin 27 adapter (on the EXP port) for probe (and BEEPER).
