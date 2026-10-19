@@ -1,0 +1,260 @@
+#!/usr/bin/env python3
+#
+# size-manifest
+# Plan, merge and report the nightly build of every example config.
+#
+# Usage:
+#   size-manifest plan [--size N] [--filter REGEX] [--matrix FILE] groups.tsv <targets.tsv >plan.tsv
+#   size-manifest merge [--marlin SHA] [--configurations SHA] [--date DATE] results.tsv ... >sizes.tsv
+#   size-manifest report sizes.tsv [previous.tsv] >report.md
+#
+# plan    Split the config folders into shards of at most N builds (default 30). A shard only holds
+#         configs of one toolchain group, so it needs just one PlatformIO cache.
+#         targets.tsv is the output of config-targets:  <dir> <env> <board>
+#         groups.tsv is the output of toolchain-group:  <env> <group>
+#         Writes  <dir> <env> <board> <group> <shard>  to stdout, and the matrix of shards to
+#         matrix.json (or --matrix FILE) as [{"shard": "...", "group": "...", "env": "...", "count": N}, ...]
+#
+# merge   Combine the results.tsv files written by build-configs (one per shard) into the manifest:
+#           # marlin <sha>   (header lines)
+#           <dir> <env> OK|FAIL <flash used> <flash max> <first error>
+#         sorted by folder.
+#
+# report  Write a Markdown summary for the job summary: failures, how each environment's base size
+#         changed since the previous manifest, the biggest changes, and the configs closest to the limit.
+#         Without a previous manifest only the first and last parts are written.
+#
+
+import argparse, json, os, statistics, sys
+
+TSV = "\t"
+NEAR = 2048        # "Close to the limit" in bytes of flash
+TOP = 10           # Rows in the "biggest changes" tables
+
+
+def read_rows(path):
+    """Header lines (#key value) and rows [dir, env, status, used, max, error]."""
+    header, rows = {}, []
+    with open(path) as f:
+        for line in f:
+            line = line.rstrip("\n")
+            if not line:
+                continue
+            if line.startswith("#"):
+                key, _, val = line[1:].strip().partition(" ")
+                header[key] = val.strip()
+                continue
+            cols = line.split(TSV)
+            cols += [""] * (6 - len(cols))
+            rows.append(cols[:6])
+    return header, rows
+
+
+def to_int(s):
+    return int(s) if s.strip().lstrip("-").isdigit() else None
+
+
+# ---------------------------------------------------------------- plan
+
+def cmd_plan(args):
+    groups = dict(line.rstrip("\n").split(TSV)[:2] for line in open(args.groups) if TSV in line)
+    targets = [line.rstrip("\n").split(TSV) for line in sys.stdin if line.strip()]
+    if args.filter:
+        import re
+        rx = re.compile(args.filter)
+        targets = [t for t in targets if rx.search(t[0])]
+
+    by_group = {}
+    for t in targets:
+        by_group.setdefault(groups.get(t[1], "none"), []).append(t)
+
+    plan, matrix = [], []
+    for group in sorted(by_group):
+        rows = sorted(by_group[group])
+        for i in range(0, len(rows), args.size):
+            chunk = rows[i:i + args.size]
+            shard = "%s-%02d" % (group, i // args.size + 1)
+            matrix.append({"shard": shard, "group": group, "env": chunk[0][1], "count": len(chunk)})
+            for dir_, env, board in chunk:
+                plan.append((dir_, env, board, group, shard))
+
+    for row in plan:
+        print(TSV.join(row))
+    with open(args.matrix, "w") as f:
+        json.dump(matrix, f, separators=(",", ":"))
+    print("%d configs in %d shards" % (len(plan), len(matrix)), file=sys.stderr)
+
+
+# ---------------------------------------------------------------- merge
+
+def cmd_merge(args):
+    seen = {}
+    for path in args.results:
+        _, rows = read_rows(path)
+        for r in rows:
+            seen[r[0]] = r            # A folder built twice (a retried shard) counts once
+    print("#date %s" % args.date)
+    if args.marlin:
+        print("#marlin %s" % args.marlin)
+    if args.configurations:
+        print("#configurations %s" % args.configurations)
+    for dir_ in sorted(seen):
+        r = seen[dir_]
+        r[5] = r[5].replace(TSV, " ").replace("\n", " ")
+        print(TSV.join(r))
+
+
+# ---------------------------------------------------------------- report
+
+def cell(s):
+    return s.replace("|", "\\|")
+
+
+def fmt_bytes(n):
+    return "%+d" % n if n else "0"
+
+
+def cmd_report(args):
+    head, rows = read_rows(args.sizes)
+    prev_head, prev_rows = read_rows(args.previous) if args.previous else ({}, [])
+    prev = {r[0]: r for r in prev_rows}
+
+    total = len(rows)
+    failed = [r for r in rows if r[2] != "OK"]
+    out = []
+    w = out.append
+
+    when = head.get("date", "")
+    w("### Nightly sizes: %d of %d configs built%s" % (total - len(failed), total, " (%d failed)" % len(failed) if failed else ""))
+    srcs = []
+    if head.get("marlin"):
+        srcs.append("Marlin `%s`" % head["marlin"][:10])
+    if head.get("configurations"):
+        srcs.append("Configurations `%s`" % head["configurations"][:10])
+    if srcs:
+        w(", ".join(srcs) + (", " + when if when else ""))
+    if prev_head.get("marlin") and head.get("marlin") and prev_head["marlin"] != head["marlin"]:
+        w("")
+        w("Marlin changed since %s: [`%s...%s`](https://github.com/MarlinFirmware/Marlin/compare/%s...%s)" % (
+            prev_head.get("date", "the previous run"), prev_head["marlin"][:10], head["marlin"][:10],
+            prev_head["marlin"], head["marlin"]))
+    w("")
+
+    if prev:
+        cur = {r[0] for r in rows}
+        recovered = sorted(r[0] for r in rows if r[2] == "OK" and prev.get(r[0], [0, 0, "OK"])[2] != "OK")
+        added = sorted(cur - set(prev))
+        gone = sorted(set(prev) - cur)
+        for label, names in (("Fixed since the previous run", recovered), ("New configs", added), ("Configs no longer built", gone)):
+            if names:
+                w("%s: %s" % (label, ", ".join("`%s`" % n.replace("config/examples/", "") for n in names[:8]) + (" and %d more" % (len(names) - 8) if len(names) > 8 else "")))
+                w("")
+
+    # Failures, with a mark if the config built in the previous run
+    if failed:
+        w("#### Failed")
+        w("")
+        w("| Config | Env | Flash | Error | |")
+        w("|---|---|---|---|---|")
+        for d, env, st, used, mx, err in failed:
+            u, m = to_int(used), to_int(mx)
+            flash = "%d / %d (%+d)" % (u, m, u - m) if u is not None and m is not None else "-"
+            p = prev.get(d)
+            was = "" if not prev else ("**new**" if p and p[2] == "OK" else ("" if p else "new config"))
+            w("| `%s` | %s | %s | %s | %s |" % (d, env, flash, cell(err), was))
+        w("")
+
+    # Both builds OK: the change in flash
+    both = []
+    for d, env, st, used, mx, err in rows:
+        p = prev.get(d)
+        if st == "OK" and p and p[2] == "OK" and to_int(used) is not None and to_int(p[3]) is not None:
+            both.append((d, env, to_int(used) - to_int(p[3]), to_int(used)))
+
+    if prev and both:
+        # The median change across an env is a change of the firmware, not of one example
+        by_env = {}
+        for d, env, delta, used in both:
+            by_env.setdefault(env, []).append(delta)
+        moved = [(statistics.median(v), env, len(v), max(v), min(v)) for env, v in by_env.items()]
+        moved = [m for m in moved if m[0] != 0]
+        w("#### Base size change by environment")
+        w("")
+        if moved:
+            w("The median change of the configs that built in both runs (since %s). A change here is Marlin's, not one example's." % (prev_head.get("date") or "the previous run"))
+            w("")
+            w("| Env | Configs | Median | Range |")
+            w("|---|---|---|---|")
+            for med, env, n, hi, lo in sorted(moved, key=lambda m: -abs(m[0])):
+                w("| %s | %d | **%s** | %s to %s |" % (env, n, fmt_bytes(int(med)), fmt_bytes(lo), fmt_bytes(hi)))
+        else:
+            w("No environment changed in size.")
+        w("")
+
+        growth = sorted((b for b in both if b[2] > 0), key=lambda b: -b[2])[:TOP]
+        shrink = sorted((b for b in both if b[2] < 0), key=lambda b: b[2])[:TOP // 2]
+        if growth or shrink:
+            w("<details><summary>Biggest changes in one config</summary>")
+            w("")
+            w("| Config | Env | Change | Flash used |")
+            w("|---|---|---|---|")
+            for d, env, delta, used in growth + shrink:
+                w("| `%s` | %s | %s | %d |" % (d, env, fmt_bytes(delta), used))
+            w("")
+            w("</details>")
+            w("")
+
+    # Closest to the limit
+    near = []
+    for d, env, st, used, mx, err in rows:
+        u, m = to_int(used), to_int(mx)
+        if st == "OK" and u is not None and m is not None and m - u < NEAR:
+            p = prev.get(d)
+            pu, pm = (to_int(p[3]), to_int(p[4])) if p and p[2] == "OK" else (None, None)
+            was = fmt_bytes(u - pu) if pu is not None else "new"
+            near.append((m - u, d, env, was))
+    if near:
+        w("<details><summary>Within %d KB of the flash limit (%d configs)</summary>" % (NEAR // 1024, len(near)))
+        w("")
+        w("| Config | Env | Headroom | Change since previous |")
+        w("|---|---|---|---|")
+        for room, d, env, was in sorted(near)[:25]:
+            w("| `%s` | %s | %d bytes | %s |" % (d, env, room, was))
+        w("")
+        w("</details>")
+        w("")
+
+    print("\n".join(out))
+
+
+# ---------------------------------------------------------------- main
+
+def main():
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    sub = ap.add_subparsers(dest="cmd", required=True)
+
+    p = sub.add_parser("plan")
+    p.add_argument("--size", type=int, default=30)
+    p.add_argument("--filter", default="")
+    p.add_argument("--matrix", default="matrix.json")
+    p.add_argument("groups")
+    p.set_defaults(fn=cmd_plan)
+
+    m = sub.add_parser("merge")
+    m.add_argument("--marlin", default="")
+    m.add_argument("--configurations", default="")
+    m.add_argument("--date", default="")
+    m.add_argument("results", nargs="+")
+    m.set_defaults(fn=cmd_merge)
+
+    r = sub.add_parser("report")
+    r.add_argument("sizes")
+    r.add_argument("previous", nargs="?")
+    r.set_defaults(fn=cmd_report)
+
+    args = ap.parse_args()
+    args.fn(args)
+
+
+if __name__ == "__main__":
+    main()

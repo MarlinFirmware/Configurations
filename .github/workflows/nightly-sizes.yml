@@ -1,0 +1,244 @@
+#
+# nightly-sizes.yml
+# Build every example config against Marlin's bugfix-2.1.x each night, and keep the flash used by each.
+#
+# "PR Test Build" only builds the folders a PR changed, so nothing notices when Marlin itself grows
+# and an example config that no PR touches stops fitting. This builds them all (in shards, one
+# toolchain group each, as in cache-pio.yml) and writes the sizes to a manifest, saved as the "sizes"
+# artifact and compared with the previous night in the job summary.
+# See .github/scripts/size-manifest. The run fails if any config fails to build.
+#
+
+name: Nightly Sizes
+
+on:
+  schedule:
+  - cron: '17 7 * * *'  # After the weekly toolchain caches are refreshed (cache-pio.yml)
+  workflow_dispatch:
+    inputs:
+      filter:
+        description: 'Only build the config folders that match this regex, e.g. "Anet|Creality/Ender-3/". Leave empty to build all.'
+        required: false
+        default: ''
+
+concurrency:
+  group: nightly-sizes
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  actions: read  # To get the previous manifest
+
+jobs:
+  plan:
+
+    name: Plan Builds
+    if: github.repository == 'MarlinFirmware/Configurations' || github.event_name == 'workflow_dispatch'
+
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+
+    outputs:
+      matrix: ${{ steps.plan.outputs.matrix }}
+      count: ${{ steps.plan.outputs.count }}
+      marlin: ${{ steps.plan.outputs.marlin }}
+
+    steps:
+    - name: Check out
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+    - name: Select Python 3.9
+      uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+      with:
+        python-version: '3.9'
+        architecture: 'x64'
+
+    - name: Install PlatformIO
+      run: |
+        pip install -U platformio
+
+    - name: Clone Marlin
+      run: |
+        git clone --depth=1 --branch bugfix-2.1.x https://github.com/MarlinFirmware/Marlin.git
+
+    # Split the builds into shards that share a toolchain: [{"shard":…,"group":…,"env":…,"count":…}, …]
+    - name: Plan the shards
+      id: plan
+      env:
+        FILTER: ${{ inputs.filter }}
+      run: |
+        mapfile -t dirs < <(find config -name Configuration.h -exec dirname {} \; | sort -u)
+
+        # Configs for boards not yet in bugfix-2.1.x are reported but skipped
+        .github/scripts/config-targets Marlin "${dirs[@]}" >"$RUNNER_TEMP/targets.tsv" || true
+
+        mapfile -t envs < <(cut -f2 "$RUNNER_TEMP/targets.tsv" | sort -u)
+        pio project config -d Marlin --json-output \
+          | .github/scripts/toolchain-group "${envs[@]}" >"$RUNNER_TEMP/groups.tsv"
+
+        .github/scripts/size-manifest plan --filter "$FILTER" --matrix matrix.json \
+          "$RUNNER_TEMP/groups.tsv" <"$RUNNER_TEMP/targets.tsv" >plan.tsv
+
+        {
+          echo "matrix=$(cat matrix.json)"
+          echo "count=$(wc -l <plan.tsv | tr -d ' ')"
+          echo "marlin=$(git -C Marlin rev-parse HEAD)"
+        } >>"$GITHUB_OUTPUT"
+        jq . matrix.json
+
+    - name: Save the plan
+      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+      with:
+        name: plan
+        path: plan.tsv
+        retention-days: 7
+
+  build:
+
+    name: Build ${{ matrix.shard }}
+    needs: plan
+    if: needs.plan.outputs.count != '0'
+
+    runs-on: ubuntu-22.04
+    timeout-minutes: 240
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include: ${{ fromJSON(needs.plan.outputs.matrix) }}
+
+    steps:
+    - name: Check out
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+    - name: Get the plan
+      uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+      with:
+        name: plan
+
+    - name: Select Python 3.9
+      uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+      with:
+        python-version: '3.9'
+        architecture: 'x64'
+
+    - name: Install PlatformIO
+      run: |
+        pip install -U platformio
+
+    # Every shard builds the same Marlin, even if bugfix-2.1.x moves during the run
+    - name: Get Marlin
+      env:
+        MARLIN_SHA: ${{ needs.plan.outputs.marlin }}
+      run: |
+        git init -q Marlin
+        git -C Marlin fetch -q --depth=1 https://github.com/MarlinFirmware/Marlin.git "$MARLIN_SHA"
+        git -C Marlin checkout -q FETCH_HEAD
+
+    # Caches are saved on import-2.1.x by cache-pio.yml
+    - name: Restore PlatformIO cache
+      uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
+      with:
+        path: ~/.platformio
+        key: ${{ runner.os }}-pio-v2-${{ matrix.group }}
+
+    - name: Update PlatformIO packages
+      run: |
+        pio pkg update --global
+
+    - name: Select this shard
+      env:
+        SHARD: ${{ matrix.shard }}
+      run: |
+        awk -F'\t' -v s="$SHARD" '$5 == s { print $1 "\t" $2 "\t" $3 }' plan.tsv >targets.tsv
+        wc -l <targets.tsv
+        if cut -f2 targets.tsv | grep -qx simulator_linux_release; then
+          sudo apt-get update
+          sudo apt-get install -y build-essential libsdl2-dev libsdl2-net-dev libglm-dev
+        fi
+
+    # Build every config and report all the results at the end. See .github/scripts/build-configs.
+    # Each shard names its own file, as the results of all the shards are merged into one folder
+    - name: Build the configs
+      env:
+        SHARD: ${{ matrix.shard }}
+      run: .github/scripts/build-configs Marlin "results-$SHARD.tsv" <targets.tsv
+
+    - name: Save the results
+      if: always()
+      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+      with:
+        name: results-${{ matrix.shard }}
+        path: results-${{ matrix.shard }}.tsv
+        retention-days: 7
+        if-no-files-found: warn
+
+  manifest:
+
+    name: Size Manifest
+    needs: [plan, build]
+    if: always() && needs.plan.result == 'success'
+
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+
+    steps:
+    - name: Check out
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+    - name: Get the results
+      uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+      with:
+        pattern: results-*
+        path: results
+        merge-multiple: true
+
+    # The newest manifest from a full run, if there is one. A run for a few configs is "sizes-partial".
+    - name: Get the previous manifest
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: |
+        ID=$(gh api "repos/$GITHUB_REPOSITORY/actions/artifacts?name=sizes&per_page=1" \
+               --jq '.artifacts[0] | select(.expired == false) | .id')
+        if [[ -z $ID ]]; then
+          echo "No previous manifest."
+        elif ! { gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/$ID/zip" >previous.zip && unzip -p previous.zip sizes.tsv >previous.tsv; }; then
+          echo "::warning::Could not read the previous manifest."
+          rm -f previous.tsv
+        fi
+
+    - name: Write the manifest and report
+      env:
+        MARLIN_SHA: ${{ needs.plan.outputs.marlin }}
+        PLANNED: ${{ needs.plan.outputs.count }}
+      run: |
+        shopt -s nullglob
+        files=(results/*.tsv)
+        ((${#files[@]})) || { echo "::error::No results. Every shard failed before building."; exit 1; }
+
+        .github/scripts/size-manifest merge --marlin "$MARLIN_SHA" --configurations "$GITHUB_SHA" \
+          --date "$(date -u +%F)" "${files[@]}" >sizes.tsv
+
+        PREV=
+        [[ -s previous.tsv ]] && PREV=previous.tsv
+        .github/scripts/size-manifest report sizes.tsv $PREV | tee report.md >>"$GITHUB_STEP_SUMMARY"
+
+        BUILT=$(grep -vc '^#' sizes.tsv)
+        if ((BUILT < PLANNED)); then
+          echo "::error::Only $BUILT of $PLANNED configs were built. A shard did not finish."
+          exit 1
+        fi
+        if grep -q -P '\tFAIL\t' sizes.tsv; then
+          echo "::error::$(grep -c -P '\tFAIL\t' sizes.tsv) config(s) failed to build. See the job summary."
+          exit 1
+        fi
+
+    - name: Save the manifest
+      if: always() && hashFiles('sizes.tsv') != ''
+      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+      with:
+        name: ${{ inputs.filter == '' && 'sizes' || 'sizes-partial' }}
+        path: |
+          sizes.tsv
+          report.md
+        retention-days: 90
