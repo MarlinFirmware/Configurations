@@ -225,6 +225,12 @@
 // :[0, 1, 2, 3, 4, 5, 6, 7, 8]
 #define EXTRUDERS 2
 
+// Drive the E axis with two synchronized steppers
+//#define E_DUAL_STEPPER_DRIVERS
+#if ENABLED(E_DUAL_STEPPER_DRIVERS)
+  //#define INVERT_E1_VS_E0_DIR       // E direction signals are opposites
+#endif
+
 // Generally expected filament diameter (1.75, 2.85, 3.0, ...). Used for Volumetric, Filament Width Sensor, etc.
 #define DEFAULT_NOMINAL_FILAMENT_DIA 1.75
 
@@ -270,7 +276,7 @@
 
 /**
  * Two separate X-carriages with extruders that connect to a moving part
- * via a solenoid docking mechanism. Requires SOL1_PIN and SOL2_PIN.
+ * via a solenoid docking mechanism. Requires SOL0_PIN and SOL1_PIN.
  */
 //#define PARKING_EXTRUDER
 
@@ -1367,7 +1373,7 @@
  * Override with M203
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_FEEDRATE          { 160, 160, 10, 10000 }
+#define DEFAULT_MAX_FEEDRATE          { 160, 160, 10, 1600 }
 
 //#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
@@ -3409,6 +3415,11 @@
 // Touch-screen LCD for Anycubic Vyper
 //
 //#define ANYCUBIC_LCD_VYPER
+
+//
+// Touch-screen LCD for Anycubic Kobra
+//
+//#define ANYCUBIC_LCD_KOBRA
 
 //
 // Sovol SV-06 Resistive Touch Screen
