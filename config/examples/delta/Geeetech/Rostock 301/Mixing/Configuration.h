@@ -385,11 +385,11 @@
 #if ENABLED(MIXING_EXTRUDER)
   #define MIXING_STEPPERS 3        // Number of steppers in your mixing extruder
   #define MIXING_VIRTUAL_TOOLS 16  // Use the Virtual Tool method with M163 and M164
-  #define DIRECT_MIXING_IN_G1    // Allow ABCDHI mix factors in G1 movement commands
-  #define GRADIENT_MIX           // Support for gradient mixing with M166 and LCD
-  #define MIXING_PRESETS         // Assign 8 default V-tool presets for 2 or 3 MIXING_STEPPERS
+  #define DIRECT_MIXING_IN_G1      // Allow ABCDHI mix factors in G1 movement commands
+  #define GRADIENT_MIX             // Support for gradient mixing with M166 and LCD
+  #define MIXING_PRESETS           // Assign 8 default V-tool presets for 2 or 3 MIXING_STEPPERS
   #if ENABLED(GRADIENT_MIX)
-    #define GRADIENT_VTOOL       // Add M166 T to use a V-tool index as a Gradient alias
+    #define GRADIENT_VTOOL         // Add M166 T to use a V-tool index as a Gradient alias
   #endif
 #endif
 
@@ -1059,7 +1059,7 @@
   #endif
 
   // Print surface diameter/2 minus unreachable space (avoid collisions with vertical towers).
-  #define PRINTABLE_RADIUS       105.0     // (mm)
+  #define PRINTABLE_RADIUS       105.0    // (mm)
 
   // Center-to-center distance of the holes in the diagonal push rods.
   #define DELTA_DIAGONAL_ROD 200.0        // (mm)
@@ -1904,7 +1904,7 @@
 
 // @section extruder
 
-#define DISABLE_E               // Disable the extruder when not stepping
+#define DISABLE_E                 // Disable the extruder when not stepping
 #define DISABLE_OTHER_EXTRUDERS   // Keep only the active extruder enabled
 
 // @section stepper drivers
