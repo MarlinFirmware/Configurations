@@ -24,6 +24,7 @@ jobs:
     if: github.repository == 'MarlinFirmware/Configurations'
 
     runs-on: ubuntu-22.04
+    timeout-minutes: 10
 
     env:
       PR: ${{ github.event.pull_request.number }}

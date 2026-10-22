@@ -15,6 +15,9 @@
 #   the value and any leading "//" (enabled or disabled).
 #   Anything that can't be matched (added lines, added comments, changed
 #   code) is left alone and the scan moves on to the next line that can.
+# - With --changed (or --base REF) only the config files changed since the
+#   merge-base with the PR's base branch are scanned (committed, uncommitted,
+#   and new files), which is much faster than scanning all of config/examples.
 # - Only the whitespace before a trailing "//" comment is changed. Code
 #   and comment text are preserved. If the code runs past the default
 #   comment column, a single space is used.
@@ -24,11 +27,15 @@
 #   bin/mfformat -n "config/examples/Creality"   # Report what would change
 #   bin/mfformat -d path/to/Configuration.h      # Show a diff and write it
 #   bin/mfformat --check                  # Exit 1 if anything needs formatting
+#   bin/mfformat -C                       # Format only what this branch changed
+#   bin/mfformat -C --check               # Quick pre-PR check
+#   bin/mfformat -b origin/import-2.1.x -n   # Compare against a specific base
 #
 import re
 import sys
 import argparse
 import difflib
+import subprocess
 from pathlib import Path
 
 NAMES = ('Configuration.h', 'Configuration_adv.h')
@@ -169,6 +176,37 @@ def find_files(paths, default_dir):
     return [f for f in files if default_dir not in f.resolve().parents]
 
 
+BASE_CANDIDATES = ('upstream/import-2.1.x', 'origin/import-2.1.x', 'import-2.1.x')
+
+
+def git(root, *args):
+    r = subprocess.run(('git',) + args, cwd=root, capture_output=True, text=True)
+    return r.stdout if r.returncode == 0 else None
+
+
+def changed_files(root, base=None):
+    '''
+    Config files changed since the merge-base of HEAD and the base ref,
+    including uncommitted and untracked ones. Returns (files, base_ref)
+    or (None, message) on failure.
+    '''
+    ref = None
+    for cand in ([base] if base else BASE_CANDIDATES):
+        if git(root, 'rev-parse', '--verify', '--quiet', cand + '^{commit}'):
+            ref = cand
+            break
+    if not ref:
+        return None, f"Can't find base branch {base or ' / '.join(BASE_CANDIDATES)}. Use --base REF."
+    mb = (git(root, 'merge-base', ref, 'HEAD') or '').strip()
+    if not mb:
+        return None, f"No merge-base between {ref} and HEAD."
+    out = git(root, 'diff', '-z', '--name-only', '--diff-filter=AMR', mb) or ''
+    out += git(root, 'ls-files', '-z', '--others', '--exclude-standard') or ''
+    names = sorted({n for n in out.split('\0') if n and Path(n).name in NAMES})
+    top = (git(root, 'rev-parse', '--show-toplevel') or str(root)).strip()
+    return [Path(top) / n for n in names if (Path(top) / n).is_file()], ref
+
+
 def main():
     here = Path(__file__).resolve().parent
     root = here.parent
@@ -178,6 +216,8 @@ def main():
     ap.add_argument('-n', '--dry-run', action='store_true', help="report what would change without writing")
     ap.add_argument('-d', '--diff', action='store_true', help="show a diff of each change")
     ap.add_argument('-c', '--check', action='store_true', help="exit with status 1 if any file needs formatting (implies --dry-run)")
+    ap.add_argument('-C', '--changed', action='store_true', help="only scan files changed since the merge-base with the PR's base branch (auto-detects upstream/import-2.1.x)")
+    ap.add_argument('-b', '--base', metavar='REF', help="base ref for --changed (implies --changed)")
     ap.add_argument('-q', '--quiet', action='store_true', help="only print a summary")
     args = ap.parse_args()
 
@@ -190,7 +230,19 @@ def main():
             return 2
         defaults[name] = read_lines(p)
 
-    files = find_files(args.paths or [str(root / 'config' / 'examples')], default_dir)
+    if args.changed or args.base:
+        files, ref = changed_files(root, args.base)
+        if files is None:
+            print(f"Error: {ref}", file=sys.stderr)
+            return 2
+        if args.paths:
+            scopes = [Path(p).resolve() for p in args.paths]
+            files = [f for f in files if any(f.resolve() == sc or sc in f.resolve().parents for sc in scopes)]
+        default_resolved = default_dir.resolve()
+        files = [f for f in files if default_resolved not in f.resolve().parents]
+        if not args.quiet: print(f"{len(files)} changed config file{'s' if len(files) != 1 else ''} since {ref}")
+    else:
+        files = find_files(args.paths or [str(root / 'config' / 'examples')], default_dir)
     dry = args.dry_run or args.check
     nfiles = nlines = 0
     for f in files:
