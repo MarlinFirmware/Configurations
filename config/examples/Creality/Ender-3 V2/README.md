@@ -110,3 +110,6 @@ If you have a **DWIN** or **DACAI** display, please follow the procedure below t
     - Power on to confirm a successful flash
 
 If you're experiencing screen glitches, please ensure both the printer and the display unit have been flashed correctly.
+
+> [!NOTE]
+> `DWIN_SET.tar.gz` is Marlin's unified set, so one flash serves every DWIN UI (Creality UI, JyersUI, ProUI and MarlinUI). It is built from the sources in Marlin's `buildroot/share/dwin` folder with `bin/make_dwin_set.py`.
