@@ -111,5 +111,16 @@ If you have a **DWIN** or **DACAI** display, please follow the procedure below t
 
 If you're experiencing screen glitches, please ensure both the printer and the display unit have been flashed correctly.
 
+After switching to a different UI, reset the EEPROM (accept "Initialize/Reset EEPROM", or send `M502` then `M500`). Each UI keeps different data there.
+
 > [!NOTE]
 > `DWIN_SET.tar.gz` is Marlin's unified set, so one flash serves every DWIN UI (Creality UI, JyersUI, ProUI and MarlinUI). It is built from the sources in Marlin's `buildroot/share/dwin` folder with `bin/make_dwin_set.py`.
+
+## **Troubleshooting**
+
+* **Blank or wrong icons in Pro UI, JyersUI or Creality UI** (checkboxes, mesh, tilt, brightness, tramming corners)
+    - The display has an older `DWIN_SET` that lacks these icons. Flash the current `DWIN_SET.tar.gz` from the `LCD Files` folder.
+* **Broken icons after using MRiscoC's own firmware**
+    - His firmware uses its own `DWIN_SET`, which overwrites part of the icon set Marlin uses. Flash Marlin's `DWIN_SET` again.
+* **Pro UI shows the boot image with the status, temperatures and position drawn over it, no menu, and the knob does nothing**
+    - This is a firmware bug, not the display set (MarlinFirmware/Marlin#27141). Update to firmware that includes MarlinFirmware/Marlin#28669.
