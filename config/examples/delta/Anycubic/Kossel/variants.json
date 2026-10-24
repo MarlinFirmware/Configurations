@@ -1,0 +1,12 @@
+{
+  "permute": {
+    "ANYCUBIC_KOSSEL_PLUS": { "0":"Kossel", "1":"Kossel Plus" },
+    "ANYCUBIC_PROBE_VERSION": { "0":"No Probe", "1":"Anycubic Probe V1", "2":"Anycubic Probe V2" },
+    "ANYCUBIC_KOSSEL_ENABLE_BED": { "0":"No Bed", "1":"Aluminum Bed", "2":"Ultrabase Bed" }
+  },
+  "default": {
+    "ANYCUBIC_KOSSEL_PLUS": 0,
+    "ANYCUBIC_PROBE_VERSION": 0,
+    "ANYCUBIC_KOSSEL_ENABLE_BED": 0
+  }
+}
