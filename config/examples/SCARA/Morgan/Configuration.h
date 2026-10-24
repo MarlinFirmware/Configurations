@@ -1978,7 +1978,7 @@
 
 // Travel limits (linear=mm, rotational=°) after homing, corresponding to endstop positions.
 #define X_MIN_POS 0
-#define Y_MIN_POS 0
+#define Y_MIN_POS -60  // The home position is at Y -56, so the limits must extend past it
 #define Z_MIN_POS MANUAL_Z_HOME_POS
 #define X_MAX_POS X_BED_SIZE
 #define Y_MAX_POS Y_BED_SIZE
