@@ -4687,8 +4687,8 @@
      * only for an ESP32 build of Marlin. With an add-on WiFi module the module
      * runs its own firmware, so neither option has any effect there.
      */
-    //#define WEBSUPPORT          // Start a webserver (which may include auto-discovery) using SPIFFS
-    //#define OTASUPPORT          // Support over-the-air firmware updates
+    //#define WEBSUPPORT        // Start a webserver (which may include auto-discovery) using SPIFFS
+    //#define OTASUPPORT        // Support over-the-air firmware updates
   #endif
 
   /**
