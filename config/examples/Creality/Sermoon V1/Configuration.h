@@ -225,6 +225,12 @@
 // :[0, 1, 2, 3, 4, 5, 6, 7, 8]
 #define EXTRUDERS 1
 
+// Drive the E axis with two synchronized steppers
+//#define E_DUAL_STEPPER_DRIVERS
+#if ENABLED(E_DUAL_STEPPER_DRIVERS)
+  //#define INVERT_E1_VS_E0_DIR       // E direction signals are opposites
+#endif
+
 // Generally expected filament diameter (1.75, 2.85, 3.0, ...). Used for Volumetric, Filament Width Sensor, etc.
 #define DEFAULT_NOMINAL_FILAMENT_DIA 1.75
 
@@ -270,7 +276,7 @@
 
 /**
  * Two separate X-carriages with extruders that connect to a moving part
- * via a solenoid docking mechanism. Requires SOL1_PIN and SOL2_PIN.
+ * via a solenoid docking mechanism. Requires SOL0_PIN and SOL1_PIN.
  */
 //#define PARKING_EXTRUDER
 
@@ -3409,6 +3415,11 @@
 //#define ANYCUBIC_LCD_VYPER
 
 //
+// Touch-screen LCD for Anycubic Kobra
+//
+//#define ANYCUBIC_LCD_KOBRA
+
+//
 // Sovol SV-06 Resistive Touch Screen
 //
 //#define SOVOL_SV06_RTS
@@ -3423,6 +3434,14 @@
 // Requires a 6x6 (Pro), 7x7 (Plus), or 7x9 (Max) bilinear leveling grid.
 //
 //#define ELEGOO_NEPTUNE_3_TFT
+
+//
+// PanelDue touch controller by Duet3D (PanelDueFirmware 3.2 or newer)
+// https://docs.duet3d.com/User_manual/Connecting_hardware/Display_PanelDue
+// Connect the PanelDue to a free UART and define LCD_SERIAL_PORT with its index.
+// The PanelDue baud rate must be set to 57600, or define LCD_BAUDRATE to match.
+//
+//#define PANELDUE
 
 //
 // Third-party or vendor-customized controller interfaces.
