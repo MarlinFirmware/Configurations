@@ -39,7 +39,6 @@
  */
 #define CONFIGURATION_H_VERSION 02010300
 
-#define VERY_HIGH_SPEED
 //#define BED_TEMP_COMP
 
 //===========================================================================
@@ -70,11 +69,7 @@
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
 #define MACHINE_NAME      "Ender-5 S1"
-#if ENABLED(VERY_HIGH_SPEED)
-  #define FIRMWARE_VERSION  "1.0.6T13"
-#else
-  #define FIRMWARE_VERSION  "1.0.6T10"
-#endif
+#define FIRMWARE_VERSION  "1.0.6T10"
 #define SCREEN_VERSION    "U23"
 #define SCREEN_HW_VERSION "DWIN20220915"
 #define HARDWARE_VERSION  "CR4NS200141C13"
@@ -1402,19 +1397,11 @@
  * Override with M201
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#if ENABLED(VERY_HIGH_SPEED)
-  #define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 3000}
-#else
-  #define DEFAULT_MAX_ACCELERATION      { 500, 500, 100, 1000}
-#endif
+#define DEFAULT_MAX_ACCELERATION      { 2000, 2000, 100, 3000 }  // Creality ships 3000 for X and Y, which is too aggressive
 
 #define LIMITED_MAX_ACCEL_EDITING       // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
 #if ENABLED(LIMITED_MAX_ACCEL_EDITING)
-  #if ENABLED(VERY_HIGH_SPEED)
-    #define MAX_ACCEL_EDIT_VALUES       { 2000, 2000, 200, 2000 }
-  #else
-    #define MAX_ACCEL_EDIT_VALUES       { 1000, 1000, 200, 2000 } // ...or, set your own edit limits
-  #endif
+  //#define MAX_ACCEL_EDIT_VALUES       { 4000, 4000, 200, 6000 } // ...or, set your own edit limits
 #endif
 
 /**
@@ -1425,15 +1412,9 @@
  *   M204 R    Retract Acceleration
  *   M204 T    Travel Acceleration
  */
-#if ENABLED(VERY_HIGH_SPEED)
-  #define DEFAULT_ACCELERATION           2000 // X, Y, Z ... and E acceleration for printing moves
-  #define DEFAULT_RETRACT_ACCELERATION   2000 // E acceleration for retracts
-  #define DEFAULT_TRAVEL_ACCELERATION    2000 // X, Y, Z ... acceleration for travel (non printing) moves
-#else
-  #define DEFAULT_ACCELERATION            500 // X, Y, Z ... and E acceleration for printing moves
-  #define DEFAULT_RETRACT_ACCELERATION   1000 // E acceleration for retracts
-  #define DEFAULT_TRAVEL_ACCELERATION    1000 // X, Y, Z ... acceleration for travel (non printing) moves
-#endif
+#define DEFAULT_ACCELERATION           1000   // X, Y, Z ... and E acceleration for printing moves (Creality: 2000)
+#define DEFAULT_RETRACT_ACCELERATION   1000   // E acceleration for retracts
+#define DEFAULT_TRAVEL_ACCELERATION    1000   // X, Y, Z ... acceleration for travel (non printing) moves
 
 /**
  * Default Jerk limits (mm/s)
@@ -1445,8 +1426,8 @@
  */
  #define CLASSIC_JERK
 #if ENABLED(CLASSIC_JERK)
-  #define DEFAULT_XJERK TERN(VERY_HIGH_SPEED, 15.0, 10.0)
-  #define DEFAULT_YJERK TERN(VERY_HIGH_SPEED, 15.0, 10.0)
+  #define DEFAULT_XJERK 10.0
+  #define DEFAULT_YJERK 10.0
   #define DEFAULT_ZJERK  0.4
   #define DEFAULT_EJERK  5.0
   //#define DEFAULT_IJERK  0.3
