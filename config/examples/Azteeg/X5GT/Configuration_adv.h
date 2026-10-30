@@ -21,6 +21,8 @@
  */
 #pragma once
 
+#define CONFIG_EXAMPLES_DIR "Azteeg/X5GT"
+
 /**
  * Configuration_adv.h
  *
