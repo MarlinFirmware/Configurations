@@ -39,8 +39,6 @@
  */
 #define CONFIGURATION_H_VERSION 02010300
 
-//#define BED_TEMP_COMP
-
 //===========================================================================
 //============================= Getting Started =============================
 //===========================================================================
@@ -941,7 +939,6 @@
 #if ANY(PIDTEMP, PIDTEMPBED, PIDTEMPCHAMBER)
   //#define PID_OPENLOOP          // Puts PID in open loop. M104/M140 sets the output power from 0 to PID_MAX
   //#define SLOW_PWM_HEATERS      // PWM with very low frequency (roughly 0.125Hz=8s) and minimum state time of approximately 1s useful for heaters driven by a relay
-  // The current temperature and target temperature differences start to control the temperature of the PID algorithm. Rock_20220916
   #define PID_FUNCTIONAL_RANGE 20 // If the temperature difference between the target temperature and the actual temperature
                                   // is more than PID_FUNCTIONAL_RANGE then the PID will be shut off and the heater will be set to min/max.
 
@@ -3258,15 +3255,6 @@
 //
 //#define CR10_STOCKDISPLAY
 
-// Resistive touch screen
-#define CREALITY_RTS
-#define LCD_SERIAL_PORT 2
-#define LCD_BAUDRATE 115200
-#define USB_HOST_SERIAL MYSERIAL2
-
-// Over-the-air Firmware Update with M936
-#define OTA_FIRMWARE_UPDATE
-
 //
 // Ender-2 OEM display, a variant of the MKS_MINI_12864
 //
@@ -3462,6 +3450,17 @@
 // Sovol SV-06 Resistive Touch Screen
 //
 //#define SOVOL_SV06_RTS
+
+//
+// Creality Resistive Touch Screen
+// As found in the Creality Ender-5 S1
+//
+#define CREALITY_RTS
+#if ENABLED(CREALITY_RTS)
+  #define CREALITY_WIFI        // Creality WiFi module
+  #define MENU_RESET_WIFI      // The controller has a menu to reset WiFi with RESET_WIFI_PIN
+  #define LCD_BAUDRATE 115200
+#endif
 
 //
 // 320x240 Nextion 2.8" serial TFT Resistive Touch Screen NX3224T028
@@ -3896,7 +3895,7 @@
  * Set this manually if there are extra servos needing manual control.
  * Set to 0 to turn off servo support.
  */
-#define NUM_SERVOS 1   // Note: Servo index starts with 0 for M280-M282 commands
+//#define NUM_SERVOS 3 // Note: Servo index starts with 0 for M280-M282 commands
 
 // (ms) Delay before the next move will start, to give the servo time to reach its target angle.
 // 300ms is a good value but you can try less delay.
@@ -3911,7 +3910,3 @@
 
 // Disable servo with M282 to reduce power consumption, noise, and heat when not in use
 //#define SERVO_DETACH_GCODE
-
-// Creality WiFi
-#define CREALITY_WIFI
-#define MENU_RESET_WIFI
