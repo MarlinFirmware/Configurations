@@ -21,6 +21,8 @@
  */
 #pragma once
 
+#define CONFIG_EXAMPLES_DIR "Copymaster3D/500"
+
 /**
  * Configuration_adv.h
  *
