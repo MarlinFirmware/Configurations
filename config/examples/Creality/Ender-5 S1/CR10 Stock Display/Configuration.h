@@ -1,6 +1,6 @@
 /**
  * Marlin 3D Printer Firmware
- * Copyright (c) 2023 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
+ * Copyright (c) 2026 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
  *
  * Based on Sprinter and grbl.
  * Copyright (c) 2011 Camiel Gubbels / Erik van der Zalm
@@ -39,8 +39,6 @@
  */
 #define CONFIGURATION_H_VERSION 02010300
 
-//#define BED_TEMP_COMP
-
 //===========================================================================
 //============================= Getting Started =============================
 //===========================================================================
@@ -67,15 +65,6 @@
 // Author info of this build printed to the host during boot and M115
 #define STRING_CONFIG_H_AUTHOR "(Creality)"       // Original author or contributor.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
-
-#define MACHINE_NAME      "Ender-5 S1"
-#define FIRMWARE_VERSION  "1.0.6T10"
-#define SCREEN_VERSION    "U23"
-#define SCREEN_HW_VERSION "DWIN20220915"
-#define HARDWARE_VERSION  "CR4NS200141C13"
-#define PRINT_SIZE        "220 X 220 X 280mm"
-#define CORP_WEBSITE_C    "www.creality.cn "
-#define CORP_WEBSITE_E    "www.creality.com"
 
 // @section machine
 
@@ -941,7 +930,6 @@
 #if ANY(PIDTEMP, PIDTEMPBED, PIDTEMPCHAMBER)
   //#define PID_OPENLOOP          // Puts PID in open loop. M104/M140 sets the output power from 0 to PID_MAX
   //#define SLOW_PWM_HEATERS      // PWM with very low frequency (roughly 0.125Hz=8s) and minimum state time of approximately 1s useful for heaters driven by a relay
-  // The current temperature and target temperature differences start to control the temperature of the PID algorithm. Rock_20220916
   #define PID_FUNCTIONAL_RANGE 20 // If the temperature difference between the target temperature and the actual temperature
                                   // is more than PID_FUNCTIONAL_RANGE then the PID will be shut off and the heater will be set to min/max.
 
@@ -2397,7 +2385,7 @@
  * Add a bed leveling sub-menu for ABL or MBL.
  * Include a guided procedure if manual probing is enabled.
  */
-//#define LCD_BED_LEVELING
+#define LCD_BED_LEVELING
 
 #if ENABLED(LCD_BED_LEVELING)
   #define MESH_EDIT_Z_STEP  0.025 // (mm) Step size while manually probing Z axis.
@@ -2823,7 +2811,6 @@
  * :{ 'en':'English', 'an':'Aragonese', 'bg':'Bulgarian', 'ca':'Catalan', 'cz':'Czech', 'da':'Danish', 'de':'German', 'el':'Greek (Greece)', 'el_CY':'Greek (Cyprus)', 'es':'Spanish', 'eu':'Basque-Euskera', 'fi':'Finnish', 'fr':'French', 'gl':'Galician', 'hg':'Hinglish (Hindi-Latin)', 'hr':'Croatian', 'hu':'Hungarian', 'id':'Indonesian', 'it':'Italian', 'jp_kana':'Japanese', 'ko_KR':'Korean (South Korea)', 'nl':'Dutch', 'pl':'Polish', 'pt':'Portuguese', 'pt_br':'Portuguese (Brazilian)', 'ro':'Romanian', 'ru':'Russian', 'sk':'Slovak', 'sv':'Swedish', 'tr':'Turkish', 'uk':'Ukrainian', 'vi':'Vietnamese', 'zh_CN':'Chinese (Simplified)', 'zh_TW':'Chinese (Traditional)' }
  */
 #define LCD_LANGUAGE en
-#define LCD_LANGUAGE_2 zh_CN
 
 /**
  * LCD Character Set
@@ -3256,16 +3243,7 @@
 //
 // Connect to EXP1 on RAMPS and compatible boards.
 //
-//#define CR10_STOCKDISPLAY
-
-// Resistive touch screen
-#define CREALITY_RTS
-#define LCD_SERIAL_PORT 2
-#define LCD_BAUDRATE 115200
-#define USB_HOST_SERIAL MYSERIAL2
-
-// Over-the-air Firmware Update with M936
-#define OTA_FIRMWARE_UPDATE
+#define CR10_STOCKDISPLAY
 
 //
 // Ender-2 OEM display, a variant of the MKS_MINI_12864
@@ -3462,6 +3440,16 @@
 // Sovol SV-06 Resistive Touch Screen
 //
 //#define SOVOL_SV06_RTS
+
+//
+// Creality Resistive Touch Screen
+// As found in the Creality Ender-5 S1
+//
+//#define CREALITY_RTS
+#if ENABLED(CREALITY_RTS)
+  //#define CREALITY_WIFI      // Creality WiFi module
+  //#define MENU_RESET_WIFI    // The controller has a menu to reset WiFi with RESET_WIFI_PIN
+#endif
 
 //
 // 320x240 Nextion 2.8" serial TFT Resistive Touch Screen NX3224T028
@@ -3896,7 +3884,7 @@
  * Set this manually if there are extra servos needing manual control.
  * Set to 0 to turn off servo support.
  */
-#define NUM_SERVOS 1   // Note: Servo index starts with 0 for M280-M282 commands
+//#define NUM_SERVOS 3 // Note: Servo index starts with 0 for M280-M282 commands
 
 // (ms) Delay before the next move will start, to give the servo time to reach its target angle.
 // 300ms is a good value but you can try less delay.
@@ -3911,7 +3899,3 @@
 
 // Disable servo with M282 to reduce power consumption, noise, and heat when not in use
 //#define SERVO_DETACH_GCODE
-
-// Creality WiFi
-#define CREALITY_WIFI
-#define MENU_RESET_WIFI
