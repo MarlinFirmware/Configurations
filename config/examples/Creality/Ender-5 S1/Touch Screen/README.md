@@ -1,4 +1,7 @@
-# Creality Ender-5 S1   
+# Creality Ender-5 S1 — Touch Screen
+
+This configuration drives the stock resistive touch screen (`CREALITY_RTS`). To use the Creality / CR-10 12864 knob display on the board's "LCD" header instead, see the [CR10 Stock Display](../CR10%20Stock%20Display) configuration.
+
 ## (Work in progress, waiting on https://github.com/MarlinFirmware/Marlin/pull/25382 to support the screen) 
 
 The bootloader on the stock board has special requirements and requires a flag to be set in the EEPROM before it will install the firmware.
