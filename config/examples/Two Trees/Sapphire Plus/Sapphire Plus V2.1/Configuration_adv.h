@@ -1955,7 +1955,9 @@
    *  - SDSORT_CACHE_NAMES will retain the sorted file listing in RAM. (Expensive!)
    *  - SDSORT_DYNAMIC_RAM only uses RAM when the SD menu is visible. (Use with caution!)
    */
-  #define SDCARD_SORT_ALPHA
+  #if DISABLED(SAPPHIRE_PLUS_MKS_UI)
+    #define SDCARD_SORT_ALPHA
+  #endif
 
   // SD Card Sorting options
   #if ENABLED(SDCARD_SORT_ALPHA)
