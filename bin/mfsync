@@ -1,0 +1,430 @@
+#!/usr/bin/env python3
+#
+# mfsync [options] [paths...]
+#
+# Find example configs that missed a change made to config/default.
+#
+# A change for all configs is made to config/default and then copied into
+# every example. An example can still miss it:
+# - A PR adds or rewrites an example based on an older import-2.1.x, and a
+#   change for all configs is merged in the meantime.
+# - A PR applies a change to all configs, and new examples are merged into
+#   import-2.1.x after the PR was branched.
+# Either way git merges without a conflict and the example quietly stays
+# out of date. This tool finds those examples, and can fix them.
+#
+# How it works:
+# - Each config is reduced to a "skeleton": each option by name and trailing
+#   comment (value and a leading "//" ignored), and all other lines with the
+#   whitespace collapsed. An example's own values and choice of enabled
+#   options don't count as differences.
+# - The change to the default between two versions is split into:
+#   - text changes (skeleton hunks, each with up to 2 lines of context):
+#     added, removed or edited options, comments and #if lines.
+#   - setting changes: an option enabled or disabled, or its value changed.
+# - Each change is then APPLIED in an example (the new form is there),
+#   MISSED (the old form is still there) or DIVERGED (the example has its
+#   own text or setting there, which is left alone).
+#
+# Examples may choose their own settings, so a MISSED setting is only an
+# error where the change could not have reached the example: examples a PR
+# adds or changes (for changes on the base) and examples added to the base
+# after a PR branched (for changes in the PR). In --since mode they are
+# listed for review; --strict makes them errors.
+#
+# Modes:
+#   mfsync --since REF [--at REF]
+#       Check the default changes from REF to the working tree (or --at REF)
+#       against all examples in the working tree (or --at REF).
+#   mfsync --pr [--base REF] [--head REF]
+#       Check a PR as if it were merged now (git merge-tree). The PR is HEAD
+#       (or --head), the base is upstream/import-2.1.x (or --base):
+#       - Base changes since the PR branched, in the examples the PR adds
+#         or changes.
+#       - The PR's changes, in all examples (settings: only in examples
+#         added to the base after the PR branched).
+#
+# --fix (--since mode on the working tree only) applies the default's text
+# changes to each example with a missed one, with a 3-way merge (git
+# merge-file). Add --settings to apply setting changes too. Examples where
+# the merge would conflict are left alone and listed for a manual fix.
+#
+# Examples:
+#   bin/mfsync --pr                          # Check this branch as a PR
+#   bin/mfsync --pr --head upstream/pr-28747 # Check another branch
+#   bin/mfsync --since release-2.1.2.7       # Audit changes since a release
+#   bin/mfsync --since a1b2c3d4 --fix        # Apply missed text changes
+#   bin/mfsync --since upstream/import-2.1.x "config/examples/Creality"
+#
+import re
+import sys
+import difflib
+import argparse
+import tempfile
+import subprocess
+from pathlib import Path
+
+NAMES = ('Configuration.h', 'Configuration_adv.h')
+DEFAULT_DIR = 'config/default'
+EXAMPLES_DIR = 'config/examples'
+BASE_CANDIDATES = ('upstream/import-2.1.x', 'origin/import-2.1.x', 'import-2.1.x')
+CONTEXT = 2
+
+# "#define NAME" or "//#define NAME", with or without a value
+_DEFINE = re.compile(r'^\s*(//\s*)?#\s*(define|undef)\s+([A-Za-z_]\w*)')
+# Disabled directive: "//#if ..." -> "#if ..."
+_DISABLED = re.compile(r'^\s*//\s*(?=#\s*(?:if|ifdef|ifndef|elif|else|endif|include|error|warning)\b)')
+
+
+def split_comment(text):
+    '''Split code into (code, trailing comment), ignoring "//" in strings.'''
+    in_str = False
+    i, n = 0, len(text)
+    while i < n:
+        c = text[i]
+        if in_str:
+            if c == '\\': i += 1
+            elif c == in_str: in_str = False
+        elif c in '"\'': in_str = c
+        elif c == '/' and text[i + 1:i + 2] in ('/', '*'):
+            return text[:i], text[i:]
+        i += 1
+    return text, ''
+
+
+class Config:
+    '''
+    A config file reduced to its skeleton, one entry per non-blank line:
+    keys:    the line for matching text
+    names:   the option name, or None
+    details: (enabled, value) of the option, or None
+    raw:     the index of the line in lines
+    '''
+    def __init__(self, text):
+        self.lines = text.splitlines(keepends=True)
+        self.keys, self.names, self.details, self.raw = [], [], [], []
+        for i, line in enumerate(self.lines):
+            m = _DEFINE.match(line)
+            if m:
+                value, com = split_comment(line[m.end():])
+                com = ' '.join(com.split())
+                self.keys.append(f'#{m[2]} {m[3]}' + (f' {com}' if com else ''))
+                self.names.append(f'#{m[2]} {m[3]}')
+                self.details.append((not m[1], ' '.join(value.split())))
+            else:
+                s = ' '.join(_DISABLED.sub('', line).split())
+                if not s: continue
+                self.keys.append(s)
+                self.names.append(None)
+                self.details.append(None)
+            self.raw.append(i)
+        self._pos = self._occ = None
+
+    def contains(self, seq):
+        '''True if the keys contain this run of lines.'''
+        if not seq: return False
+        if self._pos is None:
+            self._pos = {}
+            for i, k in enumerate(self.keys): self._pos.setdefault(k, []).append(i)
+        n = len(seq)
+        return any(self.keys[i:i + n] == seq for i in self._pos.get(seq[0], ()))
+
+    def occurrences(self, name):
+        '''Positions of an option name, in order.'''
+        if self._occ is None:
+            self._occ = {}
+            for i, n in enumerate(self.names):
+                if n: self._occ.setdefault(n, []).append(i)
+        return self._occ.get(name, [])
+
+
+def describe(detail):
+    on, value = detail
+    if not value: return 'enabled' if on else 'disabled'
+    return value if on else f'//{value}'
+
+
+class DefaultChange:
+    '''The change from an old to a new default config, as text hunks and settings.'''
+    def __init__(self, old_text, new_text):
+        self.old_text, self.new_text = old_text, new_text
+        old, new = Config(old_text), Config(new_text)
+        self.old, self.new = old, new
+        sm = difflib.SequenceMatcher(None, old.keys, new.keys, autojunk=False)
+        # Copy: get_grouped_opcodes() trims the cached opcodes in place
+        opcodes = list(sm.get_opcodes())
+
+        # Text hunks: (before, removed, added, after, label)
+        self.hunks = []
+        for group in sm.get_grouped_opcodes(CONTEXT):
+            before = after = []
+            if group[0][0] == 'equal':
+                before = old.keys[group[0][1]:group[0][2]]
+                group = group[1:]
+            if group and group[-1][0] == 'equal':
+                after = old.keys[group[-1][1]:group[-1][2]]
+                group = group[:-1]
+            if not group: continue
+            removed = old.keys[group[0][1]:group[-1][2]]
+            added = new.keys[group[0][3]:group[-1][4]]
+            label = next((f'+ {l}' for l in added if l not in removed), None) \
+                 or next(f'- {l}' for l in removed if l not in added)
+            self.hunks.append((before, removed, added, after, label))
+
+        # Setting changes on matching lines: (name, occurrence, old, new, old raw, new raw)
+        self.settings = []
+        for tag, i1, i2, j1, j2 in opcodes:
+            if tag != 'equal': continue
+            for i, j in zip(range(i1, i2), range(j1, j2)):
+                od, nd = old.details[i], new.details[j]
+                if od is None or od == nd: continue
+                name = new.names[j]
+                occ = new.occurrences(name).index(j)
+                self.settings.append((name, occ, od, nd, old.raw[i], new.raw[j]))
+
+    def __bool__(self):
+        return bool(self.hunks or self.settings)
+
+    def target_text(self, settings):
+        '''The new default, with the setting changes undone unless settings.'''
+        if settings or not self.settings: return self.new_text
+        lines = list(self.new.lines)
+        for _, _, _, _, oi, ni in self.settings:
+            lines[ni] = self.old.lines[oi]
+        return ''.join(lines)
+
+
+# Context to try, most to least: (lines before, lines after)
+_TRIES = sorted(((b, a) for b in range(CONTEXT, -1, -1) for a in range(CONTEXT, -1, -1)), key=lambda t: -sum(t))
+
+
+def classify_hunk(ex, hunk):
+    '''APPLIED, MISSED or DIVERGED for one text hunk in one example.'''
+    before, removed, added, after, _ = hunk
+    for b, a in _TRIES:
+        pre, post = before[len(before) - b:] if b else [], after[:a]
+        # Need enough lines to be sure: 3 or more, and context on both
+        # sides when nothing is left of the change itself
+        def usable(core): return len(core) + b + a >= 3 and bool(core or (b and a))
+        if usable(added) and ex.contains(pre + added + post): return 'APPLIED'
+        if usable(removed) and ex.contains(pre + removed + post): return 'MISSED'
+    return 'DIVERGED'
+
+
+def classify_setting(ex, dc, setting):
+    '''APPLIED, MISSED or DIVERGED for one setting change in one example.'''
+    name, occ, od, nd, _, _ = setting
+    mine, theirs = ex.occurrences(name), dc.new.occurrences(name)
+    if len(mine) != len(theirs): return 'DIVERGED'
+    ed = ex.details[mine[occ]]
+    # Compare only what the default changed
+    fields = [k for k in (0, 1) if od[k] != nd[k]]
+    if all(ed[k] == nd[k] for k in fields): return 'APPLIED'
+    if all(ed[k] == od[k] for k in fields): return 'MISSED'
+    return 'DIVERGED'
+
+
+def git(root, *args, check=True):
+    r = subprocess.run(('git',) + args, cwd=root, capture_output=True, text=True)
+    if check and r.returncode != 0:
+        raise SystemExit(f"git {' '.join(args)}: {r.stderr.strip()}")
+    return r.stdout
+
+
+def in_scope(names, scopes):
+    if not scopes: return names
+    return [n for n in names if any(n == s or n.startswith(s.rstrip('/') + '/') for s in scopes)]
+
+
+class Tree:
+    '''Config files from a git tree, or from the working tree (ref None).'''
+    def __init__(self, root, ref=None):
+        self.root, self.ref = root, ref
+        self.cache = {}
+
+    def examples(self, scopes=()):
+        if self.ref:
+            out = git(self.root, 'ls-tree', '-r', '-z', '--name-only', self.ref, '--', EXAMPLES_DIR)
+            names = [n for n in out.split('\0') if n]
+        else:
+            names = [p.relative_to(self.root).as_posix() for p in (self.root / EXAMPLES_DIR).rglob('*')]
+        return in_scope(sorted(n for n in names if Path(n).name in NAMES), scopes)
+
+    def read(self, path):
+        if path not in self.cache:
+            if self.ref:
+                r = subprocess.run(('git', 'show', f'{self.ref}:{path}'), cwd=self.root, capture_output=True)
+                self.cache[path] = r.stdout.decode('utf-8', 'replace') if r.returncode == 0 else None
+            else:
+                p = self.root / path
+                self.cache[path] = p.read_text(encoding='utf-8', errors='replace') if p.is_file() else None
+        return self.cache[path]
+
+    def label(self):
+        return self.ref or 'the working tree'
+
+
+def default_changes(old_tree, new_tree):
+    '''{config name: DefaultChange} for the default configs that changed.'''
+    result = {}
+    for name in NAMES:
+        old, new = old_tree.read(f'{DEFAULT_DIR}/{name}'), new_tree.read(f'{DEFAULT_DIR}/{name}')
+        if old is None or new is None or old == new: continue
+        dc = DefaultChange(old, new)
+        if dc: result[name] = dc
+    return result
+
+
+def summary(changes):
+    h = sum(len(dc.hunks) for dc in changes.values())
+    s = sum(len(dc.settings) for dc in changes.values())
+    return f"{h} text, {s} setting"
+
+
+def check(tree, files, changes, settings_in=None):
+    '''
+    Check each file for missed changes. settings_in limits the setting
+    checks to a set of files (None = all files).
+    Returns {path: (missed hunk labels, missed setting labels)}.
+    '''
+    report = {}
+    for path in files:
+        dc = changes.get(Path(path).name)
+        text = tree.read(path) if dc else None
+        if not text: continue
+        ex = Config(text)
+        hunks = [h[4] for h in dc.hunks if classify_hunk(ex, h) == 'MISSED']
+        sets = []
+        if settings_in is None or path in settings_in:
+            sets = [f'~ {s[0]}: {describe(s[2])} -> {describe(s[3])}'
+                    for s in dc.settings if classify_setting(ex, dc, s) == 'MISSED']
+        if hunks or sets: report[path] = (hunks, sets)
+    return report
+
+
+def print_report(title, report, verbose, settings_fail=True):
+    '''Print a report. Returns the number of files with an error.'''
+    if not report:
+        print(f"{title}: OK")
+        return 0
+    bad = {p for p, (h, s) in report.items() if h or (s and settings_fail)}
+    review = len(report) - len(bad)
+    parts = []
+    if bad: parts.append(f"{len(bad)} file{'s' if len(bad) != 1 else ''} missed a change")
+    if review: parts.append(f"{review} file{'s' if review != 1 else ''} with settings to review")
+    print(f"{title}: {', '.join(parts)}")
+    for path, (hunks, sets) in report.items():
+        print(f"  {path}{'' if path in bad else '  [review]'}")
+        lines = hunks + sets
+        for l in lines[:None if verbose else 4]: print(f"      {l[:110]}")
+        if not verbose and len(lines) > 4: print(f"      ... {len(lines) - 4} more (-v to list all)")
+    return len(bad)
+
+
+def fix(root, report, changes, settings):
+    '''Apply the default's change to each reported file with a 3-way merge.'''
+    fixed, conflicts = [], []
+    with tempfile.TemporaryDirectory() as tmp:
+        for name, dc in changes.items():
+            Path(tmp, 'old-' + name).write_text(dc.old_text, encoding='utf-8')
+            Path(tmp, 'new-' + name).write_text(dc.target_text(settings), encoding='utf-8')
+        for path, (hunks, sets) in report.items():
+            if not hunks and not (sets and settings): continue
+            name = Path(path).name
+            r = subprocess.run(('git', 'merge-file', '-p', '--quiet', str(root / path),
+                                str(Path(tmp, 'old-' + name)), str(Path(tmp, 'new-' + name))),
+                               capture_output=True)
+            if r.returncode == 0:
+                (root / path).write_bytes(r.stdout)
+                fixed.append(path)
+            else:
+                conflicts.append(path)
+    for p in fixed: print(f"Fixed: {p}")
+    for p in conflicts: print(f"Needs a manual fix (merge conflict): {p}")
+    print(f"{len(fixed)} fixed, {len(conflicts)} need a manual fix. Review with: git diff")
+    return conflicts
+
+
+def resolve_base(root, base):
+    for cand in ([base] if base else BASE_CANDIDATES):
+        if git(root, 'rev-parse', '--verify', '--quiet', cand + '^{commit}', check=False).strip():
+            return cand
+    raise SystemExit(f"Can't find base branch {base or ' / '.join(BASE_CANDIDATES)}. Use --base REF.")
+
+
+def main():
+    ap = argparse.ArgumentParser(description="Find example configs that missed a change made to config/default")
+    ap.add_argument('paths', nargs='*', help="only check examples under these paths")
+    ap.add_argument('-s', '--since', metavar='REF', help="check the default changes made since REF")
+    ap.add_argument('-a', '--at', metavar='REF', help="with --since: check REF instead of the working tree")
+    ap.add_argument('-p', '--pr', action='store_true', help="check HEAD (or --head) as a PR against --base")
+    ap.add_argument('-b', '--base', metavar='REF', help="with --pr: the PR base (default upstream/import-2.1.x)")
+    ap.add_argument('-H', '--head', metavar='REF', default='HEAD', help="with --pr: the PR head (default HEAD)")
+    ap.add_argument('-f', '--fix', action='store_true', help="with --since on the working tree: apply missed text changes")
+    ap.add_argument('-S', '--settings', action='store_true', help="with --fix: apply missed setting changes too")
+    ap.add_argument('--strict', action='store_true', help="with --since: missed settings are errors")
+    ap.add_argument('-v', '--verbose', action='store_true', help="list every missed change")
+    args = ap.parse_args()
+
+    if args.pr == bool(args.since): ap.error("use one of --pr or --since")
+    if args.fix and (args.pr or args.at): ap.error("--fix works with --since on the working tree only")
+    if args.settings and not args.fix: ap.error("--settings goes with --fix")
+
+    top = Path(git(Path.cwd(), 'rev-parse', '--show-toplevel').strip()).resolve()
+    scopes = [(Path.cwd() / p).resolve().relative_to(top).as_posix() for p in args.paths]
+
+    if args.since:
+        new = Tree(top, args.at)
+        changes = default_changes(Tree(top, args.since), new)
+        print(f"Default changes from {args.since} to {new.label()}: {summary(changes)}")
+        if not changes: return 0
+        report = check(new, new.examples(scopes), changes)
+        bad = print_report(f"Examples in {new.label()}", report, args.verbose, args.strict)
+        if args.fix:
+            return 1 if fix(top, report, changes, args.settings) else 0
+        if bad: print(f"To apply the missed text changes: bin/mfsync --since {args.since} --fix")
+        return 1 if bad else 0
+
+    # PR mode: check the PR as merged now
+    base = resolve_base(top, args.base)
+    head = args.head
+    mb = git(top, 'merge-base', base, head).strip()
+    print(f"PR {head} on {base} (branched at {mb[:10]})")
+    r = subprocess.run(('git', 'merge-tree', '--write-tree', '--no-messages', '--name-only', base, head),
+                       cwd=top, capture_output=True, text=True)
+    tree, *conflicted = [l for l in r.stdout.splitlines() if l.strip()] or ['']
+    if r.returncode not in (0, 1) or not tree:
+        raise SystemExit(f"git merge-tree failed: {r.stderr.strip()}")
+    # Files with conflicts can't be checked until the PR is updated
+    conflicted = set(conflicted)
+    merged, t_mb = Tree(top, tree), Tree(top, mb)
+
+    out = git(top, 'diff', '-z', '--name-only', '--diff-filter=AMR', mb, head, '--', EXAMPLES_DIR)
+    pr_files = in_scope(sorted(n for n in out.split('\0') if n and Path(n).name in NAMES), scopes)
+    all_files = merged.examples(scopes)
+    new_in_base = set(all_files) - set(t_mb.examples()) - set(pr_files)
+    skipped = [n for n in all_files if n in conflicted]
+    if conflicted:
+        print(f"Note: the PR conflicts with the base in {len(conflicted)} files. Skipping {len(skipped)} examples with conflicts; update the PR and check again.")
+    pr_files = [n for n in pr_files if n not in conflicted]
+    all_files = [n for n in all_files if n not in conflicted]
+
+    bad = 0
+    changes = default_changes(t_mb, Tree(top, base))
+    title = f"Base changes since the PR branched ({summary(changes)}) in the {len(pr_files)} examples the PR adds or changes"
+    rep = check(merged, pr_files, changes) if changes else {}
+    n = print_report(title, rep, args.verbose)
+    if n: print(f"  To fix: merge {base} into the PR, then: bin/mfsync --since {mb[:10]} --fix --settings <example dirs>")
+    bad += n
+
+    changes = default_changes(t_mb, Tree(top, head))
+    title = f"PR changes ({summary(changes)}) in all {len(all_files)} examples ({len(new_in_base)} new on the base)"
+    rep = check(merged, all_files, changes, settings_in=new_in_base) if changes else {}
+    n = print_report(title, rep, args.verbose)
+    if n: print(f"  To fix: merge {base} into the PR, then: bin/mfsync --since {base} --fix (--settings for examples new on the base)")
+    bad += n
+    return 1 if bad else 0
+
+
+if __name__ == '__main__':
+    sys.exit(main())
