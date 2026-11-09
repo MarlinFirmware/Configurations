@@ -1401,7 +1401,7 @@
 
 #define LIMITED_MAX_ACCEL_EDITING       // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
 #if ENABLED(LIMITED_MAX_ACCEL_EDITING)
-  //#define MAX_ACCEL_EDIT_VALUES       { 4000, 4000, 200, 6000 } // ...or, set your own edit limits
+  //#define MAX_ACCEL_EDIT_VALUES     { 4000, 4000, 200, 6000 }  // ...or, set your own edit limits
 #endif
 
 /**
@@ -1412,9 +1412,9 @@
  *   M204 R    Retract Acceleration
  *   M204 T    Travel Acceleration
  */
-#define DEFAULT_ACCELERATION           1000   // X, Y, Z ... and E acceleration for printing moves (Creality: 2000)
-#define DEFAULT_RETRACT_ACCELERATION   1000   // E acceleration for retracts
-#define DEFAULT_TRAVEL_ACCELERATION    1000   // X, Y, Z ... acceleration for travel (non printing) moves
+#define DEFAULT_ACCELERATION          1000    // X, Y, Z and E acceleration for printing moves
+#define DEFAULT_RETRACT_ACCELERATION  1000    // E acceleration for retracts
+#define DEFAULT_TRAVEL_ACCELERATION   1000    // X, Y, Z acceleration for travel (non printing) moves
 
 /**
  * Default Jerk limits (mm/s)
@@ -1424,7 +1424,7 @@
  * When changing speed and direction, if the difference is less than the
  * value set here, it may happen instantaneously.
  */
- #define CLASSIC_JERK
+#define CLASSIC_JERK
 #if ENABLED(CLASSIC_JERK)
   #define DEFAULT_XJERK 10.0
   #define DEFAULT_YJERK 10.0
@@ -1763,7 +1763,6 @@
 
 // X and Y axis travel speed between probes.
 // Leave undefined to use the average of the current XY homing feedrate.
-//探头之间的X、Y轴移动速度(mm/min)
 #define XY_PROBE_FEEDRATE    (400*60) // (mm/min)
 
 // Feedrate for the first approach when double-probing (MULTIPLE_PROBING == 2)

@@ -3423,17 +3423,29 @@
 //#define ANYCUBIC_LCD_VYPER
 
 //
-// 320x240 Nextion 2.8" serial TFT Resistive Touch Screen NX3224T028
+// Touch-screen LCD for Anycubic Kobra
 //
-#define NEXTION_TFT
-#if ENABLED(NEXTION_TFT)
-  #define LCD_SERIAL_PORT 2
-#endif
+//#define ANYCUBIC_LCD_KOBRA
 
 //
 // Sovol SV-06 Resistive Touch Screen
 //
 //#define SOVOL_SV06_RTS
+
+//
+// Creality Resistive Touch Screen
+// As found in the Creality Ender-5 S1
+//
+//#define CREALITY_RTS
+#if ENABLED(CREALITY_RTS)
+  //#define CREALITY_WIFI      // Creality WiFi module
+  //#define MENU_RESET_WIFI    // The controller has a menu to reset WiFi with RESET_WIFI_PIN
+#endif
+
+//
+// 320x240 Nextion 2.8" serial TFT Resistive Touch Screen NX3224T028
+//
+#define NEXTION_TFT
 
 //
 // Elegoo Neptune 3 Pro / Plus / Max TJC Touch Screen

@@ -128,13 +128,6 @@
   //#define RS485_BUS_BUFFER_SIZE 128
 #endif
 
-// Enable CAN bus support and protocol
-//#define CAN_HOST
-//#define CAN_TOOLHEAD
-#if ANY(CAN_HOST, CAN_TOOLHEAD)
-  //#define CAN_DEBUG
-#endif
-
 // Enable the Bluetooth serial interface on AT90USB devices
 //#define BLUETOOTH
 
@@ -2236,8 +2229,9 @@
  */
 #define PREHEAT_BEFORE_LEVELING
 #if ENABLED(PREHEAT_BEFORE_LEVELING)
-  #define LEVELING_NOZZLE_TEMP 140       // (°C) Only applies to E0 at this time
-  #define LEVELING_BED_TEMP     60
+  #define LEVELING_NOZZLE_TEMP     140   // (°C) Only applies to E0 at this time
+  #define LEVELING_BED_TEMP         60
+  //#define LEVELING_HEAT_SOAK_TIME 60   // (s) Time to wait for heat soak after heaters reach temperature
 #endif
 
 /**
@@ -2329,8 +2323,8 @@
 
   //#define MESH_EDIT_GFX_OVERLAY   // Display a graphics overlay while editing the mesh
 
-  #define MESH_INSET 0              // Set Mesh bounds as an inset region of the bed
-  #define GRID_MAX_POINTS_X 7       // Don't use more than 15 points per axis, implementation limited.
+  #define MESH_INSET 0              // (mm) Set Mesh bounds as an inset region of the bed
+  #define GRID_MAX_POINTS_X  7      // Don't use more than 15 points per axis, implementation limited.
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
   //#define UBL_HILBERT_CURVE       // Use Hilbert distribution for less travel when probing multiple points
@@ -2341,8 +2335,7 @@
   #define UBL_MESH_EDIT_MOVES_Z     // Sophisticated users prefer no movement of nozzle
   #define UBL_SAVE_ACTIVE_ON_M500   // Save the currently active mesh in the current slot on M500
 
-  //#define UBL_Z_RAISE_WHEN_OFF_MESH 2.5 // When the nozzle is off the mesh, this value is used
-                                          // as the Z-Height correction value.
+  //#define UBL_Z_RAISE_WHEN_OFF_MESH 2.5 // (mm) Use for Z-Height correction when the nozzle is off the mesh
 
   //#define UBL_MESH_WIZARD         // Run several commands in a row to get a complete mesh
 
@@ -2371,7 +2364,7 @@
   //=================================== Mesh ==================================
   //===========================================================================
 
-  #define MESH_INSET 0           // Set Mesh bounds as an inset region of the bed
+  #define MESH_INSET  0          // (mm) Set Mesh bounds as an inset region of the bed
   #define GRID_MAX_POINTS_X 7
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
