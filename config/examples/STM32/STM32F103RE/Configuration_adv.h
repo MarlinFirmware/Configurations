@@ -21,6 +21,8 @@
  */
 #pragma once
 
+#define CONFIG_EXAMPLES_DIR "STM32/STM32F103RE"
+
 /**
  * Configuration_adv.h
  *
