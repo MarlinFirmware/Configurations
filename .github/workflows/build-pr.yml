@@ -140,17 +140,32 @@ jobs:
       run: |
         pip install -U platformio
 
-    # Fetch the code from the other repo and compile it:
+    # Fetch the code from the other repo and compile it.
+    # A branch named pr-NNN goes with Marlin PR NNN. While that PR is open,
+    # build it merged into the current bugfix-2.1.x, as it would land: the
+    # branch on its own can be old and lack boards that the examples use.
+    # Once it has merged, bugfix-2.1.x already has it.
     - name: Clone Marlin
       if: env.DIRS != ''
+      env:
+        GH_TOKEN: ${{ github.token }}
       run: |
+        git clone --branch bugfix-2.1.x https://github.com/MarlinFirmware/Marlin.git
         if [[ "$GITHUB_HEAD_REF" =~ ^pr-([0-9]+)$ ]]; then
           MARLIN_PR="${BASH_REMATCH[1]}"
-          git clone https://github.com/MarlinFirmware/Marlin.git
-          git -C Marlin fetch origin "pull/$MARLIN_PR/head:refs/heads/pr/$MARLIN_PR"
-          git -C Marlin checkout "pr/$MARLIN_PR"
-        else
-          git clone --branch bugfix-2.1.x https://github.com/MarlinFirmware/Marlin.git
+          STATE=$(gh api "repos/MarlinFirmware/Marlin/pulls/$MARLIN_PR" --jq .state || echo unknown)
+          if [[ $STATE == open ]]; then
+            git -C Marlin fetch origin "pull/$MARLIN_PR/head:refs/heads/pr/$MARLIN_PR"
+            git -C Marlin checkout "pr/$MARLIN_PR"
+            if git -C Marlin -c user.name=ci -c user.email=ci@localhost merge --no-edit origin/bugfix-2.1.x; then
+              echo "Marlin PR $MARLIN_PR merged with bugfix-2.1.x."
+            else
+              git -C Marlin merge --abort
+              echo "::warning::Marlin PR $MARLIN_PR conflicts with bugfix-2.1.x. Building the PR branch alone."
+            fi
+          else
+            echo "Marlin PR $MARLIN_PR is $STATE. Using bugfix-2.1.x."
+          fi
         fi
 
     # Get the PlatformIO env for each changed config, and the toolchain cache group
