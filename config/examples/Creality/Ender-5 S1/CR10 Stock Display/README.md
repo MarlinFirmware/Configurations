@@ -51,3 +51,12 @@ The bootloader on the stock board has special requirements and requires a flag t
 
 - Other Marlin options (such as `LCD_BED_TRAMMING` and `ASSISTED_TRAMMING`) need positions chosen for your bed and probe, so they are left off.
 - Acceleration and jerk are conservative starting values and have not been tuned.
+
+## Fixed-Time Motion
+
+[Fixed-Time Motion](https://marlinfw.org/docs/features/ft_motion.html) (FT Motion) is an alternative motion system that plans moves on a fixed time step and can apply input shapers to reduce ringing. It is compiled in here but off at startup, so the printer uses standard motion until you switch it on:
+
+- `M493 S1` turns FT Motion on and `M493 S0` turns it off (see [M493](https://marlinfw.org/docs/gcode/M493.html)).
+- The `FT_MOTION_MENU` option adds an FT Motion menu to the display.
+- The shapers start as `NONE` and no frequencies are tuned. Find your printer's frequency with the methods on the [Input Shaping](https://marlinfw.org/docs/features/input_shaping.html) page, set it with `M493`, and save with `M500`.
+- FT Motion is new, so test it with a few small prints first.
