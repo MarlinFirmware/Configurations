@@ -26,6 +26,14 @@
 #   MISSED (the old form is still there) or DIVERGED (the example has its
 #   own text or setting there, which is left alone).
 #
+# Examples also keep their own extra lines and notes, so a text change is only
+# MISSED when it really is absent:
+# - An insertion whose lines are all there already, but not together (the
+#   example moved the block, or added a line of its own inside it), is APPLIED.
+#   Bare "//" and "#endif" lines don't count, as they are everywhere.
+# - A trailing comment an example adds to an option doesn't hide the lines
+#   around it when matching the context of a change.
+#
 # Examples may choose their own settings, so a MISSED setting is only an
 # error where the change could not have reached the example: examples a PR
 # adds or changes (for changes on the base) and examples added to the base
@@ -92,6 +100,15 @@ def split_comment(text):
     return text, ''
 
 
+def loose_key(key):
+    '''A line key without the trailing comment of an option.'''
+    return ' '.join(key.split()[:2]) if key.startswith(('#define ', '#undef ')) else key
+
+
+# Lines too common to show that a block is present
+_GENERIC = ('//', '#endif', '#else')
+
+
 class Config:
     '''
     A config file reduced to its skeleton, one entry per non-blank line:
@@ -118,16 +135,31 @@ class Config:
                 self.names.append(None)
                 self.details.append(None)
             self.raw.append(i)
-        self._pos = self._occ = None
+        self._pos = self._occ = self._loose = self._have = None
 
-    def contains(self, seq):
-        '''True if the keys contain this run of lines.'''
+    def contains(self, seq, ctx=(0, 0)):
+        '''True if the keys contain this run of lines. ctx is the number of
+        lines at each end of seq that are context: for those the trailing
+        comment of an option is left out of the comparison.'''
         if not seq: return False
         if self._pos is None:
             self._pos = {}
             for i, k in enumerate(self.keys): self._pos.setdefault(k, []).append(i)
+            self._loose = [loose_key(k) for k in self.keys]
         n = len(seq)
-        return any(self.keys[i:i + n] == seq for i in self._pos.get(seq[0], ()))
+        pre, post = ctx
+        if not (pre or post):
+            return any(self.keys[i:i + n] == seq for i in self._pos.get(seq[0], ()))
+        want = [loose_key(k) if (j < pre or j >= n - post) else k for j, k in enumerate(seq)]
+        for i in range(len(self.keys) - n + 1):
+            if all((self._loose[i + j] if (j < pre or j >= n - post) else self.keys[i + j]) == want[j] for j in range(n)):
+                return True
+        return False
+
+    def has(self, key):
+        '''True if a line, or an option of that name, is anywhere in the config.'''
+        if self._have is None: self._have = set(self.keys) | {loose_key(k) for k in self.keys}
+        return key in self._have or loose_key(key) in self._have
 
     def occurrences(self, name):
         '''Positions of an option name, in order.'''
@@ -201,13 +233,21 @@ _TRIES = sorted(((b, a) for b in range(CONTEXT, -1, -1) for a in range(CONTEXT, 
 def classify_hunk(ex, hunk):
     '''APPLIED, MISSED or DIVERGED for one text hunk in one example.'''
     before, removed, added, after, _ = hunk
-    for b, a in _TRIES:
-        pre, post = before[len(before) - b:] if b else [], after[:a]
-        # Need enough lines to be sure: 3 or more, and context on both
-        # sides when nothing is left of the change itself
-        def usable(core): return len(core) + b + a >= 3 and bool(core or (b and a))
-        if usable(added) and ex.contains(pre + added + post): return 'APPLIED'
-        if usable(removed) and ex.contains(pre + removed + post): return 'MISSED'
+    # An insertion whose lines are all there but not together: the example
+    # moved the block or added a line of its own inside it
+    core = [k for k in added if k not in _GENERIC and len(k) > 3]
+    if not removed and core and all(ex.has(k) for k in core): return 'APPLIED'
+    # Exact lines first, then ignoring the comments an example adds to the
+    # options around the change
+    for loose in (False, True):
+        for b, a in _TRIES:
+            pre, post = before[len(before) - b:] if b else [], after[:a]
+            ctx = (len(pre), len(post)) if loose else (0, 0)
+            # Need enough lines to be sure: 3 or more, and context on both
+            # sides when nothing is left of the change itself
+            def usable(core): return len(core) + b + a >= 3 and bool(core or (b and a))
+            if usable(added) and ex.contains(pre + added + post, ctx): return 'APPLIED'
+            if usable(removed) and ex.contains(pre + removed + post, ctx): return 'MISSED'
     return 'DIVERGED'
 
 
