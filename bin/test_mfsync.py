@@ -174,9 +174,103 @@ def test_comment_only_change():
     finally:
         shutil.rmtree(tmp)
 
+# A default that gains a block between two sections separated by bare "//" lines
+BLOCK_OLD = """//
+// Sovol Touch Screen
+//
+//#define SOVOL_RTS
+
+//
+// Nextion Touch Screen
+//
+//#define NEXTION_TFT
+"""
+BLOCK_NEW = """//
+// Sovol Touch Screen
+//
+//#define SOVOL_RTS
+
+//
+// Creality Touch Screen
+// As found in the Ender-5 S1
+//
+//#define CREALITY_RTS
+#if ENABLED(CREALITY_RTS)
+  //#define CREALITY_WIFI  // Creality WiFi module
+#endif
+
+//
+// Nextion Touch Screen
+//
+//#define NEXTION_TFT
+"""
+# The example has the block, enabled, with a line of its own inside it
+BLOCK_EXTENDED = BLOCK_NEW.replace("//#define CREALITY_RTS", "#define CREALITY_RTS").replace(
+    "  //#define CREALITY_WIFI  // Creality WiFi module", "  #define CREALITY_WIFI  // Creality WiFi module\n  #define LCD_BAUDRATE 115200")
+# The example has the block elsewhere, in its own section
+BLOCK_MOVED = BLOCK_OLD + """
+// Machine
+#define CREALITY_RTS
+#if ENABLED(CREALITY_RTS)
+  #define CREALITY_WIFI
+#endif
+// Creality Touch Screen
+// As found in the Ender-5 S1
+"""
+
+
+def test_tolerance():
+    # An example that has the added block, extended or moved, is not a miss.
+    # One that lacks it still is, even though its neighbors are bare "//" lines.
+    tmp = make_repo()
+    try:
+        write(tmp, 'config/default/Configuration.h', BLOCK_OLD)
+        for name in ('Extended', 'Moved', 'Stale'):
+            write(tmp, f'config/examples/{name}/Configuration.h', BLOCK_OLD)
+        commit(tmp, 'base')
+        base = subprocess.run(('git', '-C', str(tmp), 'rev-parse', 'HEAD'),
+                              capture_output=True, text=True).stdout.strip()
+        write(tmp, 'config/default/Configuration.h', BLOCK_NEW)
+        write(tmp, 'config/examples/Extended/Configuration.h', BLOCK_EXTENDED)
+        write(tmp, 'config/examples/Moved/Configuration.h', BLOCK_MOVED)
+        commit(tmp, 'change')
+        r = run(tmp, '--since', base)
+        assert 'Stale' in r.stdout, r.stdout
+        assert 'Extended' not in r.stdout and 'Moved' not in r.stdout, r.stdout
+        assert r.returncode == 1, r.returncode
+        print('test_tolerance: OK')
+    finally:
+        shutil.rmtree(tmp)
+
+
+def test_option_comment():
+    # A comment an example adds to an option next to a change doesn't hide
+    # the change: an example that missed it is still found, one that has it is not
+    tmp = make_repo()
+    try:
+        write(tmp, 'config/default/Configuration.h', OLD_DEF)
+        write(tmp, 'config/examples/Stale/Configuration.h',
+              OLD_DEF.replace('#define BAUDRATE 250000', '#define BAUDRATE 250000 // Mine'))
+        write(tmp, 'config/examples/Good/Configuration.h',
+              OLD_DEF.replace('#define BAUDRATE 250000', '#define BAUDRATE 250000 // Mine'))
+        commit(tmp, 'base')
+        base = subprocess.run(('git', '-C', str(tmp), 'rev-parse', 'HEAD'),
+                              capture_output=True, text=True).stdout.strip()
+        write(tmp, 'config/default/Configuration.h', NEW_DEF)
+        write(tmp, 'config/examples/Good/Configuration.h',
+              GOOD.replace('#define BAUDRATE 250000', '#define BAUDRATE 250000 // Mine'))
+        commit(tmp, 'change')
+        r = run(tmp, '--since', base)
+        assert 'Stale' in r.stdout and 'Good' not in r.stdout, r.stdout
+        print('test_option_comment: OK')
+    finally:
+        shutil.rmtree(tmp)
+
 
 if __name__ == '__main__':
     test_detection()
     test_settings()
     test_comment_only_change()
+    test_tolerance()
+    test_option_comment()
     print('All mfsync tests passed.')
