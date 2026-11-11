@@ -4662,8 +4662,8 @@
    * only for an ESP32 build of Marlin. With an add-on WiFi module the module
    * runs its own firmware, so neither option has any effect there.
    */
-  //#define WEBSUPPORT          // Start a webserver (which may include auto-discovery) using SPIFFS
-  //#define OTASUPPORT          // Support over-the-air firmware updates
+  //#define WEBSUPPORT            // Start a webserver (which may include auto-discovery) using SPIFFS
+  //#define OTASUPPORT            // Support over-the-air firmware updates
 
   /**
    * The network is set at compile time. To set a default WiFi SSID / Password, create a file
