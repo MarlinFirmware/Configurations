@@ -3,18 +3,31 @@
 # changed-configs
 # Print the config folders whose build result could differ from the base.
 #
-# Usage: changed-configs <base-ref> <config-dir> ...
+# Usage: changed-configs [--marlin <marlin-dir>] <base-ref> <config-dir> ...
 #
 # A folder is printed if any of its .h files was added or removed, or if it
 # differs from <base-ref> after stripping comments and whitespace. A folder
 # whose only changes are comments or alignment can't change the firmware, so
-# there's nothing to build. When in doubt (e.g. the base can't be read) the
+# there's nothing to build.
+#
+# With --marlin, a Configuration.h / Configuration_adv.h that differs beyond
+# comments is also run through the preprocessor (with Marlin's macros.h, boards.h and drivers.h) and the
+# effective results are compared. New options that are disabled by default
+# (//#define FOO, plus a block of sub-options inside #if ENABLED(FOO)) vanish in
+# the preprocessed text, so folders that don't enable the new option are skipped.
+#
+# When in doubt (e.g. the base can't be read, the preprocessor fails) the
 # folder is printed, so a failure here only costs build time.
 #
 # Also: changed-configs --strip <file>   prints the normalized text, for debugging.
+#        changed-configs --marlin <dir> --pp <config-dir>   prints the effective text.
 #
 
-import subprocess, sys, os, glob
+import subprocess, sys, os, glob, re
+
+MARLIN = None                               # Marlin repo root (for --marlin)
+CC = os.environ.get('CC', 'gcc')
+CFG_FILES = ('Configuration.h', 'Configuration_adv.h')
 
 def strip(text):
     """Remove // and /* */ comments (respecting string and char literals),
@@ -47,20 +60,77 @@ def base_files(ref, d):
     r = subprocess.run(['git', 'ls-tree', '--name-only', f'{ref}:{d}'], capture_output=True, text=True)
     return set() if r.returncode else {f for f in r.stdout.split('\n') if f.endswith('.h')}
 
+GUARD = re.compile(r'^\s*#\s*(error\b.*|pragma\s+once\b.*)$')
+
+def effective(cfg, adv):
+    """Preprocess Configuration.h + Configuration_adv.h as Marlin sees them (one
+    translation unit, in that order) and return only what remains: the active
+    #define directives and the code that survives the #if / #else tree.
+    Returns None if the preprocessor fails."""
+    src = ['#include "src/core/macros.h"', '#include "src/core/boards.h"']   # ENABLED(), MB(), ...
+    # AXIS_DRIVER_TYPE_*() and HAS_DRIVER() from drivers.h, which Configuration_adv.h uses. Take only the
+    # #defines before its first #if, since the rest needs what Marlin's Conditionals provide.
+    with open(f'{MARLIN}/Marlin/src/core/drivers.h', errors='replace') as f:
+        for ln in f:
+            if ln.startswith('#if'): break
+            src.append(ln.rstrip('\n'))
+    # HAS_E_DRIVER() needs E_STEPPERS, which Marlin derives from EXTRUDERS, and a literal count to repeat.
+    src += ['#define E_STEPPERS EXTRUDERS', '#undef HAS_E_DRIVER',
+            '#define HAS_E_DRIVER(T) (' + ' || '.join(f'(E_STEPPERS > {n} && _AXIS_DRIVER_TYPE(E{n},T))' for n in range(8)) + ')']
+    for text in (cfg, adv):
+        src += [ln for ln in text.replace('\r', '').split('\n') if not GUARD.match(ln)]
+    r = subprocess.run([CC, '-E', '-P', '-dD', '-x', 'c',
+                        f'-I{MARLIN}/Marlin', f'-I{MARLIN}/Marlin/src/core', '-'],
+                       input='\n'.join(src), capture_output=True, text=True, errors='replace')
+    if r.returncode:
+        err = next((ln for ln in r.stderr.split('\n') if 'error' in ln), r.stderr[:200])
+        print(f'changed-configs: preprocessing failed: {err}', file=sys.stderr)
+        return None
+    lines = (' '.join(ln.split()) for ln in r.stdout.split('\n'))
+    return '\n'.join(ln for ln in lines if ln)
+
+def pair(d, read):
+    """Both configuration files of a folder, from the read(name) function."""
+    a, b = (read(n) for n in CFG_FILES)
+    return (a, b) if a is not None and b is not None else None
+
+def effective_change(ref, d):
+    """True if the folder's preprocessed configuration differs from the base
+    (or can't be compared)."""
+    old = pair(d, lambda n: base_text(ref, f'{d}/{n}'))
+    def rd(n):
+        try:
+            with open(os.path.join(d, n), errors='replace') as f: return f.read()
+        except OSError: return None
+    new = pair(d, rd)
+    if old is None or new is None:
+        return True
+    a, b = effective(*old), effective(*new)
+    return a is None or b is None or a != b
+
 def changed(ref, d):
     now = {os.path.basename(p) for p in glob.glob(os.path.join(d, '*.h'))}
     if now != base_files(ref, d):
         return True                         # added, removed, or new folder
+    cfg_differs = False
     for name in sorted(now):
         old = base_text(ref, f'{d}/{name}')
         if old is None:
             return True
         with open(os.path.join(d, name), errors='replace') as f:
             if strip(f.read()) != strip(old):
-                return True
-    return False
+                if not MARLIN or name not in CFG_FILES:
+                    return True             # a screen file etc. is compared as text
+                cfg_differs = True
+    # Only the two configuration files differ beyond comments: compare what the
+    # preprocessor makes of them, since a disabled option adds nothing.
+    return cfg_differs and effective_change(ref, d)
 
 if __name__ == '__main__':
+    if len(sys.argv) > 2 and sys.argv[1] == '--marlin':
+        MARLIN = sys.argv[2]; del sys.argv[1:3]
+    if len(sys.argv) == 3 and sys.argv[1] == '--pp':
+        print(effective(*pair(sys.argv[2], lambda n: open(os.path.join(sys.argv[2], n), errors='replace').read()))); sys.exit(0)
     if len(sys.argv) == 3 and sys.argv[1] == '--strip':
         print(strip(open(sys.argv[2], errors='replace').read())); sys.exit(0)
     if len(sys.argv) < 3:

@@ -108,38 +108,6 @@ jobs:
         path: ci
         sparse-checkout: .github/scripts
 
-    # Comments and spacing can't change the firmware, so a folder whose .h files
-    # only differ from the base in those needs no build. Mass-edits of comments
-    # (new docs for an option, realignment) then cost seconds instead of an hour.
-    - name: Skip configs with comment-only changes
-      if: env.DIRS != ''
-      env:
-        BASE_SHA: ${{ github.event.pull_request.base.sha }}
-      run: |
-        git fetch --depth=1 "https://github.com/$GITHUB_REPOSITORY" "$BASE_SHA"
-        mapfile -t dirs <<<"$DIRS"
-        KEEP=$(ci/.github/scripts/changed-configs FETCH_HEAD "${dirs[@]}")
-
-        {
-          echo "### Test Build"
-          echo "${#dirs[@]} config folders changed; $(grep -c . <<<"$KEEP") differ from the base beyond comments and spacing."
-        } >>"$GITHUB_STEP_SUMMARY"
-
-        # Rewrite DIRS for the remaining steps (empty means nothing to build)
-        echo -e "DIRS<<EOF\n$KEEP\nEOF" >>"$GITHUB_ENV"
-
-    - name: Select Python 3.9
-      if: env.DIRS != ''
-      uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7
-      with:
-        python-version: '3.9' # Version range or exact version of a Python version to use, using semvers version range syntax.
-        architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
-
-    - name: Install PlatformIO
-      if: env.DIRS != ''
-      run: |
-        pip install -U platformio
-
     # Fetch the code from the other repo and compile it.
     # A branch named pr-NNN goes with Marlin PR NNN. While that PR is open,
     # build it merged into the current bugfix-2.1.x, as it would land: the
@@ -167,6 +135,40 @@ jobs:
             echo "Marlin PR $MARLIN_PR is $STATE. Using bugfix-2.1.x."
           fi
         fi
+
+    # Comments and spacing can't change the firmware, and neither can an option
+    # that is added but left disabled (//#define FOO, with its sub-options in
+    # #if ENABLED(FOO)). A folder is built only if its configuration, as the
+    # preprocessor sees it, differs from the base. Mass-edits (new docs or new
+    # disabled options in every example) then cost seconds instead of over an hour.
+    - name: Skip configs with no effective changes
+      if: env.DIRS != ''
+      env:
+        BASE_SHA: ${{ github.event.pull_request.base.sha }}
+      run: |
+        git fetch --depth=1 "https://github.com/$GITHUB_REPOSITORY" "$BASE_SHA"
+        mapfile -t dirs <<<"$DIRS"
+        KEEP=$(ci/.github/scripts/changed-configs --marlin "$PWD/Marlin" FETCH_HEAD "${dirs[@]}")
+
+        {
+          echo "### Test Build"
+          echo "${#dirs[@]} config folders changed; $(grep -c . <<<"$KEEP") differ from the base in effect (not just comments, spacing, or disabled options)."
+        } >>"$GITHUB_STEP_SUMMARY"
+
+        # Rewrite DIRS for the remaining steps (empty means nothing to build)
+        echo -e "DIRS<<EOF\n$KEEP\nEOF" >>"$GITHUB_ENV"
+
+    - name: Select Python 3.9
+      if: env.DIRS != ''
+      uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7
+      with:
+        python-version: '3.9' # Version range or exact version of a Python version to use, using semvers version range syntax.
+        architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
+
+    - name: Install PlatformIO
+      if: env.DIRS != ''
+      run: |
+        pip install -U platformio
 
     # Get the PlatformIO env for each changed config, and the toolchain cache group
     - name: Resolve build targets
