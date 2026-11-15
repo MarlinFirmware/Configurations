@@ -3458,6 +3458,11 @@
 // 320x240 Nextion 2.8" serial TFT Resistive Touch Screen NX3224T028
 //
 #define NEXTION_TFT
+/**
+ * Connect the Nextion to Serial 2 (TX2 = D16, RX2 = D17 on AUX4). Without this the
+ * port is Serial 3, whose pins D14 and D15 are the Y_MIN and Y_MAX endstops on a RAMPS board.
+ */
+#define LCD_SERIAL_PORT 2
 
 //
 // Elegoo Neptune 3 Pro / Plus / Max TJC Touch Screen
