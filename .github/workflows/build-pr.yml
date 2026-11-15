@@ -1,7 +1,8 @@
 #
 # build-pr.yml
-# Format the new / updated configs in the PR (bin/mfformat), then
-# build Marlin with them.
+# Check the comment alignment of the new / updated configs in the PR (bin/mfformat),
+# plan the builds (only configs that really changed), then build Marlin with them
+# in parallel batches.
 #
 
 name: PR Test Build
@@ -64,14 +65,24 @@ jobs:
       run: |
         echo "::error::End-of-line comments are not aligned with config/default. Run \`bin/mfformat --changed\` and push the result. A bot will also comment on the PR with a ready-made fix."
 
-  build:
+  # Work out which configs need a build, and split them into batches (shards)
+  # that each use one PlatformIO toolchain. A PR that really changes hundreds of
+  # configs is then built by many jobs at once instead of one job that times out.
+  plan:
 
-    name: Test Build
+    name: Plan Build
     needs: format
     if: github.repository == 'MarlinFirmware/Configurations'
 
     runs-on: ubuntu-22.04
-    timeout-minutes: 60
+    timeout-minutes: 20
+
+    outputs:
+      matrix: ${{ steps.plan.outputs.matrix || steps.dirs.outputs.matrix }}
+      count: ${{ steps.plan.outputs.count || steps.dirs.outputs.count }}
+      marlin_base: ${{ steps.marlin.outputs.base }}
+      marlin_pr: ${{ steps.marlin.outputs.pr }}
+      marlin_merge: ${{ steps.marlin.outputs.merge }}
 
     steps:
     - name: Check out the PR (with any formatting commit)
@@ -82,10 +93,15 @@ jobs:
 
     # Get the list of directories containing changed config files:
     - name: Get changed directories
+      id: dirs
       env:
         GH_TOKEN: ${{ github.token }}
         PR: ${{ github.event.pull_request.number }}
       run: |
+        # Nothing to build unless a later step says otherwise
+        echo "count=0" >>"$GITHUB_OUTPUT"
+        echo "matrix=[]" >>"$GITHUB_OUTPUT"
+
         # Ask the API for the files changed by the PR. The checkout above
         # comes from the contributor's fork, so "origin" is the fork and its
         # (possibly stale) base branch can't be used for a `git diff`.
@@ -113,20 +129,25 @@ jobs:
     # build it merged into the current bugfix-2.1.x, as it would land: the
     # branch on its own can be old and lack boards that the examples use.
     # Once it has merged, bugfix-2.1.x already has it.
+    # The commits used are recorded so that every batch builds the same Marlin.
     - name: Clone Marlin
+      id: marlin
       if: env.DIRS != ''
       env:
         GH_TOKEN: ${{ github.token }}
       run: |
         git clone --branch bugfix-2.1.x https://github.com/MarlinFirmware/Marlin.git
+        echo "base=$(git -C Marlin rev-parse HEAD)" >>"$GITHUB_OUTPUT"
         if [[ "$GITHUB_HEAD_REF" =~ ^pr-([0-9]+)$ ]]; then
           MARLIN_PR="${BASH_REMATCH[1]}"
           STATE=$(gh api "repos/MarlinFirmware/Marlin/pulls/$MARLIN_PR" --jq .state || echo unknown)
           if [[ $STATE == open ]]; then
             git -C Marlin fetch origin "pull/$MARLIN_PR/head:refs/heads/pr/$MARLIN_PR"
             git -C Marlin checkout "pr/$MARLIN_PR"
+            echo "pr=$(git -C Marlin rev-parse HEAD)" >>"$GITHUB_OUTPUT"
             if git -C Marlin -c user.name=ci -c user.email=ci@localhost merge --no-edit origin/bugfix-2.1.x; then
               echo "Marlin PR $MARLIN_PR merged with bugfix-2.1.x."
+              echo "merge=true" >>"$GITHUB_OUTPUT"
             else
               git -C Marlin merge --abort
               echo "::warning::Marlin PR $MARLIN_PR conflicts with bugfix-2.1.x. Building the PR branch alone."
@@ -162,54 +183,180 @@ jobs:
       if: env.DIRS != ''
       uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7
       with:
-        python-version: '3.9' # Version range or exact version of a Python version to use, using semvers version range syntax.
-        architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
+        python-version: '3.9'
+        architecture: 'x64'
 
     - name: Install PlatformIO
       if: env.DIRS != ''
       run: |
         pip install -U platformio
 
-    # Get the PlatformIO env for each changed config, and the toolchain cache group
-    - name: Resolve build targets
-      id: targets
+    # Get the PlatformIO env for each changed config, then split the configs into batches of
+    # at most 20 builds. A batch only holds configs of one toolchain group (envs that share
+    # a platform and packages), so it needs just one PlatformIO cache. See size-manifest.
+    - name: Plan the batches
+      id: plan
       if: env.DIRS != ''
       run: |
         mapfile -t dirs <<<"$DIRS"
         ci/.github/scripts/config-targets Marlin "${dirs[@]}" >"$RUNNER_TEMP/targets.tsv"
-        cat "$RUNNER_TEMP/targets.tsv"
 
-        # Envs sharing a toolchain share a cache. Use the first config's group.
-        ENV1=$(head -n1 "$RUNNER_TEMP/targets.tsv" | cut -f2)
-        GROUP=$(pio project config -d Marlin --json-output | ci/.github/scripts/toolchain-group "$ENV1" | cut -f2)
-        echo "group=$GROUP" >>"$GITHUB_OUTPUT"
+        mapfile -t envs < <(cut -f2 "$RUNNER_TEMP/targets.tsv" | sort -u)
+        pio project config -d Marlin --json-output \
+          | ci/.github/scripts/toolchain-group "${envs[@]}" >"$RUNNER_TEMP/groups.tsv"
 
-        if cut -f2 "$RUNNER_TEMP/targets.tsv" | grep -qx simulator_linux_release; then
-          echo "simulator=true" >>"$GITHUB_OUTPUT"
+        ci/.github/scripts/size-manifest plan --size 20 --matrix matrix.json \
+          "$RUNNER_TEMP/groups.tsv" <"$RUNNER_TEMP/targets.tsv" >plan.tsv
+
+        {
+          echo "matrix=$(cat matrix.json)"
+          echo "count=$(wc -l <plan.tsv | tr -d ' ')"
+        } >>"$GITHUB_OUTPUT"
+        echo "$(jq length matrix.json) batches of builds:" | tee -a "$GITHUB_STEP_SUMMARY"
+        jq -r '.[] | "- `\(.shard)`: \(.count) configs"' matrix.json | tee -a "$GITHUB_STEP_SUMMARY"
+
+    - name: Save the plan
+      if: env.DIRS != ''
+      uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+      with:
+        name: plan
+        path: plan.tsv
+        retention-days: 3
+
+  build:
+
+    name: Build ${{ matrix.shard }}
+    needs: plan
+    if: needs.plan.outputs.count != '0'
+
+    runs-on: ubuntu-22.04
+    timeout-minutes: 60
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include: ${{ fromJSON(needs.plan.outputs.matrix) }}
+
+    steps:
+    - name: Check out the PR (with any formatting commit)
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      with:
+        ref: ${{ github.event.pull_request.head.ref }}
+        repository: ${{ github.event.pull_request.head.repo.full_name }}
+
+    # The PR branch may predate the CI scripts, so get them from the base branch
+    - name: Check out the CI scripts
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      with:
+        ref: ${{ github.event.pull_request.base.ref }}
+        path: ci
+        sparse-checkout: .github/scripts
+
+    - name: Get the plan
+      uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8
+      with:
+        name: plan
+
+    - name: Select Python 3.9
+      uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7
+      with:
+        python-version: '3.9'
+        architecture: 'x64'
+
+    - name: Install PlatformIO
+      run: |
+        pip install -U platformio
+
+    # Every batch builds the same Marlin as the plan did (see "Clone Marlin" above),
+    # even if bugfix-2.1.x moves during the run.
+    - name: Get Marlin
+      env:
+        MARLIN_BASE: ${{ needs.plan.outputs.marlin_base }}
+        MARLIN_PR: ${{ needs.plan.outputs.marlin_pr }}
+        MARLIN_MERGE: ${{ needs.plan.outputs.marlin_merge }}
+        PR_NAME: ${{ github.head_ref }}
+      run: |
+        git clone --branch bugfix-2.1.x https://github.com/MarlinFirmware/Marlin.git
+        git -C Marlin checkout -q "$MARLIN_BASE"
+        if [[ -n $MARLIN_PR ]]; then
+          [[ $PR_NAME =~ ^pr-([0-9]+)$ ]] || { echo "::error::Unexpected branch name."; exit 1; }
+          git -C Marlin fetch -q origin "pull/${BASH_REMATCH[1]}/head"
+          git -C Marlin checkout -q "$MARLIN_PR"
+          if [[ $MARLIN_MERGE == true ]]; then
+            git -C Marlin -c user.name=ci -c user.email=ci@localhost merge --no-edit "$MARLIN_BASE"
+          fi
         fi
+        git -C Marlin log -1 --oneline
 
     # PR runs only restore. Caches are saved on import-2.1.x by cache-pio.yml,
     # since a cache saved by a PR run can't be used by any other PR.
     - name: Restore PlatformIO cache
-      if: env.DIRS != ''
       uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
       with:
         path: ~/.platformio
-        key: ${{ runner.os }}-pio-v2-${{ steps.targets.outputs.group }}
+        key: ${{ runner.os }}-pio-v2-${{ matrix.group }}
 
     - name: Update PlatformIO packages
-      if: env.DIRS != ''
       run: |
         pio pkg update --global
 
-    - name: Install Simulator dependencies
-      if: steps.targets.outputs.simulator == 'true'
+    - name: Select this batch
+      env:
+        SHARD: ${{ matrix.shard }}
       run: |
-        sudo apt-get update
-        sudo apt-get install -y build-essential libsdl2-dev libsdl2-net-dev libglm-dev
+        awk -F'\t' -v s="$SHARD" '$5 == s { print $1 "\t" $2 "\t" $3 }' plan.tsv >targets.tsv
+        wc -l <targets.tsv
+        if cut -f2 targets.tsv | grep -qx simulator_linux_release; then
+          sudo apt-get update
+          sudo apt-get install -y build-essential libsdl2-dev libsdl2-net-dev libglm-dev
+        fi
 
-    # Build every changed config, reporting all the results at the end, not just the first failure.
+    # Build every config in the batch, reporting all the results at the end, not just the first failure.
     # See .github/scripts/build-configs. Results are also in the job summary.
-    - name: Test all changed config files
-      if: env.DIRS != ''
-      run: ci/.github/scripts/build-configs Marlin "$RUNNER_TEMP/results.tsv" <"$RUNNER_TEMP/targets.tsv"
+    # Each batch names its own file, as the results of all the batches are merged into one folder.
+    - name: Test the batch of configs
+      env:
+        SHARD: ${{ matrix.shard }}
+      run: ci/.github/scripts/build-configs Marlin "results-$SHARD.tsv" <targets.tsv
+
+    - name: Save the results
+      if: always()
+      uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+      with:
+        name: results-${{ matrix.shard }}
+        path: results-${{ matrix.shard }}.tsv
+        retention-days: 3
+        if-no-files-found: warn
+
+  # The one result to require for the PR: every batch passed (or there was nothing to build).
+  results:
+
+    name: Test Build
+    needs: [plan, build]
+    if: always() && github.repository == 'MarlinFirmware/Configurations'
+
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+
+    steps:
+    - name: Check the plan
+      env:
+        PLAN: ${{ needs.plan.result }}
+        BUILD: ${{ needs.build.result }}
+      run: |
+        [[ $PLAN == success ]] || { echo "::error::Planning the builds: $PLAN."; exit 1; }
+        [[ $BUILD == success || $BUILD == skipped ]] || { echo "::error::Some batches did not pass: $BUILD."; exit 1; }
+
+    - name: Get the results
+      if: needs.build.result == 'success'
+      uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8
+      with:
+        pattern: results-*
+        path: results
+        merge-multiple: true
+
+    - name: Summarize
+      if: needs.build.result == 'success'
+      run: |
+        TOTAL=$(cat results/*.tsv | grep -c .)
+        echo "### Test Build: all $TOTAL configs in $(find results -type f | wc -l | tr -d ' ') batches passed" >>"$GITHUB_STEP_SUMMARY"
