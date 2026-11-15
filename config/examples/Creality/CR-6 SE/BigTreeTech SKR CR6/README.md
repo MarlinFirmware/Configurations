@@ -5,3 +5,4 @@ Creality CR-6 SE with a BigTreeTech SKR CR6 board and the stock touch screen.
 - Some printers need `ENDSTOP_NOISE_THRESHOLD 2` for reliable probing. It is commented out here.
 - `EEPROM_AUTOSAVE_AFTER` saves settings edited on the screen a few seconds later. Comment it out to save only with `M500`.
 - `LEVELING_HEAT_SOAK_TIME 300` makes the Z Offset screen's Home and automatic leveling heat the bed and nozzle to the Leveling Settings temperatures and wait 5 minutes first, since the bed and nozzle change shape and size as they warm up. If the bed is already at temperature there is no wait. Lower or comment it out if you prefer.
+- Power-Loss Recovery is compiled in but off by default (`PLR_ENABLED_DEFAULT false`). Without a power-loss detection circuit it saves to the SD card in the middle of the print, which makes the printer pause, so it is best avoided. Turn it on with `M413 S1` and `M500` if you want it.
