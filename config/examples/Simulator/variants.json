@@ -1,0 +1,19 @@
+{
+  "groups": [{
+    "type": "exclusive",
+    "options": [
+      "REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER",
+      "REPRAP_DISCOUNT_SMART_CONTROLLER",
+      "TFT_CLASSIC_UI",
+      "TFT_COLOR_UI",
+      "TFT_LVGL_UI",
+    ],
+  }],
+  "default": {
+    "REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER": 1,
+    "REPRAP_DISCOUNT_SMART_CONTROLLER": 0,
+    "TFT_CLASSIC_UI": 0,
+    "TFT_COLOR_UI": 0,
+    "TFT_LVGL_UI": 0
+  }
+}
