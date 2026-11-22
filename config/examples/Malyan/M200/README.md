@@ -1,7 +1,21 @@
 ### Malyan M200 Build Instructions
 
-Malyan M200 series firmware currently builds using the Arduino IDE. These instructions should
-guide you through the configuration and compilation.
+These instructions cover building Malyan M200 firmware with PlatformIO or the Arduino IDE.
+
+### PlatformIO (M200 V1)
+
+1. Download matching versions of Marlin and these example configurations. Copy `Configuration.h` and `Configuration_adv.h` to the `Marlin` directory in the Marlin source tree.
+2. With PlatformIO installed, run `pio run -e STM32F103CB_malyan` from the root of the Marlin source tree.
+3. Use `.pio/build/STM32F103CB_malyan/firmware.bin` as the firmware binary and follow the SD-card flashing instructions in steps 15-19 below.
+
+The PlatformIO environment above is for the V1's STM32F103CB, not the V2's STM32F070. Confirm the MCU on the board; external features alone may not identify the revision.
+
+> [!WARNING]
+> A successful build does not confirm that the firmware works on your printer. Boot loops have been reported on M200 boards; see [MarlinFirmware/Marlin#23716](https://github.com/MarlinFirmware/Marlin/issues/23716).
+
+### Arduino IDE
+
+If the Arduino build fails because `F_CPU` is not a constant expression, try the PlatformIO instructions above for the M200 V1 instead of adding a clock definition to the configuration.
 
 1. Install the Arduino IDE from your favorite source (arduino.cc, windows store, app store)
 2. Launch the IDE to add the ST boards manager:
@@ -11,7 +25,7 @@ guide you through the configuration and compilation.
    - Select "**Show verbose ouptut during: compilation**."
 3. Select **Tools** > **Board** > **Boards Manager**.
 4. Type "Malyan" into the Search field.
-5. The only board listed will be "**STM32 Cores by STMicroelectronics**." Any version from 1.6.0 up is fine. Choose install. This will download many tools and packages, be patient.
+5. The board package is "**STM32 Cores by STMicroelectronics**." Choose install. This will download many tools and packages, be patient.
 6. Open the **Tools** > **Board** submenu, scroll all the way down, and select **3D Printer Boards**.
 7. From the **Tools** menu, select a board part number:
    - If you own a M200 V1 or early run (black V2), choose **Malyan M200 V1**.
