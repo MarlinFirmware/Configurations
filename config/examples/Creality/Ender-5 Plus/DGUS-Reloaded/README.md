@@ -6,7 +6,8 @@ To use `DGUS_LCD_UI RELOADED` the stock LCD must be flashed with custom firmware
 
 ### Get the DWIN_SET
 
-- Download the `DWIN_SET` archive from https://github.com/MarlinFirmware/Configurations/raw/bugfix-2.1.x/config/examples/Creality/Ender-5%20Plus/DGUS-Reloaded/DWIN_SET.tar.gz
+- Download the [bundled `DWIN_SET` archive](DWIN_SET.tar.gz) from the same Configurations branch as these files.
+- Use it with the matching Marlin version. Display files from another version may be incompatible (for example, temperatures may display at one tenth of their actual value).
 - Extract the contents of the archive. You should now have a folder called `DWIN_SET`.
 
 ### Prepare the SD Card
