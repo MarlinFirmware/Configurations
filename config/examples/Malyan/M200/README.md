@@ -8,7 +8,7 @@ These instructions cover building Malyan M200 firmware with PlatformIO or the Ar
 2. With PlatformIO installed, run `pio run -e STM32F103CB_malyan` from the root of the Marlin source tree.
 3. Use `.pio/build/STM32F103CB_malyan/firmware.bin` as the firmware binary and follow the SD-card flashing instructions in steps 15-19 below.
 
-The PlatformIO environment above is for the V1's STM32F103CB, not the V2's STM32F070. Confirm the MCU on the board; external features alone may not identify the revision.
+The PlatformIO environment above is for STM32F103CB-based boards, not STM32F070-based V2 boards. Confirm the MCU on the board; external features alone may not identify the revision.
 
 > [!WARNING]
 > A successful build does not confirm that the firmware works on your printer. Boot loops have been reported on M200 boards; see [MarlinFirmware/Marlin#23716](https://github.com/MarlinFirmware/Marlin/issues/23716).
