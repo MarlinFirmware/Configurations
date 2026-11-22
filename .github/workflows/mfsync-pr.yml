@@ -1,0 +1,37 @@
+#
+# mfsync-pr.yml
+# Check PR changes against config/default for examples that missed a change.
+#
+
+name: PR Example Sync
+
+on:
+  pull_request:
+    branches:
+    - import-2.1.x
+
+permissions:
+  contents: read
+
+jobs:
+  mfsync:
+    name: Check Example Sync
+    if: github.repository == 'MarlinFirmware/Configurations'
+
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+
+    steps:
+    - name: Check out the PR and history
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      with:
+        fetch-depth: 0
+
+    - name: Test mfsync
+      run: python3 bin/test_mfsync.py
+
+    - name: Check examples against config/default
+      env:
+        BASE_REF: ${{ github.event.pull_request.base.ref }}
+        HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+      run: bin/mfsync --pr --base "origin/$BASE_REF" --head "$HEAD_SHA"
