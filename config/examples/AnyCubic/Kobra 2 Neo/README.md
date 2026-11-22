@@ -30,4 +30,3 @@ Bootloader: 0x9000, updated from SD card with a file named `firmware.bin`
 
 - Vendor firmware: https://github.com/ANYCUBIC-3D/Kobra2_Neo
 - Hardware notes: https://1coderookie.github.io/Kobra2NeoInsights/hardware/mainboard/
-- Marlin feature request: MarlinFirmware/Marlin#26682
