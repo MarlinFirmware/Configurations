@@ -1076,7 +1076,7 @@
 
     // Add G33 'L' to solve by least squares, as in RepRapFirmware, and optionally calibrate the diagonal rod.
     // The factors to adjust are chosen by the 'L' value: 3 (endstops), 4 (+ radius), 6 (+ tower angles), 7 (+ diagonal rod)
-    //#define DELTA_CALIBRATION_LEAST_SQUARES
+    #define DELTA_CALIBRATION_LEAST_SQUARES
   #endif
 
   #if ANY(DELTA_AUTO_CALIBRATION, DELTA_CALIBRATION_MENU)
