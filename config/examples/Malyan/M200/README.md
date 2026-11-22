@@ -1,21 +1,26 @@
 ### Malyan M200 Build Instructions
 
-These instructions cover building Malyan M200 firmware with PlatformIO or the Arduino IDE.
+These instructions cover building Malyan M200 firmware with PlatformIO or the Arduino IDE. The example configuration in this folder is for the **M200 V1** (`BOARD_MALYAN_M200`, STM32F103CB). PlatformIO is the recommended way to build it.
+
+> [!WARNING]
+> A successful build does not confirm that the firmware works on your printer. Confirm your board revision before flashing. Boards that look like a V1 (no fan at the rear of the base) have turned out to be V2 boards. A build for the wrong MCU will not work, and V2 boards have been reported to boot-loop; see [MarlinFirmware/Marlin#23716](https://github.com/MarlinFirmware/Marlin/issues/23716).
 
 ### PlatformIO (M200 V1)
 
-1. Download matching versions of Marlin and these example configurations. Copy `Configuration.h` and `Configuration_adv.h` to the `Marlin` directory in the Marlin source tree.
+1. Download matching versions of Marlin and these example configurations (use the `bugfix-2.1.x` or release configurations, not `import-2.1.x`). Copy `Configuration.h` and `Configuration_adv.h` to the `Marlin` directory in the Marlin source tree.
 2. With PlatformIO installed, run `pio run -e STM32F103CB_malyan` from the root of the Marlin source tree.
-3. Use `.pio/build/STM32F103CB_malyan/firmware.bin` as the firmware binary and follow the SD-card flashing instructions in steps 15-19 below.
+3. The firmware binary is `.pio/build/STM32F103CB_malyan/firmware.bin`. Flash it from an SD card:
+   - Copy `firmware.bin` to the SD card under three names: `firmware.bin`, `update.bin`, and `fcupdate.flg`. Use the SD card that came with the printer if possible. The bootloader is very picky about SD cards.
+   - Follow steps 16-19 of the Arduino IDE instructions below (center the X and Y axes, power-cycle, remove the card and delete `fcupdate.flg`, then test).
 
-The PlatformIO environment above is for STM32F103CB-based boards, not STM32F070-based V2 boards. Confirm the MCU on the board; external features alone may not identify the revision.
+### M200 V2 / V3
 
-> [!WARNING]
-> A successful build does not confirm that the firmware works on your printer. Boot loops have been reported on M200 boards; see [MarlinFirmware/Marlin#23716](https://github.com/MarlinFirmware/Marlin/issues/23716).
+The later-run V2 and the V3 use an STM32F070 MCU and are not covered by this example configuration. The PlatformIO environments for them are `STM32F070RB_malyan` and `STM32F070CB_malyan` (with `MOTHERBOARD` set to `BOARD_MALYAN_M200_V2`). Only changing `MOTHERBOARD` in this example does **not** produce a working build: the `STM32F070CB_malyan` build overflows the flash by several KB and the `STM32F070RB_malyan` build stops with a `static_assert` error. A V2 or V3 needs a configuration trimmed to fit, along with its own steps-per-mm and axis directions (see steps 11-12 below). The V3 pinout is not complete.
 
 ### Arduino IDE
 
-If the Arduino build fails because `F_CPU` is not a constant expression, try the PlatformIO instructions above for the M200 V1 instead of adding a clock definition to the configuration.
+> [!NOTE]
+> Building with the Arduino IDE is currently not working. With STM32 Cores 1.9.0 the build stops because `F_CPU` is not a constant expression (see [Configurations#900](https://github.com/MarlinFirmware/Configurations/issues/900)), and STM32 Cores 2.4.0 builds but overshoots the flash size. Adding `#define F_CPU` to the configuration is not a fix, as it breaks PlatformIO builds. Use PlatformIO instead. The steps below are kept for reference.
 
 1. Install the Arduino IDE from your favorite source (arduino.cc, windows store, app store)
 2. Launch the IDE to add the ST boards manager:
