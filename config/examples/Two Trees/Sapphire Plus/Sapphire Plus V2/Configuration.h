@@ -24,7 +24,7 @@
 #error "Use the 'bugfix...' or 'release...' configurations matching your Marlin version."
 
 //#define SAPPHIRE_PLUS_MKS_UI
-//#define SAPPHIRE_PLUS_BLTOUCH
+//#define USE_BLTOUCH
 //#define SAPPHIRE_PLUS_TMC_UART
 
 /**
@@ -1336,8 +1336,8 @@
 #define X_MAX_ENDSTOP_HIT_STATE HIGH
 #define Y_MIN_ENDSTOP_HIT_STATE HIGH
 #define Y_MAX_ENDSTOP_HIT_STATE LOW
-#define Z_MIN_ENDSTOP_HIT_STATE TERN(SAPPHIRE_PLUS_BLTOUCH, HIGH, LOW)
-#define Z_MAX_ENDSTOP_HIT_STATE TERN(SAPPHIRE_PLUS_BLTOUCH, HIGH, LOW)
+#define Z_MIN_ENDSTOP_HIT_STATE TERN(USE_BLTOUCH, HIGH, LOW)
+#define Z_MAX_ENDSTOP_HIT_STATE TERN(USE_BLTOUCH, HIGH, LOW)
 #define I_MIN_ENDSTOP_HIT_STATE HIGH
 #define I_MAX_ENDSTOP_HIT_STATE HIGH
 #define J_MIN_ENDSTOP_HIT_STATE HIGH
@@ -1594,7 +1594,7 @@
 /**
  * The BLTouch probe uses a Hall effect sensor and emulates a servo.
  */
-#if ENABLED(SAPPHIRE_PLUS_BLTOUCH)
+#if ENABLED(USE_BLTOUCH)
   #define BLTOUCH
 #endif
 
@@ -1785,7 +1785,7 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
-#if ENABLED(SAPPHIRE_PLUS_BLTOUCH)
+#if ENABLED(USE_BLTOUCH)
   // https://www.thingiverse.com/thing:4361883
   #define NOZZLE_TO_PROBE_OFFSET { 0, -42.0, -2.94 }
 #else
@@ -1894,7 +1894,7 @@
 //#define PROBE_OFFSET_ZMAX  20   // (mm)
 
 // Enable the M48 repeatability test to test probe accuracy
-#if ENABLED(SAPPHIRE_PLUS_BLTOUCH)
+#if ENABLED(USE_BLTOUCH)
   #define Z_MIN_PROBE_REPEATABILITY_TEST
 #endif
 
@@ -2042,7 +2042,7 @@
 #define Z_MIN_POS 0
 #define X_MAX_POS X_BED_SIZE
 #define Y_MAX_POS Y_BED_SIZE
-#define Z_MAX_POS TERN(SAPPHIRE_PLUS_BLTOUCH, 335, 340) // BLTouch needs clearance for homing
+#define Z_MAX_POS TERN(USE_BLTOUCH, 335, 340) // BLTouch needs clearance for homing
 //#define I_MIN_POS 0
 //#define I_MAX_POS 50
 //#define J_MIN_POS 0
@@ -2260,7 +2260,7 @@
  */
 //#define AUTO_BED_LEVELING_3POINT
 //#define AUTO_BED_LEVELING_LINEAR
-#if ENABLED(SAPPHIRE_PLUS_BLTOUCH)
+#if ENABLED(USE_BLTOUCH)
   #define AUTO_BED_LEVELING_BILINEAR
 #else
   #define MESH_BED_LEVELING
@@ -2508,7 +2508,7 @@
  * - Allows Z homing only when XY positions are known and trusted.
  * - If stepper drivers sleep, XY homing may be required again before Z homing.
  */
-#if ENABLED(SAPPHIRE_PLUS_BLTOUCH)
+#if ENABLED(USE_BLTOUCH)
   #define Z_SAFE_HOMING
 #endif
 

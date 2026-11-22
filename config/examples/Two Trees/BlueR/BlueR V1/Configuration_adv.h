@@ -2472,7 +2472,7 @@
 
   //#define BABYSTEP_DISPLAY_TOTAL          // Display total babysteps since last G28
 
-  #if ENABLED(BLUER_BLTOUCH)
+  #if ENABLED(USE_BLTOUCH)
     #define BABYSTEP_ZPROBE_OFFSET          // Combine M851 Z and Babystepping
   #endif
 

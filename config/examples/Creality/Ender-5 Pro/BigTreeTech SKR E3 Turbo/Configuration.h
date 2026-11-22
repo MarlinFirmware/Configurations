@@ -24,7 +24,7 @@
 #error "Use the 'bugfix...' or 'release...' configurations matching your Marlin version."
 
 // Enable this option for BLTouch support
-//#define E5_USE_BLTOUCH
+//#define USE_BLTOUCH
 
 /**
  * Configuration.h
@@ -1514,7 +1514,7 @@
 //#define Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN
 
 // Force the use of the probe for Z-axis homing
-#ifdef E5_USE_BLTOUCH
+#ifdef USE_BLTOUCH
   #define USE_PROBE_FOR_Z_HOMING
 #endif
 
@@ -1580,7 +1580,7 @@
 /**
  * The BLTouch probe uses a Hall effect sensor and emulates a servo.
  */
-#ifdef E5_USE_BLTOUCH
+#ifdef USE_BLTOUCH
   #define BLTOUCH
 #endif
 
@@ -2237,7 +2237,7 @@
  */
 //#define AUTO_BED_LEVELING_3POINT
 //#define AUTO_BED_LEVELING_LINEAR
-#ifdef E5_USE_BLTOUCH
+#ifdef USE_BLTOUCH
   #define AUTO_BED_LEVELING_BILINEAR
 #endif
 //#define AUTO_BED_LEVELING_UBL

@@ -78,7 +78,7 @@
  * Plug the BLTouch into the mainboard probe header, not the Z endstop.
  * Uses the probe offset and 5x5 mesh of Creality's BLTouch firmware.
  */
-//#define SERMOON_D1_BLTOUCH
+//#define USE_BLTOUCH
 
 // @section serial
 
@@ -1514,12 +1514,12 @@
  * The probe replaces the Z-MIN endstop and is used for Z homing.
  * (Automatically enables USE_PROBE_FOR_Z_HOMING.)
  */
-#if DISABLED(SERMOON_D1_BLTOUCH)
+#if DISABLED(USE_BLTOUCH)
   #define Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN
 #endif
 
 // Force the use of the probe for Z-axis homing
-#if ENABLED(SERMOON_D1_BLTOUCH)
+#if ENABLED(USE_BLTOUCH)
   #define USE_PROBE_FOR_Z_HOMING
 #endif
 
@@ -1585,7 +1585,7 @@
 /**
  * The BLTouch probe uses a Hall effect sensor and emulates a servo.
  */
-#if ENABLED(SERMOON_D1_BLTOUCH)
+#if ENABLED(USE_BLTOUCH)
   #define BLTOUCH
 #endif
 
@@ -2242,7 +2242,7 @@
  */
 //#define AUTO_BED_LEVELING_3POINT
 //#define AUTO_BED_LEVELING_LINEAR
-#if ENABLED(SERMOON_D1_BLTOUCH)
+#if ENABLED(USE_BLTOUCH)
   #define AUTO_BED_LEVELING_BILINEAR
 #endif
 //#define AUTO_BED_LEVELING_UBL
@@ -2487,7 +2487,7 @@
  * - Allows Z homing only when XY positions are known and trusted.
  * - If stepper drivers sleep, XY homing may be required again before Z homing.
  */
-#if ENABLED(SERMOON_D1_BLTOUCH)
+#if ENABLED(USE_BLTOUCH)
   #define Z_SAFE_HOMING
 #endif
 

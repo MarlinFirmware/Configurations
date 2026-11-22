@@ -25,7 +25,7 @@ Make sure you always test the endstops/limit switches after using this configura
 
 By default the standard Marlin Touch UI will be used. Enable the `SAPPHIRE_PLUS_MKS_UI` option for the MKS UI.
 
-Enable the `SAPPHIRE_PLUS_BLTOUCH` option for BLTouch support.
+Enable the `USE_BLTOUCH` option for BLTouch support.
 
 Enable the `SAPPHIRE_PLUS_TMC_UART` option for TMC UART support for the X, Y and E steppers.
 

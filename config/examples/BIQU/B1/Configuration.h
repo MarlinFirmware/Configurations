@@ -24,7 +24,7 @@
 #error "Use the 'bugfix...' or 'release...' configurations matching your Marlin version."
 
 //#define MOTHERBOARD BOARD_BTT_SKR_V1_4  // Uncomment for the V1.4 board, otherwise V2.0 is assumed
-//#define B1_USE_BLTOUCH                  // Uncomment for BLTouch support
+//#define USE_BLTOUCH                  // Uncomment for BLTouch support
 
 /**
  * Configuration.h
@@ -1337,7 +1337,7 @@
 #define X_MAX_ENDSTOP_HIT_STATE HIGH
 #define Y_MIN_ENDSTOP_HIT_STATE LOW
 #define Y_MAX_ENDSTOP_HIT_STATE HIGH
-#define Z_MIN_ENDSTOP_HIT_STATE TERN(B1_USE_BLTOUCH, HIGH, LOW)
+#define Z_MIN_ENDSTOP_HIT_STATE TERN(USE_BLTOUCH, HIGH, LOW)
 #define Z_MAX_ENDSTOP_HIT_STATE HIGH
 #define I_MIN_ENDSTOP_HIT_STATE HIGH
 #define I_MAX_ENDSTOP_HIT_STATE HIGH
@@ -1581,7 +1581,7 @@
 /**
  * The BLTouch probe uses a Hall effect sensor and emulates a servo.
  */
-#ifdef B1_USE_BLTOUCH
+#ifdef USE_BLTOUCH
   #define BLTOUCH
 #endif
 
@@ -1842,7 +1842,7 @@
  * A total of 2 does fast/slow probes with a weighted average.
  * A total of 3 or more adds more slow probes, taking the average.
  */
-#ifdef B1_USE_BLTOUCH
+#ifdef USE_BLTOUCH
   #define MULTIPLE_PROBING 2
 #endif
 //#define EXTRA_PROBING    1
@@ -2241,7 +2241,7 @@
 //#define AUTO_BED_LEVELING_3POINT
 //#define AUTO_BED_LEVELING_LINEAR
 //#define AUTO_BED_LEVELING_UBL
-#ifdef B1_USE_BLTOUCH
+#ifdef USE_BLTOUCH
   #define AUTO_BED_LEVELING_BILINEAR
 #else
   #define MESH_BED_LEVELING

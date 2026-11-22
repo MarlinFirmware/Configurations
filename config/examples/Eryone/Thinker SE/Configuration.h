@@ -23,7 +23,7 @@
 #error "Don't build with import-2.1.x configurations!"
 #error "Use the 'bugfix...' or 'release...' configurations matching your Marlin version."
 
-//#define THINKERV2_BLTOUCH  // Enable for an installed BLTOUCH
+//#define USE_BLTOUCH  // Enable for an installed BLTOUCH
 //#define THINKERV2_FL  //Enable for an installed Filament runout sensor
 //#define THINKERV2_Direct //Enable for Direct drive extruder system
 
@@ -1338,7 +1338,7 @@
 #define X_MAX_ENDSTOP_HIT_STATE LOW
 #define Y_MIN_ENDSTOP_HIT_STATE LOW
 #define Y_MAX_ENDSTOP_HIT_STATE LOW
-#define Z_MIN_ENDSTOP_HIT_STATE TERN(THINKERV2_BLTOUCH, HIGH, LOW)
+#define Z_MIN_ENDSTOP_HIT_STATE TERN(USE_BLTOUCH, HIGH, LOW)
 #define Z_MAX_ENDSTOP_HIT_STATE LOW
 #define I_MIN_ENDSTOP_HIT_STATE HIGH
 #define I_MAX_ENDSTOP_HIT_STATE HIGH
@@ -1594,7 +1594,7 @@
 /**
  * The BLTouch probe uses a Hall effect sensor and emulates a servo.
  */
-#ifdef THINKERV2_BLTOUCH
+#ifdef USE_BLTOUCH
   #define BLTOUCH
 #endif
 

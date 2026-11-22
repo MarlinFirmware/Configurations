@@ -23,7 +23,7 @@
 #error "Don't build with import-2.1.x configurations!"
 #error "Use the 'bugfix...' or 'release...' configurations matching your Marlin version."
 
-//#define ENDER5_USE_BLTOUCH
+//#define USE_BLTOUCH
 //#define ENDER5_USE_MICROSWISS
 
 /**
@@ -1586,7 +1586,7 @@
 /**
  * The BLTouch probe uses a Hall effect sensor and emulates a servo.
  */
-#if ENABLED(ENDER5_USE_BLTOUCH)
+#if ENABLED(USE_BLTOUCH)
   #define BLTOUCH
 #endif
 
@@ -2243,7 +2243,7 @@
  */
 //#define AUTO_BED_LEVELING_3POINT
 //#define AUTO_BED_LEVELING_LINEAR
-#if ENABLED(ENDER5_USE_BLTOUCH)
+#if ENABLED(USE_BLTOUCH)
   #define AUTO_BED_LEVELING_BILINEAR
 #endif
 //#define AUTO_BED_LEVELING_UBL
@@ -2313,7 +2313,7 @@
   /**
    * Enable the G26 Mesh Validation Pattern tool.
    */
-  #if ENABLED(ENDER5_USE_BLTOUCH)
+  #if ENABLED(USE_BLTOUCH)
     #define G26_MESH_VALIDATION
   #endif
   #if ENABLED(G26_MESH_VALIDATION)
@@ -2423,7 +2423,7 @@
  * Add a bed leveling sub-menu for ABL or MBL.
  * Include a guided procedure if manual probing is enabled.
  */
-#if ENABLED(ENDER5_USE_BLTOUCH)
+#if ENABLED(USE_BLTOUCH)
   #define LCD_BED_LEVELING
 #endif
 
@@ -2492,7 +2492,7 @@
  * - Allows Z homing only when XY positions are known and trusted.
  * - If stepper drivers sleep, XY homing may be required again before Z homing.
  */
-#if ENABLED(ENDER5_USE_BLTOUCH)
+#if ENABLED(USE_BLTOUCH)
   #define Z_SAFE_HOMING
 #endif
 
