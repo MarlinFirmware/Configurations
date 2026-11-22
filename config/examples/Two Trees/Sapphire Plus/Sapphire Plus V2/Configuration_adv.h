@@ -920,7 +920,7 @@
 #ifdef Z2_DRIVER_TYPE
   //#define INVERT_Z2_VS_Z_DIR        // Z2 direction signal is the opposite of Z
 
-  #if DISABLED(SAPPHIRE_PLUS_BLTOUCH)
+  #if DISABLED(USE_BLTOUCH)
     #define Z_MULTI_ENDSTOPS          // Other Z axes have their own endstops
   #endif
   #if ENABLED(Z_MULTI_ENDSTOPS)
@@ -1054,7 +1054,7 @@
  * Z Steppers Auto-Alignment
  * Add the G34 command to align multiple Z steppers using a bed probe.
  */
-#if ENABLED(SAPPHIRE_PLUS_BLTOUCH)
+#if ENABLED(USE_BLTOUCH)
   #define Z_STEPPER_AUTO_ALIGN
 #endif
 #if ENABLED(Z_STEPPER_AUTO_ALIGN)
@@ -1135,7 +1135,7 @@
  *
  * Add the G35 command to measure bed corners and help adjust screws. Requires a bed probe.
  */
-#if ENABLED(SAPPHIRE_PLUS_BLTOUCH)
+#if ENABLED(USE_BLTOUCH)
   #define ASSISTED_TRAMMING
 #endif
 #if ENABLED(ASSISTED_TRAMMING)

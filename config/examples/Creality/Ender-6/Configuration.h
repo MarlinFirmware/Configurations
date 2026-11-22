@@ -24,7 +24,7 @@
 #error "Use the 'bugfix...' or 'release...' configurations matching your Marlin version."
 
 // Enable this option for BLTouch support
-//#define E6_USE_BLTOUCH
+//#define USE_BLTOUCH
 
 /**
  * Configuration.h
@@ -1549,7 +1549,7 @@
  * Use G29 repeatedly, adjusting the Z height at each point with movement commands
  * or (with LCD_BED_LEVELING) the LCD controller.
  */
-#ifndef E6_USE_BLTOUCH
+#ifndef USE_BLTOUCH
   #define PROBE_MANUALLY
 #endif
 
@@ -1579,7 +1579,7 @@
 /**
  * The BLTouch probe uses a Hall effect sensor and emulates a servo.
  */
-#ifdef E6_USE_BLTOUCH
+#ifdef USE_BLTOUCH
   #define BLTOUCH
 #endif
 
@@ -1976,7 +1976,7 @@
 //#define Z_CLEARANCE_FOR_HOMING  4   // (mm) Minimal Z height before homing (G28) for Z clearance above the bed, clamps, ...
                                       // You'll need this much clearance above Z_MAX_POS to avoid grinding.
 
-#ifdef E6_USE_BLTOUCH
+#ifdef USE_BLTOUCH
   #define Z_AFTER_HOMING         10   // (mm) Height to move to after homing (if Z was homed)
 //#define XY_AFTER_HOMING { 10, 10 }  // (mm) Move to an XY position after homing (and raising Z)
 
@@ -2481,7 +2481,7 @@
  * - Allows Z homing only when XY positions are known and trusted.
  * - If stepper drivers sleep, XY homing may be required again before Z homing.
  */
-#ifdef E6_USE_BLTOUCH
+#ifdef USE_BLTOUCH
   #define Z_SAFE_HOMING
 #endif
 

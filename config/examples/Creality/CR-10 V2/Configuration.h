@@ -28,7 +28,7 @@
  */
 
 // Is the BLTouch option installed?
-#define CR10V2_BLTOUCH
+#define USE_BLTOUCH
 
 /**
  * Configuration.h
@@ -1520,7 +1520,7 @@
 
 // Force the use of the probe for Z-axis homing
 //#define USE_PROBE_FOR_Z_HOMING
-#if ENABLED(CR10V2_BLTOUCH)
+#if ENABLED(USE_BLTOUCH)
   #define USE_PROBE_FOR_Z_HOMING
 #endif
 
@@ -1539,7 +1539,7 @@
  */
 //#define Z_MIN_PROBE_PIN -1
 
-#if ENABLED(CR10V2_BLTOUCH)
+#if ENABLED(USE_BLTOUCH)
   #define Z_MIN_PROBE_PIN 19
 #endif
 
@@ -1590,7 +1590,7 @@
 /**
  * The BLTouch probe uses a Hall effect sensor and emulates a servo.
  */
-#if ENABLED(CR10V2_BLTOUCH)
+#if ENABLED(USE_BLTOUCH)
   #define BLTOUCH
 #endif
 
@@ -1885,7 +1885,7 @@
 #define PROBE_OFFSET_ZMAX     9   // (mm)
 
 // Enable the M48 repeatability test to test probe accuracy
-#if ENABLED(CR10V2_BLTOUCH)
+#if ENABLED(USE_BLTOUCH)
   #define Z_MIN_PROBE_REPEATABILITY_TEST
 #endif
 
@@ -2249,7 +2249,7 @@
  */
 //#define AUTO_BED_LEVELING_3POINT
 //#define AUTO_BED_LEVELING_LINEAR
-#if ENABLED(CR10V2_BLTOUCH)
+#if ENABLED(USE_BLTOUCH)
   #define AUTO_BED_LEVELING_BILINEAR
 #endif
 //#define AUTO_BED_LEVELING_UBL
@@ -2272,7 +2272,7 @@
  * these options to restore the prior leveling state or to always enable
  * leveling immediately after G28.
  */
-#if ENABLED(CR10V2_BLTOUCH)
+#if ENABLED(USE_BLTOUCH)
   #define RESTORE_LEVELING_AFTER_G28
 #endif
 //#define ENABLE_LEVELING_AFTER_G28
@@ -2429,7 +2429,7 @@
  * Add a bed leveling sub-menu for ABL or MBL.
  * Include a guided procedure if manual probing is enabled.
  */
-#if ENABLED(CR10V2_BLTOUCH)
+#if ENABLED(USE_BLTOUCH)
   #define LCD_BED_LEVELING
 #endif
 
@@ -2498,7 +2498,7 @@
  * - Allows Z homing only when XY positions are known and trusted.
  * - If stepper drivers sleep, XY homing may be required again before Z homing.
  */
-#if ENABLED(CR10V2_BLTOUCH)
+#if ENABLED(USE_BLTOUCH)
   #define Z_SAFE_HOMING
 #endif
 

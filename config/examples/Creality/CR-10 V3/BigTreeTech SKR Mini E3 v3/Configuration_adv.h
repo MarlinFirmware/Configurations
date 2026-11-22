@@ -1131,7 +1131,7 @@
  *
  * Add the G35 command to measure bed corners and help adjust screws. Requires a bed probe.
  */
-#if ENABLED(CR10V3_BLTOUCH)
+#if ENABLED(USE_BLTOUCH)
   #define ASSISTED_TRAMMING
 #endif
 #if ENABLED(ASSISTED_TRAMMING)
@@ -2451,7 +2451,7 @@
  *
  * Warning: Does not respect endstops!
  */
-#if ENABLED(CR10V3_BLTOUCH)
+#if ENABLED(USE_BLTOUCH)
   #define BABYSTEPPING
 #endif
 #if ENABLED(BABYSTEPPING)
@@ -2476,7 +2476,7 @@
 
   //#define BABYSTEP_DISPLAY_TOTAL          // Display total babysteps since last G28
 
-  #if ENABLED(CR10V3_BLTOUCH)
+  #if ENABLED(USE_BLTOUCH)
     #define BABYSTEP_ZPROBE_OFFSET          // Combine M851 Z and Babystepping
   #endif
 
@@ -2619,7 +2619,7 @@
  * Repeatedly attempt G29 leveling until it succeeds.
  * Stop after G29_MAX_RETRIES attempts.
  */
-#if ENABLED(CR10V3_BLTOUCH)
+#if ENABLED(USE_BLTOUCH)
   #define G29_RETRY_AND_RECOVER
 #endif
 #if ENABLED(G29_RETRY_AND_RECOVER)

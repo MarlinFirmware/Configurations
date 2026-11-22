@@ -14,6 +14,6 @@ Regarding wiring, electronics case fan should be connected to the FAN2 pins.
 
 ## BLTouch Support
 
-Enable `E5_USE_BLTOUCH` for BLTouch support.
+Enable `USE_BLTOUCH` for BLTouch support.
 
 BLTouch can be connected like the SKR E3 mini v2.0 to the Z-PROBE pins (check naming: https://github.com/bigtreetech/BIGTREETECH-SKR-E3-Turbo/blob/master/Hardware/BTT%20SKR%20E3%20Turbo-Pin.pdf). See a SKR E3 mini v2.0 guide: https://linsomniac.gitlab.io/post/2020-06-20-ender3-pro-skr-v2_0-bltouch-upgrade/

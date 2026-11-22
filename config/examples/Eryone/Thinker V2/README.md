@@ -13,7 +13,7 @@
     `//#define THINKERV2_FL  // Enable for an installed Filament runout sensor`
 3. You are using the Bltouch:
   - Enable this line (Remove the "`//`" prefix)<br/>
-    `//#define THINKERV2_BLTOUCH  // Enable for an installed BLTOUCH`
+    `//#define USE_BLTOUCH  // Enable for an installed BLTOUCH`
 4. You are using the direct drive extruder:
   - Enable this line (Remove the "`//`" prefix)<br/>
     `//#define THINKERV2_Direct // Enable for Direct drive extruder system`

@@ -24,7 +24,7 @@
 #error "Use the 'bugfix...' or 'release...' configurations matching your Marlin version."
 
 //#define I3MEGA_PRO_STOCK
-//#define I3MEGA_HAS_BLTOUCH
+//#define USE_BLTOUCH
 //#define I3MEGA_HAS_TMC2208
 
 /**
@@ -1383,7 +1383,7 @@
 #define V_MAX_ENDSTOP_HIT_STATE HIGH
 #define W_MIN_ENDSTOP_HIT_STATE HIGH
 #define W_MAX_ENDSTOP_HIT_STATE HIGH
-#define Z_MIN_PROBE_ENDSTOP_HIT_STATE TERN(I3MEGA_HAS_BLTOUCH, HIGH, LOW)
+#define Z_MIN_PROBE_ENDSTOP_HIT_STATE TERN(USE_BLTOUCH, HIGH, LOW)
 
 // Enable this feature if all enabled endstop pins are interrupt-capable.
 // This will remove the need to poll the interrupt pins, saving many CPU cycles.
@@ -1591,7 +1591,7 @@
  * Use G29 repeatedly, adjusting the Z height at each point with movement commands
  * or (with LCD_BED_LEVELING) the LCD controller.
  */
-#if DISABLED(I3MEGA_HAS_BLTOUCH)
+#if DISABLED(USE_BLTOUCH)
   #define PROBE_MANUALLY
 #endif
 
@@ -1621,7 +1621,7 @@
 /**
  * The BLTouch probe uses a Hall effect sensor and emulates a servo.
  */
-#if ENABLED(I3MEGA_HAS_BLTOUCH)
+#if ENABLED(USE_BLTOUCH)
   #define BLTOUCH
 #endif
 
@@ -1916,7 +1916,7 @@
 //#define PROBE_OFFSET_ZMAX  20   // (mm)
 
 // Enable the M48 repeatability test to test probe accuracy
-#if ENABLED(I3MEGA_HAS_BLTOUCH)
+#if ENABLED(USE_BLTOUCH)
   #define Z_MIN_PROBE_REPEATABILITY_TEST
 #endif
 
@@ -2285,11 +2285,11 @@
  */
 //#define AUTO_BED_LEVELING_3POINT
 //#define AUTO_BED_LEVELING_LINEAR
-#if ENABLED(I3MEGA_HAS_BLTOUCH)
+#if ENABLED(USE_BLTOUCH)
   #define AUTO_BED_LEVELING_BILINEAR
 #endif
 //#define AUTO_BED_LEVELING_UBL
-#if DISABLED(I3MEGA_HAS_BLTOUCH)
+#if DISABLED(USE_BLTOUCH)
   #define MESH_BED_LEVELING
 #endif
 
