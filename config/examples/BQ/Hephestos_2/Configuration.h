@@ -654,12 +654,14 @@
   #define TEMP_RESIDENCY_TIME         10  // (seconds) Time to wait for hotend to "settle" in M109
   #define TEMP_WINDOW                  1  // (°C) Temperature proximity for the "temperature reached" timer
   #define TEMP_HYSTERESIS              3  // (°C) Temperature proximity considered "close enough" to the target
+  //#define TEMP_SETTLE_BAND           3  // (°C) Time in range (TEMP_RESIDENCY_TIME, heat soak) counts from when the hotend gets this close to the target. (Default: TEMP_HYSTERESIS)
 #endif
 
 #if TEMP_SENSOR_BED
   #define TEMP_BED_RESIDENCY_TIME     10  // (seconds) Time to wait for bed to "settle" in M190
   #define TEMP_BED_WINDOW              1  // (°C) Temperature proximity for the "temperature reached" timer
   #define TEMP_BED_HYSTERESIS          3  // (°C) Temperature proximity considered "close enough" to the target
+  //#define TEMP_BED_SETTLE_BAND       3  // (°C) Time in range (TEMP_BED_RESIDENCY_TIME, heat soak) counts from when the bed gets this close to the target. (Default: TEMP_BED_HYSTERESIS)
 #endif
 
 #if TEMP_SENSOR_CHAMBER
@@ -1080,6 +1082,10 @@
   #if ENABLED(DELTA_AUTO_CALIBRATION)
     // Default number of probe points : n*n (1 -> 7)
     #define DELTA_CALIBRATION_DEFAULT_POINTS 4
+
+    // Add G33 'L' to solve by least squares, as in RepRapFirmware, and optionally calibrate the diagonal rod.
+    // The factors to adjust are chosen by the 'L' value: 3 (endstops), 4 (+ radius), 6 (+ tower angles), 7 (+ diagonal rod)
+    //#define DELTA_CALIBRATION_LEAST_SQUARES
   #endif
 
   #if ANY(DELTA_AUTO_CALIBRATION, DELTA_CALIBRATION_MENU)
