@@ -1037,14 +1037,11 @@
    */
   #define BLTOUCH_HS_MODE true
 
-  // Add a Z limit
-  #define BLTOUCH_AND_Z_LIMIT
-
   #ifdef BLTOUCH_HS_MODE
     // The probe Z offset (M851 Z) is the height at which the probe triggers.
     // This must be large enough to keep the probe pin off the bed and prevent
     // it from snagging on the bed clips.
-    #define BLTOUCH_HS_EXTRA_CLEARANCE    7 // Extra Z Clearance
+    #define BLTOUCH_HS_EXTRA_CLEARANCE    0 // Extra Z Clearance
   #endif
 
 #endif // BLTOUCH
@@ -1173,7 +1170,7 @@
  * Enable/disable and set parameters with G-code M493 and M494.
  * See ft_types.h for named values used by FTM options.
  */
-//#define FT_MOTION
+#define FT_MOTION
 #if ENABLED(FT_MOTION)
   //#define FTM_IS_DEFAULT_MOTION               // Use FT Motion as the factory default?
   //#define FT_MOTION_MENU                      // Provide a MarlinUI menu to set M493 and M494 parameters
@@ -1183,7 +1180,7 @@
     //#define FTM_HOME_AND_PROBE                // Use FT Motion for homing / probing. Disable if FT Motion breaks these functions.
   #endif
 
-  //#define FTM_DYNAMIC_FREQ                    // Enable for linear adjustment of XY shaping frequency according to Z or E
+  #define FTM_DYNAMIC_FREQ                      // Enable for linear adjustment of XY shaping frequency according to Z or E
   #if ENABLED(FTM_DYNAMIC_FREQ)
     #define FTM_DEFAULT_DYNFREQ_MODE dynFreqMode_DISABLED // Default mode of dynamic frequency calculation. (DISABLED, Z_BASED, MASS_BASED)
   #endif
@@ -1208,20 +1205,20 @@
   #define FTM_SHAPING_ZETA_Y            0.1f    // Zeta used by input shapers for Y axis
   #define FTM_SHAPING_V_TOL_Y           0.05f   // Vibration tolerance used by EI input shapers for Y axis
 
-  //#define FTM_SHAPER_Z                        // Include Z shaping support
+  #define FTM_SHAPER_Z                          // Include Z shaping support
   #define FTM_DEFAULT_SHAPER_Z      ftMotionShaper_NONE // Default shaper mode on Z axis
   #define FTM_SHAPING_DEFAULT_FREQ_Z   21.0f    // (Hz) Default peak frequency used by input shapers
   #define FTM_SHAPING_ZETA_Z            0.03f   // Zeta used by input shapers for Z axis
   #define FTM_SHAPING_V_TOL_Z           0.05f   // Vibration tolerance used by EI input shapers for Z axis
 
-  //#define FTM_SHAPER_E                        // Include E shaping support
+  #define FTM_SHAPER_E                          // Include E shaping support
                                                 // Required to synchronize extruder with XYZ (better quality)
   #define FTM_DEFAULT_SHAPER_E      ftMotionShaper_NONE // Default shaper mode on Extruder axis
   #define FTM_SHAPING_DEFAULT_FREQ_E   21.0f    // (Hz) Default peak frequency used by input shapers
   #define FTM_SHAPING_ZETA_E            0.03f   // Zeta used by input shapers for E axis
   #define FTM_SHAPING_V_TOL_E           0.05f   // Vibration tolerance used by EI input shapers for E axis
 
-  //#define FTM_SMOOTHING                       // Smoothing can reduce artifacts and make steppers quieter
+  #define FTM_SMOOTHING                         // Smoothing can reduce artifacts and make steppers quieter
                                                 // on sharp corners, but too much will round corners.
   #if ENABLED(FTM_SMOOTHING)
     #define FTM_MAX_SMOOTHING_TIME      0.10f   // (s) Maximum smoothing time. Higher values consume more RAM.
@@ -1229,7 +1226,7 @@
     #define FTM_SMOOTHING_TIME_X        0.00f   // (s) Smoothing time for X axis. Zero means disabled.
     #define FTM_SMOOTHING_TIME_Y        0.00f   // (s) Smoothing time for Y axis
     #define FTM_SMOOTHING_TIME_Z        0.00f   // (s) Smoothing time for Z axis
-    #define FTM_SMOOTHING_TIME_E        0.02f   // (s) Smoothing time for E axis. Prevents noise/skipping from LA by
+    #define FTM_SMOOTHING_TIME_E        0.00f   // (s) Smoothing time for E axis. Prevents noise/skipping from LA by
                                                 //     smoothing acceleration peaks, which may also smooth curved surfaces.
   #endif
 
@@ -1237,6 +1234,10 @@
   #if ENABLED(FTM_POLYS)
     #define FTM_POLY6_ACCELERATION_OVERSHOOT 1.875f // Max acceleration overshoot factor for POLY6 (1.25 to 1.875)
   #endif
+
+  #define FTM_MINIMUM_CRUISE_RATIO 0.5f         // Minimum fraction of distance to spend at cruising speed (0.0f disables)
+                                                // Reduces vibrations and extrusion artefacts in short blocks like small surface
+                                                // features and thin solid infills
 
   /**
    * FTM Constant-Jolt Trajectory (7-phase S-curve).
@@ -1302,29 +1303,29 @@
  *
  * Tune with M593 D<factor> F<frequency>
  */
-//#define INPUT_SHAPING_X
-//#define INPUT_SHAPING_Y
+#define INPUT_SHAPING_X
+#define INPUT_SHAPING_Y
 //#define INPUT_SHAPING_Z
 #if ANY(INPUT_SHAPING_X, INPUT_SHAPING_Y, INPUT_SHAPING_Z)
   #if ENABLED(INPUT_SHAPING_X)
-    #define SHAPING_FREQ_X  40.0        // (Hz) The default dominant resonant frequency on the X axis.
+    #define SHAPING_FREQ_X   0.0        // (Hz) Dominant resonant frequency on the X axis. 0 = off until set with M593 F.
     #define SHAPING_ZETA_X   0.15       // Damping ratio of the X axis (range: 0.0 = no damping to 1.0 = critical damping).
   #endif
   #if ENABLED(INPUT_SHAPING_Y)
-    #define SHAPING_FREQ_Y  40.0        // (Hz) The default dominant resonant frequency on the Y axis.
+    #define SHAPING_FREQ_Y  0.0         // (Hz) Dominant resonant frequency on the Y axis. 0 = off until set with M593 F.
     #define SHAPING_ZETA_Y   0.15       // Damping ratio of the Y axis (range: 0.0 = no damping to 1.0 = critical damping).
   #endif
   #if ENABLED(INPUT_SHAPING_Z)
     #define SHAPING_FREQ_Z  40.0        // (Hz) The default dominant resonant frequency on the Z axis.
     #define SHAPING_ZETA_Z   0.15       // Damping ratio of the Z axis (range: 0.0 = no damping to 1.0 = critical damping).
   #endif
-  //#define SHAPING_MIN_FREQ  20.0      // (Hz) By default the minimum of the shaping frequencies. Override to affect SRAM usage.
+  #define SHAPING_MIN_FREQ  20.0        // (Hz) By default the minimum of the shaping frequencies. Override to affect SRAM usage.
   //#define SHAPING_MAX_STEPRATE 10000  // By default the maximum total step rate of the shaped axes. Override to affect SRAM usage.
   //#define SHAPING_MENU                // Add a menu to the LCD to set shaping parameters.
 #endif
 
 #if ANY(INPUT_SHAPING_X, INPUT_SHAPING_Y, INPUT_SHAPING_Z, FTM_SHAPER_ZV, FTM_SHAPER_ZVD, FTM_SHAPER_ZVDD, FTM_SHAPER_ZVDDD, FTM_SHAPER_EI, FTM_SHAPER_2HEI, FTM_SHAPER_3HEI, FTM_SHAPER_MZV)
-  //#define RESONANCE_TEST              // Sine sweep motion for resonance study
+  #define RESONANCE_TEST                // Sine sweep motion for resonance study
 #endif
 
 // @section motion
@@ -1900,7 +1901,7 @@
    */
   #define POWER_LOSS_RECOVERY
   #if ENABLED(POWER_LOSS_RECOVERY)
-    #define PLR_ENABLED_DEFAULT       true  // Power-Loss Recovery enabled by default. (Set with 'M413 Sn' & M500)
+    #define PLR_ENABLED_DEFAULT      false  // Off by default: without a power-loss circuit it only wears the SD card. (Set with 'M413 Sn' & M500)
     //#define PLR_HEAT_BED_ON_REBOOT        // Heat up bed immediately on reboot to mitigate object detaching/warping.
     //#define PLR_HEAT_BED_EXTRA          0 // (°C) Relative increase of bed temperature for better adhesion (limited by max temp).
     //#define PLR_BED_THRESHOLD BED_MAXTEMP // (°C) Skip user confirmation at or above this bed temperature (0 to disable)
@@ -2074,7 +2075,7 @@
   #endif
 
   // "Over-the-air" Firmware Update with M936 - Required to set EEPROM flag
-  //#define OTA_FIRMWARE_UPDATE
+  #define OTA_FIRMWARE_UPDATE
 
   /**
    * Set this option to one of the following (or the board's defaults apply):
@@ -2389,6 +2390,17 @@
 #endif
 
 /**
+ * G-code Preview for TFT Color UI
+ * Show the thumbnail your slicer embeds in the G-code before printing a file.
+ * Set your slicer to write JPG or QOI thumbnails, or MKS TFT preview images.
+ */
+#if ALL(TFT_COLOR_UI, HAS_MEDIA)
+  //#define GCODE_PREVIEW_JPEG  // Enable JPEG thumbnail decoding
+  //#define GCODE_PREVIEW_QOI   // Enable QOI thumbnail decoding
+  //#define GCODE_PREVIEW_MKS   // Enable MKS TFT preview images (";simage:" / ";;gimage:")
+#endif
+
+/**
  * Display Sleep
  * Enable this option to save energy and prevent OLED pixel burn-in.
  */
@@ -2489,9 +2501,9 @@
 
 #if ANY(LIN_ADVANCE, FT_MOTION)
   #if ENABLED(DISTINCT_E_FACTORS)
-    #define ADVANCE_K { 0.22 }    // (mm) Compression length per 1mm/s extruder speed, per extruder. Override with 'M900 T<tool> K<mm>'.
+    #define ADVANCE_K { 0.0 }     // (mm) Compression length per 1mm/s extruder speed, per extruder. Override with 'M900 T<tool> K<mm>'.
   #else
-    #define ADVANCE_K 0.22        // (mm) Compression length for all extruders. Override with 'M900 K<mm>'.
+    #define ADVANCE_K 0.0         // (mm) Compression length for all extruders. Override with 'M900 K<mm>'.
   #endif
   //#define ADVANCE_K_EXTRA       // Add a second linear advance constant, configurable with 'M900 L'.
 #endif
@@ -3592,6 +3604,7 @@
    * This mode allows for faster movements at the expense of higher noise levels.
    * STEALTHCHOP_(XY|Z|E) must be enabled to use HYBRID_THRESHOLD.
    * M913 X/Y/Z/E to live tune the setting
+   * Set THRESHOLD to zero to disable this function on specific axis.
    */
   //#define HYBRID_THRESHOLD
 
@@ -4404,12 +4417,12 @@
  * Host Prompt Support enables Marlin to use the host for user prompts so
  * filament runout and other processes can be managed from the host side.
  */
-//#define HOST_ACTION_COMMANDS
+#define HOST_ACTION_COMMANDS
 #if ENABLED(HOST_ACTION_COMMANDS)
   //#define HOST_PAUSE_M76                // Tell the host to pause in response to M76
-  //#define HOST_PROMPT_SUPPORT           // Initiate host prompts to get user feedback
+  #define HOST_PROMPT_SUPPORT             // Initiate host prompts to get user feedback
   #if ENABLED(HOST_PROMPT_SUPPORT)
-    //#define HOST_STATUS_NOTIFICATIONS   // Send some status messages to the host as notifications
+    #define HOST_STATUS_NOTIFICATIONS     // Send some status messages to the host as notifications
   #endif
   //#define HOST_START_MENU_ITEM          // Add a menu item that tells the host to start
   //#define HOST_SHUTDOWN_MENU_ITEM       // Add a menu item that tells the host to shut down
@@ -4661,14 +4674,44 @@
 
 #if ANY(WIFISUPPORT, ESP3D_WIFISUPPORT)
   /**
-   * Webserver and OTA updates.
-   * With WIFISUPPORT these are Marlin's own, implemented in HAL/ESP32/wifi/ and built
-   * only for an ESP32 build of Marlin. With an add-on WiFi module the module runs its
-   * own firmware, so neither option has any effect there.
-   * With ESP3D_WIFISUPPORT these enable the ESP3D web interface and ESP3D OTA updates.
+   * MKS WiFi module: an ESP8266/ESP32 co-processor on its own UART, fitted to
+   * MKS Robin / Neptune / Monster boards. Unlike a plain add-on module, which
+   * just bridges a serial port, Marlin talks to this one directly to transfer
+   * files and to set the network from WIFI_SSID / WIFI_PWD below.
+   *
+   * Requires a board that defines WIFI_RESET_PIN and WIFI_IO1_PIN, and
+   * SDSUPPORT for file transfers.
    */
-  //#define WEBSUPPORT          // Start a webserver (which may include auto-discovery) using SPIFFS
-  //#define OTASUPPORT          // Support over-the-air firmware updates
+  //#define MKS_WIFI_MODULE
+
+  #if ENABLED(MKS_WIFI_MODULE)
+    /**
+     * WIFI_SSID / WIFI_PWD are only the defaults here. The network is stored
+     * with the rest of Marlin's settings, so M587 or the TFT_LVGL_UI screens
+     * can change it at runtime and M500 makes the change stick. M502 restores
+     * the values below.
+     *
+     *   M587                       ; Report the current network
+     *   M587 S"MyNetwork" P"pass"  ; Join a network (needs GCODE_QUOTED_STRINGS)
+     *   M587 A1                    ; Host an access point instead
+     */
+    //#define MKS_WIFI_AP_MODE      // Host WIFI_SSID as an access point instead of joining it
+
+  #else
+    /**
+     * Webserver and OTA updates.
+     * With WIFISUPPORT these are Marlin's own, implemented in HAL/ESP32/wifi/ and built
+     * only for an ESP32 build of Marlin. With an add-on WiFi module the module runs its
+     * own firmware, so neither option has any effect there.
+     * With ESP3D_WIFISUPPORT these enable the ESP3D web interface and ESP3D OTA updates.
+     */
+    //#define WEBSUPPORT          // Start a webserver (which may include auto-discovery) using SPIFFS
+    //#define OTASUPPORT          // Support over-the-air firmware updates
+  #endif
+
+  #if ENABLED(ESP3D_WIFISUPPORT)
+    //#define WIFI_CUSTOM_COMMAND // Accept ESP3D '[ESP...]' commands from the host
+  #endif
 
   /**
    * To set a default WiFi SSID / Password, create a file called Configuration_Secure.h with
@@ -4682,10 +4725,6 @@
    * the defaults for station mode, which can be changed at runtime with '[ESP100]' / '[ESP101]'.
    */
   //#include "Configuration_Secure.h" // External file with WiFi SSID / Password
-#endif
-
-#if ENABLED(ESP3D_WIFISUPPORT)
-  //#define WIFI_CUSTOM_COMMAND // Accept ESP3D '[ESP...]' commands from the host
 #endif
 
 // @section multi-material
@@ -4894,6 +4933,70 @@
   #endif
 
 #endif // HAS_PRUSA_MMU2 || HAS_PRUSA_MMU3
+
+#if HAS_CHAMELEON
+
+  /**
+   * 3D Chameleon Mk4 (https://www.3dchameleon.com)
+   *
+   * The Chameleon's one button is pressed by moving a printer axis into it.
+   * Hold times select the filament and run its feed motor, so timing matters.
+   * Use the "Mk4 G-code Generator" values from the Chameleon site as a guide.
+   */
+  #define CHAMELEON_BUTTON_AXIS     X_AXIS    // (X_AXIS, Y_AXIS, Z_AXIS) Axis that presses the button
+  #define CHAMELEON_BUTTON_POS      X_MAX_POS // (mm) Axis position where the button is fully pressed (within the axis limits)
+  #define CHAMELEON_PRESS_MM        3         // (mm) Standby this far short of the button, toward the middle of the axis
+  #define CHAMELEON_PRESS_FEEDRATE  2000      // (mm/min) Speed of button presses
+  #define CHAMELEON_TRAVEL_FEEDRATE 5000      // (mm/min) Speed of moves to and from the standby position
+
+  // Where to wait while changing. The button axis is set by CHAMELEON_BUTTON_POS.
+  // Z is only raised, never lowered. These are ignored for the button axis.
+  //#define CHAMELEON_TOOLCHANGE_X  X_CENTER
+  //#define CHAMELEON_TOOLCHANGE_Y  Y_CENTER
+  //#define CHAMELEON_TOOLCHANGE_Z  Z_MAX_POS
+
+  // Timing. Press a number of pulses to select a filament (1 = T0, 2 = T1, ...).
+  // If the wrong filament is selected, adjust the pulse time to match your Chameleon.
+  #define CHAMELEON_PULSE_MS         500      // (ms) One pulse
+  #define CHAMELEON_CUT_MS          2000      // (ms) After selecting, wait for the cutter and the selector to finish
+  #define CHAMELEON_UNLOAD_MS       4000      // (ms) Hold to pull the old filament back out of the Y adapter
+  #define CHAMELEON_LOAD_MS         4000      // (ms) Hold to push the new filament to the extruder, including the assist
+  #define CHAMELEON_SETTLE_MS        400      // (ms) Wait after releasing the button
+  #define CHAMELEON_HOME_MS         2000      // (ms) Wait for the selector to home
+  #define CHAMELEON_HOME_FIRST                // Home the selector before the first load. (The Chameleon starts out empty.)
+
+  // Extruder moves
+  #define CHAMELEON_EXTRUDER_TO_HOTEND_MM 86  // (mm) Distance from the extruder gears to the nozzle
+  #define CHAMELEON_CUT_RETRACT_MM        20  // (mm) Initial retract, to make room for the cut
+  #define CHAMELEON_RELEASE_MM           -30  // (mm) Final move to clear the extruder. Use a positive value with a mechanical cutter.
+  #define CHAMELEON_LOAD_ASSIST_MM        25  // (mm) Extruder move to catch the filament as the Chameleon lets go
+  #define CHAMELEON_ASSIST_FEEDRATE     1500  // (mm/min)
+  #define CHAMELEON_SLOW_FEEDRATE        500  // (mm/min)
+  #define CHAMELEON_FAST_FEEDRATE       2000  // (mm/min)
+
+  /**
+   * Tip shaping. Not needed with a 3DClippy filament cutter, so comment this out.
+   * Each step is { temp, extrude, feedrate }. If 'temp' is non-zero Marlin waits for
+   * the hotend to reach it before the move. The hotend returns to its target
+   * temperature afterward. Cold extrusion is allowed during the sequence.
+   */
+  #define CHAMELEON_TIP_SEQUENCE \
+    { 180,  +20, 1500 }, /* Cool to 180C to prevent swelling, then ram */ \
+    {   0,   -5,  500 }, \
+    { 165,   +5, 1500 }, \
+    {   0,   -1,  500 }, \
+    { 155,   +1, 1500 }, \
+    {   0,  -25,  500 }, \
+    { 150,  +24, 1500 }, /* Last tip dip with a cold tip */ \
+    {   0,  -24, 1500 }, \
+    { 180,  -80,  500 }  /* Heat up again and back out of the extruder */
+
+  // Optional G-code to run at each stage of an unload (e.g., for a cooling fan or a mechanical cutter)
+  //#define CHAMELEON_START_GCODE "M106 S255"  // Just after reaching the standby position
+  //#define CHAMELEON_CUT_GCODE   "M280 P0 S90" // After the cut retract, before tip shaping
+  //#define CHAMELEON_END_GCODE   "M106 S0"    // After the new filament is loaded
+
+#endif // HAS_CHAMELEON
 
 /**
  * Advanced Print Counter settings
