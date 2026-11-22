@@ -70,7 +70,7 @@
 
 // Choose the name from boards.h that matches your setup
 #ifndef MOTHERBOARD
-  #define MOTHERBOARD BOARD_TRIGORILLA_V401_GD32_MFL // BOARD_AQUILA_V101_GD32_MFL
+  #define MOTHERBOARD BOARD_TRIGORILLA_V401_GD32_MFL
 #endif
 
 // @section serial
@@ -84,7 +84,7 @@
  *
  * :[-2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
  */
-#define SERIAL_PORT 1 // 0
+#define SERIAL_PORT 1
 
 /**
  * Serial Port Baud Rate
@@ -97,14 +97,13 @@
  *
  * :[2400, 9600, 19200, 38400, 57600, 115200, 250000, 500000, 1000000]
  */
-#define BAUDRATE 115200 // 250000
+#define BAUDRATE 115200
 
 //#define BAUD_RATE_GCODE     // Enable G-code M575 to set the baud rate
 
 /**
  * Select a secondary serial port on the board to use for communication with the host.
  * -2 is Ethernet on Teensy 4.1 boards, and the built-in Bluetooth (Classic SPP) on ESP32.
- * ESP3D_WIFISUPPORT requires -1, which carries G-code from ESP3D to Marlin.
  * :[-2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
  */
 //#define SERIAL_PORT_2 -1
@@ -605,7 +604,7 @@
  *   998 : Dummy Table that ALWAYS reads 25°C or the temperature defined below.
  *   999 : Dummy Table that ALWAYS reads 100°C or the temperature defined below.
  */
-#define TEMP_SENSOR_0 5 // 1
+#define TEMP_SENSOR_0 5
 #define TEMP_SENSOR_1 0
 #define TEMP_SENSOR_2 0
 #define TEMP_SENSOR_3 0
@@ -705,7 +704,7 @@
 #define HEATER_5_MAXTEMP 275
 #define HEATER_6_MAXTEMP 275
 #define HEATER_7_MAXTEMP 275
-#define BED_MAXTEMP 120 // 150
+#define BED_MAXTEMP      120
 #define CHAMBER_MAXTEMP  60
 
 /**
@@ -747,13 +746,13 @@
   #if ENABLED(PID_PARAMS_PER_HOTEND)
     // Specify up to one value per hotend here, according to your setup.
     // If there are fewer values, the last one applies to the remaining hotends.
-    #define DEFAULT_KP_LIST {  22.20,  22.20 }
-    #define DEFAULT_KI_LIST {   1.08,   1.08 }
-    #define DEFAULT_KD_LIST { 114.00, 114.00 }
+    #define DEFAULT_KP_LIST {  14.42,  14.42 }
+    #define DEFAULT_KI_LIST {   0.88,   0.88 }
+    #define DEFAULT_KD_LIST {  59.12,  59.12 }
   #else
-    #define DEFAULT_KP 14.42 // 22.20
-    #define DEFAULT_KI 0.88 // 1.08
-    #define DEFAULT_KD 59.12 // 114.00
+    #define DEFAULT_KP 14.42
+    #define DEFAULT_KI  0.88
+    #define DEFAULT_KD 59.12
   #endif
 #else
   #define BANG_MAX 255    // Limit hotend current while in bang-bang mode; 255=full current
@@ -851,9 +850,9 @@
 
   // 120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   // from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
-  #define DEFAULT_BED_KP 97.1 // 10.00
-  #define DEFAULT_BED_KI 1.41 // 0.023
-  #define DEFAULT_BED_KD 1675.16 // 305.4
+  #define DEFAULT_BED_KP   97.1
+  #define DEFAULT_BED_KI    1.41
+  #define DEFAULT_BED_KD 1675.16
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #else
@@ -1041,6 +1040,17 @@
   #define DEFAULT_SEGMENTS_PER_SECOND 5   // Move segmentation based on duration
   #define PEN_UP_DOWN_MENU                // Add "Pen Up" and "Pen Down" to the MarlinUI menu
 #endif
+
+// @section pancakebot
+
+/**
+ * PancakeBot
+ *  - Batter Pump on the fan output (M106 / M107) stops while the print is paused.
+ *  - LEDs that show SD printing and SD card errors.
+ *
+ * Use with the PancakeBot board and PANCAKEBOT_PANEL.
+ */
+//#define PANCAKEBOT
 
 // @section delta
 
@@ -1316,9 +1326,9 @@
  * Endstop "Hit" State
  * Set to the state (HIGH or LOW) that applies to each endstop.
  */
-#define X_MIN_ENDSTOP_HIT_STATE LOW // HIGH
+#define X_MIN_ENDSTOP_HIT_STATE LOW
 #define X_MAX_ENDSTOP_HIT_STATE HIGH
-#define Y_MIN_ENDSTOP_HIT_STATE LOW // HIGH
+#define Y_MIN_ENDSTOP_HIT_STATE LOW
 #define Y_MAX_ENDSTOP_HIT_STATE HIGH
 #define Z_MIN_ENDSTOP_HIT_STATE HIGH
 #define Z_MAX_ENDSTOP_HIT_STATE HIGH
@@ -1382,7 +1392,7 @@
  * Override with M92 (when enabled below)
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT { 80, 80, 400, 455 } // { 80, 80, 400, 500 }
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 455 }
 
 /**
  * Enable support for M92. Disable to save at least ~530 bytes of flash.
@@ -1407,7 +1417,7 @@
  * Override with M201
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_ACCELERATION { 3000, 3000, 500, 10000 } // { 3000, 3000, 100, 10000 }
+#define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 500, 10000 }
 
 //#define LIMITED_MAX_ACCEL_EDITING     // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
 #if ENABLED(LIMITED_MAX_ACCEL_EDITING)
@@ -1753,7 +1763,7 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
-#define NOZZLE_TO_PROBE_OFFSET { 24, 13.35, 0 } // { 10, 10, 0 } // (mm) X, Y, Z distance from Nozzle tip to Probe trigger-point
+#define NOZZLE_TO_PROBE_OFFSET { 24, 13.35, 0 } // (mm) X, Y, Z distance from Nozzle tip to Probe trigger-point
 
 // Enable and set to use a specific tool for probing. Disable to allow any tool.
 #define PROBING_TOOL 0
@@ -1765,7 +1775,7 @@
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
-#define PROBING_MARGIN 0 // 10
+#define PROBING_MARGIN  0
 
 // X and Y axis travel speed between probes.
 // Leave undefined to use the average of the current XY homing feedrate.
@@ -1853,8 +1863,8 @@
 //#define PROBE_OFFSET_XMAX  50   // (mm)
 //#define PROBE_OFFSET_YMIN -50   // (mm)
 //#define PROBE_OFFSET_YMAX  50   // (mm)
-#define PROBE_OFFSET_ZMIN  -5     // (mm)
-#define PROBE_OFFSET_ZMAX   5     // (mm)
+#define PROBE_OFFSET_ZMIN    -5   // (mm)
+#define PROBE_OFFSET_ZMAX     5   // (mm)
 
 // Enable the M48 repeatability test to test probe accuracy
 #define Z_MIN_PROBE_REPEATABILITY_TEST
@@ -1926,7 +1936,7 @@
 // Invert the stepper direction. Change (or reverse the motor connector) if an axis goes the wrong way.
 #define INVERT_X_DIR false
 #define INVERT_Y_DIR true
-#define INVERT_Z_DIR true // false
+#define INVERT_Z_DIR true
 //#define INVERT_I_DIR false
 //#define INVERT_J_DIR false
 //#define INVERT_K_DIR false
@@ -1994,16 +2004,16 @@
 // @section geometry
 
 // The size of the printable area
-#define X_BED_SIZE 220 // 200
-#define Y_BED_SIZE 220 // 200
+#define X_BED_SIZE 220
+#define Y_BED_SIZE 220
 
 // Travel limits (linear=mm, rotational=°) after homing, corresponding to endstop positions.
-#define X_MIN_POS -5.8 // 0
-#define Y_MIN_POS -1.0 // 0
+#define X_MIN_POS -5.8
+#define Y_MIN_POS -1.0
 #define Z_MIN_POS 0
 #define X_MAX_POS X_BED_SIZE+10
 #define Y_MAX_POS Y_BED_SIZE+10
-#define Z_MAX_POS 250 // 200
+#define Z_MAX_POS 250
 //#define I_MIN_POS 0
 //#define I_MAX_POS 50
 //#define J_MIN_POS 0
@@ -2305,7 +2315,7 @@
 #if ANY(AUTO_BED_LEVELING_LINEAR, AUTO_BED_LEVELING_BILINEAR)
 
   // Set the number of grid points per dimension.
-  #define GRID_MAX_POINTS_X 5 // 3
+  #define GRID_MAX_POINTS_X 5
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
   // Probe along the Y axis, advancing X after each column
@@ -2343,7 +2353,7 @@
   //#define MESH_EDIT_GFX_OVERLAY   // Display a graphics overlay while editing the mesh
 
   #define MESH_INSET 1              // (mm) Set Mesh bounds as an inset region of the bed
-  #define GRID_MAX_POINTS_X 5       // 10 // Don't use more than 15 points per axis, implementation limited.
+  #define GRID_MAX_POINTS_X  5      // Don't use more than 15 points per axis, implementation limited.
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
   //#define UBL_HILBERT_CURVE       // Use Hilbert distribution for less travel when probing multiple points
@@ -2384,7 +2394,7 @@
   //===========================================================================
 
   #define MESH_INSET 10          // (mm) Set Mesh bounds as an inset region of the bed
-  #define GRID_MAX_POINTS_X 5 // 3
+  #define GRID_MAX_POINTS_X 5
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
   //#define MESH_G28_REST_ORIGIN // After homing all axes ('G28' or 'G28 XYZ') rest Z at Z_MIN_POS
@@ -3192,6 +3202,12 @@
 //#define MAKRPANEL
 
 //
+// PancakeBot Panel with a 128x32 ST7565 graphic display and 4 push buttons.
+// Up / Down / Select / Back. Use with the PancakeBot board and PANCAKEBOT.
+//
+//#define PANCAKEBOT_PANEL
+
+//
 // Adafruit ST7565 Full Graphic Controller.
 // https://github.com/eboston/Adafruit-ST7565-Full-Graphic-Controller/
 //
@@ -3465,7 +3481,7 @@
 
 //
 // Creality Resistive Touch Screen
-// As found in the Creality CR-6 S1
+// As found in the Creality Ender-5 S1
 //
 //#define CREALITY_RTS
 #if ENABLED(CREALITY_RTS)
@@ -3606,7 +3622,7 @@
 #define TFT_GENERIC
 #if ENABLED(TFT_GENERIC)
   // :[ 'AUTO', 'ST7735', 'ST7789', 'ST7796', 'R61505', 'ILI9328', 'ILI9341', 'ILI9488' ]
-  #define TFT_DRIVER ST7789 // AUTO
+  #define TFT_DRIVER ST7789
 
   // Interface. Enable one of the following options:
   //#define TFT_INTERFACE_FSMC
@@ -3642,7 +3658,7 @@
    * HELVETICA - Lightweight font, no anti-aliasing. Supports Basic Latin (0x0020-0x007F) and Latin-1 Supplement (0x0080-0x00FF) characters only.
    * :['NOTOSANS', 'UNIFONT', 'HELVETICA']
    */
-  #define TFT_FONT HELVETICA // NOTOSANS
+  #define TFT_FONT  HELVETICA
   //#define TFT_FONT_LARGE    // Use larger fonts for better visibility. (TFT_RES_1024x600 with NOTOSANS or UNIFONT)
   //#define TFT_NO_TINY_FONT  // Eschew the small numerical font used for meshes to recover Flash space.
 
@@ -3687,7 +3703,7 @@
  *
  * :{ 'TFT_NO_ROTATION':'None', 'TFT_ROTATE_90':'90°', 'TFT_ROTATE_90_MIRROR_X':'90° (Mirror X)', 'TFT_ROTATE_90_MIRROR_Y':'90° (Mirror Y)', 'TFT_ROTATE_180':'180°', 'TFT_ROTATE_180_MIRROR_X':'180° (Mirror X)', 'TFT_ROTATE_180_MIRROR_Y':'180° (Mirror Y)', 'TFT_ROTATE_270':'270°', 'TFT_ROTATE_270_MIRROR_X':'270° (Mirror X)', 'TFT_ROTATE_270_MIRROR_Y':'270° (Mirror Y)', 'TFT_MIRROR_X':'Mirror X', 'TFT_MIRROR_Y':'Mirror Y' }
  */
-#define TFT_ROTATION TFT_MIRROR_Y // TFT_MIRROR_X // TFT_ROTATE_90 // TFT_ROTATE_180 // TFT_NO_ROTATION
+#define TFT_ROTATION TFT_MIRROR_Y
 
 //=============================================================================
 //============================  Other Controllers  ============================
