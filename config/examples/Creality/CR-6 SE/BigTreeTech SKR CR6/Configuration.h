@@ -128,6 +128,18 @@
   //#define RS485_BUS_BUFFER_SIZE 128
 #endif
 
+/**
+ * CAN bus
+ * Use the board's CAN port (CAN_RX_PIN / CAN_TX_PIN) to talk to CAN devices,
+ * such as toolhead boards running Klipper. Classic CAN 2.0 frames only.
+ * Requires an STM32 with bxCAN (F1/F2/F4/F7) or FDCAN (G0/G4/H7), and a CAN transceiver.
+ * M960 reports the bus state and lists Klipper / Katapult nodes found on the bus.
+ */
+//#define CAN_BUS
+#if ENABLED(CAN_BUS)
+  #define CAN_BITRATE 1000000 // (bits/s) All nodes must agree. Klipper's default is 1000000.
+#endif
+
 // Enable the Bluetooth serial interface on AT90USB devices
 //#define BLUETOOTH
 
@@ -634,12 +646,14 @@
   #define TEMP_RESIDENCY_TIME         10  // (seconds) Time to wait for hotend to "settle" in M109
   #define TEMP_WINDOW                  1  // (°C) Temperature proximity for the "temperature reached" timer
   #define TEMP_HYSTERESIS              3  // (°C) Temperature proximity considered "close enough" to the target
+  //#define TEMP_SETTLE_BAND           3  // (°C) Time in range (TEMP_RESIDENCY_TIME, heat soak) counts from when the hotend gets this close to the target. (Default: TEMP_HYSTERESIS)
 #endif
 
 #if TEMP_SENSOR_BED
   #define TEMP_BED_RESIDENCY_TIME     10  // (seconds) Time to wait for bed to "settle" in M190
   #define TEMP_BED_WINDOW              1  // (°C) Temperature proximity for the "temperature reached" timer
   #define TEMP_BED_HYSTERESIS          3  // (°C) Temperature proximity considered "close enough" to the target
+  //#define TEMP_BED_SETTLE_BAND       3  // (°C) Time in range (TEMP_BED_RESIDENCY_TIME, heat soak) counts from when the bed gets this close to the target. (Default: TEMP_BED_HYSTERESIS)
 #endif
 
 #if TEMP_SENSOR_CHAMBER
@@ -1027,6 +1041,17 @@
   #define PEN_UP_DOWN_MENU                // Add "Pen Up" and "Pen Down" to the MarlinUI menu
 #endif
 
+// @section pancakebot
+
+/**
+ * PancakeBot
+ *  - Batter Pump on the fan output (M106 / M107) stops while the print is paused.
+ *  - LEDs that show SD printing and SD card errors.
+ *
+ * Use with the PancakeBot board and PANCAKEBOT_PANEL.
+ */
+//#define PANCAKEBOT
+
 // @section delta
 
 /**
@@ -1054,6 +1079,10 @@
   #if ENABLED(DELTA_AUTO_CALIBRATION)
     // Default number of probe points : n*n (1 -> 7)
     #define DELTA_CALIBRATION_DEFAULT_POINTS 4
+
+    // Add G33 'L' to solve by least squares, as in RepRapFirmware, and optionally calibrate the diagonal rod.
+    // The factors to adjust are chosen by the 'L' value: 3 (endstops), 4 (+ radius), 6 (+ tower angles), 7 (+ diagonal rod)
+    //#define DELTA_CALIBRATION_LEAST_SQUARES
   #endif
 
   #if ANY(DELTA_AUTO_CALIBRATION, DELTA_CALIBRATION_MENU)
@@ -2451,6 +2480,18 @@
   //#define Z_SAFE_HOMING_POINT_ABSOLUTE  // Ignore home offsets (M206) for Z homing position
 #endif
 
+/**
+ * Precise Z Homing
+ *
+ * Enables the 'G28 P' parameter. After Z homes, 'G28 P' probes at the same XY
+ * with the bed probe and corrects Z by the measured error. Uses the same
+ * settings as bed leveling, including MULTIPLE_PROBING, EXTRA_PROBING, and
+ * PROBING_HEATERS_OFF. Useful for probes that are intermittently inaccurate.
+ * Consider Z_SAFE_HOMING, and setting the Z value of HOMING_BUMP_MM to 0.
+ * Requires a bed probe.
+ */
+//#define PRECISE_Z_HOMING
+
 // Homing speeds (linear=mm/min, rotational=°/min)
 #define HOMING_FEEDRATE_MM_M { (50*60), (50*60), (4*60) }
 
@@ -3160,6 +3201,12 @@
 // https://reprap.org/wiki/MaKrPanel
 //
 //#define MAKRPANEL
+
+//
+// PancakeBot Panel with a 128x32 ST7565 graphic display and 4 push buttons.
+// Up / Down / Select / Back. Use with the PancakeBot board and PANCAKEBOT.
+//
+//#define PANCAKEBOT_PANEL
 
 //
 // Adafruit ST7565 Full Graphic Controller.
