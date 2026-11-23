@@ -4389,6 +4389,7 @@
     //#define BUTTON2_GCODE         "M701"
     #define BUTTON2_GCODE         "M104 S200\nG1 F100 E0"
     #define BUTTON2_DESC          "Load Filament"
+    //#define BUTTON2_IMMEDIATE
   #endif
 
   //#define BUTTON3_PIN PB5
@@ -4397,6 +4398,7 @@
     #define BUTTON3_WHEN_PRINTING false
     #define BUTTON3_GCODE         "M702"
     #define BUTTON3_DESC          "Unload Filament"
+    //#define BUTTON3_IMMEDIATE
   #endif
 #endif
 

@@ -1784,7 +1784,7 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
-//#define NOZZLE_TO_PROBE_OFFSET { 10, 10, 0 }
+//#define NOZZLE_TO_PROBE_OFFSET { 10, 10, 0 } // (mm) X, Y, Z distance from Nozzle tip to Probe trigger-point
 
 // ANET A8: FRONT-MOUNTED SENSOR WITH 3D PRINTED MOUNT
 //#define NOZZLE_TO_PROBE_OFFSET { -28, -45, 0 }
