@@ -72,6 +72,7 @@
 #ifndef MOTHERBOARD
   #define MOTHERBOARD BOARD_BTT_SKR_MINI_E3_V3_0
 #endif
+#define NO_CONTROLLER_CUSTOM_WIRING_WARNING
 
 // @section serial
 
