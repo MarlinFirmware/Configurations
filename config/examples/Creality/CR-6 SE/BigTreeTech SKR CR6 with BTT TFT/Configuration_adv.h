@@ -261,7 +261,9 @@
   #define COOLER_MINTEMP           8  // (°C)
   #define COOLER_MAXTEMP          26  // (°C)
   #define COOLER_DEFAULT_TEMP     16  // (°C)
-  #define TEMP_COOLER_HYSTERESIS   1  // (°C) Temperature proximity considered "close enough" to the target
+  #define TEMP_COOLER_RESIDENCY_TIME 0  // (seconds) Time to wait for cooler to "settle" in M193
+  #define TEMP_COOLER_WINDOW       1  // (°C) Temperature proximity for the "temperature reached" timer
+  #define TEMP_COOLER_HYSTERESIS   3  // (°C) Temperature proximity considered "close enough" to the target
   #define COOLER_PIN               8  // Laser cooler on/off pin used to control power to the cooling element (e.g., TEC, External chiller via relay)
   #define COOLER_INVERTING     false
   #define TEMP_COOLER_PIN         15  // Laser/Cooler temperature sensor pin. ADC is required.
@@ -1902,7 +1904,7 @@
    */
   #define POWER_LOSS_RECOVERY
   #if ENABLED(POWER_LOSS_RECOVERY)
-    #define PLR_ENABLED_DEFAULT       true  // Power-Loss Recovery enabled by default. (Set with 'M413 Sn' & M500)
+    #define PLR_ENABLED_DEFAULT       false // Power-Loss Recovery enabled by default. (Set with 'M413 Sn' & M500)
     //#define PLR_HEAT_BED_ON_REBOOT        // Heat up bed immediately on reboot to mitigate object detaching/warping.
     //#define PLR_HEAT_BED_EXTRA          0 // (°C) Relative increase of bed temperature for better adhesion (limited by max temp).
     //#define PLR_BED_THRESHOLD BED_MAXTEMP // (°C) Skip user confirmation at or above this bed temperature (0 to disable)
@@ -5020,6 +5022,14 @@
 // M265 - I2C Scanner
 //
 //#define I2C_SCANNER
+
+/**
+ * M7422 - Dump the Creality v4.2.x bootloader info region to serial.
+ * The stock bootloader on some STM32F103-based Creality boards (v4.2.2 and
+ * similar) reserves the last 2K of flash for the last-flashed filename
+ * tagged with a 0xAA55 magic header.
+ */
+//#define CREALITY_BOOTLOADER_INFO_DUMP
 
 // Enable Tests that will run at startup and produce a report
 //#define MARLIN_TEST_BUILD

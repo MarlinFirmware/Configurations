@@ -1,16 +1,21 @@
 # Configurations
-Pre-tested Configurations for Marlin Firmware. Links below…
+Pre-tested Configurations for Marlin Firmware. Links below… To get pre-built firmware see [MarlinBuilds](//github.com/MarlinFirmware/MarlinBuilds) and to build your own firmware using these configurations, or your own older configurations, see [MarlinWebBuild](//github.com/MarlinFirmware/MarlinWebBuild).
 
 > [!IMPORTANT]
 > Before downloading configurations in ZIP format using the CODE button above you must select the correct branch for your version of Marlin.
 
-## Latest Major Version
+## 2.1.3.x - Latest Major Version
 *For most users.* The latest stable Marlin release and prior patches.
-
-### 2.1.2.x
 
 Version|Link|Download
 ---|---|---
+2.1.3|([Browse](//github.com/MarlinFirmware/Configurations/tree/release-2.1.3))|([Download ZIP](//github.com/MarlinFirmware/Configurations/archive/release-2.1.3.zip))
+
+### 2.1.2.x - Previous Release
+
+Version|Link|Download
+---|---|---
+2.1.2.10|([Browse](//github.com/MarlinFirmware/Configurations/tree/release-2.1.2.10))|([Download ZIP](//github.com/MarlinFirmware/Configurations/archive/release-2.1.2.10.zip))
 2.1.2.9|([Browse](//github.com/MarlinFirmware/Configurations/tree/release-2.1.2.9))|([Download ZIP](//github.com/MarlinFirmware/Configurations/archive/release-2.1.2.9.zip))
 2.1.2.8|([Browse](//github.com/MarlinFirmware/Configurations/tree/release-2.1.2.8))|([Download ZIP](//github.com/MarlinFirmware/Configurations/archive/release-2.1.2.8.zip))
 2.1.2.7|([Browse](//github.com/MarlinFirmware/Configurations/tree/release-2.1.2.7))|([Download ZIP](//github.com/MarlinFirmware/Configurations/archive/release-2.1.2.7.zip))
@@ -44,6 +49,8 @@ Version|Link|Download
 
 Version|Link|Download
 ---|---|---
+2.0.9.13|([Browse](//github.com/MarlinFirmware/Configurations/tree/release-2.0.9.13))|([Download ZIP](//github.com/MarlinFirmware/Configurations/archive/release-2.0.9.13.zip))
+2.0.9.12|([Browse](//github.com/MarlinFirmware/Configurations/tree/release-2.0.9.12))|([Download ZIP](//github.com/MarlinFirmware/Configurations/archive/release-2.0.9.12.zip))
 2.0.9.11|([Browse](//github.com/MarlinFirmware/Configurations/tree/release-2.0.9.11))|([Download ZIP](//github.com/MarlinFirmware/Configurations/archive/release-2.0.9.11.zip))
 2.0.9.10|([Browse](//github.com/MarlinFirmware/Configurations/tree/release-2.0.9.10))|([Download ZIP](//github.com/MarlinFirmware/Configurations/archive/release-2.0.9.10.zip))
 2.0.9.9|([Browse](//github.com/MarlinFirmware/Configurations/tree/release-2.0.9.9))|([Download ZIP](//github.com/MarlinFirmware/Configurations/archive/release-2.0.9.9.zip))

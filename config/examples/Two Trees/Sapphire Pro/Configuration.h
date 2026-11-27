@@ -25,7 +25,7 @@
 
 //#define SPRO_INVERTED_E // Enable if the extruder runs the wrong way
 //#define SPRO_TMC2209 // Enable for the TMC2209 driver version
-//#define SPRO_BLTOUCH // Enable if you want to use BLTOUCH
+//#define USE_BLTOUCH // Enable if you want to use BLTOUCH
 
 /**
  * Configuration.h
@@ -82,11 +82,12 @@
 /**
  * Select the serial port on the board to use for communication with the host.
  * This allows the connection of wireless adapters (for instance) to non-default port pins.
- * Serial port -1 is the USB emulated serial port, if available.
+ * Serial port -1 is the USB emulated serial port, if available (ESP32-S2/S3: the native USB port).
  * Serial port -2 is the built-in Bluetooth (Classic SPP) on ESP32, not together with WiFi.
+ * ESP32: Serial port -3 is the WiFi serial port (WIFISUPPORT or ESP3D_WIFISUPPORT).
  * Note: The first serial port (-1 or 0) will always be used by the Arduino bootloader.
  *
- * :[-2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+ * :[-3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
  */
 #define SERIAL_PORT 3
 
@@ -108,7 +109,8 @@
 /**
  * Select a secondary serial port on the board to use for communication with the host.
  * -2 is Ethernet on Teensy 4.1 boards, and the built-in Bluetooth (Classic SPP) on ESP32.
- * :[-2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+ * ESP3D_WIFISUPPORT requires a serial port set to -3, which carries G-code from ESP3D to Marlin.
+ * :[-3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
  */
 #define SERIAL_PORT_2 1
 //#define BAUDRATE_2 250000   // :[2400, 9600, 19200, 38400, 57600, 115200, 250000, 500000, 1000000] Enable to override BAUDRATE
@@ -116,8 +118,8 @@
 /**
  * Select a third serial port on the board to use for communication with the host.
  * Currently supported for AVR, DUE, SAMD51, LPC1768/9, STM32/STM32F1/HC32, and Teensy 4.x,
- * and ESP32 for Bluetooth (-2).
- * :[-2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+ * and ESP32 (-2 Bluetooth, -3 the WiFi serial port; ESP32-S2/S3: -1, the native USB port).
+ * :[-3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
  */
 //#define SERIAL_PORT_3 1
 //#define BAUDRATE_3 250000   // :[2400, 9600, 19200, 38400, 57600, 115200, 250000, 500000, 1000000] Enable to override BAUDRATE
@@ -1357,7 +1359,7 @@
 #define V_MAX_ENDSTOP_HIT_STATE HIGH
 #define W_MIN_ENDSTOP_HIT_STATE HIGH
 #define W_MAX_ENDSTOP_HIT_STATE HIGH
-#define Z_MIN_PROBE_ENDSTOP_HIT_STATE TERN(SPRO_BLTOUCH, HIGH, LOW)
+#define Z_MIN_PROBE_ENDSTOP_HIT_STATE TERN(USE_BLTOUCH, HIGH, LOW)
 
 // Enable this feature if all enabled endstop pins are interrupt-capable.
 // This will remove the need to poll the interrupt pins, saving many CPU cycles.
@@ -1520,7 +1522,7 @@
  * The probe replaces the Z-MIN endstop and is used for Z homing.
  * (Automatically enables USE_PROBE_FOR_Z_HOMING.)
  */
-#if ENABLED(SPRO_BLTOUCH)
+#if ENABLED(USE_BLTOUCH)
   #define Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN
 #endif
 
@@ -1589,7 +1591,7 @@
 /**
  * The BLTouch probe uses a Hall effect sensor and emulates a servo.
  */
-#if ENABLED(SPRO_BLTOUCH)
+#if ENABLED(USE_BLTOUCH)
   #define BLTOUCH
 #endif
 
@@ -2255,7 +2257,7 @@
 //#define AUTO_BED_LEVELING_3POINT
 //#define AUTO_BED_LEVELING_LINEAR
 //#define AUTO_BED_LEVELING_UBL
-#if ENABLED(SPRO_BLTOUCH)
+#if ENABLED(USE_BLTOUCH)
   #define AUTO_BED_LEVELING_BILINEAR
 #else
   #define MESH_BED_LEVELING
@@ -2500,7 +2502,7 @@
  * - Allows Z homing only when XY positions are known and trusted.
  * - If stepper drivers sleep, XY homing may be required again before Z homing.
  */
-#if ENABLED(SPRO_BLTOUCH)
+#if ENABLED(USE_BLTOUCH)
   #define Z_SAFE_HOMING
 #endif
 
@@ -2609,8 +2611,9 @@
 #define EEPROM_CHITCHAT       // Give feedback on EEPROM commands. Disable to save flash.
 #define EEPROM_BOOT_SILENT    // Keep M503 quiet and only give errors during first load
 #if ENABLED(EEPROM_SETTINGS)
-  //#define EEPROM_AUTO_INIT  // Init EEPROM automatically on any errors.
-  //#define EEPROM_INIT_NOW   // Init EEPROM on first boot after a new build.
+  //#define EEPROM_AUTO_INIT            // Init EEPROM automatically on any errors.
+  //#define EEPROM_INIT_NOW             // Init EEPROM on first boot after a new build.
+  //#define EEPROM_AUTOSAVE_AFTER 5000  // (ms) Save settings this long after they're edited on a supporting LCD, once not printing.
 #endif
 
 // @section host
@@ -3454,13 +3457,18 @@
  *  - Download https://www.crealitycloud.com/downloads/firmware/sermoon-series/sermoon-v1
  *  - Copy the DWIN_SET folder from the firmware package to the SD card.
  *
+ * CREALITY_TOUCH
+ *  - Creality CR-6 SE touch screen. Requires CR-6 Community touch screen firmware v61 or newer.
+ *  - Download https://github.com/CR6Community/CR-6-touchscreen/releases
+ *  - Copy the DWIN_SET folder from the release to the SD card.
+ *
  * Flash display with DGUS Displays for Marlin:
  *  - Format the SD card to FAT32 with an allocation size of 4kb.
  *  - Download files as specified for your type of display.
  *  - Plug the microSD card into the back of the display.
  *  - Boot the display and wait for the update to complete.
  *
- * :[ 'ORIGIN', 'FYSETC', 'HYPRECY', 'MKS', 'RELOADED', 'IA_CREALITY', 'E3S1PRO', 'CR10SPROV2', 'SERMOON_D1', 'SERMOON_V1' ]
+ * :[ 'ORIGIN', 'FYSETC', 'HYPRECY', 'MKS', 'RELOADED', 'IA_CREALITY', 'E3S1PRO', 'CR10SPROV2', 'SERMOON_D1', 'SERMOON_V1', 'CREALITY_TOUCH' ]
  */
 //#define DGUS_LCD_UI ORIGIN
 #if DGUS_UI_IS(MKS)
